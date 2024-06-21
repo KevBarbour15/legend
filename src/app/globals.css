@@ -3,27 +3,42 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --custom-white: #f4f4f4;
+  --custom-navy: #234055;
+  --custom-cream: #dfcfc0;
+  --custom-gold: #bc9952;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --custom-white: #f4f4f4;
+    --custom-navy: #234055;
+    --custom-cream: #dfcfc0;
+    --custom-gold: #bc9952;
   }
 }
 
+@font-face {
+  font-family: "Avenir";
+  src: url("/fonts/Avenir.ttc") format("truetype-collection");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Bigola Display" format("opentype");
+  src: url("/fonts/BigolaDisplay-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--custom-white);
+  background: var(--custom-navy);
+  .h1 {
+    font-family: "Bigola Display";
+  }
+  
 }
 
 @layer utilities {
