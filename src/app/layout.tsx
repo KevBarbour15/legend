@@ -9,6 +9,15 @@ export const metadata: Metadata = {
   description: "Legend Has It... a new hi-fi bar is coming soon to Sacramento",
 };
 
+// GSAP animation imports
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import ScrambleTextPlugin from "gsap/ScrambleTextPlugin";
+import SplitText from "gsap/SplitText";
+import CustomEase from "gsap/CustomEase";
+
+gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin, SplitText, CustomEase);
+
 export default function RootLayout({
   children,
 }: Readonly<{

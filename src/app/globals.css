@@ -4,9 +4,9 @@
 
 :root {
   --custom-white: #f4f4f4;
-  --custom-navy: #234055;
+  --custom-navy: #244154;
   --custom-cream: #dfcfc0;
-  --custom-gold: #bc9952;
+  --custom-gold: #a98541;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,8 +26,29 @@
 }
 
 @font-face {
-  font-family: "Bigola Display" format("opentype");
-  src: url("/fonts/BigolaDisplay-Regular.otf") format("opentype");
+  font-family: "Bigola Display";
+  src: url("/fonts/Bigola-Display-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Hypatia Sans Pro Bold";
+  src: url("/fonts/Hypatia-Sans-Pro-Bold.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Ubuntu Regular";
+  src: url("/fonts/Ubuntu-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Ubuntu Light";
+  src: url("/fonts/Ubuntu-Light.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -35,14 +56,16 @@
 body {
   color: var(--custom-white);
   background: var(--custom-navy);
-  .h1 {
-    font-family: "Bigola Display";
-  }
-  
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.custom-object-hover:hover{
+  transform: scale(1.1);
+  transition: all 0.25s ease in-out;
+  background-color: rgba(0, 0, 0, 0.5);
 }

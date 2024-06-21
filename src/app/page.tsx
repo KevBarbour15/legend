@@ -1,9 +1,82 @@
+"use client";
 import Image from "next/image";
+import { useRef } from "react";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import FacebookIcon from "@mui/icons-material/Facebook";
+
+// animation imports
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { SplitText } from "gsap/all";
 
 export default function Home() {
+  // still need to implement email form submission services
+  useGSAP(() => {
+    // need to figure animations for next.js
+  });
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>Legend Has It...a new hi-fi bar is coming soon to Sacramento</h1>
+    <main className="flex min-h-screen flex-col items-center space-y-14 px-24">
+      <div id="logo">
+        <Image
+          src="/images/logo.png"
+          alt="Legend Has It logo"
+          width={175}
+          height={175}
+        />
+      </div>
+
+      <div>
+        <h1
+          id="title"
+          className="font-hypatiaBold text-5xl text-white text-center"
+        >
+          Legend Has It...a new hi-fi bar is coming soon to Sacramento
+        </h1>
+      </div>
+      <div>
+        <h2 className="font-ubuntuLight text-2xl text-white text-center">
+          Sign up to be the first to learn about updates on our launch and
+          upcoming events!
+        </h2>
+      </div>
+
+      <div>
+        <form className="flex flex-col items-center">
+          <input
+            type="email"
+            placeholder="Email"
+            className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-50vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+          />
+          <button className="font-avenir font-bold bg-customGold rounded-full text-sm py-3.5 px-14 mt-7 tracking-wider">
+            SUBMIT
+          </button>
+        </form>
+      </div>
+      <div className="flex justify-between items-center space-x-4 text-white">
+        <a
+          href="https://www.instagram.com/legendhasithifi/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <InstagramIcon className="w-7 h-7 text-white" />
+        </a>
+        <a
+          href="https://www.youtube.com/@legendhasithifi"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <YouTubeIcon className="w-7 h-7 text-white" />
+        </a>
+        <a
+          href="https://www.facebook.com/legendhasithifi"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FacebookIcon className="w-7 h-7 text-white" />
+        </a>
+      </div>
     </main>
   );
 }
