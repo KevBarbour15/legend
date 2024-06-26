@@ -1,32 +1,23 @@
 "use client";
 import Image from "next/image";
+import Head from "next/head";
 import { useRef } from "react";
+import { useIsomorphicLayoutEffect } from "usehooks-ts";
+import { gsap, SplitText } from "../lib/gsap/index.ts";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookIcon from "@mui/icons-material/Facebook";
 
-// animation imports
-import gsap from "gsap";
+import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { useGSAP } from "@gsap/react";
-import { SplitText } from "gsap/all";
 
 export default function Home() {
   // still need to implement email form submission services
-  useGSAP(() => {
-    // need to figure animations for next.js
-  });
+  const logoRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
   return (
-    <main className="flex min-h-screen flex-col items-center space-y-14 px-24">
-      <div id="logo">
-        <Image
-          src="/images/logo.png"
-          alt="Legend Has It logo"
-          width={175}
-          height={175}
-        />
-      </div>
-
+    <main className="flex min-h-screen flex-col items-center space-y-14 px-24 ">
       <div>
         <h1
           id="title"

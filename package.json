@@ -12,14 +12,17 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@gsap/react": "^2.1.1",
+    "@kinde-oss/kinde-auth-nextjs": "^2.3.1",
     "@material-ui/icons": "^4.11.3",
     "@mui/icons-material": "^5.15.20",
     "@mui/material": "^5.15.20",
+    "@svgr/webpack": "^8.1.0",
     "gsap": "npm:@gsap/shockingly@^3.12.5",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
-    "sass": "^1.77.6"
+    "sass": "^1.77.6",
+    "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {
     "@types/node": "^20",

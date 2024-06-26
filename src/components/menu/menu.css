@@ -1,0 +1,101 @@
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--custom-cream);
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+}
+
+.menu-close-container {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-close-icon {
+  cursor: pointer;
+  color: var(--custom-gold);
+  font-size: 65px;
+  font-family: "Bigola Display";
+}
+
+.menu-links-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-logo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-link-item {
+  width: max-content;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.menu-link-item-holder {
+  position: relative;
+  text-align: center;
+}
+
+.menu-link-item-holder a {
+  color: var(--custom-navy);
+  font-size: 80px;
+  font-family: "Bigola Display";
+  text-decoration: none;
+  line-height: 85%;
+}
+
+.menu-info-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.menu-info-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: var(--custom-gold);
+  width: 50%;
+}
+
+.menu-info-row svg {
+  height: 60px;
+  width: 60px;
+}
+
+@media (max-width: 900px) {
+  .menu-close-icon {
+    display: none;
+  }
+
+  .links-container {
+    padding-top: 8em;
+  }
+
+  .menu-link-item-holder a {
+    font-size: 60px;
+  }
+}
