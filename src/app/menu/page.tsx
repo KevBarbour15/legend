@@ -2,6 +2,7 @@ export default function Menu() {
   return (
     <div className="flex flex-row w-screen justify-center">
       <div className="w-1/3 justify-center text-center">
+        {/* Draft Beer section */}
         <h1 className="font-bigola underline text-customCream text-5xl">
           Draft Beer
         </h1>
@@ -52,6 +53,7 @@ export default function Menu() {
           <p>Description, 5.0% ABV</p>
           <p>$10.00, 16oz</p>
         </div>
+        {/* Wine section */}
         <h1 className="font-bigola underline text-customCream text-5xl">
           Wine
         </h1>
@@ -75,6 +77,7 @@ export default function Menu() {
         </div>
       </div>
       {/* Column 2 of menu */}
+      {/* Canner Beer section */}
       <div className="w-1/3 justify-center text-center">
         <h1 className="font-bigola underline text-customCream text-5xl">
           Canned Beer
@@ -123,6 +126,7 @@ export default function Menu() {
           <p>Description, 5.0% ABV</p>
           <p>$10.00, 16oz</p>
         </div>
+        {/* Sake section */}
         <h1 className="font-bigola underline text-customCream text-5xl">
           Sake
         </h1>

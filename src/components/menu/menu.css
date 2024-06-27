@@ -87,8 +87,12 @@
 }
 
 @media (max-width: 900px) {
+  .menu-overlay {
+    flex-direction: column;
+  }
+
   .menu-close-icon {
-    display: none;
+    //display: none;
   }
 
   .links-container {
@@ -97,5 +101,14 @@
 
   .menu-link-item-holder a {
     font-size: 60px;
+  }
+
+  .menu-info-row {
+    width: 40%;
+  }
+
+  .menu-info-row svg {
+    height: 40px;
+    width: 40px;
   }
 }

@@ -17,7 +17,7 @@ export default function Home() {
   const titleRef = useRef<HTMLHeadingElement>(null);
 
   return (
-    <main className="flex min-h-screen flex-col items-center space-y-14 px-24 ">
+    <main className="flex flex-col items-center space-y-14 px-24">
       <div>
         <h1
           id="title"
@@ -40,8 +40,8 @@ export default function Home() {
             placeholder="Email"
             className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-50vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
           />
-          <button className="font-avenir font-bold bg-customGold rounded-full text-sm py-3.5 px-14 mt-7 tracking-wider">
-            SUBMIT
+          <button className="font-hypatia font-bold bg-customGold rounded-full py-3.5 px-14 mt-7 tracking-wider">
+            <span className="text-white leading-none text-sm">SUBMIT</span>
           </button>
         </form>
       </div>

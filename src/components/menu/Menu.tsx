@@ -79,15 +79,17 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
       {""}
       <div className="menu-overlay">
         <div className="menu-close-container">
-          <Image
-            className="menu-close-icon"
-            src="/images/monogram.png"
-            alt="Legend Has It logo"
-            width={125}
-            height={125}
-            priority
-            onClick={toggleMenu}
-          />
+          <Link href="/">
+            <Image
+              className="menu-close-icon"
+              src="/images/monogram.png"
+              alt="Legend Has It logo"
+              width={125}
+              height={125}
+              priority
+              onClick={toggleMenu}
+            />
+          </Link>
         </div>
         <div className="menu-links-container">
           <div className="menu-links">
