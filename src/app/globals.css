@@ -33,8 +33,29 @@
 }
 
 @font-face {
+  font-family: "Hypatia Sans Pro";
+  src: url("/fonts/Hypatia-Sans-Pro.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: "Hypatia Sans Pro Bold";
   src: url("/fonts/Hypatia-Sans-Pro-Bold.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Hypatia Sans Pro Semibold";
+  src: url("/fonts/Hypatia-Sans-Pro-Semibold.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Hypatia Sans Pro Light";
+  src: url("/fonts/Hypatia-Sans-Pro-Light.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
@@ -64,7 +85,7 @@ body {
   }
 }
 
-.custom-object-hover:hover{
+.custom-object-hover:hover {
   //transform: scale(1.1);
   //transition: all 0.25s ease in-out;
   //background-color: rgba(0, 0, 0, 0.5);

@@ -11,7 +11,10 @@ const config: Config = {
       fontFamily: {
         avenir: ["Avenir", "sans-serif"],
         bigola: ["Bigola Display", "sans-serif"],
+        hypatia: ["Hypatia Sans Pro", "sans-serif"],
         hypatiaBold: ["Hypatia Sans Pro Bold", "sans-serif"],
+        hypatiaSemibold: ["Hypatia Sans Pro Semibold", "sans-serif"],
+        hypatiaLight: ["Hypatia Sans Pro Light", "sans-serif"],
         ubuntuRegular: ["Ubuntu Regular", "sans-serif"],
         ubuntuLight: ["Ubuntu Light", "sans-serif"],
       },
@@ -22,7 +25,7 @@ const config: Config = {
         customGold: "#bc9952",
       },
       width: {
-        '50vw': '50vw',
+        "50vw": "50vw",
       },
     },
   },

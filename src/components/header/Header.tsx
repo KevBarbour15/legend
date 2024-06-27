@@ -12,25 +12,25 @@ const Header: React.FC = () => {
   };
 
   return (
-    <div>
+    <>
       <NavMenu menuStatus={menuOpen} toggleMenu={toggleMenu} />
-      <header className="flex flex-row w-screen justify-between items-center sticky">
+      <header className="flex flex-row w-screen justify-between items-center sticky top-0 bg-customNavy ">
         <div className="w-10 "></div>
 
         <div id="logo" className="">
           <Image
             src="/images/logo.png"
             alt="Legend Has It logo"
-            width={165}
-            height={165}
+            width={135}
+            height={135}
             priority
           />
         </div>
         <div onClick={toggleMenu} className="w-14">
-          <Menu className="cursor-pointer	text-3xl" />
+          <Menu className="cursor-pointer	text-4xl" />
         </div>
       </header>
-    </div>
+    </>
   );
 };
 
