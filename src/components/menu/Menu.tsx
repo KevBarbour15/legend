@@ -6,7 +6,8 @@ import { Close } from "@mui/icons-material";
 
 import Image from "next/image";
 
-import { gsap } from "@/lib/gsap/index.ts";
+//import { gsap } from "@/lib/gsap/index.ts";
+import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -30,41 +31,39 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
   const container = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
 
-  useGSAP(
-    () => {
-      gsap.set(".menu-link-item-holder", { y: 75 });
-      gsap.set(".menu-close-icon", { opacity: 0 });
-      gsap.set(".menu-info-row svg", { opacity: 0 });
+  useEffect(() => {
+    if (!container.current) return;
+    gsap.set(".menu-link-item-holder", { y: 75 });
+    gsap.set(".menu-close-icon", { opacity: 0 });
+    gsap.set(".menu-info-row svg", { opacity: 0 });
 
-      tl.current = gsap
-        .timeline({ paused: true })
-        .to(".menu-overlay", {
-          duration: 0.5,
-          ease: "power4.inOut",
-          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-        })
-        .to(".menu-link-item-holder", {
-          y: 0,
-          duration: 0.75,
-          stagger: 0.1,
-          delay: -0.25,
-          ease: "power4.in",
-        })
-        .to(".menu-close-icon", {
-          opacity: 1,
-          duration: 0.25,
-          delay: -0.25,
-        })
-        .to(".menu-info-row svg", {
-          opacity: 1,
-          //x: 0,
-          duration: 0.25,
-          stagger: -0.15,
-          delay: -0.25,
-        });
-    },
-    { scope: container }
-  );
+    tl.current = gsap
+      .timeline({ paused: true })
+      .to(".menu-overlay", {
+        duration: 0.5,
+        ease: "power4.inOut",
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+      })
+      .to(".menu-link-item-holder", {
+        y: 0,
+        duration: 0.75,
+        stagger: 0.1,
+        delay: -0.25,
+        ease: "power4.in",
+      })
+      .to(".menu-close-icon", {
+        opacity: 1,
+        duration: 0.25,
+        delay: -0.25,
+      })
+      .to(".menu-info-row svg", {
+        opacity: 1,
+        //x: 0,
+        duration: 0.25,
+        stagger: -0.15,
+        delay: -0.25,
+      });
+  }, []);
 
   useEffect(() => {
     if (menuStatus) {
@@ -76,7 +75,6 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
 
   return (
     <div className="menu-container" ref={container}>
-      {""}
       <div className="menu-overlay">
         <div className="menu-close-container">
           <Link href="/">

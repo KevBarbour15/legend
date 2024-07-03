@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavMenu from "@/components/menu/Menu";
 import Image from "next/image";
 import { Menu } from "@mui/icons-material";
@@ -8,8 +8,13 @@ const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
+    //console.log("toggleMenu");
     setMenuOpen(!menuOpen);
   };
+
+  useEffect(() => {
+    //console.log("Menu Open State:", menuOpen);
+  }, [menuOpen]);
 
   return (
     <>

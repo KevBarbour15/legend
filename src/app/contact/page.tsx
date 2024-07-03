@@ -74,7 +74,7 @@ export default function Contact() {
               className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-50vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
               required
             >
-              <option value="" disabled selected>
+              <option defaultValue="" disabled>
                 Select one
               </option>
               <option>Option 1</option>

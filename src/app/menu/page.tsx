@@ -1,6 +1,6 @@
 export default function Menu() {
   return (
-    <div className="flex flex-row w-screen justify-center">
+    <div className="flex flex-row w-screen justify-center min-h-screen">
       <div className="w-1/3 justify-center text-center">
         {/* Draft Beer section */}
         <h1 className="font-bigola underline text-customCream text-5xl">

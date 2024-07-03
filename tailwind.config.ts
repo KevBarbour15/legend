@@ -6,6 +6,16 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  compilerOptions: {
+    baseUrl: ".",
+    paths: {
+      "@components/*": ["./components/*"],
+      "@utils/*": ["./utils/*"],
+      "@styles/*": ["./styles/*"],
+      "@models/*": ["./models/*"],
+      "@lib/*": ["./lib/*"],
+    },
+  },
   theme: {
     extend: {
       fontFamily: {
@@ -26,6 +36,9 @@ const config: Config = {
       },
       width: {
         "50vw": "50vw",
+      },
+      minHeight: {
+        pageHeight: "calc(100vh - 135px)",
       },
     },
   },

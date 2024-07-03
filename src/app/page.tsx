@@ -17,7 +17,7 @@ export default function Home() {
   const titleRef = useRef<HTMLHeadingElement>(null);
 
   return (
-    <main className="flex flex-col items-center space-y-14 px-24">
+    <main className="flex flex-col items-center space-y-14 px-24 min-h-pageHeight">
       <div>
         <h1
           id="title"
