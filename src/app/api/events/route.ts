@@ -2,7 +2,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import Event from "@/models/Event";
 
-export async function GET(req: NextRequest) {}
+export async function GET(req: NextRequest) {
+  try {
+    const events = await Event.find();
+    console.log("Events: ", events);
+
+    return NextResponse.json(events, { status: 200 });
+  } catch (error) {
+    
+    console.log("Error: ", error);
+    return NextResponse.json({ error: "Failed to fetch events!" }, { status: 500 });
+  }
+}
 
 export async function POST(req: NextRequest) {
   try {

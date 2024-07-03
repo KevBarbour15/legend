@@ -7,6 +7,10 @@ import "./globals.css";
 
 import { connectToMongoDB } from "@/lib/db";
 
+import gsap from "gsap";
+import { SplitText } from "gsap/all";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -19,13 +23,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // connect to MongoDB
   connectToMongoDB();
+
+  // register GSAP plugins
+  gsap.registerPlugin(SplitText, ScrollTrigger);
   return (
     <>
       <html lang="en">
         <body className={inter.className}>
           <Header />
           {children}
+          <Footer />
         </body>
       </html>
     </>

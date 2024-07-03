@@ -2,22 +2,25 @@
 import Image from "next/image";
 import Head from "next/head";
 import { useRef } from "react";
-import { useIsomorphicLayoutEffect } from "usehooks-ts";
-import { gsap, SplitText } from "../lib/gsap/index.ts";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookIcon from "@mui/icons-material/Facebook";
 
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
+
+import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { SplitText } from "gsap/dist/SplitText";
 
 export default function Home() {
   // still need to implement email form submission services
   const logoRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
 
+  useGSAP(() => {}, []);
+
   return (
-    <main className="flex flex-col items-center space-y-14 px-24 min-h-pageHeight">
+    <main className="flex flex-col items-center space-y-14 px-24">
       <div>
         <h1
           id="title"

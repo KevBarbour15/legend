@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 
 // Dashboard components
-import DashHeader from "@/components/dashHeader/DashHeader";
-import CreateEvent from "@/components/createEvent/CreateEvent";
-import LiveStream from "@/components/liveStream/LiveStream";
+import DashHeader from "@/components/dash-header/DashHeader";
+import CreateEvent from "@/components/create-event/CreateEvent";
+import LiveStream from "@/components/live-stream/LiveStream";
 import EventsList from "@/components/events/Events";
 
 export default function Dashboard() {
