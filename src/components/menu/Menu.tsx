@@ -31,37 +31,38 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
   const container = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (!container.current) return;
     gsap.set(".menu-link-item-holder", { y: 75 });
     gsap.set(".menu-close-icon", { opacity: 0 });
+    gsap.set(".menu-overlay", { opacity: 0 });
     gsap.set(".menu-info-row svg", { opacity: 0 });
 
     tl.current = gsap
       .timeline({ paused: true })
       .to(".menu-overlay", {
-        duration: 0.5,
+        duration: 0.35,
         ease: "power4.inOut",
         clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+        opacity: 1,
       })
       .to(".menu-link-item-holder", {
         y: 0,
-        duration: 0.75,
-        stagger: 0.1,
-        delay: -0.25,
+        duration: 0.5,
+        stagger: 0.075,
+        delay: -0.3,
         ease: "power4.in",
       })
       .to(".menu-close-icon", {
         opacity: 1,
-        duration: 0.25,
-        delay: -0.25,
+        duration: 0.2,
+        delay: -0.3,
       })
       .to(".menu-info-row svg", {
         opacity: 1,
-        //x: 0,
-        duration: 0.25,
-        stagger: -0.15,
-        delay: -0.25,
+        duration: 0.2,
+        stagger: -0.1,
+        delay: -0.3,
       });
   }, []);
 

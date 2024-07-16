@@ -20,7 +20,7 @@ export default function Events() {
   const fetchEvents = async () => {
     // logic to fetch events goes here
     try {
-      const response = await fetch("/api/events");
+      const response = await fetch(`/api/events?action=${"getEvents"}`);
 
       if (!response.ok) {
         throw new Error("Failed to fetch events.");

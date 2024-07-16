@@ -11,7 +11,6 @@ const CreateEvent: React.FC = () => {
     e.preventDefault();
 
     if (!title || !date || !time || !description) {
-      console.log("Error: Please fill out all fields.");
       setError("Please fill out all fields.");
       return;
     }
@@ -19,7 +18,7 @@ const CreateEvent: React.FC = () => {
     setError("");
 
     try {
-      const response = await fetch("/api/events", {
+      const response = await fetch(`/api/events?action=${"createEvent"}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,7 +32,6 @@ const CreateEvent: React.FC = () => {
       });
 
       if (response.ok) {
-        console.log("Event created successfully!");
         setTitle("");
         setDate("");
         setTime("");
@@ -64,7 +62,7 @@ const CreateEvent: React.FC = () => {
             <input
               className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-50vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
               type="text"
-              placeholder="Enter event name here."
+              placeholder="For ex: Jose's Birthday Party"
               required
               onChange={(e) => setTitle(e.target.value)}
             />

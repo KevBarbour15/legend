@@ -30,7 +30,7 @@ export default function Home() {
         </h1>
       </div>
       <div>
-        <h2 className="font-ubuntuLight text-2xl text-white text-center">
+        <h2 className="font-hypatia text-2xl text-white text-center">
           Sign up to be the first to learn about updates on our launch and
           upcoming events!
         </h2>

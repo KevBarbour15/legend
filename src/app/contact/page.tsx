@@ -8,15 +8,15 @@ export default function Contact() {
         <form className="flex flex-col items-center">
           <div className="my-2.5">
             <label className="flex text-left text-xl font-hypatia">Name:</label>
-            <div className="flex flex-row w-50vw justify-between">
+            <div className="flex flex-col sm:flex-row w-50vw justify-between">
               <input
-                className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg flex-1 mr-1 focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+                className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg flex-1 sm:mr-1 focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
                 type="text"
                 placeholder="First Name"
                 required
               />
               <input
-                className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg flex-1 ml-1 focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+                className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg flex-1 sm:ml-1 focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
                 type="text"
                 placeholder="Last Name"
                 required
