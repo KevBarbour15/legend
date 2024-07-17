@@ -13,10 +13,7 @@ export default function Events() {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  // need to fetch events from the API and make events cards
-  // sort events by date, current first
-  // if no events, display a message
-
+  
   const fetchEvents = async () => {
     // logic to fetch events goes here
     try {
@@ -61,7 +58,7 @@ export default function Events() {
             Upcoming Events
           </h1>
           {sortedEvents.map((event, index) => (
-            <EventCard key={index} event={event} />
+            <EventCard key={index} event={event} inDashboard={false} />
           ))}
         </>
       )}

@@ -1,6 +1,6 @@
 // pages/api/events.ts
 import { NextRequest, NextResponse } from "next/server";
-import Event from "@/models/Event";
+import Message from "@/models/Message";
 
 // GET request handler ************************************************************************************************
 export async function GET(req: NextRequest) {
@@ -10,8 +10,8 @@ export async function GET(req: NextRequest) {
     const action = searchParams.get("action");
 
     switch (action) {
-      case "getEvents":
-        return getEvents();
+      case "getMessages":
+        return getMessages();
       default:
         return NextResponse.json(
           { error: "Failed to process request." },
@@ -27,17 +27,17 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// fetch the events
-async function getEvents() {
+// fetch the messages
+async function getMessages() {
   try {
-    const events = await Event.find();
-    //console.log("Events: ", events);
+    const messages = await Message.find();
+    console.log("Messages: ", messages);
 
-    return NextResponse.json(events, { status: 200 });
+    return NextResponse.json(messages, { status: 200 });
   } catch (error) {
     console.log("Error: ", error);
     return NextResponse.json(
-      { error: "Failed to fetch events." },
+      { error: "Failed to fetch messages." },
       { status: 500 }
     );
   }
@@ -46,12 +46,13 @@ async function getEvents() {
 // POST request handler ************************************************************************************************
 export async function POST(req: NextRequest) {
   try {
+    // parse the action from the query params
     const { searchParams } = new URL(req.url);
     const action = searchParams.get("action");
 
     switch (action) {
-      case "createEvent":
-        return createEvent(req);
+      case "createMessage":
+        return createMessage(req);
       default:
         return NextResponse.json({ error: "Invalid action." }, { status: 400 });
     }
@@ -64,38 +65,41 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// create an event
-async function createEvent(req: NextRequest) {
+// create a new message
+async function createMessage(req: NextRequest) {
   try {
-    // Ensure the request body is parsed correctly
-    const body = await req.json();
+    const {
+      firstName,
+      lastName,
+      email,
+      phone,
+      preferredDate,
+      budget,
+      howDidYouHear,
+      message,
+    } = await req.json();
 
-    const { title, date, time, description } = body;
-
-    if (!title || !date || !time || !description) {
-      return NextResponse.json(
-        { error: "All fields are required!" },
-        { status: 400 }
-      );
-    }
-
-    const event = new Event({
-      title,
-      date,
-      time,
-      description,
+    const newMessage = new Message({
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phone: phone,
+      preferredDate: preferredDate,
+      budget: budget,
+      howDidYouHear: howDidYouHear,
+      message: message,
     });
 
-    await event.save();
+    await newMessage.save();
 
     return NextResponse.json(
-      { message: "Event created successfully." },
+      { message: "Message successfully sent." },
       { status: 201 }
     );
   } catch (error) {
     console.log("Error: ", error);
     return NextResponse.json(
-      { error: "Failed to create event." },
+      { error: "Failed to create message." },
       { status: 500 }
     );
   }

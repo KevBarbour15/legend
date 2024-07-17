@@ -37,8 +37,8 @@ const CreateEvent: React.FC = () => {
         setTime("");
         setDescription("");
       } else {
+
         const errorData = await response.json();
-        console.log("Error: ", errorData.error);
         setError(errorData.error);
       }
     } catch (error) {
@@ -49,7 +49,7 @@ const CreateEvent: React.FC = () => {
 
   return (
     <div className="flex flex-col w-screen justify-center items-center text-center">
-      <h1 className="font-bigola  text-customCream text-4xl my-3.5">
+      <h1 className="font-bigola  text-customCream text-4xl mt-3.5">
         Create Event
       </h1>
       <div>

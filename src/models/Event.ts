@@ -26,6 +26,10 @@ const EventSchema: Schema = new Schema({
     type: String,
     required: true,
   },
+  notes: {
+    type: String,
+    required: false,
+  },
 });
 
 export default mongoose.models.Event ||
