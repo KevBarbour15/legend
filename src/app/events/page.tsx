@@ -43,18 +43,18 @@ export default function Events() {
   );
 
   return (
-    <div className="flex flex-col w-screen justify-center items-center text-center">
+    <div className="flex flex-col w-screen justify-center items-center text-center pt-135">
       {loading ? (
-        <h1 className="font-bigola text-customCream text-6xl">
+        <h1 className="font-bigola text-customCream text-4xl lg:text-5xl w-90vw">
           Loading events...
         </h1>
       ) : events.length === 0 ? (
-        <h1 className="font-bigola  text-customCream text-6xl">
+        <h1 className="font-bigola  text-customCream text-4xl lg:text-5xl w-90vw">
           Stay tuned for upcoming events...
         </h1>
       ) : (
         <>
-          <h1 className="font-bigola  text-customCream text-6xl">
+          <h1 className="font-bigola  text-customCream text-4xl lg:text-5xl w-90vw">
             Upcoming Events
           </h1>
           {sortedEvents.map((event, index) => (

@@ -37,7 +37,6 @@ const CreateEvent: React.FC = () => {
         setTime("");
         setDescription("");
       } else {
-
         const errorData = await response.json();
         setError(errorData.error);
       }
@@ -49,7 +48,7 @@ const CreateEvent: React.FC = () => {
 
   return (
     <div className="flex flex-col w-screen justify-center items-center text-center">
-      <h1 className="font-bigola  text-customCream text-4xl mt-3.5">
+      <h1 className="font-bigola  text-customCream text-4xl lg:text-5xl mt-3.5">
         Create Event
       </h1>
       <div>
@@ -60,7 +59,7 @@ const CreateEvent: React.FC = () => {
             </label>
 
             <input
-              className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-50vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
               type="text"
               placeholder="For ex: Jose's Birthday Party"
               required
@@ -71,7 +70,7 @@ const CreateEvent: React.FC = () => {
           <div className="my-2.5">
             <label className="flex text-left text-xl font-hypatia">Date:</label>
             <input
-              className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-50vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
               type="date"
               required
               onChange={(e) => setDate(e.target.value)}
@@ -81,7 +80,7 @@ const CreateEvent: React.FC = () => {
           <div className="my-2.5">
             <label className="flex text-left text-xl font-hypatia">Time:</label>
             <input
-              className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-50vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
               type="time"
               required
               onChange={(e) => setTime(e.target.value)}
@@ -93,7 +92,7 @@ const CreateEvent: React.FC = () => {
               Event Description:
             </label>
             <textarea
-              className="bg-transparent font-ubuntuRegular py-2 px-4 h-52 border border-white border-opacity-50 rounded-lg w-50vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="bg-transparent font-ubuntuRegular py-2 px-4 h-52 border border-white border-opacity-50 rounded-lg w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
               placeholder="Add any additional information/ideas here."
               required
               onChange={(e) => setDescription(e.target.value)}

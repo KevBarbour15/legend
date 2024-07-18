@@ -20,17 +20,17 @@ export default function Home() {
   useGSAP(() => {}, []);
 
   return (
-    <main className="flex flex-col items-center space-y-14 px-24">
+    <main className="flex flex-col items-center space-y-14 pt-135">
       <div>
         <h1
           id="title"
-          className="font-hypatiaBold text-5xl text-white text-center"
+          className="font-hypatiaBold text-4xl lg:text-5xl text-white text-center w-90vw lg:w-55vw xl:w-50vw xxl:w-45vw"
         >
           Legend Has It...a new hi-fi bar is coming soon to Sacramento
         </h1>
       </div>
       <div>
-        <h2 className="font-hypatia text-2xl text-white text-center">
+        <h2 className="font-hypatia text-2xl text-white text-center w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw">
           Sign up to be the first to learn about updates on our launch and
           upcoming events!
         </h2>
@@ -41,7 +41,7 @@ export default function Home() {
           <input
             type="email"
             placeholder="Email"
-            className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-50vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+            className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
           />
           <button className="font-hypatia font-bold bg-customGold rounded-full py-3.5 px-14 mt-7 tracking-wider">
             <span className="text-white leading-none text-sm">SUBMIT</span>

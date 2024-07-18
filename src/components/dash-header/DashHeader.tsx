@@ -11,7 +11,7 @@ const DashHeader: React.FC<DashProps> = ({ setActiveTab }) => {
 
   return (
     <div className="flex flex-row justify-center items-center w-screen bg-customGold ">
-      <div className="flex flex-row justify-between items-center w-7/12 my-2.5 font-hypatia text-xl">
+      <div className="flex flex-row justify-between items-center w-90vw lg:w-50vw xl:w-45vw xxl:w-40vw my-2.5 font-hypatia text-base lg:text-xl">
         <button onClick={() => setActiveTab("Create Event")}>
           Create Event
         </button>

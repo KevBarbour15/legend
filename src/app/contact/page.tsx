@@ -72,15 +72,15 @@ export default function Contact() {
   };
 
   return (
-    <div className="flex flex-col justify-center w-screen">
-      <h2 className="font-bigola text-customCream text-5xl text-center my-6">
+    <div className="flex flex-col justify-center w-screen pt-135">
+      <h2 className="font-bigola text-customCream text-4xl lg:text-5xl text-center my-6 ">
         Let's Work Together
       </h2>
       <div>
-        <form className="flex flex-col items-center" onSubmit={handleSubmit}>
+        <form className="flex flex-col items-center " onSubmit={handleSubmit}>
           <div className="my-2.5">
             <label className="flex text-left text-xl font-hypatia">Name:</label>
-            <div className="flex flex-col sm:flex-row w-50vw justify-between">
+            <div className="flex flex-col sm:flex-row w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw justify-between">
               <input
                 className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg flex-1 sm:mr-1 focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
                 type="text"
@@ -89,7 +89,7 @@ export default function Contact() {
                 onChange={(e) => setFirstName(e.target.value)}
               />
               <input
-                className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg flex-1 sm:ml-1 focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+                className="bg-transparent font-ubuntuRegular py-2 px-4 mt-2.5 sm:mt-0 border border-white border-opacity-50 rounded-lg flex-1 sm:ml-1 focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
                 type="text"
                 placeholder="Last Name"
                 required
@@ -102,7 +102,7 @@ export default function Contact() {
               Email:
             </label>
             <input
-              className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-50vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="bg-transparent font-ubuntuRegular py-2 px-4 w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw border border-white border-opacity-50 rounded-lg focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
               type="email"
               placeholder="example@example.com"
               required
@@ -114,7 +114,7 @@ export default function Contact() {
               Phone:
             </label>
             <input
-              className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-50vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="bg-transparent font-ubuntuRegular py-2 px-4 w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw border border-white border-opacity-50 rounded-lg focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
               //type="tel"
               placeholder="(555) 555-5555"
               //pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
@@ -127,7 +127,7 @@ export default function Contact() {
               Preferred Date:
             </label>
             <input
-              className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-50vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="bg-transparent font-ubuntuRegular py-2 px-4 w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw border border-white border-opacity-50 rounded-lg focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
               type="date"
               required
               onChange={(e) => setPreferredDate(e.target.value)}
@@ -138,7 +138,7 @@ export default function Contact() {
               What is your budget?
             </label>
             <input
-              className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-50vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="bg-transparent font-ubuntuRegular py-2 px-4 w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw border border-white border-opacity-50 rounded-lg focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
               type="text"
               placeholder="e.g., $500 - $1000"
               required
@@ -150,7 +150,7 @@ export default function Contact() {
               How did you hear about us?
             </label>
             <select
-              className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-50vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="bg-transparent font-ubuntuRegular py-2 px-4 w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw border border-white border-opacity-50 rounded-lg focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
               required
               onChange={(e) => setHowDidYouHear(e.target.value)}
             >
@@ -169,7 +169,7 @@ export default function Contact() {
               Message:
             </label>
             <textarea
-              className="bg-transparent font-ubuntuRegular py-2 px-4 h-52 border border-white border-opacity-50 rounded-lg w-50vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="bg-transparent font-ubuntuRegular py-2 px-4 w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw h-52 border border-white border-opacity-50 rounded-lg focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
               placeholder="Add any additional information/ideas here."
               required
               onChange={(e) => setMessage(e.target.value)}

@@ -44,16 +44,16 @@ const EventsList: React.FC = () => {
   return (
     <div className="flex flex-col w-screen justify-center items-center text-center">
       {loading ? (
-        <h1 className="font-bigola  text-customCream text-4xl mt-3.5">
+        <h1 className="font-bigola  text-customCream text-4xl lg:text-5xl mt-3.5">
           Loading events...
         </h1>
       ) : events.length === 0 ? (
-        <h1 className="font-bigola  text-customCream text-4xl mt-3.5">
+        <h1 className="font-bigola  text-customCream text-4xl lg:text-5xl mt-3.5">
           No events found.
         </h1>
       ) : (
         <>
-          <h1 className="font-bigola  text-customCream text-4xl mt-3.5">
+          <h1 className="font-bigola  text-customCream text-4xl lg:text-5xl mt-3.5">
             Upcoming Events
           </h1>
           {sortedEvents.map((event, index) => (

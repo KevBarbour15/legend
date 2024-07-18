@@ -33,8 +33,10 @@ export default function Dashboard() {
 
   return (
     <>
+      <div className="pt-135">
       <DashHeader setActiveTab={setActiveTab} />
-      <CurrentComponent />
+        <CurrentComponent />
+      </div>
     </>
   );
 }
