@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Head from "next/head";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -16,8 +16,25 @@ export default function Home() {
   // still need to implement email form submission services
   const logoRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const [email, setEmail] = useState<string>("");
 
   useGSAP(() => {}, []);
+
+  const subscribeEmail = () => {
+    alert(`Thank you for subscribing with ${email}!`);
+
+    try {
+      const response = fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <main className="flex flex-col items-center space-y-14 pt-135">
@@ -37,11 +54,12 @@ export default function Home() {
       </div>
 
       <div>
-        <form className="flex flex-col items-center">
+        <form className="flex flex-col items-center" onSubmit={subscribeEmail}>
           <input
+            onChange={(e) => setEmail(e.target.value)}
             type="email"
             placeholder="Email"
-            className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+            className="bg-transparent font-ubuntuRegular py-2 px-4 border border-white border-opacity-50 rounded-lg w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
           />
           <button className="font-hypatia font-bold bg-customGold rounded-full py-3.5 px-14 mt-7 tracking-wider">
             <span className="text-white leading-none text-sm">SUBMIT</span>
