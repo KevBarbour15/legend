@@ -85,6 +85,7 @@ export default function Contact() {
                 className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg flex-1 sm:mr-1 focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
                 type="text"
                 placeholder="First Name"
+                value={firstName}
                 required
                 onChange={(e) => setFirstName(e.target.value)}
               />
@@ -92,6 +93,7 @@ export default function Contact() {
                 className="bg-transparent font-ubuntuRegular py-2 px-4 mt-2.5 sm:mt-0 border border-white border-opacity-50 rounded-lg flex-1 sm:ml-1 focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
                 type="text"
                 placeholder="Last Name"
+                value={lastName}
                 required
                 onChange={(e) => setLastName(e.target.value)}
               />
@@ -105,6 +107,7 @@ export default function Contact() {
               className="bg-transparent font-ubuntuRegular py-2 px-4 w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw border border-white border-opacity-50 rounded-lg focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
               type="email"
               placeholder="example@example.com"
+              value={email}
               required
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -118,6 +121,7 @@ export default function Contact() {
               //type="tel"
               placeholder="(555) 555-5555"
               //pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              value={phone}
               required
               onChange={(e) => setPhone(e.target.value)}
             />
@@ -129,6 +133,7 @@ export default function Contact() {
             <input
               className="bg-transparent font-ubuntuRegular py-2 px-4 w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw border border-white border-opacity-50 rounded-lg focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
               type="date"
+              value={preferredDate}
               required
               onChange={(e) => setPreferredDate(e.target.value)}
             />
@@ -141,6 +146,7 @@ export default function Contact() {
               className="bg-transparent font-ubuntuRegular py-2 px-4 w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw border border-white border-opacity-50 rounded-lg focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
               type="text"
               placeholder="e.g., $500 - $1000"
+              value={budget}
               required
               onChange={(e) => setBudget(e.target.value)}
             />
@@ -152,9 +158,10 @@ export default function Contact() {
             <select
               className="bg-transparent font-ubuntuRegular py-2 px-4 w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw border border-white border-opacity-50 rounded-lg focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
               required
+              value={howDidYouHear}
               onChange={(e) => setHowDidYouHear(e.target.value)}
             >
-              <option defaultValue="" disabled>
+              <option value="" disabled>
                 Select one
               </option>
               <option>Option 1</option>
@@ -171,6 +178,7 @@ export default function Contact() {
             <textarea
               className="bg-transparent font-ubuntuRegular py-2 px-4 w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw h-52 border border-white border-opacity-50 rounded-lg focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
               placeholder="Add any additional information/ideas here."
+              value={message}
               required
               onChange={(e) => setMessage(e.target.value)}
             />

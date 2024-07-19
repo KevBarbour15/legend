@@ -55,6 +55,10 @@ const MessageSchema: Schema = new Schema({
     type: Boolean,
     default: false,
   },
+  contacted: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export default mongoose.models.Message ||
