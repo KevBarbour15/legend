@@ -46,22 +46,22 @@ const MessagesList: React.FC = () => {
 
   // sort events by date
   const sortedMessages = messages.sort(
-    (a, b) => new Date(a.sentAt).getTime() - new Date(b.sentAt).getTime()
+    (a, b) => new Date(a.sentAt).getTime() - new Date(b.sentAt).getTime(),
   );
 
   return (
-    <div className="flex flex-col w-screen justify-center items-center text-center">
+    <div className="flex w-screen flex-col items-center justify-center text-center">
       {loading ? (
-        <h1 className="font-bigola  text-customCream text-4xl lg:text-5xl mt-3.5">
+        <h1 className="mt-3.5 font-bigola text-4xl text-customCream lg:text-5xl">
           Loading messages...
         </h1>
       ) : sortedMessages.length === 0 ? (
-        <h1 className="font-bigola  text-customCream text-4xl lg:text-5xl mt-3.5">
+        <h1 className="mt-3.5 font-bigola text-4xl text-customCream lg:text-5xl">
           No messages found.
         </h1>
       ) : (
         <>
-          <h1 className="font-bigola  text-customCream text-4xl lg:text-5xl mt-3.5">
+          <h1 className="mt-3.5 font-bigola text-4xl text-customCream lg:text-5xl">
             Messages
           </h1>
           {sortedMessages.map((message, index) => (

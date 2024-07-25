@@ -43,13 +43,13 @@ export default function Home() {
       <div>
         <h1
           id="title"
-          className="font-hypatiaBold text-4xl lg:text-5xl text-white text-center w-90vw lg:w-55vw xl:w-50vw xxl:w-45vw"
+          className="w-90vw text-center font-hypatiaBold text-4xl text-white lg:w-55vw lg:text-5xl xl:w-50vw xxl:w-45vw"
         >
           Legend Has It...a new hi-fi bar is coming soon to Sacramento
         </h1>
       </div>
       <div>
-        <h2 className="font-hypatia text-2xl text-white text-center w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw">
+        <h2 className="w-85vw text-center font-hypatia text-2xl text-white lg:w-50vw xl:w-45vw xxl:w-40vw">
           Sign up to be the first to learn about updates on our launch and
           upcoming events!
         </h2>
@@ -61,34 +61,34 @@ export default function Home() {
             onChange={(e) => setEmail(e.target.value)}
             type="email"
             placeholder="Email"
-            className="bg-transparent font-ubuntuRegular py-2 px-4 border border-white border-opacity-50 rounded-lg w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+            className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
           />
-          <button className="font-hypatia font-bold bg-customGold rounded-full py-3.5 px-14 mt-7 tracking-wider">
-            <span className="text-white leading-none text-sm">SUBMIT</span>
+          <button className="mt-7 rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider">
+            <span className="text-sm leading-none text-white">SUBMIT</span>
           </button>
         </form>
       </div>
-      <div className="flex justify-between items-center space-x-4 text-white">
+      <div className="flex items-center justify-between space-x-4 text-white">
         <a
           href="https://www.instagram.com/legendhasithifi/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <InstagramIcon className="w-7 h-7 text-white" />
+          <InstagramIcon className="h-7 w-7 text-white" />
         </a>
         <a
           href="https://www.youtube.com/@legendhasithifi"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <YouTubeIcon className="w-7 h-7 text-white" />
+          <YouTubeIcon className="h-7 w-7 text-white" />
         </a>
         <a
           href="https://www.facebook.com/legendhasithifi"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FacebookIcon className="w-7 h-7 text-white" />
+          <FacebookIcon className="h-7 w-7 text-white" />
         </a>
       </div>
     </main>

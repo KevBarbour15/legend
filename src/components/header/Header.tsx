@@ -11,15 +11,13 @@ const Header: React.FC = () => {
     setMenuOpen(!menuOpen);
   };
 
-  useEffect(() => {
-    
-  }, [menuOpen]);
+  useEffect(() => {}, [menuOpen]);
 
   return (
     <>
       <NavMenu menuStatus={menuOpen} toggleMenu={toggleMenu} />
-      <header className="flex flex-row w-screen justify-between items-center fixed top-0 bg-customNavy z-10">
-        <div className="w-10 "></div>
+      <header className="fixed top-0 z-10 flex w-screen flex-row items-center justify-between bg-customNavy">
+        <div className="w-10"></div>
 
         <div id="logo" className="">
           <Image
@@ -31,7 +29,7 @@ const Header: React.FC = () => {
           />
         </div>
         <div onClick={toggleMenu} className="w-14">
-          <Menu className="cursor-pointer	text-3xl" />
+          <Menu className="cursor-pointer text-3xl" />
         </div>
       </header>
     </>

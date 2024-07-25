@@ -7,6 +7,7 @@ interface Event {
   date: string;
   time: string;
   description: string;
+  notes: string;
 }
 
 const EventsList: React.FC = () => {
@@ -38,22 +39,22 @@ const EventsList: React.FC = () => {
 
   // sort events by date
   const sortedEvents = events.sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
   );
 
   return (
-    <div className="flex flex-col w-screen justify-center items-center text-center">
+    <div className="flex w-screen flex-col items-center justify-center text-center">
       {loading ? (
-        <h1 className="font-bigola  text-customCream text-4xl lg:text-5xl mt-3.5">
+        <h1 className="mt-3.5 font-bigola text-4xl text-customCream lg:text-5xl">
           Loading events...
         </h1>
       ) : events.length === 0 ? (
-        <h1 className="font-bigola  text-customCream text-4xl lg:text-5xl mt-3.5">
+        <h1 className="mt-3.5 font-bigola text-4xl text-customCream lg:text-5xl">
           No events found.
         </h1>
       ) : (
         <>
-          <h1 className="font-bigola  text-customCream text-4xl lg:text-5xl mt-3.5">
+          <h1 className="mt-3.5 font-bigola text-4xl text-customCream lg:text-5xl">
             Upcoming Events
           </h1>
           {sortedEvents.map((event, index) => (

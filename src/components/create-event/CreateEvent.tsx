@@ -47,19 +47,19 @@ const CreateEvent: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col w-screen justify-center items-center text-center">
-      <h1 className="font-bigola  text-customCream text-4xl lg:text-5xl mt-3.5">
+    <div className="flex w-screen flex-col items-center justify-center text-center">
+      <h1 className="mt-3.5 font-bigola text-4xl text-customCream lg:text-5xl">
         Create Event
       </h1>
       <div>
         <form className="flex flex-col items-center" onSubmit={handleSubmit}>
           <div className="my-2.5">
-            <label className="flex text-left text-xl font-hypatia">
+            <label className="flex text-left font-hypatia text-xl">
               Event Name:
             </label>
 
             <input
-              className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="text"
               placeholder="For ex: Jose's Birthday Party"
               required
@@ -68,9 +68,9 @@ const CreateEvent: React.FC = () => {
           </div>
 
           <div className="my-2.5">
-            <label className="flex text-left text-xl font-hypatia">Date:</label>
+            <label className="flex text-left font-hypatia text-xl">Date:</label>
             <input
-              className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="date"
               required
               onChange={(e) => setDate(e.target.value)}
@@ -78,9 +78,9 @@ const CreateEvent: React.FC = () => {
           </div>
 
           <div className="my-2.5">
-            <label className="flex text-left text-xl font-hypatia">Time:</label>
+            <label className="flex text-left font-hypatia text-xl">Time:</label>
             <input
-              className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="time"
               required
               onChange={(e) => setTime(e.target.value)}
@@ -88,21 +88,21 @@ const CreateEvent: React.FC = () => {
           </div>
 
           <div className="my-2.5">
-            <label className="flex text-left text-xl font-hypatia">
+            <label className="flex text-left font-hypatia text-xl">
               Event Description:
             </label>
             <textarea
-              className="bg-transparent font-ubuntuRegular py-2 px-4 h-52 border border-white border-opacity-50 rounded-lg w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="h-52 w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               placeholder="Add any additional information/ideas here."
               required
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
           <button
-            className="font-hypatia font-bold bg-customGold rounded-full py-3.5 px-14 mt-7 tracking-wider"
+            className="mt-7 rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider"
             type="submit"
           >
-            <span className="text-white leading-none text-sm">SUBMIT</span>
+            <span className="text-sm leading-none text-white">SUBMIT</span>
           </button>
         </form>
       </div>

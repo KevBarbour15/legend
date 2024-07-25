@@ -21,7 +21,7 @@ const Playlist = () => {
   return (
     <div
       id="playlist-container"
-      className="fixed bottom-0 right-0 bg-customGold p-3 rounded-xl shadow-xl"
+      className="fixed bottom-0 right-0 rounded-xl bg-customGold p-3 shadow-xl"
     >
       <iframe
         allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"

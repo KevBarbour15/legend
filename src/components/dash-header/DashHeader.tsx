@@ -14,8 +14,8 @@ const DashHeader: React.FC<DashProps> = ({ setActiveTab }) => {
   // TO DO: need to get the unread messages count for the user
 
   return (
-    <div className="flex flex-row justify-center items-center w-screen bg-customGold">
-      <div className="flex flex-row justify-between items-center w-90vw lg:w-50vw xl:w-45vw xxl:w-40vw my-2.5 font-bigola text-base lg:text-xl">
+    <div className="flex w-screen flex-row items-center justify-center bg-customGold">
+      <div className="my-2.5 flex w-90vw flex-row items-center justify-between font-bigola text-base lg:w-50vw lg:text-xl xl:w-45vw xxl:w-40vw">
         <button onClick={() => setActiveTab("Messages")}>
           <Badge className="z-1" badgeContent={3} color="primary">
             <MailIcon />

@@ -7,13 +7,14 @@ interface Event {
   date: string;
   time: string;
   description: string;
+  notes: string;
 }
 
 export default function Events() {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  
+
   const fetchEvents = async () => {
     // logic to fetch events goes here
     try {
@@ -39,22 +40,22 @@ export default function Events() {
 
   // sort events by date
   const sortedEvents = events.sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
   );
 
   return (
-    <div className="flex flex-col w-screen justify-center items-center text-center pt-135">
+    <div className="flex w-screen flex-col items-center justify-center pt-135 text-center">
       {loading ? (
-        <h1 className="font-bigola text-customCream text-4xl lg:text-5xl w-90vw">
+        <h1 className="w-90vw font-bigola text-4xl text-customCream lg:text-5xl">
           Loading events...
         </h1>
       ) : events.length === 0 ? (
-        <h1 className="font-bigola  text-customCream text-4xl lg:text-5xl w-90vw">
+        <h1 className="w-90vw font-bigola text-4xl text-customCream lg:text-5xl">
           Stay tuned for upcoming events...
         </h1>
       ) : (
         <>
-          <h1 className="font-bigola  text-customCream text-4xl lg:text-5xl w-90vw">
+          <h1 className="w-90vw font-bigola text-4xl text-customCream lg:text-5xl">
             Upcoming Events
           </h1>
           {sortedEvents.map((event, index) => (

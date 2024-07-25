@@ -35,7 +35,7 @@ const MessageCard: React.FC<MessageCardProps> = ({ message }) => {
 
   const formattedDate = new Date(message.sentAt).toLocaleDateString();
   const formattedPreferredDate = new Date(
-    message.preferredDate
+    message.preferredDate,
   ).toLocaleDateString();
 
   const handleContacted = async () => {
@@ -53,7 +53,7 @@ const MessageCard: React.FC<MessageCardProps> = ({ message }) => {
             _id: message._id,
             contacted: newContacted,
           }),
-        }
+        },
       );
 
       if (response.ok) {
@@ -124,14 +124,14 @@ const MessageCard: React.FC<MessageCardProps> = ({ message }) => {
 
   return (
     <>
-      <div className="flex flex-col w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw border-y-2 border-customGold m-5 p-5 text-left">
-        <h1 className="font-bigola text-customCream text-3xl mb-2">
+      <div className="m-5 flex w-85vw flex-col border-y-2 border-customGold p-5 text-left lg:w-50vw xl:w-45vw xxl:w-40vw">
+        <h1 className="mb-2 font-bigola text-3xl text-customCream">
           {message.firstName} {message.lastName}
         </h1>
-        <p className="font-hypatia text-lg lg:text-xl mb-1">{formattedDate}</p>
-        <ul className="list-disc pl-5 font-hypatia text-lg lg:text-xl mb-1">
+        <p className="mb-1 font-hypatia text-lg lg:text-xl">{formattedDate}</p>
+        <ul className="mb-1 list-disc pl-5 font-hypatia text-lg lg:text-xl">
           <li>Email:</li>
-          <p className="font-hypatia text-lg lg:text-xl mb-1">
+          <p className="mb-1 font-hypatia text-lg lg:text-xl">
             <a href={`mailto:${message.email}`} className="underline">
               {message.email}
             </a>
@@ -163,9 +163,9 @@ const MessageCard: React.FC<MessageCardProps> = ({ message }) => {
             control={<Switch />}
           />
         </FormGroup>
-        <div className="flex flex-row mt-2">
+        <div className="mt-2 flex flex-row">
           <button
-            className="font-hypatia font-bold bg-customGold rounded-full py-3.5 px-14 tracking-wider"
+            className="rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider"
             onClick={handleDeleteOpen}
           >
             DELETE

@@ -48,9 +48,10 @@ const EventCard: React.FC<EventCardProps> = ({ event, inDashboard }) => {
     setOpenEdit(false);
   };
 
-  const handleEditChange = (field: keyof Event) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEditedEvent({ ...editedEvent, [field]: event.target.value });
-  };
+  const handleEditChange =
+    (field: keyof Event) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      setEditedEvent({ ...editedEvent, [field]: event.target.value });
+    };
 
   const confirmEdit = () => {
     console.log("Edit confirmed", editedEvent);
@@ -59,31 +60,31 @@ const EventCard: React.FC<EventCardProps> = ({ event, inDashboard }) => {
 
   return (
     <>
-      <div className="flex flex-col w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw border-y-2 border-customGold m-5 p-5 text-left">
+      <div className="m-5 flex w-85vw flex-col border-y-2 border-customGold p-5 text-left lg:w-50vw xl:w-45vw xxl:w-40vw">
         {inDashboard ? (
           <>
-            <h1 className="font-bigola text-customCream text-3xl mb-2">
+            <h1 className="mb-2 font-bigola text-3xl text-customCream">
               {event.title}
             </h1>
             <p className="font-hypatia text-lg lg:text-xl">
               {event.description}
             </p>
-            <p className="font-hypatia text-lg lg:text-xl mb-1">
+            <p className="mb-1 font-hypatia text-lg lg:text-xl">
               {formattedDate}
             </p>
-            <p className="font-hypatia text-lg lg:text-xl mb-1">
+            <p className="mb-1 font-hypatia text-lg lg:text-xl">
               {formattedTime}
             </p>
 
-            <div className="flex flex-row mt-2">
+            <div className="mt-2 flex flex-row">
               <button
-                className="font-hypatia font-bold bg-customGold rounded-full py-3.5 px-14 mr-7 tracking-wider"
+                className="mr-7 rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider"
                 onClick={handleEditOpen}
               >
                 EDIT
               </button>
               <button
-                className="font-hypatia font-bold bg-customGold rounded-full py-3.5 px-14 tracking-wider"
+                className="rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider"
                 onClick={handleDeleteOpen}
               >
                 DELETE
@@ -92,11 +93,11 @@ const EventCard: React.FC<EventCardProps> = ({ event, inDashboard }) => {
           </>
         ) : (
           <>
-            <h1 className="font-bigola text-customCream text-3xl mb-2">
+            <h1 className="mb-2 font-bigola text-3xl text-customCream">
               {event.title}
             </h1>
-            <p className="font-hypatia text-base mb-1">{formattedDate}</p>
-            <p className="font-hypatia text-base mb-1">{formattedTime}</p>
+            <p className="mb-1 font-hypatia text-base">{formattedDate}</p>
+            <p className="mb-1 font-hypatia text-base">{formattedTime}</p>
             <p className="font-hypatia text-base">{event.description}</p>
           </>
         )}
@@ -111,7 +112,8 @@ const EventCard: React.FC<EventCardProps> = ({ event, inDashboard }) => {
         <DialogTitle id="alert-dialog-title">{"Delete Event?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete this event? This action cannot be undone.
+            Are you sure you want to delete this event? This action cannot be
+            undone.
           </DialogContentText>
         </DialogContent>
         <DialogActions>

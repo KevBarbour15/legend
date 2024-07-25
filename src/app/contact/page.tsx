@@ -72,17 +72,17 @@ export default function Contact() {
   };
 
   return (
-    <div className="flex flex-col justify-center w-screen pt-135">
-      <h2 className="font-bigola text-customCream text-4xl lg:text-5xl text-center my-6 ">
+    <div className="flex w-screen flex-col justify-center pt-135">
+      <h2 className="my-6 text-center font-bigola text-4xl text-customCream lg:text-5xl">
         Let's Work Together
       </h2>
       <div>
-        <form className="flex flex-col items-center " onSubmit={handleSubmit}>
+        <form className="flex flex-col items-center" onSubmit={handleSubmit}>
           <div className="my-2.5">
-            <label className="flex text-left text-xl font-hypatia">Name:</label>
-            <div className="flex flex-col sm:flex-row w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw justify-between">
+            <label className="flex text-left font-hypatia text-xl">Name:</label>
+            <div className="flex w-85vw flex-col justify-between sm:flex-row lg:w-50vw xl:w-45vw xxl:w-40vw">
               <input
-                className="bg-transparent font-ubuntuRegular py-2 px-4  border border-white border-opacity-50 rounded-lg flex-1 sm:mr-1 focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+                className="flex-1 rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none sm:mr-1"
                 type="text"
                 placeholder="First Name"
                 value={firstName}
@@ -90,7 +90,7 @@ export default function Contact() {
                 onChange={(e) => setFirstName(e.target.value)}
               />
               <input
-                className="bg-transparent font-ubuntuRegular py-2 px-4 mt-2.5 sm:mt-0 border border-white border-opacity-50 rounded-lg flex-1 sm:ml-1 focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+                className="mt-2.5 flex-1 rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none sm:ml-1 sm:mt-0"
                 type="text"
                 placeholder="Last Name"
                 value={lastName}
@@ -100,11 +100,11 @@ export default function Contact() {
             </div>
           </div>
           <div className="my-2.5">
-            <label className="flex text-left text-xl font-hypatia">
+            <label className="flex text-left font-hypatia text-xl">
               Email:
             </label>
             <input
-              className="bg-transparent font-ubuntuRegular py-2 px-4 w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw border border-white border-opacity-50 rounded-lg focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="email"
               placeholder="example@example.com"
               value={email}
@@ -113,11 +113,11 @@ export default function Contact() {
             />
           </div>
           <div className="my-2.5">
-            <label className="flex text-left text-xl font-hypatia">
+            <label className="flex text-left font-hypatia text-xl">
               Phone:
             </label>
             <input
-              className="bg-transparent font-ubuntuRegular py-2 px-4 w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw border border-white border-opacity-50 rounded-lg focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               //type="tel"
               placeholder="(555) 555-5555"
               //pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
@@ -127,11 +127,11 @@ export default function Contact() {
             />
           </div>
           <div className="my-2.5">
-            <label className="flex text-left text-xl font-hypatia">
+            <label className="flex text-left font-hypatia text-xl">
               Preferred Date:
             </label>
             <input
-              className="bg-transparent font-ubuntuRegular py-2 px-4 w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw border border-white border-opacity-50 rounded-lg focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="date"
               value={preferredDate}
               required
@@ -139,11 +139,11 @@ export default function Contact() {
             />
           </div>
           <div className="my-2.5">
-            <label className="flex text-left text-xl font-hypatia">
+            <label className="flex text-left font-hypatia text-xl">
               What is your budget?
             </label>
             <input
-              className="bg-transparent font-ubuntuRegular py-2 px-4 w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw border border-white border-opacity-50 rounded-lg focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="text"
               placeholder="e.g., $500 - $1000"
               value={budget}
@@ -152,11 +152,11 @@ export default function Contact() {
             />
           </div>
           <div className="my-2.5">
-            <label className="flex text-left text-xl font-hypatia">
+            <label className="flex text-left font-hypatia text-xl">
               How did you hear about us?
             </label>
             <select
-              className="bg-transparent font-ubuntuRegular py-2 px-4 w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw border border-white border-opacity-50 rounded-lg focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               required
               value={howDidYouHear}
               onChange={(e) => setHowDidYouHear(e.target.value)}
@@ -172,19 +172,19 @@ export default function Contact() {
             </select>
           </div>
           <div className="my-2.5">
-            <label className="flex text-left text-xl font-hypatia">
+            <label className="flex text-left font-hypatia text-xl">
               Message:
             </label>
             <textarea
-              className="bg-transparent font-ubuntuRegular py-2 px-4 w-85vw lg:w-50vw xl:w-45vw xxl:w-40vw h-52 border border-white border-opacity-50 rounded-lg focus:outline-none hover:outline-none focus:border-opacity-100 hover:border-opacity-75 text-white"
+              className="h-52 w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               placeholder="Add any additional information/ideas here."
               value={message}
               required
               onChange={(e) => setMessage(e.target.value)}
             />
           </div>
-          <button className="font-hypatia font-bold bg-customGold rounded-full py-3.5 px-14 mt-7 tracking-wider">
-            <span className="text-white leading-none text-sm">SUBMIT</span>
+          <button className="mt-7 rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider">
+            <span className="text-sm leading-none text-white">SUBMIT</span>
           </button>
         </form>
       </div>
