@@ -2,11 +2,11 @@
 import React, { useRef, useEffect } from "react";
 import Link from "next/link";
 import "./menu.css";
-import { Close } from "@mui/icons-material";
+import LoginSharpIcon from "@mui/icons-material/LoginSharp";
+import Close from "@mui/icons-material/Close";
 
 import Image from "next/image";
 
-//import { gsap } from "@/lib/gsap/index.ts";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -34,9 +34,11 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
   useGSAP(() => {
     if (!container.current) return;
     gsap.set(".menu-link-item-holder", { y: 75 });
-    gsap.set(".menu-close-icon", { opacity: 0 });
+    gsap.set(".menu-logo-icon", { opacity: 0.5, scale: 0 });
     gsap.set(".menu-overlay", { opacity: 0 });
-    gsap.set(".menu-info-row svg", { opacity: 0 });
+    gsap.set(".menu-info-row svg", { opacity: 0.5, scale: 0 });
+    gsap.set(".menu-close-icon", { opacity: 0.5, rotation: 360, scale: 0 });
+    gsap.set(".menu-login-icon", { opacity: 0.5, scale: 0 });
 
     tl.current = gsap
       .timeline({ paused: true })
@@ -48,21 +50,36 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
       })
       .to(".menu-link-item-holder", {
         y: 0,
-        duration: 0.5,
+        duration: 0.25,
         stagger: 0.075,
         delay: -0.3,
         ease: "power4.in",
+      })
+      .to(".menu-logo-icon", {
+        opacity: 1,
+        duration: 0.2,
+        delay: -0.3,
+        scale: 1,
       })
       .to(".menu-close-icon", {
         opacity: 1,
         duration: 0.2,
         delay: -0.3,
+        rotation: 0,
+        scale: 1,
+      })
+      .to(".menu-login-icon", {
+        opacity: 1,
+        duration: 0.2,
+        delay: -0.3,
+        scale: 1,
       })
       .to(".menu-info-row svg", {
         opacity: 1,
         duration: 0.2,
         stagger: -0.1,
         delay: -0.3,
+        scale: 1,
       });
   }, []);
 
@@ -77,10 +94,11 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
   return (
     <div className="menu-container" ref={container}>
       <div className="menu-overlay">
-        <div className="menu-close-container">
+        <Close className="menu-close-icon" onClick={toggleMenu} />
+        <div className="menu-logo-container">
           <Link href="/">
             <Image
-              className="menu-close-icon"
+              className="menu-logo-icon"
               src="/images/monogram.png"
               alt="Legend Has It logo"
               width={125}
@@ -128,6 +146,13 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
             </a>
           </div>
         </div>
+        <Link
+          className="menu-login-icon"
+          href="/dashboard"
+          onClick={toggleMenu}
+        >
+          <LoginSharpIcon />
+        </Link>
       </div>
     </div>
   );

@@ -1,6 +1,4 @@
-import { read } from "fs";
 import mongoose, { Document, Schema } from "mongoose";
-
 export interface IMessage extends Document {
   firstName: string;
   lastName: string;

@@ -12,6 +12,8 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/dist/SplitText";
 
+import Playlist from "@/components/playlist/Playlist";
+
 export default function Home() {
   // still need to implement email form submission services
   const logoRef = useRef<HTMLDivElement>(null);

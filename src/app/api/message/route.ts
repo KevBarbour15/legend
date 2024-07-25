@@ -1,6 +1,7 @@
 // pages/api/events.ts
 import { NextRequest, NextResponse } from "next/server";
 import Message from "@/models/Message";
+import Unread from "@/models/Unread";
 
 // GET request handler ************************************************************************************************
 export async function GET(req: NextRequest) {
@@ -146,6 +147,7 @@ async function updateContactedStatus(req: NextRequest) {
   }
 }
 
+// TODO: implement the Unread count in here.
 async function updateReadStatus(req: NextRequest) {
   try {
     const { _id, read } = await req.json();

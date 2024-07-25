@@ -6,13 +6,15 @@ interface Message {
   firstName: string;
   lastName: string;
   email: string;
-  number: string;
+  phone: string;
   preferredDate: string;
   sentAt: Date;
   howDidYouHear: string;
   budget: string;
   message: string;
   read: boolean;
+  contacted: boolean;
+  _id: string;
 }
 
 const MessagesList: React.FC = () => {

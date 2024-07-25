@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
+import Playlist from "@/components/playlist/Playlist";
 import "./globals.css";
 
 import { connectToMongoDB } from "@/lib/db";
@@ -9,6 +10,7 @@ import { connectToMongoDB } from "@/lib/db";
 import gsap from "gsap";
 import { SplitText } from "gsap/all";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Draggable } from "gsap/Draggable";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,7 +28,7 @@ export default function RootLayout({
   connectToMongoDB();
 
   // register GSAP plugins
-  gsap.registerPlugin(SplitText, ScrollTrigger);
+  gsap.registerPlugin(SplitText, ScrollTrigger, Draggable);
   return (
     <>
       <html lang="en">

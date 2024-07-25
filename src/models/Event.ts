@@ -28,7 +28,8 @@ const EventSchema: Schema = new Schema({
   },
   notes: {
     type: String,
-    required: false,
+    required: true,
+    default: "",
   },
 });
 

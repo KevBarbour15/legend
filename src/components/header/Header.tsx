@@ -18,7 +18,7 @@ const Header: React.FC = () => {
   return (
     <>
       <NavMenu menuStatus={menuOpen} toggleMenu={toggleMenu} />
-      <header className="flex flex-row w-screen justify-between items-center fixed top-0 bg-customNavy ">
+      <header className="flex flex-row w-screen justify-between items-center fixed top-0 bg-customNavy z-10">
         <div className="w-10 "></div>
 
         <div id="logo" className="">
