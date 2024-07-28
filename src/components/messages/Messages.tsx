@@ -21,6 +21,7 @@ const MessagesList: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [unreadMessages, setUnreadMessages] = useState<number>(4);
 
   const fetchMessages = async () => {
     try {

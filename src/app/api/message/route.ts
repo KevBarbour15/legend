@@ -16,14 +16,14 @@ export async function GET(req: NextRequest) {
       default:
         return NextResponse.json(
           { error: "Failed to process request." },
-          { status: 400 }
+          { status: 400 },
         );
     }
   } catch (error) {
     console.log("Error: ", error);
     return NextResponse.json(
       { error: "Failed to process request." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -39,7 +39,7 @@ async function getMessages() {
     console.log("Error: ", error);
     return NextResponse.json(
       { error: "Failed to fetch messages." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -54,8 +54,6 @@ export async function POST(req: NextRequest) {
     switch (action) {
       case "createMessage":
         return createMessage(req);
-      case "deleteMessage":
-        return deleteMessage();
       case "updateContactedStatus":
         return updateContactedStatus(req);
       case "updateReadStatus":
@@ -67,7 +65,7 @@ export async function POST(req: NextRequest) {
     console.log("Error: ", error);
     return NextResponse.json(
       { error: "Failed to process request." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -101,20 +99,15 @@ async function createMessage(req: NextRequest) {
 
     return NextResponse.json(
       { message: "Message successfully sent." },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     console.log("Error: ", error);
     return NextResponse.json(
       { error: "Failed to create message." },
-      { status: 500 }
+      { status: 500 },
     );
   }
-}
-
-async function deleteMessage() {
-  try {
-  } catch (error) {}
 }
 
 async function updateContactedStatus(req: NextRequest) {
@@ -124,25 +117,25 @@ async function updateContactedStatus(req: NextRequest) {
     const response = await Message.findByIdAndUpdate(
       _id,
       { contacted: contacted },
-      { new: true }
+      { new: true },
     );
 
     if (response) {
       return NextResponse.json(
         { message: "Contacted status updated successfully." },
-        { status: 200 }
+        { status: 200 },
       );
     } else {
       return NextResponse.json(
         { error: "Failed to update contacted status." },
-        { status: 400 }
+        { status: 400 },
       );
     }
   } catch (error) {
     console.log("Error: ", error);
     return NextResponse.json(
       { error: "Failed to update contacted status." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -155,25 +148,41 @@ async function updateReadStatus(req: NextRequest) {
     const response = await Message.findByIdAndUpdate(
       _id,
       { read: read },
-      { new: true }
+      { new: true },
     );
 
     if (response) {
       return NextResponse.json(
         { message: "Read / unread status updated successfully." },
-        { status: 200 }
+        { status: 200 },
       );
     } else {
       return NextResponse.json(
         { error: "Failed to update read / unread status." },
-        { status: 400 }
+        { status: 400 },
       );
     }
   } catch (error) {
     console.log("Error: ", error);
     return NextResponse.json(
       { error: "Failed to update read / unread status." },
-      { status: 500 }
+      { status: 500 },
+    );
+  }
+}
+
+// DELETE request handler ************************************************************************************************
+export async function DELETE(req: NextRequest) {
+  try {
+    const { messageId } = await req.json();
+    await Message.findByIdAndDelete(messageId);
+
+    return NextResponse.json({ message: "Message deleted." }, { status: 200 });
+  } catch (error) {
+    console.log("Error: ", error);
+    return NextResponse.json(
+      { error: "Failed to delete message." },
+      { status: 500 },
     );
   }
 }

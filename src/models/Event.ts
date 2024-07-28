@@ -6,6 +6,8 @@ export interface IEvent extends Document {
   date: string;
   time: string;
   description: string;
+  notes: string;
+  image_url: string;
 }
 
 // schema for the event
@@ -28,8 +30,11 @@ const EventSchema: Schema = new Schema({
   },
   notes: {
     type: String,
-    required: true,
-    default: "",
+    required: false,
+  },
+  image_url: {
+    type: String,
+    required: false,
   },
 });
 

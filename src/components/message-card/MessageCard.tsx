@@ -26,9 +26,15 @@ interface Message {
 
 interface MessageCardProps {
   message: Message;
+  //fetchMessages: () => void;
+  //calculateUnreadMessages: () => void;
 }
 
-const MessageCard: React.FC<MessageCardProps> = ({ message }) => {
+const MessageCard: React.FC<MessageCardProps> = ({
+  message,
+  //fetchMessages,
+  //calculateUnreadMessages,
+}) => {
   const [contacted, setContacted] = useState<boolean>(message.contacted);
   const [read, setRead] = useState<boolean>(message.read);
   const [open, setOpen] = useState<boolean>(false);
@@ -83,11 +89,13 @@ const MessageCard: React.FC<MessageCardProps> = ({ message }) => {
 
       if (response.ok) {
         console.log("Read status updated successfully.");
+        //calculateUnreadMessages();
       }
     } catch (error) {
       console.error("Failed to update read/unread status.");
       // reset the switch
       setRead(!newRead);
+      //calculateUnreadMessages();
     }
   };
 
@@ -101,19 +109,19 @@ const MessageCard: React.FC<MessageCardProps> = ({ message }) => {
 
   const confirmDelete = async () => {
     try {
-      const response = await fetch(`/api/message?action=deleteMessage`, {
-        method: "POST",
+      const response = await fetch("/api/message", {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          _id: message._id,
+          messageId: message._id,
         }),
       });
 
       if (response.ok) {
         console.log("Message deleted successfully.");
-        // You can add additional logic to remove the message from the UI here
+        //fetchMessages();
         handleDeleteClose();
       }
     } catch (error) {
@@ -125,44 +133,49 @@ const MessageCard: React.FC<MessageCardProps> = ({ message }) => {
   return (
     <>
       <div className="m-5 flex w-85vw flex-col border-y-2 border-customGold p-5 text-left lg:w-50vw xl:w-45vw xxl:w-40vw">
-        <h1 className="mb-2 font-bigola text-3xl text-customCream">
-          {message.firstName} {message.lastName}
-        </h1>
-        <p className="mb-1 font-hypatia text-lg lg:text-xl">{formattedDate}</p>
+        <div className="flex flex-row justify-between">
+          <div>
+            <h1 className="mb-2 font-bigola text-3xl text-customCream">
+              {message.firstName} {message.lastName}
+            </h1>
+            <p className="mb-1 font-hypatia text-lg lg:text-xl">
+              {formattedDate}
+            </p>
+          </div>
+          <div>
+            <FormGroup>
+              <FormControlLabel
+                label="Contacted"
+                onChange={handleContacted}
+                checked={contacted}
+                control={<Switch />}
+              />
+              <FormControlLabel
+                label="Read"
+                onChange={handleRead}
+                checked={read}
+                control={<Switch />}
+              />
+            </FormGroup>
+          </div>
+        </div>
         <ul className="mb-1 list-disc pl-5 font-hypatia text-lg lg:text-xl">
-          <li>Email:</li>
+          <li className="text-customCream">Contact</li>
           <p className="mb-1 font-hypatia text-lg lg:text-xl">
             <a href={`mailto:${message.email}`} className="underline">
               {message.email}
             </a>
           </p>
-          <li>Phone:</li>
           <p>{message.phone}</p>
-          <li className="m-0">Preferred date: </li>
+          <li className="text-customCream">Preferred date </li>
           <p>{formattedPreferredDate}</p>
-          <li>How did you hear?</li>
+          <li className="text-customCream">How did you hear?</li>
           <p>{message.howDidYouHear}</p>
-          <li>Budget:</li>
+          <li className="text-customCream">Budget</li>
           <p>Budget: {message.budget}</p>
-          <li>Message:</li>
+          <li className="text-customCream">Message</li>
           <p>"{message.message}"</p>
         </ul>
-        <FormGroup>
-          <FormControlLabel
-            style={{ color: "#dfcfc0" }}
-            label="Contacted"
-            onChange={handleContacted}
-            checked={contacted}
-            control={<Switch />}
-          />
-          <FormControlLabel
-            style={{ color: "#dfcfc0" }}
-            label="Read"
-            onChange={handleRead}
-            checked={read}
-            control={<Switch />}
-          />
-        </FormGroup>
         <div className="mt-2 flex flex-row">
           <button
             className="rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider"

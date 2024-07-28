@@ -32,13 +32,11 @@ const CreateEvent: React.FC = () => {
       });
 
       if (response.ok) {
+        alert("Event created successfully.");
         setTitle("");
         setDate("");
         setTime("");
         setDescription("");
-      } else {
-        const errorData = await response.json();
-        setError(errorData.error);
       }
     } catch (error) {
       console.log("Error: ", error);
@@ -63,6 +61,7 @@ const CreateEvent: React.FC = () => {
               type="text"
               placeholder="For ex: Jose's Birthday Party"
               required
+              value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
@@ -73,6 +72,7 @@ const CreateEvent: React.FC = () => {
               className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="date"
               required
+              value={date}
               onChange={(e) => setDate(e.target.value)}
             />
           </div>
@@ -83,6 +83,7 @@ const CreateEvent: React.FC = () => {
               className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="time"
               required
+              value={time}
               onChange={(e) => setTime(e.target.value)}
             />
           </div>
@@ -95,6 +96,7 @@ const CreateEvent: React.FC = () => {
               className="h-52 w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               placeholder="Add any additional information/ideas here."
               required
+              value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>

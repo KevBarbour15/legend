@@ -15,14 +15,14 @@ export async function GET(req: NextRequest) {
       default:
         return NextResponse.json(
           { error: "Failed to process request." },
-          { status: 400 }
+          { status: 400 },
         );
     }
   } catch (error) {
     console.log("Error: ", error);
     return NextResponse.json(
       { error: "Failed to process request." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -38,7 +38,7 @@ async function getEvents() {
     console.log("Error: ", error);
     return NextResponse.json(
       { error: "Failed to fetch events." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
     console.log("Error: ", error);
     return NextResponse.json(
       { error: "Failed to process request." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -75,7 +75,7 @@ async function createEvent(req: NextRequest) {
     if (!title || !date || !time || !description) {
       return NextResponse.json(
         { error: "All fields are required!" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -90,13 +90,44 @@ async function createEvent(req: NextRequest) {
 
     return NextResponse.json(
       { message: "Event created successfully." },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     console.log("Error: ", error);
     return NextResponse.json(
       { error: "Failed to create event." },
-      { status: 500 }
+      { status: 500 },
+    );
+  }
+}
+
+// PUT request handler ************************************************************************************************
+export async function PUT(req: NextRequest) {
+  try {
+    const {eventId, title, date, time, description} = await req.json();
+
+    
+  } catch (error) {
+    console.log("Error: ", error);
+    return NextResponse.json(
+      { error: "Failed to update event." },
+      { status: 500 },
+    );
+  }
+}
+
+// DELETE request handler ************************************************************************************************
+export async function DELETE(req: NextRequest) {
+  try {
+    const { eventId } = await req.json();
+    await Event.findByIdAndDelete(eventId);
+
+    return NextResponse.json({ message: "Event deleted." }, { status: 200 });
+  } catch (error) {
+    console.log("Error: ", error);
+    return NextResponse.json(
+      { error: "Failed to delete event." },
+      { status: 500 },
     );
   }
 }

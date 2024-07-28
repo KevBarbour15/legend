@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 interface Event {
+  _id: string;
   title: string;
   date: string;
   time: string;
@@ -19,9 +20,14 @@ interface Event {
 interface EventCardProps {
   event: Event;
   inDashboard: boolean;
+  fetchEvents: () => void;
 }
 
-const EventCard: React.FC<EventCardProps> = ({ event, inDashboard }) => {
+const EventCard: React.FC<EventCardProps> = ({
+  event,
+  inDashboard,
+  fetchEvents,
+}) => {
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [editedEvent, setEditedEvent] = useState<Event>({ ...event });
@@ -36,8 +42,25 @@ const EventCard: React.FC<EventCardProps> = ({ event, inDashboard }) => {
     setOpenDelete(false);
   };
 
-  const confirmDelete = () => {
-    console.log("Delete confirmed");
+  const confirmDelete = async () => {
+    console.log("event: ", event._id);
+    try {
+      const response = await fetch("/api/events", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ eventId: event._id }),
+      });
+
+      if (response.ok) {
+        // close the dialog and fetch the updated events
+        setOpenDelete(false);
+        fetchEvents();
+      }
+    } catch (error) {
+      console.log("Error: ", error);
+    }
   };
 
   const handleEditOpen = () => {
@@ -53,8 +76,22 @@ const EventCard: React.FC<EventCardProps> = ({ event, inDashboard }) => {
       setEditedEvent({ ...editedEvent, [field]: event.target.value });
     };
 
-  const confirmEdit = () => {
+  const confirmEdit = async () => {
     console.log("Edit confirmed", editedEvent);
+    try {
+      const response = await fetch(`/api/events?action=${"editEvent"}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ event: editedEvent }),
+      });
+
+      if (response.ok) {
+        fetchEvents();
+        handleEditClose();
+      }
+    } catch (error) {}
     handleEditClose();
   };
 

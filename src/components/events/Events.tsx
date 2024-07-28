@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import EventCard from "@/components/event-card/EventCard";
 
 interface Event {
+  _id: string;
   title: string;
   date: string;
   time: string;
@@ -58,7 +59,7 @@ const EventsList: React.FC = () => {
             Upcoming Events
           </h1>
           {sortedEvents.map((event, index) => (
-            <EventCard key={index} event={event} inDashboard={true} />
+            <EventCard key={index} event={event} inDashboard={true} fetchEvents={fetchEvents} />
           ))}
         </>
       )}
