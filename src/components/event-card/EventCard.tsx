@@ -101,7 +101,7 @@ const EventCard: React.FC<EventCardProps> = ({
       <div className="m-5 flex w-85vw flex-col border-y-2 border-customGold p-5 text-left lg:w-50vw xl:w-45vw xxl:w-40vw">
         {inDashboard ? (
           <>
-            <div className="flex flex-row">
+            <div className="flex flex-col md:flex-row">
               <div className="flex flex-1 flex-col">
                 <h1 className="mb-2 font-bigola text-3xl text-customCream">
                   {event.title}
@@ -132,8 +132,8 @@ const EventCard: React.FC<EventCardProps> = ({
           </>
         ) : (
           <>
-            <div className="flex flex-row">
-              <div className="flex flex-1 flex-col">
+            <div className="flex flex-col md:flex-row">
+              <div className="md:flew-row mb-5 flex flex-1 flex-col md:mb-0">
                 <h1 className="mb-2 font-bigola text-3xl text-customCream">
                   {event.title}
                 </h1>
@@ -141,14 +141,18 @@ const EventCard: React.FC<EventCardProps> = ({
                 <p className="mb-1 font-hypatia text-base">{formattedTime}</p>
                 <p className="font-hypatia text-base">{event.description}</p>
               </div>
-              <div className="flex-1 border-2 border-customGold">
-                <img src={event.image_url} alt="event" className="w-auto" />
+              <div className="flex-1">
+                <img
+                  src={event.image_url}
+                  alt="event"
+                  className="w-auto border-2 border-customGold"
+                />
               </div>
             </div>
           </>
         )}
       </div>
-      {/* Delete event */}
+      {/************************************  Delete event *************************************/}
       <Dialog
         open={openDelete}
         onClose={handleDeleteClose}

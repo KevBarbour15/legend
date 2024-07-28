@@ -91,13 +91,16 @@ const CreateEvent: React.FC = () => {
           </div>
 
           <div className="my-2.5">
-            <label className="flex text-left font-hypatia text-xl">Image URL:</label>
+            <label className="flex text-left font-hypatia text-xl">
+              Image URL:
+            </label>
             <input
               className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="text"
               required
               value={imageURL}
               onChange={(e) => setImageURL(e.target.value)}
+              placeholder="Add image address from Imgur"
             />
           </div>
 
