@@ -9,6 +9,7 @@ interface Event {
   time: string;
   description: string;
   notes: string;
+  image_url: string;
 }
 
 const EventsList: React.FC = () => {

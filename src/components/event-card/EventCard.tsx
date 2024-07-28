@@ -15,6 +15,7 @@ interface Event {
   time: string;
   description: string;
   notes: string;
+  image_url: string;
 }
 
 interface EventCardProps {
@@ -84,7 +85,7 @@ const EventCard: React.FC<EventCardProps> = ({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ event: editedEvent }),
+        body: JSON.stringify({ ...editedEvent }),
       });
 
       if (response.ok) {
@@ -100,20 +101,21 @@ const EventCard: React.FC<EventCardProps> = ({
       <div className="m-5 flex w-85vw flex-col border-y-2 border-customGold p-5 text-left lg:w-50vw xl:w-45vw xxl:w-40vw">
         {inDashboard ? (
           <>
-            <h1 className="mb-2 font-bigola text-3xl text-customCream">
-              {event.title}
-            </h1>
-            <p className="font-hypatia text-lg lg:text-xl">
-              {event.description}
-            </p>
-            <p className="mb-1 font-hypatia text-lg lg:text-xl">
-              {formattedDate}
-            </p>
-            <p className="mb-1 font-hypatia text-lg lg:text-xl">
-              {formattedTime}
-            </p>
+            <div className="flex flex-row">
+              <div className="flex flex-1 flex-col">
+                <h1 className="mb-2 font-bigola text-3xl text-customCream">
+                  {event.title}
+                </h1>
+                <p className="mb-1 font-hypatia text-base">{formattedDate}</p>
+                <p className="mb-1 font-hypatia text-base">{formattedTime}</p>
+                <p className="font-hypatia text-base">{event.description}</p>
+              </div>
+              <div className="flex-1 border-2 border-customGold">
+                <img src={event.image_url} alt="event" className="w-auto" />
+              </div>
+            </div>
 
-            <div className="mt-2 flex flex-row">
+            <div className="mt-5 flex flex-row justify-center">
               <button
                 className="mr-7 rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider"
                 onClick={handleEditOpen}
@@ -130,12 +132,19 @@ const EventCard: React.FC<EventCardProps> = ({
           </>
         ) : (
           <>
-            <h1 className="mb-2 font-bigola text-3xl text-customCream">
-              {event.title}
-            </h1>
-            <p className="mb-1 font-hypatia text-base">{formattedDate}</p>
-            <p className="mb-1 font-hypatia text-base">{formattedTime}</p>
-            <p className="font-hypatia text-base">{event.description}</p>
+            <div className="flex flex-row">
+              <div className="flex flex-1 flex-col">
+                <h1 className="mb-2 font-bigola text-3xl text-customCream">
+                  {event.title}
+                </h1>
+                <p className="mb-1 font-hypatia text-base">{formattedDate}</p>
+                <p className="mb-1 font-hypatia text-base">{formattedTime}</p>
+                <p className="font-hypatia text-base">{event.description}</p>
+              </div>
+              <div className="flex-1 border-2 border-customGold">
+                <img src={event.image_url} alt="event" className="w-auto" />
+              </div>
+            </div>
           </>
         )}
       </div>
@@ -196,6 +205,14 @@ const EventCard: React.FC<EventCardProps> = ({
             value={editedEvent.time}
             onChange={handleEditChange("time")}
             InputLabelProps={{ shrink: true }}
+          />
+          <TextField
+            margin="dense"
+            label="Image URL"
+            type="text"
+            fullWidth
+            value={editedEvent.image_url}
+            onChange={handleEditChange("image_url")}
           />
           <TextField
             margin="dense"

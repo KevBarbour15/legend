@@ -104,9 +104,11 @@ async function createEvent(req: NextRequest) {
 // PUT request handler ************************************************************************************************
 export async function PUT(req: NextRequest) {
   try {
-    const {eventId, title, date, time, description} = await req.json();
+    const { _id, title, date, time, description, image_url, notes } = await req.json();
 
-    
+    await Event.findByIdAndUpdate(_id, { title, date, time, description, image_url, notes });
+
+    return NextResponse.json({ message: "Event updated." }, { status: 200 });
   } catch (error) {
     console.log("Error: ", error);
     return NextResponse.json(

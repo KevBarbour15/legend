@@ -176,7 +176,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
           <li className="text-customCream">Message</li>
           <p>"{message.message}"</p>
         </ul>
-        <div className="mt-2 flex flex-row">
+        <div className="mt-2 flex flex-row justify-center">
           <button
             className="rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider"
             onClick={handleDeleteOpen}
