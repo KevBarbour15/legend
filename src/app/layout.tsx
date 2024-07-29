@@ -25,7 +25,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   // connect to MongoDB
+  console.log("Start---");
   connectToMongoDB();
+  console.log("End---");
 
   // register GSAP plugins
   gsap.registerPlugin(SplitText, ScrollTrigger, Draggable);

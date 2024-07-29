@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
       case "getEvents":
         return getEvents();
       default:
-        return NextResponse.json(
+        return NextResponse.json( 
           { error: "Failed to process request." },
           { status: 400 },
         );
@@ -32,7 +32,7 @@ async function getEvents() {
   try {
     const events = await Event.find();
     //console.log("Events: ", events);
-
+    
     return NextResponse.json(events, { status: 200 });
   } catch (error) {
     console.log("Error: ", error);
