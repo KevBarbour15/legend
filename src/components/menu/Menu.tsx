@@ -31,6 +31,18 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
   const container = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
 
+  useEffect(() => {
+     const handleResize = () => {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  },[]);
+
   useGSAP(() => {
     if (!container.current) return;
     gsap.set(".menu-link-item-holder", { y: 75 });
