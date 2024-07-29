@@ -8,11 +8,15 @@ import LiveStream from "@/components/live-stream/LiveStream";
 import EventsList from "@/components/events/Events";
 import MessagesList from "@/components/messages/Messages";
 
+// Default component
+const DefaultComponent: React.FC = () => <div>No component selected</div>;
+
 // Set display names
 CreateEvent.displayName = "CreateEvent";
 LiveStream.displayName = "LiveStream";
 EventsList.displayName = "EventsList";
 MessagesList.displayName = "MessagesList";
+DefaultComponent.displayName = "DefaultComponent";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState<string>("Create Event");
@@ -32,9 +36,8 @@ export default function Dashboard() {
     case "Messages":
       CurrentComponent = MessagesList;
       break;
-
     default:
-      CurrentComponent = () => <div></div>;
+      CurrentComponent = DefaultComponent;
   }
 
   return (
@@ -46,6 +49,3 @@ export default function Dashboard() {
     </>
   );
 }
-
-const DefaultComponent: React.FC = () => <div>No component selected</div>;
-DefaultComponent.displayName = "DefaultComponent";
