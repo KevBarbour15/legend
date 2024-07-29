@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Contact() {
   const [firstName, setFirstName] = useState<string>("");
@@ -71,6 +71,13 @@ export default function Contact() {
     }
   };
 
+ useEffect(() => {
+    const today = new Date();
+    const formattedDate = today.toISOString().split('T')[0];
+    setPreferredDate(formattedDate);
+  }, []);
+
+
   return (
     <div className="flex w-screen flex-col justify-center pt-135">
       <h2 className="my-6 text-center font-bigola text-4xl text-customCream lg:text-5xl">
@@ -134,6 +141,7 @@ export default function Contact() {
               className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="date"
               value={preferredDate}
+              placeholder="Select a date"
               required
               onChange={(e) => setPreferredDate(e.target.value)}
             />

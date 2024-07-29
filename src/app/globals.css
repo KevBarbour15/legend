@@ -80,9 +80,17 @@ body {
   input {
     -webkit-appearance: none;
     appearance: none;
+    background-color: red;
   }
 
   select {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  
+
+  textarea {
     -webkit-appearance: none;
     appearance: none;
   }
