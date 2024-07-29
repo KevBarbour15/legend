@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 // Dashboard components
 import DashHeader from "@/components/dash-header/DashHeader";
@@ -8,20 +8,11 @@ import LiveStream from "@/components/live-stream/LiveStream";
 import EventsList from "@/components/events/Events";
 import MessagesList from "@/components/messages/Messages";
 
-interface Message {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  preferredDate: string;
-  sentAt: Date;
-  howDidYouHear: string;
-  budget: string;
-  message: string;
-  read: boolean;
-  contacted: boolean;
-  _id: string;
-}
+// Set display names
+CreateEvent.displayName = "CreateEvent";
+LiveStream.displayName = "LiveStream";
+EventsList.displayName = "EventsList";
+MessagesList.displayName = "MessagesList";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState<string>("Create Event");
@@ -55,3 +46,6 @@ export default function Dashboard() {
     </>
   );
 }
+
+const DefaultComponent: React.FC = () => <div>No component selected</div>;
+DefaultComponent.displayName = "DefaultComponent";
