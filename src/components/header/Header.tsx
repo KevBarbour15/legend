@@ -17,9 +17,12 @@ const Header: React.FC = () => {
     <>
       <NavMenu menuStatus={menuOpen} toggleMenu={toggleMenu} />
       <header className="fixed top-0 z-10 flex w-screen flex-row items-center justify-between bg-customNavy">
-        <div className="w-10"></div>
+        <div className="w-14">
+          &nbsp;
+        </div>
 
         <div id="logo" className="">
+          {/* turn to link once full site is live */}
           <Image
             src="/images/logo.png"
             alt="Legend Has It logo"
