@@ -32,7 +32,6 @@ export async function GET(req: NextRequest) {
 async function getMessages() {
   try {
     const messages = await Message.find();
-    console.log("Messages: ", messages);
 
     return NextResponse.json(messages, { status: 200 });
   } catch (error) {

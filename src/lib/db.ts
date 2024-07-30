@@ -1,14 +1,9 @@
-// Importing mongoose library along with Connection type from it
 import mongoose, { Connection } from "mongoose";
 
-// Declaring a variable to store the cached database connection
 let cachedConnection: Connection | null = null;
 
-// Function to establish a connection to MongoDB
 export async function connectToMongoDB() {
   // If a cached connection exists, return it
-  console.log("Connecting to MongoDB");
-  console.log(".env: " + process.env.MONGODB_URI!);
   if (cachedConnection) {
     console.log("Using cached db connection");
     return cachedConnection;

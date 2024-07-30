@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const CreateEvent: React.FC = () => {
   const [title, setTitle] = useState<string>("");
@@ -45,6 +45,12 @@ const CreateEvent: React.FC = () => {
       setError("Failed to create event");
     }
   };
+
+   useEffect(() => {
+    const today = new Date();
+    const formattedDate = today.toISOString().split('T')[0];
+    setDate(formattedDate);
+  }, []);
 
   return (
     <div className="flex w-screen flex-col items-center justify-center text-center">
