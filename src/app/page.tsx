@@ -6,21 +6,67 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookIcon from "@mui/icons-material/Facebook";
 
-import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
-
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { SplitText } from "gsap/dist/SplitText";
+//import { SplitText } from "gsap/dist/SplitText";
 
-import Playlist from "@/components/playlist/Playlist";
+//import Playlist from "@/components/playlist/Playlist";
 
 export default function Home() {
-  // still need to implement email form submission services
-  const logoRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const tl = useRef<gsap.core.Timeline | null>(null);
+
   const [email, setEmail] = useState<string>("");
 
-  useGSAP(() => {}, []);
+  useGSAP(() => {
+    if (!containerRef.current) return;
+    gsap.set("#header", { opacity: 0, scale: 0.75, y: 50 });
+    gsap.set("#subheader", { opacity: 0, scale: 0.75, y: 50 });
+    gsap.set("#form", { opacity: 0 });
+    gsap.set("#icons svg", { opacity: 0, scale: 0.75 });
+
+    tl.current = gsap
+      .timeline({})
+      .to(
+        "#header",
+        {
+          duration: 0.45,
+          opacity: 1,
+          y: 0,
+          scale: 1,
+        },
+        0.35,
+      )
+      .to(
+        "#subheader",
+        {
+          duration: 0.45,
+          opacity: 1,
+          y: 0,
+          scale: 1,
+        },
+        0.55,
+      )
+      .to(
+        "#form",
+        {
+          duration: 0.35,
+          opacity: 1,
+          scale: 1,
+        },
+        0.75,
+      )
+      .to(
+        "#icons svg",
+        {
+          duration: 0.35,
+          stagger: 0.085,
+          opacity: 1,
+          scale: 1,
+        },
+        0.75,
+      );
+  }, []);
 
   const subscribeEmail = () => {
     alert(`Thank you for subscribing with ${email}!`);
@@ -39,23 +85,29 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col items-center space-y-14 pt-135">
+    <main
+      ref={containerRef}
+      className="flex flex-col items-center space-y-14 pt-135"
+    >
       <div>
         <h1
-          id="title"
-          className="w-90vw text-center font-hypatiaBold text-4xl text-white lg:w-55vw lg:text-5xl xl:w-50vw xxl:w-45vw"
+          id="header"
+          className="w-90vw text-center font-hypatiaBold text-4xl text-white opacity-0 lg:w-55vw lg:text-5xl xl:w-50vw xxl:w-45vw"
         >
           Legend Has It...a new hi-fi bar is coming soon to Sacramento
         </h1>
       </div>
       <div>
-        <h2 className="w-85vw text-center font-hypatia text-2xl text-white lg:w-50vw xl:w-45vw xxl:w-40vw">
+        <h2
+          id="subheader"
+          className="w-85vw text-center font-hypatia text-2xl text-white opacity-0 lg:w-50vw xl:w-45vw xxl:w-40vw"
+        >
           Sign up to be the first to learn about updates on our launch and
           upcoming events!
         </h2>
       </div>
 
-      <div>
+      <div id="form" className="opacity-0">
         <form className="flex flex-col items-center" onSubmit={subscribeEmail}>
           <input
             onChange={(e) => setEmail(e.target.value)}
@@ -68,27 +120,30 @@ export default function Home() {
           </button>
         </form>
       </div>
-      <div className="flex items-center justify-between space-x-4 text-white">
+      <div
+        id="icons"
+        className="flex items-center justify-between space-x-4 text-white"
+      >
         <a
           href="https://www.instagram.com/legendhasithifi/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <InstagramIcon className="h-7 w-7 text-white" />
+          <InstagramIcon className="h-7 w-7 text-white opacity-0" />
         </a>
         <a
           href="https://www.youtube.com/@legendhasithifi"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <YouTubeIcon className="h-7 w-7 text-white" />
+          <YouTubeIcon className="h-7 w-7 text-white opacity-0" />
         </a>
         <a
           href="https://www.facebook.com/legendhasithifi"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FacebookIcon className="h-7 w-7 text-white" />
+          <FacebookIcon className="h-7 w-7 text-white opacity-0" />
         </a>
       </div>
     </main>
