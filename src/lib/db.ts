@@ -8,7 +8,7 @@ let cachedConnection: Connection | null = null;
 export async function connectToMongoDB() {
   // If a cached connection exists, return it
   console.log("Connecting to MongoDB");
-  console.log(".env: " , process.env.MONGODB_URI);
+  console.log(".env: " + process.env.MONGODB_URI!);
   if (cachedConnection) {
     console.log("Using cached db connection");
     return cachedConnection;

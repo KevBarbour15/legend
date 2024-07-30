@@ -1,3 +1,4 @@
+import React,{use, useEffect} from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "@/components/header/Header";
@@ -25,10 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   // connect to MongoDB
-  console.log("Start---");
-  connectToMongoDB();
-  console.log("End---");
-
+    connectToMongoDB();
+  
   // register GSAP plugins
   gsap.registerPlugin(SplitText, ScrollTrigger, Draggable);
   return (
