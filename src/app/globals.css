@@ -80,7 +80,6 @@ body {
   input {
     -webkit-appearance: none;
     appearance: none;
-    background-color: red;
   }
 
   select {

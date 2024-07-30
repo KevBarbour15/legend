@@ -48,7 +48,7 @@ const config: Config = {
       },
       colors: {
         customWhite: "#f4f4f4",
-        customNavy: "#234055",
+        customNavy: "#244154",
         customCream: "#dfcfc0",
         customGold: "#bc9952",
       },

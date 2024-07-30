@@ -20,10 +20,10 @@ export default function Home() {
 
   useGSAP(() => {
     if (!containerRef.current) return;
-    gsap.set("#header", { opacity: 0, scale: 0.75, y: 50 });
-    gsap.set("#subheader", { opacity: 0, scale: 0.75, y: 50 });
+    gsap.set("#header", { opacity: 0, scale: 0.85, y: 25 });
+    gsap.set("#subheader", { opacity: 0, scale: 0.85, y: 25 });
     gsap.set("#form", { opacity: 0 });
-    gsap.set("#icons svg", { opacity: 0, scale: 0.75 });
+    gsap.set("#icons svg", { opacity: 0, scale: 0.85 });
 
     tl.current = gsap
       .timeline({})

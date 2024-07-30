@@ -19,7 +19,7 @@ const Header: React.FC = () => {
 
   useGSAP(() => {
     if (!containerRef.current) return;
-    gsap.set("#logo", { opacity: 0, rotation: 90 });
+    gsap.set("#logo", { opacity: 0, rotation: 180, scale: 0 });
     gsap.set("#menu", { opacity: 0 });
 
     tl.current = gsap
@@ -27,6 +27,7 @@ const Header: React.FC = () => {
       .to("#logo", {
         opacity: 1,
         rotation: 0,
+        scale: 1,
       })
       .to("#menu", {
         opacity: 1,
@@ -38,7 +39,7 @@ const Header: React.FC = () => {
       <NavMenu menuStatus={menuOpen} toggleMenu={toggleMenu} />
       <header
         ref={containerRef}
-        className="fixed top-0 z-10 flex w-screen flex-row items-center justify-between bg-customNavy"
+        className="fixed top-0 z-10 flex w-screen flex-row items-center justify-between"
       >
         <div className="w-14">&nbsp;</div>
 

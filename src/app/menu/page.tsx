@@ -1,6 +1,18 @@
+"use client";
+import { useRef } from "react";
+
+//gsap imports
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
 export default function Menu() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className="align-center flex min-h-screen w-screen flex-row justify-center pt-135">
+    <div
+      ref={containerRef}
+      className="align-center flex min-h-screen w-screen flex-row justify-center pt-135"
+    >
       <div className="w-45vw justify-center text-center lg:w-30vw">
         {/* Draft Beer section */}
         <h1 className="font-bigola text-3xl text-customCream underline lg:text-4xl">

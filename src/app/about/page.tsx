@@ -1,14 +1,67 @@
+"use client";
+import { use, useRef } from "react";
+
+//gsap imports
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
 export default function About() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const tl = useRef<gsap.core.Timeline | null>(null);
+
+  useGSAP(() => {
+    if (!containerRef.current) return;
+    gsap.set("#title", {
+      opacity: 0,
+      scale: 0.85,
+      y: 25,
+    });
+
+    gsap.set("#map", {
+      opacity: 0.25,
+      scale: 0,
+    });
+
+    tl.current = gsap
+      .timeline({})
+      .to(
+        "#title",
+        {
+          duration: 0.45,
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          ease: "power4.inOut",
+        },
+        0.35,
+      )
+      .to(
+        "#map",
+        {
+          duration: 0.75,
+          opacity: 1,
+          scale: 1,
+          ease: "back.out(1.95)",
+        },
+        0.85,
+      );
+  }, []);
   return (
-    <div className="flex w-screen flex-col items-center justify-center pt-135 text-center">
-      <h1 className="w-85vw font-bigola text-4xl text-customCream lg:w-50vw lg:text-5xl xl:w-45vw xxl:w-40vw">
+    <div
+      ref={containerRef}
+      className="flex w-screen flex-col items-center justify-center pt-135 text-center"
+    >
+      <h1
+        id="title"
+        className="w-85vw font-bigola text-4xl text-customCream opacity-0 lg:w-50vw lg:text-5xl xl:w-45vw xxl:w-40vw"
+      >
         About coming soon...
       </h1>
-      <p className="w-85vw py-3 font-hypatia text-xl lg:w-50vw lg:text-2xl xl:w-45vw xxl:w-40vw">
-        Write whatever you want here. This is simple copy/paste for me when you
-        write it up.
-      </p>
-      <div className="mt-5 border-4 border-solid border-customGold">
+
+      <div
+        id="map"
+        className="mt-5 border-4 border-solid border-customGold opacity-0"
+      >
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3118.9963546287295!2d-121.50463458858096!3d38.57993176525615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809ad12b9928b091%3A0x8fd24ebe337fbfe7!2sLegend%20Has%20It!5e0!3m2!1sen!2sus!4v1721929967965!5m2!1sen!2sus"
           width="400"
