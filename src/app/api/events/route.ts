@@ -1,9 +1,11 @@
 // pages/api/events.ts
 import { NextRequest, NextResponse } from "next/server";
 import Event from "@/models/Event";
+import { connectToMongoDB } from "@/lib/db";
 
 // GET request handler ************************************************************************************************
 export async function GET(req: NextRequest) {
+  await connectToMongoDB();
   try {
     // parse the action from the query params
     const { searchParams } = new URL(req.url);
@@ -31,7 +33,6 @@ export async function GET(req: NextRequest) {
 async function getEvents() {
   try {
     const events = await Event.find();
-    //console.log("Events: ", events);
     
     return NextResponse.json(events, { status: 200 });
   } catch (error) {
@@ -66,6 +67,7 @@ export async function POST(req: NextRequest) {
 
 // create an event
 async function createEvent(req: NextRequest) {
+  await connectToMongoDB();
   try {
     // Ensure the request body is parsed correctly
     const body = await req.json();
@@ -103,6 +105,7 @@ async function createEvent(req: NextRequest) {
 
 // PUT request handler ************************************************************************************************
 export async function PUT(req: NextRequest) {
+  await connectToMongoDB();
   try {
     const { _id, title, date, time, description, image_url, notes } = await req.json();
 
@@ -120,6 +123,7 @@ export async function PUT(req: NextRequest) {
 
 // DELETE request handler ************************************************************************************************
 export async function DELETE(req: NextRequest) {
+  await connectToMongoDB();
   try {
     const { eventId } = await req.json();
     await Event.findByIdAndDelete(eventId);

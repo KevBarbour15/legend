@@ -61,7 +61,12 @@ export default function Events() {
             Upcoming Events
           </h1>
           {sortedEvents.map((event, index) => (
-            <EventCard fetchEvents={fetchEvents} key={index} event={event} inDashboard={false} />
+            <EventCard
+              fetchEvents={fetchEvents}
+              key={index}
+              event={event}
+              inDashboard={false}
+            />
           ))}
         </>
       )}

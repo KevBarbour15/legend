@@ -1,4 +1,4 @@
-import React,{use, useEffect} from "react";
+import React, { use, useEffect } from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "@/components/header/Header";
@@ -20,14 +20,14 @@ export const metadata: Metadata = {
   description: "Legend Has It... a new hi-fi bar is coming soon to Sacramento",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   // connect to MongoDB
-    connectToMongoDB();
-  
+  await connectToMongoDB();
+
   // register GSAP plugins
   gsap.registerPlugin(SplitText, ScrollTrigger, Draggable);
   return (
