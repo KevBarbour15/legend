@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export default function middleware(req: NextRequest) {
   // Check if the request is to the /dashboard route or any of its subpaths
-  if (req.nextUrl.pathname.startsWith('/dashboard')) {
+ if (req.nextUrl.pathname.startsWith('/dashboard')) {
     // Perform Kinde authentication
     return withAuth(req);
   }
@@ -26,5 +26,5 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/api/events/:path*', '/api/message/:path*', '/api/subscribe/:path*'], // Adjust paths as needed
+  matcher: ['/dashboard/:path*', '/api/events/:path*', '/api/message/:path*', '/api/subscribe/:path*'], 
 };

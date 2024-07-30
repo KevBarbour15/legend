@@ -66,7 +66,7 @@ const MessagesList: React.FC = () => {
             Messages
           </h1>
           {sortedMessages.map((message, index) => (
-            <MessageCard key={index} message={message} />
+            <MessageCard key={index} fetchMessages={fetchMessages}  message={message} />
           ))}
         </>
       )}

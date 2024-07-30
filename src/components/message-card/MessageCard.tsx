@@ -26,13 +26,13 @@ interface Message {
 
 interface MessageCardProps {
   message: Message;
-  //fetchMessages: () => void;
+  fetchMessages: () => void;
   //calculateUnreadMessages: () => void;
 }
 
 const MessageCard: React.FC<MessageCardProps> = ({
   message,
-  //fetchMessages,
+  fetchMessages,
   //calculateUnreadMessages,
 }) => {
   const [contacted, setContacted] = useState<boolean>(message.contacted);
@@ -121,7 +121,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
 
       if (response.ok) {
         console.log("Message deleted successfully.");
-        //fetchMessages();
+        fetchMessages();
         handleDeleteClose();
       }
     } catch (error) {
