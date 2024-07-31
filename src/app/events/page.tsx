@@ -2,6 +2,10 @@
 import React, { useState, useEffect } from "react";
 import EventCard from "@/components/event-card/EventCard";
 
+//gsap imports
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
 interface Event {
   _id: string;
   title: string;

@@ -13,13 +13,13 @@ export default function About() {
     if (!containerRef.current) return;
     gsap.set("#title", {
       opacity: 0,
-      scale: 0.85,
-      y: 25,
+      scale: 0.75,
     });
 
     gsap.set("#map", {
-      opacity: 0.25,
+      opacity: 0,
       scale: 0,
+      y: 200
     });
 
     tl.current = gsap
@@ -27,13 +27,12 @@ export default function About() {
       .to(
         "#title",
         {
-          duration: 0.45,
+          duration: 0.35,
           opacity: 1,
-          y: 0,
           scale: 1,
-          ease: "power4.inOut",
+          ease: "linear",
         },
-        0.35,
+        0.4,
       )
       .to(
         "#map",
@@ -41,9 +40,10 @@ export default function About() {
           duration: 0.75,
           opacity: 1,
           scale: 1,
-          ease: "back.out(1.95)",
+          ease: "back.out(0.75)",
+          y: 0,
         },
-        0.85,
+        0.7,
       );
   }, []);
   return (

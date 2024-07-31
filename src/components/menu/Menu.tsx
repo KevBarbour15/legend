@@ -46,16 +46,16 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
   useGSAP(() => {
     if (!container.current) return;
     gsap.set(".menu-link-item-holder", { y: 75 });
-    gsap.set(".menu-logo-icon", { opacity: 0.5, scale: 0, rotation: 360 });
-    gsap.set(".menu-overlay", { opacity: 0 });
+    gsap.set(".menu-logo-icon", { opacity: 0, scale: 0, rotation: 360 });
+    gsap.set(".menu-overlay", { opacity: 0.25});
     gsap.set(".menu-info-row svg", { opacity: 0.5, scale: 0 });
-    gsap.set(".menu-close-icon", { opacity: 0.5, rotation: 360, scale: 0 });
-    gsap.set(".menu-login-icon", { opacity: 0.5, scale: 0 });
+    gsap.set(".menu-close-icon", { opacity: 0, rotation: 360, scale: 0 });
+    gsap.set(".menu-login-icon", { opacity: 0, scale: 0 });
 
     tl.current = gsap
       .timeline({ paused: true })
       .to(".menu-overlay", {
-        duration: 0.3,
+        duration: 0.35,
         ease: "power4.inOut",
         clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
         opacity: 1,
@@ -63,7 +63,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
       .to(".menu-link-item-holder", {
         y: 0,
         duration: 0.25,
-        stagger: 0.085,
+        stagger: 0.075,
         delay: -0.35,
         ease: "power4.in",
       })
@@ -89,9 +89,8 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
       })
       .to(".menu-info-row svg", {
         opacity: 1,
-        duration: 0.2,
-        stagger: -0.085,
-        delay: -0.35,
+        stagger: -0.05,
+        delay: -0.5,
         scale: 1,
       });
   }, []);

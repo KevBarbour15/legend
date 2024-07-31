@@ -1,5 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useRef, use } from "react";
+
+//gsap imports
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 export default function Contact() {
   const [firstName, setFirstName] = useState<string>("");
@@ -11,6 +15,48 @@ export default function Contact() {
   const [howDidYouHear, setHowDidYouHear] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const containerRef = useRef<HTMLDivElement>(null);
+  const tl = useRef<gsap.core.Timeline | null>(null);
+
+  useGSAP(() => {
+    if (!containerRef.current) return;
+
+    gsap.set("#contact-title", {
+      opacity: 0,
+      scale: 0.75,
+    });
+
+    gsap.set("#form #input-section", {
+      opacity: 0,
+      scale: 0.95,
+      y: 50,
+    });
+
+    tl.current = gsap
+      .timeline({})
+      .to(
+        "#contact-title",
+        {
+          duration: 0.35,
+          opacity: 1,
+          scale: 1,
+          ease: "linear",
+        },
+        0.35,
+      )
+      .to(
+        "#form #input-section",
+        {
+          duration: 0.35,
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          ease: "power1.inOut",
+          stagger: 0.1,
+        },
+        0.7,
+      );
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -71,21 +117,30 @@ export default function Contact() {
     }
   };
 
- useEffect(() => {
+  useEffect(() => {
     const today = new Date();
-    const formattedDate = today.toISOString().split('T')[0];
+    const formattedDate = today.toISOString().split("T")[0];
     setPreferredDate(formattedDate);
   }, []);
 
-
   return (
-    <div className="flex w-screen flex-col justify-center pt-135">
-      <h2 className="my-6 text-center font-bigola text-4xl text-customCream lg:text-5xl">
+    <div
+      ref={containerRef}
+      className="flex w-screen flex-col justify-center pt-135"
+    >
+      <h2
+        id="contact-title"
+        className="my-6 text-center font-bigola text-4xl text-customCream opacity-0 lg:text-5xl"
+      >
         Let's Work Together
       </h2>
       <div>
-        <form className="flex flex-col items-center" onSubmit={handleSubmit}>
-          <div className="my-2.5">
+        <form
+          id="form"
+          className="flex flex-col items-center"
+          onSubmit={handleSubmit}
+        >
+          <div id="input-section" className="my-2.5 opacity-0">
             <label className="flex text-left font-hypatia text-xl">Name:</label>
             <div className="flex w-85vw flex-col justify-between sm:flex-row lg:w-50vw xl:w-45vw xxl:w-40vw">
               <input
@@ -106,7 +161,7 @@ export default function Contact() {
               />
             </div>
           </div>
-          <div className="my-2.5">
+          <div id="input-section" className="my-2.5 opacity-0">
             <label className="flex text-left font-hypatia text-xl">
               Email:
             </label>
@@ -119,7 +174,7 @@ export default function Contact() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="my-2.5">
+          <div id="input-section" className="my-2.5 opacity-0">
             <label className="flex text-left font-hypatia text-xl">
               Phone:
             </label>
@@ -133,7 +188,7 @@ export default function Contact() {
               onChange={(e) => setPhone(e.target.value)}
             />
           </div>
-          <div className="my-2.5">
+          <div id="input-section" className="my-2.5 opacity-0">
             <label className="flex text-left font-hypatia text-xl">
               Preferred Date:
             </label>
@@ -146,7 +201,7 @@ export default function Contact() {
               onChange={(e) => setPreferredDate(e.target.value)}
             />
           </div>
-          <div className="my-2.5">
+          <div id="input-section" className="my-2.5 opacity-0">
             <label className="flex text-left font-hypatia text-xl">
               What is your budget?
             </label>
@@ -159,7 +214,7 @@ export default function Contact() {
               onChange={(e) => setBudget(e.target.value)}
             />
           </div>
-          <div className="my-2.5">
+          <div id="input-section" className="my-2.5 opacity-0">
             <label className="flex text-left font-hypatia text-xl">
               How did you hear about us?
             </label>
@@ -179,7 +234,7 @@ export default function Contact() {
               <option>Option 5</option>
             </select>
           </div>
-          <div className="my-2.5">
+          <div id="input-section" className="my-2.5 opacity-0">
             <label className="flex text-left font-hypatia text-xl">
               Message:
             </label>
@@ -191,7 +246,10 @@ export default function Contact() {
               onChange={(e) => setMessage(e.target.value)}
             />
           </div>
-          <button className="mt-7 rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider">
+          <button
+            id="input-section"
+            className="mt-7 rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider opacity-0"
+          >
             <span className="text-sm leading-none text-white">SUBMIT</span>
           </button>
         </form>
