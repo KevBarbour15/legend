@@ -8,10 +8,11 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-//import { SplitText } from "gsap/dist/SplitText";
+import { SplitText } from "gsap/all";
 
 //import Playlist from "@/components/playlist/Playlist";
 
+gsap.registerPlugin(SplitText);
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
@@ -20,22 +21,39 @@ export default function Home() {
 
   useGSAP(() => {
     if (!containerRef.current) return;
-    gsap.set("#header", { opacity: 0, scale: 0.85, y: 25 });
-    gsap.set("#subheader", { opacity: 0, scale: 0.85, y: 25 });
-    gsap.set("#form", { opacity: 0 });
-    gsap.set("#icons svg", { opacity: 0, scale: 0.85 });
+    let header1 = new SplitText("#header-1", {
+      type: "words",
+    });
+
+    gsap.set("#header-1", { opacity: 0, scale: 0 });
+    gsap.set("#header-2", { opacity: 0, scale: 0 });
+    gsap.set("#subheader", { opacity: 0, scale: 1 });
+    gsap.set("#form", { opacity: 0, scale: 1 });
+    gsap.set("#icons svg", { opacity: 0, scale: 0.5 });
 
     tl.current = gsap
       .timeline({})
       .to(
-        "#header",
+        "#header-1",
         {
           duration: 0.45,
           opacity: 1,
           y: 0,
           scale: 1,
+          stagger: 0.05,
         },
         0.35,
+      )
+      .to(
+        "#header-2",
+        {
+          duration: 0.45,
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          ease: "power4.in",
+        },
+        0.75,
       )
       .to(
         "#subheader",
@@ -44,15 +62,18 @@ export default function Home() {
           opacity: 1,
           y: 0,
           scale: 1,
+          ease: "power4.in",
         },
-        0.55,
+        0.75,
       )
       .to(
         "#form",
         {
-          duration: 0.35,
+          duration: 0.45,
           opacity: 1,
           scale: 1,
+          y: 0,
+          ease: "power4.in",
         },
         0.75,
       )
@@ -63,6 +84,7 @@ export default function Home() {
           stagger: 0.085,
           opacity: 1,
           scale: 1,
+          ease: "power4.in",
         },
         0.75,
       );
@@ -90,11 +112,13 @@ export default function Home() {
       className="flex flex-col items-center space-y-14 pt-135"
     >
       <div>
-        <h1
-          id="header"
-          className="w-90vw text-center font-hypatiaBold text-4xl text-white opacity-0 lg:w-55vw lg:text-5xl xl:w-50vw xxl:w-45vw"
-        >
-          Legend Has It...a new hi-fi bar is coming soon to Sacramento
+        <h1 className="w-90vw text-center font-hypatiaBold text-4xl text-white lg:w-55vw lg:text-5xl xl:w-50vw xxl:w-45vw">
+          <span id="header-1" className="opacity-0">
+            Legend Has It...
+          </span>
+          <span id="header-2" className="opacity-0">
+            a new hi-fi bar is coming soon to Sacramento
+          </span>
         </h1>
       </div>
       <div>

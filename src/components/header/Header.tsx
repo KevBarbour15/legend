@@ -8,6 +8,7 @@ import { Menu } from "@mui/icons-material";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
+
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -19,19 +20,27 @@ const Header: React.FC = () => {
 
   useGSAP(() => {
     if (!containerRef.current) return;
-    gsap.set("#logo", { opacity: 0, rotation: 180, scale: 0 });
-    gsap.set("#menu", { opacity: 0 });
+    gsap.set("#logo", { opacity: 0, scale: 0.5 });
+    gsap.set("#menu", { opacity: 0, scale: 0.5 });
 
     tl.current = gsap
       .timeline({ ease: "power4.inOut", duration: 0.15 })
-      .to("#logo", {
-        opacity: 1,
-        rotation: 0,
-        scale: 1,
-      })
-      .to("#menu", {
-        opacity: 1,
-      });
+      .to(
+        "#logo",
+        {
+          opacity: 1,
+          scale: 1,
+        },
+        0,
+      )
+      .to(
+        "#menu",
+        {
+          opacity: 1,
+          scale: 1,
+        },
+        0,
+      );
   }, []);
 
   return (
