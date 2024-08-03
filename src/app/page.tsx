@@ -25,7 +25,7 @@ export default function Home() {
     let split = new SplitText("#header-1", { type: "words", opacity: 0 });
 
     gsap.set("#header", { opacity: 0 });
-    gsap.set(split.words, { opacity: 0 });
+    gsap.set(split.words, { scale: 1.25, opacity: 0 });
     gsap.set("#header-2", { opacity: 0 });
     gsap.set("#subheader", { opacity: 0 });
     gsap.set("#form", { opacity: 0 });
@@ -44,7 +44,7 @@ export default function Home() {
           opacity: 1,
           scale: 1,
           ease: "linear",
-          stagger: 0.075,
+          stagger: 0.1,
         },
         0.35,
       )
@@ -103,7 +103,7 @@ export default function Home() {
   return (
     <main
       ref={containerRef}
-      className="flex flex-col items-center space-y-14 pt-135 bg-customNavy"
+      className="flex flex-col items-center space-y-14 bg-customNavy pt-135"
     >
       <div>
         <h1

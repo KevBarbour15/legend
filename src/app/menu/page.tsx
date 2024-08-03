@@ -25,7 +25,6 @@ export default function Menu() {
 
     tl.current = gsap
       .timeline({})
-
       .to("#menu-column-left #menu-item", {
         delay: 0.4,
         duration: 0.35,

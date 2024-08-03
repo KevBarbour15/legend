@@ -7,33 +7,8 @@ import { connectToMongoDB } from "@/lib/db";
 export async function GET(req: NextRequest) {
   await connectToMongoDB();
   try {
-    // parse the action from the query params
-    const { searchParams } = new URL(req.url);
-    const action = searchParams.get("action");
-
-    switch (action) {
-      case "getEvents":
-        return getEvents();
-      default:
-        return NextResponse.json( 
-          { error: "Failed to process request." },
-          { status: 400 },
-        );
-    }
-  } catch (error) {
-    console.log("Error: ", error);
-    return NextResponse.json(
-      { error: "Failed to process request." },
-      { status: 500 },
-    );
-  }
-}
-
-// fetch the events
-async function getEvents() {
-  try {
     const events = await Event.find();
-    
+
     return NextResponse.json(events, { status: 200 });
   } catch (error) {
     console.log("Error: ", error);
@@ -47,34 +22,11 @@ async function getEvents() {
 // POST request handler ************************************************************************************************
 export async function POST(req: NextRequest) {
   try {
-    const { searchParams } = new URL(req.url);
-    const action = searchParams.get("action");
-
-    switch (action) {
-      case "createEvent":
-        return createEvent(req);
-      default:
-        return NextResponse.json({ error: "Invalid action." }, { status: 400 });
-    }
-  } catch (error) {
-    console.log("Error: ", error);
-    return NextResponse.json(
-      { error: "Failed to process request." },
-      { status: 500 },
-    );
-  }
-}
-
-// create an event
-async function createEvent(req: NextRequest) {
-  await connectToMongoDB();
-  try {
-    // Ensure the request body is parsed correctly
     const body = await req.json();
 
-    const { title, date, time, description } = body;
+    const { title, date, time, description, image_url } = body;
 
-    if (!title || !date || !time || !description) {
+    if (!title || !date || !time || !description || !image_url) {
       return NextResponse.json(
         { error: "All fields are required!" },
         { status: 400 },
@@ -86,6 +38,7 @@ async function createEvent(req: NextRequest) {
       date,
       time,
       description,
+      image_url,
     });
 
     await event.save();
@@ -107,9 +60,17 @@ async function createEvent(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   await connectToMongoDB();
   try {
-    const { _id, title, date, time, description, image_url, notes } = await req.json();
+    const { _id, title, date, time, description, image_url, notes } =
+      await req.json();
 
-    await Event.findByIdAndUpdate(_id, { title, date, time, description, image_url, notes });
+    await Event.findByIdAndUpdate(_id, {
+      title,
+      date,
+      time,
+      description,
+      image_url,
+      notes,
+    });
 
     return NextResponse.json({ message: "Event updated." }, { status: 200 });
   } catch (error) {

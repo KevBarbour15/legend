@@ -51,7 +51,7 @@ export default function Contact() {
           opacity: 1,
           scale: 1,
           y: 0,
-          ease: "power1.inOut",
+          ease: "power2.inOut",
           stagger: 0.085,
         },
         0.7,

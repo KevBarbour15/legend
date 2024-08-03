@@ -19,7 +19,7 @@ const CreateEvent: React.FC = () => {
     setError("");
 
     try {
-      const response = await fetch(`/api/events?action=${"createEvent"}`, {
+      const response = await fetch("/api/events", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,6 +29,7 @@ const CreateEvent: React.FC = () => {
           date: date,
           time: time,
           description: description,
+          image_url: imageURL,
         }),
       });
 
@@ -46,9 +47,9 @@ const CreateEvent: React.FC = () => {
     }
   };
 
-   useEffect(() => {
+  useEffect(() => {
     const today = new Date();
-    const formattedDate = today.toISOString().split('T')[0];
+    const formattedDate = today.toISOString().split("T")[0];
     setDate(formattedDate);
   }, []);
 
