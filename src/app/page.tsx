@@ -1,6 +1,4 @@
 "use client";
-import Image from "next/image";
-import Head from "next/head";
 import { useRef, useState } from "react";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
@@ -14,11 +12,12 @@ import { SplitText } from "gsap/all";
 
 gsap.registerPlugin(SplitText);
 export default function Home() {
+  const [email, setEmail] = useState<string>("");
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
 
-  const [email, setEmail] = useState<string>("");
-
+  // This is a temporary page so this doesn't need to be refactored
+  // Other GSAP animations should be added to lib or utils folder
   useGSAP(() => {
     if (!containerRef.current) return;
 
