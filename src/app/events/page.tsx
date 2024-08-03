@@ -86,14 +86,12 @@ export default function Events() {
       ) : (
         <>
           {sortedEvents.map((event, index) => (
-            <div>
-              <EventCard
-                fetchEvents={fetchEvents}
-                key={index}
-                event={event}
-                inDashboard={false}
-              />
-            </div>
+            <EventCard
+              fetchEvents={fetchEvents}
+              key={index}
+              event={event}
+              inDashboard={false}
+            />
           ))}
         </>
       )}

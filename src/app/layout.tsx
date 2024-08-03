@@ -16,8 +16,17 @@ import { Draggable } from "gsap/Draggable";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Legend Has It",
-  description: "Legend Has It... a new hi-fi bar is coming soon to Sacramento",
+  openGraph: {
+    title: "Legend Has It",
+    description:
+      "Legend Has It... a new hi-fi bar is coming soon to Sacramento",
+    images: [
+      {
+        url: "/images/logo.png",
+        alt: "Legend Has It",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -26,7 +35,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   // connect to MongoDB
-
 
   // register GSAP plugins
   gsap.registerPlugin(SplitText, ScrollTrigger, Draggable);
