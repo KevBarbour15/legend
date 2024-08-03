@@ -28,8 +28,8 @@ export default function Contact() {
 
     gsap.set("#form #input-section", {
       opacity: 0,
-      scale: 0.95,
-      y: 50,
+      scale: 0.9,
+      y: 35,
     });
 
     tl.current = gsap
@@ -52,7 +52,7 @@ export default function Contact() {
           scale: 1,
           y: 0,
           ease: "power1.inOut",
-          stagger: 0.1,
+          stagger: 0.085,
         },
         0.7,
       );

@@ -103,7 +103,7 @@ export default function Home() {
   return (
     <main
       ref={containerRef}
-      className="flex flex-col items-center space-y-14 pt-135"
+      className="flex flex-col items-center space-y-14 pt-135 bg-customNavy"
     >
       <div>
         <h1
