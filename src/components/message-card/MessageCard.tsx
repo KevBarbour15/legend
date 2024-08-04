@@ -51,7 +51,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
       const response = await fetch(
         `/api/message?action=updateContactedStatus`,
         {
-          method: "POST",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
@@ -77,7 +77,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
     setRead(newRead);
     try {
       const response = await fetch(`/api/message?action=updateReadStatus`, {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },

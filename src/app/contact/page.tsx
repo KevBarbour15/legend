@@ -80,7 +80,7 @@ export default function Contact() {
     setError("");
 
     try {
-      const response = await fetch(`/api/message?action=${"createMessage"}`, {
+      const response = await fetch("/api/message", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

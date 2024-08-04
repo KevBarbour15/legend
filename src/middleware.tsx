@@ -2,15 +2,22 @@ import { withAuth } from "@kinde-oss/kinde-auth-nextjs/middleware";
 import { NextRequest, NextResponse } from "next/server";
 
 export default function middleware(req: NextRequest) {
-  // Check if the request is to the /dashboard route or any of its subpaths
+  const protectedRoutes = [
+    { path: "/dashboard", methods: ["GET"] },
+    { path: "/api/events", methods: ["POST", "PUT", "DELETE"] },
+    { path: "api/message", methods: ["GET", "DELETE", "PUT"] },
+  ];
 
-  // TODO: protect routes here
-  if (req.nextUrl.pathname.startsWith("/dashboard")) {
-    return withAuth(req);
+  for (const route of protectedRoutes) {
+    if (
+      req.nextUrl.pathname.startsWith(route.path) &&
+      route.methods.includes(req.method)
+    ) {
+      return withAuth(req);
+    }
   }
 
   const response = NextResponse.next();
-
   // Set CORS headers for all other requests
   response.headers.set("Access-Control-Allow-Origin", "*");
   response.headers.set(
@@ -31,5 +38,5 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard"],
+  matcher: ["/dashboard", "/api/message", "/api/events"],
 };

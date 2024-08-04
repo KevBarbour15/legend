@@ -15,16 +15,16 @@ export default function Home() {
   const [email, setEmail] = useState<string>("");
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
-
+  
   // This is a temporary page so this doesn't need to be refactored
-  // Other GSAP animations should be added to lib or utils folder
+  // Other GSAP animations should be added to lib or utils folder and imported eventually
   useGSAP(() => {
     if (!containerRef.current) return;
 
     let split = new SplitText("#header-1", { type: "words", opacity: 0 });
 
     gsap.set("#header", { opacity: 0 });
-    gsap.set(split.words, { scale: 1.25, opacity: 0 });
+    gsap.set(split.words, { scale: 1.15, opacity: 0 });
     gsap.set("#header-2", { opacity: 0 });
     gsap.set("#subheader", { opacity: 0 });
     gsap.set("#form", { opacity: 0 });

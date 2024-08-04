@@ -1,35 +1,9 @@
 // pages/api/events.ts
 import { NextRequest, NextResponse } from "next/server";
 import Message from "@/models/Message";
-import Unread from "@/models/Unread";
 
 // GET request handler ************************************************************************************************
 export async function GET(req: NextRequest) {
-  try {
-    // parse the action from the query params
-    const { searchParams } = new URL(req.url);
-    const action = searchParams.get("action");
-
-    switch (action) {
-      case "getMessages":
-        return getMessages();
-      default:
-        return NextResponse.json(
-          { error: "Failed to process request." },
-          { status: 400 },
-        );
-    }
-  } catch (error) {
-    console.log("Error: ", error);
-    return NextResponse.json(
-      { error: "Failed to process request." },
-      { status: 500 },
-    );
-  }
-}
-
-// fetch the messages
-async function getMessages() {
   try {
     const messages = await Message.find();
 
@@ -45,32 +19,6 @@ async function getMessages() {
 
 // POST request handler ************************************************************************************************
 export async function POST(req: NextRequest) {
-  try {
-    // parse the action from the query params
-    const { searchParams } = new URL(req.url);
-    const action = searchParams.get("action");
-
-    switch (action) {
-      case "createMessage":
-        return createMessage(req);
-      case "updateContactedStatus":
-        return updateContactedStatus(req);
-      case "updateReadStatus":
-        return updateReadStatus(req);
-      default:
-        return NextResponse.json({ error: "Invalid action." }, { status: 400 });
-    }
-  } catch (error) {
-    console.log("Error: ", error);
-    return NextResponse.json(
-      { error: "Failed to process request." },
-      { status: 500 },
-    );
-  }
-}
-
-// create a new message
-async function createMessage(req: NextRequest) {
   try {
     const {
       firstName,
@@ -109,6 +57,30 @@ async function createMessage(req: NextRequest) {
   }
 }
 
+// PUT request handler ************************************************************************************************
+export async function PUT(req: NextRequest) {
+  try {
+    // parse the action from the query params
+    const { searchParams } = new URL(req.url);
+    const action = searchParams.get("action");
+
+    switch (action) {
+      case "updateContactedStatus":
+        return updateContactedStatus(req);
+      case "updateReadStatus":
+        return updateReadStatus(req);
+      default:
+        return NextResponse.json({ error: "Invalid action." }, { status: 400 });
+    }
+  } catch (error) {
+    console.log("Error: ", error);
+    return NextResponse.json(
+      { error: "Failed to process request." },
+      { status: 500 },
+    );
+  }
+}
+
 async function updateContactedStatus(req: NextRequest) {
   try {
     const { _id, contacted } = await req.json();
@@ -139,7 +111,6 @@ async function updateContactedStatus(req: NextRequest) {
   }
 }
 
-// TODO: implement the Unread count in here.
 async function updateReadStatus(req: NextRequest) {
   try {
     const { _id, read } = await req.json();
