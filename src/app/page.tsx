@@ -15,7 +15,7 @@ export default function Home() {
   const [email, setEmail] = useState<string>("");
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
-  
+
   // This is a temporary page so this doesn't need to be refactored
   // Other GSAP animations should be added to lib or utils folder and imported eventually
   useGSAP(() => {
@@ -135,7 +135,10 @@ export default function Home() {
             placeholder="Email"
             className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
           />
-          <button className="mt-7 rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider">
+          <button
+            id="form-button"
+            className="mt-7 rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider"
+          >
             <span className="text-sm leading-none text-white">SUBMIT</span>
           </button>
         </form>

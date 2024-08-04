@@ -1,4 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, use } from "react";
+
+//gsap imports
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 const CreateEvent: React.FC = () => {
   const [title, setTitle] = useState<string>("");
@@ -7,6 +11,19 @@ const CreateEvent: React.FC = () => {
   const [description, setDescription] = useState<string>("");
   const [imageURL, setImageURL] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const containerRef = useRef<HTMLDivElement>(null);
+  const tl = useRef<gsap.core.Timeline | null>(null);
+
+  useGSAP(() => {
+    if (!containerRef.current) return;
+    gsap.set(containerRef.current, { opacity: 0 });
+
+    tl.current = gsap.timeline({}).to(containerRef.current, {
+      delay: 0.35,
+      duration: 0.5,
+      opacity: 1,
+    });
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,7 +71,7 @@ const CreateEvent: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex w-screen flex-col items-center justify-center text-center">
+    <div ref={containerRef } className="flex w-screen flex-col items-center justify-center text-center opacity-0">
       <h1 className="mt-3.5 font-bigola text-4xl text-customCream lg:text-5xl">
         Create Event
       </h1>

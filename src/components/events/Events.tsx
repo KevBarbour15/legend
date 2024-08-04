@@ -19,7 +19,7 @@ const EventsList: React.FC = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await fetch(`/api/events?action=${"getEvents"}`);
+      const response = await fetch("/api/events");
 
       if (!response.ok) {
         throw new Error("Failed to fetch events.");
@@ -60,7 +60,12 @@ const EventsList: React.FC = () => {
             Upcoming Events
           </h1>
           {sortedEvents.map((event, index) => (
-            <EventCard key={index} event={event} inDashboard={true} fetchEvents={fetchEvents} />
+            <EventCard
+              key={index}
+              event={event}
+              inDashboard={true}
+              fetchEvents={fetchEvents}
+            />
           ))}
         </>
       )}

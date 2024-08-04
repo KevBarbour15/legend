@@ -25,7 +25,7 @@ const MessagesList: React.FC = () => {
 
   const fetchMessages = async () => {
     try {
-      const response = await fetch(`/api/message?action=${"getMessages"}`);
+      const response = await fetch("/api/message");
 
       if (!response.ok) {
         throw new Error("Failed to fetch messages.");
@@ -66,7 +66,11 @@ const MessagesList: React.FC = () => {
             Messages
           </h1>
           {sortedMessages.map((message, index) => (
-            <MessageCard key={index} fetchMessages={fetchMessages}  message={message} />
+            <MessageCard
+              key={index}
+              fetchMessages={fetchMessages}
+              message={message}
+            />
           ))}
         </>
       )}
