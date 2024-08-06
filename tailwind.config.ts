@@ -29,16 +29,16 @@ const config: Config = {
         ubuntuLight: ["Ubuntu Light", "sans-serif"],
       },
       height: {
-        "300px": "300px",
+        "350px": "350px",
       },
       width: {
-        "300px": "300px"
+        "350px": "350px",
       },
       maxHeight: {
-        "300px": "300px",
+        "350px": "350px",
       },
       maxWidth: {
-        "300px": "300px",
+        "350px": "350px",
       },
       spacing: {
         "135": "140px",

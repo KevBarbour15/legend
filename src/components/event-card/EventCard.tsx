@@ -162,19 +162,19 @@ const EventCard: React.FC<EventCardProps> = ({
     <>
       <div
         ref={containerRef}
-        className={`flex w-95vw flex-col border-t-2 border-customGold p-5 py-5 text-left md:w-70vw lg:w-65vw xl:w-60vw xxl:w-50vw ${
+        className={`flex w-90vw flex-col border-t-2 border-customGold p-5 py-5 text-left md:w-75vw lg:w-70vw xl:w-65vw xxl:w-60vw ${
           index === length - 1 ? "border-b-2 border-customGold" : ""
         }`}
       >
         {inDashboard ? (
           <>
-            <div className="flex w-full flex-col text-customWhite md:flex-row">
-              <div className="flex max-h-full max-w-full flex-row justify-between text-left font-bigola text-xl text-customWhite md:w-1/5 md:flex-col md:text-2xl">
+            <div className="flex w-full flex-col text-customWhite">
+              <div className="flex max-h-full max-w-full flex-row justify-between text-left font-bigola text-xl text-customWhite md:text-2xl">
                 <h1>{formattedDate}</h1>
                 <h1>{formattedTime}</h1>
               </div>
               <div className="flex flex-col justify-between md:w-4/5">
-                <div className="mb-5 flex max-h-full flex-col gap-5">
+                <div className="flex max-h-full flex-col gap-5 py-5">
                   <h1 className="font-bigola text-3xl md:text-5xl">
                     {event.title}
                   </h1>
@@ -185,7 +185,7 @@ const EventCard: React.FC<EventCardProps> = ({
                 <img
                   src={event.image_url}
                   alt="event"
-                  className="h-300px w-300px border-2 border-customGold object-cover"
+                  className="h-350px w-350px border-2 border-customGold object-cover"
                 ></img>
               </div>
             </div>
@@ -207,13 +207,13 @@ const EventCard: React.FC<EventCardProps> = ({
           </>
         ) : (
           <>
-            <div className="flex w-full flex-col text-customWhite md:flex-row">
-              <div className="flex max-h-full max-w-full flex-row justify-between text-left font-bigola text-xl text-customWhite md:w-1/5 md:flex-col md:text-2xl">
+            <div className="flex w-full flex-col text-customWhite">
+              <div className="flex max-h-full max-w-full flex-row justify-between text-left font-bigola text-xl text-customWhite md:text-2xl">
                 <h1>{formattedDate}</h1>
                 <h1>{formattedTime}</h1>
               </div>
               <div className="flex flex-col justify-between md:w-4/5">
-                <div className="mb-5 flex max-h-full flex-col gap-5">
+                <div className="flex max-h-full flex-col gap-5 py-5">
                   <h1 className="font-bigola text-3xl md:text-5xl">
                     {event.title}
                   </h1>
@@ -224,7 +224,7 @@ const EventCard: React.FC<EventCardProps> = ({
                 <img
                   src={event.image_url}
                   alt="event"
-                  className="h-300px w-300px border-2 border-customGold object-cover"
+                  className="h-350px w-350px border-2 border-customGold object-cover"
                 ></img>
               </div>
             </div>

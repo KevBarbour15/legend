@@ -25,9 +25,9 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     console.log(body);
 
-    const { title, date, time, description, image_url, isPublic } = body;
+    const { title, date, time, description, image_url } = body;
 
-    if (!title || !date || !time || !description || !image_url || !isPublic) {
+    if (!title || !date || !time || !description || !image_url) {
       return NextResponse.json(
         { error: "All fields are required!" },
         { status: 400 },
@@ -40,7 +40,6 @@ export async function POST(req: NextRequest) {
       time,
       description,
       image_url,
-      isPublic,
     });
 
     await event.save();

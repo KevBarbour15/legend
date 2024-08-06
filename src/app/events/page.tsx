@@ -5,8 +5,6 @@ import EventCard from "@/components/event-card/EventCard";
 //gsap imports
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/all";
-gsap.registerPlugin(ScrollTrigger);
 
 interface Event {
   _id: string;
