@@ -28,6 +28,18 @@ const config: Config = {
         ubuntuRegular: ["Ubuntu Regular", "sans-serif"],
         ubuntuLight: ["Ubuntu Light", "sans-serif"],
       },
+      height: {
+        "300px": "300px",
+      },
+      width: {
+        "300px": "300px"
+      },
+      maxHeight: {
+        "300px": "300px",
+      },
+      maxWidth: {
+        "300px": "300px",
+      },
       spacing: {
         "135": "140px",
         "25vw": "25vw",

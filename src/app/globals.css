@@ -105,8 +105,7 @@ body.menu-open {
   }
 }
 
-.custom-object-hover:hover {
-  //transform: scale(1.1);
-  //transition: all 0.25s ease in-out;
-  //background-color: rgba(0, 0, 0, 0.5);
+.form-label span {
+  font-family: "Bigola Display", sans-serif;  
+  font-size: 16px;
 }

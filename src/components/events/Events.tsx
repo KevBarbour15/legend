@@ -10,6 +10,7 @@ interface Event {
   description: string;
   notes: string;
   image_url: string;
+  //isPublic: boolean;
 }
 
 const EventsList: React.FC = () => {
@@ -47,24 +48,23 @@ const EventsList: React.FC = () => {
   return (
     <div className="flex w-screen flex-col items-center justify-center text-center">
       {loading ? (
-        <h1 className="mt-3.5 font-bigola text-4xl text-customCream lg:text-5xl">
+        <h1 className="my-5 font-bigola text-4xl text-customWhite lg:text-5xl">
           Loading events...
         </h1>
       ) : events.length === 0 ? (
-        <h1 className="mt-3.5 font-bigola text-4xl text-customCream lg:text-5xl">
+        <h1 className="my-5 font-bigola text-4xl text-customWhite lg:text-5xl">
           No events found.
         </h1>
       ) : (
         <>
-          <h1 className="mt-3.5 font-bigola text-4xl text-customCream lg:text-5xl">
-            Upcoming Events
-          </h1>
           {sortedEvents.map((event, index) => (
             <EventCard
               key={index}
               event={event}
               inDashboard={true}
               fetchEvents={fetchEvents}
+              length={events.length}
+              index={index}
             />
           ))}
         </>

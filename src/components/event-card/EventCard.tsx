@@ -1,5 +1,5 @@
 import { formatTime } from "@/utils/time";
-import { useState } from "react";
+import { use, useRef, useState } from "react";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -7,6 +7,13 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+
+// gsap imports
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 interface Event {
   _id: string;
@@ -16,24 +23,80 @@ interface Event {
   description: string;
   notes: string;
   image_url: string;
+  //isPublic: boolean;
 }
 
 interface EventCardProps {
   event: Event;
   inDashboard: boolean;
   fetchEvents: () => void;
+  length: number;
+  index: number;
 }
 
 const EventCard: React.FC<EventCardProps> = ({
   event,
   inDashboard,
   fetchEvents,
+  length,
+  index,
 }) => {
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [editedEvent, setEditedEvent] = useState<Event>({ ...event });
   const formattedDate = new Date(event.date).toLocaleDateString();
   const formattedTime = formatTime(event.time);
+  const tl = useRef<gsap.core.Timeline | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!containerRef.current) return;
+    console.log("Animating event card");
+    gsap.set("#text h1", {
+      opacity: 0,
+      scale: 0.75,
+    });
+    gsap.set("#text p", {
+      opacity: 0,
+      scale: 0.75,
+    });
+    gsap.set("#event-image", {
+      opacity: 0,
+      scale: 0.75,
+    });
+
+    tl.current = gsap
+      .timeline({ ease: "linear" })
+      .to(
+        "#text h1",
+        {
+          duration: 0.2,
+          opacity: 1,
+          scale: 1,
+          ease: "linear",
+        },
+        1,
+      )
+      .to(
+        "#text p",
+        {
+          duration: 0.2,
+          opacity: 1,
+          scale: 1,
+          stagger: 0.1,
+        },
+        1,
+      )
+      .to(
+        "#event-image",
+        {
+          duration: 0.2,
+          opacity: 1,
+          scale: 1,
+        },
+        1,
+      );
+  }, []);
 
   const handleDeleteOpen = () => {
     setOpenDelete(true);
@@ -44,7 +107,6 @@ const EventCard: React.FC<EventCardProps> = ({
   };
 
   const confirmDelete = async () => {
-    console.log("event: ", event._id);
     try {
       const response = await fetch("/api/events", {
         method: "DELETE",
@@ -98,20 +160,33 @@ const EventCard: React.FC<EventCardProps> = ({
 
   return (
     <>
-      <div className="m-5 flex w-85vw flex-col border-y-2 border-customGold p-5 text-left lg:w-50vw xl:w-45vw xxl:w-40vw">
+      <div
+        ref={containerRef}
+        className={`flex w-95vw flex-col border-t-2 border-customGold p-5 py-5 text-left md:w-70vw lg:w-65vw xl:w-60vw xxl:w-50vw ${
+          index === length - 1 ? "border-b-2 border-customGold" : ""
+        }`}
+      >
         {inDashboard ? (
           <>
-            <div className="flex flex-col md:flex-row">
-              <div className="flex flex-1 flex-col">
-                <h1 className="mb-2 font-bigola text-3xl text-customCream">
-                  {event.title}
-                </h1>
-                <p className="mb-1 font-hypatia text-base">{formattedDate}</p>
-                <p className="mb-1 font-hypatia text-base">{formattedTime}</p>
-                <p className="font-hypatia text-base">{event.description}</p>
+            <div className="flex w-full flex-col text-customWhite md:flex-row">
+              <div className="flex max-h-full max-w-full flex-row justify-between text-left font-bigola text-xl text-customWhite md:w-1/5 md:flex-col md:text-2xl">
+                <h1>{formattedDate}</h1>
+                <h1>{formattedTime}</h1>
               </div>
-              <div className="flex-1 border-2 border-customGold">
-                <img src={event.image_url} alt="event" className="w-auto" />
+              <div className="flex flex-col justify-between md:w-4/5">
+                <div className="mb-5 flex max-h-full flex-col gap-5">
+                  <h1 className="font-bigola text-3xl md:text-5xl">
+                    {event.title}
+                  </h1>
+                  <p className="font-hypatia text-xl md:text-2xl">
+                    {event.description}
+                  </p>
+                </div>
+                <img
+                  src={event.image_url}
+                  alt="event"
+                  className="h-300px w-300px border-2 border-customGold object-cover"
+                ></img>
               </div>
             </div>
 
@@ -132,27 +207,32 @@ const EventCard: React.FC<EventCardProps> = ({
           </>
         ) : (
           <>
-            <div className="flex flex-col md:flex-row">
-              <div className="md:flew-row mb-5 flex flex-1 flex-col md:mb-0">
-                <h1 className="mb-2 font-bigola text-3xl text-customCream">
-                  {event.title}
-                </h1>
-                <p className="mb-1 font-hypatia text-base">{formattedDate}</p>
-                <p className="mb-1 font-hypatia text-base">{formattedTime}</p>
-                <p className="font-hypatia text-base">{event.description}</p>
+            <div className="flex w-full flex-col text-customWhite md:flex-row">
+              <div className="flex max-h-full max-w-full flex-row justify-between text-left font-bigola text-xl text-customWhite md:w-1/5 md:flex-col md:text-2xl">
+                <h1>{formattedDate}</h1>
+                <h1>{formattedTime}</h1>
               </div>
-              <div className="flex-1">
+              <div className="flex flex-col justify-between md:w-4/5">
+                <div className="mb-5 flex max-h-full flex-col gap-5">
+                  <h1 className="font-bigola text-3xl md:text-5xl">
+                    {event.title}
+                  </h1>
+                  <p className="font-hypatia text-xl md:text-2xl">
+                    {event.description}
+                  </p>
+                </div>
                 <img
                   src={event.image_url}
                   alt="event"
-                  className="w-auto border-2 border-customGold"
-                />
+                  className="h-300px w-300px border-2 border-customGold object-cover"
+                ></img>
               </div>
             </div>
           </>
         )}
       </div>
-      {/************************************  Delete event *************************************/}
+
+      {/************************************  Delete event modal *************************************/}
       <Dialog
         open={openDelete}
         onClose={handleDeleteClose}
@@ -226,6 +306,16 @@ const EventCard: React.FC<EventCardProps> = ({
             value={editedEvent.description}
             onChange={handleEditChange("description")}
           />
+          {/*
+          <FormGroup>
+            <FormControlLabel
+              label="Contacted"
+              className="form-label"
+              checked={editedEvent.isPublic}
+              control={<Switch />}
+            />
+          </FormGroup>
+          */}
           <TextField
             margin="dense"
             label="Notes"

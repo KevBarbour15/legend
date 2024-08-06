@@ -5,7 +5,6 @@ let cachedConnection: Connection | null = null;
 export async function connectToMongoDB() {
   // If a cached connection exists, return it
   if (cachedConnection) {
-    console.log("Using cached db connection");
     return cachedConnection;
   }
   try {
@@ -15,7 +14,6 @@ export async function connectToMongoDB() {
     cachedConnection = cnx.connection;
     // Log message indicating a new MongoDB connection is established
     console.log("New mongodb connection established");
-    // Return the newly established connection
     return cachedConnection;
   } catch (error) {
     // If an error occurs during connection, log the error and throw it

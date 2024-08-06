@@ -53,18 +53,15 @@ const MessagesList: React.FC = () => {
   return (
     <div className="flex w-screen flex-col items-center justify-center text-center">
       {loading ? (
-        <h1 className="mt-3.5 font-bigola text-4xl text-customCream lg:text-5xl">
+        <h1 className="mt-5 font-bigola text-4xl text-customWhite lg:text-5xl">
           Loading messages...
         </h1>
       ) : sortedMessages.length === 0 ? (
-        <h1 className="mt-3.5 font-bigola text-4xl text-customCream lg:text-5xl">
+        <h1 className="mt-5 font-bigola text-4xl text-customWhite lg:text-5xl">
           No messages found.
         </h1>
       ) : (
         <>
-          <h1 className="mt-3.5 font-bigola text-4xl text-customCream lg:text-5xl">
-            Messages
-          </h1>
           {sortedMessages.map((message, index) => (
             <MessageCard
               key={index}

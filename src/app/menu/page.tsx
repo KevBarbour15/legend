@@ -8,11 +8,10 @@ import { useGSAP } from "@gsap/react";
 export default function Menu() {
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
-  
 
   useGSAP(() => {
     if (!containerRef.current) return;
-    
+
     gsap.set("#menu-column-left  #menu-item", {
       opacity: 0,
       y: 35,
@@ -49,7 +48,7 @@ export default function Menu() {
   return (
     <div
       ref={containerRef}
-      className="align-center flex min-h-screen w-screen flex-row justify-center pt-135"
+      className="align-center flex min-h-screen w-screen flex-row justify-center"
     >
       <div
         id="menu-column-left"

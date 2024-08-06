@@ -7,6 +7,8 @@ import { Menu } from "@mui/icons-material";
 // gsap imports
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -24,6 +26,7 @@ const Header: React.FC = () => {
 
     tl.current = gsap
       .timeline({ ease: "power4.inOut", duration: 0.05 })
+
       .to(
         "#logo",
         {
@@ -38,6 +41,20 @@ const Header: React.FC = () => {
         },
         0,
       );
+
+    let tlScroll = gsap.timeline();
+
+    tlScroll.to("#app-header", {
+      scrollTrigger: {
+        trigger: "#app-header",
+        start: "top+=1 top",
+        end: "top top",
+        scrub: 1,
+      },
+      position: "sticky",
+      borderBottom: "2px solid #a98541",
+      boxShadow: "0 3px 5px rgba(0, 0, 0, 0.35)",
+    });
   }, []);
 
   return (
@@ -45,7 +62,8 @@ const Header: React.FC = () => {
       <NavMenu menuStatus={menuOpen} toggleMenu={toggleMenu} />
       <header
         ref={containerRef}
-        className="fixed top-0 z-10 flex w-screen flex-row items-center justify-between bg-customNavy"
+        className="top-0 z-10 flex w-screen flex-row items-center justify-between border-y border-transparent bg-customNavy"
+        id="app-header"
       >
         <div className="w-14">&nbsp;</div>
 

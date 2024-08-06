@@ -5,6 +5,8 @@ import EventCard from "@/components/event-card/EventCard";
 //gsap imports
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
+gsap.registerPlugin(ScrollTrigger);
 
 interface Event {
   _id: string;
@@ -14,6 +16,7 @@ interface Event {
   description: string;
   notes: string;
   image_url: string;
+  isPublic: boolean;
 }
 
 export default function Events() {
@@ -21,14 +24,89 @@ export default function Events() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const tl = useRef<gsap.core.Timeline | null>(null);
-  const eventsRef = useRef<Event[]>([]);
+  const eventsTL = useRef<gsap.core.Timeline | null>(null);
+  const eventRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useGSAP(() => {
     if (!containerRef.current) return;
-    // TODO: make individual animations in separate functions
-    // -- use shouldAnimate to determine if animation should run
-  }, []);
+    gsap.set("#events-title", {
+      opacity: 0,
+      scale: 0.75,
+    });
+
+    gsap.set("#no-events", {
+      opacity: 0,
+      scale: 0.75,
+    });
+
+    eventRefs.current.forEach((ref) => {
+      gsap.set(ref, {
+        opacity: 0,
+        scale: 0.75,
+        y: 50,
+      });
+    });
+
+    gsap.fromTo(
+      "#event-subheader",
+      { opacity: 0 },
+      { opacity: 1, duration: 0.15, delay: 0.1 },
+    );
+
+    if (!loading && eventRefs.current.length > 0) {
+      eventsTL.current = gsap
+        .timeline({})
+        .to(
+          "#events-title",
+          {
+            duration: 0.35,
+            opacity: 1,
+            scale: 1,
+            ease: "linear",
+            pin: true,
+          },
+          0.35,
+        )
+        .to(
+          eventRefs.current,
+          {
+            duration: 0.35,
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            ease: "power2.out",
+            stagger: 0.15,
+          },
+          0.7,
+        );
+    }
+
+    if (!loading && eventRefs.current.length == 0) {
+      eventsTL.current = gsap
+        .timeline({})
+        .to(
+          "#events-title",
+          {
+            duration: 0.35,
+            opacity: 1,
+            scale: 1,
+            ease: "linear",
+            pin: true,
+          },
+          0.35,
+        )
+        .to(
+          "#no-events",
+          {
+            duration: 0.35,
+            opacity: 1,
+            scale: 1,
+            ease: "power2.out",
+          },
+          0.7,
+        );
+    }
+  }, [events]);
 
   const fetchEvents = async () => {
     // logic to fetch events goes here
@@ -61,37 +139,49 @@ export default function Events() {
   return (
     <div
       ref={containerRef}
-      className="flex w-screen flex-col items-center justify-center pt-135 text-center"
+      className="flex w-screen flex-col items-center justify-center text-center"
     >
+      {/*
       <h1
         id="events-title"
-        className="w-90vw font-bigola text-4xl text-customCream lg:text-5xl"
+        className="top-135 w-85vw py-5 font-bigola text-4xl text-customWhite opacity-0 lg:w-90vw lg:text-5xl xl:w-85vw xxl:w-60vw"
       >
         Upcoming Events
       </h1>
+*/}
       {loading ? (
         <h1
           id="event-subheader"
-          className="m-5 flex w-85vw flex-col border-y-2 border-customGold p-5 text-center font-bigola text-4xl text-customCream opacity-0 lg:w-50vw xl:w-45vw xxl:w-40vw"
+          className="m-5 flex w-85vw flex-col border-customGold p-5 text-center font-bigola text-4xl text-customWhite opacity-0 lg:w-50vw xl:w-45vw xxl:w-40vw"
         >
           Loading events...
         </h1>
       ) : events.length === 0 ? (
         <h1
-          id="event-subheader"
-          className="m-5 flex w-85vw flex-col border-y-2 border-customGold p-5 text-center font-bigola text-4xl text-customCream lg:w-50vw xl:w-45vw xxl:w-40vw"
+          id="no-events"
+          className="m-5 flex w-85vw flex-col border-customGold p-5 text-center font-bigola text-4xl text-customWhite opacity-0 lg:w-50vw xl:w-45vw xxl:w-40vw"
         >
           Stay tuned for upcoming events...
         </h1>
       ) : (
         <>
           {sortedEvents.map((event, index) => (
-            <EventCard
-              fetchEvents={fetchEvents}
-              key={index}
-              event={event}
-              inDashboard={false}
-            />
+            <div
+              key={event._id}
+              ref={(el) => {
+                eventRefs.current[index] = el;
+              }}
+              className="opacity-0"
+            >
+              <EventCard
+                length={sortedEvents.length}
+                fetchEvents={fetchEvents}
+                key={index}
+                event={event}
+                inDashboard={false}
+                index={index}
+              />
+            </div>
           ))}
         </>
       )}

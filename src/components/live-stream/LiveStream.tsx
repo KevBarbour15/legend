@@ -25,7 +25,7 @@ const LiveStream: React.FC = () => {
       ref={containerRef}
       className="flex w-screen flex-col items-center justify-center text-center opacity-0"
     >
-      <h1 className="my-3.5 font-bigola text-4xl text-customCream lg:text-5xl">
+      <h1 className="my-5 font-bigola text-4xl text-customWhite lg:text-5xl">
         Live streaming coming soon...
       </h1>
     </div>

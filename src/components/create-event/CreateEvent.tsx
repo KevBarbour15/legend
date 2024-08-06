@@ -7,7 +7,7 @@ import { useGSAP } from "@gsap/react";
 const CreateEvent: React.FC = () => {
   const [title, setTitle] = useState<string>("");
   const [date, setDate] = useState<string>("");
-  const [time, setTime] = useState<string>("");
+  const [time, setTime] = useState<string>("12:00");
   const [description, setDescription] = useState<string>("");
   const [imageURL, setImageURL] = useState<string>("");
   const [error, setError] = useState<string>("");
@@ -47,6 +47,7 @@ const CreateEvent: React.FC = () => {
           time: time,
           description: description,
           image_url: imageURL,
+          //isPublic: true,
         }),
       });
 
@@ -71,8 +72,11 @@ const CreateEvent: React.FC = () => {
   }, []);
 
   return (
-    <div ref={containerRef } className="flex w-screen flex-col items-center justify-center text-center opacity-0">
-      <h1 className="mt-3.5 font-bigola text-4xl text-customCream lg:text-5xl">
+    <div
+      ref={containerRef}
+      className="flex w-screen flex-col items-center justify-center text-center opacity-0"
+    >
+      <h1 className="mt-5 font-bigola text-4xl text-customWhite lg:text-5xl">
         Create Event
       </h1>
       <div>

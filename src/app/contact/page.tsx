@@ -17,6 +17,7 @@ export default function Contact() {
   const [error, setError] = useState<string>("");
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
+  const eventRefs = useRef<HTMLDivElement[]>([]); // for each event div
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -124,16 +125,13 @@ export default function Contact() {
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="flex w-screen flex-col justify-center pt-135"
-    >
-      <h2
+    <div ref={containerRef} className="flex w-screen flex-col justify-center">
+      <h1
         id="contact-title"
-        className="my-6 text-center font-bigola text-4xl text-customCream opacity-0 lg:text-5xl"
+        className="my-6 text-center font-bigola text-4xl text-customWhite opacity-0 lg:text-5xl"
       >
         Let's Work Together
-      </h2>
+      </h1>
       <div>
         <form
           id="form"

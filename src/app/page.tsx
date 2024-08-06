@@ -4,13 +4,14 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookIcon from "@mui/icons-material/Facebook";
 
+//gsap imports
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/all";
+gsap.registerPlugin(SplitText);
 
 //import Playlist from "@/components/playlist/Playlist";
 
-gsap.registerPlugin(SplitText);
 export default function Home() {
   const [email, setEmail] = useState<string>("");
   const containerRef = useRef<HTMLDivElement>(null);
@@ -102,7 +103,7 @@ export default function Home() {
   return (
     <main
       ref={containerRef}
-      className="flex flex-col items-center space-y-14 bg-customNavy pt-135"
+      className="flex flex-col items-center space-y-14 bg-customNavy"
     >
       <div>
         <h1

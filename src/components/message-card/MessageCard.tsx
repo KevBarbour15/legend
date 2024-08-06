@@ -132,12 +132,13 @@ const MessageCard: React.FC<MessageCardProps> = ({
 
   return (
     <>
-      <div className="m-5 flex w-85vw flex-col border-y-2 border-customGold p-5 text-left lg:w-50vw xl:w-45vw xxl:w-40vw">
+      <div className="w-100vw flex flex-col border-b border-customGold p-5 text-left md:w-65vw lg:w-50vw xl:w-45vw xxl:w-40vw">
         <div className="flex flex-row justify-between">
           <div>
-            <h1 className="mb-2 font-bigola text-3xl text-customCream">
+            <h1 className="mb-2 mr-5 font-bigola text-3xl text-customWhite">
               {message.firstName} {message.lastName}
             </h1>
+
             <p className="mb-1 font-hypatia text-lg lg:text-xl">
               {formattedDate}
             </p>
@@ -146,12 +147,14 @@ const MessageCard: React.FC<MessageCardProps> = ({
             <FormGroup>
               <FormControlLabel
                 label="Contacted"
+                className="form-label"
                 onChange={handleContacted}
                 checked={contacted}
                 control={<Switch />}
               />
               <FormControlLabel
                 label="Read"
+                className="form-label"
                 onChange={handleRead}
                 checked={read}
                 control={<Switch />}
@@ -159,22 +162,47 @@ const MessageCard: React.FC<MessageCardProps> = ({
             </FormGroup>
           </div>
         </div>
-        <ul className="mb-1 list-disc pl-5 font-hypatia text-lg lg:text-xl">
-          <li className="text-customCream">Contact</li>
-          <p className="mb-1 font-hypatia text-lg lg:text-xl">
-            <a href={`mailto:${message.email}`} className="underline">
+        <ul className="list-disc pl-5 text-lg lg:text-xl">
+          <li className="font-bigola text-customCream">
+            Email:{" "}
+            <span className="font-hypatia text-customWhite">
               {message.email}
-            </a>
-          </p>
-          <p>{message.phone}</p>
-          <li className="text-customCream">Preferred date </li>
-          <p>{formattedPreferredDate}</p>
-          <li className="text-customCream">How did you hear?</li>
-          <p>{message.howDidYouHear}</p>
-          <li className="text-customCream">Budget</li>
-          <p>Budget: {message.budget}</p>
-          <li className="text-customCream">Message</li>
-          <p>"{message.message}"</p>
+            </span>
+          </li>
+
+          <li className="font-bigola text-customCream">
+            Phone:{" "}
+            <span className="font-hypatia text-customWhite">
+              {message.phone}
+            </span>
+          </li>
+
+          <li className="font-bigola text-customCream">
+            Preferred date{" "}
+            <span className="font-hypatia text-customWhite">
+              {formattedDate}
+            </span>
+          </li>
+
+          <li className="font-bigola text-customCream">
+            How did you hear?{" "}
+            <span className="font-hypatia text-customWhite">
+              {message.howDidYouHear}
+            </span>
+          </li>
+          <li className="font-bigola text-customCream">
+            Budget:{" "}
+            <span className="font-hypatia text-customWhite">
+              {message.budget}
+            </span>
+          </li>
+
+          <li className="font-bigola text-customCream">
+            Message:{" "}
+            <span className="font-hypatia text-customWhite">
+              {message.message}
+            </span>
+          </li>
         </ul>
         <div className="mt-2 flex flex-row justify-center">
           <button
