@@ -3,15 +3,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
-import Playlist from "@/components/playlist/Playlist";
+import MusicPlayer from "@/components/music-player/MusicPlayer";
 import "./globals.css";
-
-import { connectToMongoDB } from "@/lib/db";
-
-import gsap from "gsap";
-import { SplitText } from "gsap/all";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Draggable } from "gsap/Draggable";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,13 +13,41 @@ export const metadata: Metadata = {
   description: "Legend Has It... a new hi-fi bar is coming soon to Sacramento",
 };
 
+const tracks: {
+  url: string;
+  title: string;
+  artist: string;
+  albumArt: string;
+  album: string;
+}[] = [
+  {
+    url: "./audio/action-bronson/the-symbol.mp3",
+    title: "The Symbol",
+    artist: "Action Bronson",
+    albumArt: "./audio/action-bronson/rare-chandeliers.jpg",
+    album: "Rare Chandeliers",
+  },
+  {
+    url: "./audio/westside-gunn/mr-t.mp3",
+    title: "Mr. T",
+    artist: "Westside Gunn",
+    albumArt: "./audio/westside-gunn/flygod.jpg",
+    album: "Flygod",
+  },
+  {
+    url: "./audio/asap-rocky/brand-new-guy.mp3",
+    title: "Brand New Guy",
+    artist: "A$AP Rocky",
+    albumArt: "./audio/asap-rocky/live-love-asap.jpg",
+    album: "Live.Love.A$AP",
+  },
+];
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // register GSAP plugins
-  gsap.registerPlugin(SplitText, ScrollTrigger, Draggable);
   return (
     <>
       <html lang="en">
@@ -39,6 +60,7 @@ export default function RootLayout({
         <body className={inter.className}>
           <Header />
           {children}
+          <MusicPlayer tracks={tracks} />
           <Footer />
         </body>
       </html>

@@ -128,7 +128,7 @@ export default function Contact() {
     <div ref={containerRef} className="flex w-screen flex-col justify-center">
       <h1
         id="contact-title"
-        className="my-6 text-center font-bigola text-4xl text-customWhite opacity-0 lg:text-5xl"
+        className="mb-6 text-center font-bigola text-4xl text-customWhite opacity-0 lg:text-5xl"
       >
         Let's Work Together
       </h1>
