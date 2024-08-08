@@ -11,7 +11,7 @@ import {
   SkipPrevious,
   SkipNext,
   KeyboardArrowDown,
-  KeyboardArrowUp,
+  KeyboardArrowUpTwoTone,
   QueueMusic,
 } from "@mui/icons-material";
 
@@ -31,7 +31,7 @@ interface MusicPlayerProps {
 const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
   const [playing, setPlaying] = useState(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
-  const [visible, setVisible] = useState<boolean>(true);
+  const [visible, setVisible] = useState<boolean>(false);
   const [playlistVisible, setPlaylistVisible] = useState(false);
 
   useGSAP(() => {
@@ -78,6 +78,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
 
   const handleTrackChange = (index: number) => {
     setCurrentTrackIndex(index);
+    setPlaying(true);
   };
 
   return (
@@ -85,25 +86,12 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       id="player-container"
       className="fixed bottom-0 flex h-auto w-screen flex-col border-2 border-customGold bg-customWhite shadow-xl shadow-black md:w-350px"
     >
-      <IconButton
-        className="absolute right-1 top-1 z-10"
-        onClick={togglePlayer}
-      >
-        {visible ? (
-          <KeyboardArrowDown
-            className={`p-0 ${playlistVisible ? "text-customWhite" : "text-customNavy"}`}
-          />
-        ) : (
-          <KeyboardArrowUp className="p-0 text-customNavy" />
-        )}
-      </IconButton>
-
       <Collapse in={playlistVisible}>
         <div className="flex flex-col">
           {tracks.map((track, index) => (
             <div
               key={index}
-              className="flex flex-row border-b-2 border-customGold bg-customNavy p-1"
+              className="flex h-full flex-row border-b-2 border-customGold bg-customWhite p-1"
             >
               <div className="flex h-20 w-20 rounded-xl">
                 <img
@@ -111,10 +99,15 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                   src={track.albumArt}
                 ></img>
               </div>
-              <div className="w- flex flex-col px-1 font-bigola text-customWhite">
+              <div className="flex w-auto flex-1 flex-col px-1 font-hypatia text-customNavy">
                 <h1 className="text-xl">{track.artist}</h1>
                 <h1 className="text-xl">{track.title}</h1>
                 <h1 className="text-xl">{track.album}</h1>
+              </div>
+              <div className="flex h-full items-center justify-center">
+                <IconButton onClick={() => handleTrackChange(index)}>
+                  <PlayArrow className="text-customNavy" />
+                </IconButton>
               </div>
             </div>
           ))}
@@ -129,7 +122,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               src={tracks[currentTrackIndex].albumArt}
             ></img>
           </div>
-          <div className="flex flex-col justify-end px-2 font-bigola text-customNavy">
+          <div className="flex flex-col justify-end px-2 font-hypatia text-customNavy">
             <h1 className="text-xl">{tracks[currentTrackIndex].artist}</h1>
             <h1 className="text-xl">{tracks[currentTrackIndex].title}</h1>
             <h1 className="text-xl">{tracks[currentTrackIndex].album}</h1>
@@ -137,7 +130,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         </div>
       </Collapse>
 
-      <div className="align-center flex justify-center p-1">
+      <div className="flex items-center justify-center p-1">
         <IconButton
           onClick={togglePlaylist}
           className="absolute bottom-1 left-1 text-customNavy"
@@ -152,6 +145,16 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         </IconButton>
         <IconButton onClick={handleNextTrack} className="text-customNavy">
           <SkipNext />
+        </IconButton>
+        <IconButton
+          className="absolute bottom-1 right-1"
+          onClick={togglePlayer}
+        >
+          {visible ? (
+            <KeyboardArrowDown className="p-0 text-customNavy" />
+          ) : (
+            <KeyboardArrowUpTwoTone className="p-0 text-customNavy" />
+          )}
         </IconButton>
       </div>
       <ReactHowler

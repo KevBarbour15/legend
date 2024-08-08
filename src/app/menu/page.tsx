@@ -48,7 +48,7 @@ export default function Menu() {
   return (
     <div
       ref={containerRef}
-      className="align-center flex min-h-screen w-screen flex-row justify-center"
+      className=" flex min-h-screen w-screen flex-row justify-center"
     >
       <div
         id="menu-column-left"
