@@ -109,7 +109,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
     <div
       ref={containerRef}
       id="player-container"
-      className="fixed bottom-0 flex h-auto w-screen flex-col border-2 rounded-lg border-customGold bg-customWhite opacity-0 shadow-top shadow-black md:w-350px"
+      className="fixed bottom-0 flex h-auto w-screen flex-col border-2 border-customGold bg-customWhite opacity-0 shadow-top shadow-black md:w-350px"
     >
       {/* Playlist Popup */}
       <Collapse in={playlistVisible}>
