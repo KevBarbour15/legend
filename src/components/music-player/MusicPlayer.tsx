@@ -20,8 +20,6 @@ import {
   GraphicEq,
 } from "@mui/icons-material";
 
-import { useIsMobile } from "@/utils/isMobile";
-
 gsap.registerPlugin(Draggable);
 
 interface Track {
@@ -111,7 +109,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
     <div
       ref={containerRef}
       id="player-container"
-      className="shadow-top fixed bottom-0 flex h-auto w-screen flex-col border-2 border-customGold bg-customWhite opacity-0 shadow-black md:w-350px"
+      className="fixed bottom-0 flex h-auto w-screen flex-col border-2 rounded-lg border-customGold bg-customWhite opacity-0 shadow-top shadow-black md:w-350px"
     >
       {/* Playlist Popup */}
       <Collapse in={playlistVisible}>
@@ -121,7 +119,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               key={index}
               className="flex h-full flex-row border-b-2 border-customGold bg-customWhite p-1"
             >
-              <div className="drop-shadow-text flex w-auto flex-1 flex-col px-1 font-bigola text-customNavy">
+              <div className="flex w-auto flex-1 flex-col px-1 font-bigola text-customNavy drop-shadow-text">
                 <div className="flex flex-row">
                   <Person className="pr-2" />
                   <h1 className="text-xl">{track.artist}</h1>
@@ -134,10 +132,10 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               <div className="flex items-center justify-center">
                 <IconButton className="m-0 flex">
                   {index == currentTrackIndex ? (
-                    <GraphicEq className="drop-shadow-text text-customNavy" />
+                    <GraphicEq className="text-customNavy drop-shadow-text" />
                   ) : (
                     <PlayArrow
-                      className="drop-shadow-text text-customGold"
+                      className="text-customGold drop-shadow-text"
                       onClick={() => handleTrackChange(index)}
                     />
                   )}
@@ -150,10 +148,10 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
 
       {/* Player Popup */}
       <Collapse in={visible}>
-        <div className="relative flex flex-row px-1 pt-1">
+        <div className="relative flex flex-row p-2">
           <IconButton
             onClick={togglePlaylist}
-            className="drop-shadow-text absolute right-1 top-1 z-10 text-customNavy"
+            className="absolute right-1 top-1 z-10 text-customNavy drop-shadow-text"
           >
             <LibraryMusic />
           </IconButton>
@@ -166,23 +164,24 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
           </div>
           <div className="flex flex-col justify-center px-2 font-bigola text-customNavy">
             <div className="flex flex-row">
-              <Person className="drop-shadow-text pr-2 text-customNavy" />
-              <h1 className="drop-shadow-text text-xl">
+              <Person className="pr-2 text-customNavy drop-shadow-text" />
+              <h1 className="text-xl drop-shadow-text">
                 {tracks[currentTrackIndex].artist}
               </h1>
             </div>
             <div className="flex flex-row">
-              <Audiotrack className="drop-shadow-text pr-2 text-customNavy" />
-              <h1 className="drop-shadow-text text-xl">
+              <Audiotrack className="pr-2 text-customNavy drop-shadow-text" />
+              <h1 className="text-xl drop-shadow-text">
                 {tracks[currentTrackIndex].title}
               </h1>
             </div>
           </div>
+          <div className="absolute inset-x-0 bottom-0 mx-auto w-4/5 border-b-2"></div>
         </div>
       </Collapse>
 
       <div className="flex items-center justify-center p-1">
-        <IconButton className="drop-shadow-text absolute bottom-1 left-1 text-customNavy">
+        <IconButton className="absolute bottom-1 left-1 text-customNavy drop-shadow-text">
           {mute ? (
             <VolumeOff onClick={handleMute} />
           ) : (
@@ -195,13 +194,13 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
 
         <IconButton
           onClick={handlePlayPause}
-          className="drop-shadow-text text-customNavy"
+          className="text-customNavy drop-shadow-text"
         >
           {playing ? <Pause /> : <PlayArrow />}
         </IconButton>
         <IconButton
           onClick={handleNextTrack}
-          className="drop-shadow-text text-customNavy"
+          className="text-customNavy drop-shadow-text"
         >
           <SkipNext />
         </IconButton>
@@ -210,9 +209,9 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
           onClick={togglePlayer}
         >
           {visible ? (
-            <KeyboardArrowDown className="drop-shadow-text p-0 text-customNavy" />
+            <KeyboardArrowDown className="p-0 text-customNavy drop-shadow-text" />
           ) : (
-            <KeyboardArrowUpTwoTone className="drop-shadow-text p-0 text-customNavy" />
+            <KeyboardArrowUpTwoTone className="p-0 text-customNavy drop-shadow-text" />
           )}
         </IconButton>
       </div>
@@ -220,7 +219,8 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         src={tracks[currentTrackIndex].url}
         playing={playing}
         mute={mute}
-        volume={1}
+        volume={1.0}
+        loop={true}
       />
     </div>
   );
