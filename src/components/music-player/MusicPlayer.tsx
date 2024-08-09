@@ -34,7 +34,7 @@ interface MusicPlayerProps {
 }
 
 const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
-  const [playing, setPlaying] = useState<boolean>(false);
+  const [playing, setPlaying] = useState<boolean>(true);
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
   const [mute, setMute] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
@@ -98,7 +98,6 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
     if (window.innerWidth >= 768) {
       // make player visible on desktop
       setVisible(true);
-      setPlaying(true);
     }
 
     if (playing) {
