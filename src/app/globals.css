@@ -19,6 +19,13 @@
 }
 
 @font-face {
+  font-family: "Roboto Medium";
+  src: url("/fonts/Roboto-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: "Avenir";
   src: url("/fonts/Avenir.ttc") format("truetype-collection");
   font-weight: normal;
@@ -106,6 +113,6 @@ body.menu-open {
 }
 
 .form-label span {
-  font-family: "Bigola Display", sans-serif;  
+  font-family: "Bigola Display", sans-serif;
   font-size: 16px;
 }

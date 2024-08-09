@@ -17,29 +17,31 @@ const tracks: {
   url: string;
   title: string;
   artist: string;
-  albumArt: string;
-  album: string;
 }[] = [
   {
-    url: "./audio/action-bronson/the-symbol.mp3",
-    title: "The Symbol",
-    artist: "Action Bronson",
-    albumArt: "./audio/action-bronson/rare-chandeliers.jpg",
-    album: "Rare Chandeliers",
+    url: "./audio/do-for-love.mp3",
+    title: "Do For Love",
+    artist: "Get Down Edits",
   },
   {
-    url: "./audio/westside-gunn/mr-t.mp3",
-    title: "Mr. T",
-    artist: "Westside Gunn",
-    albumArt: "./audio/westside-gunn/flygod.jpg",
-    album: "Flygod",
+    url: "./audio/lover-in-u.mp3",
+    title: "Lover In U",
+    artist: "Fig Edits",
   },
   {
-    url: "./audio/asap-rocky/brand-new-guy.mp3",
-    title: "Brand New Guy",
-    artist: "A$AP Rocky",
-    albumArt: "./audio/asap-rocky/live-love-asap.jpg",
-    album: "Live.Love.A$AP",
+    url: "./audio/love-yes.mp3",
+    title: "Love Yes",
+    artist: "HP Vince",
+  },
+  {
+    url: "./audio/get-down-baby.mp3",
+    title: "Get Down Baby",
+    artist: "Deep & Disco",
+  },
+  {
+    url: "./audio/everlasting.mp3",
+    title: "Everlasting",
+    artist: "Dr. Packer",
   },
 ];
 

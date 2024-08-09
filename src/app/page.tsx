@@ -1,8 +1,8 @@
 "use client";
 import { useRef, useState } from "react";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import FacebookIcon from "@mui/icons-material/Facebook";
+
+import { Button, IconButton } from "@mui/material";
+import { Instagram, YouTube, Facebook } from "@mui/icons-material";
 
 //gsap imports
 import gsap from "gsap";
@@ -85,8 +85,6 @@ export default function Home() {
   }, []);
 
   const subscribeEmail = () => {
-    alert(`Thank you for subscribing with ${email}!`);
-
     try {
       const response = fetch("/api/subscribe", {
         method: "POST",
@@ -134,41 +132,42 @@ export default function Home() {
             onChange={(e) => setEmail(e.target.value)}
             type="email"
             placeholder="Email"
-            className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+            className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
           />
-          <button
+          <Button
             id="form-button"
-            className="mt-7 rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider"
+            className="mt-7 rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider ring-2 ring-customGold hover:ring-2 hover:ring-customWhite"
           >
             <span className="text-sm leading-none text-white">SUBMIT</span>
-          </button>
+          </Button>
         </form>
       </div>
-      <div
-        id="icons"
-        className="flex items-center justify-between space-x-4 text-white"
-      >
-        <a
+      <div id="icons" className="flex items-center justify-between space-x-4">
+        <IconButton
           href="https://www.instagram.com/legendhasithifi/"
           target="_blank"
           rel="noopener noreferrer"
+          className="text-white transition-all hover:text-customGold focus:text-customGold"
         >
-          <InstagramIcon className="h-7 w-7 text-white opacity-0" />
-        </a>
-        <a
+          <Instagram className="v opacity-0" />
+        </IconButton>
+        <IconButton
           href="https://www.youtube.com/@legendhasithifi"
           target="_blank"
           rel="noopener noreferrer"
+          className="text-white transition-all hover:text-customGold focus:text-customGold"
         >
-          <YouTubeIcon className="h-7 w-7 text-white opacity-0" />
-        </a>
-        <a
+          <YouTube className="h-7 w-7 opacity-0" />
+        </IconButton>
+
+        <IconButton
           href="https://www.facebook.com/legendhasithifi"
           target="_blank"
           rel="noopener noreferrer"
+          className="text-white transition-all hover:text-customGold focus:text-customGold"
         >
-          <FacebookIcon className="h-7 w-7 text-white opacity-0" />
-        </a>
+          <Facebook className="h-7 w-7 opacity-0" />
+        </IconButton>
       </div>
     </main>
   );

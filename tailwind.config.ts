@@ -27,6 +27,7 @@ const config: Config = {
         hypatiaLight: ["Hypatia Sans Pro Light", "sans-serif"],
         ubuntuRegular: ["Ubuntu Regular", "sans-serif"],
         ubuntuLight: ["Ubuntu Light", "sans-serif"],
+        robotoMedium: ["Roboto Medium", "sans-serif"],
       },
       height: {
         "100px": "100px",
@@ -42,6 +43,7 @@ const config: Config = {
         "300px": "300px",
         "350px": "350px",
       },
+
       maxHeight: {
         "350px": "350px",
       },
@@ -71,6 +73,13 @@ const config: Config = {
         customNavy: "#244154",
         customCream: "#dfcfc0",
         customGold: "#bc9952",
+      },
+      dropShadow: {
+        record: "0.5px 1.75px 2.5px rgba(0, 0, 0, 0.65)",
+        text: ".75px 1.75px 1.75px rgba(0, 0, 0, 0.35)",
+      },
+      boxShadow: {
+        top: "0 -2.5px 3.5px -1.5px rgba(0, 0, 0, 0.35)",
       },
       minHeight: {
         pageHeight: "calc(100vh - 135px)",
