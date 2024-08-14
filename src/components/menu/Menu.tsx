@@ -46,10 +46,10 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
   useGSAP(() => {
     if (!container.current) return;
 
-    gsap.set(".menu-link-item-holder", { y: 75 });
-    gsap.set(".menu-logo-icon", { opacity: 0 });
+    gsap.set(".menu-link-item-holder", { y: 75, scale: 1, opacity: 0 });
+    gsap.set(".menu-logo-icon", { opacity: 0, rotation: 360 });
     gsap.set(".menu-overlay", { opacity: 0 });
-    gsap.set(".menu-info-row svg", { opacity: 0.5, scale: 0 });
+    gsap.set(".menu-info-row svg", { opacity: 0.5, scale: 0, rotation: 360 });
     gsap.set(".menu-close-icon", { opacity: 0, rotation: 360, scale: 0 });
     gsap.set(".menu-login-icon", { opacity: 0, scale: 0 });
 
@@ -71,7 +71,8 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
         duration: 0.25,
         stagger: 0.075,
         delay: -0.35,
-        ease: "power4.in",
+        ease: "linear",
+        opacity: 1,
       })
       .to(".menu-logo-icon", {
         opacity: 1,
@@ -95,9 +96,9 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
       })
       .to(".menu-info-row svg", {
         opacity: 1,
-        stagger: -0.05,
         delay: -0.5,
         scale: 1,
+        rotation: 0,
       })
       .to("body", {
         backgroundColor: "var(--custom-cream)",
