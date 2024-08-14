@@ -45,7 +45,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
 
   useGSAP(() => {
     if (!container.current) return;
-   
+
     gsap.set(".menu-link-item-holder", { y: 75 });
     gsap.set(".menu-logo-icon", { opacity: 0 });
     gsap.set(".menu-overlay", { opacity: 1 });
@@ -55,12 +55,17 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
 
     tl.current = gsap
       .timeline({ paused: true })
-      .to(".menu-overlay", {
-        duration: 0.35,
-        ease: "power4.inOut",
-        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-        opacity: 1,
-      })
+      .to("#player-container", {}, 0)
+      .to(
+        ".menu-overlay",
+        {
+          duration: 0.35,
+          ease: "power4.inOut",
+          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+          opacity: 1,
+        },
+        0,
+      )
       .to(".menu-link-item-holder", {
         y: 0,
         duration: 0.25,
