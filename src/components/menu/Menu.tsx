@@ -48,7 +48,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
 
     gsap.set(".menu-link-item-holder", { y: 75 });
     gsap.set(".menu-logo-icon", { opacity: 0 });
-    gsap.set(".menu-overlay", { opacity: 1 });
+    gsap.set(".menu-overlay", { opacity: 0 });
     gsap.set(".menu-info-row svg", { opacity: 0.5, scale: 0 });
     gsap.set(".menu-close-icon", { opacity: 0, rotation: 360, scale: 0 });
     gsap.set(".menu-login-icon", { opacity: 0, scale: 0 });
