@@ -176,7 +176,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               </h1>
             </div>
           </div>
-          <div className="absolute inset-x-0 bottom-0 mx-auto w-4/5 border-b-2"></div>
+          <div className="absolute inset-x-0 bottom-0 mx-auto w-4/5 border-b-[1px] border-customNavy"></div>
         </div>
       </Collapse>
 

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, use } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 //gsap imports
 import gsap from "gsap";
@@ -76,7 +76,7 @@ const CreateEvent: React.FC = () => {
       ref={containerRef}
       className="flex w-screen flex-col items-center justify-center text-center opacity-0"
     >
-      <h1 className="mt-5 font-bigola text-4xl text-customWhite lg:text-5xl">
+      <h1 className="font-bigola text-4xl text-customWhite lg:text-5xl">
         Create Event
       </h1>
       <div>

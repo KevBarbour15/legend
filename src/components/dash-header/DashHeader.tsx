@@ -1,8 +1,26 @@
 import Link from "next/link";
-import { useRef, useState } from "react";
-import Badge from "@mui/material/Badge";
+import React, { useRef, useState } from "react";
 import MailIcon from "@mui/icons-material/Mail";
 import LogoutIcon from "@mui/icons-material/Logout";
+import Button from "@mui/material/Button";
+
+import Box from "@mui/material/Box";
+import Fab from "@mui/material/Fab";
+
+import Event from "@mui/icons-material/Event";
+import EditCalendar from "@mui/icons-material/EditCalendar";
+
+import Drawer from "@mui/material/Drawer";
+
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MenuBook from "@mui/icons-material/MenuBook";
+import SportsBar from "@mui/icons-material/SportsBar";
 
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
@@ -15,77 +33,79 @@ interface DashProps {
 }
 
 const DashHeader: React.FC<DashProps> = ({ setActiveTab }) => {
-  // TO DO: need to get the unread messages count for the user
   const postLogoutRedirectURL = process.env.KINDE_POST_LOGOUT_REDIRECT_URL;
-  const containerRef = useRef<HTMLDivElement>(null);
-  const tlRef = useRef<gsap.core.Timeline | null>(null);
+  const [open, setOpen] = React.useState(false);
 
-  useGSAP(() => {
-    if (!containerRef.current) return;
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpen(newOpen);
+  };
 
-    gsap.set("#menu-item", {
-      opacity: 0,
-      scale: 0.75,
-    });
-
-    tlRef.current = gsap.timeline({}).to(
-      "#menu-item",
-      {
-        duration: 0.35,
-        opacity: 1,
-        scale: 1,
-        ease: "linear",
-        stagger: 0.1,
-      },
-      0.35,
-    );
-  }, []);
+  const DrawerList = (
+    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+      <List>
+        {["Create Event", "Upcoming Events", "Past Events"].map(
+          (text, index) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton onClick={() => setActiveTab(text)}>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ),
+        )}
+      </List>
+      <Divider />
+      <List>
+        {["Edit Menu", "Menu Items"].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <LogoutLink postLogoutRedirectURL={postLogoutRedirectURL}>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <MenuBook /> : <SportsBar />}
+                </ListItemIcon>
+              </LogoutLink>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {["Unread Messages", "Read Messages"].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <ListItem disablePadding>
+        <ListItemButton>
+          <ListItemIcon>
+            <LogoutIcon />
+          </ListItemIcon>
+          <ListItemText primary={"Logout"} />
+        </ListItemButton>
+      </ListItem>
+    </Box>
+  );
 
   return (
-    <div
-      ref={containerRef}
-      className="flex w-screen flex-row items-center justify-center bg-customGold"
-    >
-      <div className="my-2.5 flex w-90vw flex-row items-center justify-between font-bigola text-base lg:w-50vw lg:text-xl xl:w-45vw xxl:w-40vw">
-        <button
-          id="menu-item"
-          className="opacity-0"
-          onClick={() => setActiveTab("Messages")}
-        >
-          <Badge className="z-1" badgeContent={0} color="primary">
-            <MailIcon />
-          </Badge>
-        </button>
-        <button
-          id="menu-item"
-          className="opacity-0"
-          onClick={() => setActiveTab("Create Event")}
-        >
-          Create Event
-        </button>
-        <button
-          id="menu-item"
-          className="opacity-0"
-          onClick={() => setActiveTab("Events List")}
-        >
-          Events
-        </button>
-        <button
-          id="menu-item"
-          className="opacity-0"
-          onClick={() => setActiveTab("Live Stream")}
-        >
-          Live Stream
-        </button>
-
-        <LogoutLink
-          id="menu-item"
-          className="opacity-0"
-          postLogoutRedirectURL={postLogoutRedirectURL}
-        >
-          <LogoutIcon />
-        </LogoutLink>
-      </div>
+    <div className="fixed bottom-[25px] right-[25px]">
+      <Box sx={{ "& > :not(style)": { m: 1 } }}>
+        <Fab onClick={toggleDrawer(true)} variant="extended">
+          Dashboard
+        </Fab>
+      </Box>
+      <Drawer open={open} onClose={toggleDrawer(false)}>
+        {DrawerList}
+      </Drawer>
     </div>
   );
 };

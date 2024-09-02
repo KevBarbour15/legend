@@ -60,10 +60,8 @@ export default function RootLayout({
           />
         </head>
         <body className={inter.className}>
-          <Header />
           {children}
           <MusicPlayer tracks={tracks} />
-          <Footer />
         </body>
       </html>
     </>

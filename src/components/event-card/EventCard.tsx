@@ -142,7 +142,7 @@ const EventCard: React.FC<EventCardProps> = ({
   const confirmEdit = async () => {
     console.log("Edit confirmed", editedEvent);
     try {
-      const response = await fetch(`/api/events?action=${"editEvent"}`, {
+      const response = await fetch(`/api/events?action=${"EditCalendar"}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -221,17 +221,17 @@ const EventCard: React.FC<EventCardProps> = ({
               </div>
               <div className="flex flex-col justify-between md:flex-row">
                 <div className="flex max-h-full flex-col gap-5 pb-5">
-                  <h1 className="drop-shadow-text font-bigola text-3xl md:text-5xl">
+                  <h1 className="font-bigola text-3xl drop-shadow-text md:text-5xl">
                     {event.title}
                   </h1>
-                  <p className="drop-shadow-text font-hypatia text-xl md:w-3/5 md:text-2xl">
+                  <p className="font-hypatia text-xl drop-shadow-text md:w-3/5 md:text-2xl">
                     {event.description}
                   </p>
                 </div>
                 <img
                   src={event.image_url}
                   alt="event"
-                  className="h-350px w-350px border-2 border-customGold object-cover md:h-200px md:w-200px drop-shadow-text"
+                  className="h-350px w-350px border-2 border-customGold object-cover drop-shadow-text md:h-200px md:w-200px"
                 ></img>
               </div>
             </div>
