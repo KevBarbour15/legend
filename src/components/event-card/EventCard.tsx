@@ -49,55 +49,6 @@ const EventCard: React.FC<EventCardProps> = ({
   const tl = useRef<gsap.core.Timeline | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    if (!containerRef.current) return;
-    console.log("Animating event card");
-    gsap.set("#text h1", {
-      opacity: 0,
-      scale: 0.75,
-    });
-    gsap.set("#text p", {
-      opacity: 0,
-      scale: 0.75,
-    });
-    gsap.set("#event-image", {
-      opacity: 0,
-      scale: 0.75,
-    });
-
-    tl.current = gsap
-      .timeline({ ease: "linear" })
-      .to(
-        "#text h1",
-        {
-          duration: 0.2,
-          opacity: 1,
-          scale: 1,
-          ease: "linear",
-        },
-        1,
-      )
-      .to(
-        "#text p",
-        {
-          duration: 0.2,
-          opacity: 1,
-          scale: 1,
-          stagger: 0.1,
-        },
-        1,
-      )
-      .to(
-        "#event-image",
-        {
-          duration: 0.2,
-          opacity: 1,
-          scale: 1,
-        },
-        1,
-      );
-  }, []);
-
   const handleDeleteOpen = () => {
     setOpenDelete(true);
   };
@@ -165,7 +116,7 @@ const EventCard: React.FC<EventCardProps> = ({
           <div
             ref={containerRef}
             className={
-              "flex w-90vw flex-col border-b-2 border-customGold p-5 py-5 text-left md:w-75vw lg:w-70vw xl:w-65vw xxl:w-60vw"
+              "flex w-90vw flex-col p-5 py-5 text-left md:w-75vw lg:w-70vw xl:w-65vw xxl:w-60vw"
             }
           >
             <div className="flex w-full flex-col text-customWhite">
@@ -185,7 +136,7 @@ const EventCard: React.FC<EventCardProps> = ({
                 <img
                   src={event.image_url}
                   alt="event"
-                  className="h-350px w-350px border-2 border-customGold object-cover md:h-200px md:w-200px"
+                  className="h-350px w-350px object-cover md:h-200px md:w-200px"
                 ></img>
               </div>
             </div>
@@ -210,9 +161,7 @@ const EventCard: React.FC<EventCardProps> = ({
         <>
           <div
             ref={containerRef}
-            className={`flex w-90vw flex-col border-t-2 border-customGold p-5 py-5 text-left md:w-75vw lg:w-70vw xl:w-65vw xxl:w-60vw ${
-              index === length - 1 ? "border-b-2 border-customGold" : ""
-            }`}
+            className="flex w-90vw flex-col p-5 py-5 text-left md:w-50vw lg:w-50vw xl:w-50vw xxl:w-50vw"
           >
             <div className="flex w-full flex-col text-customWhite">
               <div className="mb-5 flex max-h-full max-w-full flex-row justify-between text-left font-bigola text-xl text-customWhite md:text-2xl">
@@ -231,7 +180,7 @@ const EventCard: React.FC<EventCardProps> = ({
                 <img
                   src={event.image_url}
                   alt="event"
-                  className="h-350px w-350px border-2 border-customGold object-cover drop-shadow-text md:h-200px md:w-200px"
+                  className="h-350px w-350px object-cover drop-shadow-text md:h-200px md:w-200px"
                 ></img>
               </div>
             </div>

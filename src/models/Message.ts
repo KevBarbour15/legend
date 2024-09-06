@@ -39,11 +39,11 @@ const MessageSchema: Schema = new Schema({
   },
   howDidYouHear: {
     type: String,
-    required: true,
+    required: false,
   },
   budget: {
     type: String,
-    required: true,
+    required: false,
   },
   message: {
     type: String,

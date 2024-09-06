@@ -16,9 +16,10 @@
     "@mui/icons-material": "^5.16.5",
     "@mui/material": "^5.16.5",
     "@radix-ui/themes": "^3.1.1",
-    "@svgr/webpack": "^8.1.0",
     "@types/mongoose": "^5.11.97",
     "cors": "^2.8.5",
+    "embla-carousel-auto-scroll": "^8.2.1",
+    "embla-carousel-react": "^8.2.1",
     "gsap": "npm:@gsap/shockingly@^3.12.5",
     "mongoose": "^8.5.1",
     "next": "^14.2.4",
@@ -29,6 +30,7 @@
     "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

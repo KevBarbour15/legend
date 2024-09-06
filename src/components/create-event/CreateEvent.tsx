@@ -87,7 +87,7 @@ const CreateEvent: React.FC = () => {
             </label>
 
             <input
-              className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="w-85vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="text"
               placeholder="For ex: Jose's Birthday Party"
               required
@@ -99,7 +99,7 @@ const CreateEvent: React.FC = () => {
           <div className="my-2.5">
             <label className="flex text-left font-hypatia text-xl">Date:</label>
             <input
-              className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="w-85vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="date"
               required
               value={date}
@@ -110,7 +110,7 @@ const CreateEvent: React.FC = () => {
           <div className="my-2.5">
             <label className="flex text-left font-hypatia text-xl">Time:</label>
             <input
-              className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="w-85vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="time"
               required
               value={time}
@@ -123,7 +123,7 @@ const CreateEvent: React.FC = () => {
               Image URL:
             </label>
             <input
-              className="w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="w-85vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="text"
               required
               value={imageURL}
@@ -137,7 +137,7 @@ const CreateEvent: React.FC = () => {
               Event Description:
             </label>
             <textarea
-              className="h-52 w-85vw rounded-lg border border-white border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-white hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="h-52 w-85vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               placeholder="Add any additional information/ideas here."
               required
               value={description}
@@ -148,7 +148,9 @@ const CreateEvent: React.FC = () => {
             className="mt-7 rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider"
             type="submit"
           >
-            <span className="text-sm leading-none text-white">SUBMIT</span>
+            <span className="text-sm leading-none text-customWhite">
+              SUBMIT
+            </span>
           </button>
         </form>
       </div>
