@@ -94,7 +94,6 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
 
   useEffect(() => {
     if (window.innerWidth >= 768) {
-      // make player visible on desktop
       setVisible(true);
     }
 
@@ -109,17 +108,25 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
     <div
       ref={containerRef}
       id="player-container"
-      className="fixed bottom-0 z-[2] flex h-auto w-screen flex-col border-2 border-customGold bg-customWhite opacity-0 shadow-top shadow-black md:w-350px"
+      className="fixed bottom-0 left-0 right-0 z-[2] flex h-auto w-full flex-col opacity-0 md:w-auto"
     >
       {/* Playlist Popup */}
-      <Collapse in={playlistVisible}>
-        <div className="flex flex-col">
+      <Collapse in={playlistVisible} className="z-10 w-full md:w-fit">
+        <div className="mb-3 flex flex-col rounded-lg border-2 backdrop-blur-md">
           {tracks.map((track, index) => (
             <div
               key={index}
-              className="flex h-full flex-row border-b-2 border-customGold bg-customWhite p-1"
+              className={`flex h-full flex-row p-1 ${
+                index !== tracks.length - 1 ? "border-b-2" : ""
+              }`}
             >
-              <div className="flex w-auto flex-1 flex-col px-1 font-bigola text-customNavy drop-shadow-text">
+              <div
+                className={`flex w-auto flex-1 flex-col px-1 font-bigola ${
+                  index === currentTrackIndex
+                    ? "text-customCream"
+                    : "text-customWhite"
+                } drop-shadow-text`}
+              >
                 <div className="flex flex-row">
                   <Person className="pr-2" />
                   <h1 className="text-xl">{track.artist}</h1>
@@ -132,10 +139,10 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               <div className="flex items-center justify-center">
                 <IconButton className="m-0 flex">
                   {index == currentTrackIndex ? (
-                    <GraphicEq className="text-customNavy drop-shadow-text" />
+                    <GraphicEq className="text-customCream drop-shadow-text" />
                   ) : (
                     <PlayArrow
-                      className="text-customGold drop-shadow-text"
+                      className="text-customWhite drop-shadow-text"
                       onClick={() => handleTrackChange(index)}
                     />
                   )}
@@ -145,73 +152,62 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
           ))}
         </div>
       </Collapse>
-
       {/* Player Popup */}
       <Collapse in={visible}>
-        <div className="relative flex flex-row p-2">
-          <IconButton
-            onClick={togglePlaylist}
-            className="absolute right-1 top-1 z-10 text-customNavy drop-shadow-text"
-          >
-            <LibraryMusic />
-          </IconButton>
-          <div className="relative flex h-20 w-20 rounded-xl">
-            <img
-              id="now-playing"
-              className="drop-shadow-record"
-              src="./images/monogram.png"
-            ></img>
-          </div>
-          <div className="flex flex-col justify-center px-2 font-bigola text-customNavy">
-            <div className="flex flex-row">
-              <Person className="pr-2 text-customNavy drop-shadow-text" />
-              <h1 className="text-xl drop-shadow-text">
-                {tracks[currentTrackIndex].artist}
-              </h1>
-            </div>
-            <div className="flex flex-row">
-              <Audiotrack className="pr-2 text-customNavy drop-shadow-text" />
-              <h1 className="text-xl drop-shadow-text">
-                {tracks[currentTrackIndex].title}
-              </h1>
-            </div>
-          </div>
-          <div className="absolute inset-x-0 bottom-0 mx-auto w-4/5 border-b-[1px] border-customNavy"></div>
+        <div className="relative left-6 hidden md:block">
+          <img
+            id="now-playing"
+            className="absolute left-[105px] top-[40.75%] z-[3] w-[32px]"
+            src="./images/small-logo.png"
+          ></img>
+          <img
+            className="drop-shadow-record md:w-[200px]"
+            src="./images/player.svg"
+          ></img>
         </div>
       </Collapse>
 
-      <div className="flex items-center justify-center p-1">
-        <IconButton className="absolute bottom-1 left-1 text-customNavy drop-shadow-text">
+      <div className="flex justify-between pb-6 pl-6 md:mt-3 md:justify-start">
+        <IconButton className="px-1 py-0 text-customWhite drop-shadow-text">
           {mute ? (
             <VolumeOff onClick={handleMute} />
           ) : (
             <VolumeUp onClick={handleMute} />
           )}
         </IconButton>
-        <IconButton onClick={handlePreviousTrack} className="text-customNavy">
-          <SkipPrevious className="drop-shadow-text" />
+        <IconButton
+          onClick={handlePreviousTrack}
+          className="px-1 py-0 text-customWhite drop-shadow-text"
+        >
+          <SkipPrevious />
         </IconButton>
 
         <IconButton
           onClick={handlePlayPause}
-          className="text-customNavy drop-shadow-text"
+          className="px-1 py-0 text-customWhite drop-shadow-text"
         >
           {playing ? <Pause /> : <PlayArrow />}
         </IconButton>
         <IconButton
           onClick={handleNextTrack}
-          className="text-customNavy drop-shadow-text"
+          className="px-1 py-0 text-customWhite drop-shadow-text"
         >
           <SkipNext />
         </IconButton>
         <IconButton
-          className="absolute bottom-1 right-1"
+          onClick={togglePlaylist}
+          className="px-1 py-0 text-customWhite drop-shadow-text"
+        >
+          <LibraryMusic />
+        </IconButton>
+        <IconButton
+          className="hidden px-1 py-0 md:block"
           onClick={togglePlayer}
         >
           {visible ? (
-            <KeyboardArrowDown className="p-0 text-customNavy drop-shadow-text" />
+            <KeyboardArrowDown className="text-customWhite drop-shadow-text" />
           ) : (
-            <KeyboardArrowUpTwoTone className="p-0 text-customNavy drop-shadow-text" />
+            <KeyboardArrowUpTwoTone className="text-customWhite drop-shadow-text" />
           )}
         </IconButton>
       </div>

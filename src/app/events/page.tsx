@@ -6,6 +6,8 @@ import EventCard from "@/components/event-card/EventCard";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
+import SideMenu from "@/components/side-menu/SideMenu";
+
 interface Event {
   _id: string;
   title: string;
@@ -29,18 +31,18 @@ export default function Events() {
     if (!containerRef.current) return;
     gsap.set("#events-title", {
       opacity: 0,
-      scale: 0.75,
+      scale: 0.95,
     });
 
     gsap.set("#no-events", {
       opacity: 0,
-      scale: 0.75,
+      scale: 0.95,
     });
 
     eventRefs.current.forEach((ref) => {
       gsap.set(ref, {
         opacity: 0,
-        scale: 0.75,
+        scale: 0.95,
         y: 50,
       });
     });
@@ -57,13 +59,13 @@ export default function Events() {
         .to(
           "#events-title",
           {
-            duration: 0.35,
+            duration: 0.15,
             opacity: 1,
             scale: 1,
             ease: "linear",
             pin: true,
           },
-          0.35,
+          0.15,
         )
         .to(
           eventRefs.current,
@@ -75,7 +77,7 @@ export default function Events() {
             ease: "power2.out",
             stagger: 0.15,
           },
-          0.7,
+          0.3,
         );
     }
 
@@ -137,27 +139,20 @@ export default function Events() {
   return (
     <div
       ref={containerRef}
-      className="flex w-screen flex-col items-center justify-center text-center"
+      className="z-10 flex w-screen flex-col items-center"
     >
-      {/*
-      <h1
-        id="events-title"
-        className="top-135 w-85vw py-5 font-bigola text-4xl text-customWhite opacity-0 lg:w-90vw lg:text-5xl xl:w-85vw xxl:w-60vw"
-      >
-        Upcoming Events
-      </h1>
-*/}
+      <div></div>
       {loading ? (
         <h1
           id="event-subheader"
-          className="m-5 flex w-85vw flex-col border-customGold p-5 text-center font-bigola text-4xl text-customWhite opacity-0 lg:w-50vw xl:w-45vw xxl:w-40vw"
+          className="m-6 flex flex-col p-5 text-center font-bigola text-4xl text-customWhite opacity-0 lg:w-50vw xl:w-45vw xxl:w-40vw"
         >
           Loading events...
         </h1>
       ) : events.length === 0 ? (
         <h1
           id="no-events"
-          className="m-5 flex w-85vw flex-col border-customGold p-5 text-center font-bigola text-4xl text-customWhite opacity-0 lg:w-50vw xl:w-45vw xxl:w-40vw"
+          className="m-6 flex flex-col p-6 text-center font-bigola text-4xl text-customWhite opacity-0 lg:w-50vw xl:w-45vw xxl:w-40vw"
         >
           Stay tuned for upcoming events...
         </h1>
