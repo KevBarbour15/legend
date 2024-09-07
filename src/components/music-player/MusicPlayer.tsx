@@ -111,39 +111,46 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       className="fixed bottom-0 left-0 right-0 z-[2] flex h-auto w-full flex-col opacity-0 md:w-auto"
     >
       {/* Playlist Popup */}
-      <Collapse in={playlistVisible} className="z-10 w-full md:w-fit">
-        <div className="mb-3 flex flex-col rounded-lg border-2 backdrop-blur-md">
+      <Collapse in={playlistVisible} className="z-10 w-full md:ml-6 md:w-fit">
+        <div
+          className="flex flex-col rounded-lg border-2 border-customCream bg-customWhite bg-opacity-50 backdrop-blur-md md:mb-3"
+          id="playlist-border"
+        >
           {tracks.map((track, index) => (
             <div
+              id="playlist-border"
               key={index}
               className={`flex h-full flex-row p-1 ${
-                index !== tracks.length - 1 ? "border-b-2" : ""
+                index !== tracks.length - 1
+                  ? "border-b-2 border-customCream"
+                  : ""
               }`}
             >
               <div
-                className={`flex w-auto flex-1 flex-col px-1 font-bigola ${
-                  index === currentTrackIndex
-                    ? "text-customCream"
-                    : "text-customWhite"
-                } drop-shadow-text`}
+                className="flex w-auto flex-1 flex-col px-1 font-bigola text-customWhite drop-shadow-text"
+                id="playlist-item"
               >
                 <div className="flex flex-row">
                   <Person className="pr-2" />
-                  <h1 className="text-xl">{track.artist}</h1>
+                  <p className="text-xl drop-shadow-text">{track.artist}</p>
                 </div>
                 <div className="flex flex-row">
                   <Audiotrack className="pr-2" />
-                  <h1 className="text-xl">{track.title}</h1>
+                  <p className="text-xl drop-shadow-text">{track.title}</p>
                 </div>
               </div>
               <div className="flex items-center justify-center">
                 <IconButton className="m-0 flex">
                   {index == currentTrackIndex ? (
-                    <GraphicEq className="text-customCream drop-shadow-text" />
+                    <GraphicEq
+                      className="text-customWhite drop-shadow-text"
+                      id="playlist-item"
+                    />
                   ) : (
                     <PlayArrow
                       className="text-customWhite drop-shadow-text"
                       onClick={() => handleTrackChange(index)}
+                      id="playlist-item"
                     />
                   )}
                 </IconButton>
@@ -167,8 +174,8 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         </div>
       </Collapse>
 
-      <div className="flex justify-between pb-6 pl-6 md:mt-3 md:justify-start">
-        <IconButton className="px-1 py-0 text-customWhite drop-shadow-text">
+      <div className="flex justify-between bg-opacity-50 p-3 backdrop-blur-md md:mt-3 md:justify-start md:bg-opacity-0 md:pb-6 md:pl-6 md:pr-0 md:pt-0 md:backdrop-blur-none">
+        <IconButton className="player-button px-1 py-0 text-customCream drop-shadow-text">
           {mute ? (
             <VolumeOff onClick={handleMute} />
           ) : (
@@ -177,37 +184,37 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         </IconButton>
         <IconButton
           onClick={handlePreviousTrack}
-          className="px-1 py-0 text-customWhite drop-shadow-text"
+          className="player-button px-1 py-0 text-customCream drop-shadow-text"
         >
           <SkipPrevious />
         </IconButton>
 
         <IconButton
           onClick={handlePlayPause}
-          className="px-1 py-0 text-customWhite drop-shadow-text"
+          className="player-button px-1 py-0 text-customCream drop-shadow-text"
         >
           {playing ? <Pause /> : <PlayArrow />}
         </IconButton>
         <IconButton
           onClick={handleNextTrack}
-          className="px-1 py-0 text-customWhite drop-shadow-text"
+          className="player-button px-1 py-0 text-customCream drop-shadow-text"
         >
           <SkipNext />
         </IconButton>
         <IconButton
           onClick={togglePlaylist}
-          className="px-1 py-0 text-customWhite drop-shadow-text"
+          className="player-button px-1 py-0 text-customCream drop-shadow-text"
         >
           <LibraryMusic />
         </IconButton>
         <IconButton
-          className="hidden px-1 py-0 md:block"
+          className="player-button hidden p-1 text-customCream md:block"
           onClick={togglePlayer}
         >
           {visible ? (
-            <KeyboardArrowDown className="text-customWhite drop-shadow-text" />
+            <KeyboardArrowDown className="drop-shadow-text" />
           ) : (
-            <KeyboardArrowUpTwoTone className="text-customWhite drop-shadow-text" />
+            <KeyboardArrowUpTwoTone className="drop-shadow-text" />
           )}
         </IconButton>
       </div>

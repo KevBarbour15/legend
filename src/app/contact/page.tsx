@@ -3,7 +3,6 @@ import { useEffect, useState, useRef, use } from "react";
 
 import SideMenu from "@/components/side-menu/SideMenu";
 
-//gsap imports
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -23,6 +22,11 @@ export default function Contact() {
 
   useGSAP(() => {
     if (!containerRef.current) return;
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    if (isMobile) {
+      gsap.set(".side-menu", { display: "none" });
+    }
 
     gsap.set("#contact-title", {
       opacity: 0,
@@ -128,9 +132,7 @@ export default function Contact() {
 
   return (
     <>
-      <SideMenu />
       <div ref={containerRef} className="block p-6">
-        <h3>Work</h3>
         <form
           id="form"
           className="tw-bg-customBlack m-6 flex flex-col items-center"
@@ -140,7 +142,7 @@ export default function Contact() {
             <label className="flex text-left font-hypatia text-xl">Name:</label>
             <div className="flex w-85vw flex-col justify-between sm:flex-row lg:w-50vw xl:w-45vw xxl:w-40vw">
               <input
-                className="flex-1 rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none sm:mr-1"
+                className="flex-1 rounded-lg border-2 border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none sm:mr-1"
                 type="text"
                 placeholder="First Name"
                 value={firstName}
@@ -148,7 +150,7 @@ export default function Contact() {
                 onChange={(e) => setFirstName(e.target.value)}
               />
               <input
-                className="mt-2.5 flex-1 rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none sm:ml-1 sm:mt-0"
+                className="mt-2.5 flex-1 rounded-lg border-2 border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none sm:ml-1 sm:mt-0"
                 type="text"
                 placeholder="Last Name"
                 value={lastName}
@@ -162,7 +164,7 @@ export default function Contact() {
               Email:
             </label>
             <input
-              className="w-85vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="w-85vw rounded-lg border-2 border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="email"
               placeholder="example@example.com"
               value={email}
@@ -175,7 +177,7 @@ export default function Contact() {
               Phone:
             </label>
             <input
-              className="w-85vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="w-85vw rounded-lg border-2 border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               placeholder="(555) 555-5555"
               value={phone}
               required
@@ -187,7 +189,7 @@ export default function Contact() {
               Preferred Date:
             </label>
             <input
-              className="w-85vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="w-85vw rounded-lg border-2 border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="date"
               value={preferredDate}
               placeholder="Select a date"
@@ -200,7 +202,7 @@ export default function Contact() {
               Message:
             </label>
             <textarea
-              className="h-52 w-85vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="h-52 w-85vw rounded-lg border-2 border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               placeholder="Add any additional information/ideas here."
               value={message}
               required
@@ -209,7 +211,7 @@ export default function Contact() {
           </div>
           <button
             id="input-section"
-            className="mt-3 rounded-full border border-customWhite border-opacity-50 px-10 py-3 font-bigola tracking-wider opacity-0 transition-all hover:border-opacity-100 focus:border-opacity-100 focus:outline-none"
+            className="mt-3 rounded-full border-2 border-customWhite border-opacity-50 px-10 py-3 font-bigola tracking-wider opacity-0 transition-all hover:border-opacity-100 focus:border-opacity-100 focus:outline-none"
           >
             <span className="text-lg leading-none text-customWhite">
               SUBMIT
