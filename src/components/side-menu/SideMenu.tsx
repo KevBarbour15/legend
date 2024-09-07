@@ -83,7 +83,7 @@ const SideMenu: React.FC = ({}) => {
   return (
     <>
       <div className="side-menu flex h-screen flex-col justify-between text-customCream md:fixed md:w-fit md:p-6">
-        <div className="flex h-full flex-col justify-between pl-6 pt-6 md:justify-start md:p-0">
+        <div className="flex h-full flex-col justify-start pl-6 pt-6 md:p-0">
           <ul
             className="font-bigola text-3xl uppercase drop-shadow-text"
             id="menu-text"
