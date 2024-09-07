@@ -96,7 +96,7 @@ const SideMenu: React.FC = ({}) => {
           </ul>
           <div className="menu-link mt-12 w-fit font-bigola drop-shadow-text">
             <img
-              className="mb-3 w-[150px] drop-shadow-text md:hidden"
+              className="mb-6 w-[150px] drop-shadow-text md:hidden"
               src="./images/alt-logo.png"
             ></img>
             <a
