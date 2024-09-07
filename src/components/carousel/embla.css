@@ -2,7 +2,7 @@
   min-width: 0;
   margin: auto;
   --slide-height: 500px;
-  --slide-spacing: 3rem;
+  --slide-spacing: 1rem;
   --slide-size: 75%;
 }
 
