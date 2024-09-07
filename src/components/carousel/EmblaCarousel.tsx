@@ -1,6 +1,7 @@
 import React from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import "./embla.css";
+import { usePrevNextButtons, PrevButton, NextButton } from "./Arrows";
 
 const slides = [
   "/images/carousel/1.jpg",
@@ -10,28 +11,35 @@ const slides = [
   "/images/carousel/6.jpg",
 ];
 
-const options = {
-  align: "center",
-  containScroll: false,
-};
-
 const EmblaCarousel: React.FC = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({});
+  const {
+    prevBtnDisabled,
+    nextBtnDisabled,
+    onPrevButtonClick,
+    onNextButtonClick,
+  } = usePrevNextButtons(emblaApi);
 
   return (
     <section className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {slides.map((index) => (
+          {slides.map((src, index) => (
             <div className="embla__slide" key={index}>
-              <img
-                src={index}
-                alt="carousel"
-                className="drop-shadow-record"
-              />
+              <img src={src} alt="carousel" className="drop-shadow-record" />
             </div>
           ))}
         </div>
+      </div>
+      <div className="flex flex-row justify-between text-3xl text-customNavy">
+        <PrevButton
+          onClick={onPrevButtonClick}
+          disabled={prevBtnDisabled}
+        ></PrevButton>
+        <NextButton
+          onClick={onNextButtonClick}
+          disabled={nextBtnDisabled}
+        ></NextButton>
       </div>
     </section>
   );
