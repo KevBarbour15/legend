@@ -28,9 +28,10 @@ export default function Home() {
     tl.current = gsap.timeline({
       scrollTrigger: {
         trigger: ".content-area",
-        start: "top 90%",
+        start: "top 75%",
         end: "top 35%",
         scrub: 1,
+        markers: true,
       },
     });
 
