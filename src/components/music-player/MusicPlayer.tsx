@@ -132,11 +132,11 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               >
                 <div className="flex flex-row">
                   <Person className="pr-2" />
-                  <p className="text-xl drop-shadow-text">{track.artist}</p>
+                  <p className="text-xl">{track.artist}</p>
                 </div>
                 <div className="flex flex-row">
                   <Audiotrack className="pr-2" />
-                  <p className="text-xl drop-shadow-text">{track.title}</p>
+                  <p className="text-xl">{track.title}</p>
                 </div>
               </div>
               <div className="flex items-center justify-center">
@@ -167,10 +167,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             className="absolute left-[105px] top-[40.75%] z-[3] w-[32px]"
             src="./images/small-logo.png"
           ></img>
-          <img
-            className="drop-shadow-record md:w-[200px]"
-            src="./images/player.svg"
-          ></img>
+          <img className="md:w-[200px]" src="./images/player.svg"></img>
         </div>
       </Collapse>
 

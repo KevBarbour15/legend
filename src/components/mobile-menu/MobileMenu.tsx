@@ -50,7 +50,7 @@ const MobileMenu: React.FC = () => {
           alt="Logo"
         />
         <ul
-          className="font-bigola text-5xl uppercase drop-shadow-text"
+          className="font-bigola text-5xl uppercase"
           id="menu-text"
         >
           {links.map((link, idx) => (
@@ -60,7 +60,7 @@ const MobileMenu: React.FC = () => {
           ))}
         </ul>
       </div>
-      <div className="mb-12 ml-6 w-fit font-bigola drop-shadow-text">
+      <div className="mb-12 ml-6 w-fit font-bigola">
         <a
           className="cursor-pointer"
           target="_blank"
