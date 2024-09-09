@@ -3,7 +3,7 @@ const BackgroundOverlay: React.FC = ({}) => {
     <>
       <div
         className="fixed inset-0 z-[-1] bg-cover bg-center"
-        style={{ backgroundImage: "url(/images/background.jpeg)" }}
+        style={{ backgroundImage: "url(/images/background.jpg)" }}
       >
         <img
           src="/images/alt-logo.png"

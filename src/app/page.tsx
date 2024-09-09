@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useEffect } from "react";
 import ImageCarousel from "@/components/carousel/EmblaCarousel";
+import MobileMenu from "@/components/mobile-menu/MobileMenu";
 
 //gsap imports
 import gsap from "gsap";
@@ -108,6 +109,7 @@ export default function Home() {
   }, []);
   return (
     <>
+      <MobileMenu />
       <div ref={containerRef} className="block w-screen">
         <div className="hidden-bg fixed inset-0 z-[-1] h-screen w-screen bg-customCream opacity-0"></div>
         <div className="top-bg hidden h-screen w-full md:block"></div>
@@ -118,6 +120,35 @@ export default function Home() {
               className="drop-shadow-record"
             />
           </div>
+
+          <div className="font-hypatia text-lg text-customNavy">
+            <p className="my-6">
+              Welcome to Legend Has It, Sacramento's first hi-fi listening bar,
+              where music meets the art of sound. We offer an immersive
+              experience for audiophiles and music lovers, celebrating the
+              warmth of vinyl records and the richness of high-fidelity sound.
+            </p>
+            <p>
+              Our carefully curated sound systems and eclectic vinyl collection
+              create an intimate atmosphere, perfect for discovering new tunes
+              or revisiting classics. Enjoy expertly crafted cocktails and a
+              menu designed to complement your auditory journey. At Legend Has
+              It, music legends come to life, and every visit tells a new story
+              through sound.
+            </p>
+          </div>
+          <div className="mb-6 block py-6 font-bigola text-xl text-customNavy drop-shadow-text md:mb-0 md:text-3xl">
+            <h2 className="mb-6">Hours</h2>
+            <div className="mb-6 flex flex-row justify-between">
+              <p>Sunday - Tuesday:</p>
+              <p>Closed</p>
+            </div>
+            <div className="flex flex-row justify-between">
+              <p>Wednesday - Saturday:</p>
+              <p>4pm - 11:30pm</p>
+            </div>
+          </div>
+          <ImageCarousel />
           <h2 className="pt-6 font-bigola text-xl text-customNavy drop-shadow-text md:text-3xl">
             Socials
           </h2>
@@ -152,18 +183,6 @@ export default function Home() {
               </a>
             </li>
           </ul>
-          <ImageCarousel />
-          <div className="mb-6 block py-6 font-bigola text-xl text-customNavy drop-shadow-text md:mb-0 md:text-3xl">
-            <h2 className="mb-6">Hours</h2>
-            <div className="mb-6 flex flex-row justify-between">
-              <p>Sunday - Tuesday:</p>
-              <p>Closed</p>
-            </div>
-            <div className="flex flex-row justify-between">
-              <p>Wednesday - Saturday:</p>
-              <p>4pm - 11:30pm</p>
-            </div>
-          </div>
         </div>
       </div>
     </>

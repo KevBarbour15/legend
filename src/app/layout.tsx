@@ -63,6 +63,7 @@ export default function RootLayout({
           <BackgroundOverlay />
           <SideMenu />
           {children}
+          <MusicPlayer tracks={tracks} />
         </body>
       </html>
     </>
