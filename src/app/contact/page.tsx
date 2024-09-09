@@ -6,6 +6,9 @@ import SideMenu from "@/components/side-menu/SideMenu";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
+import Link from "next/link";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
 export default function Contact() {
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
@@ -132,7 +135,18 @@ export default function Contact() {
 
   return (
     <>
-      <div ref={containerRef} className="block p-6">
+      <SideMenu />
+      <div className="absolute z-0 h-screen w-screen backdrop-blur-sm"></div>
+      <div
+        ref={containerRef}
+        className="z-10 flex w-screen flex-col py-6 md:items-center md:px-[260px] md:py-12"
+      >
+        <div className="z-10 pl-6 text-3xl text-customCream md:hidden">
+          <Link href={"/"}>
+            <ArrowBackIcon className="mr-6" />
+            <span className="font-bigola">Let's Connect</span>
+          </Link>
+        </div>
         <form
           id="form"
           className="tw-bg-customBlack m-6 flex flex-col items-center"

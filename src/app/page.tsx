@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useEffect } from "react";
 import ImageCarousel from "@/components/carousel/EmblaCarousel";
+import SideMenu from "@/components/side-menu/SideMenu";
 import MobileMenu from "@/components/mobile-menu/MobileMenu";
 
 //gsap imports
@@ -109,6 +110,7 @@ export default function Home() {
   }, []);
   return (
     <>
+      <SideMenu />
       <MobileMenu />
       <div ref={containerRef} className="block w-screen">
         <div className="hidden-bg fixed inset-0 z-[-1] h-screen w-screen bg-customCream opacity-0"></div>
@@ -137,7 +139,7 @@ export default function Home() {
               through sound.
             </p>
           </div>
-          <div className="mb-6 block py-6 font-bigola text-xl text-customNavy drop-shadow-text md:mb-0 md:text-3xl">
+          <div className="mb-6 block py-6 font-bigola text-xl text-customNavy md:mb-0 md:text-3xl">
             <h2 className="mb-6">Hours</h2>
             <div className="mb-6 flex flex-row justify-between">
               <p>Sunday - Tuesday:</p>
@@ -149,10 +151,10 @@ export default function Home() {
             </div>
           </div>
           <ImageCarousel />
-          <h2 className="pt-6 font-bigola text-xl text-customNavy drop-shadow-text md:text-3xl">
+          <h2 className="pt-6 font-bigola text-xl text-customNavy md:text-3xl">
             Socials
           </h2>
-          <ul className="flex flex-row gap-6 py-6 font-bigola text-xl text-customNavy drop-shadow-text md:text-3xl">
+          <ul className="mb-12 flex flex-row gap-6 py-6 font-bigola text-xl text-customNavy md:mb-0 md:text-3xl">
             <li className="social-link">
               <a
                 className="social-link"

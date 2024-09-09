@@ -61,7 +61,7 @@ export default function RootLayout({
         </head>
         <body className={inter.className}>
           <BackgroundOverlay />
-          <SideMenu />
+         
           {children}
           <MusicPlayer tracks={tracks} />
         </body>

@@ -1,12 +1,13 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import EventCard from "@/components/event-card/EventCard";
-
+import Link from "next/link";
 //gsap imports
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import SideMenu from "@/components/side-menu/SideMenu";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 interface Event {
   _id: string;
@@ -137,47 +138,60 @@ export default function Events() {
   );
 
   return (
-    <div
-      ref={containerRef}
-      className="z-10 flex w-screen flex-col items-center"
-    >
-      <div></div>
-      {loading ? (
-        <h1
-          id="event-subheader"
-          className="m-6 flex flex-col p-5 text-center font-bigola text-4xl text-customWhite opacity-0 lg:w-50vw xl:w-45vw xxl:w-40vw"
-        >
-          Loading events...
-        </h1>
-      ) : events.length === 0 ? (
-        <h1
-          id="no-events"
-          className="m-6 flex flex-col p-6 text-center font-bigola text-4xl text-customWhite opacity-0 lg:w-50vw xl:w-45vw xxl:w-40vw"
-        >
-          Stay tuned for upcoming events...
-        </h1>
-      ) : (
-        <>
-          {sortedEvents.map((event, index) => (
-            <div
-              key={event._id}
-              ref={(el) => {
-                eventRefs.current[index] = el;
-              }}
-              className="opacity-0"
-            >
-              <EventCard
-                length={sortedEvents.length}
-                fetchEvents={fetchEvents}
-                key={index}
-                event={event}
-                inDashboard={false}
-                index={index}
-              />
-            </div>
-          ))}
-        </>
-      )}
-    </div>
+    <>
+      <SideMenu />
+      <div className="absolute z-0 h-screen w-screen backdrop-blur-sm"></div>
+      <div
+        ref={containerRef}
+        className="z-10 flex w-screen flex-col py-6 md:items-center md:px-[260px] md:py-12"
+      >
+        <div className="z-10 pb-6 pl-6 text-3xl text-customCream md:hidden">
+          <Link href={"/"}>
+            <ArrowBackIcon className="mr-6" />
+            <span className="font-bigola">Events</span>
+          </Link>
+        </div>
+        {loading ? (
+          <h1
+            id="event-subheader"
+            className="z-10 m-6 flex flex-col p-5 text-center font-bigola text-4xl text-customCream opacity-0 lg:w-50vw xl:w-45vw xxl:w-40vw"
+          >
+            Loading events...
+          </h1>
+        ) : events.length === 0 ? (
+          <h1
+            id="no-events"
+            className="z-10 m-6 flex flex-col p-6 text-center font-bigola text-4xl text-customCream opacity-0 lg:w-50vw xl:w-45vw xxl:w-40vw"
+          >
+            Stay tuned for upcoming events...
+          </h1>
+        ) : (
+          <>
+            {sortedEvents.map((event, index) => (
+              <div
+                key={event._id}
+                ref={(el) => {
+                  eventRefs.current[index] = el;
+                }}
+                className={`border-t-2 ${
+                  index === sortedEvents.length - 1
+                    ? "border-b-2 border-customWhite"
+                    : ""
+                } opacity-0`}
+              >
+                <EventCard
+                  length={sortedEvents.length}
+                  fetchEvents={fetchEvents}
+                  key={index}
+                  event={event}
+                  inDashboard={false}
+                  index={index}
+                />
+              </div>
+            ))}
+          </>
+        )}
+      </div>
+    </>
   );
 }

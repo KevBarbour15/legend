@@ -116,11 +116,11 @@ const EventCard: React.FC<EventCardProps> = ({
           <div
             ref={containerRef}
             className={
-              "flex w-90vw flex-col p-5 py-5 text-left md:w-75vw lg:w-70vw xl:w-65vw xxl:w-60vw"
+              "flex w-90vw flex-col p-6 py-6 text-left text-customCream md:w-65vw lg:w-60vw xl:w-60vw xxl:w-60vw"
             }
           >
-            <div className="flex w-full flex-col text-customWhite">
-              <div className="mb-5 flex max-h-full max-w-full flex-row justify-between text-left font-bigola text-xl text-customWhite md:text-2xl">
+            <div className="flex w-full flex-col">
+              <div className="mb-5 flex max-h-full max-w-full flex-row justify-between text-left font-bigola text-xl md:text-2xl">
                 <h1>{formattedDate}</h1>
                 <h1>{formattedTime}</h1>
               </div>
@@ -161,10 +161,10 @@ const EventCard: React.FC<EventCardProps> = ({
         <>
           <div
             ref={containerRef}
-            className="flex w-90vw flex-col p-5 py-5 text-left md:w-50vw lg:w-50vw xl:w-50vw xxl:w-50vw"
+            className="flex w-90vw flex-col p-6 py-6 text-left text-customCream md:w-65vw lg:w-60vw xl:w-60vw xxl:w-60vw"
           >
-            <div className="flex w-full flex-col text-customWhite">
-              <div className="mb-5 flex max-h-full max-w-full flex-row justify-between text-left font-bigola text-xl text-customWhite md:text-2xl">
+            <div className="flex w-full flex-col">
+              <div className="mb-5 flex max-h-full max-w-full flex-row justify-between text-left font-bigola text-xl md:text-2xl">
                 <h1 className="drop-shadow-text">{formattedDate}</h1>
                 <h1 className="drop-shadow-text">{formattedTime}</h1>
               </div>
