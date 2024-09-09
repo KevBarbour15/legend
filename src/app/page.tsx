@@ -31,7 +31,6 @@ export default function Home() {
         start: "top 75%",
         end: "top 35%",
         scrub: 1,
-        markers: true,
       },
     });
 
