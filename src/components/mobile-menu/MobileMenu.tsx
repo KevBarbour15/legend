@@ -14,28 +14,27 @@ const MobileMenu: React.FC = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const [windowHeight, setWindowHeight] = useState<number>(window.innerHeight);
 
-  // Update height when window resizes
   useEffect(() => {
-    const updateHeight = () => {
+    if (typeof window !== "undefined") {
+      // Set initial height when the component mounts
       setWindowHeight(window.innerHeight);
-    };
 
-    window.addEventListener("resize", updateHeight);
+      const updateHeight = () => {
+        setWindowHeight(window.innerHeight);
+      };
 
-    return () => {
-      window.removeEventListener("resize", updateHeight);
-    };
-  }, []);
+      window.addEventListener("resize", updateHeight);
 
-  useEffect(() => {
-    if (menuRef.current) {
-      menuRef.current.style.height = `${windowHeight}px`;
+      return () => {
+        window.removeEventListener("resize", updateHeight);
+      };
     }
-  }, [windowHeight]);
+  }, []);
 
   return (
     <div
       ref={menuRef}
+      style={{ height: windowHeight }}
       className="flex flex-col justify-between text-customCream md:hidden"
     >
       <div className="flex flex-grow flex-col justify-start pl-6 pt-6">
