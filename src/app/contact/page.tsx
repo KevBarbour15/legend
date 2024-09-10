@@ -136,10 +136,10 @@ export default function Contact() {
   return (
     <>
       <SideMenu />
-      <div className="absolute z-0 h-screen w-screen backdrop-blur-sm"></div>
+      <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col py-6 md:items-center md:px-[260px] md:py-12"
+        className="z-10 flex w-screen flex-col py-6 md:items-center md:px-[260px] md:py-6"
       >
         <div className="z-10 pl-6 text-3xl text-customCream md:hidden">
           <Link href={"/"}>
@@ -147,16 +147,21 @@ export default function Contact() {
             <span className="font-bigola">Let's Connect</span>
           </Link>
         </div>
+        <h1 className="mb-3 font-bigola text-4xl text-customCream lg:text-5xl">
+          Let's Connect
+        </h1>
+        <p className="font-hypatia text-lg">
+          Fill out the form below and we will reach out to you.
+        </p>
         <form
           id="form"
-          className="tw-bg-customBlack m-6 flex flex-col items-center"
+          className="tw-bg-customBlack flex flex-col items-center p-6"
           onSubmit={handleSubmit}
         >
-          <div id="input-section" className="mb-2.5 opacity-0">
-            <label className="flex text-left font-hypatia text-xl">Name:</label>
-            <div className="flex w-85vw flex-col justify-between sm:flex-row lg:w-50vw xl:w-45vw xxl:w-40vw">
+          <div id="input-section" className="mb-3 opacity-0">
+            <div className="flex w-85vw flex-col justify-between text-2xl sm:flex-row lg:w-50vw xl:w-45vw xxl:w-40vw">
               <input
-                className="flex-1 rounded-lg border-2 border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none sm:mr-1"
+                className="flex-1 border-b-2 border-customCream border-opacity-50 bg-transparent font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none sm:mr-1"
                 type="text"
                 placeholder="First Name"
                 value={firstName}
@@ -164,7 +169,7 @@ export default function Contact() {
                 onChange={(e) => setFirstName(e.target.value)}
               />
               <input
-                className="mt-2.5 flex-1 rounded-lg border-2 border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none sm:ml-1 sm:mt-0"
+                className="mt-3 flex-1 border-b-2 border-customCream border-opacity-50 bg-transparent font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none sm:ml-1 sm:mt-0"
                 type="text"
                 placeholder="Last Name"
                 value={lastName}
@@ -173,37 +178,28 @@ export default function Contact() {
               />
             </div>
           </div>
-          <div id="input-section" className="my-2.5 opacity-0">
-            <label className="flex text-left font-hypatia text-xl">
-              Email:
-            </label>
+          <div id="input-section" className="my-3 opacity-0">
             <input
-              className="w-85vw rounded-lg border-2 border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="w-85vw border-b-2 border-customCream border-opacity-50 bg-transparent font-hypatiaLight text-2xl text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="email"
-              placeholder="example@example.com"
+              placeholder="Email"
               value={email}
               required
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div id="input-section" className="my-2.5 opacity-0">
-            <label className="flex text-left font-hypatia text-xl">
-              Phone:
-            </label>
+          <div id="input-section" className="my-3 opacity-0">
             <input
-              className="w-85vw rounded-lg border-2 border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
-              placeholder="(555) 555-5555"
+              className="w-85vw border-b-2 border-customCream border-opacity-50 bg-transparent font-hypatiaLight text-2xl text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              placeholder="Phone Number"
               value={phone}
               required
               onChange={(e) => setPhone(e.target.value)}
             />
           </div>
-          <div id="input-section" className="my-2.5 opacity-0">
-            <label className="flex text-left font-hypatia text-xl">
-              Preferred Date:
-            </label>
+          <div id="input-section" className="my-3 opacity-0">
             <input
-              className="w-85vw rounded-lg border-2 border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="w-85vw border-b-2 border-customCream border-opacity-50 bg-transparent font-hypatiaLight text-2xl text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="date"
               value={preferredDate}
               placeholder="Select a date"
@@ -212,11 +208,8 @@ export default function Contact() {
             />
           </div>
           <div id="input-section" className="my-3 opacity-0">
-            <label className="flex text-left font-hypatia text-xl">
-              Message:
-            </label>
             <textarea
-              className="h-52 w-85vw rounded-lg border-2 border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-hypatiaLight text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="h-52 w-85vw border-b-2 border-customCream border-opacity-50 bg-transparent font-hypatiaLight text-2xl text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               placeholder="Add any additional information/ideas here."
               value={message}
               required
@@ -225,11 +218,9 @@ export default function Contact() {
           </div>
           <button
             id="input-section"
-            className="mt-3 rounded-full border-2 border-customWhite border-opacity-50 px-10 py-3 font-bigola tracking-wider opacity-0 transition-all hover:border-opacity-100 focus:border-opacity-100 focus:outline-none"
+            className="menu-link mt-3 font-bigola text-2xl leading-none tracking-wider text-customCream opacity-0"
           >
-            <span className="text-lg leading-none text-customWhite">
-              SUBMIT
-            </span>
+            SUBMIT
           </button>
         </form>
       </div>

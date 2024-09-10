@@ -36,6 +36,16 @@ const EventSchema: Schema = new Schema({
     type: String,
     required: true,
   },
+  is_public: {
+    type: Boolean,
+    required: true,
+    default: true,
+  },
+  is_photo: {
+    type: Boolean,
+    required: true,
+    default: true,
+  },
 });
 
 export default mongoose.models.Event ||

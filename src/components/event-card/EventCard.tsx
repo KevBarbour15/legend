@@ -23,7 +23,8 @@ interface Event {
   description: string;
   notes: string;
   image_url: string;
-  //isPublic: boolean;
+  is_photo: boolean;
+  is_public: boolean;
 }
 
 interface EventCardProps {
@@ -143,16 +144,18 @@ const EventCard: React.FC<EventCardProps> = ({
 
             <div className="mt-5 flex flex-row justify-center">
               <button
-                className="mr-7 rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider"
+                className="mr-6 py-3"
+                type="submit"
                 onClick={handleEditOpen}
               >
-                EDIT
+                <span className="font-bigola text-2xl leading-none text-customWhite">
+                  EDIT
+                </span>
               </button>
-              <button
-                className="rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider"
-                onClick={handleDeleteOpen}
-              >
-                DELETE
+              <button className="py-3" type="submit" onClick={handleDeleteOpen}>
+                <span className="font-bigola text-2xl leading-none text-customWhite">
+                  DELETE
+                </span>
               </button>
             </div>
           </div>

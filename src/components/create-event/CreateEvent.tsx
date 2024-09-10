@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 //gsap imports
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import Switch from "@mui/material/Switch";
 
 const CreateEvent: React.FC = () => {
   const [title, setTitle] = useState<string>("");
@@ -10,6 +11,8 @@ const CreateEvent: React.FC = () => {
   const [time, setTime] = useState<string>("12:00");
   const [description, setDescription] = useState<string>("");
   const [imageURL, setImageURL] = useState<string>("");
+  const [isPhoto, setIsPhoto] = useState<boolean>(true);
+  const [isPublic, setIsPublic] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
@@ -47,7 +50,8 @@ const CreateEvent: React.FC = () => {
           time: time,
           description: description,
           image_url: imageURL,
-          //isPublic: true,
+          is_public: true,
+          is_photo: isPhoto,
         }),
       });
 
@@ -58,6 +62,8 @@ const CreateEvent: React.FC = () => {
         setTime("");
         setImageURL("");
         setDescription("");
+        setIsPhoto(true);
+        setIsPublic(true);
       }
     } catch (error) {
       console.log("Error: ", error);
@@ -74,14 +80,27 @@ const CreateEvent: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className="flex w-screen flex-col items-center justify-center text-center opacity-0"
+      className="my-6 flex w-screen flex-col text-center opacity-0"
     >
       <h1 className="font-bigola text-4xl text-customWhite lg:text-5xl">
         Create Event
       </h1>
       <div>
         <form className="flex flex-col items-center" onSubmit={handleSubmit}>
-          <div className="my-2.5">
+          <div className="my-3">
+            <div className="flex w-fit items-center justify-center pb-3">
+              <label className="font-hypatia text-xl text-customWhite">
+                Hidden
+              </label>
+              <Switch
+                checked={isPublic}
+                onChange={() => setIsPublic(!isPublic)}
+                inputProps={{ "aria-label": "controlled" }}
+              />
+              <label className="font-hypatia text-xl text-customWhite">
+                Public
+              </label>
+            </div>
             <label className="flex text-left font-hypatia text-xl">
               Event Name:
             </label>
@@ -96,7 +115,7 @@ const CreateEvent: React.FC = () => {
             />
           </div>
 
-          <div className="my-2.5">
+          <div className="my-3">
             <label className="flex text-left font-hypatia text-xl">Date:</label>
             <input
               className="w-85vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
@@ -107,7 +126,7 @@ const CreateEvent: React.FC = () => {
             />
           </div>
 
-          <div className="my-2.5">
+          <div className="my-3">
             <label className="flex text-left font-hypatia text-xl">Time:</label>
             <input
               className="w-85vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
@@ -118,9 +137,9 @@ const CreateEvent: React.FC = () => {
             />
           </div>
 
-          <div className="my-2.5">
-            <label className="flex text-left font-hypatia text-xl">
-              Image URL:
+          <div className="my-3 flex flex-col">
+            <label className="flex w-85vw text-left font-hypatia text-xl lg:w-50vw xl:w-45vw xxl:w-40vw">
+              Image or Video URL from Imgur (for video convert to MP4):
             </label>
             <input
               className="w-85vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
@@ -130,9 +149,22 @@ const CreateEvent: React.FC = () => {
               onChange={(e) => setImageURL(e.target.value)}
               placeholder="Add image address from Imgur"
             />
+            <div className="flex w-fit items-center justify-center pt-3">
+              <label className="font-hypatia text-xl text-customWhite">
+                Video
+              </label>
+              <Switch
+                checked={isPhoto}
+                onChange={() => setIsPhoto(!isPhoto)}
+                inputProps={{ "aria-label": "controlled" }}
+              />
+              <label className="font-hypatia text-xl text-customWhite">
+                Photo
+              </label>
+            </div>
           </div>
 
-          <div className="my-2.5">
+          <div className="mb-3">
             <label className="flex text-left font-hypatia text-xl">
               Event Description:
             </label>
@@ -144,11 +176,8 @@ const CreateEvent: React.FC = () => {
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
-          <button
-            className="mt-7 rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider"
-            type="submit"
-          >
-            <span className="text-sm leading-none text-customWhite">
+          <button className="py-3" type="submit">
+            <span className="font-bigola text-2xl leading-none text-customWhite">
               SUBMIT
             </span>
           </button>

@@ -17,7 +17,8 @@ interface Event {
   description: string;
   notes: string;
   image_url: string;
-  isPublic: boolean;
+  is_photo: boolean;
+  is_public: boolean;
 }
 
 export default function Events() {
@@ -32,20 +33,10 @@ export default function Events() {
     if (!containerRef.current) return;
     gsap.set("#events-title", {
       opacity: 0,
-      scale: 0.95,
     });
 
     gsap.set("#no-events", {
       opacity: 0,
-      scale: 0.95,
-    });
-
-    eventRefs.current.forEach((ref) => {
-      gsap.set(ref, {
-        opacity: 0,
-        scale: 0.95,
-        y: 50,
-      });
     });
 
     gsap.fromTo(
@@ -55,31 +46,14 @@ export default function Events() {
     );
 
     if (!loading && eventRefs.current.length > 0) {
-      eventsTL.current = gsap
-        .timeline({})
-        .to(
-          "#events-title",
-          {
-            duration: 0.15,
-            opacity: 1,
-            scale: 1,
-            ease: "linear",
-            pin: true,
-          },
-          0.15,
-        )
-        .to(
-          eventRefs.current,
-          {
-            duration: 0.35,
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            ease: "power2.out",
-            stagger: 0.15,
-          },
-          0.3,
-        );
+      eventsTL.current = gsap.timeline({}).to(
+        "#events-title",
+        {
+          duration: 0.15,
+          opacity: 1,
+        },
+        0.15,
+      );
     }
 
     if (!loading && eventRefs.current.length == 0) {
@@ -90,21 +64,16 @@ export default function Events() {
           {
             duration: 0.35,
             opacity: 1,
-            scale: 1,
-            ease: "linear",
-            pin: true,
           },
-          0.35,
+          0.15,
         )
         .to(
           "#no-events",
           {
             duration: 0.35,
             opacity: 1,
-            scale: 1,
-            ease: "power2.out",
           },
-          0.7,
+          0.5,
         );
     }
   }, [events]);
@@ -140,28 +109,31 @@ export default function Events() {
   return (
     <>
       <SideMenu />
-      <div className="absolute z-0 h-screen w-screen backdrop-blur-sm"></div>
+      <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col py-6 md:items-center md:px-[260px] md:py-12"
+        className="z-10 flex w-screen flex-col py-6 md:items-center md:px-[260px] md:py-6"
       >
-        <div className="z-10 pb-6 pl-6 text-3xl text-customCream md:hidden">
+        <div className="pb-6 pl-6 text-3xl text-customCream md:hidden">
           <Link href={"/"}>
             <ArrowBackIcon className="mr-6" />
             <span className="font-bigola">Events</span>
           </Link>
         </div>
+        <h1 className="font-bigola text-4xl text-customCream lg:text-5xl">
+          Upcoming Events
+        </h1>
         {loading ? (
           <h1
             id="event-subheader"
-            className="z-10 m-6 flex flex-col p-5 text-center font-bigola text-4xl text-customCream opacity-0 lg:w-50vw xl:w-45vw xxl:w-40vw"
+            className="m-6 flex flex-col p-5 text-center font-hypatia text-3xl text-customCream opacity-0 lg:w-50vw lg:text-4xl xl:w-45vw xxl:w-40vw"
           >
             Loading events...
           </h1>
         ) : events.length === 0 ? (
           <h1
             id="no-events"
-            className="z-10 m-6 flex flex-col p-6 text-center font-bigola text-4xl text-customCream opacity-0 lg:w-50vw xl:w-45vw xxl:w-40vw"
+            className="m-6 flex flex-col p-6 text-center font-hypatia text-3xl text-customCream opacity-0 lg:w-50vw lg:text-4xl xl:w-45vw xxl:w-40vw"
           >
             Stay tuned for upcoming events...
           </h1>
@@ -177,7 +149,7 @@ export default function Events() {
                   index === sortedEvents.length - 1
                     ? "border-b-2 border-customWhite"
                     : ""
-                } opacity-0`}
+                }`}
               >
                 <EventCard
                   length={sortedEvents.length}
