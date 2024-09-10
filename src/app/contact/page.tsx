@@ -141,16 +141,16 @@ export default function Contact() {
         ref={containerRef}
         className="z-10 flex w-screen flex-col px-6 pb-12 pt-6 md:items-center md:px-[260px]"
       >
-        <div className="z-10 mb-3 border-b-2 border-customCream pb-3 text-3xl text-customCream md:hidden">
+        <div className="w-full border-b-2 border-customCream pb-6 pl-6 text-3xl text-customCream md:hidden">
           <Link href={"/"}>
             <ArrowBackIcon className="mr-6" />
             <span className="font-bigola">Let's Connect</span>
           </Link>
         </div>
-        <h1 className="mb-3 hidden font-bigola text-4xl text-customCream md:flex lg:text-5xl">
+        <h1 className="hidden font-bigola text-4xl text-customCream md:flex lg:text-5xl">
           Let's Connect
         </h1>
-        <p className="font-hypatia text-lg text-customCream">
+        <p className="mt-6 font-hypatia text-lg text-customCream">
           Fill out the form below and we will reach out to you.
         </p>
         <form
