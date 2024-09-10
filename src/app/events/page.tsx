@@ -109,18 +109,18 @@ export default function Events() {
   return (
     <>
       <SideMenu />
-      <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
+      <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-xl"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col py-6 md:items-center md:px-[260px] md:py-6"
+        className="z-10 flex w-screen flex-col items-center py-6 md:px-[260px] md:py-6"
       >
-        <div className="pb-6 pl-6 text-3xl text-customCream md:hidden">
+        <div className="w-full pb-6 pl-6 text-3xl text-customCream md:hidden">
           <Link href={"/"}>
             <ArrowBackIcon className="mr-6" />
             <span className="font-bigola">Events</span>
           </Link>
         </div>
-        <h1 className="mb-6 font-bigola text-4xl text-customCream lg:text-5xl">
+        <h1 className="mb-6 hidden font-bigola text-4xl text-customCream md:flex lg:text-5xl">
           Upcoming Events
         </h1>
         {loading ? (
@@ -145,7 +145,7 @@ export default function Events() {
                 ref={(el) => {
                   eventRefs.current[index] = el;
                 }}
-                className={`border-t-2 border-customCream ${
+                className={`w-90vw border-t-2 border-customCream md:w-fit ${
                   index === sortedEvents.length - 1 ? "border-b-2" : ""
                 }`}
               >

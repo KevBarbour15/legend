@@ -53,7 +53,7 @@ export default function About() {
     >
       <h1
         id="title"
-        className="w-85vw font-bigola text-4xl text-customWhite opacity-0 lg:w-50vw lg:text-5xl xl:w-45vw xxl:w-40vw"
+        className="w-90vw font-bigola text-4xl text-customWhite opacity-0 lg:w-50vw lg:text-5xl xl:w-45vw xxl:w-40vw"
       >
         About coming soon...
       </h1>

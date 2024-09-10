@@ -28,6 +28,14 @@ const CreateEvent: React.FC = () => {
     });
   }, []);
 
+  const handlePhotoToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsPhoto(event.target.checked);
+  };
+
+  const handlePublicToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsPublic(event.target.checked);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -94,7 +102,7 @@ const CreateEvent: React.FC = () => {
               </label>
               <Switch
                 checked={isPublic}
-                onChange={() => setIsPublic(!isPublic)}
+                onChange={handlePublicToggle}
                 inputProps={{ "aria-label": "controlled" }}
               />
               <label className="font-hypatia text-xl text-customWhite">
@@ -106,7 +114,7 @@ const CreateEvent: React.FC = () => {
             </label>
 
             <input
-              className="w-85vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="w-90vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="text"
               placeholder="For ex: Jose's Birthday Party"
               required
@@ -118,7 +126,7 @@ const CreateEvent: React.FC = () => {
           <div className="my-3">
             <label className="flex text-left font-hypatia text-xl">Date:</label>
             <input
-              className="w-85vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="w-90vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="date"
               required
               value={date}
@@ -129,7 +137,7 @@ const CreateEvent: React.FC = () => {
           <div className="my-3">
             <label className="flex text-left font-hypatia text-xl">Time:</label>
             <input
-              className="w-85vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="w-90vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="time"
               required
               value={time}
@@ -138,11 +146,11 @@ const CreateEvent: React.FC = () => {
           </div>
 
           <div className="my-3 flex flex-col">
-            <label className="flex w-85vw text-left font-hypatia text-xl lg:w-50vw xl:w-45vw xxl:w-40vw">
+            <label className="flex w-90vw text-left font-hypatia text-xl lg:w-50vw xl:w-45vw xxl:w-40vw">
               Image or Video URL from Imgur (for video convert to MP4):
             </label>
             <input
-              className="w-85vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="w-90vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="text"
               required
               value={imageURL}
@@ -155,7 +163,7 @@ const CreateEvent: React.FC = () => {
               </label>
               <Switch
                 checked={isPhoto}
-                onChange={() => setIsPhoto(!isPhoto)}
+                onChange={handlePhotoToggle}
                 inputProps={{ "aria-label": "controlled" }}
               />
               <label className="font-hypatia text-xl text-customWhite">
@@ -169,7 +177,7 @@ const CreateEvent: React.FC = () => {
               Event Description:
             </label>
             <textarea
-              className="h-52 w-85vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="h-52 w-90vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               placeholder="Add any additional information/ideas here."
               required
               value={description}

@@ -108,7 +108,7 @@ const EventCard: React.FC<EventCardProps> = ({
           <div
             ref={containerRef}
             className={
-              "flex w-90vw flex-col p-6 py-6 text-left text-customCream md:w-65vw lg:w-60vw xl:w-60vw xxl:w-60vw"
+              "flex w-90vw flex-col p-6 text-left text-customCream md:w-65vw lg:w-60vw xl:w-60vw xxl:w-60vw"
             }
           >
             <div className="flex w-full flex-col">
@@ -166,7 +166,7 @@ const EventCard: React.FC<EventCardProps> = ({
         <>
           <div
             ref={containerRef}
-            className="flex w-90vw flex-col p-6 py-6 text-left text-customCream md:w-65vw lg:w-60vw xl:w-60vw xxl:w-60vw"
+            className="flex w-90vw flex-col p-6 text-left text-customCream md:w-65vw lg:w-60vw xl:w-60vw xxl:w-60vw"
           >
             <div className="flex flex-col justify-between font-bigola md:flex-row">
               <div className="block">
@@ -174,7 +174,7 @@ const EventCard: React.FC<EventCardProps> = ({
                 <h2 className="mb-6 font-bigola text-3xl md:text-5xl">
                   {event.title}
                 </h2>
-                <div className="flex">
+                <div className="mb-6 flex md:mb-0">
                   <h2 className="mr-12 text-2xl">{formattedTime}</h2>
                   <p className="font-hypatia text-2xl md:text-2xl">
                     {event.description}
