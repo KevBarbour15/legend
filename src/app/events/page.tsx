@@ -109,10 +109,10 @@ export default function Events() {
   return (
     <>
       <SideMenu />
-      <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-xl"></div>
+      <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-lg"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col items-center py-6 md:px-[260px] md:py-6"
+        className="z-10 flex w-screen flex-col items-center px-6 pb-12 pt-6 md:px-[260px]"
       >
         <div className="w-full pb-6 pl-6 text-3xl text-customCream md:hidden">
           <Link href={"/"}>

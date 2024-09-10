@@ -57,7 +57,7 @@ export default function Dashboard() {
 
   return (
     <div className="relative">
-      <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
+      <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-lg"></div>
       <div className="z-10">
         <DashHeader setActiveTab={setActiveTab} />
         <CurrentComponent />

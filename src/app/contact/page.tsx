@@ -136,10 +136,10 @@ export default function Contact() {
   return (
     <>
       <SideMenu />
-      <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-md"></div>
+      <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-lg"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col p-6 md:items-center md:px-[260px] md:py-6"
+        className="z-10 flex w-screen flex-col px-6 pb-12 pt-6 md:items-center md:px-[260px]"
       >
         <div className="z-10 mb-3 border-b-2 border-customCream pb-3 text-3xl text-customCream md:hidden">
           <Link href={"/"}>

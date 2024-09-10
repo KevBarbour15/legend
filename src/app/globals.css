@@ -85,6 +85,12 @@ body {
   color: var(--custom-white);
   background: black;
 
+  input,
+  textarea,
+  select {
+    border-radius: 0;
+  }
+
   input {
     -webkit-appearance: none;
     appearance: none;
