@@ -7,7 +7,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import Link from "next/link";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { ArrowBackIos } from "@mui/icons-material";
 
 export default function Contact() {
   const [firstName, setFirstName] = useState<string>("");
@@ -141,9 +141,9 @@ export default function Contact() {
         ref={containerRef}
         className="z-10 flex w-screen flex-col px-6 pb-12 pt-6 md:items-center md:px-[260px]"
       >
-        <div className="w-full border-b-2 border-customCream pb-6 pl-6 text-3xl text-customCream md:hidden">
+        <div className="w-full border-b-2 border-customCream pb-6 text-3xl text-customCream md:hidden">
           <Link href={"/"}>
-            <ArrowBackIcon className="mr-6" />
+            <ArrowBackIos className="mr-6" />
             <span className="font-bigola">Let's Connect</span>
           </Link>
         </div>
@@ -180,7 +180,7 @@ export default function Contact() {
           </div>
           <div id="input-section" className="my-3 opacity-0">
             <input
-              className="w-90vw border-b-2 border-customCream border-opacity-50 bg-transparent font-hypatia text-2xl text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="w-90vw border-b-2 border-customCream border-opacity-50 bg-transparent text-left font-hypatia text-2xl text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="email"
               placeholder="Email"
               value={email}
@@ -190,7 +190,7 @@ export default function Contact() {
           </div>
           <div id="input-section" className="my-3 opacity-0">
             <input
-              className="w-90vw border-b-2 border-customCream border-opacity-50 bg-transparent font-hypatia text-2xl text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="w-90vw border-b-2 border-customCream border-opacity-50 bg-transparent text-left font-hypatia text-2xl text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               placeholder="Phone Number"
               value={phone}
               required
@@ -199,7 +199,7 @@ export default function Contact() {
           </div>
           <div id="input-section" className="my-3 opacity-0">
             <input
-              className="w-90vw border-b-2 border-customCream border-opacity-50 bg-transparent font-hypatia text-2xl text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="w-90vw border-b-2 border-customCream border-opacity-50 bg-transparent text-left font-hypatia text-2xl text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="date"
               value={preferredDate}
               placeholder="Select a date"

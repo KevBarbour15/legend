@@ -7,7 +7,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import SideMenu from "@/components/side-menu/SideMenu";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { ArrowBackIos } from "@mui/icons-material";
 
 interface Event {
   _id: string;
@@ -114,9 +114,9 @@ export default function Events() {
         ref={containerRef}
         className="z-10 flex w-screen flex-col items-center px-6 pb-12 pt-6 md:px-[260px]"
       >
-        <div className="w-full pb-6 pl-6 text-3xl text-customCream md:hidden">
+        <div className="w-full pb-6 text-3xl text-customCream md:hidden">
           <Link href={"/"}>
-            <ArrowBackIcon className="mr-6" />
+            <ArrowBackIos className="mr-6" />
             <span className="font-bigola">Events</span>
           </Link>
         </div>

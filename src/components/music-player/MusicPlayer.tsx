@@ -111,9 +111,12 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       className="fixed bottom-0 left-0 right-0 z-[150] flex h-auto w-full flex-col opacity-0 md:w-fit"
     >
       {/* Playlist Popup */}
-      <Collapse in={playlistVisible} className="z-10 w-full md:ml-6 md:w-fit">
+      <Collapse
+        in={playlistVisible}
+        className="z-10 mx-6 w-full md:mx-0 md:ml-6 md:w-fit"
+      >
         <div
-          className="flex flex-col rounded-lg border-2 border-customCream bg-customWhite bg-opacity-50 backdrop-blur-md md:mb-3"
+          className="flex flex-col rounded-lg border-2 border-customCream bg-customCream bg-opacity-75 drop-shadow-record backdrop-blur-lg md:mb-3"
           id="playlist-border"
         >
           {tracks.map((track, index) => (
@@ -127,28 +130,25 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               }`}
             >
               <div
-                className="flex w-auto flex-1 flex-col px-1 font-bigola text-customWhite"
+                className="flex w-auto flex-1 flex-col px-1 font-hypatia text-customNavy"
                 id="playlist-item"
               >
                 <div className="flex flex-row">
-                  <Person className="pr-2" />
-                  <p className="text-xl">{track.artist}</p>
+                  <Person className="pr-2 drop-shadow-record" />
+                  <p className="text-xl drop-shadow-record">{track.artist}</p>
                 </div>
                 <div className="flex flex-row">
-                  <Audiotrack className="pr-2" />
-                  <p className="text-xl">{track.title}</p>
+                  <Audiotrack className="pr-2 drop-shadow-record" />
+                  <p className="text-xl drop-shadow-record">{track.title}</p>
                 </div>
               </div>
               <div className="flex items-center justify-center">
-                <IconButton className="m-0 flex">
+                <IconButton className="m-0 flex drop-shadow-record">
                   {index == currentTrackIndex ? (
-                    <GraphicEq
-                      className="text-customWhite"
-                      id="playlist-item"
-                    />
+                    <GraphicEq className="text-customNavy" id="playlist-item" />
                   ) : (
                     <PlayArrow
-                      className="text-customWhite"
+                      className="text-customNavy"
                       onClick={() => handleTrackChange(index)}
                       id="playlist-item"
                     />
