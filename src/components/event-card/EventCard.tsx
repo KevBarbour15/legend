@@ -189,10 +189,11 @@ const EventCard: React.FC<EventCardProps> = ({
             ) : (
               <video
                 src={event.image_url}
-                className="h-350px w-350px object-cover md:h-250px md:w-250px"
+                className="aspect-square w-full object-cover object-center md:h-250px md:w-250px"
                 loop
                 autoPlay
                 muted
+                playsInline
               ></video>
             )}
           </div>
