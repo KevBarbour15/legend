@@ -8,11 +8,6 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Legend Has It",
-  description: "Legend Has It... a new hi-fi bar is coming soon to Sacramento",
-};
-
 const tracks: {
   url: string;
   title: string;
@@ -45,6 +40,31 @@ const tracks: {
   },
 ];
 
+export const metadata: Metadata = {
+  metadataBase: new URL("https://legend-zg4t.vercel.app/"),
+  title: "Legend Has It",
+  openGraph: {
+    title: "Legend Has It",
+    url: "https://your-site.com",
+    siteName: "Legend Has It",
+    images: [
+      {
+        url: "/images/carousel/2.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Legend Has It",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Legend Has It",
+    images: ["/images/carousel/2.jpg"],
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -61,7 +81,7 @@ export default function RootLayout({
         </head>
         <body className={inter.className}>
           <BackgroundOverlay />
-         
+
           {children}
           <MusicPlayer tracks={tracks} />
         </body>
