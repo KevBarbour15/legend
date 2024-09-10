@@ -61,11 +61,9 @@ const DashHeader: React.FC<DashProps> = ({ setActiveTab }) => {
         {["Edit Menu", "Menu Items"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
-              <LogoutLink postLogoutRedirectURL={postLogoutRedirectURL}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <MenuBook /> : <SportsBar />}
-                </ListItemIcon>
-              </LogoutLink>
+              <ListItemIcon>
+                {index % 2 === 0 ? <MenuBook /> : <SportsBar />}
+              </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
@@ -87,10 +85,11 @@ const DashHeader: React.FC<DashProps> = ({ setActiveTab }) => {
       <Divider />
       <ListItem disablePadding>
         <ListItemButton>
-          <ListItemIcon>
-            <LogoutIcon />
-          </ListItemIcon>
-          <ListItemText primary={"Logout"} />
+          <LogoutLink postLogoutRedirectURL={postLogoutRedirectURL}>
+            <ListItemIcon>
+              <LogoutIcon />
+            </ListItemIcon>
+          </LogoutLink>
         </ListItemButton>
       </ListItem>
     </Box>

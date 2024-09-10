@@ -139,7 +139,7 @@ export default function Contact() {
       <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col py-6 md:items-center md:px-[260px] md:py-6"
+        className="z-10 flex w-screen flex-col p-6 md:items-center md:px-[260px] md:py-6"
       >
         <div className="z-10 pl-6 text-3xl text-customCream md:hidden">
           <Link href={"/"}>

@@ -1,5 +1,5 @@
 import { formatTime } from "@/utils/time";
-import { use, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -7,13 +7,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
-
-// gsap imports
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 
 interface Event {
   _id: string;
@@ -69,7 +62,6 @@ const EventCard: React.FC<EventCardProps> = ({
       });
 
       if (response.ok) {
-        // close the dialog and fetch the updated events
         setOpenDelete(false);
         fetchEvents();
       }
@@ -92,7 +84,6 @@ const EventCard: React.FC<EventCardProps> = ({
     };
 
   const confirmEdit = async () => {
-    console.log("Edit confirmed", editedEvent);
     try {
       const response = await fetch(`/api/events?action=${"EditCalendar"}`, {
         method: "PUT",
@@ -134,28 +125,39 @@ const EventCard: React.FC<EventCardProps> = ({
                     {event.description}
                   </p>
                 </div>
-                <img
-                  src={event.image_url}
-                  alt="event"
-                  className="h-350px w-350px object-cover md:h-200px md:w-200px"
-                ></img>
+                {event.is_photo ? (
+                  <img
+                    src={event.image_url}
+                    alt="event"
+                    className="h-350px w-350px object-cover md:h-200px md:w-200px"
+                  ></img>
+                ) : (
+                  <>
+                    <video
+                      src={event.image_url} //video url
+                      className="h-350px w-350px object-cover md:h-200px md:w-200px"
+                      loop
+                      autoPlay
+                    ></video>
+                  </>
+                )}
               </div>
             </div>
 
-            <div className="mt-5 flex flex-row justify-center">
+            <div className="mt-3 flex flex-row justify-center">
               <button
-                className="mr-6 py-3"
+                className="menu-link mr-6 py-3 font-bigola text-2xl leading-none text-customCream"
                 type="submit"
                 onClick={handleEditOpen}
               >
-                <span className="font-bigola text-2xl leading-none text-customWhite">
-                  EDIT
-                </span>
+                EDIT
               </button>
-              <button className="py-3" type="submit" onClick={handleDeleteOpen}>
-                <span className="font-bigola text-2xl leading-none text-customWhite">
-                  DELETE
-                </span>
+              <button
+                className="menu-link py-3 font-bigola text-2xl leading-none text-customCream"
+                type="submit"
+                onClick={handleDeleteOpen}
+              >
+                DELETE
               </button>
             </div>
           </div>
@@ -166,26 +168,33 @@ const EventCard: React.FC<EventCardProps> = ({
             ref={containerRef}
             className="flex w-90vw flex-col p-6 py-6 text-left text-customCream md:w-65vw lg:w-60vw xl:w-60vw xxl:w-60vw"
           >
-            <div className="flex w-full flex-col">
-              <div className="mb-5 flex max-h-full max-w-full flex-row justify-between text-left font-bigola text-xl md:text-2xl">
-                <h1 className="drop-shadow-text">{formattedDate}</h1>
-                <h1 className="drop-shadow-text">{formattedTime}</h1>
-              </div>
-              <div className="flex flex-col justify-between md:flex-row">
-                <div className="flex max-h-full flex-col gap-5 pb-5">
-                  <h1 className="font-bigola text-3xl drop-shadow-text md:text-5xl">
-                    {event.title}
-                  </h1>
-                  <p className="font-hypatia text-xl drop-shadow-text md:w-3/5 md:text-2xl">
+            <div className="flex flex-col justify-between font-bigola md:flex-row">
+              <div className="block">
+                <h2 className="mb-6 text-2xl">{formattedDate}</h2>
+                <h2 className="mb-6 font-bigola text-3xl md:text-5xl">
+                  {event.title}
+                </h2>
+                <div className="flex">
+                  <h2 className="mr-12 text-2xl">{formattedTime}</h2>
+                  <p className="font-hypatia text-2xl md:text-2xl">
                     {event.description}
                   </p>
                 </div>
+              </div>
+              {event.is_photo ? (
                 <img
                   src={event.image_url}
                   alt="event"
-                  className="h-350px w-350px object-cover drop-shadow-text md:h-200px md:w-200px"
+                  className="h-350px w-350px object-cover md:h-200px md:w-200px"
                 ></img>
-              </div>
+              ) : (
+                <video
+                  src={event.image_url}
+                  className="h-350px w-350px object-cover md:h-250px md:w-250px"
+                  loop
+                  autoPlay
+                ></video>
+              )}
             </div>
           </div>
         </>

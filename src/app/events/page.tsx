@@ -120,13 +120,13 @@ export default function Events() {
             <span className="font-bigola">Events</span>
           </Link>
         </div>
-        <h1 className="font-bigola text-4xl text-customCream lg:text-5xl">
+        <h1 className="mb-6 font-bigola text-4xl text-customCream lg:text-5xl">
           Upcoming Events
         </h1>
         {loading ? (
           <h1
             id="event-subheader"
-            className="m-6 flex flex-col p-5 text-center font-hypatia text-3xl text-customCream opacity-0 lg:w-50vw lg:text-4xl xl:w-45vw xxl:w-40vw"
+            className="m-6 flex flex-col p-6 text-center font-hypatia text-3xl text-customCream opacity-0 lg:w-50vw lg:text-4xl xl:w-45vw xxl:w-40vw"
           >
             Loading events...
           </h1>
@@ -138,17 +138,15 @@ export default function Events() {
             Stay tuned for upcoming events...
           </h1>
         ) : (
-          <>
+          <div>
             {sortedEvents.map((event, index) => (
               <div
                 key={event._id}
                 ref={(el) => {
                   eventRefs.current[index] = el;
                 }}
-                className={`border-t-2 ${
-                  index === sortedEvents.length - 1
-                    ? "border-b-2 border-customWhite"
-                    : ""
+                className={`border-t-2 border-customCream ${
+                  index === sortedEvents.length - 1 ? "border-b-2" : ""
                 }`}
               >
                 <EventCard
@@ -161,7 +159,7 @@ export default function Events() {
                 />
               </div>
             ))}
-          </>
+          </div>
         )}
       </div>
     </>
