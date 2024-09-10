@@ -163,41 +163,40 @@ const EventCard: React.FC<EventCardProps> = ({
           </div>
         </>
       ) : (
-        <>
-          <div
-            ref={containerRef}
-            className="flex w-90vw flex-col p-6 text-left text-customCream md:w-65vw lg:w-60vw xl:w-60vw xxl:w-60vw"
-          >
-            <div className="flex flex-col justify-between font-bigola md:flex-row">
-              <div className="block">
-                <h2 className="mb-6 text-2xl">{formattedDate}</h2>
-                <h2 className="mb-6 font-bigola text-3xl md:text-5xl">
-                  {event.title}
-                </h2>
-                <div className="mb-6 flex md:mb-0">
-                  <h2 className="mr-12 text-2xl">{formattedTime}</h2>
-                  <p className="font-hypatia text-2xl md:text-2xl">
-                    {event.description}
-                  </p>
-                </div>
+        <div
+          ref={containerRef}
+          className="flex w-90vw flex-col p-6 text-left text-customCream md:w-65vw lg:w-60vw xl:w-60vw xxl:w-60vw"
+        >
+          <div className="flex flex-col justify-between font-bigola md:flex-row">
+            <div className="block">
+              <h2 className="mb-6 text-2xl">{formattedDate}</h2>
+              <h2 className="mb-6 font-bigola text-3xl md:text-5xl">
+                {event.title}
+              </h2>
+              <div className="mb-6 flex md:mb-0">
+                <h2 className="mr-12 text-2xl">{formattedTime}</h2>
+                <p className="font-hypatia text-2xl md:text-2xl">
+                  {event.description}
+                </p>
               </div>
-              {event.is_photo ? (
-                <img
-                  src={event.image_url}
-                  alt="event"
-                  className="h-350px w-350px object-cover md:h-200px md:w-200px"
-                ></img>
-              ) : (
-                <video
-                  src={event.image_url}
-                  className="h-350px w-350px object-cover md:h-250px md:w-250px"
-                  loop
-                  autoPlay
-                ></video>
-              )}
             </div>
+            {event.is_photo ? (
+              <img
+                src={event.image_url}
+                alt="event"
+                className="h-350px w-350px object-cover md:h-200px md:w-200px"
+              ></img>
+            ) : (
+              <video
+                src={event.image_url}
+                className="h-350px w-350px object-cover md:h-250px md:w-250px"
+                loop
+                autoPlay
+                muted
+              ></video>
+            )}
           </div>
-        </>
+        </div>
       )}
 
       {/************************************  Delete event modal *************************************/}
