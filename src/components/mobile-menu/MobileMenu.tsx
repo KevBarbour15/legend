@@ -15,9 +15,7 @@ const MobileMenu: React.FC = () => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    /*
     if (typeof window !== "undefined") {
-      // Ensure that we're in the client before accessing window
       setIsClient(true);
       setWindowHeight(window.innerHeight);
 
@@ -25,12 +23,12 @@ const MobileMenu: React.FC = () => {
         setWindowHeight(window.innerHeight);
       };
 
-      window.addEventListener("resize", updateHeight);
+      //window.addEventListener("resize", updateHeight);
 
       return () => {
-        window.removeEventListener("resize", updateHeight);
+        //window.removeEventListener("resize", updateHeight);
       };
-    }*/
+    }
   }, []);
 
   // Render only when on the client side
@@ -42,7 +40,7 @@ const MobileMenu: React.FC = () => {
     <div
       ref={menuRef}
       style={{ height: `${windowHeight}px` }} // Dynamically set height
-      className="flex flex-col justify-between text-customCream md:hidden"
+      className="flex h-screen flex-col justify-between text-customCream md:hidden"
     >
       <div className="flex flex-grow flex-col justify-start pl-6 pt-6">
         <img
@@ -58,7 +56,7 @@ const MobileMenu: React.FC = () => {
           ))}
         </ul>
       </div>
-      <div className="mb-24 ml-6 w-fit font-bigola">
+      <div className="mb-12 ml-6 w-fit font-bigola">
         <a
           className="cursor-pointer"
           target="_blank"

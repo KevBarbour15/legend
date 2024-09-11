@@ -154,7 +154,7 @@ export default function Home() {
           <h2 className="pt-6 font-bigola text-xl text-customNavy md:text-3xl">
             Socials
           </h2>
-          <ul className="mb-12 flex flex-row gap-6 py-6 font-bigola text-xl text-customNavy md:mb-0 md:text-3xl">
+          <ul className="mb-12 flex flex-row gap-6 font-bigola text-xl text-customNavy md:mb-0 md:text-3xl">
             <li className="social-link">
               <a
                 className="social-link"
