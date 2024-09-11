@@ -15,6 +15,7 @@ const MobileMenu: React.FC = () => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    /*
     if (typeof window !== "undefined") {
       // Ensure that we're in the client before accessing window
       setIsClient(true);
@@ -29,7 +30,7 @@ const MobileMenu: React.FC = () => {
       return () => {
         window.removeEventListener("resize", updateHeight);
       };
-    }
+    }*/
   }, []);
 
   // Render only when on the client side
@@ -57,7 +58,7 @@ const MobileMenu: React.FC = () => {
           ))}
         </ul>
       </div>
-      <div className="mb-12 ml-6 w-fit font-bigola">
+      <div className="mb-24 ml-6 w-fit font-bigola">
         <a
           className="cursor-pointer"
           target="_blank"
