@@ -161,7 +161,7 @@ export default function Contact() {
           <div id="input-section" className="mb-3 font-hypatia opacity-0">
             <div className="flex w-90vw flex-col justify-between text-2xl sm:flex-row lg:w-50vw xl:w-45vw xxl:w-40vw">
               <input
-                className="flex-1 border-b-2 border-customCream border-opacity-50 bg-transparent text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none sm:mr-1"
+                className="flex-1 border-b-2 border-customCream bg-transparent text-customWhite transition-colors hover:border-customWhite hover:border-opacity-75 hover:outline-none focus:border-customWhite focus:border-opacity-100 focus:outline-none sm:mr-1"
                 type="text"
                 placeholder="First Name"
                 value={firstName}
@@ -169,7 +169,7 @@ export default function Contact() {
                 onChange={(e) => setFirstName(e.target.value)}
               />
               <input
-                className="mt-3 flex-1 border-b-2 border-customCream border-opacity-50 bg-transparent text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none sm:ml-1 sm:mt-0"
+                className="mt-3 flex-1 border-b-2 border-customCream bg-transparent text-customWhite transition-colors hover:border-customWhite hover:border-opacity-75 hover:outline-none focus:border-customWhite focus:border-opacity-100 focus:outline-none sm:ml-1 sm:mt-0"
                 type="text"
                 placeholder="Last Name"
                 value={lastName}
@@ -180,7 +180,7 @@ export default function Contact() {
           </div>
           <div id="input-section" className="my-3 opacity-0">
             <input
-              className="w-90vw border-b-2 border-customCream border-opacity-50 bg-transparent text-left font-hypatia text-2xl text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="w-90vw border-b-2 border-customCream bg-transparent text-left font-hypatia text-2xl text-customWhite transition-colors hover:border-customWhite hover:border-opacity-75 hover:outline-none focus:border-customWhite focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="email"
               placeholder="Email"
               value={email}
@@ -190,7 +190,7 @@ export default function Contact() {
           </div>
           <div id="input-section" className="my-3 opacity-0">
             <input
-              className="w-90vw border-b-2 border-customCream border-opacity-50 bg-transparent text-left font-hypatia text-2xl text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="w-90vw border-b-2 border-customCream bg-transparent text-left font-hypatia text-2xl text-customWhite transition-colors hover:border-customWhite hover:border-opacity-75 hover:outline-none focus:border-customWhite focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               placeholder="Phone Number"
               value={phone}
               required
@@ -199,7 +199,7 @@ export default function Contact() {
           </div>
           <div id="input-section" className="my-3 opacity-0">
             <input
-              className="w-90vw border-b-2 border-customCream border-opacity-50 bg-transparent text-left font-hypatia text-2xl text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="w-90vw border-b-2 border-customCream bg-transparent text-left font-hypatia text-2xl text-customWhite transition-colors hover:border-customWhite hover:border-opacity-75 hover:outline-none focus:border-customWhite focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               type="date"
               value={preferredDate}
               placeholder="Select a date"
@@ -209,7 +209,7 @@ export default function Contact() {
           </div>
           <div id="input-section" className="my-3 opacity-0">
             <textarea
-              className="h-52 w-90vw border-b-2 border-customCream border-opacity-50 bg-transparent font-hypatia text-2xl text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
+              className="h-40 w-90vw border-b-2 border-customCream bg-transparent font-hypatia text-2xl text-customWhite transition-colors hover:border-customWhite hover:border-opacity-75 hover:outline-none focus:border-customWhite focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
               placeholder="Add any additional information/ideas here."
               value={message}
               required

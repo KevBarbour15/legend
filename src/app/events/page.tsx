@@ -79,7 +79,6 @@ export default function Events() {
   }, [events]);
 
   const fetchEvents = async () => {
-    // logic to fetch events goes here
     try {
       const response = await fetch("/api/events");
 
@@ -112,9 +111,9 @@ export default function Events() {
       <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-lg"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col items-center px-6 pb-12 pt-6 md:px-[260px]"
+        className="z-10 flex w-screen flex-col items-center px-6 pb-24 pt-6 md:px-[275px]"
       >
-        <div className="w-full pb-6 text-3xl text-customCream md:hidden">
+        <div className="w-full border-b-2 border-customCream pb-6 text-3xl text-customCream md:hidden">
           <Link href={"/"}>
             <ArrowBackIos className="mr-6" />
             <span className="font-bigola">Events</span>
@@ -145,7 +144,7 @@ export default function Events() {
                 ref={(el) => {
                   eventRefs.current[index] = el;
                 }}
-                className={`w-90vw border-t-2 border-customCream md:w-fit ${
+                className={`max-w-90vw border-customCream md:w-fit md:border-t-2 ${
                   index === sortedEvents.length - 1 ? "border-b-2" : ""
                 }`}
               >

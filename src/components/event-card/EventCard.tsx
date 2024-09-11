@@ -1,5 +1,5 @@
 import { formatTime } from "@/utils/time";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -7,6 +7,10 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import Close from "@mui/icons-material/Close";
 
 interface Event {
   _id: string;
@@ -32,8 +36,6 @@ const EventCard: React.FC<EventCardProps> = ({
   event,
   inDashboard,
   fetchEvents,
-  length,
-  index,
 }) => {
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
@@ -42,6 +44,9 @@ const EventCard: React.FC<EventCardProps> = ({
   const formattedTime = formatTime(event.time);
   const tl = useRef<gsap.core.Timeline | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleDeleteOpen = () => {
     setOpenDelete(true);
@@ -181,20 +186,24 @@ const EventCard: React.FC<EventCardProps> = ({
               </div>
             </div>
             {event.is_photo ? (
-              <img
-                src={event.image_url}
-                alt="event"
-                className="h-350px w-350px object-cover md:h-200px md:w-200px"
-              ></img>
+              <Button onClick={handleOpen}>
+                <img
+                  src={event.image_url}
+                  alt="event"
+                  className="h-350px w-350px object-cover md:h-200px md:w-200px"
+                ></img>
+              </Button>
             ) : (
-              <video
-                src={event.image_url}
-                className="aspect-square w-full object-cover object-center md:h-250px md:w-250px"
-                loop
-                autoPlay
-                muted
-                playsInline
-              ></video>
+              <Button onClick={handleOpen}>
+                <video
+                  src={event.image_url}
+                  className="aspect-square w-full object-cover object-center md:h-250px md:w-250px"
+                  loop
+                  autoPlay
+                  muted
+                  playsInline
+                ></video>
+              </Button>
             )}
           </div>
         </div>
@@ -223,7 +232,8 @@ const EventCard: React.FC<EventCardProps> = ({
           </Button>
         </DialogActions>
       </Dialog>
-      {/* Edit event */}
+
+      {/************************************ Edit event modal *************************************/}
       <Dialog
         open={openEdit}
         onClose={handleEditClose}
@@ -305,6 +315,36 @@ const EventCard: React.FC<EventCardProps> = ({
           </Button>
         </DialogActions>
       </Dialog>
+
+      {/************************************ View event media modal *************************************/}
+      <Modal open={open} onClose={handleClose}>
+        <Box>
+          <div className="relative flex h-screen w-screen items-center justify-center p-3">
+            <IconButton
+              onClick={handleClose}
+              className="fixed right-3 top-3 md:right-6 md:top-6"
+            >
+              <Close className="text-customWhite drop-shadow-record transition-all hover:scale-125 hover:text-customCream" />
+            </IconButton>
+            {event.is_photo ? (
+              <img
+                src={event.image_url}
+                alt="event"
+                className="event-media aspect-square w-full object-cover object-center drop-shadow-record md:h-[75vh] md:w-auto"
+              ></img>
+            ) : (
+              <video
+                src={event.image_url}
+                className="event-media aspect-square w-full object-cover object-center drop-shadow-record md:h-[75vh] md:w-auto"
+                loop
+                autoPlay
+                muted
+                playsInline
+              ></video>
+            )}
+          </div>
+        </Box>
+      </Modal>
     </>
   );
 };
