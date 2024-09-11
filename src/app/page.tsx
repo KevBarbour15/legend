@@ -117,10 +117,7 @@ export default function Home() {
         <div className="top-bg hidden h-screen w-full md:block"></div>
         <div className="content-area relative block h-auto p-6 md:ml-[224px]">
           <div className="md:aspect-video md:overflow-hidden">
-            <img
-              src={"/images/carousel/2.jpg"}
-              className="drop-shadow-record"
-            />
+            <img src={"/images/carousel/2.jpg"} className="" />
           </div>
 
           <div className="font-hypatia text-lg text-customNavy">

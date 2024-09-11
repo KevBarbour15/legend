@@ -26,7 +26,7 @@ const EmblaCarousel: React.FC = () => {
         <div className="embla__container">
           {slides.map((src, index) => (
             <div className="embla__slide" key={index}>
-              <img src={src} alt="carousel" className="drop-shadow-record" />
+              <img src={src} alt="carousel" className="" />
             </div>
           ))}
         </div>

@@ -7,7 +7,7 @@ const BackgroundOverlay: React.FC = ({}) => {
       >
         <img
           src="/images/alt-logo.png"
-          className="invisible absolute bottom-6 right-6 w-[175px] drop-shadow-text md:visible"
+          className="invisible absolute bottom-6 right-6 w-[175px]  md:visible"
         />
       </div>
     </>
