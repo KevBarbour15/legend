@@ -2,7 +2,6 @@ import React, { use, useEffect } from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import BackgroundOverlay from "@/components/bg-overlay/BackgroundOverlay";
-import SideMenu from "@/components/side-menu/SideMenu";
 import MusicPlayer from "@/components/music-player/MusicPlayer";
 import "./globals.css";
 
@@ -81,7 +80,6 @@ export default function RootLayout({
         </head>
         <body className={inter.className}>
           <BackgroundOverlay />
-
           {children}
           <MusicPlayer tracks={tracks} />
         </body>

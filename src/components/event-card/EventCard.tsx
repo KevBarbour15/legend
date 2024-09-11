@@ -178,8 +178,10 @@ const EventCard: React.FC<EventCardProps> = ({
               <h2 className="mb-6 font-bigola text-3xl md:text-5xl">
                 {event.title}
               </h2>
-              <div className="mb-6 flex md:mb-0">
-                <h2 className="mr-12 text-2xl">{formattedTime}</h2>
+              <div className="mb-6 flex flex-col md:mb-0 md:flex-row">
+                <h2 className="mb-6 text-2xl md:mb-0 md:mr-12">
+                  {formattedTime}
+                </h2>
                 <p className="font-hypatia text-2xl md:text-2xl">
                   {event.description}
                 </p>

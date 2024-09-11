@@ -89,6 +89,7 @@ body {
   textarea,
   select {
     border-radius: 0;
+    text-align: left;
   }
 
   input {
@@ -100,6 +101,10 @@ body {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+    text-align: left;
+    svg {
+      display: none;
+    }
   }
 
   select {

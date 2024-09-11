@@ -1,20 +1,30 @@
 "use client";
-import { useEffect, useState, useRef, use } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import SideMenu from "@/components/side-menu/SideMenu";
+
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import Link from "next/link";
 import { ArrowBackIos } from "@mui/icons-material";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import customTheme from "@/app/customTheme";
+import { ThemeProvider, useTheme } from "@mui/material/styles";
+import { format } from "date-fns";
 
 export default function Contact() {
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
-  const [preferredDate, setPreferredDate] = useState<string>("");
+  const [preferredDate, setPreferredDate] = useState<Date | null>(null);
   const [budget, setBudget] = useState<string>("");
   const [howDidYouHear, setHowDidYouHear] = useState<string>("");
   const [message, setMessage] = useState<string>("");
@@ -22,57 +32,63 @@ export default function Contact() {
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
   const eventRefs = useRef<HTMLDivElement[]>([]);
+  const outerTheme = useTheme();
 
   useGSAP(() => {
     if (!containerRef.current) return;
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-    if (isMobile) {
-      gsap.set(".side-menu", { display: "none" });
-    }
-
-    gsap.set("#contact-title", {
+    gsap.set("#contact-heading", {
       opacity: 0,
-      scale: 0.98,
-      y: -50,
+      y: -15,
+    });
+
+    gsap.set("#contact-subheading", {
+      opacity: 0,
+      y: -15,
     });
 
     gsap.set("#form #input-section", {
       opacity: 0,
-      scale: 0.98,
       y: 15,
     });
 
     tl.current = gsap
       .timeline({})
       .to(
-        "#contact-title",
+        "#contact-heading",
         {
-          duration: 0.1,
+          duration: 0.15,
           opacity: 1,
-          scale: 1,
-          ease: "linear",
+          ease: "sine.inOut",
           y: 0,
         },
-        0.1,
+        0.05,
+      )
+      .to(
+        "#contact-subheading",
+        {
+          duration: 0.15,
+          opacity: 1,
+          ease: "sine.inOut",
+          y: 0,
+        },
+        0.15,
       )
       .to(
         "#form #input-section",
         {
           duration: 0.15,
           opacity: 1,
-          scale: 1,
           y: 0,
-          ease: "linear",
+          ease: "sine.inOut",
           stagger: 0.025,
         },
-        0.15,
+        0.3,
       );
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     if (
       !firstName ||
       !lastName ||
@@ -84,12 +100,10 @@ export default function Contact() {
       setError("Please fill out all fields.");
       return;
     }
-
-    console.log("Made it to here");
-
     setError("");
 
     try {
+      const dateString = preferredDate.toLocaleDateString();
       const response = await fetch("/api/message", {
         method: "POST",
         headers: {
@@ -100,7 +114,7 @@ export default function Contact() {
           lastName: lastName,
           email: email,
           phone: phone,
-          preferredDate: preferredDate,
+          preferredDate: dateString,
           budget: budget,
           howDidYouHear: howDidYouHear,
           message: message,
@@ -108,12 +122,11 @@ export default function Contact() {
       });
 
       if (response.ok) {
-        console.log("Message sent successfully.");
         setFirstName("");
         setLastName("");
         setEmail("");
         setPhone("");
-        setPreferredDate("");
+        setPreferredDate(null);
         setBudget("");
         setHowDidYouHear("");
         setMessage("");
@@ -128,102 +141,126 @@ export default function Contact() {
   };
 
   useEffect(() => {
-    const today = new Date();
-    const formattedDate = today.toISOString().split("T")[0];
-    setPreferredDate(formattedDate);
+    //const today = new Date();
+    //const formattedDate = today.toISOString().split("T")[0];
+    //setPreferredDate(formattedDate);
   }, []);
 
   return (
     <>
-      <SideMenu />
-      <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-lg"></div>
-      <div
-        ref={containerRef}
-        className="z-10 flex w-screen flex-col px-6 pb-12 pt-6 md:items-center md:px-[260px]"
-      >
-        <div className="w-full border-b-2 border-customCream pb-6 text-3xl text-customCream md:hidden">
-          <Link href={"/"}>
-            <ArrowBackIos className="mr-6" />
-            <span className="font-bigola">Let's Connect</span>
-          </Link>
-        </div>
-        <h1 className="hidden font-bigola text-4xl text-customCream md:flex lg:text-5xl">
-          Let's Connect
-        </h1>
-        <p className="mt-6 font-hypatia text-lg text-customCream">
-          Fill out the form below and we will reach out to you.
-        </p>
-        <form
-          id="form"
-          className="tw-bg-customBlack flex flex-col items-center py-6"
-          onSubmit={handleSubmit}
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <SideMenu />
+        <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-lg"></div>
+        <div
+          ref={containerRef}
+          className="z-10 flex w-screen flex-col px-6 pb-12 pt-6 md:items-center md:px-[260px]"
         >
-          <div id="input-section" className="mb-3 font-hypatia opacity-0">
-            <div className="flex w-90vw flex-col justify-between text-2xl sm:flex-row lg:w-50vw xl:w-45vw xxl:w-40vw">
-              <input
-                className="flex-1 border-b-2 border-customCream bg-transparent text-customWhite transition-colors hover:border-customWhite hover:border-opacity-75 hover:outline-none focus:border-customWhite focus:border-opacity-100 focus:outline-none sm:mr-1"
-                type="text"
-                placeholder="First Name"
-                value={firstName}
-                required
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-              <input
-                className="mt-3 flex-1 border-b-2 border-customCream bg-transparent text-customWhite transition-colors hover:border-customWhite hover:border-opacity-75 hover:outline-none focus:border-customWhite focus:border-opacity-100 focus:outline-none sm:ml-1 sm:mt-0"
-                type="text"
-                placeholder="Last Name"
-                value={lastName}
-                required
-                onChange={(e) => setLastName(e.target.value)}
-              />
+          <div
+            id="contact-heading"
+            className="w-full border-b-2 border-customCream pb-6 text-3xl text-customCream opacity-0 md:hidden"
+          >
+            <div className="menu-link">
+              <Link href={"/"}>
+                <ArrowBackIos className="mr-6" />
+                <span className="font-bigola">Let's Connect</span>
+              </Link>
             </div>
           </div>
-          <div id="input-section" className="my-3 opacity-0">
-            <input
-              className="w-90vw border-b-2 border-customCream bg-transparent text-left font-hypatia text-2xl text-customWhite transition-colors hover:border-customWhite hover:border-opacity-75 hover:outline-none focus:border-customWhite focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
-              type="email"
-              placeholder="Email"
-              value={email}
-              required
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div id="input-section" className="my-3 opacity-0">
-            <input
-              className="w-90vw border-b-2 border-customCream bg-transparent text-left font-hypatia text-2xl text-customWhite transition-colors hover:border-customWhite hover:border-opacity-75 hover:outline-none focus:border-customWhite focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
-              placeholder="Phone Number"
-              value={phone}
-              required
-              onChange={(e) => setPhone(e.target.value)}
-            />
-          </div>
-          <div id="input-section" className="my-3 opacity-0">
-            <input
-              className="w-90vw border-b-2 border-customCream bg-transparent text-left font-hypatia text-2xl text-customWhite transition-colors hover:border-customWhite hover:border-opacity-75 hover:outline-none focus:border-customWhite focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
-              type="date"
-              value={preferredDate}
-              placeholder="Select a date"
-              required
-              onChange={(e) => setPreferredDate(e.target.value)}
-            />
-          </div>
-          <div id="input-section" className="my-3 opacity-0">
-            <textarea
-              className="h-40 w-90vw border-b-2 border-customCream bg-transparent font-hypatia text-2xl text-customWhite transition-colors hover:border-customWhite hover:border-opacity-75 hover:outline-none focus:border-customWhite focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
-              placeholder="Add any additional information/ideas here."
-              value={message}
-              required
-              onChange={(e) => setMessage(e.target.value)}
-            />
-          </div>
-          <button
-            id="input-section"
-            className="menu-link mt-3 font-bigola text-2xl leading-none tracking-wider text-customCream opacity-0"
+          <h2
+            id="contact-heading"
+            className="hidden font-bigola text-4xl text-customCream opacity-0 md:flex lg:text-5xl"
           >
-            SUBMIT
-          </button>
-        </form>
-      </div>
+            Let's Connect
+          </h2>
+          <p
+            id="contact-subheading"
+            className="mt-6 font-hypatia text-lg text-customCream opacity-0"
+          >
+            Fill out the form below and we will reach out to you.
+          </p>
+          <ThemeProvider theme={customTheme(outerTheme)}>
+            <Box
+              component="form"
+              id="form"
+              className="flex flex-col items-center py-6"
+              onSubmit={handleSubmit}
+            >
+              <div id="input-section" className="mb-3 font-hypatia opacity-0">
+                <div className="flex w-90vw flex-col justify-between text-2xl sm:flex-row lg:w-50vw xl:w-45vw xxl:w-40vw">
+                  <TextField
+                    className="flex-1 sm:mr-1"
+                    type="text"
+                    label="First Name"
+                    value={firstName}
+                    required
+                    onChange={(e) => setFirstName(e.target.value)}
+                    variant="standard"
+                  />
+                  <TextField
+                    className="mt-3 flex-1 sm:ml-1 sm:mt-0"
+                    type="text"
+                    label="Last Name"
+                    value={lastName}
+                    required
+                    onChange={(e) => setLastName(e.target.value)}
+                    variant="standard"
+                  />
+                </div>
+              </div>
+              <div id="input-section" className="my-3 opacity-0">
+                <TextField
+                  className="w-90vw lg:w-50vw xl:w-45vw xxl:w-40vw"
+                  type="email"
+                  label="Email"
+                  value={email}
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                  variant="standard"
+                />
+              </div>
+              <div id="input-section" className="my-3 opacity-0">
+                <TextField
+                  className="w-90vw lg:w-50vw xl:w-45vw xxl:w-40vw"
+                  type="tel"
+                  label="Phone"
+                  value={phone}
+                  required
+                  onChange={(e) => setPhone(e.target.value)}
+                  variant="standard"
+                />
+              </div>
+              <div id="input-section" className="my-3 opacity-0">
+                <DatePicker
+                  value={preferredDate}
+                  label="Preferred Date *"
+                  onChange={(newValue) => setPreferredDate(newValue)}
+                  slotProps={{ textField: { variant: "standard" } }}
+                  className="w-90vw lg:w-50vw xl:w-45vw xxl:w-40vw"
+                />
+              </div>
+              <div id="input-section" className="my-3 opacity-0">
+                <TextField
+                  className="w-90vw lg:w-50vw xl:w-45vw xxl:w-40vw"
+                  label="Add any additional information/ideas here."
+                  value={message}
+                  required
+                  rows={4}
+                  multiline
+                  variant="standard"
+                  onChange={(e) => setMessage(e.target.value)}
+                />
+              </div>
+              <Button
+                id="input-section"
+                type="submit"
+                className="menu-link mt-3 font-bigola text-2xl leading-none tracking-wider text-customCream opacity-0"
+              >
+                SUBMIT
+              </Button>
+            </Box>
+          </ThemeProvider>
+        </div>
+      </LocalizationProvider>
     </>
   );
 }

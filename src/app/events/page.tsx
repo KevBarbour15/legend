@@ -31,39 +31,63 @@ export default function Events() {
 
   useGSAP(() => {
     if (!containerRef.current) return;
-    gsap.set("#events-title", {
+    gsap.set("#events-heading", {
       opacity: 0,
+      y: -15,
     });
 
     gsap.set("#no-events", {
       opacity: 0,
+      y: 15,
     });
 
     gsap.fromTo(
-      "#event-subheader",
-      { opacity: 0 },
-      { opacity: 1, duration: 0.15, delay: 0.1 },
+      "#event-subheading",
+      { opacity: 0, y: 15 },
+      { opacity: 1, duration: 0.15, delay: 0.1, ease: "sine.inOut", y: 0 },
     );
 
+    gsap.set(eventRefs.current, {
+      opacity: 0,
+      y: 20,
+    });
+
     if (!loading && eventRefs.current.length > 0) {
-      eventsTL.current = gsap.timeline({}).to(
-        "#events-title",
-        {
-          duration: 0.15,
-          opacity: 1,
-        },
-        0.15,
-      );
+      eventsTL.current = gsap
+        .timeline({})
+        .to(
+          "#events-heading",
+          {
+            duration: 0.15,
+            opacity: 1,
+            ease: "sine.inOut",
+            y: 0,
+          },
+          0.05,
+        )
+        .to(
+          eventRefs.current,
+          {
+            duration: 0.25,
+            opacity: 1,
+            stagger: 0.1,
+            y: 0,
+            ease: "sine.inOut",
+          },
+          0.15,
+        );
     }
 
     if (!loading && eventRefs.current.length == 0) {
       eventsTL.current = gsap
         .timeline({})
         .to(
-          "#events-title",
+          "#events-heading",
           {
             duration: 0.35,
             opacity: 1,
+            ease: "sine.inOut",
+            y: 0,
           },
           0.15,
         )
@@ -72,8 +96,10 @@ export default function Events() {
           {
             duration: 0.35,
             opacity: 1,
+            ease: "sine.inOut",
+            y: 0,
           },
-          0.5,
+          0.35,
         );
     }
   }, [events]);
@@ -113,29 +139,37 @@ export default function Events() {
         ref={containerRef}
         className="z-10 flex w-screen flex-col items-center px-6 pb-24 pt-6 md:px-[275px]"
       >
-        <div className="w-full border-b-2 border-customCream pb-6 text-3xl text-customCream md:hidden">
-          <Link href={"/"}>
-            <ArrowBackIos className="mr-6" />
-            <span className="font-bigola">Events</span>
-          </Link>
+        <div
+          id="events-heading"
+          className="w-full border-b-2 border-customCream pb-6 text-3xl text-customCream opacity-0 md:hidden"
+        >
+          <div className="menu-link">
+            <Link href={"/"}>
+              <ArrowBackIos className="mr-6" />
+              <span className="font-bigola">Events</span>
+            </Link>
+          </div>
         </div>
-        <h1 className="mb-6 hidden font-bigola text-4xl text-customCream md:flex lg:text-5xl">
+        <h2
+          id="events-heading"
+          className="mb-6 hidden font-bigola text-4xl text-customCream opacity-0 md:flex lg:text-5xl"
+        >
           Upcoming Events
-        </h1>
+        </h2>
         {loading ? (
-          <h1
-            id="event-subheader"
+          <h2
+            id="event-subheading"
             className="m-6 flex flex-col p-6 text-center font-hypatia text-3xl text-customCream opacity-0 lg:w-50vw lg:text-4xl xl:w-45vw xxl:w-40vw"
           >
             Loading events...
-          </h1>
+          </h2>
         ) : events.length === 0 ? (
-          <h1
+          <h2
             id="no-events"
             className="m-6 flex flex-col p-6 text-center font-hypatia text-3xl text-customCream opacity-0 lg:w-50vw lg:text-4xl xl:w-45vw xxl:w-40vw"
           >
             Stay tuned for upcoming events...
-          </h1>
+          </h2>
         ) : (
           <div>
             {sortedEvents.map((event, index) => (
@@ -144,7 +178,7 @@ export default function Events() {
                 ref={(el) => {
                   eventRefs.current[index] = el;
                 }}
-                className={`max-w-90vw border-customCream md:w-fit md:border-t-2 ${
+                className={`max-w-90vw border-customCream opacity-0 md:w-fit ${index === 0 ? "md:border-t-2" : "border-t-2"} ${
                   index === sortedEvents.length - 1 ? "border-b-2" : ""
                 }`}
               >

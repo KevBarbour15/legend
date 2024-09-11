@@ -37,7 +37,7 @@ const EventsList: React.FC = () => {
     });
 
     gsap.fromTo(
-      "#event-subheader",
+      "#event-subheading",
       { opacity: 0 },
       { opacity: 1, duration: 0.15, delay: 0.1 },
     );
@@ -112,7 +112,7 @@ const EventsList: React.FC = () => {
     >
       {loading ? (
         <h1
-          id="event-subheader"
+          id="event-subheading"
           className="my-5 font-bigola text-4xl text-customWhite lg:text-5xl"
         >
           Loading events...
