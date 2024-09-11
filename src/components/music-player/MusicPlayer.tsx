@@ -113,10 +113,10 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       {/* Playlist Popup */}
       <Collapse
         in={playlistVisible}
-        className="z-10 mx-6 w-full md:mx-0 md:ml-6 md:w-fit"
+        className="z-10 w-full md:mx-0 md:ml-6 md:w-fit"
       >
         <div
-          className="flex flex-col rounded-lg border-2 border-customCream bg-customCream bg-opacity-75 drop-shadow-record backdrop-blur-lg md:mb-3"
+          className="flex flex-col rounded-lg border-2 border-customWhite bg-customWhite bg-opacity-25 drop-shadow-record backdrop-blur-lg md:mb-3"
           id="playlist-border"
         >
           {tracks.map((track, index) => (
@@ -125,12 +125,12 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               key={index}
               className={`flex h-full flex-row p-1 ${
                 index !== tracks.length - 1
-                  ? "border-b-2 border-customCream"
+                  ? "border-b-2 border-customWhite"
                   : ""
               }`}
             >
               <div
-                className="flex w-auto flex-1 flex-col px-1 font-hypatia text-customNavy"
+                className="flex w-auto flex-1 flex-col px-1 font-hypatia text-customWhite"
                 id="playlist-item"
               >
                 <div className="flex flex-row">
@@ -145,10 +145,13 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               <div className="flex items-center justify-center">
                 <IconButton className="m-0 flex drop-shadow-record">
                   {index == currentTrackIndex ? (
-                    <GraphicEq className="text-customNavy" id="playlist-item" />
+                    <GraphicEq
+                      className="text-customWhite"
+                      id="playlist-item"
+                    />
                   ) : (
                     <PlayArrow
-                      className="text-customNavy"
+                      className="text-customWhite"
                       onClick={() => handleTrackChange(index)}
                       id="playlist-item"
                     />
@@ -172,7 +175,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       </Collapse>
 
       <div className="flex justify-between bg-opacity-50 p-3 backdrop-blur-md md:mt-3 md:justify-start md:bg-opacity-0 md:pb-6 md:pl-6 md:pr-0 md:pt-0 md:backdrop-blur-none">
-        <IconButton className="player-button px-1 py-0 text-customCream">
+        <IconButton className="player-button px-1 py-0 text-customCream transition-all hover:text-customGold">
           {mute ? (
             <VolumeOff onClick={handleMute} />
           ) : (
@@ -181,38 +184,34 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         </IconButton>
         <IconButton
           onClick={handlePreviousTrack}
-          className="player-button px-1 py-0 text-customCream"
+          className="player-button transition-d px-1 py-0 text-customCream hover:text-customGold"
         >
           <SkipPrevious />
         </IconButton>
 
         <IconButton
           onClick={handlePlayPause}
-          className="player-button px-1 py-0 text-customCream"
+          className="player-button px-1 py-0 text-customCream transition-all hover:text-customGold"
         >
           {playing ? <Pause /> : <PlayArrow />}
         </IconButton>
         <IconButton
           onClick={handleNextTrack}
-          className="player-button px-1 py-0 text-customCream"
+          className="player-button px-1 py-0 text-customCream transition-all hover:text-customGold"
         >
           <SkipNext />
         </IconButton>
         <IconButton
           onClick={togglePlaylist}
-          className="player-button px-1 py-0 text-customCream"
+          className="player-button px-1 py-0 text-customCream transition-all hover:text-customGold"
         >
           <LibraryMusic />
         </IconButton>
         <IconButton
-          className="player-button hidden p-1 text-customCream md:block"
+          className="player-button hidden px-1 py-0 text-customCream transition-all hover:text-customGold md:block"
           onClick={togglePlayer}
         >
-          {visible ? (
-            <KeyboardArrowDown className="" />
-          ) : (
-            <KeyboardArrowUpTwoTone className="" />
-          )}
+          {visible ? <KeyboardArrowDown /> : <KeyboardArrowUpTwoTone />}
         </IconButton>
       </div>
       <ReactHowler
