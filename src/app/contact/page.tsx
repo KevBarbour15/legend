@@ -153,13 +153,13 @@ export default function Contact() {
         <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-lg"></div>
         <div
           ref={containerRef}
-          className="z-10 flex w-screen flex-col px-6 pb-12 pt-6 md:items-center md:px-[260px]"
+          className="z-10 flex w-screen flex-col items-center pb-12 pt-3 md:px-[260px] md:pt-6"
         >
           <div
             id="contact-heading"
-            className="w-full border-b-2 border-customCream pb-6 text-3xl text-customCream opacity-0 md:hidden"
+            className="w-[90vw] border-b-2 border-customCream pb-3 text-3xl text-customCream opacity-0 md:hidden"
           >
-            <div className="menu-link">
+            <div className="menu-link w-">
               <Link href={"/"}>
                 <ArrowBackIos className="mr-6" />
                 <span className="font-bigola">Let's Connect</span>
@@ -174,7 +174,7 @@ export default function Contact() {
           </h2>
           <p
             id="contact-subheading"
-            className="mt-6 font-hypatia text-lg text-customCream opacity-0"
+            className="mt-3 text-center font-hypatia text-lg text-customCream opacity-0 md:mt-6"
           >
             Fill out the form below and we will reach out to you.
           </p>
@@ -182,7 +182,7 @@ export default function Contact() {
             <Box
               component="form"
               id="form"
-              className="flex flex-col items-center py-6"
+              className="flex flex-col items-center py-3 md:py-6"
               onSubmit={handleSubmit}
             >
               <div id="input-section" className="mb-3 font-hypatia opacity-0">

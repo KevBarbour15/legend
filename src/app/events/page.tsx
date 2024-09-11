@@ -137,11 +137,11 @@ export default function Events() {
       <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-lg"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col items-center px-6 pb-24 pt-6 md:px-[275px]"
+        className="z-10 flex w-screen flex-col items-center pb-24 pt-3 md:w-screen md:px-[275px] md:pt-6"
       >
         <div
           id="events-heading"
-          className="w-full border-b-2 border-customCream pb-6 text-3xl text-customCream opacity-0 md:hidden"
+          className="w-[90vw] border-b-2 border-customCream pb-3 text-3xl text-customCream opacity-0 md:hidden md:pb-6"
         >
           <div className="menu-link">
             <Link href={"/"}>
