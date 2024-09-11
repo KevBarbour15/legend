@@ -3,6 +3,8 @@ import { useRef, useEffect } from "react";
 import ImageCarousel from "@/components/carousel/EmblaCarousel";
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileMenu from "@/components/mobile-menu/MobileMenu";
+import { Instagram, Facebook, YouTube } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 
 //gsap imports
 import gsap from "gsap";
@@ -136,52 +138,50 @@ export default function Home() {
               through sound.
             </p>
           </div>
-          <div className="mb-6 block py-6 font-bigola text-xl text-customNavy md:mb-0 md:text-3xl">
-            <h2 className="mb-6">Hours</h2>
-            <div className="mb-6 flex flex-row justify-between">
+          <div className="block py-6 font-bigola text-xl text-customNavy md:mb-0 md:text-3xl">
+            <h2 className="mb-3 md:mb-6">Hours</h2>
+            <div className="mb-3 flex flex-row justify-between md:mb-6">
               <p>Sunday - Tuesday:</p>
               <p>Closed</p>
             </div>
+            <div className="mb-3 flex flex-row justify-between md:mb-6">
+              <p>Wednesday - Thursday:</p>
+              <p>4 pm - 11ish pm</p>
+            </div>
             <div className="flex flex-row justify-between">
-              <p>Wednesday - Saturday:</p>
-              <p>4pm - 11:30pm</p>
+              <p>Friday - Saturday:</p>
+              <p>4 pm - 12 am</p>
             </div>
           </div>
-          <ImageCarousel />
-          <h2 className="pt-6 font-bigola text-xl text-customNavy md:text-3xl">
-            Socials
-          </h2>
-          <ul className="mb-12 flex flex-row gap-6 font-bigola text-xl text-customNavy md:mb-0 md:text-3xl">
-            <li className="social-link">
-              <a
-                className="social-link"
-                href="https://www.instagram.com/legendhasithifi/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Instagram
-              </a>
-            </li>
-            <li className="social-link">
-              <a
-                href="https://www.facebook.com/legendhasithifi"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Facebook
-              </a>
-            </li>
+          <div className="flex flex-row justify-between pb-6 font-bigola md:justify-start md:gap-24">
+            <IconButton
+              className="social-link px-0 text-5xl text-customNavy hover:px-2"
+              href="https://www.instagram.com/legendhasithifi/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Instagram fontSize="inherit" />
+            </IconButton>
 
-            <li className="social-link">
-              <a
-                href="https://www.youtube.com/@legendhasithifi"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Youtube
-              </a>
-            </li>
-          </ul>
+            <IconButton
+              className="social-link px-0 text-5xl text-customNavy hover:px-2"
+              href="https://www.facebook.com/legendhasithifi"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Facebook fontSize="inherit" />
+            </IconButton>
+
+            <IconButton
+              className="social-link px-0 text-5xl text-customNavy hover:px-2"
+              href="https://www.youtube.com/@legendhasithifi"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <YouTube fontSize="inherit" />
+            </IconButton>
+          </div>
+          <ImageCarousel />
         </div>
       </div>
     </>

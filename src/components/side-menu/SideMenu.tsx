@@ -85,7 +85,7 @@ const SideMenu: React.FC = ({}) => {
   return (
     <div className="side-menu z-10 hidden h-screen flex-col justify-between text-customCream md:fixed md:flex md:w-fit md:p-6">
       <div className="flex h-full flex-col justify-start pl-6 pt-6 md:p-0">
-        <ul className="font-bigola text-3xl uppercase" id="menu-text">
+        <ul className="font-bigola text-3xl" id="menu-text">
           {links.map((link, idx) => (
             <li key={idx} className="menu-link m-0 p-0">
               <Link href={link.path}>{link.label}</Link>

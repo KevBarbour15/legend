@@ -1,4 +1,4 @@
-import React, { use, useEffect } from "react";
+import Head from "next/head";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import BackgroundOverlay from "@/components/bg-overlay/BackgroundOverlay";
@@ -72,12 +72,13 @@ export default function RootLayout({
   return (
     <>
       <html lang="en">
-        <head>
+        <Head>
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-        </head>
+          <title>Legend Has It</title>
+        </Head>
         <body className={inter.className}>
           <BackgroundOverlay />
           {children}

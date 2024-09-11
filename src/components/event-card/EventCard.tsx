@@ -174,7 +174,9 @@ const EventCard: React.FC<EventCardProps> = ({
         >
           <div className="flex flex-col justify-between font-bigola md:flex-row">
             <div className="block">
-              <h2 className="mb-3 text-xl md:mb-6">{formattedDate}</h2>
+              <h2 className="mb-3 text-xl text-customGold md:mb-6">
+                {formattedDate}
+              </h2>
               <h2 className="mb-3 font-bigola text-3xl md:mb-6 md:text-5xl">
                 {event.title}
               </h2>
