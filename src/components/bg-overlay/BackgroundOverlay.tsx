@@ -14,10 +14,10 @@ const BackgroundOverlay: React.FC = ({}) => {
         setWindowHeight(window.innerHeight);
       };
 
-      //window.addEventListener("resize", updateHeight);
+      window.addEventListener("resize", updateHeight);
 
       return () => {
-        //window.removeEventListener("resize", updateHeight);
+        window.removeEventListener("resize", updateHeight);
       };
     }
   }, []);

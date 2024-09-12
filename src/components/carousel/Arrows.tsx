@@ -55,7 +55,7 @@ export const PrevButton: React.FC<IconButtonProps> = (props) => {
   const { children, ...restProps } = props;
 
   return (
-    <IconButton {...restProps}>
+    <IconButton {...restProps} className="text-customNavy">
       <ChevronLeftIcon />
       {children}
     </IconButton>
@@ -66,7 +66,7 @@ export const NextButton: React.FC<IconButtonProps> = (props) => {
   const { children, ...restProps } = props;
 
   return (
-    <IconButton {...restProps}>
+    <IconButton {...restProps} className="text-customNavy">
       <ChevronRightIcon />
       {children}
     </IconButton>

@@ -48,7 +48,7 @@ const MobileMenu: React.FC = () => {
           src="./images/alt-logo.png"
           alt="Logo"
         />
-        <ul className="font-bigola text-3xl uppercase" id="menu-text">
+        <ul className="font-bigola text-3xl" id="menu-text">
           {links.map((link, idx) => (
             <li key={idx} className="m-0 p-0">
               <Link href={link.path}>{link.label}</Link>

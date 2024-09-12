@@ -155,7 +155,7 @@ export default function Home() {
           </div>
           <div className="flex flex-row justify-between pb-6 font-bigola md:justify-start md:gap-24">
             <IconButton
-              className="social-link px-0 text-5xl text-customNavy hover:px-2"
+              className="px-0 text-5xl text-customNavy hover:px-2"
               href="https://www.instagram.com/legendhasithifi/"
               target="_blank"
               rel="noopener noreferrer"
@@ -164,7 +164,7 @@ export default function Home() {
             </IconButton>
 
             <IconButton
-              className="social-link px-0 text-5xl text-customNavy hover:px-2"
+              className="px-0 text-5xl text-customNavy hover:px-2"
               href="https://www.facebook.com/legendhasithifi"
               target="_blank"
               rel="noopener noreferrer"
@@ -173,7 +173,7 @@ export default function Home() {
             </IconButton>
 
             <IconButton
-              className="social-link px-0 text-5xl text-customNavy hover:px-2"
+              className="px-0 text-5xl text-customNavy hover:px-2"
               href="https://www.youtube.com/@legendhasithifi"
               target="_blank"
               rel="noopener noreferrer"
