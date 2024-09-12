@@ -49,8 +49,8 @@ const SideMenu: React.FC = ({}) => {
     menuLinks.forEach((menuLink) => {
       menuLink.addEventListener("mouseenter", () => {
         gsap.to(menuLink, {
-          duration: 0.3,
-          ease: "bounce",
+          duration: 0.15,
+          ease: "sine.inOut",
           x: 15,
           fontStyle: "italic",
         });
@@ -58,8 +58,8 @@ const SideMenu: React.FC = ({}) => {
 
       menuLink.addEventListener("mouseleave", () => {
         gsap.to(menuLink, {
-          duration: 0.3,
-          ease: "bounce",
+          duration: 0.15,
+          ease: "sine.inOut",
           x: 0,
           fontStyle: "normal",
         });
@@ -67,8 +67,8 @@ const SideMenu: React.FC = ({}) => {
 
       menuLink.addEventListener("onclick", () => {
         gsap.to(menuLink, {
-          duration: 0.3,
-          ease: "bounce",
+          duration: 0.15,
+          ease: "sine.inOut",
           x: 0,
           fontStyle: "normal",
         });

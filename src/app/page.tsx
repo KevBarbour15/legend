@@ -22,6 +22,7 @@ const slides = [
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
+  const overlayTl = useRef<gsap.core.Timeline | null>(null);
   gsap.registerPlugin(ScrollTrigger);
 
   useGSAP(() => {
@@ -78,38 +79,27 @@ export default function Home() {
         },
         0,
       );
-  }, []);
 
-  useEffect(() => {
-    const socialLinks = document.querySelectorAll(".social-link");
-
-    socialLinks.forEach((socialLink) => {
-      socialLink.addEventListener("mouseenter", () => {
-        gsap.to(socialLink, {
-          duration: 0.3,
-          ease: "bounce",
-          x: 10,
-          fontStyle: "italic",
-        });
-      });
-
-      socialLink.addEventListener("mouseleave", () => {
-        gsap.to(socialLink, {
-          duration: 0.3,
-          ease: "bounce",
-          fontStyle: "normal",
-          x: 0,
-        });
-      });
+    if (!overlayTl.current) return;
+    overlayTl.current = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".content-area",
+        start: "top 99%",
+        end: "top 35%",
+        scrub: 1,
+      },
     });
 
-    return () => {
-      socialLinks.forEach((socialLink) => {
-        socialLink.removeEventListener("mouseenter", () => {});
-        socialLink.removeEventListener("mouseleave", () => {});
-      });
-    };
+    overlayTl.current.to(
+      ".background-overlay",
+      {
+        ease: "none",
+        scale: 1.75,
+      },
+      0,
+    );
   }, []);
+
   return (
     <>
       <SideMenu />
@@ -117,7 +107,7 @@ export default function Home() {
       <div ref={containerRef} className="block w-screen">
         <div className="hidden-bg fixed inset-0 z-[-1] h-screen w-screen bg-customCream opacity-0"></div>
         <div className="top-bg hidden h-screen w-full md:block"></div>
-        <div className="content-area relative block h-auto p-6 md:ml-[224px]">
+        <div className="content-area relative block h-auto p-3 md:ml-[224px] md:p-6">
           <div className="md:aspect-video md:overflow-hidden">
             <img src={"/images/carousel/2.jpg"} className="" />
           </div>
@@ -155,7 +145,7 @@ export default function Home() {
           </div>
           <div className="flex flex-row justify-between pb-6 font-bigola md:justify-start md:gap-24">
             <IconButton
-              className="px-0 text-5xl text-customNavy hover:px-2"
+              className="p-0 text-5xl text-customNavy"
               href="https://www.instagram.com/legendhasithifi/"
               target="_blank"
               rel="noopener noreferrer"
@@ -164,7 +154,7 @@ export default function Home() {
             </IconButton>
 
             <IconButton
-              className="px-0 text-5xl text-customNavy hover:px-2"
+              className="p-0 text-5xl text-customNavy"
               href="https://www.facebook.com/legendhasithifi"
               target="_blank"
               rel="noopener noreferrer"
@@ -173,7 +163,7 @@ export default function Home() {
             </IconButton>
 
             <IconButton
-              className="px-0 text-5xl text-customNavy hover:px-2"
+              className="p-0 text-5xl text-customNavy"
               href="https://www.youtube.com/@legendhasithifi"
               target="_blank"
               rel="noopener noreferrer"

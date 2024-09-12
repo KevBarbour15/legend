@@ -29,7 +29,7 @@ const BackgroundOverlay: React.FC = ({}) => {
   return (
     <>
       <div
-        className="fixed inset-0 z-[-1] bg-cover bg-center"
+        className="background-overlay fixed inset-0 z-[-1] bg-cover bg-center"
         style={{
           backgroundImage: "url(/images/background.jpg)",
           height: `${windowHeight}px`,

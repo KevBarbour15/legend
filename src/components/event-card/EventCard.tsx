@@ -40,7 +40,9 @@ const EventCard: React.FC<EventCardProps> = ({
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [editedEvent, setEditedEvent] = useState<Event>({ ...event });
-  const formattedDate = new Date(event.date).toLocaleDateString();
+  const formattedDate = new Date(event.date).toLocaleDateString("en-US", {
+    timeZone: "UTC",
+  });
   const formattedTime = formatTime(event.time);
   const tl = useRef<gsap.core.Timeline | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);

@@ -6,6 +6,10 @@ import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
+import { formatInTimeZone, toZonedTime } from "date-fns-tz";
+
+import { format } from "date-fns";
+
 import SideMenu from "@/components/side-menu/SideMenu";
 import { ArrowBackIos } from "@mui/icons-material";
 
@@ -126,10 +130,40 @@ export default function Events() {
     fetchEvents();
   }, []);
 
-  // sort events by date
-  const sortedEvents = events.sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
-  );
+  const californiaTimeZone = "America/Los_Angeles";
+
+  const sortedEvents = events
+    .filter((event) => {
+      
+      const eventDate = toZonedTime(new Date(event.date), californiaTimeZone);
+
+
+      const today = toZonedTime(new Date(), californiaTimeZone);
+
+    
+      const formattedEventDate = formatInTimeZone(
+        eventDate,
+        californiaTimeZone,
+        "yyyy-MM-dd",
+      );
+      const formattedToday = formatInTimeZone(
+        today,
+        californiaTimeZone,
+        "yyyy-MM-dd",
+      );
+
+    
+      return (
+        new Date(formattedEventDate).getTime() >=
+        new Date(formattedToday).getTime()
+      );
+    })
+    .sort((a, b) => {
+      
+      const eventDateA = toZonedTime(new Date(a.date), californiaTimeZone);
+      const eventDateB = toZonedTime(new Date(b.date), californiaTimeZone);
+      return eventDateA.getTime() - eventDateB.getTime();
+    });
 
   return (
     <>
@@ -154,7 +188,7 @@ export default function Events() {
           id="events-heading"
           className="mb-6 hidden font-bigola text-4xl text-customCream opacity-0 md:flex lg:text-5xl"
         >
-          Upcoming Events
+          Events
         </h2>
         {loading ? (
           <h2
