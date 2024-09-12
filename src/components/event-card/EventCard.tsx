@@ -1,5 +1,5 @@
 import { formatTime } from "@/utils/time";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -49,6 +49,8 @@ const EventCard: React.FC<EventCardProps> = ({
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [windowHeight, setWindowHeight] = useState<number>(0);
+  const [isClient, setIsClient] = useState(false);
 
   const handleDeleteOpen = () => {
     setOpenDelete(true);
@@ -107,6 +109,27 @@ const EventCard: React.FC<EventCardProps> = ({
     } catch (error) {}
     handleEditClose();
   };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsClient(true);
+      setWindowHeight(window.innerHeight);
+
+      const updateHeight = () => {
+        setWindowHeight(window.innerHeight);
+      };
+
+      window.addEventListener("resize", updateHeight);
+
+      return () => {
+        window.removeEventListener("resize", updateHeight);
+      };
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
+  }, [isClient]);
 
   return (
     <>
@@ -323,7 +346,13 @@ const EventCard: React.FC<EventCardProps> = ({
       </Dialog>
 
       {/************************************ View event media modal *************************************/}
-      <Modal open={open} onClose={handleClose}>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        style={{
+          height: `${windowHeight}px`,
+        }}
+      >
         <Box>
           <div className="relative flex h-screen w-screen items-center justify-center p-3">
             <IconButton
