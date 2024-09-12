@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation"; // Use the correct router for the app directory
 
 const links = [
   { path: "/", label: "About" },
@@ -11,25 +11,37 @@ const links = [
 
 const MobileMenu: React.FC = () => {
   const menuRef = useRef<HTMLDivElement>(null);
-  const [windowHeight, setWindowHeight] = useState<number>(0);
   const [isClient, setIsClient] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       setIsClient(true);
-      setWindowHeight(window.innerHeight);
-
-      const updateHeight = () => {
-        setWindowHeight(window.innerHeight);
-      };
-
-      //window.addEventListener("resize", updateHeight);
-
-      return () => {
-        //window.removeEventListener("resize", updateHeight);
-      };
     }
   }, []);
+
+  // Scroll to about section if we're already on the "/" page
+  const scrollToAbout = () => {
+    const aboutSection = document.getElementById("about-section");
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleAboutClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (window.location.pathname === "/") {
+      // If already on the "/" page, scroll to the section
+      scrollToAbout();
+    } else {
+      // If on another page, navigate to "/" and then scroll
+      router.push("/").then(() => {
+        setTimeout(() => {
+          scrollToAbout(); // Ensure scrolling happens after navigation
+        }, 100); // Small delay to ensure page is fully loaded
+      });
+    }
+  };
 
   // Render only when on the client side
   if (!isClient) {
@@ -39,7 +51,6 @@ const MobileMenu: React.FC = () => {
   return (
     <div
       ref={menuRef}
-      style={{ height: `${windowHeight}px` }} // Dynamically set height
       className="flex h-screen flex-col justify-between text-customCream md:hidden"
     >
       <div className="flex flex-grow flex-col justify-start pl-6 pt-6">
@@ -51,7 +62,13 @@ const MobileMenu: React.FC = () => {
         <ul className="font-bigola text-3xl" id="menu-text">
           {links.map((link, idx) => (
             <li key={idx} className="m-0 p-0">
-              <Link href={link.path}>{link.label}</Link>
+              {link.label === "About" ? (
+                <a href="/" onClick={handleAboutClick}>
+                  {link.label}
+                </a>
+              ) : (
+                <Link href={link.path}>{link.label}</Link>
+              )}
             </li>
           ))}
         </ul>

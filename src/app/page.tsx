@@ -107,7 +107,10 @@ export default function Home() {
       <div ref={containerRef} className="block w-screen">
         <div className="hidden-bg fixed inset-0 z-[-1] h-screen w-screen bg-customCream opacity-0"></div>
         <div className="top-bg hidden h-screen w-full md:block"></div>
-        <div className="content-area relative block h-auto p-3 md:ml-[224px] md:p-6">
+        <div
+          id="about-section"
+          className="content-area relative block h-auto p-3 md:ml-[224px] md:p-6"
+        >
           <div className="md:aspect-video md:overflow-hidden">
             <img src={"/images/carousel/2.jpg"} className="" />
           </div>

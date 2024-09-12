@@ -1,40 +1,9 @@
 "use client";
 import Link from "next/link";
-
+import { useRouter } from "next/navigation"; // useRouter replacement in app directory
+import { useEffect, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-
-const tracks: {
-  url: string;
-  title: string;
-  artist: string;
-}[] = [
-  {
-    url: "./audio/do-for-love.mp3",
-    title: "Do For Love",
-    artist: "Get Down Edits",
-  },
-  {
-    url: "./audio/lover-in-u.mp3",
-    title: "Lover In U",
-    artist: "Fig Edits",
-  },
-  {
-    url: "./audio/love-yes.mp3",
-    title: "Love Yes",
-    artist: "HP Vince",
-  },
-  {
-    url: "./audio/get-down-baby.mp3",
-    title: "Get Down Baby",
-    artist: "Deep & Disco",
-  },
-  {
-    url: "./audio/everlasting.mp3",
-    title: "Everlasting",
-    artist: "Dr. Packer",
-  },
-];
 
 const links = [
   { path: "/", label: "About" },
@@ -42,7 +11,29 @@ const links = [
   { path: "/events", label: "Events" },
 ];
 
-const SideMenu: React.FC = ({}) => {
+const SideMenu: React.FC = () => {
+  const router = useRouter(); // Ensure using useRouter from next/navigation
+  const [isMounted, setIsMounted] = useState(false);
+  const [scrollToAbout, setScrollToAbout] = useState(false); // State to trigger scroll
+
+  useEffect(() => {
+    // Ensure this only runs client-side after mount
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    // Check if we're on the "/" page and the scrollToAbout is true
+    if (window.location.pathname === "/" && scrollToAbout) {
+      setTimeout(() => {
+        const aboutSection = document.getElementById("about-section");
+        if (aboutSection) {
+          aboutSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100); // Small delay to ensure DOM is ready
+      setScrollToAbout(false); // Reset the state after scrolling
+    }
+  }, [scrollToAbout]);
+
   useGSAP(() => {
     const menuLinks = document.querySelectorAll(".menu-link");
 
@@ -64,15 +55,6 @@ const SideMenu: React.FC = ({}) => {
           fontStyle: "normal",
         });
       });
-
-      menuLink.addEventListener("onclick", () => {
-        gsap.to(menuLink, {
-          duration: 0.15,
-          ease: "sine.inOut",
-          x: 0,
-          fontStyle: "normal",
-        });
-      });
     });
 
     return () => {
@@ -82,13 +64,36 @@ const SideMenu: React.FC = ({}) => {
       });
     };
   }, []);
+
+  const handleAboutClick = () => {
+    if (!isMounted) return;
+
+    if (window.location.pathname === "/") {
+      // If already on the about page, scroll to the section directly
+      const aboutSection = document.getElementById("about-section");
+      if (aboutSection) {
+        aboutSection.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // Set the state to trigger scrolling once we navigate to the about page
+      setScrollToAbout(true);
+      router.push("/"); // Navigate to the about page
+    }
+  };
+
   return (
     <div className="side-menu z-10 hidden h-screen flex-col justify-between text-customCream md:fixed md:flex md:w-fit md:p-6">
       <div className="flex h-full flex-col justify-start pl-6 pt-6 md:p-0">
         <ul className="font-bigola text-3xl" id="menu-text">
           {links.map((link, idx) => (
             <li key={idx} className="menu-link m-0 p-0">
-              <Link href={link.path}>{link.label}</Link>
+              {link.path === "/" ? (
+                <a onClick={handleAboutClick} className="cursor-pointer">
+                  {link.label}
+                </a>
+              ) : (
+                <Link href={link.path}>{link.label}</Link>
+              )}
             </li>
           ))}
         </ul>
@@ -96,7 +101,8 @@ const SideMenu: React.FC = ({}) => {
           <img
             className="mb-6 w-[150px] md:hidden"
             src="./images/alt-logo.png"
-          ></img>
+            alt="Alternative Logo"
+          />
           <a
             className="cursor-pointer"
             target="_blank"
