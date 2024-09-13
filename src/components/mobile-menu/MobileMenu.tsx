@@ -19,16 +19,6 @@ const MobileMenu: React.FC = () => {
     if (typeof window !== "undefined") {
       setIsClient(true);
       setWindowHeight(window.innerHeight);
-
-      const updateHeight = () => {
-        setWindowHeight(window.innerHeight);
-      };
-
-      window.addEventListener("resize", updateHeight);
-
-      return () => {
-        window.removeEventListener("resize", updateHeight);
-      };
     }
   }, []);
 
