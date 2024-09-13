@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation"; // Use the correct router for the app directory
+import { useRouter } from "next/navigation";
 
 const links = [
   { path: "/", label: "About" },
@@ -20,7 +20,6 @@ const MobileMenu: React.FC = () => {
     }
   }, []);
 
-  // Scroll to about section if we're already on the "/" page
   const scrollToAbout = () => {
     const aboutSection = document.getElementById("about-section");
     if (aboutSection) {
@@ -28,22 +27,19 @@ const MobileMenu: React.FC = () => {
     }
   };
 
-  const handleAboutClick = (e: React.MouseEvent) => {
+  const handleAboutClick = async (e: React.MouseEvent) => {
     e.preventDefault();
+    const router = useRouter();
     if (window.location.pathname === "/") {
-      // If already on the "/" page, scroll to the section
       scrollToAbout();
     } else {
-      // If on another page, navigate to "/" and then scroll
-      router.push("/").then(() => {
-        setTimeout(() => {
-          scrollToAbout(); // Ensure scrolling happens after navigation
-        }, 100); // Small delay to ensure page is fully loaded
-      });
+      await router.push("/");
+      setTimeout(() => {
+        scrollToAbout();
+      }, 100);
     }
   };
 
-  // Render only when on the client side
   if (!isClient) {
     return null;
   }

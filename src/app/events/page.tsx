@@ -134,13 +134,10 @@ export default function Events() {
 
   const sortedEvents = events
     .filter((event) => {
-      
       const eventDate = toZonedTime(new Date(event.date), californiaTimeZone);
-
 
       const today = toZonedTime(new Date(), californiaTimeZone);
 
-    
       const formattedEventDate = formatInTimeZone(
         eventDate,
         californiaTimeZone,
@@ -152,14 +149,12 @@ export default function Events() {
         "yyyy-MM-dd",
       );
 
-    
       return (
         new Date(formattedEventDate).getTime() >=
         new Date(formattedToday).getTime()
       );
     })
     .sort((a, b) => {
-      
       const eventDateA = toZonedTime(new Date(a.date), californiaTimeZone);
       const eventDateB = toZonedTime(new Date(b.date), californiaTimeZone);
       return eventDateA.getTime() - eventDateB.getTime();
@@ -206,7 +201,7 @@ export default function Events() {
           </h2>
         ) : (
           <div>
-            {sortedEvents.map((event, index) => (
+            {events.map((event, index) => (
               <div
                 key={event._id}
                 ref={(el) => {
