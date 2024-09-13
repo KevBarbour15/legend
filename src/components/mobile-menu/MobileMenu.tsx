@@ -11,12 +11,24 @@ const links = [
 
 const MobileMenu: React.FC = () => {
   const menuRef = useRef<HTMLDivElement>(null);
+  const [windowHeight, setWindowHeight] = useState<number>(0);
   const [isClient, setIsClient] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       setIsClient(true);
+      setWindowHeight(window.innerHeight);
+
+      const updateHeight = () => {
+        setWindowHeight(window.innerHeight);
+      };
+
+      window.addEventListener("resize", updateHeight);
+
+      return () => {
+        window.removeEventListener("resize", updateHeight);
+      };
     }
   }, []);
 
@@ -47,6 +59,9 @@ const MobileMenu: React.FC = () => {
     <div
       ref={menuRef}
       className="flex h-screen flex-col justify-between text-customCream md:hidden"
+      style={{
+        height: `${windowHeight}px`,
+      }}
     >
       <div className="flex flex-grow flex-col justify-start pl-6 pt-6">
         <img
