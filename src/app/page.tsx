@@ -139,11 +139,11 @@ export default function Home() {
             </div>
             <div className="mb-3 flex flex-row justify-between md:mb-6">
               <p>Wednesday - Thursday:</p>
-              <p>4pm - 11pm</p>
+              <p>3pm - 11pm</p>
             </div>
             <div className="flex flex-row justify-between">
               <p>Friday - Saturday:</p>
-              <p>4pm - 12am</p>
+              <p>3pm - 12am</p>
             </div>
           </div>
           <div className="flex flex-row justify-between pb-6 font-bigola md:justify-start md:gap-24">
