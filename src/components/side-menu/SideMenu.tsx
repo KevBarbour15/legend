@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation"; // useRouter replacement in app directory
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -12,25 +12,23 @@ const links = [
 ];
 
 const SideMenu: React.FC = () => {
-  const router = useRouter(); // Ensure using useRouter from next/navigation
+  const router = useRouter();
   const [isMounted, setIsMounted] = useState(false);
-  const [scrollToAbout, setScrollToAbout] = useState(false); // State to trigger scroll
+  const [scrollToAbout, setScrollToAbout] = useState(false);
 
   useEffect(() => {
-    // Ensure this only runs client-side after mount
     setIsMounted(true);
   }, []);
 
   useEffect(() => {
-    // Check if we're on the "/" page and the scrollToAbout is true
     if (window.location.pathname === "/" && scrollToAbout) {
       setTimeout(() => {
         const aboutSection = document.getElementById("about-section");
         if (aboutSection) {
           aboutSection.scrollIntoView({ behavior: "smooth" });
         }
-      }, 100); // Small delay to ensure DOM is ready
-      setScrollToAbout(false); // Reset the state after scrolling
+      }, 100);
+      setScrollToAbout(false);
     }
   }, [scrollToAbout]);
 
@@ -69,15 +67,13 @@ const SideMenu: React.FC = () => {
     if (!isMounted) return;
 
     if (window.location.pathname === "/") {
-      // If already on the about page, scroll to the section directly
       const aboutSection = document.getElementById("about-section");
       if (aboutSection) {
         aboutSection.scrollIntoView({ behavior: "smooth" });
       }
     } else {
-      // Set the state to trigger scrolling once we navigate to the about page
       setScrollToAbout(true);
-      router.push("/"); // Navigate to the about page
+      router.push("/");
     }
   };
 

@@ -29,7 +29,6 @@ const MobileMenu: React.FC = () => {
 
   const handleAboutClick = async (e: React.MouseEvent) => {
     e.preventDefault();
-    const router = useRouter();
     if (window.location.pathname === "/") {
       scrollToAbout();
     } else {
