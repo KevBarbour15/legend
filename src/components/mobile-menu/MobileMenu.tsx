@@ -22,9 +22,8 @@ const MobileMenu: React.FC = () => {
 
   const scrollToAbout = () => {
     const aboutSection = document.getElementById("about-section");
-    console.log("trying scrolling to about step 2");
+
     if (aboutSection) {
-      console.log("scrolling to about");
       aboutSection.scrollIntoView({ behavior: "smooth" });
     }
   };
@@ -47,13 +46,13 @@ const MobileMenu: React.FC = () => {
         height: `${windowHeight}px`,
       }}
     >
-      <div className="flex flex-grow flex-col justify-start pl-6 pt-6">
+      <div className="flex flex-grow flex-col justify-start pl-3 pt-3">
         <img
-          className="mb-6 w-[135px] md:hidden"
+          className="mb-3 w-[135px] md:hidden"
           src="./images/alt-logo.png"
           alt="Logo"
         />
-        <ul className="font-bigola text-3xl" id="menu-text">
+        <ul className="font-bigola text-4xl" id="menu-text">
           {links.map((link, idx) => (
             <li key={idx} className="m-0 p-0">
               {link.label === "About" ? (
@@ -67,14 +66,14 @@ const MobileMenu: React.FC = () => {
           ))}
         </ul>
       </div>
-      <div className="mb-12 ml-6 w-fit font-bigola">
+      <div className="mb-12 ml-3 w-fit font-bigola">
         <a
           className="cursor-pointer"
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.google.com/maps/dir//410+L+St,+Sacramento,+CA+95814/@38.5798987,-121.5844553,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x809ad12b9928b091:0x8fd24ebe337fbfe7!2m2!1d-121.5020543!2d38.5799276?entry=ttu&g_ep=EgoyMDI0MDkwNC4wIKXMDSoASAFQAw%3D%3D"
         >
-          <div id="menu-text" className="flex justify-between text-3xl">
+          <div id="menu-text" className="flex justify-between text-4xl">
             <p>410</p>
             <p>L</p>
             <p>St</p>
@@ -91,7 +90,7 @@ const MobileMenu: React.FC = () => {
             <span>t</span>
             <span>o</span>
           </p>
-          <div id="menu-text" className="flex justify-between text-3xl">
+          <div id="menu-text" className="flex justify-between text-4xl">
             <p>CA</p>
             <p>95814</p>
           </div>
