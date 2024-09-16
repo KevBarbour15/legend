@@ -12,7 +12,7 @@ const links = [
 const MobileMenu: React.FC = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const [windowHeight, setWindowHeight] = useState<number>(0);
-  const [isClient, setIsClient] = useState(false);
+  const [isClient, setIsClient] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const MobileMenu: React.FC = () => {
       await router.push("/");
       setTimeout(() => {
         scrollToAbout();
-      }, 100);
+      }, 300);
     }
   };
 
