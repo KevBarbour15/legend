@@ -22,7 +22,6 @@ const slides = [
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
-  const overlayTl = useRef<gsap.core.Timeline | null>(null);
   gsap.registerPlugin(ScrollTrigger);
 
   useGSAP(() => {
@@ -79,25 +78,6 @@ export default function Home() {
         },
         0,
       );
-
-    if (!overlayTl.current) return;
-    overlayTl.current = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".content-area",
-        start: "top 99%",
-        end: "top 35%",
-        scrub: 1,
-      },
-    });
-
-    overlayTl.current.to(
-      ".background-overlay",
-      {
-        ease: "none",
-        scale: 1.75,
-      },
-      0,
-    );
   }, []);
 
   return (

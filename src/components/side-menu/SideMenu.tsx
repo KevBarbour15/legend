@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -12,25 +11,11 @@ const links = [
 ];
 
 const SideMenu: React.FC = () => {
-  const router = useRouter();
   const [isMounted, setIsMounted] = useState(false);
-  const [scrollToAbout, setScrollToAbout] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
-
-  useEffect(() => {
-    if (window.location.pathname === "/" && scrollToAbout) {
-      setTimeout(() => {
-        const aboutSection = document.getElementById("about-section");
-        if (aboutSection) {
-          aboutSection.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
-      setScrollToAbout(false);
-    }
-  }, [scrollToAbout]);
 
   useGSAP(() => {
     const menuLinks = document.querySelectorAll(".menu-link");
@@ -66,14 +51,10 @@ const SideMenu: React.FC = () => {
   const handleAboutClick = () => {
     if (!isMounted) return;
 
-    if (window.location.pathname === "/") {
-      const aboutSection = document.getElementById("about-section");
-      if (aboutSection) {
-        aboutSection.scrollIntoView({ behavior: "smooth" });
-      }
-    } else {
-      setScrollToAbout(true);
-      router.push("/");
+ 
+    const aboutSection = document.getElementById("about-section");
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 

@@ -2,15 +2,14 @@
 import { useState, useEffect, useRef } from "react";
 import EventCard from "@/components/event-card/EventCard";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 //gsap imports
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-import { formatInTimeZone, toZonedTime } from "date-fns-tz";
-
-import { format } from "date-fns";
-
 import SideMenu from "@/components/side-menu/SideMenu";
+import { Button } from "@mui/material";
 import { ArrowBackIos } from "@mui/icons-material";
 
 interface Event {
@@ -26,6 +25,7 @@ interface Event {
 }
 
 export default function Events() {
+  const router = useRouter();
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -130,35 +130,18 @@ export default function Events() {
     fetchEvents();
   }, []);
 
-  const californiaTimeZone = "America/Los_Angeles";
+  const handleAboutScroll = async (e: React.MouseEvent) => {
+    e.preventDefault();
 
-  const sortedEvents = events
-    .filter((event) => {
-      const eventDate = toZonedTime(new Date(event.date), californiaTimeZone);
+    await router.push("/");
+    setTimeout(() => {
+      const aboutSection = document.getElementById("about-section");
 
-      const today = toZonedTime(new Date(), californiaTimeZone);
-
-      const formattedEventDate = formatInTimeZone(
-        eventDate,
-        californiaTimeZone,
-        "yyyy-MM-dd",
-      );
-      const formattedToday = formatInTimeZone(
-        today,
-        californiaTimeZone,
-        "yyyy-MM-dd",
-      );
-
-      return (
-        new Date(formattedEventDate).getTime() >=
-        new Date(formattedToday).getTime()
-      );
-    })
-    .sort((a, b) => {
-      const eventDateA = toZonedTime(new Date(a.date), californiaTimeZone);
-      const eventDateB = toZonedTime(new Date(b.date), californiaTimeZone);
-      return eventDateA.getTime() - eventDateB.getTime();
-    });
+      if (aboutSection) {
+        aboutSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 200);
+  };
 
   return (
     <>
@@ -172,11 +155,11 @@ export default function Events() {
           id="events-heading"
           className="w-[90vw] border-b-2 border-customCream pb-3 text-3xl text-customCream opacity-0 md:hidden md:pb-6"
         >
-          <div className="menu-link">
-            <Link href={"/"}>
-              <ArrowBackIos className="mr-6" />
-              <span className="font-bigola">Events</span>
-            </Link>
+          <div>
+            <Button onClick={handleAboutScroll}>
+              <ArrowBackIos className="mr-6 text-customCream" />
+              <span className="font-bigola text-customCream">Events</span>
+            </Button>
           </div>
         </div>
         <h2
@@ -208,11 +191,11 @@ export default function Events() {
                   eventRefs.current[index] = el;
                 }}
                 className={`max-w-90vw border-customCream opacity-0 md:w-fit ${index === 0 ? "md:border-t-2" : "border-t-2"} ${
-                  index === sortedEvents.length - 1 ? "border-b-2" : ""
+                  index === events.length - 1 ? "border-b-2" : ""
                 }`}
               >
                 <EventCard
-                  length={sortedEvents.length}
+                  length={events.length}
                   fetchEvents={fetchEvents}
                   key={index}
                   event={event}

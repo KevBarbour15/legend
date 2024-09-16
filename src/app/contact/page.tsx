@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 import SideMenu from "@/components/side-menu/SideMenu";
 
@@ -8,18 +9,16 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-
-import Link from "next/link";
+import { Button } from "@mui/material";
 import { ArrowBackIos } from "@mui/icons-material";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import customTheme from "@/app/customTheme";
 import { ThemeProvider, useTheme } from "@mui/material/styles";
-import { format } from "date-fns";
 
 export default function Contact() {
+  const router = useRouter();
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -140,11 +139,18 @@ export default function Contact() {
     }
   };
 
-  useEffect(() => {
-    //const today = new Date();
-    //const formattedDate = today.toISOString().split("T")[0];
-    //setPreferredDate(formattedDate);
-  }, []);
+  const handleAboutScroll = async (e: React.MouseEvent) => {
+    e.preventDefault();
+
+    await router.push("/");
+    setTimeout(() => {
+      const aboutSection = document.getElementById("about-section");
+
+      if (aboutSection) {
+        aboutSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 200);
+  };
 
   return (
     <>
@@ -159,11 +165,13 @@ export default function Contact() {
             id="contact-heading"
             className="w-[90vw] border-b-2 border-customCream pb-3 text-3xl text-customCream opacity-0 md:hidden"
           >
-            <div className="menu-link w-">
-              <Link href={"/"}>
-                <ArrowBackIos className="mr-6" />
-                <span className="font-bigola">Let's Connect</span>
-              </Link>
+            <div>
+              <Button onClick={handleAboutScroll}>
+                <ArrowBackIos className="mr-6 text-customCream" />
+                <span className="font-bigola text-customCream">
+                  Let's Connect
+                </span>
+              </Button>
             </div>
           </div>
           <h2

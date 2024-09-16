@@ -175,7 +175,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       </Collapse>
 
       <div className="flex justify-between bg-opacity-50 p-3 backdrop-blur-md md:mt-3 md:justify-start md:bg-opacity-0 md:pb-6 md:pl-6 md:pr-0 md:pt-0 md:backdrop-blur-none">
-        <IconButton className="player-button px-1 py-0 text-customCream transition-all hover:text-customGold">
+        <IconButton className="player-button px-1 py-0 text-customCream transition-all">
           {mute ? (
             <VolumeOff onClick={handleMute} />
           ) : (
@@ -184,31 +184,31 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         </IconButton>
         <IconButton
           onClick={handlePreviousTrack}
-          className="player-button transition-d px-1 py-0 text-customCream hover:text-customGold"
+          className="player-button transition-d px-1 py-0 text-customCream"
         >
           <SkipPrevious />
         </IconButton>
 
         <IconButton
           onClick={handlePlayPause}
-          className="player-button px-1 py-0 text-customCream transition-all hover:text-customGold"
+          className="player-button px-1 py-0 text-customCream transition-all"
         >
           {playing ? <Pause /> : <PlayArrow />}
         </IconButton>
         <IconButton
           onClick={handleNextTrack}
-          className="player-button px-1 py-0 text-customCream transition-all hover:text-customGold"
+          className="player-button px-1 py-0 text-customCream transition-all"
         >
           <SkipNext />
         </IconButton>
         <IconButton
           onClick={togglePlaylist}
-          className="player-button px-1 py-0 text-customCream transition-all hover:text-customGold"
+          className="player-button px-1 py-0 text-customCream transition-all"
         >
           <LibraryMusic />
         </IconButton>
         <IconButton
-          className="player-button hidden px-1 py-0 text-customCream transition-all hover:text-customGold md:block"
+          className="player-button hidden px-1 py-0 text-customCream transition-all md:block"
           onClick={togglePlayer}
         >
           {visible ? <KeyboardArrowDown /> : <KeyboardArrowUpTwoTone />}

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 const BackgroundOverlay: React.FC = ({}) => {
   const [windowHeight, setWindowHeight] = useState<number>(0);
-  const [isClient, setIsClient] = useState(false);
+  const [isClient, setIsClient] = useState<boolean>(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {

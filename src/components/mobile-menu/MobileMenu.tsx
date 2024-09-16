@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 
 const links = [
   { path: "/", label: "About" },
@@ -13,7 +12,6 @@ const MobileMenu: React.FC = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const [windowHeight, setWindowHeight] = useState<number>(0);
   const [isClient, setIsClient] = useState<boolean>(false);
-  const router = useRouter();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -24,21 +22,17 @@ const MobileMenu: React.FC = () => {
 
   const scrollToAbout = () => {
     const aboutSection = document.getElementById("about-section");
+    console.log("trying scrolling to about step 2");
     if (aboutSection) {
+      console.log("scrolling to about");
       aboutSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   const handleAboutClick = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (window.location.pathname === "/") {
-      scrollToAbout();
-    } else {
-      await router.push("/");
-      setTimeout(() => {
-        scrollToAbout();
-      }, 300);
-    }
+    if (window.location.pathname !== "/") return;
+    scrollToAbout();
   };
 
   if (!isClient) {
