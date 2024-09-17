@@ -10,40 +10,31 @@ const links = [
 
 const MobileMenu: React.FC = () => {
   const menuRef = useRef<HTMLDivElement>(null);
-  const [windowHeight, setWindowHeight] = useState<number>(0);
+  const [windowHeight, setWindowHeight] = useState<string>("100vh");
   const [isClient, setIsClient] = useState<boolean>(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       setIsClient(true);
-      setWindowHeight(window.innerHeight);
+      setWindowHeight(window.innerHeight + "px");
     }
   }, []);
 
-  const scrollToAbout = () => {
-    const aboutSection = document.getElementById("about-section");
-
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   const handleAboutClick = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (window.location.pathname !== "/") return;
-    scrollToAbout();
-  };
+    if (window.location.pathname !== "/" && !isClient) return;
 
-  if (!isClient) {
-    return null;
-  }
+    const aboutSection = document.getElementById("about-section");
+    if (!aboutSection) return;
+    aboutSection.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div
       ref={menuRef}
       className="flex h-screen flex-col justify-between text-customCream md:hidden"
       style={{
-        height: `${windowHeight}px`,
+        height: `${windowHeight}`,
       }}
     >
       <div className="flex flex-grow flex-col justify-start pl-3 pt-3">
