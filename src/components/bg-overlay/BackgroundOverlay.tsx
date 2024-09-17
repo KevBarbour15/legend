@@ -31,6 +31,7 @@ const BackgroundOverlay: React.FC = ({}) => {
       <div
         className="background-overlay fixed inset-0 z-[-1] h-screen bg-cover bg-center transition-all"
         style={{
+          //backgroundImage: "url(/images/carousel/1.jpg)",
           backgroundImage: "url(/images/background.jpg)",
           height: `${windowHeight}px`,
         }}

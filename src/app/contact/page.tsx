@@ -261,9 +261,9 @@ export default function Contact() {
               <Button
                 id="input-section"
                 type="submit"
-                className="menu-link mt-3 font-bigola text-2xl leading-none tracking-wider text-customCream opacity-0"
+                className="menu-link rounded-full p-3 font-bigola text-2xl capitalize text-customCream opacity-0"
               >
-                SUBMIT
+                Submit
               </Button>
             </Box>
           </ThemeProvider>

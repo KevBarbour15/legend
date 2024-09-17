@@ -49,8 +49,6 @@ const EventCard: React.FC<EventCardProps> = ({
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [windowHeight, setWindowHeight] = useState<number>(0);
-  const [isClient, setIsClient] = useState(false);
 
   const handleDeleteOpen = () => {
     setOpenDelete(true);
@@ -110,133 +108,67 @@ const EventCard: React.FC<EventCardProps> = ({
     handleEditClose();
   };
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsClient(true);
-      setWindowHeight(window.innerHeight);
-
-      const updateHeight = () => {
-        setWindowHeight(window.innerHeight);
-      };
-
-      window.addEventListener("resize", updateHeight);
-
-      return () => {
-        window.removeEventListener("resize", updateHeight);
-      };
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!isClient) return;
-  }, [isClient]);
-
   return (
     <>
-      {inDashboard ? (
-        <>
-          <div
-            ref={containerRef}
-            className={
-              "flex w-90vw flex-col p-3 text-left text-customCream md:w-65vw md:p-6 lg:w-60vw xl:w-60vw xxl:w-60vw"
-            }
-          >
-            <div className="flex w-full flex-col">
-              <div className="mb-5 flex max-h-full max-w-full flex-row justify-between text-left font-bigola text-xl md:text-2xl">
-                <h1>{formattedDate}</h1>
-                <h1>{formattedTime}</h1>
-              </div>
-              <div className="flex flex-col justify-between md:flex-row">
-                <div className="flex max-h-full flex-col gap-5 pb-5">
-                  <h1 className="font-bigola text-3xl md:text-5xl">
-                    {event.title}
-                  </h1>
-                  <p className="font-hypatia text-xl md:w-3/5 md:text-2xl">
-                    {event.description}
-                  </p>
-                </div>
-                {event.is_photo ? (
-                  <img
-                    src={event.image_url}
-                    alt="event"
-                    className="h-350px w-350px object-cover md:h-200px md:w-200px"
-                  ></img>
-                ) : (
-                  <>
-                    <video
-                      src={event.image_url} //video url
-                      className="h-350px w-350px object-cover md:h-200px md:w-200px"
-                      loop
-                      autoPlay
-                    ></video>
-                  </>
-                )}
-              </div>
-            </div>
-
-            <div className="mt-3 flex flex-row justify-center">
-              <button
-                className="menu-link mr-6 py-3 font-bigola text-2xl leading-none text-customCream"
-                type="submit"
-                onClick={handleEditOpen}
-              >
-                EDIT
-              </button>
-              <button
-                className="menu-link py-3 font-bigola text-2xl leading-none text-customCream"
-                type="submit"
-                onClick={handleDeleteOpen}
-              >
-                DELETE
-              </button>
+      <div
+        ref={containerRef}
+        className="flex w-90vw flex-col py-3 text-left text-customCream md:w-65vw lg:w-60vw xl:w-60vw xxl:w-60vw"
+      >
+        <div className="flex flex-col justify-between font-bigola md:flex-row">
+          <div className="block">
+            <h2 className="mb-3 text-xl text-customGold md:mb-6">
+              {formattedDate}
+            </h2>
+            <h2 className="mb-3 font-bigola text-3xl md:mb-6 md:text-5xl">
+              {event.title}
+            </h2>
+            <div className="mb-3 flex flex-col md:mb-0 md:flex-row">
+              <h2 className="mb-3 text-xl md:mb-0 md:mr-12">{formattedTime}</h2>
+              <p className="font-hypatia text-xl md:text-2xl">
+                {event.description}
+              </p>
             </div>
           </div>
-        </>
-      ) : (
-        <div
-          ref={containerRef}
-          className="flex w-90vw flex-col p-3 text-left text-customCream md:w-65vw md:p-6 lg:w-60vw xl:w-60vw xxl:w-60vw"
-        >
-          <div className="flex flex-col justify-between font-bigola md:flex-row">
-            <div className="block">
-              <h2 className="mb-3 text-xl text-customGold md:mb-6">
-                {formattedDate}
-              </h2>
-              <h2 className="mb-3 font-bigola text-3xl md:mb-6 md:text-5xl">
-                {event.title}
-              </h2>
-              <div className="mb-3 flex flex-col md:mb-0 md:flex-row">
-                <h2 className="mb-3 text-xl md:mb-0 md:mr-12">
-                  {formattedTime}
-                </h2>
-                <p className="font-hypatia text-xl md:text-2xl">
-                  {event.description}
-                </p>
-              </div>
-            </div>
-            {event.is_photo ? (
-              <Button onClick={handleOpen}>
-                <img
-                  src={event.image_url}
-                  alt="event"
-                  className="h-350px w-350px object-cover md:h-200px md:w-200px"
-                ></img>
-              </Button>
-            ) : (
-              <Button onClick={handleOpen}>
-                <video
-                  src={event.image_url}
-                  className="aspect-square w-full object-cover object-center md:h-250px md:w-250px"
-                  loop
-                  autoPlay
-                  muted
-                  playsInline
-                ></video>
-              </Button>
-            )}
-          </div>
+          {event.is_photo ? (
+            <Button onClick={handleOpen} className="p-0">
+              <img
+                src={event.image_url}
+                alt="event"
+                className="h-auto w-full object-cover md:h-200px md:w-200px"
+              ></img>
+            </Button>
+          ) : (
+            <Button onClick={handleOpen} className="p-0">
+              <video
+                src={event.image_url}
+                className="aspect-square h-auto w-full object-cover object-center md:h-250px md:w-250px"
+                loop
+                autoPlay
+                muted
+                playsInline
+              ></video>
+            </Button>
+          )}
         </div>
-      )}
+        {inDashboard && (
+          <div className="mt-3 flex flex-row justify-center">
+            <Button
+              className="menu-link mr-6 py-3 font-bigola text-2xl leading-none text-customCream"
+              type="button"
+              onClick={handleEditOpen}
+            >
+              Edit
+            </Button>
+            <Button
+              className="menu-link py-3 font-bigola text-2xl leading-none text-customCream"
+              type="button"
+              onClick={handleDeleteOpen}
+            >
+              Delete
+            </Button>
+          </div>
+        )}
+      </div>
 
       {/************************************  Delete event modal *************************************/}
       <Dialog
@@ -346,13 +278,7 @@ const EventCard: React.FC<EventCardProps> = ({
       </Dialog>
 
       {/************************************ View event media modal *************************************/}
-      <Modal
-        open={open}
-        onClose={handleClose}
-        style={{
-          height: `${windowHeight}px`,
-        }}
-      >
+      <Modal open={open} onClose={handleClose}>
         <Box>
           <div className="relative flex h-screen w-screen items-center justify-center p-3">
             <IconButton

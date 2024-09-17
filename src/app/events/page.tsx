@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import EventCard from "@/components/event-card/EventCard";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 //gsap imports
@@ -146,10 +145,10 @@ export default function Events() {
   return (
     <>
       <SideMenu />
-      <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-lg"></div>
+      <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col items-center pb-24 pt-3 md:w-screen md:px-[275px] md:pt-6"
+        className="z-10 flex w-screen flex-col items-center p-3 pb-24 md:w-screen md:px-[275px] md:pt-6"
       >
         <div
           id="events-heading"
