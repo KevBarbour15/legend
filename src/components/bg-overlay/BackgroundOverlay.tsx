@@ -2,16 +2,16 @@
 import React, { useEffect, useState } from "react";
 
 const BackgroundOverlay: React.FC = ({}) => {
-  const [windowHeight, setWindowHeight] = useState<number>(0);
+  const [windowHeight, setWindowHeight] = useState<string>("100vh");
   const [isClient, setIsClient] = useState<boolean>(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       setIsClient(true);
-      setWindowHeight(window.innerHeight);
+      setWindowHeight(window.innerHeight + "px");
 
       const updateHeight = () => {
-        setWindowHeight(window.innerHeight);
+        setWindowHeight(window.innerHeight + "px");
       };
 
       window.addEventListener("resize", updateHeight);
@@ -29,7 +29,7 @@ const BackgroundOverlay: React.FC = ({}) => {
   return (
     <>
       <div
-        className="background-overlay fixed inset-0 z-[-1] bg-cover bg-center"
+        className="background-overlay fixed inset-0 z-[-1] h-screen bg-cover bg-center transition-all"
         style={{
           backgroundImage: "url(/images/background.jpg)",
           height: `${windowHeight}px`,

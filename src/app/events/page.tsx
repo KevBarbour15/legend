@@ -140,7 +140,7 @@ export default function Events() {
       if (aboutSection) {
         aboutSection.scrollIntoView({ behavior: "smooth" });
       }
-    }, 200);
+    }, 300);
   };
 
   return (

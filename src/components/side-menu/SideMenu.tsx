@@ -1,6 +1,9 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
+
+// animation imports
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -12,6 +15,8 @@ const links = [
 
 const SideMenu: React.FC = () => {
   const [isMounted, setIsMounted] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     setIsMounted(true);
@@ -48,13 +53,23 @@ const SideMenu: React.FC = () => {
     };
   }, []);
 
-  const handleAboutClick = () => {
+  const handleAboutClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+
     if (!isMounted) return;
 
- 
-    const aboutSection = document.getElementById("about-section");
-    if (aboutSection) {
+    if (pathname === "/") {
+      const aboutSection = document.getElementById("about-section");
+      if (!aboutSection) return;
       aboutSection.scrollIntoView({ behavior: "smooth" });
+    } else {
+      router.push("/");
+      setTimeout(() => {
+        const aboutSection = document.getElementById("about-section");
+        if (!aboutSection) return;
+
+        aboutSection.scrollIntoView({ behavior: "smooth" });
+      }, 300);
     }
   };
 

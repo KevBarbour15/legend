@@ -105,9 +105,9 @@ export default function Home() {
             <p>
               Our carefully curated sound systems and eclectic vinyl collection
               create an intimate atmosphere, perfect for discovering new tunes
-              or revisiting classics. Enjoy from our local craft beer menu and a
-              menu designed to complement your auditory journey. At Legend Has
-              It, music legends come to life, and every visit tells a new story
+              or revisiting classics. Enjoy from our local craft beer menu
+              designed to complement your auditory journey. At Legend Has It,
+              music legends come to life, and every visit tells a new story
               through sound.
             </p>
           </div>
