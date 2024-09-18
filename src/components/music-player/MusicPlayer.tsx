@@ -77,14 +77,14 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       opacity: 1,
       duration: 0.2,
       delay: 0.15,
-      ease: "power4.in",
+      ease: "linear",
     });
 
     playlistTl.current = gsap.timeline({}).to("#playlist", {
       opacity: 1,
       duration: 0.2,
       delay: 0.15,
-      ease: "power4.in",
+      ease: "linear",
     });
   }, []);
 
@@ -147,6 +147,18 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       id="player-container"
       className="fixed bottom-0 left-0 right-0 z-[150] flex h-auto w-full flex-col opacity-0 md:w-fit"
     >
+      {/* Player Popup */}
+      <Collapse in={visible} id="player" className="opacity-0">
+        <div className="relative left-6 hidden md:block">
+          <img
+            id="now-playing"
+            className="absolute left-[105px] top-[40.75%] z-[3] w-[32px]"
+            src="./images/small-logo.png"
+          ></img>
+          <img className="p-0 md:w-[200px]" src="./images/player.svg"></img>
+        </div>
+      </Collapse>
+
       {/* Playlist Popup */}
       <Collapse
         in={playlistVisible}
@@ -154,7 +166,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         className="z-10 w-full opacity-0 md:mx-0 md:ml-6 md:w-fit"
       >
         <div
-          className="block rounded-sm border border-customNavy bg-gradient-to-tr from-customCream to-customWhite drop-shadow-record md:mb-3"
+          className="mt-3 block rounded-md border border-customNavy bg-gradient-to-r from-customCream to-customWhite"
           id="playlist-border"
         >
           {tracks.map((track, index) => (
@@ -181,7 +193,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               <div className="flex items-center justify-center">
                 <IconButton className="m-0 flex">
                   {index == currentTrackIndex ? (
-                    <GraphicEq className="text-customNavy" id="playlist-item" />
+                    <GraphicEq className="text-customGold" id="playlist-item" />
                   ) : (
                     <PlayArrow
                       className="text-customNavy"
@@ -195,20 +207,9 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
           ))}
         </div>
       </Collapse>
-      {/* Player Popup */}
-      <Collapse in={visible} id="player" className="opacity-0">
-        <div className="relative left-6 hidden md:block">
-          <img
-            id="now-playing"
-            className="absolute left-[105px] top-[40.75%] z-[3] w-[32px]"
-            src="./images/small-logo.png"
-          ></img>
-          <img className="md:w-[200px]" src="./images/player.svg"></img>
-        </div>
-      </Collapse>
 
-      <div className="flex justify-between bg-opacity-50 p-3 backdrop-blur-md md:mt-3 md:justify-start md:bg-opacity-0 md:pb-6 md:pl-6 md:pr-0 md:pt-0 md:backdrop-blur-none">
-        <IconButton className="player-button px-1 py-0 text-customCream transition-all">
+      <div className="mt-3 flex justify-between rounded-md border border-customNavy bg-gradient-to-r from-customCream to-customWhite p-1 md:mb-6 md:ml-6 md:py-0">
+        <IconButton className="player-button text-customNavy transition-all md:px-1 md:py-0">
           {mute ? (
             <VolumeOff onClick={handleMute} />
           ) : (
@@ -217,31 +218,31 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         </IconButton>
         <IconButton
           onClick={handlePreviousTrack}
-          className="player-button transition-d px-1 py-0 text-customCream"
+          className="player-button text-customNavy transition-all md:px-1 md:py-0"
         >
           <SkipPrevious />
         </IconButton>
 
         <IconButton
           onClick={handlePlayPause}
-          className="player-button px-1 py-0 text-customCream transition-all"
+          className="player-button text-customNavy transition-all md:px-1 md:py-0"
         >
           {playing ? <Pause /> : <PlayArrow />}
         </IconButton>
         <IconButton
           onClick={handleNextTrack}
-          className="player-button px-1 py-0 text-customCream transition-all"
+          className="player-button text-customNavy transition-all md:px-1 md:py-0"
         >
           <SkipNext />
         </IconButton>
         <IconButton
           onClick={togglePlaylist}
-          className="player-button px-1 py-0 text-customCream transition-all"
+          className="player-button text-customNavy transition-all md:px-1 md:py-0"
         >
           <LibraryMusic />
         </IconButton>
         <IconButton
-          className="player-button hidden px-1 py-0 text-customCream transition-all md:block"
+          className="player-button hidden text-customNavy transition-all md:block md:px-1 md:py-0"
           onClick={togglePlayer}
         >
           {visible ? <KeyboardArrowDown /> : <KeyboardArrowUpTwoTone />}
