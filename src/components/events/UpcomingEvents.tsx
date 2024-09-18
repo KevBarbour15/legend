@@ -1,13 +1,16 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import EventCard from "@/components/event-card/EventCard";
 import { formatTime } from "@/utils/time";
+import EditEventModal from "../edit-event-modal/EditEventModal";
 
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 //gsap imports
@@ -32,6 +35,16 @@ const UpcomingEventsList: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const eventsTL = useRef<gsap.core.Timeline | null>(null);
   const eventRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [openDelete, setOpenDelete] = useState<boolean>(false);
+  const [openEdit, setOpenEdit] = useState<boolean>(false);
+  const [openImageModal, setOpenImageModal] = useState<boolean>(false);
+
+  const handleDeleteOpen = () => setOpenDelete(true);
+  const handleDeleteClose = () => setOpenDelete(false);
+  const handleEditOpen = () => setOpenEdit(true);
+  const handleEditClose = () => setOpenEdit(false);
+  const handleImageModalOpen = () => setOpenImageModal(true);
+  const handleImageModalClose = () => setOpenImageModal(false);
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -127,37 +140,83 @@ const UpcomingEventsList: React.FC = () => {
       ) : (
         <>
           {sortedEvents.map((event, index) => (
-            <Accordion
-              key={event._id}
-              ref={(el) => {
-                eventRefs.current[index] = el;
-              }}
-              className="w-fit"
-            >
-              <AccordionSummary
-                expandIcon={<ArrowDownwardIcon />}
-                className="flex w-full"
+            <>
+              <EditEventModal
+                handleEditClose={handleEditClose}
+                fetchEvents={fetchEvents}
+                openEdit={openEdit}
+                event={event}
+              />
+              <Accordion
+                key={event._id}
+                ref={(el) => {
+                  eventRefs.current[index] = el;
+                }}
+                className="w-full bg-customWhite drop-shadow-text md:w-[500px]"
               >
-                <Typography className="mr-12 font-bigola text-xl">
-                  {event.title}
-                </Typography>
-                <Typography className="font-bigola text-xl">
-                  {new Date(event.date).toLocaleDateString("en-US", {
-                    timeZone: "UTC",
-                  })}
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <EventCard
-                  length={sortedEvents.length}
-                  fetchEvents={fetchEvents}
-                  key={index}
-                  event={event}
-                  inDashboard={true}
-                  index={index}
-                />
-              </AccordionDetails>
-            </Accordion>
+                <AccordionSummary
+                  expandIcon={<ArrowDropDownIcon className="text-customNavy" />}
+                  className="flex w-full flex-row justify-between text-customNavy"
+                >
+                  <Typography className="font-bigola text-xl">
+                    {new Date(event.date).toLocaleDateString("en-US", {
+                      timeZone: "UTC",
+                    })}
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails className="border-t border-customNavy text-customNavy">
+                  <Typography className="font-bigola text-2xl">
+                    {event.title}
+                  </Typography>
+                  <Typography className="font-hypatia text-lg">
+                    {formatTime(event.time)}
+                  </Typography>
+                  <Typography className="font-hypatia text-lg">
+                    {event.description}
+                  </Typography>
+
+                  {event.is_photo ? (
+                    <Button onClick={handleImageModalOpen} className="p-0">
+                      <img
+                        src={event.image_url}
+                        alt="event"
+                        className="h-auto w-full border border-customNavy object-cover"
+                      ></img>
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={handleImageModalOpen}
+                      className="border p-0"
+                    >
+                      <video
+                        src={event.image_url}
+                        className="aspect-square h-auto w-full border border-customNavy object-cover object-center"
+                        loop
+                        autoPlay
+                        muted
+                        playsInline
+                      ></video>
+                    </Button>
+                  )}
+                  <div className="flex w-full justify-end pt-3">
+                    <Button
+                      className="mr-6 font-hypatiaBold text-customNavy"
+                      type="button"
+                      onClick={handleEditOpen}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      className="font-hypatiaBold text-customNavy"
+                      type="button"
+                      onClick={handleDeleteOpen}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                </AccordionDetails>
+              </Accordion>
+            </>
           ))}
         </>
       )}

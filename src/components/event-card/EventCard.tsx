@@ -42,18 +42,16 @@ const EventCard: React.FC<EventCardProps> = ({
   fetchEvents,
 }) => {
   const [isClient, setIsClient] = useState<boolean>(false);
-  const [openDelete, setOpenDelete] = useState(false);
-  const [openEdit, setOpenEdit] = useState(false);
-  const [editedEvent, setEditedEvent] = useState<Event>({ ...event });
+  const [openDelete, setOpenDelete] = useState<boolean>(false);
   const formattedDate = new Date(event.date).toLocaleDateString("en-US", {
     timeZone: "UTC",
   });
   const formattedTime = formatTime(event.time);
   const tl = useRef<gsap.core.Timeline | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [open, setOpen] = useState<boolean>(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [openImageModal, setOpenImageModal] = useState<boolean>(false);
+  const handleImageModalOpen = () => setOpenImageModal(true);
+  const handleImageModalClose = () => setOpenImageModal(false);
 
   const handleDeleteOpen = () => {
     setOpenDelete(true);
@@ -80,37 +78,6 @@ const EventCard: React.FC<EventCardProps> = ({
     } catch (error) {
       console.log("Error: ", error);
     }
-  };
-
-  const handleEditOpen = () => {
-    setOpenEdit(true);
-  };
-
-  const handleEditClose = () => {
-    setOpenEdit(false);
-  };
-
-  const handleEditChange =
-    (field: keyof Event) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      setEditedEvent({ ...editedEvent, [field]: event.target.value });
-    };
-
-  const confirmEdit = async () => {
-    try {
-      const response = await fetch(`/api/events?action=${"EditCalendar"}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...editedEvent }),
-      });
-
-      if (response.ok) {
-        fetchEvents();
-        handleEditClose();
-      }
-    } catch (error) {}
-    handleEditClose();
   };
 
   useGSAP(() => {
@@ -156,7 +123,7 @@ const EventCard: React.FC<EventCardProps> = ({
             </div>
           </div>
           {event.is_photo ? (
-            <Button onClick={handleOpen} className="p-0">
+            <Button onClick={handleImageModalOpen} className="p-0">
               <img
                 src={event.image_url}
                 alt="event"
@@ -164,7 +131,7 @@ const EventCard: React.FC<EventCardProps> = ({
               ></img>
             </Button>
           ) : (
-            <Button onClick={handleOpen} className="p-0">
+            <Button onClick={handleImageModalOpen} className="p-0">
               <video
                 src={event.image_url}
                 className="aspect-square h-auto w-full object-cover object-center md:h-250px md:w-250px"
@@ -176,24 +143,6 @@ const EventCard: React.FC<EventCardProps> = ({
             </Button>
           )}
         </div>
-        {inDashboard && (
-          <div className="mt-3 flex flex-row justify-center">
-            <Button
-              className="menu-link mr-6 py-3 font-bigola text-2xl capitalize text-customCream"
-              type="button"
-              onClick={handleEditOpen}
-            >
-              Edit
-            </Button>
-            <Button
-              className="menu-link rounded-full p-3 font-bigola text-2xl capitalize text-customCream"
-              type="button"
-              onClick={handleDeleteOpen}
-            >
-              Delete
-            </Button>
-          </div>
-        )}
       </div>
 
       {/************************************  Delete event modal *************************************/}
@@ -221,94 +170,13 @@ const EventCard: React.FC<EventCardProps> = ({
       </Dialog>
 
       {/************************************ Edit event modal *************************************/}
-      <Dialog
-        open={openEdit}
-        onClose={handleEditClose}
-        aria-labelledby="edit-dialog-title"
-        aria-describedby="edit-dialog-description"
-      >
-        <DialogContent>
-          <TextField
-            margin="dense"
-            label="Title"
-            type="text"
-            fullWidth
-            value={editedEvent.title}
-            onChange={handleEditChange("title")}
-          />
-          <TextField
-            margin="dense"
-            label="Date"
-            type="date"
-            fullWidth
-            value={editedEvent.date}
-            onChange={handleEditChange("date")}
-            InputLabelProps={{ shrink: true }}
-          />
-          <TextField
-            margin="dense"
-            label="Time"
-            type="time"
-            fullWidth
-            value={editedEvent.time}
-            onChange={handleEditChange("time")}
-            InputLabelProps={{ shrink: true }}
-          />
-          <TextField
-            margin="dense"
-            label="Image URL"
-            type="text"
-            fullWidth
-            value={editedEvent.image_url}
-            onChange={handleEditChange("image_url")}
-          />
-          <TextField
-            margin="dense"
-            label="Description"
-            type="text"
-            fullWidth
-            multiline
-            rows={3}
-            value={editedEvent.description}
-            onChange={handleEditChange("description")}
-          />
-          {/*
-          <FormGroup>
-            <FormControlLabel
-              label="Contacted"
-              className="form-label"
-              checked={editedEvent.isPublic}
-              control={<Switch />}
-            />
-          </FormGroup>
-          */}
-          <TextField
-            margin="dense"
-            label="Notes"
-            type="text"
-            fullWidth
-            multiline
-            rows={4}
-            value={editedEvent.notes}
-            onChange={handleEditChange("notes")}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleEditClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={confirmEdit} color="primary" autoFocus>
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
 
       {/************************************ View event media modal *************************************/}
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={openImageModal} onClose={handleImageModalClose}>
         <Box>
           <div className="relative flex h-screen w-screen items-center justify-center p-3">
             <IconButton
-              onClick={handleClose}
+              onClick={handleImageModalClose}
               className="fixed right-3 top-3 md:right-6 md:top-6"
             >
               <Close className="text-customWhite transition-all hover:scale-125 hover:text-customCream" />

@@ -1,10 +1,13 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
+
 import gsap from "gsap";
-import { Draggable } from "gsap/Draggable";
+
 import { useGSAP } from "@gsap/react";
 import ReactHowler from "react-howler";
 import { IconButton, Collapse } from "@mui/material";
+
 import {
   PlayArrow,
   Pause,
@@ -19,8 +22,6 @@ import {
   Person,
   GraphicEq,
 } from "@mui/icons-material";
-
-gsap.registerPlugin(Draggable);
 
 interface Track {
   title: string;
@@ -42,9 +43,10 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
   const recordTl = useRef<gsap.core.Timeline | null>(null);
   const recordPlayerTl = useRef<gsap.core.Timeline | null>(null);
   const playlistTl = useRef<gsap.core.Timeline | null>(null);
+  const pathName = usePathname();
 
   useEffect(() => {
-    if (window.innerWidth >= 768) {
+    if (window.innerWidth >= 768 && pathName !== "/dashboard") {
       setVisible(true);
     }
   }, []);

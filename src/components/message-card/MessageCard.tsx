@@ -116,55 +116,54 @@ const MessageCard: React.FC<MessageCardProps> = ({
 
   return (
     <>
-      <Box className="mb-3 rounded-lg text-customNavy drop-shadow-text md:w-[60vw]">
-        <Card className="w-full bg-gradient-to-r from-customWhite via-customCream p-3 backdrop-blur-sm">
-          <CardContent>
-            <Typography className="mb-1 p-0 font-bigola text-2xl capitalize text-customNavy">
-              {message.firstName} {message.lastName}
-            </Typography>
-            <Typography className="mb-1 p-0 font-bigola text-xl text-customNavy">
-              {formattedDate}
-            </Typography>
-            <FormGroup className="font-hypatia text-customNavy">
-              <FormControlLabel
-                control={
-                  <Switch checked={contacted} onChange={handleContacted} />
-                }
-                label="Contacted"
+      <Card className="w-full bg-gradient-to-r from-customWhite via-customCream p-3 backdrop-blur-sm">
+        <CardContent>
+          <Typography className="mb-1 p-0 font-bigola text-2xl capitalize text-customNavy">
+            {message.firstName} {message.lastName}
+          </Typography>
+          <Typography className="mb-1 p-0 font-bigola text-xl text-customNavy">
+            {formattedDate}
+          </Typography>
+          <FormGroup className="font-hypatia text-customNavy">
+            <FormControlLabel
+              control={
+                <Switch checked={contacted} onChange={handleContacted} />
+              }
+              label="Contacted"
+            />
+            <FormControlLabel
+              control={<Switch checked={read} onChange={handleRead} />}
+              label="Read"
+            />
+          </FormGroup>
+          <List>
+            <ListItem className="p-0">
+              <ListItemText primary="Email:" secondary={message.email} />
+            </ListItem>
+            <ListItem className="p-0">
+              <ListItemText primary="Phone:" secondary={message.phone} />
+            </ListItem>
+            <ListItem className="p-0">
+              <ListItemText
+                primary="Preferred date:"
+                secondary={formattedPreferredDate}
               />
-              <FormControlLabel
-                control={<Switch checked={read} onChange={handleRead} />}
-                label="Read"
-              />
-            </FormGroup>
-            <List>
-              <ListItem className="p-0">
-                <ListItemText primary="Email:" secondary={message.email} />
-              </ListItem>
-              <ListItem className="p-0">
-                <ListItemText primary="Phone:" secondary={message.phone} />
-              </ListItem>
-              <ListItem className="p-0">
-                <ListItemText
-                  primary="Preferred date:"
-                  secondary={formattedPreferredDate}
-                />
-              </ListItem>
-              <ListItem className="p-0">
-                <ListItemText primary="Message:" secondary={message.message} />
-              </ListItem>
-            </List>
-          </CardContent>
-          <CardActions>
-            <Button
-              onClick={handleDeleteOpen}
-              className="w-fit rounded-full px-12 py-3 font-bigola text-lg text-customNavy transition-colors duration-300"
-            >
-              Delete message
-            </Button>
-          </CardActions>
-        </Card>
-      </Box>
+            </ListItem>
+            <ListItem className="p-0">
+              <ListItemText primary="Message:" secondary={message.message} />
+            </ListItem>
+          </List>
+        </CardContent>
+        <CardActions>
+          <Button
+            onClick={handleDeleteOpen}
+            className="w-fit rounded-full px-12 py-3 font-bigola text-lg text-customNavy transition-colors duration-300"
+          >
+            Delete message
+          </Button>
+        </CardActions>
+      </Card>
+
       <Dialog
         open={open}
         onClose={handleDeleteClose}
