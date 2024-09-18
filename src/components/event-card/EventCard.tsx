@@ -12,6 +12,10 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Close from "@mui/icons-material/Close";
 
+// animation imports
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
 interface Event {
   _id: string;
   title: string;
@@ -37,6 +41,7 @@ const EventCard: React.FC<EventCardProps> = ({
   inDashboard,
   fetchEvents,
 }) => {
+  const [isClient, setIsClient] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [editedEvent, setEditedEvent] = useState<Event>({ ...event });
@@ -46,7 +51,7 @@ const EventCard: React.FC<EventCardProps> = ({
   const formattedTime = formatTime(event.time);
   const tl = useRef<gsap.core.Timeline | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState<boolean>(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -108,11 +113,32 @@ const EventCard: React.FC<EventCardProps> = ({
     handleEditClose();
   };
 
+  useGSAP(() => {
+    if (!containerRef.current && !isClient) return;
+
+    gsap.set(containerRef.current, {
+      opacity: 0,
+    });
+
+    tl.current = gsap.timeline({}).to(containerRef.current, {
+      opacity: 1,
+      duration: 0.5,
+      ease: "linear",
+      delay: 0.25,
+    });
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsClient(true);
+    }, 100);
+  }, []);
+
   return (
     <>
       <div
         ref={containerRef}
-        className="flex w-90vw flex-col py-3 text-left text-customCream md:w-65vw lg:w-60vw xl:w-60vw xxl:w-60vw"
+        className="flex w-90vw flex-col py-3 text-left text-customCream opacity-0 md:w-65vw lg:w-60vw xl:w-60vw xxl:w-60vw"
       >
         <div className="flex flex-col justify-between font-bigola md:flex-row">
           <div className="block">
@@ -153,14 +179,14 @@ const EventCard: React.FC<EventCardProps> = ({
         {inDashboard && (
           <div className="mt-3 flex flex-row justify-center">
             <Button
-              className="menu-link mr-6 py-3 font-bigola text-2xl leading-none text-customCream"
+              className="menu-link mr-6 py-3 font-bigola text-2xl capitalize text-customCream"
               type="button"
               onClick={handleEditOpen}
             >
               Edit
             </Button>
             <Button
-              className="menu-link py-3 font-bigola text-2xl leading-none text-customCream"
+              className="menu-link rounded-full p-3 font-bigola text-2xl capitalize text-customCream"
               type="button"
               onClick={handleDeleteOpen}
             >
@@ -285,18 +311,18 @@ const EventCard: React.FC<EventCardProps> = ({
               onClick={handleClose}
               className="fixed right-3 top-3 md:right-6 md:top-6"
             >
-              <Close className="text-customWhite drop-shadow-record transition-all hover:scale-125 hover:text-customCream" />
+              <Close className="text-customWhite transition-all hover:scale-125 hover:text-customCream" />
             </IconButton>
             {event.is_photo ? (
               <img
                 src={event.image_url}
                 alt="event"
-                className="event-media aspect-square w-full object-cover object-center drop-shadow-record md:h-[75vh] md:w-auto"
+                className="event-media aspect-square w-full object-cover object-center md:h-[75vh] md:w-auto"
               ></img>
             ) : (
               <video
                 src={event.image_url}
-                className="event-media aspect-square w-full object-cover object-center drop-shadow-record md:h-[75vh] md:w-auto"
+                className="event-media aspect-square w-full object-cover object-center md:h-[75vh] md:w-auto"
                 loop
                 autoPlay
                 muted

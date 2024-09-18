@@ -3,11 +3,9 @@ import React, { useEffect, useState } from "react";
 
 const BackgroundOverlay: React.FC = ({}) => {
   const [windowHeight, setWindowHeight] = useState<string>("100vh");
-  const [isClient, setIsClient] = useState<boolean>(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setIsClient(true);
       setWindowHeight(window.innerHeight + "px");
 
       const updateHeight = () => {
@@ -22,10 +20,6 @@ const BackgroundOverlay: React.FC = ({}) => {
     }
   }, []);
 
-  // Render only when on the client side
-  if (!isClient) {
-    return null;
-  }
   return (
     <>
       <div

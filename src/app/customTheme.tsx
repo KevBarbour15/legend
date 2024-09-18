@@ -17,7 +17,7 @@ const customTheme = (outerTheme: Theme) =>
           root: {
             color: "#dfcfc0",
             "--TextField-brandBorderColor": "#dfcfc0",
-            "--TextField-brandBorderHoverColor": "#234055",
+            "--TextField-brandBorderHoverColor": "#f4f4f4",
             "--TextField-brandBorderFocusedColor": "#f4f4f4",
             "& label": {
               color: "#dfcfc0",

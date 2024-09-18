@@ -5,7 +5,6 @@ import EventCard from "@/components/event-card/EventCard";
 //gsap imports
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-
 interface Event {
   _id: string;
   title: string;
@@ -18,7 +17,7 @@ interface Event {
   is_public: boolean;
 }
 
-const EventsList: React.FC = () => {
+const UpcomingEventsList: React.FC = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -48,10 +47,8 @@ const EventsList: React.FC = () => {
         {
           duration: 0.35,
           opacity: 1,
-          scale: 1,
-          ease: "linear",
         },
-        0.15,
+        0.35,
       );
     }
 
@@ -63,7 +60,6 @@ const EventsList: React.FC = () => {
           {
             duration: 0.35,
             opacity: 1,
-            ease: "linear",
           },
           0.15,
         )
@@ -100,30 +96,29 @@ const EventsList: React.FC = () => {
     fetchEvents();
   }, []);
 
-  // sort events by date
-  const sortedEvents = events.sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
-  );
+  const sortedEvents = events
+    .filter((event) => new Date(event.date).getTime() >= new Date().getTime())
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   return (
     <div
       ref={containerRef}
-      className="flex w-screen flex-col items-center justify-center py-6 text-center"
+      className="z-10 flex w-screen flex-col items-center justify-center py-6 text-center"
     >
       {loading ? (
-        <h1
+        <h2
           id="event-subheading"
-          className="my-5 font-bigola text-4xl text-customWhite lg:text-5xl"
+          className="my-6 font-hypatia text-3xl text-customWhite lg:text-4xl"
         >
           Loading events...
-        </h1>
+        </h2>
       ) : events.length === 0 ? (
-        <h1
+        <h2
           id="no-events"
-          className="my-5 font-bigola text-4xl text-customWhite lg:text-5xl"
+          className="my-5 font-hypatia text-3xl text-customWhite lg:text-4xl"
         >
           No events found.
-        </h1>
+        </h2>
       ) : (
         <>
           {sortedEvents.map((event, index) => (
@@ -132,7 +127,7 @@ const EventsList: React.FC = () => {
               ref={(el) => {
                 eventRefs.current[index] = el;
               }}
-              className="opacity-0"
+              className=""
             >
               <EventCard
                 length={sortedEvents.length}
@@ -150,4 +145,4 @@ const EventsList: React.FC = () => {
   );
 };
 
-export default EventsList;
+export default UpcomingEventsList;

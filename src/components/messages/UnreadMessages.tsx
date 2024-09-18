@@ -21,11 +21,10 @@ interface Message {
   _id: string;
 }
 
-const MessagesList: React.FC = () => {
+const UnreadMessagesList: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [unreadMessages, setUnreadMessages] = useState<number>(4);
   const containerRef = useRef<HTMLDivElement>(null);
   const tL = useRef<gsap.core.Timeline | null>(null);
 
@@ -67,28 +66,29 @@ const MessagesList: React.FC = () => {
     fetchMessages();
   }, []);
 
-  // sort events by date
-  const sortedMessages = messages.sort(
-    (a, b) => new Date(a.sentAt).getTime() - new Date(b.sentAt).getTime(),
-  );
+  const unreadMessages = messages
+    .filter((message) => !message.read)
+    .sort(
+      (a, b) => new Date(a.sentAt).getTime() - new Date(b.sentAt).getTime(),
+    );
 
   return (
     <div
       ref={containerRef}
       id="messages-container"
-      className="flex w-screen flex-col items-center justify-center text-center"
+      className="flex w-screen flex-col items-center justify-center pb-12 pt-3 text-center"
     >
       {loading ? (
         <h1 className="mt-5 font-bigola text-4xl text-customWhite lg:text-5xl">
           Loading messages...
         </h1>
-      ) : sortedMessages.length === 0 ? (
+      ) : unreadMessages.length === 0 ? (
         <h1 className="mt-5 font-bigola text-4xl text-customWhite lg:text-5xl">
           No messages found.
         </h1>
       ) : (
         <>
-          {sortedMessages.map((message, index) => (
+          {unreadMessages.map((message, index) => (
             <MessageCard
               key={index}
               fetchMessages={fetchMessages}
@@ -101,4 +101,4 @@ const MessagesList: React.FC = () => {
   );
 };
 
-export default MessagesList;
+export default UnreadMessagesList;

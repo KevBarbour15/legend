@@ -1,43 +1,30 @@
 "use client";
 import React, { useState } from "react";
 
-// Dashboard components
 import DashHeader from "@/components/dash-header/DashHeader";
 import CreateEvent from "@/components/create-event/CreateEvent";
 import LiveStream from "@/components/live-stream/LiveStream";
-import EventsList from "@/components/events/Events";
-import MessagesList from "@/components/messages/Messages";
-import UpcomingEventsList from "@/components/upcoming-events/UpcomingEvents";
-import PastEventsList from "@/components/past-events/PastEvents";
+import UnreadMessagesList from "@/components/messages/UnreadMessages";
+import ReadMessagesList from "@/components/messages/ReadMessages";
+import UpcomingEventsList from "@/components/events/UpcomingEvents";
+import PastEventsList from "@/components/events/PastEvents";
 
-// Next.js imports and Kinde Auth
-import { redirect } from "next/navigation";
-const postLogoutRedirectURL = process.env.KINDE_POST_LOGOUT_REDIRECT_URL;
-import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-
-// Default component
 const DefaultComponent: React.FC = () => <div>No component selected</div>;
 
-// Set display names
 CreateEvent.displayName = "CreateEvent";
 LiveStream.displayName = "LiveStream";
-EventsList.displayName = "EventsList";
 UpcomingEventsList.displayName = "UpcomingEventsList";
 PastEventsList.displayName = "PastEventsList";
-MessagesList.displayName = "MessagesList";
+UnreadMessagesList.displayName = "MessagesList";
 DefaultComponent.displayName = "DefaultComponent";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState<string>("Create Event");
 
-  // change the active tab based on the button clicked
   let CurrentComponent: React.ComponentType<any>;
   switch (activeTab) {
     case "Create Event":
       CurrentComponent = CreateEvent;
-      break;
-    case "Events List":
-      CurrentComponent = EventsList;
       break;
     case "Upcoming Events":
       CurrentComponent = UpcomingEventsList;
@@ -48,8 +35,11 @@ export default function Dashboard() {
     case "Live Stream":
       CurrentComponent = LiveStream;
       break;
-    case "Messages":
-      CurrentComponent = MessagesList;
+    case "Unread Messages":
+      CurrentComponent = UnreadMessagesList;
+      break;
+    case "Read Messages":
+      CurrentComponent = ReadMessagesList;
       break;
     default:
       CurrentComponent = DefaultComponent;
@@ -57,9 +47,9 @@ export default function Dashboard() {
 
   return (
     <div className="relative">
-      <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-lg"></div>
-      <div className="z-10">
-        <DashHeader setActiveTab={setActiveTab} />
+      <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
+      <div className="z-10 pb-12">
+        <DashHeader setActiveTab={setActiveTab} activeTab={activeTab} />
         <CurrentComponent />
       </div>
     </div>

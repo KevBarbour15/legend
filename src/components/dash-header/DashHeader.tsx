@@ -1,111 +1,115 @@
-import Link from "next/link";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Button,
+  Menu,
+  MenuItem,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import MailIcon from "@mui/icons-material/Mail";
+import EventIcon from "@mui/icons-material/Event";
+import EditCalendarIcon from "@mui/icons-material/EditCalendar";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+import SportsBarIcon from "@mui/icons-material/SportsBar";
 import LogoutIcon from "@mui/icons-material/Logout";
-import Button from "@mui/material/Button";
-
-import Box from "@mui/material/Box";
-import Fab from "@mui/material/Fab";
-
-import Event from "@mui/icons-material/Event";
-import EditCalendar from "@mui/icons-material/EditCalendar";
-
-import Drawer from "@mui/material/Drawer";
-
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MenuBook from "@mui/icons-material/MenuBook";
-import SportsBar from "@mui/icons-material/SportsBar";
-
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-
-//gsap imports
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 
 interface DashProps {
   setActiveTab: (tab: string) => void;
+  activeTab: string;
 }
 
-const DashHeader: React.FC<DashProps> = ({ setActiveTab }) => {
+const DashHeader: React.FC<DashProps> = ({ setActiveTab, activeTab }) => {
   const postLogoutRedirectURL = process.env.KINDE_POST_LOGOUT_REDIRECT_URL;
-  const [open, setOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const toggleDrawer = (newOpen: boolean) => () => {
-    setOpen(newOpen);
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
   };
 
-  const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
-      <List>
-        {["Create Event", "Upcoming Events", "Past Events"].map(
-          (text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton onClick={() => setActiveTab(text)}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ),
-        )}
-      </List>
-      <Divider />
-      <List>
-        {["Edit Menu", "Menu Items"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <MenuBook /> : <SportsBar />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["Unread Messages", "Read Messages"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <ListItem disablePadding>
-        <ListItemButton>
-          <LogoutLink postLogoutRedirectURL={postLogoutRedirectURL}>
-            <ListItemIcon>
-              <LogoutIcon />
-            </ListItemIcon>
-          </LogoutLink>
-        </ListItemButton>
-      </ListItem>
-    </Box>
-  );
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleMenuItemClick = (tab: string) => {
+    setActiveTab(tab);
+    handleClose();
+  };
 
   return (
-    <div className="fixed bottom-[25px] right-[25px]">
-      <Box sx={{ "& > :not(style)": { m: 1 } }}>
-        <Fab onClick={toggleDrawer(true)} variant="extended">
-          Dashboard
-        </Fab>
-      </Box>
-      <Drawer open={open} onClose={toggleDrawer(false)}>
-        {DrawerList}
-      </Drawer>
-    </div>
+    <AppBar className="sticky top-0 bg-customNavy">
+      <Toolbar>
+        <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          sx={{ mr: 2 }}
+          onClick={handleMenu}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{ flexGrow: 1 }}
+          className="font-bigola"
+        >
+          {activeTab}
+        </Typography>
+        <Menu
+          id="menu-appbar"
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={() => handleMenuItemClick("Create Event")}>
+            <EditCalendarIcon sx={{ mr: 1 }} /> Create Event
+          </MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick("Upcoming Events")}>
+            <EventIcon sx={{ mr: 1 }} /> Upcoming Events
+          </MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick("Past Events")}>
+            <EventIcon sx={{ mr: 1 }} /> Past Events
+          </MenuItem>
+          {/*
+          <MenuItem onClick={() => handleMenuItemClick("Edit Menu")}>
+            <MenuBookIcon sx={{ mr: 1 }} /> Edit Menu
+          </MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick("Menu Items")}>
+            <SportsBarIcon sx={{ mr: 1 }} /> Menu Items
+          </MenuItem>
+          */}
+          <MenuItem onClick={() => handleMenuItemClick("Unread Messages")}>
+            <MailIcon sx={{ mr: 1 }} /> Unread Messages
+          </MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick("Read Messages")}>
+            <MailIcon sx={{ mr: 1 }} /> Read Messages
+          </MenuItem>
+        </Menu>
+        <LogoutLink postLogoutRedirectURL={postLogoutRedirectURL}>
+          <Button
+            color="inherit"
+            startIcon={<LogoutIcon />}
+            className="font-bigola"
+          >
+            Logout
+          </Button>
+        </LogoutLink>
+      </Toolbar>
+    </AppBar>
   );
 };
 

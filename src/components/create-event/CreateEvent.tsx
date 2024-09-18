@@ -88,11 +88,8 @@ const CreateEvent: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className="my-6 flex w-screen flex-col text-center opacity-0"
+      className="flex w-screen flex-col items-center pt-3"
     >
-      <h1 className="font-bigola text-4xl text-customWhite lg:text-5xl">
-        Create Event
-      </h1>
       <div>
         <form className="flex flex-col items-center" onSubmit={handleSubmit}>
           <div className="my-3">

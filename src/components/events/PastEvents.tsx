@@ -112,23 +112,20 @@ const PastEventsList: React.FC = () => {
       ref={containerRef}
       className="z-10 flex w-screen flex-col items-center justify-center py-6 text-center"
     >
-      <h1 className="font-bigola text-4xl text-customWhite lg:text-5xl">
-        Past Events
-      </h1>
       {loading ? (
-        <h1
+        <h2
           id="event-subheading"
           className="my-6 font-hypatia text-3xl text-customWhite lg:text-4xl"
         >
           Loading events...
-        </h1>
+        </h2>
       ) : events.length === 0 ? (
-        <h1
+        <h2
           id="no-events"
           className="my-6 font-hypatia text-3xl text-customWhite lg:text-4xl"
         >
           No events found.
-        </h1>
+        </h2>
       ) : (
         <>
           {sortedEvents.map((event, index) => (

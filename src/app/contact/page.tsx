@@ -156,7 +156,7 @@ export default function Contact() {
     <>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <SideMenu />
-        <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-lg"></div>
+        <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
         <div
           ref={containerRef}
           className="z-10 flex w-screen flex-col items-center pb-12 pt-3 md:px-[260px] md:pt-6"

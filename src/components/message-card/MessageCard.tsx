@@ -1,13 +1,23 @@
-import { useState } from "react";
-import Switch from "@mui/material/Switch";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import DialogTitle from "@mui/material/DialogTitle";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import Button from "@mui/material/Button";
+import React, { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardActions,
+  Typography,
+  Switch,
+  FormGroup,
+  FormControlLabel,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button,
+  List,
+  ListItem,
+  ListItemText,
+  Box,
+} from "@mui/material";
 
 interface Message {
   _id: string;
@@ -27,13 +37,11 @@ interface Message {
 interface MessageCardProps {
   message: Message;
   fetchMessages: () => void;
-  //calculateUnreadMessages: () => void;
 }
 
 const MessageCard: React.FC<MessageCardProps> = ({
   message,
   fetchMessages,
-  //calculateUnreadMessages,
 }) => {
   const [contacted, setContacted] = useState<boolean>(message.contacted);
   const [read, setRead] = useState<boolean>(message.read);
@@ -52,13 +60,8 @@ const MessageCard: React.FC<MessageCardProps> = ({
         `/api/message?action=updateContactedStatus`,
         {
           method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            _id: message._id,
-            contacted: newContacted,
-          }),
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ _id: message._id, contacted: newContacted }),
         },
       );
 
@@ -67,7 +70,6 @@ const MessageCard: React.FC<MessageCardProps> = ({
       }
     } catch (error) {
       console.error("Failed to update contacted status.");
-      // reset the switch
       setContacted(!newContacted);
     }
   };
@@ -78,45 +80,27 @@ const MessageCard: React.FC<MessageCardProps> = ({
     try {
       const response = await fetch(`/api/message?action=updateReadStatus`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          _id: message._id,
-          read: newRead,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ _id: message._id, read: newRead }),
       });
 
       if (response.ok) {
         console.log("Read status updated successfully.");
-        //calculateUnreadMessages();
       }
     } catch (error) {
-      console.error("Failed to update read/unread status.");
-      // reset the switch
       setRead(!newRead);
-      //calculateUnreadMessages();
     }
   };
 
-  const handleDeleteOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDeleteClose = () => {
-    setOpen(false);
-  };
+  const handleDeleteOpen = () => setOpen(true);
+  const handleDeleteClose = () => setOpen(false);
 
   const confirmDelete = async () => {
     try {
       const response = await fetch("/api/message", {
         method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          messageId: message._id,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messageId: message._id }),
       });
 
       if (response.ok) {
@@ -132,94 +116,62 @@ const MessageCard: React.FC<MessageCardProps> = ({
 
   return (
     <>
-      <div className="w-100vw flex flex-col border-b border-customGold p-5 text-left md:w-65vw lg:w-50vw xl:w-45vw xxl:w-40vw">
-        <div className="flex flex-row justify-between">
-          <div>
-            <h1 className="mb-2 mr-5 font-bigola text-3xl text-customWhite">
+      <Box className="mb-3 rounded-lg text-customNavy drop-shadow-text md:w-[60vw]">
+        <Card className="w-full bg-gradient-to-r from-customWhite via-customCream p-3 backdrop-blur-sm">
+          <CardContent>
+            <Typography className="mb-1 p-0 font-bigola text-2xl capitalize text-customNavy">
               {message.firstName} {message.lastName}
-            </h1>
-
-            <p className="mb-1 font-hypatia text-lg lg:text-xl">
+            </Typography>
+            <Typography className="mb-1 p-0 font-bigola text-xl text-customNavy">
               {formattedDate}
-            </p>
-          </div>
-          <div>
-            <FormGroup>
+            </Typography>
+            <FormGroup className="font-hypatia text-customNavy">
               <FormControlLabel
+                control={
+                  <Switch checked={contacted} onChange={handleContacted} />
+                }
                 label="Contacted"
-                className="form-label"
-                onChange={handleContacted}
-                checked={contacted}
-                control={<Switch />}
               />
               <FormControlLabel
+                control={<Switch checked={read} onChange={handleRead} />}
                 label="Read"
-                className="form-label"
-                onChange={handleRead}
-                checked={read}
-                control={<Switch />}
               />
             </FormGroup>
-          </div>
-        </div>
-        <ul className="list-disc pl-5 text-lg lg:text-xl">
-          <li className="font-bigola text-customCream">
-            Email:{" "}
-            <span className="font-hypatia text-customWhite">
-              {message.email}
-            </span>
-          </li>
-
-          <li className="font-bigola text-customCream">
-            Phone:{" "}
-            <span className="font-hypatia text-customWhite">
-              {message.phone}
-            </span>
-          </li>
-
-          <li className="font-bigola text-customCream">
-            Preferred date{" "}
-            <span className="font-hypatia text-customWhite">
-              {formattedDate}
-            </span>
-          </li>
-
-          <li className="font-bigola text-customCream">
-            How did you hear?{" "}
-            <span className="font-hypatia text-customWhite">
-              {message.howDidYouHear}
-            </span>
-          </li>
-          <li className="font-bigola text-customCream">
-            Budget:{" "}
-            <span className="font-hypatia text-customWhite">
-              {message.budget}
-            </span>
-          </li>
-
-          <li className="font-bigola text-customCream">
-            Message:{" "}
-            <span className="font-hypatia text-customWhite">
-              {message.message}
-            </span>
-          </li>
-        </ul>
-        <div className="mt-2 flex flex-row justify-center">
-          <button
-            className="rounded-full bg-customGold px-14 py-3.5 font-hypatia font-bold tracking-wider"
-            onClick={handleDeleteOpen}
-          >
-            DELETE
-          </button>
-        </div>
-      </div>
+            <List>
+              <ListItem className="p-0">
+                <ListItemText primary="Email:" secondary={message.email} />
+              </ListItem>
+              <ListItem className="p-0">
+                <ListItemText primary="Phone:" secondary={message.phone} />
+              </ListItem>
+              <ListItem className="p-0">
+                <ListItemText
+                  primary="Preferred date:"
+                  secondary={formattedPreferredDate}
+                />
+              </ListItem>
+              <ListItem className="p-0">
+                <ListItemText primary="Message:" secondary={message.message} />
+              </ListItem>
+            </List>
+          </CardContent>
+          <CardActions>
+            <Button
+              onClick={handleDeleteOpen}
+              className="w-fit rounded-full px-12 py-3 font-bigola text-lg text-customNavy transition-colors duration-300"
+            >
+              Delete message
+            </Button>
+          </CardActions>
+        </Card>
+      </Box>
       <Dialog
         open={open}
         onClose={handleDeleteClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Delete Message?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">Delete Message?</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Are you sure you want to delete this message? This action cannot be
@@ -227,10 +179,8 @@ const MessageCard: React.FC<MessageCardProps> = ({
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleDeleteClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={confirmDelete} color="primary" autoFocus>
+          <Button onClick={handleDeleteClose}>Cancel</Button>
+          <Button onClick={confirmDelete} autoFocus>
             Delete
           </Button>
         </DialogActions>
