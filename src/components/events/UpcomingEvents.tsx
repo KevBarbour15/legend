@@ -1,6 +1,14 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import EventCard from "@/components/event-card/EventCard";
+import { formatTime } from "@/utils/time";
+
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 //gsap imports
 import gsap from "gsap";
@@ -101,10 +109,7 @@ const UpcomingEventsList: React.FC = () => {
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   return (
-    <div
-      ref={containerRef}
-      className="z-10 flex w-screen flex-col items-center justify-center py-6 text-center"
-    >
+    <div ref={containerRef} className="z-10 flex flex-col items-center py-6">
       {loading ? (
         <h2
           id="event-subheading"
@@ -122,22 +127,37 @@ const UpcomingEventsList: React.FC = () => {
       ) : (
         <>
           {sortedEvents.map((event, index) => (
-            <div
+            <Accordion
               key={event._id}
               ref={(el) => {
                 eventRefs.current[index] = el;
               }}
-              className=""
+              className="w-fit"
             >
-              <EventCard
-                length={sortedEvents.length}
-                fetchEvents={fetchEvents}
-                key={index}
-                event={event}
-                inDashboard={true}
-                index={index}
-              />
-            </div>
+              <AccordionSummary
+                expandIcon={<ArrowDownwardIcon />}
+                className="flex w-full"
+              >
+                <Typography className="mr-12 font-bigola text-xl">
+                  {event.title}
+                </Typography>
+                <Typography className="font-bigola text-xl">
+                  {new Date(event.date).toLocaleDateString("en-US", {
+                    timeZone: "UTC",
+                  })}
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <EventCard
+                  length={sortedEvents.length}
+                  fetchEvents={fetchEvents}
+                  key={index}
+                  event={event}
+                  inDashboard={true}
+                  index={index}
+                />
+              </AccordionDetails>
+            </Accordion>
           ))}
         </>
       )}

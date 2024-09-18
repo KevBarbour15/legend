@@ -37,24 +37,36 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
   const [mute, setMute] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
   const [playlistVisible, setPlaylistVisible] = useState<boolean>(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
   const recordTl = useRef<gsap.core.Timeline | null>(null);
+  const playlistTl = useRef<gsap.core.Timeline | null>(null);
 
   useGSAP(() => {
     if (!containerRef.current) return;
 
-    gsap.set(containerRef.current, { y: 100, opacity: 0 });
+    gsap.set(containerRef.current, { y: 200, opacity: 0 });
+
     tl.current = gsap.timeline().to(containerRef.current, {
-      delay: 0.35,
+      delay: 0.15,
       duration: 0.5,
       y: 0,
-      opacity: 100,
+      opacity: 1,
+      ease: "sine.inOut",
     });
 
     recordTl.current = gsap.timeline({ repeat: -1 }).to("#now-playing", {
       duration: 1.8,
       rotation: 360,
+      ease: "linear",
+    });
+
+    gsap.set("#playlist", { opacity: 0 });
+
+    playlistTl.current = gsap.timeline({}).to("#playlist", {
+      opacity: 1,
+      duration: 0.2,
+      delay: 0.15,
       ease: "linear",
     });
   }, []);
@@ -102,7 +114,13 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
     } else {
       recordTl.current?.pause();
     }
-  }, [playing]);
+
+    if (playlistVisible) {
+      playlistTl.current?.play();
+    } else {
+      playlistTl.current?.reverse();
+    }
+  }, [playing, playlistVisible]);
 
   return (
     <div
@@ -113,10 +131,11 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       {/* Playlist Popup */}
       <Collapse
         in={playlistVisible}
+        id="playlist"
         className="z-10 w-full opacity-0 md:mx-0 md:ml-6 md:w-fit"
       >
         <div
-          className="block rounded-lg border-2 border-customNavy bg-customCream drop-shadow-record md:mb-3"
+          className="block rounded-sm border border-customNavy bg-gradient-to-tr from-customCream to-customWhite drop-shadow-record md:mb-3"
           id="playlist-border"
         >
           {tracks.map((track, index) => (
@@ -124,9 +143,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               id="playlist-border"
               key={index}
               className={`flex h-full flex-row p-1 ${
-                index !== tracks.length - 1
-                  ? "border-b-2 border-customNavy"
-                  : ""
+                index !== tracks.length - 1 ? "border-b border-customNavy" : ""
               }`}
             >
               <div
