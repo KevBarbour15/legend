@@ -40,7 +40,14 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
   const recordTl = useRef<gsap.core.Timeline | null>(null);
+  const recordPlayerTl = useRef<gsap.core.Timeline | null>(null);
   const playlistTl = useRef<gsap.core.Timeline | null>(null);
+
+  useEffect(() => {
+    if (window.innerWidth >= 768) {
+      setVisible(true);
+    }
+  }, []);
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -61,13 +68,21 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       ease: "linear",
     });
 
+    gsap.set("#player", { opacity: 0 });
     gsap.set("#playlist", { opacity: 0 });
+
+    recordPlayerTl.current = gsap.timeline({}).to("#player", {
+      opacity: 1,
+      duration: 0.2,
+      delay: 0.15,
+      ease: "power4.in",
+    });
 
     playlistTl.current = gsap.timeline({}).to("#playlist", {
       opacity: 1,
       duration: 0.2,
       delay: 0.15,
-      ease: "linear",
+      ease: "power4.in",
     });
   }, []);
 
@@ -105,14 +120,16 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
   };
 
   useEffect(() => {
-    if (window.innerWidth >= 768) {
-      setVisible(true);
-    }
-
     if (playing) {
       recordTl.current?.play();
     } else {
       recordTl.current?.pause();
+    }
+
+    if (visible) {
+      recordPlayerTl.current?.play();
+    } else {
+      recordPlayerTl.current?.reverse();
     }
 
     if (playlistVisible) {
@@ -120,7 +137,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
     } else {
       playlistTl.current?.reverse();
     }
-  }, [playing, playlistVisible]);
+  }, [playing, visible, playlistVisible]);
 
   return (
     <div
@@ -177,7 +194,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         </div>
       </Collapse>
       {/* Player Popup */}
-      <Collapse in={visible}>
+      <Collapse in={visible} id="player" className="opacity-0">
         <div className="relative left-6 hidden md:block">
           <img
             id="now-playing"
