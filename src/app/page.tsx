@@ -17,12 +17,14 @@ export default function Home() {
   const tl = useRef<gsap.core.Timeline | null>(null);
 
   useGSAP(() => {
+    if (!containerRef.current) return;
+
     tl.current = gsap.timeline({
       ease: "sine.inOut",
       scrollTrigger: {
         trigger: "#about-section",
-        start: "top 75%",
-        end: "top 35%",
+        start: "top 90%",
+        end: "top 60%",
         scrub: 1,
       },
     });
@@ -60,15 +62,17 @@ export default function Home() {
         gsap.fromTo(
           section,
           {
+            y: 20,
             opacity: 0,
           },
           {
             duration: 1,
             opacity: 1,
+            y: 0,
             scrollTrigger: {
               trigger: section,
-              start: "top bottom-=100",
-              end: "top 70%",
+              start: "top bottom",
+              end: "top 65%",
               scrub: 1,
             },
           },
