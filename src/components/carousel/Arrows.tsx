@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { EmblaCarouselType } from "embla-carousel";
 import IconButton from "@mui/material/IconButton";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
+import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 
 // Hook to manage prev/next button states
 type UsePrevNextButtonsType = {
@@ -55,8 +55,11 @@ export const PrevButton: React.FC<IconButtonProps> = (props) => {
   const { children, ...restProps } = props;
 
   return (
-    <IconButton {...restProps} className="text-customNavy">
-      <ChevronLeftIcon />
+    <IconButton
+      {...restProps}
+      className="mt-3 p-0 text-5xl text-customNavy transition-colors md:hover:text-customGold"
+    >
+      <ArrowBackRoundedIcon className="p-0" fontSize="inherit" />
       {children}
     </IconButton>
   );
@@ -66,8 +69,11 @@ export const NextButton: React.FC<IconButtonProps> = (props) => {
   const { children, ...restProps } = props;
 
   return (
-    <IconButton {...restProps} className="text-customNavy">
-      <ChevronRightIcon />
+    <IconButton
+      {...restProps}
+      className="mt-3 p-0 text-5xl text-customNavy transition-colors md:hover:text-customGold"
+    >
+      <ArrowForwardRoundedIcon className="p-0" fontSize="inherit" />
       {children}
     </IconButton>
   );

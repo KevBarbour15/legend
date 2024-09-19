@@ -1,6 +1,6 @@
 "use client";
 import { useRef } from "react";
-import ImageCarousel from "@/components/carousel/EmblaCarousel";
+import ImageCarousel from "@/components/carousel/Carousel";
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileMenu from "@/components/mobile-menu/MobileMenu";
 import { Instagram, Facebook, YouTube } from "@mui/icons-material";

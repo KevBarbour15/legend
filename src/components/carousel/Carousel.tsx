@@ -11,7 +11,7 @@ const slides = [
   "/images/carousel/6.jpg",
 ];
 
-const EmblaCarousel: React.FC = () => {
+const Carousel: React.FC = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({});
   const {
     prevBtnDisabled,
@@ -31,7 +31,7 @@ const EmblaCarousel: React.FC = () => {
           ))}
         </div>
       </div>
-      <div className="flex flex-row justify-between text-3xl text-customNavy">
+      <div className="flex flex-row justify-between">
         <PrevButton
           onClick={onPrevButtonClick}
           disabled={prevBtnDisabled}
@@ -45,4 +45,4 @@ const EmblaCarousel: React.FC = () => {
   );
 };
 
-export default EmblaCarousel;
+export default Carousel;
