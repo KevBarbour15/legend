@@ -10,16 +10,13 @@ import { IconButton } from "@mui/material";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
 
-  gsap.registerPlugin(ScrollTrigger);
-
   useGSAP(() => {
-    if (!containerRef.current) return;
-
     tl.current = gsap.timeline({
       ease: "sine.inOut",
       scrollTrigger: {
@@ -93,23 +90,23 @@ export default function Home() {
         <div className="top-bg hidden h-screen w-full md:block"></div>
         <div
           id="about-section"
-          className="relative block h-auto p-3 md:ml-[224px] md:p-6"
+          className="relative block h-auto p-3 opacity-0 md:ml-[224px] md:p-6"
         >
           <div
             id="about-section"
-            className="md:aspect-video md:overflow-hidden"
+            className="opacity-0 md:aspect-video md:overflow-hidden"
           >
             <img src={"/images/about-image.jpg"} className="" />
           </div>
 
           <div className="font-hypatia text-lg text-customNavy">
-            <p id="about-section" className="my-6">
+            <p id="about-section" className="my-6 opacity-0">
               Welcome to Legend Has It, Sacramento's first hi-fi listening bar,
               where music meets the art of sound. We offer an immersive
               experience for audiophiles and music lovers, celebrating the
               warmth of vinyl records and the richness of high-fidelity sound.
             </p>
-            <p id="about-section">
+            <p id="about-section" className="opacity-0">
               Our carefully curated sound systems and eclectic vinyl collection
               create an intimate atmosphere, perfect for discovering new tunes
               or revisiting classics. Enjoy from our local craft beer menu
@@ -119,31 +116,34 @@ export default function Home() {
             </p>
           </div>
           <div className="block py-6 font-bigola text-xl text-customNavy md:mb-0 md:text-3xl">
-            <h2 id="about-section" className="mb-3 md:mb-6">
+            <h2 id="about-section " className="mb-3 opacity-0 md:mb-6">
               Hours
             </h2>
             <div
               id="about-section"
-              className="mb-3 flex flex-row justify-between md:mb-6"
+              className="mb-3 flex flex-row justify-between opacity-0 md:mb-6"
             >
               <p>Sunday - Tuesday:</p>
               <p>Closed</p>
             </div>
             <div
               id="about-section"
-              className="mb-3 flex flex-row justify-between md:mb-6"
+              className="mb-3 flex flex-row justify-between opacity-0 md:mb-6"
             >
               <p>Wednesday - Thursday:</p>
               <p>3pm - 11pm</p>
             </div>
-            <div id="about-section" className="flex flex-row justify-between">
+            <div
+              id="about-section"
+              className="flex flex-row justify-between opacity-0"
+            >
               <p>Friday - Saturday:</p>
               <p>3pm - 12am</p>
             </div>
           </div>
           <div
             id="about-section"
-            className="flex justify-center gap-12 pb-6 font-bigola md:gap-24"
+            className="flex justify-center gap-12 pb-6 font-bigola opacity-0 md:gap-24"
           >
             <IconButton
               className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
@@ -172,7 +172,7 @@ export default function Home() {
               <YouTube fontSize="inherit" />
             </IconButton>
           </div>
-          <div id="about-section">
+          <div id="about-section" className="opacity-0">
             <ImageCarousel />
           </div>
         </div>

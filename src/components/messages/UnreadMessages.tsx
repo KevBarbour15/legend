@@ -95,16 +95,41 @@ const UnreadMessagesList: React.FC = () => {
           No messages found.
         </h1>
       ) : (
-        <>
+            <>
+              
           {unreadMessages.map((message, index) => (
-            <Card className="w-[300px]" key={index}>
+            <Card className="w-[325px]" key={index}>
               <CardHeader>
-                <CardTitle className="flex gap-1 capitalize">
-                  <p>{message.firstName}</p>
-                  <p>{message.lastName}</p>
+                <CardTitle className="flex justify-between capitalize">
+                  <div className="flex gap-1">
+                    <p>{message.firstName}</p>
+                    <p>{message.lastName}</p>
+                  </div>
+                  <p>
+                    {new Date(message.sentAt).toLocaleDateString("en-US", {
+                      timeZone: "UTC",
+                    })}
+                  </p>
                 </CardTitle>
-                <CardDescription>{}</CardDescription>
               </CardHeader>
+              <CardContent className="w-full text-left">
+                <div className="block pb-3">
+                  <p className="font-bold">Message:</p>
+                  <p>{message.message}</p>
+                </div>
+                <div className="block pb-3">
+                  <p className="font-bold">Preferred Date:</p>
+                  <p>{message.preferredDate}</p>
+                </div>
+                <div className="block pb-3">
+                  <p className="font-bold">Email:</p>
+                  <p>{message.email}</p>
+                </div>
+                <div className="block pb-3">
+                  <p className="font-bold">Phone:</p>
+                  <p>{message.phone}</p>
+                </div>
+              </CardContent>
             </Card>
           ))}
         </>
