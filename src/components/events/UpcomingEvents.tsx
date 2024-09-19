@@ -6,12 +6,18 @@ import EditEventModal from "../edit-event-modal/EditEventModal";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
+
 import Typography from "@mui/material/Typography";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+import { Button } from "@/components/ui/button";
 
 //gsap imports
 import gsap from "gsap";
@@ -122,19 +128,19 @@ const UpcomingEventsList: React.FC = () => {
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   return (
-    <div ref={containerRef} className="z-10 flex flex-col items-center py-6">
+    <div
+      ref={containerRef}
+      className="z-10 flex flex-col items-center py-6 text-black"
+    >
       {loading ? (
         <h2
           id="event-subheading"
-          className="my-6 font-hypatia text-3xl text-customWhite lg:text-4xl"
+          className="my-6 font-hypatia text-3xl lg:text-4xl"
         >
           Loading events...
         </h2>
       ) : events.length === 0 ? (
-        <h2
-          id="no-events"
-          className="my-5 font-hypatia text-3xl text-customWhite lg:text-4xl"
-        >
+        <h2 id="no-events" className="my-5 font-hypatia text-3xl lg:text-4xl">
           No events found.
         </h2>
       ) : (
@@ -147,74 +153,62 @@ const UpcomingEventsList: React.FC = () => {
                 openEdit={openEdit}
                 event={event}
               />
-              <Accordion
-                key={event._id}
-                ref={(el) => {
-                  eventRefs.current[index] = el;
-                }}
-                className="w-full bg-customWhite drop-shadow-text md:w-[500px]"
-              >
-                <AccordionSummary
-                  expandIcon={<ArrowDropDownIcon className="text-customNavy" />}
-                  className="flex w-full flex-row justify-between text-customNavy"
-                >
-                  <Typography className="font-bigola text-xl">
-                    {new Date(event.date).toLocaleDateString("en-US", {
-                      timeZone: "UTC",
-                    })}
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails className="border-t border-customNavy text-customNavy">
-                  <Typography className="font-bigola text-2xl">
-                    {event.title}
-                  </Typography>
-                  <Typography className="font-hypatia text-lg">
-                    {formatTime(event.time)}
-                  </Typography>
-                  <Typography className="font-hypatia text-lg">
-                    {event.description}
-                  </Typography>
+              <Accordion type="single" collapsible className="w-[400px]">
+                <AccordionItem value={`Event ${index}`}>
+                  <AccordionTrigger>
+                    <Typography className="font-hypatia text-xl">
+                      {new Date(event.date).toLocaleDateString("en-US", {
+                        timeZone: "UTC",
+                      })}
+                    </Typography>
+                  </AccordionTrigger>
+                  <AccordionContent className="border-t border-black pt-3">
+                    <Typography className="font-hypatia text-2xl">
+                      {event.title}
+                    </Typography>
+                    <Typography className="font-hypatia text-lg">
+                      {formatTime(event.time)}
+                    </Typography>
+                    <Typography className="font-hypatia text-lg">
+                      {event.description}
+                    </Typography>
 
-                  {event.is_photo ? (
-                    <Button onClick={handleImageModalOpen} className="p-0">
-                      <img
-                        src={event.image_url}
-                        alt="event"
-                        className="h-auto w-full border border-customNavy object-cover"
-                      ></img>
-                    </Button>
-                  ) : (
-                    <Button
-                      onClick={handleImageModalOpen}
-                      className="border p-0"
-                    >
-                      <video
-                        src={event.image_url}
-                        className="aspect-square h-auto w-full border border-customNavy object-cover object-center"
-                        loop
-                        autoPlay
-                        muted
-                        playsInline
-                      ></video>
-                    </Button>
-                  )}
-                  <div className="flex w-full justify-end pt-3">
-                    <Button
-                      className="mr-6 font-hypatiaBold text-customNavy"
-                      type="button"
-                      onClick={handleEditOpen}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      className="font-hypatiaBold text-customNavy"
-                      type="button"
-                      onClick={handleDeleteOpen}
-                    >
-                      Delete
-                    </Button>
-                  </div>
-                </AccordionDetails>
+                    {event.is_photo ? (
+                      <div className="p-0">
+                        <img
+                          src={event.image_url}
+                          alt="event"
+                          className="h-auto w-full border border-black object-cover"
+                        ></img>
+                      </div>
+                    ) : (
+                      <div className="border p-0">
+                        <video
+                          src={event.image_url}
+                          className="aspect-square h-auto w-full border border-black object-cover object-center"
+                          loop
+                          autoPlay
+                          muted
+                          playsInline
+                        ></video>
+                      </div>
+                    )}
+                    <div className="flex w-full justify-end pt-3">
+                      <Button
+                        className="mr-6 font-hypatia"
+                        onClick={handleEditOpen}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        className="font-hypatia"
+                        onClick={handleDeleteOpen}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
               </Accordion>
             </>
           ))}

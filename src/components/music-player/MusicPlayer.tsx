@@ -9,18 +9,18 @@ import ReactHowler from "react-howler";
 import { IconButton, Collapse } from "@mui/material";
 
 import {
-  PlayArrow,
-  Pause,
-  SkipPrevious,
-  SkipNext,
-  KeyboardArrowDown,
-  KeyboardArrowUpTwoTone,
-  LibraryMusic,
-  VolumeOff,
-  VolumeUp,
-  Audiotrack,
-  Person,
-  GraphicEq,
+  PlayArrowRounded,
+  PauseRounded,
+  SkipPreviousRounded,
+  SkipNextRounded,
+  ExpandMoreRounded,
+  ExpandLessRounded,
+  LibraryMusicRounded,
+  VolumeOffRounded,
+  VolumeUpRounded,
+  AudiotrackRounded,
+  PersonRounded,
+  GraphicEqRounded,
 } from "@mui/icons-material";
 
 interface Track {
@@ -96,7 +96,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
     setPlaylistVisible(!playlistVisible);
   };
 
-  const handlePlayPause = () => {
+  const handlePlayPauseRounded = () => {
     setPlaying(!playing);
   };
 
@@ -185,20 +185,22 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                 id="playlist-item"
               >
                 <div className="flex flex-row">
-                  <Person className="pr-2" />
+                  <PersonRounded className="pr-2" />
                   <p className="text-lg">{track.artist}</p>
                 </div>
                 <div className="flex flex-row">
-                  <Audiotrack className="pr-2" />
+                  <AudiotrackRounded className="pr-2" />
                   <p className="text-lg">{track.title}</p>
                 </div>
               </div>
               <div className="flex items-center justify-center">
                 {index == currentTrackIndex ? (
-                  <GraphicEq className="mr-2 text-customGold transition-colors" />
+                  <GraphicEqRounded className="mr-2 text-customGold transition-colors" />
                 ) : (
                   <IconButton className="m-0 flex text-customNavy transition-colors md:hover:text-customGold">
-                    <PlayArrow onClick={() => handleTrackChange(index)} />
+                    <PlayArrowRounded
+                      onClick={() => handleTrackChange(index)}
+                    />
                   </IconButton>
                 )}
               </div>
@@ -212,39 +214,43 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
           className="hidden text-customNavy transition-all md:block md:px-1 md:py-0 md:hover:text-customGold"
           onClick={togglePlayer}
         >
-          {visible ? <KeyboardArrowDown /> : <KeyboardArrowUpTwoTone />}
+          {visible ? (
+            <ExpandMoreRounded className="transition-all" />
+          ) : (
+            <ExpandLessRounded className="transition-all" />
+          )}
         </IconButton>
         <IconButton className="text-customNavy transition-colors md:px-1 md:py-0 md:hover:text-customGold">
           {mute ? (
-            <VolumeOff onClick={handleMute} />
+            <VolumeOffRounded onClick={handleMute} />
           ) : (
-            <VolumeUp onClick={handleMute} />
+            <VolumeUpRounded onClick={handleMute} />
           )}
         </IconButton>
         <IconButton
           onClick={handlePreviousTrack}
           className="text-customNavy transition-colors md:px-1 md:py-0 md:hover:text-customGold"
         >
-          <SkipPrevious />
+          <SkipPreviousRounded />
         </IconButton>
 
         <IconButton
-          onClick={handlePlayPause}
+          onClick={handlePlayPauseRounded}
           className="text-customNavy transition-colors md:px-1 md:py-0 md:hover:text-customGold"
         >
-          {playing ? <Pause /> : <PlayArrow />}
+          {playing ? <PauseRounded /> : <PlayArrowRounded />}
         </IconButton>
         <IconButton
           onClick={handleNextTrack}
           className="text-customNavy transition-colors md:px-1 md:py-0 md:hover:text-customGold"
         >
-          <SkipNext />
+          <SkipNextRounded />
         </IconButton>
         <IconButton
           onClick={togglePlaylist}
           className="text-customNavy transition-colors md:px-1 md:py-0 md:hover:text-customGold"
         >
-          <LibraryMusic />
+          <LibraryMusicRounded />
         </IconButton>
       </div>
       <ReactHowler

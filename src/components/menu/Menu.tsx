@@ -54,7 +54,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
     gsap.set(".menu-login-icon", { opacity: 0, scale: 0 });
 
     tl.current = gsap
-      .timeline({ paused: true })
+      .timeline({ PauseRoundedd: true })
       .to("#player-container", {}, 0)
       .to(
         ".menu-overlay",

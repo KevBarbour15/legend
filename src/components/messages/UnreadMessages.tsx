@@ -1,6 +1,14 @@
 "use client";
-import { useState, useEffect, useRef, use } from "react";
-import MessageCard from "@/components/message-card/MessageCard";
+import { useState, useEffect, useRef } from "react";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 //gsap imports
 import { gsap } from "gsap";
@@ -79,21 +87,25 @@ const UnreadMessagesList: React.FC = () => {
       className="flex w-screen flex-col items-center justify-center pb-12 pt-3 text-center"
     >
       {loading ? (
-        <h1 className="mt-5 font-bigola text-4xl text-customWhite lg:text-5xl">
+        <h1 className="mt-5 font-bigola text-4xl text-black lg:text-5xl">
           Loading messages...
         </h1>
       ) : unreadMessages.length === 0 ? (
-        <h1 className="mt-5 font-bigola text-4xl text-customWhite lg:text-5xl">
+        <h1 className="mt-5 font-bigola text-4xl text-black lg:text-5xl">
           No messages found.
         </h1>
       ) : (
         <>
           {unreadMessages.map((message, index) => (
-            <MessageCard
-              key={index}
-              fetchMessages={fetchMessages}
-              message={message}
-            />
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex gap-1 capitalize">
+                  <p>{message.firstName}</p>
+                  <p>{message.lastName}</p>
+                </CardTitle>
+                <CardDescription>{}</CardDescription>
+              </CardHeader>
+            </Card>
           ))}
         </>
       )}

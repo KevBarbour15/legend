@@ -1,6 +1,14 @@
 "use client";
-import { useState, useEffect, useRef, use } from "react";
-import MessageCard from "@/components/message-card/MessageCard";
+import { useState, useEffect, useRef } from "react";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 //gsap imports
 import { gsap } from "gsap";
@@ -79,21 +87,22 @@ const ReadMessagesList: React.FC = () => {
       className="flex w-screen flex-col items-center justify-center pb-12 pt-3 text-center"
     >
       {loading ? (
-        <h1 className="mt-5 font-bigola text-4xl text-customWhite lg:text-5xl">
+        <h1 className="mt-5 font-bigola text-4xl text-customNavy lg:text-5xl">
           Loading messages...
         </h1>
       ) : readMessages.length === 0 ? (
-        <h1 className="mt-5 font-bigola text-4xl text-customWhite lg:text-5xl">
+        <h1 className="mt-5 font-bigola text-4xl text-customNavy lg:text-5xl">
           No messages found.
         </h1>
       ) : (
         <>
           {readMessages.map((message, index) => (
-            <MessageCard
-              key={index}
-              fetchMessages={fetchMessages}
-              message={message}
-            />
+            <Card>
+              <CardHeader>
+                <CardTitle>Card Title</CardTitle>
+                <CardDescription>Card Description</CardDescription>
+              </CardHeader>
+            </Card>
           ))}
         </>
       )}
