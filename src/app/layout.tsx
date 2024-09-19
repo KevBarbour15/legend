@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Legend Has It",
-    images: ["/images/carousel/2.jpg"],
+    images: ["/images/meta-image.jpg"],
   },
 };
 
