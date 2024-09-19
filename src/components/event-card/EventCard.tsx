@@ -12,10 +12,6 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Close from "@mui/icons-material/Close";
 
-// animation imports
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-
 interface Event {
   _id: string;
   title: string;
@@ -34,7 +30,6 @@ interface EventCardProps {
 }
 
 const EventCard: React.FC<EventCardProps> = ({ event, fetchEvents }) => {
-  const [isClient, setIsClient] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
   const formattedDate = new Date(event.date).toLocaleDateString("en-US", {
     timeZone: "UTC",

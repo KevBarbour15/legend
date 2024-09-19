@@ -136,14 +136,7 @@ const PastEventsList: React.FC = () => {
               }}
               className=""
             >
-              <EventCard
-                length={sortedEvents.length}
-                fetchEvents={fetchEvents}
-                key={index}
-                event={event}
-                inDashboard={true}
-                index={index}
-              />
+              <EventCard fetchEvents={fetchEvents} key={index} event={event} />
             </div>
           ))}
         </>
