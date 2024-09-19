@@ -76,7 +76,7 @@ const config: Config = {
       },
       dropShadow: {
         record: "0.5px 1.75px 2.5px rgba(0, 0, 0, 0.65)",
-        text: ".75px 1.75px 1.75px rgba(0, 0, 0, 0.35)",
+        text: ".75px 0.75px 1.15px rgba(0, 0, 0, 0.95)",
       },
       boxShadow: {
         top: "0 -2.5px 3.5px -1.5px rgba(0, 0, 0, 0.35)",

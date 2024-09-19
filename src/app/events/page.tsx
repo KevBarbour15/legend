@@ -52,7 +52,7 @@ export default function Events() {
 
     gsap.set(eventRefs.current, {
       opacity: 0,
-      y: 20,
+      y: 50,
     });
 
     if (!loading && eventRefs.current.length > 0) {

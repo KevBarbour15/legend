@@ -155,7 +155,10 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             className="absolute left-[105px] top-[40.75%] z-[3] w-[32px]"
             src="./images/small-logo.png"
           ></img>
-          <img className="p-0 md:w-[200px]" src="./images/player.svg"></img>
+          <img
+            className="p-0 drop-shadow-record md:w-[200px]"
+            src="./images/player.svg"
+          ></img>
         </div>
       </Collapse>
 
@@ -163,10 +166,10 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       <Collapse
         in={playlistVisible}
         id="playlist"
-        className="z-10 w-full opacity-0 md:mx-0 md:ml-6 md:w-fit"
+        className="z-10 opacity-0 drop-shadow-record md:mx-0 md:ml-6"
       >
         <div
-          className="mt-3 block rounded-md border border-customNavy bg-gradient-to-r from-customCream to-customWhite"
+          className="mt-3 block rounded-sm border border-customNavy bg-gradient-to-r from-customCream to-customWhite"
           id="playlist-border"
         >
           {tracks.map((track, index) => (
@@ -178,38 +181,40 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               }`}
             >
               <div
-                className="flex w-auto flex-1 flex-col px-1 font-hypatia text-customNavy"
+                className={`flex w-auto flex-1 flex-col px-1 font-hypatia transition-colors ${index === currentTrackIndex ? "text-customGold" : "text-customNavy"} `}
                 id="playlist-item"
               >
                 <div className="flex flex-row">
                   <Person className="pr-2" />
-                  <p className="text-xl">{track.artist}</p>
+                  <p className="text-lg">{track.artist}</p>
                 </div>
                 <div className="flex flex-row">
                   <Audiotrack className="pr-2" />
-                  <p className="text-xl">{track.title}</p>
+                  <p className="text-lg">{track.title}</p>
                 </div>
               </div>
               <div className="flex items-center justify-center">
-                <IconButton className="m-0 flex">
-                  {index == currentTrackIndex ? (
-                    <GraphicEq className="text-customGold" id="playlist-item" />
-                  ) : (
-                    <PlayArrow
-                      className="text-customNavy"
-                      onClick={() => handleTrackChange(index)}
-                      id="playlist-item"
-                    />
-                  )}
-                </IconButton>
+                {index == currentTrackIndex ? (
+                  <GraphicEq className="mr-2 text-customGold transition-colors" />
+                ) : (
+                  <IconButton className="m-0 flex text-customNavy transition-colors md:hover:text-customGold">
+                    <PlayArrow onClick={() => handleTrackChange(index)} />
+                  </IconButton>
+                )}
               </div>
             </div>
           ))}
         </div>
       </Collapse>
 
-      <div className="mt-3 flex justify-between rounded-t-md border border-customNavy bg-gradient-to-r from-customCream to-customWhite p-1 md:mb-6 md:ml-6 md:rounded-md md:py-0">
-        <IconButton className="player-button text-customNavy transition-all md:px-1 md:py-0">
+      <div className="mt-3 flex justify-between rounded-t-sm border border-customNavy bg-gradient-to-r from-customCream to-customWhite p-1 drop-shadow-record md:mb-6 md:ml-6 md:rounded-sm md:py-0">
+        <IconButton
+          className="hidden text-customNavy transition-all md:block md:px-1 md:py-0 md:hover:text-customGold"
+          onClick={togglePlayer}
+        >
+          {visible ? <KeyboardArrowDown /> : <KeyboardArrowUpTwoTone />}
+        </IconButton>
+        <IconButton className="text-customNavy transition-colors md:px-1 md:py-0 md:hover:text-customGold">
           {mute ? (
             <VolumeOff onClick={handleMute} />
           ) : (
@@ -218,34 +223,28 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         </IconButton>
         <IconButton
           onClick={handlePreviousTrack}
-          className="player-button text-customNavy transition-all md:px-1 md:py-0"
+          className="text-customNavy transition-colors md:px-1 md:py-0 md:hover:text-customGold"
         >
           <SkipPrevious />
         </IconButton>
 
         <IconButton
           onClick={handlePlayPause}
-          className="player-button text-customNavy transition-all md:px-1 md:py-0"
+          className="text-customNavy transition-colors md:px-1 md:py-0 md:hover:text-customGold"
         >
           {playing ? <Pause /> : <PlayArrow />}
         </IconButton>
         <IconButton
           onClick={handleNextTrack}
-          className="player-button text-customNavy transition-all md:px-1 md:py-0"
+          className="text-customNavy transition-colors md:px-1 md:py-0 md:hover:text-customGold"
         >
           <SkipNext />
         </IconButton>
         <IconButton
           onClick={togglePlaylist}
-          className="player-button text-customNavy transition-all md:px-1 md:py-0"
+          className="text-customNavy transition-colors md:px-1 md:py-0 md:hover:text-customGold"
         >
           <LibraryMusic />
-        </IconButton>
-        <IconButton
-          className="player-button hidden text-customNavy transition-all md:block md:px-1 md:py-0"
-          onClick={togglePlayer}
-        >
-          {visible ? <KeyboardArrowDown /> : <KeyboardArrowUpTwoTone />}
         </IconButton>
       </div>
       <ReactHowler
