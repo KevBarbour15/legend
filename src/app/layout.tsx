@@ -44,11 +44,11 @@ export const metadata: Metadata = {
   title: "Legend Has It",
   openGraph: {
     title: "Legend Has It",
-    url: "https://your-site.com",
+    url: "https://www.legendhasithifi.com/",
     siteName: "Legend Has It",
     images: [
       {
-        url: "/images/carousel/2.jpg",
+        url: "/images/meta-image.jpg",
         width: 1200,
         height: 630,
         alt: "Legend Has It",
