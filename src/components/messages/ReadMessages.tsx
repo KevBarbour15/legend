@@ -84,20 +84,20 @@ const ReadMessagesList: React.FC = () => {
     <div
       ref={containerRef}
       id="messages-container"
-      className="flex w-screen flex-col items-center justify-center pb-12 pt-3 text-center"
+      className="flex w-screen flex-col items-center justify-center pb-12 pt-6 text-center"
     >
       {loading ? (
-        <h1 className="mt-5 font-bigola text-4xl text-customNavy lg:text-5xl">
+        <h1 className="font-bigola text-4xl text-black lg:text-5xl">
           Loading messages...
         </h1>
       ) : readMessages.length === 0 ? (
-        <h1 className="mt-5 font-bigola text-4xl text-customNavy lg:text-5xl">
+        <h1 className="font-bigola text-4xl text-black lg:text-5xl">
           No messages found.
         </h1>
       ) : (
         <>
           {readMessages.map((message, index) => (
-            <Card>
+            <Card className="w-[300px]" key={index}>
               <CardHeader>
                 <CardTitle>Card Title</CardTitle>
                 <CardDescription>Card Description</CardDescription>

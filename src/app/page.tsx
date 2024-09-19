@@ -20,33 +20,6 @@ export default function Home() {
   useGSAP(() => {
     if (!containerRef.current) return;
 
-    const sectionRefs = document.querySelectorAll("#about-section");
-    const sectionsTl = gsap.timeline();
-
-    sectionRefs.forEach((section) => {
-      if (!section) return;
-
-      sectionsTl.add(
-        gsap.fromTo(
-          section,
-          {
-            opacity: 0,
-          },
-          {
-            duration: 1,
-            opacity: 1,
-            scrollTrigger: {
-              trigger: section,
-              start: "top bottom-=100",
-              end: "top 70%",
-              scrub: 1,
-            },
-          },
-        ),
-        0,
-      );
-    });
-
     tl.current = gsap.timeline({
       ease: "sine.inOut",
       scrollTrigger: {
@@ -79,6 +52,33 @@ export default function Home() {
         },
         0,
       );
+
+    const sectionRefs = document.querySelectorAll("#about-section");
+    const sectionsTl = gsap.timeline();
+
+    sectionRefs.forEach((section) => {
+      if (!section) return;
+
+      sectionsTl.add(
+        gsap.fromTo(
+          section,
+          {
+            opacity: 0,
+          },
+          {
+            duration: 1,
+            opacity: 1,
+            scrollTrigger: {
+              trigger: section,
+              start: "top bottom-=100",
+              end: "top 70%",
+              scrub: 1,
+            },
+          },
+        ),
+        0,
+      );
+    });
   }, []);
 
   return (

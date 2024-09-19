@@ -97,7 +97,7 @@ const UnreadMessagesList: React.FC = () => {
       ) : (
         <>
           {unreadMessages.map((message, index) => (
-            <Card>
+            <Card className="w-[300px]" key={index}>
               <CardHeader>
                 <CardTitle className="flex gap-1 capitalize">
                   <p>{message.firstName}</p>

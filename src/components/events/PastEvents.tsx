@@ -130,7 +130,7 @@ const PastEventsList: React.FC = () => {
         <>
           {sortedEvents.map((event, index) => (
             <div
-              key={event._id}
+              key={index}
               ref={(el) => {
                 eventRefs.current[index] = el;
               }}

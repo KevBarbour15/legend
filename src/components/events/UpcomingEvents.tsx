@@ -153,63 +153,68 @@ const UpcomingEventsList: React.FC = () => {
                 openEdit={openEdit}
                 event={event}
               />
-              <Accordion type="single" collapsible className="w-[400px]">
-                <AccordionItem value={`Event ${index}`}>
-                  <AccordionTrigger>
-                    <Typography className="font-hypatia text-xl">
-                      {new Date(event.date).toLocaleDateString("en-US", {
-                        timeZone: "UTC",
-                      })}
-                    </Typography>
-                  </AccordionTrigger>
-                  <AccordionContent className="border-t border-black pt-3">
-                    <Typography className="font-hypatia text-2xl">
-                      {event.title}
-                    </Typography>
-                    <Typography className="font-hypatia text-lg">
-                      {formatTime(event.time)}
-                    </Typography>
-                    <Typography className="font-hypatia text-lg">
-                      {event.description}
-                    </Typography>
+              <div
+                key={index}
+                ref={(el) => {
+                  eventRefs.current[index] = el;
+                }}
+              >
+                <Accordion type="single" collapsible className="w-[400px]">
+                  <AccordionItem value={`Event ${index}`}>
+                    <AccordionTrigger>
+                      <p className="font-hypatia text-xl">
+                        {new Date(event.date).toLocaleDateString("en-US", {
+                          timeZone: "UTC",
+                        })}
+                      </p>
+                    </AccordionTrigger>
+                    <AccordionContent className="border-t border-black pt-3">
+                      <p className="font-hypatia text-2xl">{event.title}</p>
+                      <p className="font-hypatia text-lg">
+                        {formatTime(event.time)}
+                      </p>
+                      <p className="font-hypatia text-lg">
+                        {event.description}
+                      </p>
 
-                    {event.is_photo ? (
-                      <div className="p-0">
-                        <img
-                          src={event.image_url}
-                          alt="event"
-                          className="h-auto w-full border border-black object-cover"
-                        ></img>
+                      {event.is_photo ? (
+                        <div className="p-0">
+                          <img
+                            src={event.image_url}
+                            alt="event"
+                            className="h-auto w-full border border-black object-cover"
+                          ></img>
+                        </div>
+                      ) : (
+                        <div className="border p-0">
+                          <video
+                            src={event.image_url}
+                            className="aspect-square h-auto w-full border border-black object-cover object-center"
+                            loop
+                            autoPlay
+                            muted
+                            playsInline
+                          ></video>
+                        </div>
+                      )}
+                      <div className="flex w-full justify-end pt-3">
+                        <Button
+                          className="mr-6 font-hypatia"
+                          onClick={handleEditOpen}
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          className="font-hypatia"
+                          onClick={handleDeleteOpen}
+                        >
+                          Delete
+                        </Button>
                       </div>
-                    ) : (
-                      <div className="border p-0">
-                        <video
-                          src={event.image_url}
-                          className="aspect-square h-auto w-full border border-black object-cover object-center"
-                          loop
-                          autoPlay
-                          muted
-                          playsInline
-                        ></video>
-                      </div>
-                    )}
-                    <div className="flex w-full justify-end pt-3">
-                      <Button
-                        className="mr-6 font-hypatia"
-                        onClick={handleEditOpen}
-                      >
-                        Edit
-                      </Button>
-                      <Button
-                        className="font-hypatia"
-                        onClick={handleDeleteOpen}
-                      >
-                        Delete
-                      </Button>
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </div>
             </>
           ))}
         </>
