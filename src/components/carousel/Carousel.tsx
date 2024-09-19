@@ -9,6 +9,8 @@ const slides = [
   "/images/carousel/4.jpg",
   "/images/carousel/5.jpg",
   "/images/carousel/6.jpg",
+  "/images/carousel/7.jpg",
+  "/images/carousel/8.jpg",
 ];
 
 const Carousel: React.FC = () => {
@@ -26,7 +28,14 @@ const Carousel: React.FC = () => {
         <div className="embla__container">
           {slides.map((src, index) => (
             <div className="embla__slide" key={index}>
-              <img src={src} alt="carousel" className="" />
+              <div className="embla__slide__inner h-[275px] md:h-[500px]">
+                <img
+                  src={src}
+                  loading="lazy"
+                  alt="carousel"
+                  className="h-[275px] md:h-[500px]"
+                />
+              </div>
             </div>
           ))}
         </div>

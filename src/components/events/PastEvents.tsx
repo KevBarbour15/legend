@@ -134,7 +134,6 @@ const PastEventsList: React.FC = () => {
               ref={(el) => {
                 eventRefs.current[index] = el;
               }}
-              className=""
             >
               <EventCard fetchEvents={fetchEvents} key={index} event={event} />
             </div>

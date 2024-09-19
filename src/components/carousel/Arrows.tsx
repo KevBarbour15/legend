@@ -57,7 +57,7 @@ export const PrevButton: React.FC<IconButtonProps> = (props) => {
   return (
     <IconButton
       {...restProps}
-      className="mt-3 p-0 text-5xl text-customNavy transition-colors md:hover:text-customGold"
+      className="mb-6 mt-3 p-0 text-5xl text-customNavy transition-colors md:mb-0 md:hover:text-customGold"
     >
       <ArrowBackRoundedIcon className="p-0" fontSize="inherit" />
       {children}
@@ -71,7 +71,7 @@ export const NextButton: React.FC<IconButtonProps> = (props) => {
   return (
     <IconButton
       {...restProps}
-      className="mt-3 p-0 text-5xl text-customNavy transition-colors md:hover:text-customGold"
+      className="mb-6 mt-3 p-0 text-5xl text-customNavy transition-colors md:mb-0 md:hover:text-customGold"
     >
       <ArrowForwardRoundedIcon className="p-0" fontSize="inherit" />
       {children}

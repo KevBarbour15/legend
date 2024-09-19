@@ -99,7 +99,7 @@ export default function Home() {
             id="about-section"
             className="md:aspect-video md:overflow-hidden"
           >
-            <img src={"/images/carousel/2.jpg"} className="" />
+            <img src={"/images/about-image.jpg"} className="" />
           </div>
 
           <div className="font-hypatia text-lg text-customNavy">
