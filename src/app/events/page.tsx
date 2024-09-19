@@ -194,12 +194,9 @@ export default function Events() {
                 }`}
               >
                 <EventCard
-                  length={events.length}
                   fetchEvents={fetchEvents}
                   key={index}
                   event={event}
-                  inDashboard={false}
-                  index={index}
                 />
               </div>
             ))}

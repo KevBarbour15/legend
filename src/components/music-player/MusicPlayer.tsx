@@ -208,7 +208,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         </div>
       </Collapse>
 
-      <div className="mt-3 flex justify-between rounded-md border border-customNavy bg-gradient-to-r from-customCream to-customWhite p-1 md:mb-6 md:ml-6 md:py-0">
+      <div className="mt-3 flex justify-between rounded-t-md border border-customNavy bg-gradient-to-r from-customCream to-customWhite p-1 md:mb-6 md:ml-6 md:rounded-md md:py-0">
         <IconButton className="player-button text-customNavy transition-all md:px-1 md:py-0">
           {mute ? (
             <VolumeOff onClick={handleMute} />

@@ -17,21 +17,35 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import customTheme from "@/app/customTheme";
 import { ThemeProvider, useTheme } from "@mui/material/styles";
 
+interface ContactForm {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  howDidYouHear: string;
+  preferredDate: Date | null;
+  message: string;
+  error: string;
+}
+
+const initialForm: ContactForm = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  phone: "",
+  howDidYouHear: "",
+  preferredDate: null,
+  message: "",
+  error: "",
+};
+
 export default function Contact() {
   const router = useRouter();
-  const [firstName, setFirstName] = useState<string>("");
-  const [lastName, setLastName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
-  const [preferredDate, setPreferredDate] = useState<Date | null>(null);
-  const [budget, setBudget] = useState<string>("");
-  const [howDidYouHear, setHowDidYouHear] = useState<string>("");
-  const [message, setMessage] = useState<string>("");
-  const [error, setError] = useState<string>("");
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
-  const eventRefs = useRef<HTMLDivElement[]>([]);
   const outerTheme = useTheme();
+
+  const [contactForm, setContactForm] = useState<ContactForm>(initialForm);
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -89,53 +103,44 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (
-      !firstName ||
-      !lastName ||
-      !email ||
-      !phone ||
-      !preferredDate ||
-      !message
+      !contactForm.firstName ||
+      !contactForm.lastName ||
+      !contactForm.email ||
+      !contactForm.phone ||
+      !contactForm.preferredDate ||
+      !contactForm.message
     ) {
-      setError("Please fill out all fields.");
+      setContactForm({ ...contactForm, error: "Please fill out all fields." });
       return;
     }
-    setError("");
+    setContactForm({ ...contactForm, error: "" });
 
     try {
-      const dateString = preferredDate.toLocaleDateString();
+      const dateString = contactForm.preferredDate.toLocaleDateString();
       const response = await fetch("/api/message", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          phone: phone,
+          firstName: contactForm.firstName,
+          lastName: contactForm.lastName,
+          email: contactForm.email,
+          phone: contactForm.phone,
           preferredDate: dateString,
-          budget: budget,
-          howDidYouHear: howDidYouHear,
-          message: message,
+          howDidYouHear: contactForm.howDidYouHear,
+          message: contactForm.message,
         }),
       });
 
       if (response.ok) {
-        setFirstName("");
-        setLastName("");
-        setEmail("");
-        setPhone("");
-        setPreferredDate(null);
-        setBudget("");
-        setHowDidYouHear("");
-        setMessage("");
+        setContactForm(initialForm);
       } else {
         const errorData = await response.json();
-        setError(errorData.error);
+        setContactForm({ ...contactForm, error: errorData.error });
       }
     } catch (error) {
-      console.log("Error: ", error);
-      setError("Failed to submit form.");
+      setContactForm({ ...contactForm, error: "Failed to submit form." });
     }
   };
 
@@ -199,18 +204,28 @@ export default function Contact() {
                     className="flex-1 sm:mr-1"
                     type="text"
                     label="First Name"
-                    value={firstName}
+                    value={contactForm.firstName}
                     required
-                    onChange={(e) => setFirstName(e.target.value)}
+                    onChange={(e) =>
+                      setContactForm({
+                        ...contactForm,
+                        firstName: e.target.value,
+                      })
+                    }
                     variant="standard"
                   />
                   <TextField
                     className="mt-3 flex-1 sm:ml-1 sm:mt-0"
                     type="text"
                     label="Last Name"
-                    value={lastName}
+                    value={contactForm.lastName}
                     required
-                    onChange={(e) => setLastName(e.target.value)}
+                    onChange={(e) =>
+                      setContactForm({
+                        ...contactForm,
+                        lastName: e.target.value,
+                      })
+                    }
                     variant="standard"
                   />
                 </div>
@@ -220,9 +235,11 @@ export default function Contact() {
                   className="w-90vw lg:w-50vw xl:w-45vw xxl:w-40vw"
                   type="email"
                   label="Email"
-                  value={email}
+                  value={contactForm.email}
                   required
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) =>
+                    setContactForm({ ...contactForm, email: e.target.value })
+                  }
                   variant="standard"
                 />
               </div>
@@ -231,17 +248,24 @@ export default function Contact() {
                   className="w-90vw lg:w-50vw xl:w-45vw xxl:w-40vw"
                   type="tel"
                   label="Phone"
-                  value={phone}
+                  value={contactForm.phone}
                   required
-                  onChange={(e) => setPhone(e.target.value)}
+                  onChange={(e) =>
+                    setContactForm({ ...contactForm, phone: e.target.value })
+                  }
                   variant="standard"
                 />
               </div>
               <div id="input-section" className="my-3 opacity-0">
                 <DatePicker
-                  value={preferredDate}
+                  value={contactForm.preferredDate}
                   label="Preferred Date *"
-                  onChange={(newValue) => setPreferredDate(newValue)}
+                  onChange={(newValue) =>
+                    setContactForm({
+                      ...contactForm,
+                      preferredDate: newValue,
+                    })
+                  }
                   slotProps={{ textField: { variant: "standard" } }}
                   className="w-90vw lg:w-50vw xl:w-45vw xxl:w-40vw"
                 />
@@ -250,12 +274,14 @@ export default function Contact() {
                 <TextField
                   className="w-90vw lg:w-50vw xl:w-45vw xxl:w-40vw"
                   label="Add any additional information/ideas here."
-                  value={message}
+                  value={contactForm.message}
                   required
                   rows={4}
                   multiline
                   variant="standard"
-                  onChange={(e) => setMessage(e.target.value)}
+                  onChange={(e) =>
+                    setContactForm({ ...contactForm, message: e.target.value })
+                  }
                 />
               </div>
               <Button

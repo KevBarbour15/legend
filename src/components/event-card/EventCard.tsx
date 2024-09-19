@@ -30,17 +30,10 @@ interface Event {
 
 interface EventCardProps {
   event: Event;
-  inDashboard: boolean;
   fetchEvents: () => void;
-  length: number;
-  index: number;
 }
 
-const EventCard: React.FC<EventCardProps> = ({
-  event,
-  inDashboard,
-  fetchEvents,
-}) => {
+const EventCard: React.FC<EventCardProps> = ({ event, fetchEvents }) => {
   const [isClient, setIsClient] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
   const formattedDate = new Date(event.date).toLocaleDateString("en-US", {
@@ -50,6 +43,7 @@ const EventCard: React.FC<EventCardProps> = ({
   const tl = useRef<gsap.core.Timeline | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [openImageModal, setOpenImageModal] = useState<boolean>(false);
+
   const handleImageModalOpen = () => setOpenImageModal(true);
   const handleImageModalClose = () => setOpenImageModal(false);
 
@@ -80,32 +74,11 @@ const EventCard: React.FC<EventCardProps> = ({
     }
   };
 
-  useGSAP(() => {
-    if (!containerRef.current && !isClient) return;
-
-    gsap.set(containerRef.current, {
-      opacity: 0,
-    });
-
-    tl.current = gsap.timeline({}).to(containerRef.current, {
-      opacity: 1,
-      duration: 0.5,
-      ease: "linear",
-      delay: 0.25,
-    });
-  }, []);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsClient(true);
-    }, 100);
-  }, []);
-
   return (
     <>
       <div
         ref={containerRef}
-        className="flex w-90vw flex-col py-3 text-left text-customCream opacity-0 md:w-65vw lg:w-60vw xl:w-60vw xxl:w-60vw"
+        className="flex w-90vw flex-col py-3 text-left text-customCream md:w-65vw lg:w-60vw xl:w-60vw xxl:w-60vw"
       >
         <div className="flex flex-col justify-between font-bigola md:flex-row">
           <div className="block">
