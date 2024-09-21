@@ -185,12 +185,6 @@ export default function Contact() {
           >
             Let's Connect
           </h2>
-          <p
-            id="contact-subheading"
-            className="mt-3 text-center font-hypatia text-lg text-customCream opacity-0 md:mt-6"
-          >
-            Fill out the form below and we will reach out to you.
-          </p>
           <ThemeProvider theme={customTheme(outerTheme)}>
             <Box
               component="form"
