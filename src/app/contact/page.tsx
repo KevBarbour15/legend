@@ -164,7 +164,7 @@ export default function Contact() {
         <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
         <div
           ref={containerRef}
-          className="z-10 flex w-screen flex-col items-center pb-12 pt-3 md:px-[260px] md:pt-6"
+          className="z-10 flex flex-col items-center justify-center px-[5vw] pb-12 pt-3 md:w-screen md:px-[260px] md:pt-6"
         >
           <div
             id="contact-heading"
