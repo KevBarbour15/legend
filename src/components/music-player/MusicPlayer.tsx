@@ -195,7 +195,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               </div>
               <div className="flex items-center justify-center">
                 {index == currentTrackIndex ? (
-                  <GraphicEqRounded className="mr-2 text-customGold transition-colors" />
+                  <GraphicEqRounded className="mr-2 text-customGold transition-all" />
                 ) : (
                   <IconButton className="m-0 flex text-customNavy transition-colors md:hover:text-customGold">
                     <PlayArrowRounded
@@ -211,14 +211,10 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
 
       <div className="mt-3 flex justify-between rounded-t-sm border border-customNavy bg-gradient-to-r from-customCream to-customWhite p-1 drop-shadow-record md:mb-6 md:ml-6 md:rounded-sm md:py-0">
         <IconButton
-          className="hidden text-customNavy transition-all md:block md:px-1 md:py-0 md:hover:text-customGold"
+          className="hidden text-customNavy transition-colors md:block md:px-1 md:py-0 md:hover:text-customGold"
           onClick={togglePlayer}
         >
-          {visible ? (
-            <ExpandMoreRounded className="transition-all" />
-          ) : (
-            <ExpandLessRounded className="transition-all" />
-          )}
+          {visible ? <ExpandMoreRounded /> : <ExpandLessRounded />}
         </IconButton>
         <IconButton className="text-customNavy transition-colors md:px-1 md:py-0 md:hover:text-customGold">
           {mute ? (

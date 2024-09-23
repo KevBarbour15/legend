@@ -10,14 +10,18 @@ export async function POST(req: NextRequest) {
     if (!MAILCHIMP_API_KEY || !AUDIENCE_ID) {
       return NextResponse.json(
         { error: "Mailchimp API key or audience ID not found." },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
     const url = `https://${DATACENTER}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/`;
-    const { email } = await req.json();
+    const { email, firstName, lastName } = await req.json();
 
     const data = {
+      merge_fields: {
+        FNAME: firstName,
+        LNAME: lastName,
+      },
       email_address: email,
       status: "subscribed",
     };
@@ -39,7 +43,7 @@ export async function POST(req: NextRequest) {
     console.error(error);
     return NextResponse.json(
       { error: "Failed to subscribe user." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

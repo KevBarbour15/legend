@@ -76,20 +76,22 @@ const EventCard: React.FC<EventCardProps> = ({ event, fetchEvents }) => {
         className="flex w-90vw flex-col py-3 text-left text-customCream md:w-65vw lg:w-60vw xl:w-60vw xxl:w-60vw"
       >
         <div className="flex flex-col justify-between font-bigola md:flex-row">
-          <div className="block">
-            <h2 className="mb-3 text-xl text-customGold md:mb-6">
+          <div className="flex flex-col justify-between">
+            <h2 className="mb-3 text-xl text-customGold md:mb-0">
               {formattedDate}
             </h2>
-            <h2 className="mb-3 font-bigola text-3xl md:mb-6 md:text-5xl">
+            <h2 className="mb-3 font-bigola text-3xl md:mb-0 md:text-5xl">
               {event.title}
             </h2>
-            <div className="mb-3 flex flex-col md:mb-0 md:flex-row">
-              <h2 className="mb-3 text-xl md:mb-0 md:mr-12">{formattedTime}</h2>
-              <p className="font-hypatia text-xl md:text-2xl">
-                {event.description}
-              </p>
-            </div>
+
+            <h2 className="mb-3 text-xl text-customGold md:mb-0 md:mr-12">
+              {formattedTime}
+            </h2>
+            <p className="font-hypatia text-xl md:text-2xl">
+              {event.description}
+            </p>
           </div>
+
           {event.is_photo ? (
             <Button onClick={handleImageModalOpen} className="p-0">
               <img
@@ -136,8 +138,6 @@ const EventCard: React.FC<EventCardProps> = ({ event, fetchEvents }) => {
           </Button>
         </DialogActions>
       </Dialog>
-
-      {/************************************ Edit event modal *************************************/}
 
       {/************************************ View event media modal *************************************/}
       <Modal open={openImageModal} onClose={handleImageModalClose}>

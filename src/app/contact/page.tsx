@@ -55,11 +55,6 @@ export default function Contact() {
       y: -15,
     });
 
-    gsap.set("#contact-subheading", {
-      opacity: 0,
-      y: -15,
-    });
-
     gsap.set("#form #input-section", {
       opacity: 0,
       y: 15,
@@ -76,16 +71,6 @@ export default function Contact() {
           y: 0,
         },
         0.05,
-      )
-      .to(
-        "#contact-subheading",
-        {
-          duration: 0.15,
-          opacity: 1,
-          ease: "sine.inOut",
-          y: 0,
-        },
-        0.15,
       )
       .to(
         "#form #input-section",
@@ -134,6 +119,12 @@ export default function Contact() {
       });
 
       if (response.ok) {
+        await subscribeToMailchimp(
+          contactForm.email,
+          contactForm.firstName,
+          contactForm.lastName,
+        );
+
         setContactForm(initialForm);
       } else {
         const errorData = await response.json();
@@ -141,6 +132,31 @@ export default function Contact() {
       }
     } catch (error) {
       setContactForm({ ...contactForm, error: "Failed to submit form." });
+    }
+  };
+
+  const subscribeToMailchimp = async (
+    email: string,
+    firstName: string,
+    lastName: string,
+  ) => {
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, firstName, lastName }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Failed to subscribe to Mailchimp:", errorData.error);
+      } else {
+        console.log("Subscribed to Mailchimp");
+      }
+    } catch (error) {
+      console.error("Error subscribing to Mailchimp:", error);
     }
   };
 
