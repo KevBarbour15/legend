@@ -22,8 +22,8 @@ export default function Home() {
       ease: "sine.inOut",
       scrollTrigger: {
         trigger: "#about-section",
-        start: "top 90%",
-        end: "top 60%",
+        start: "top bottom-=25",
+        end: "top 75%",
         scrub: 1,
       },
     });
@@ -78,7 +78,7 @@ export default function Home() {
             scrollTrigger: {
               trigger: section,
               start: "top bottom-=25",
-              end: "top 85%",
+              end: "top 75%",
               scrub: 1,
             },
           },
