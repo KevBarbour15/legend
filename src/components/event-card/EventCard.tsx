@@ -73,20 +73,16 @@ const EventCard: React.FC<EventCardProps> = ({ event, fetchEvents }) => {
     <>
       <div
         ref={containerRef}
-        className="flex w-90vw flex-col py-3 text-left text-customCream md:w-full"
+        className="flex w-full flex-col py-3 text-left text-customCream"
       >
         <div className="flex flex-col justify-between font-bigola md:flex-row">
-          <div className="flex flex-col justify-between pb-3 md:pb-0">
-            <h2 className="mb-3 text-xl text-customGold md:mb-0">
+          <div className="flex flex-col gap-3 pb-3 md:pb-0 md:pr-12">
+            <h2 className="text-xl text-customGold md:text-2xl">
               {formattedDate}
             </h2>
-            <h2 className="mb-3 font-bigola text-3xl md:mb-0 md:text-5xl">
-              {event.title}
-            </h2>
+            <h2 className="text-3xl md:text-5xl">{event.title}</h2>
 
-            <h2 className="mb-3 text-xl text-customGold md:mb-0 md:mr-12">
-              {formattedTime}
-            </h2>
+            <h2 className="text-xl md:text-2xl">{formattedTime}</h2>
             <p className="font-hypatia text-xl md:text-2xl">
               {event.description}
             </p>
