@@ -10,14 +10,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 
 import { Button } from "@/components/ui/button";
 
@@ -44,14 +37,11 @@ const UpcomingEventsList: React.FC = () => {
   const eventRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
   const [openEdit, setOpenEdit] = useState<boolean>(false);
-  const [openImageModal, setOpenImageModal] = useState<boolean>(false);
 
   const handleDeleteOpen = () => setOpenDelete(true);
   const handleDeleteClose = () => setOpenDelete(false);
   const handleEditOpen = () => setOpenEdit(true);
   const handleEditClose = () => setOpenEdit(false);
-  const handleImageModalOpen = () => setOpenImageModal(true);
-  const handleImageModalClose = () => setOpenImageModal(false);
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -175,28 +165,22 @@ const UpcomingEventsList: React.FC = () => {
                     <AccordionContent className="flex w-full border-t border-black py-3">
                       <Card className="flex w-full flex-col p-3 md:flex-row md:justify-between">
                         <div className="flex flex-col justify-between">
-                          <p className="pb-3 font-hypatiaBold text-2xl">
-                            {event.title}
-                          </p>
-                          <p className="pb-3 font-hypatia text-lg">
-                            {formatTime(event.time)}
-                          </p>
-                          <p className="pb-3 font-hypatia text-lg">
-                            {event.description}
-                          </p>
+                          <div className="block">
+                            <p className="pb-3 text-2xl font-bold">
+                              {event.title}
+                            </p>
+                            <p className="pb-3">{formatTime(event.time)}</p>
+                            <p className="pb-3">{event.description}</p>
+                          </div>
                           <div className="flex w-full justify-start pb-3 md:pb-0">
                             <Button
-                              className="mr-6 font-hypatia text-lg"
+                              className="mr-3"
                               onClick={handleEditOpen}
                               variant="outline"
                             >
                               Edit
                             </Button>
-                            <Button
-                              className="font-hypatia text-lg"
-                              onClick={handleDeleteOpen}
-                              variant="outline"
-                            >
+                            <Button className="" onClick={handleDeleteOpen}>
                               Delete
                             </Button>
                           </div>
