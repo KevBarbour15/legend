@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 
-//gsap imports
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Switch from "@mui/material/Switch";

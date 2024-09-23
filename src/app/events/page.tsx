@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from "react";
 import EventCard from "@/components/event-card/EventCard";
 import { useRouter } from "next/navigation";
 
-//gsap imports
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -165,14 +164,14 @@ export default function Events() {
         {loading ? (
           <h2
             id="event-subheading"
-            className="m-6 flex flex-col p-6 text-center font-hypatia text-3xl text-customCream opacity-0"
+            className="font-bigola text-4xl text-customCream opacity-0 lg:text-5xl"
           >
             Loading events...
           </h2>
         ) : events.length === 0 ? (
           <h2
             id="no-events"
-            className="m-6 flex flex-col p-6 text-center font-hypatia text-3xl text-customCream opacity-0 lg:w-50vw lg:text-4xl xl:w-45vw xxl:w-40vw"
+            className="font-bigola text-4xl text-customCream opacity-0 lg:text-5xl"
           >
             Stay tuned for upcoming events...
           </h2>

@@ -1,18 +1,10 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-
-//gsap imports
-import { gsap } from "gsap";
+import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+
+import MessageCard from "@/components/message-card/MessageCard";
 
 interface Message {
   firstName: string;
@@ -74,35 +66,34 @@ const ReadMessagesList: React.FC = () => {
     fetchMessages();
   }, []);
 
-  const readMessages = messages
+  const unreadMessages = messages
     .filter((message) => message.read)
     .sort(
-      (a, b) => new Date(a.sentAt).getTime() - new Date(b.sentAt).getTime(),
+      (a, b) => new Date(b.sentAt).getTime() - new Date(a.sentAt).getTime(),
     );
 
   return (
     <div
       ref={containerRef}
       id="messages-container"
-      className="flex w-screen flex-col items-center justify-center pb-12 pt-6 text-center"
+      className="z-10 flex w-screen flex-col p-3 text-black md:py-6 md:pl-[275px] md:pr-6"
     >
       {loading ? (
-        <h1 className="font-bigola text-4xl text-black lg:text-5xl">
+        <h2 className="text-center font-bigola text-4xl text-black md:text-left">
           Loading messages...
-        </h1>
-      ) : readMessages.length === 0 ? (
-        <h1 className="font-bigola text-4xl text-black lg:text-5xl">
+        </h2>
+      ) : unreadMessages.length === 0 ? (
+        <h2 className="text-center font-bigola text-4xl text-black md:text-left">
           No messages found.
-        </h1>
+        </h2>
       ) : (
         <>
-          {readMessages.map((message, index) => (
-            <Card className="w-[300px]" key={index}>
-              <CardHeader>
-                <CardTitle>Card Title</CardTitle>
-                <CardDescription>Card Description</CardDescription>
-              </CardHeader>
-            </Card>
+          {unreadMessages.map((message, index) => (
+            <MessageCard
+              message={message}
+              index={index}
+              fetchMessages={fetchMessages}
+            />
           ))}
         </>
       )}

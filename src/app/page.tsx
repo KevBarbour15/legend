@@ -6,7 +6,6 @@ import MobileMenu from "@/components/mobile-menu/MobileMenu";
 import { Instagram, Facebook, YouTube } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 
-//gsap imports
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
