@@ -147,7 +147,7 @@ export default function Events() {
       <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col p-3 pb-24 md:w-screen md:pl-[275px] md:pr-6 md:pt-6"
+        className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-24 md:w-screen md:pl-[275px] md:pr-6 md:pt-6"
       >
         <div
           id="events-heading"
@@ -164,14 +164,14 @@ export default function Events() {
         {loading ? (
           <h2
             id="event-subheading"
-            className="font-bigola text-4xl text-customCream opacity-0 lg:text-5xl"
+            className="font-bigola text-5xl text-customCream opacity-0 lg:text-5xl"
           >
             Loading events...
           </h2>
         ) : events.length === 0 ? (
           <h2
             id="no-events"
-            className="font-bigola text-4xl text-customCream opacity-0 lg:text-5xl"
+            className="font-bigola text-5xl text-customCream opacity-0 lg:text-5xl"
           >
             Stay tuned for upcoming events...
           </h2>

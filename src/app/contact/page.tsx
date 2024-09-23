@@ -180,11 +180,11 @@ export default function Contact() {
         <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
         <div
           ref={containerRef}
-          className="z-10 flex flex-col items-center justify-center px-[5vw] pb-12 pt-3 md:w-screen md:px-[260px] md:pt-6"
+          className="z-10 flex w-[90vw] flex-col items-center justify-center px-[5vw] pb-12 pt-3 md:w-screen md:pb-6 md:pl-[275px] md:pr-6 md:pt-6"
         >
           <div
             id="contact-heading"
-            className="w-[90vw] border-b-2 border-customCream pb-3 text-3xl text-customCream opacity-0 md:hidden"
+            className="border-b-2 border-customCream pb-3 text-3xl text-customCream opacity-0 md:hidden"
           >
             <div>
               <Button onClick={handleAboutScroll}>
@@ -197,7 +197,7 @@ export default function Contact() {
           </div>
           <h2
             id="contact-heading"
-            className="hidden font-bigola text-4xl text-customCream opacity-0 md:flex lg:text-5xl"
+            className="hidden text-center font-bigola text-5xl text-customCream opacity-0 md:flex"
           >
             Let's Connect
           </h2>
@@ -205,13 +205,13 @@ export default function Contact() {
             <Box
               component="form"
               id="form"
-              className="flex flex-col items-center py-3 md:py-6"
+              className="flex w-full flex-col items-center py-3 md:py-6"
               onSubmit={handleSubmit}
             >
-              <div id="input-section" className="mb-3 font-hypatia opacity-0">
-                <div className="flex w-90vw flex-col justify-between text-2xl sm:flex-row lg:w-50vw xl:w-45vw xxl:w-40vw">
+              <div id="input-section" className="w-full font-hypatia opacity-0">
+                <div className="flex w-90vw flex-col justify-between sm:w-full sm:flex-row">
                   <TextField
-                    className="flex-1 sm:mr-1"
+                    className="flex-1 sm:mr-3"
                     type="text"
                     label="First Name"
                     value={contactForm.firstName}
@@ -225,7 +225,7 @@ export default function Contact() {
                     variant="standard"
                   />
                   <TextField
-                    className="mt-3 flex-1 sm:ml-1 sm:mt-0"
+                    className="mt-3 flex-1 sm:mt-0"
                     type="text"
                     label="Last Name"
                     value={contactForm.lastName}
@@ -240,9 +240,9 @@ export default function Contact() {
                   />
                 </div>
               </div>
-              <div id="input-section" className="my-3 opacity-0">
+              <div id="input-section" className="my-3 opacity-0 md:w-full">
                 <TextField
-                  className="w-90vw lg:w-50vw xl:w-45vw xxl:w-40vw"
+                  className="w-90vw md:w-full"
                   type="email"
                   label="Email"
                   value={contactForm.email}
@@ -253,9 +253,9 @@ export default function Contact() {
                   variant="standard"
                 />
               </div>
-              <div id="input-section" className="my-3 opacity-0">
+              <div id="input-section" className="my-3 opacity-0 md:w-full">
                 <TextField
-                  className="w-90vw lg:w-50vw xl:w-45vw xxl:w-40vw"
+                  className="w-90vw md:w-full"
                   type="tel"
                   label="Phone"
                   value={contactForm.phone}
@@ -266,7 +266,7 @@ export default function Contact() {
                   variant="standard"
                 />
               </div>
-              <div id="input-section" className="my-3 opacity-0">
+              <div id="input-section" className="my-3 opacity-0 md:w-full">
                 <DatePicker
                   value={contactForm.preferredDate}
                   label="Preferred Date *"
@@ -277,12 +277,12 @@ export default function Contact() {
                     })
                   }
                   slotProps={{ textField: { variant: "standard" } }}
-                  className="w-90vw lg:w-50vw xl:w-45vw xxl:w-40vw"
+                  className="w-90vw md:w-full"
                 />
               </div>
-              <div id="input-section" className="my-3 opacity-0">
+              <div id="input-section" className="my-3 opacity-0 md:w-full">
                 <TextField
-                  className="w-90vw lg:w-50vw xl:w-45vw xxl:w-40vw"
+                  className="w-90vw md:w-full"
                   label="Add any additional information/ideas here."
                   value={contactForm.message}
                   required
@@ -297,7 +297,7 @@ export default function Contact() {
               <Button
                 id="input-section"
                 type="submit"
-                className="menu-link rounded-full p-3 font-bigola text-2xl capitalize text-customCream opacity-0"
+                className="rounded-full p-3 font-bigola text-2xl text-customCream opacity-0 transition-all hover:text-customGold"
               >
                 Submit
               </Button>
