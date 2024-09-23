@@ -62,7 +62,7 @@ export default function Home() {
         gsap.fromTo(
           section,
           {
-            y: 20,
+            y: 35,
             opacity: 0,
           },
           {
