@@ -59,13 +59,13 @@ const SideMenu: React.FC = () => {
     if (!isMounted) return;
 
     if (pathname === "/") {
-      const aboutSection = document.getElementById("about-section");
+      const aboutSection = document.getElementById("about-content");
       if (!aboutSection) return;
       aboutSection.scrollIntoView({ behavior: "smooth" });
     } else {
       router.push("/");
       setTimeout(() => {
-        const aboutSection = document.getElementById("about-section");
+        const aboutSection = document.getElementById("about-content");
         if (!aboutSection) return;
 
         aboutSection.scrollIntoView({ behavior: "smooth" });

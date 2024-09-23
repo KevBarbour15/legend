@@ -133,12 +133,12 @@ export default function Events() {
 
     await router.push("/");
     setTimeout(() => {
-      const aboutSection = document.getElementById("about-section");
+      const aboutSection = document.getElementById("about-content");
 
       if (aboutSection) {
         aboutSection.scrollIntoView({ behavior: "smooth" });
       }
-    }, 300);
+    }, 150);
   };
 
   return (
