@@ -93,7 +93,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, fetchEvents }) => {
               <img
                 src={event.image_url}
                 alt="event"
-                className="h-auto w-full object-cover md:h-200px md:w-200px"
+                className="aspect-square h-auto w-full object-cover object-center md:h-250px md:w-250px"
               ></img>
             </Button>
           ) : (

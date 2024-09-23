@@ -180,7 +180,7 @@ export default function Contact() {
         <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
         <div
           ref={containerRef}
-          className="z-10 flex w-[90vw] flex-col items-center justify-center px-[5vw] pb-12 pt-3 md:w-screen md:pb-6 md:pl-[275px] md:pr-6 md:pt-6"
+          className="z-10 flex w-[90vw] flex-col items-center justify-center px-[5vw] pb-12 pt-3 md:w-screen md:pb-6 md:pl-[300px] md:pr-6 md:pt-6"
         >
           <div
             id="contact-heading"
