@@ -6,7 +6,6 @@ import MobileMenu from "@/components/mobile-menu/MobileMenu";
 import { Instagram, Facebook, YouTube } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 
-//gsap imports
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -34,6 +33,13 @@ export default function Home() {
         ".menu-link",
         {
           color: "#244154",
+        },
+        0,
+      )
+      .to(
+        ".about-link",
+        {
+          color: "#bc9952",
         },
         0,
       )
@@ -71,8 +77,8 @@ export default function Home() {
             y: 0,
             scrollTrigger: {
               trigger: section,
-              start: "top bottom",
-              end: "top 65%",
+              start: "top bottom-=25",
+              end: "top 85%",
               scrub: 1,
             },
           },
@@ -100,7 +106,7 @@ export default function Home() {
             id="about-section"
             className="opacity-0 md:aspect-video md:overflow-hidden"
           >
-            <img src={"/images/about-image.jpg"} className="" />
+            <img src={"/images/about-image.jpg"} />
           </div>
 
           <div className="font-hypatia text-lg text-customNavy">
@@ -120,7 +126,7 @@ export default function Home() {
             </p>
           </div>
           <div className="block py-6 font-bigola text-xl text-customNavy md:mb-0 md:text-3xl">
-            <h2 id="about-section " className="mb-3 opacity-0 md:mb-6">
+            <h2 id="about-section" className="mb-3 opacity-0 md:mb-6">
               Hours
             </h2>
             <div

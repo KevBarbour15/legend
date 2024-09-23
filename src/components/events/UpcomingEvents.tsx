@@ -3,13 +3,6 @@ import { useState, useRef, useEffect } from "react";
 import { formatTime } from "@/utils/time";
 import EditEventModal from "../edit-event-modal/EditEventModal";
 
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-
-import Typography from "@mui/material/Typography";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-
 import {
   Accordion,
   AccordionContent,
@@ -17,9 +10,10 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+import { Card } from "@/components/ui/card";
+
 import { Button } from "@/components/ui/button";
 
-//gsap imports
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 interface Event {
@@ -43,22 +37,15 @@ const UpcomingEventsList: React.FC = () => {
   const eventRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
   const [openEdit, setOpenEdit] = useState<boolean>(false);
-  const [openImageModal, setOpenImageModal] = useState<boolean>(false);
 
   const handleDeleteOpen = () => setOpenDelete(true);
   const handleDeleteClose = () => setOpenDelete(false);
   const handleEditOpen = () => setOpenEdit(true);
   const handleEditClose = () => setOpenEdit(false);
-  const handleImageModalOpen = () => setOpenImageModal(true);
-  const handleImageModalClose = () => setOpenImageModal(false);
 
   useGSAP(() => {
     if (!containerRef.current) return;
     gsap.set("#events-title", {
-      opacity: 0,
-    });
-
-    gsap.set("#no-events", {
       opacity: 0,
     });
 
@@ -80,6 +67,10 @@ const UpcomingEventsList: React.FC = () => {
     }
 
     if (!loading && eventRefs.current.length == 0) {
+      gsap.set("#no-events", {
+        opacity: 0,
+      });
+
       eventsTL.current = gsap
         .timeline({})
         .to(
@@ -130,17 +121,20 @@ const UpcomingEventsList: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className="z-10 flex flex-col items-center py-6 text-black"
+      className="z-10 flex w-screen flex-col p-3 text-black md:p-6"
     >
       {loading ? (
         <h2
           id="event-subheading"
-          className="my-6 font-hypatia text-3xl lg:text-4xl"
+          className="text-center font-bigola text-4xl text-black"
         >
           Loading events...
         </h2>
       ) : events.length === 0 ? (
-        <h2 id="no-events" className="my-5 font-hypatia text-3xl lg:text-4xl">
+        <h2
+          id="no-events"
+          className="text-center font-bigola text-4xl text-black"
+        >
           No events found.
         </h2>
       ) : (
@@ -159,58 +153,58 @@ const UpcomingEventsList: React.FC = () => {
                   eventRefs.current[index] = el;
                 }}
               >
-                <Accordion type="single" collapsible className="w-[400px]">
+                <Accordion type="single" collapsible className="w-full">
                   <AccordionItem value={`Event ${index}`}>
                     <AccordionTrigger>
-                      <p className="font-hypatia text-xl">
+                      <p className="font-bigola text-xl">
                         {new Date(event.date).toLocaleDateString("en-US", {
                           timeZone: "UTC",
                         })}
                       </p>
                     </AccordionTrigger>
-                    <AccordionContent className="border-t border-black pt-3">
-                      <p className="font-hypatia text-2xl">{event.title}</p>
-                      <p className="font-hypatia text-lg">
-                        {formatTime(event.time)}
-                      </p>
-                      <p className="font-hypatia text-lg">
-                        {event.description}
-                      </p>
+                    <AccordionContent className="flex w-full border-t border-black py-3">
+                      <Card className="flex w-full flex-col p-3 md:flex-row md:justify-between">
+                        <div className="flex flex-col justify-between">
+                          <div className="block">
+                            <p className="pb-3 text-2xl font-bold">
+                              {event.title}
+                            </p>
+                            <p className="pb-3">{formatTime(event.time)}</p>
+                            <p className="pb-3">{event.description}</p>
+                          </div>
+                          <div className="flex w-full justify-start pb-3 md:pb-0">
+                            <Button
+                              className="mr-3"
+                              onClick={handleEditOpen}
+                              variant="outline"
+                            >
+                              Edit
+                            </Button>
+                            <Button className="" onClick={handleDeleteOpen}>
+                              Delete
+                            </Button>
+                          </div>
+                        </div>
 
-                      {event.is_photo ? (
-                        <div className="p-0">
-                          <img
-                            src={event.image_url}
-                            alt="event"
-                            className="h-auto w-full border border-black object-cover"
-                          ></img>
+                        <div className="w-full p-0 md:w-[200px]">
+                          {event.is_photo ? (
+                            <img
+                              src={event.image_url}
+                              alt="event"
+                              className="aspect-square h-auto w-full border border-black object-cover object-center"
+                            ></img>
+                          ) : (
+                            <video
+                              src={event.image_url}
+                              className="aspect-square h-auto w-full border border-black object-cover object-center"
+                              loop
+                              autoPlay
+                              muted
+                              playsInline
+                            ></video>
+                          )}
                         </div>
-                      ) : (
-                        <div className="border p-0">
-                          <video
-                            src={event.image_url}
-                            className="aspect-square h-auto w-full border border-black object-cover object-center"
-                            loop
-                            autoPlay
-                            muted
-                            playsInline
-                          ></video>
-                        </div>
-                      )}
-                      <div className="flex w-full justify-end pt-3">
-                        <Button
-                          className="mr-6 font-hypatia"
-                          onClick={handleEditOpen}
-                        >
-                          Edit
-                        </Button>
-                        <Button
-                          className="font-hypatia"
-                          onClick={handleDeleteOpen}
-                        >
-                          Delete
-                        </Button>
-                      </div>
+                      </Card>
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>

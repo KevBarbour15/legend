@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from "react";
 import EventCard from "@/components/event-card/EventCard";
 import { useRouter } from "next/navigation";
 
-//gsap imports
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -148,7 +147,7 @@ export default function Events() {
       <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col items-center p-3 pb-24 md:w-screen md:px-[275px] md:pt-6"
+        className="z-10 flex w-screen flex-col p-3 pb-24 md:w-screen md:pl-[275px] md:pr-6 md:pt-6"
       >
         <div
           id="events-heading"
@@ -161,23 +160,18 @@ export default function Events() {
             </Button>
           </div>
         </div>
-        <h2
-          id="events-heading"
-          className="mb-6 hidden font-bigola text-4xl text-customCream opacity-0 md:flex lg:text-5xl"
-        >
-          Events
-        </h2>
+
         {loading ? (
           <h2
             id="event-subheading"
-            className="m-6 flex flex-col p-6 text-center font-hypatia text-3xl text-customCream opacity-0 lg:w-50vw lg:text-4xl xl:w-45vw xxl:w-40vw"
+            className="font-bigola text-4xl text-customCream opacity-0 lg:text-5xl"
           >
             Loading events...
           </h2>
         ) : events.length === 0 ? (
           <h2
             id="no-events"
-            className="m-6 flex flex-col p-6 text-center font-hypatia text-3xl text-customCream opacity-0 lg:w-50vw lg:text-4xl xl:w-45vw xxl:w-40vw"
+            className="font-bigola text-4xl text-customCream opacity-0 lg:text-5xl"
           >
             Stay tuned for upcoming events...
           </h2>
@@ -189,7 +183,7 @@ export default function Events() {
                 ref={(el) => {
                   eventRefs.current[index] = el;
                 }}
-                className={`max-w-90vw border-customCream opacity-0 md:w-fit ${index === 0 ? "md:border-t-2" : "border-t-2"} ${
+                className={`w-90vw border-customCream opacity-0 md:w-full ${index === 0 ? "md:border-t-2" : "border-t-2"} ${
                   index === events.length - 1 ? "border-b-2" : ""
                 }`}
               >

@@ -1,18 +1,10 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-
-//gsap imports
-import { gsap } from "gsap";
+import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+
+import MessageCard from "@/components/message-card/MessageCard";
 
 interface Message {
   firstName: string;
@@ -77,60 +69,33 @@ const UnreadMessagesList: React.FC = () => {
   const unreadMessages = messages
     .filter((message) => !message.read)
     .sort(
-      (a, b) => new Date(a.sentAt).getTime() - new Date(b.sentAt).getTime(),
+      (a, b) => new Date(b.sentAt).getTime() - new Date(a.sentAt).getTime(),
     );
 
   return (
     <div
       ref={containerRef}
       id="messages-container"
-      className="flex w-screen flex-col items-center justify-center pb-12 pt-3 text-center"
+      className="z-10 flex w-screen flex-col p-3 text-black md:p-6"
     >
       {loading ? (
-        <h1 className="mt-5 font-bigola text-4xl text-black lg:text-5xl">
+        <h2 className="text-center font-bigola text-4xl text-black">
           Loading messages...
-        </h1>
+        </h2>
       ) : unreadMessages.length === 0 ? (
-        <h1 className="mt-5 font-bigola text-4xl text-black lg:text-5xl">
+        <h2 className="text-center font-bigola text-4xl text-black">
           No messages found.
-        </h1>
+        </h2>
       ) : (
-            <>
-              
+        <>
           {unreadMessages.map((message, index) => (
-            <Card className="w-[325px]" key={index}>
-              <CardHeader>
-                <CardTitle className="flex justify-between capitalize">
-                  <div className="flex gap-1">
-                    <p>{message.firstName}</p>
-                    <p>{message.lastName}</p>
-                  </div>
-                  <p>
-                    {new Date(message.sentAt).toLocaleDateString("en-US", {
-                      timeZone: "UTC",
-                    })}
-                  </p>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="w-full text-left">
-                <div className="block pb-3">
-                  <p className="font-bold">Message:</p>
-                  <p>{message.message}</p>
-                </div>
-                <div className="block pb-3">
-                  <p className="font-bold">Preferred Date:</p>
-                  <p>{message.preferredDate}</p>
-                </div>
-                <div className="block pb-3">
-                  <p className="font-bold">Email:</p>
-                  <p>{message.email}</p>
-                </div>
-                <div className="block pb-3">
-                  <p className="font-bold">Phone:</p>
-                  <p>{message.phone}</p>
-                </div>
-              </CardContent>
-            </Card>
+            <div key={index}>
+              <MessageCard
+                message={message}
+                index={index}
+                fetchMessages={fetchMessages}
+              />
+            </div>
           ))}
         </>
       )}

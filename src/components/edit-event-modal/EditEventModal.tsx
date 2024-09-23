@@ -6,7 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import { Button } from "@/components/ui/button";
 
 interface Event {
   _id: string;
@@ -106,16 +106,6 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
           value={editedEvent.description}
           onChange={handleEditChange("description")}
         />
-        {/*
-          <FormGroup>
-            <FormControlLabel
-              label="Contacted"
-              className="form-label"
-              checked={editedEvent.isPublic}
-              control={<Switch />}
-            />
-          </FormGroup>
-          */}
         <TextField
           margin="dense"
           label="Notes"
@@ -128,17 +118,10 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
         />
       </DialogContent>
       <DialogActions>
-        <Button
-          onClick={handleEditClose}
-          className="font-hypatiaBold text-customNavy"
-        >
+        <Button onClick={handleEditClose} className="" variant="outline">
           Cancel
         </Button>
-        <Button
-          onClick={confirmEdit}
-          className="font-hypatiaBold text-customNavy"
-          autoFocus
-        >
+        <Button onClick={confirmEdit} className="" autoFocus>
           Save
         </Button>
       </DialogActions>
