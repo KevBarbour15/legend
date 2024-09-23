@@ -24,7 +24,6 @@ export default function Home() {
         trigger: "#hidden-bg",
         start: "center center",
         end: "center 25%",
-        markers: true,
         scrub: 1,
       },
     });
