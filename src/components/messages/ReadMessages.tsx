@@ -76,24 +76,26 @@ const ReadMessagesList: React.FC = () => {
     <div
       ref={containerRef}
       id="messages-container"
-      className="z-10 flex w-screen flex-col p-3 text-black md:py-6 md:pl-[275px] md:pr-6"
+      className="z-10 flex w-screen flex-col p-3 text-black md:p-6"
     >
       {loading ? (
-        <h2 className="text-center font-bigola text-4xl text-black md:text-left">
+        <h2 className="text-center font-bigola text-4xl text-black">
           Loading messages...
         </h2>
       ) : unreadMessages.length === 0 ? (
-        <h2 className="text-center font-bigola text-4xl text-black md:text-left">
+        <h2 className="text-center font-bigola text-4xl text-black">
           No messages found.
         </h2>
       ) : (
         <>
           {unreadMessages.map((message, index) => (
-            <MessageCard
-              message={message}
-              index={index}
-              fetchMessages={fetchMessages}
-            />
+            <div key={index}>
+              <MessageCard
+                message={message}
+                index={index}
+                fetchMessages={fetchMessages}
+              />
+            </div>
           ))}
         </>
       )}

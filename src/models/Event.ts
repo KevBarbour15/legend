@@ -1,6 +1,5 @@
 import mongoose, { Document, Schema } from "mongoose";
 
-// interface for the event
 export interface IEvent extends Document {
   title: string;
   date: string;
@@ -8,9 +7,9 @@ export interface IEvent extends Document {
   description: string;
   notes: string;
   image_url: string;
+  is_photo: boolean;
 }
 
-// schema for the event
 const EventSchema: Schema = new Schema({
   title: {
     type: String,
@@ -35,11 +34,6 @@ const EventSchema: Schema = new Schema({
   image_url: {
     type: String,
     required: true,
-  },
-  is_public: {
-    type: Boolean,
-    required: true,
-    default: true,
   },
   is_photo: {
     type: Boolean,

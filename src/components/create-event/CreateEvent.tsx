@@ -1,20 +1,49 @@
 import React, { useRef, useState, useEffect } from "react";
-
-import gsap from "gsap";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import Switch from "@mui/material/Switch";
+import { Switch } from "@/components/ui/switch";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+
+const formSchema = z.object({
+  title: z.string().min(1, "Event name is required"),
+  date: z.string().min(1, "Date is required"),
+  time: z.string().min(1, "Time is required"),
+  image_url: z.string().url("Invalid URL"),
+  description: z.string().min(1, "Description is required"),
+  is_photo: z.boolean(),
+});
 
 const CreateEvent: React.FC = () => {
-  const [title, setTitle] = useState<string>("");
-  const [date, setDate] = useState<string>("");
-  const [time, setTime] = useState<string>("12:00");
-  const [description, setDescription] = useState<string>("");
-  const [imageURL, setImageURL] = useState<string>("");
-  const [isPhoto, setIsPhoto] = useState<boolean>(true);
-  const [isPublic, setIsPublic] = useState<boolean>(true);
-  const [error, setError] = useState<string>("");
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: "",
+      date: "",
+      time: "",
+      image_url: "",
+      description: "",
+      is_photo: true,
+    },
+  });
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -27,166 +56,149 @@ const CreateEvent: React.FC = () => {
     });
   }, []);
 
-  const handlePhotoToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsPhoto(event.target.checked);
-  };
+  useEffect(() => {
+    const today = new Date();
+    const formattedDate = today.toISOString().split("T")[0];
+    form.setValue("date", formattedDate);
+  }, [form]);
 
-  const handlePublicToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsPublic(event.target.checked);
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (!title || !date || !time || !description || !imageURL) {
-      setError("Please fill out all fields.");
-      return;
-    }
-
-    setError("");
-
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsSubmitting(true);
     try {
       const response = await fetch("/api/events", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          title: title,
-          date: date,
-          time: time,
-          description: description,
-          image_url: imageURL,
-          is_public: true,
-          is_photo: isPhoto,
-        }),
+        body: JSON.stringify(values),
       });
 
       if (response.ok) {
-        alert("Event created successfully.");
-        setTitle("");
-        setDate("");
-        setTime("");
-        setImageURL("");
-        setDescription("");
-        setIsPhoto(true);
-        setIsPublic(true);
+        form.reset();
+      } else {
+        const errorData = await response.json();
       }
     } catch (error) {
-      console.log("Error: ", error);
-      setError("Failed to create event");
+      console.error("Error: ", error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
-
-  useEffect(() => {
-    const today = new Date();
-    const formattedDate = today.toISOString().split("T")[0];
-    setDate(formattedDate);
-  }, []);
 
   return (
     <div
       ref={containerRef}
-      className="flex w-screen flex-col items-center pt-3"
+      className="z-10 flex w-screen flex-col p-3 text-black md:p-6"
     >
-      <div>
-        <form className="flex flex-col items-center" onSubmit={handleSubmit}>
-          <div className="my-3">
-            <div className="flex w-fit items-center justify-center pb-3">
-              <label className="font-hypatia text-xl text-customWhite">
-                Hidden
-              </label>
-              <Switch
-                checked={isPublic}
-                onChange={handlePublicToggle}
-                inputProps={{ "aria-label": "controlled" }}
-              />
-              <label className="font-hypatia text-xl text-customWhite">
-                Public
-              </label>
-            </div>
-            <label className="flex text-left font-hypatia text-xl">
-              Event Name:
-            </label>
-
-            <input
-              className="w-90vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
-              type="text"
-              placeholder="For ex: Jose's Birthday Party"
-              required
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+      <Card className="p-3">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Event Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="For ex: Jose's Birthday Party"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
-
-          <div className="my-3">
-            <label className="flex text-left font-hypatia text-xl">Date:</label>
-            <input
-              className="w-90vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
-              type="date"
-              required
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
+            <FormField
+              control={form.control}
+              name="date"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Date</FormLabel>
+                  <FormControl>
+                    <Input type="date" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
-
-          <div className="my-3">
-            <label className="flex text-left font-hypatia text-xl">Time:</label>
-            <input
-              className="w-90vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
-              type="time"
-              required
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
+            <FormField
+              control={form.control}
+              name="time"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Time</FormLabel>
+                  <FormControl>
+                    <Input type="time" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
-
-          <div className="my-3 flex flex-col">
-            <label className="flex w-90vw text-left font-hypatia text-xl lg:w-50vw xl:w-45vw xxl:w-40vw">
-              Image or Video URL from Imgur (for video convert to MP4):
-            </label>
-            <input
-              className="w-90vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
-              type="text"
-              required
-              value={imageURL}
-              onChange={(e) => setImageURL(e.target.value)}
-              placeholder="Add image address from Imgur"
+            <FormField
+              control={form.control}
+              name="image_url"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Image or Video URL</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Add image address from Imgur"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>For video, convert to MP4</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-            <div className="flex w-fit items-center justify-center pt-3">
-              <label className="font-hypatia text-xl text-customWhite">
-                Video
-              </label>
-              <Switch
-                checked={isPhoto}
-                onChange={handlePhotoToggle}
-                inputProps={{ "aria-label": "controlled" }}
-              />
-              <label className="font-hypatia text-xl text-customWhite">
-                Photo
-              </label>
-            </div>
-          </div>
-
-          <div className="mb-3">
-            <label className="flex text-left font-hypatia text-xl">
-              Event Description:
-            </label>
-            <textarea
-              className="h-52 w-90vw rounded-lg border border-customWhite border-opacity-50 bg-transparent px-4 py-2 font-ubuntuRegular text-customWhite hover:border-opacity-75 hover:outline-none focus:border-opacity-100 focus:outline-none lg:w-50vw xl:w-45vw xxl:w-40vw"
-              placeholder="Add any additional information/ideas here."
-              required
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+            <FormField
+              control={form.control}
+              name="is_photo"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                  <div className="space-y-0.5">
+                    <FormLabel className="text-base">Media Type</FormLabel>
+                    <FormDescription>
+                      Choose between photo or video
+                    </FormDescription>
+                  </div>
+                  <FormControl>
+                    <div className="ml-3 flex items-center gap-3">
+                      <p>Video</p>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                      <p>Photo</p>
+                    </div>
+                  </FormControl>
+                </FormItem>
+              )}
             />
-          </div>
-          <button className="py-3" type="submit">
-            <span className="font-bigola text-2xl leading-none text-customWhite">
-              SUBMIT
-            </span>
-          </button>
-        </form>
-      </div>
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Event Description</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Add any additional information/ideas here."
+                      className="resize-none"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Submitting..." : "Submit"}
+            </Button>
+          </form>
+        </Form>
+      </Card>
     </div>
   );
 };

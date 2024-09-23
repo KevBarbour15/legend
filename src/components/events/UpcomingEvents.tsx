@@ -121,19 +121,19 @@ const UpcomingEventsList: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className="z-10 flex w-screen flex-col p-3 text-black md:py-6 md:pl-[275px] md:pr-6"
+      className="z-10 flex w-screen flex-col p-3 text-black md:p-6"
     >
       {loading ? (
         <h2
           id="event-subheading"
-          className="text-center font-bigola text-4xl text-black md:text-left"
+          className="text-center font-bigola text-4xl text-black"
         >
           Loading events...
         </h2>
       ) : events.length === 0 ? (
         <h2
           id="no-events"
-          className="text-center font-bigola text-4xl text-black md:text-left"
+          className="text-center font-bigola text-4xl text-black"
         >
           No events found.
         </h2>

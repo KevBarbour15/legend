@@ -46,7 +46,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
   const pathName = usePathname();
 
   useEffect(() => {
-    if (window.innerWidth >= 768 && pathName !== "/dashboard") {
+    if (window.innerWidth >= 768) {
       setVisible(true);
     }
   }, []);
@@ -145,7 +145,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
     <div
       ref={containerRef}
       id="player-container"
-      className="fixed bottom-0 left-0 right-0 z-[150] flex h-auto w-full flex-col opacity-0 md:w-fit"
+      className={`fixed bottom-0 left-0 right-0 z-[150] flex h-auto w-full flex-col opacity-0 md:w-fit ${pathName === "/dashboard" ? "hidden" : ""}`}
     >
       {/* Player Popup */}
       <Collapse in={visible} id="player" className="opacity-0">

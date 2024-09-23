@@ -18,7 +18,7 @@ export default function middleware(req: NextRequest) {
   }
 
   const response = NextResponse.next();
-  // Set CORS headers for all other requests
+
   response.headers.set("Access-Control-Allow-Origin", "*");
   response.headers.set(
     "Access-Control-Allow-Methods",

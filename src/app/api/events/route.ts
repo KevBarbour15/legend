@@ -23,11 +23,10 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    console.log(body);
 
-    const { title, date, time, description, image_url } = body;
+    const { title, date, time, description, image_url, is_photo } = body;
 
-    if (!title || !date || !time || !description || !image_url) {
+    if (!title || !date || !time || !description || !image_url || !is_photo) {
       return NextResponse.json(
         { error: "All fields are required!" },
         { status: 400 },
@@ -40,6 +39,7 @@ export async function POST(req: NextRequest) {
       time,
       description,
       image_url,
+      is_photo,
     });
 
     await event.save();
