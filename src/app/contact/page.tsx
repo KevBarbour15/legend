@@ -170,7 +170,7 @@ export default function Contact() {
       if (aboutSection) {
         aboutSection.scrollIntoView({ behavior: "smooth" });
       }
-    }, 200);
+    }, 300);
   };
 
   return (
@@ -180,16 +180,16 @@ export default function Contact() {
         <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
         <div
           ref={containerRef}
-          className="z-10 flex w-[90vw] flex-col items-center justify-center px-[5vw] pb-12 pt-3 md:w-screen md:pb-6 md:pl-[300px] md:pr-6 md:pt-6"
+          className="z-10 flex w-screen flex-col items-center justify-center px-3 pb-12 pt-3 md:pb-6 md:pl-[300px] md:pr-6 md:pt-6"
         >
           <div
             id="contact-heading"
-            className="border-b-2 border-customCream pb-3 text-3xl text-customCream opacity-0 md:hidden"
+            className="w-full border-b-2 border-customCream pb-3 text-3xl text-customCream opacity-0 md:hidden"
           >
             <div>
               <Button onClick={handleAboutScroll}>
                 <ArrowBackIos className="mr-6 text-customCream" />
-                <span className="font-bigola text-customCream">
+                <span className="font-bigola text-lg capitalize text-customCream">
                   Let's Connect
                 </span>
               </Button>
@@ -209,7 +209,7 @@ export default function Contact() {
               onSubmit={handleSubmit}
             >
               <div id="input-section" className="w-full font-hypatia opacity-0">
-                <div className="flex w-90vw flex-col justify-between sm:w-full sm:flex-row">
+                <div className="flex w-full flex-col justify-between sm:flex-row">
                   <TextField
                     className="flex-1 sm:mr-3"
                     type="text"
@@ -240,9 +240,9 @@ export default function Contact() {
                   />
                 </div>
               </div>
-              <div id="input-section" className="my-3 opacity-0 md:w-full">
+              <div id="input-section" className="my-3 w-full opacity-0">
                 <TextField
-                  className="w-90vw md:w-full"
+                  className="w-full"
                   type="email"
                   label="Email"
                   value={contactForm.email}
@@ -253,9 +253,9 @@ export default function Contact() {
                   variant="standard"
                 />
               </div>
-              <div id="input-section" className="my-3 opacity-0 md:w-full">
+              <div id="input-section" className="my-3 w-full opacity-0">
                 <TextField
-                  className="w-90vw md:w-full"
+                  className="w-full"
                   type="tel"
                   label="Phone"
                   value={contactForm.phone}
@@ -266,7 +266,7 @@ export default function Contact() {
                   variant="standard"
                 />
               </div>
-              <div id="input-section" className="my-3 opacity-0 md:w-full">
+              <div id="input-section" className="my-3 w-full opacity-0">
                 <DatePicker
                   value={contactForm.preferredDate}
                   label="Preferred Date *"
@@ -280,9 +280,9 @@ export default function Contact() {
                   className="w-90vw md:w-full"
                 />
               </div>
-              <div id="input-section" className="my-3 opacity-0 md:w-full">
+              <div id="input-section" className="my-3 w-full opacity-0">
                 <TextField
-                  className="w-90vw md:w-full"
+                  className="w-full"
                   label="Add any additional information/ideas here."
                   value={contactForm.message}
                   required
@@ -297,7 +297,7 @@ export default function Contact() {
               <Button
                 id="input-section"
                 type="submit"
-                className="rounded-full p-3 font-bigola text-2xl text-customCream opacity-0 transition-all hover:text-customGold"
+                className="rounded-full p-3 font-bigola text-2xl capitalize text-customCream opacity-0 transition-all hover:text-customGold"
               >
                 Submit
               </Button>

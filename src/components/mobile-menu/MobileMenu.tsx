@@ -11,18 +11,16 @@ const links = [
 const MobileMenu: React.FC = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const [windowHeight, setWindowHeight] = useState<string>("100vh");
-  const [isClient, setIsClient] = useState<boolean>(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setIsClient(true);
       setWindowHeight(window.innerHeight + "px");
     }
   }, []);
 
   const handleAboutClick = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (window.location.pathname !== "/" && !isClient) return;
+    if (window.location.pathname !== "/") return;
 
     const aboutSection = document.getElementById("about-content");
     if (!aboutSection) return;
@@ -57,7 +55,7 @@ const MobileMenu: React.FC = () => {
           ))}
         </ul>
       </div>
-      <div className="mb-12 ml-3 w-fit font-bigola">
+      <div className="mb-14 ml-3 w-fit font-bigola">
         <a
           className="cursor-pointer"
           target="_blank"

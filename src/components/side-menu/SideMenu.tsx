@@ -64,12 +64,13 @@ const SideMenu: React.FC = () => {
       aboutSection.scrollIntoView({ behavior: "smooth" });
     } else {
       router.push("/");
+
       setTimeout(() => {
         const aboutSection = document.getElementById("about-content");
         if (!aboutSection) return;
 
         aboutSection.scrollIntoView({ behavior: "smooth" });
-      }, 150);
+      }, 300);
     }
   };
 

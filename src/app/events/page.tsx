@@ -132,13 +132,13 @@ export default function Events() {
     e.preventDefault();
 
     await router.push("/");
+
     setTimeout(() => {
       const aboutSection = document.getElementById("about-content");
-
       if (aboutSection) {
         aboutSection.scrollIntoView({ behavior: "smooth" });
       }
-    }, 150);
+    }, 300);
   };
 
   return (
@@ -151,12 +151,14 @@ export default function Events() {
       >
         <div
           id="events-heading"
-          className="w-[90vw] border-b-2 border-customCream pb-3 text-3xl text-customCream opacity-0 md:hidden md:pb-6"
+          className="w-full border-b-2 border-customCream pb-3 text-3xl text-customCream opacity-0 md:hidden md:pb-6"
         >
           <div>
             <Button onClick={handleAboutScroll}>
               <ArrowBackIos className="mr-6 text-customCream" />
-              <span className="font-bigola text-customCream">Events</span>
+              <span className="font-bigola text-lg capitalize text-customCream">
+                Events
+              </span>
             </Button>
           </div>
         </div>
