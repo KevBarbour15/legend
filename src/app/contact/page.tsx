@@ -184,7 +184,7 @@ export default function Contact() {
         >
           <div
             id="contact-heading"
-            className="w-full border-b-2 border-customCream pb-3 text-3xl text-customCream opacity-0 md:hidden"
+            className="w-full border-b border-customCream pb-3 text-3xl text-customCream opacity-0 md:hidden"
           >
             <div>
               <Button onClick={handleAboutScroll}>

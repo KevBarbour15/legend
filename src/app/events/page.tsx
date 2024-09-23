@@ -147,11 +147,11 @@ export default function Events() {
       <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-24 md:pl-[300px] md:pr-6 md:pt-6"
+        className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-14 md:pl-[300px] md:pr-6 md:pt-6"
       >
         <div
           id="events-heading"
-          className="w-full border-b-2 border-customCream pb-3 text-3xl text-customCream opacity-0 md:hidden md:pb-6"
+          className="w-full border-b border-customCream pb-3 text-3xl text-customCream opacity-0 md:hidden md:pb-6"
         >
           <div>
             <Button onClick={handleAboutScroll}>
@@ -166,19 +166,19 @@ export default function Events() {
         {loading ? (
           <h2
             id="event-subheading"
-            className="font-bigola text-5xl text-customCream opacity-0"
+            className="font-bigola text-3xl text-customCream opacity-0 md:text-5xl"
           >
             Loading events...
           </h2>
         ) : events.length === 0 ? (
           <h2
             id="no-events"
-            className="font-bigola text-5xl text-customCream opacity-0"
+            className="font-bigola text-3xl text-customCream opacity-0 md:text-5xl"
           >
             Stay tuned for upcoming events...
           </h2>
         ) : (
-          <div className="w-90vw md:w-full">
+          <div className="w-full">
             {events.map((event, index) => (
               <div
                 key={event._id}
