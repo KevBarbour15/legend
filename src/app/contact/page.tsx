@@ -277,7 +277,7 @@ export default function Contact() {
                     })
                   }
                   slotProps={{ textField: { variant: "standard" } }}
-                  className="w-90vw md:w-full"
+                  className="w-full"
                 />
               </div>
               <div id="input-section" className="my-3 w-full opacity-0">
