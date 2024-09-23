@@ -23,7 +23,7 @@ const SideMenu: React.FC = () => {
   }, []);
 
   useGSAP(() => {
-    const menuLinks = document.querySelectorAll(".menu-link");
+    const menuLinks = document.querySelectorAll("#hover");
 
     menuLinks.forEach((menuLink) => {
       menuLink.addEventListener("mouseenter", () => {
@@ -69,7 +69,7 @@ const SideMenu: React.FC = () => {
         if (!aboutSection) return;
 
         aboutSection.scrollIntoView({ behavior: "smooth" });
-      }, 300);
+      }, 150);
     }
   };
 
@@ -78,7 +78,11 @@ const SideMenu: React.FC = () => {
       <div className="flex h-full flex-col justify-start pl-6 pt-6 md:p-0">
         <ul className="font-bigola text-5xl" id="menu-text">
           {links.map((link, idx) => (
-            <li key={idx} className="menu-link m-0 p-0 text-customCream">
+            <li
+              key={idx}
+              id="hover"
+              className={`${link.path === "/" ? "about-link" : "menu-link"} m-0 p-0 ${pathname === link.path && pathname !== "/" ? "text-customGold" : "text-customCream"} `}
+            >
               {link.path === "/" ? (
                 <a onClick={handleAboutClick} className="cursor-pointer">
                   {link.label}
@@ -89,14 +93,14 @@ const SideMenu: React.FC = () => {
             </li>
           ))}
         </ul>
-        <div className="menu-link mt-12 pr-3 font-bigola">
+        <div className="menu-link mt-12 pr-3 font-bigola" id="hover">
           <img
             className="mb-6 w-[150px] md:hidden"
             src="./images/alt-logo.png"
             alt="Alternative Logo"
           />
           <a
-            className="menu-link cursor-pointer text-customCream"
+            className="cursor-pointer text-customCream"
             target="_blank"
             rel="noopener noreferrer"
             href="https://www.google.com/maps/dir//410+L+St,+Sacramento,+CA+95814/@38.5798987,-121.5844553,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x809ad12b9928b091:0x8fd24ebe337fbfe7!2m2!1d-121.5020543!2d38.5799276?entry=ttu&g_ep=EgoyMDI0MDkwNC4wIKXMDSoASAFQAw%3D%3D"

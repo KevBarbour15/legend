@@ -73,7 +73,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, fetchEvents }) => {
     <>
       <div
         ref={containerRef}
-        className="flex w-90vw flex-col py-3 text-left text-customCream md:w-65vw lg:w-60vw xl:w-60vw xxl:w-60vw"
+        className="flex w-90vw flex-col py-3 text-left text-customCream md:w-full"
       >
         <div className="flex flex-col justify-between font-bigola md:flex-row">
           <div className="flex flex-col justify-between">
