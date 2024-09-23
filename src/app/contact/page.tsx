@@ -57,7 +57,7 @@ export default function Contact() {
 
     gsap.set("#form #input-section", {
       opacity: 0,
-      y: 15,
+      y: 35,
     });
 
     tl.current = gsap

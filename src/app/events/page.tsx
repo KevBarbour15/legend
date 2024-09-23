@@ -35,17 +35,17 @@ export default function Events() {
     if (!containerRef.current) return;
     gsap.set("#events-heading", {
       opacity: 0,
-      y: -15,
+      y: 35,
     });
 
     gsap.set("#no-events", {
       opacity: 0,
-      y: 15,
+      y: 35,
     });
 
     gsap.fromTo(
       "#event-subheading",
-      { opacity: 0, y: 15 },
+      { opacity: 0, y: 35 },
       { opacity: 1, duration: 0.15, delay: 0.1, ease: "sine.inOut", y: 0 },
     );
 

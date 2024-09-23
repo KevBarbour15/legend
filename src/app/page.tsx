@@ -21,9 +21,10 @@ export default function Home() {
     tl.current = gsap.timeline({
       ease: "sine.inOut",
       scrollTrigger: {
-        trigger: "#about-section",
-        start: "top bottom-=25",
-        end: "top 75%",
+        trigger: "#hidden-bg",
+        start: "center center",
+        end: "center 25%",
+        markers: true,
         scrub: 1,
       },
     });
