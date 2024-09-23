@@ -24,7 +24,7 @@ const MobileMenu: React.FC = () => {
     e.preventDefault();
     if (window.location.pathname !== "/" && !isClient) return;
 
-    const aboutSection = document.getElementById("about-section");
+    const aboutSection = document.getElementById("about-content");
     if (!aboutSection) return;
     aboutSection.scrollIntoView({ behavior: "smooth" });
   };

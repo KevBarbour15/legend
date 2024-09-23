@@ -93,8 +93,8 @@ export default function Home() {
         ></div>
         <div className="top-bg hidden h-screen w-full md:block"></div>
         <div
-          id="about-section"
-          className="relative block h-auto p-3 opacity-0 md:ml-[224px] md:p-6"
+          id="about-content"
+          className="relative block h-auto p-3 md:ml-[224px] md:p-6"
         >
           <div
             id="about-section"

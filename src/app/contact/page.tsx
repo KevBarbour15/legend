@@ -165,7 +165,7 @@ export default function Contact() {
 
     await router.push("/");
     setTimeout(() => {
-      const aboutSection = document.getElementById("about-section");
+      const aboutSection = document.getElementById("about-content");
 
       if (aboutSection) {
         aboutSection.scrollIntoView({ behavior: "smooth" });
