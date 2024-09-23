@@ -64,8 +64,11 @@ const DashHeader: React.FC<DashProps> = ({ setActiveTab, activeTab }) => {
           {activeTab}
         </div>
         <LogoutLink postLogoutRedirectURL={postLogoutRedirectURL}>
-          <Button variant="ghost" className="font-bigola text-lg">
-            <LogOut className="mr-3 h-4 w-4" />
+          <Button
+            variant="outline"
+            className="font-bigola text-lg text-black transition-all"
+          >
+            <LogOut className="mr-3 h-3 w-3" />
             Logout
           </Button>
         </LogoutLink>
