@@ -1,11 +1,6 @@
 import { formatTime } from "@/utils/time";
-import React, { useRef, useState, useEffect } from "react";
-import DialogTitle from "@mui/material/DialogTitle";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import TextField from "@mui/material/TextField";
+import React, { useRef, useState } from "react";
+
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
@@ -41,33 +36,6 @@ const EventCard: React.FC<EventCardProps> = ({ event, fetchEvents }) => {
 
   const handleImageModalOpen = () => setOpenImageModal(true);
   const handleImageModalClose = () => setOpenImageModal(false);
-
-  const handleDeleteOpen = () => {
-    setOpenDelete(true);
-  };
-
-  const handleDeleteClose = () => {
-    setOpenDelete(false);
-  };
-
-  const confirmDelete = async () => {
-    try {
-      const response = await fetch("/api/events", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ eventId: event._id }),
-      });
-
-      if (response.ok) {
-        setOpenDelete(false);
-        fetchEvents();
-      }
-    } catch (error) {
-      console.log("Error: ", error);
-    }
-  };
 
   return (
     <>
@@ -114,30 +82,6 @@ const EventCard: React.FC<EventCardProps> = ({ event, fetchEvents }) => {
           )}
         </div>
       </div>
-
-      {/************************************  Delete event modal *************************************/}
-      <Dialog
-        open={openDelete}
-        onClose={handleDeleteClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Delete Event?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete this event? This action cannot be
-            undone.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDeleteClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={confirmDelete} color="primary" autoFocus>
-            Delete
-          </Button>
-        </DialogActions>
-      </Dialog>
 
       {/************************************ View event media modal *************************************/}
       <Modal open={openImageModal} onClose={handleImageModalClose}>
