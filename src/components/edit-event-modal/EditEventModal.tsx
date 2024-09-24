@@ -1,12 +1,15 @@
-import { useState } from "react";
-
-import DialogTitle from "@mui/material/DialogTitle";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import TextField from "@mui/material/TextField";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 
 interface Event {
   _id: string;
@@ -23,26 +26,27 @@ interface Event {
 interface EditEventModalProps {
   event: Event;
   fetchEvents: () => void;
-  handleEditClose: () => void;
-  openEdit: boolean;
+  closeEditModal: () => void;
+  openEditModal: boolean;
 }
 
 const EditEventModal: React.FC<EditEventModalProps> = ({
   event,
-  openEdit,
-  handleEditClose,
   fetchEvents,
+  closeEditModal,
+  openEditModal,
 }) => {
   const [editedEvent, setEditedEvent] = useState<Event>({ ...event });
 
   const handleEditChange =
-    (field: keyof Event) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      setEditedEvent({ ...editedEvent, [field]: event.target.value });
+    (field: keyof Event) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setEditedEvent({ ...editedEvent, [field]: e.target.value });
     };
 
   const confirmEdit = async () => {
     try {
-      const response = await fetch(`/api/events?action=${"EditCalendar"}`, {
+      const response = await fetch(`/api/events?action=EditCalendar`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -52,80 +56,100 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
 
       if (response.ok) {
         fetchEvents();
-        handleEditClose();
+        closeEditModal();
       }
-    } catch (error) {}
-    handleEditClose();
+    } catch (error) {
+      console.error("Error editing event: ", error);
+    }
+    closeEditModal();
   };
 
   return (
-    <Dialog open={openEdit} onClose={handleEditClose}>
-      <DialogContent>
-        <TextField
-          margin="dense"
-          label="Title"
-          type="text"
-          fullWidth
-          value={editedEvent.title}
-          onChange={handleEditChange("title")}
-          className="font-hypatia text-customNavy"
-        />
-        <TextField
-          margin="dense"
-          label="Date"
-          type="date"
-          fullWidth
-          value={editedEvent.date}
-          onChange={handleEditChange("date")}
-          InputLabelProps={{ shrink: true }}
-        />
-        <TextField
-          margin="dense"
-          label="Time"
-          type="time"
-          fullWidth
-          value={editedEvent.time}
-          onChange={handleEditChange("time")}
-          InputLabelProps={{ shrink: true }}
-        />
-        <TextField
-          margin="dense"
-          label="Image URL"
-          type="text"
-          fullWidth
-          value={editedEvent.image_url}
-          onChange={handleEditChange("image_url")}
-        />
-        <TextField
-          margin="dense"
-          label="Description"
-          type="text"
-          fullWidth
-          multiline
-          rows={3}
-          value={editedEvent.description}
-          onChange={handleEditChange("description")}
-        />
-        <TextField
-          margin="dense"
-          label="Notes"
-          type="text"
-          fullWidth
-          multiline
-          rows={4}
-          value={editedEvent.notes}
-          onChange={handleEditChange("notes")}
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleEditClose} className="" variant="outline">
-          Cancel
-        </Button>
-        <Button onClick={confirmEdit} className="" autoFocus>
-          Save
-        </Button>
-      </DialogActions>
-    </Dialog>
+    <>
+      <Dialog open={openEditModal} onOpenChange={closeEditModal}>
+        <DialogContent className="w-full text-black">
+          <DialogHeader>
+            <DialogTitle>Edit Event</DialogTitle>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="title" className="text-right">
+                Title
+              </Label>
+              <Input
+                id="title"
+                value={editedEvent.title}
+                onChange={handleEditChange("title")}
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="date" className="text-right">
+                Date
+              </Label>
+              <Input
+                id="date"
+                type="date"
+                value={editedEvent.date}
+                onChange={handleEditChange("date")}
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="time" className="text-right">
+                Time
+              </Label>
+              <Input
+                id="time"
+                type="time"
+                value={editedEvent.time}
+                onChange={handleEditChange("time")}
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="image_url" className="text-right">
+                Image URL
+              </Label>
+              <Input
+                id="image_url"
+                value={editedEvent.image_url}
+                onChange={handleEditChange("image_url")}
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="description" className="text-right">
+                Description
+              </Label>
+              <Textarea
+                id="description"
+                value={editedEvent.description}
+                onChange={handleEditChange("description")}
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="notes" className="text-right">
+                Notes
+              </Label>
+              <Textarea
+                id="notes"
+                value={editedEvent.notes}
+                onChange={handleEditChange("notes")}
+                className="col-span-3"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={closeEditModal}>
+              Cancel
+            </Button>
+            <Button onClick={confirmEdit}>Save</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 
