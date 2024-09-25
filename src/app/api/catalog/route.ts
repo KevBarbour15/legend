@@ -30,12 +30,14 @@ export async function GET() {
 
     // Fetch locations
     const locationsResponse = await client.locationsApi.listLocations();
-    console.log("Locations:");
+    //console.log("Locations:");
+    /*
     locationsResponse.result.locations?.forEach((location) => {
       console.log(
         `ID: ${location.id}, Name: ${location.name}, Status: ${location.status}`,
       );
     });
+*/
 
     const response = await client.catalogApi.listCatalog(
       undefined,
