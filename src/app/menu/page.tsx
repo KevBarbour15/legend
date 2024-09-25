@@ -21,6 +21,7 @@ import {
 interface MenuItem {
   id: string;
   name: string | undefined;
+  brand: string | undefined;
   description: string | undefined;
   price: string | undefined;
 }
@@ -113,35 +114,32 @@ export default function Menu() {
             Error Loading Menu...
           </h2>
         ) : (
-          <Accordion
-            type="single"
-            collapsible
-            className="w-full md:border-t md:border-customGold"
-          >
+          <Accordion type="single" collapsible className="w-full">
             {Object.entries(menu).map(([category, items], index) => (
               <AccordionItem
                 ref={(el) => {
                   categoryRefs.current[index] = el;
                 }}
                 value={category}
-                className="border-b border-customGold opacity-0"
+                className="border-customGold opacity-0"
                 key={category}
               >
-                <AccordionTrigger className="cursor-pointer text-4xl text-customCream">
+                <AccordionTrigger className="cursor-pointer text-4xl text-customCream transition-colors hover:text-customGold">
                   <h2 className="font-bigola">{category}</h2>
                 </AccordionTrigger>
                 {items.map((item) => (
                   <AccordionContent key={item.id}>
-                    <div className="px-3 font-hypatia">
-                      <div className="flex justify-between text-2xl text-customWhite">
-                        <p>{item.name}</p>
-                        <p>{item.price}</p>
-                      </div>
-                      {item.description && (
-                        <p className="text-lg text-customGold">
-                          {item.description}
+                    <div className="flex justify-between pl-3 pr-6 font-hypatia text-customWhite">
+                      <div>
+                        <p className="font-bigola text-3xl text-customGold">
+                          {item.name}
                         </p>
-                      )}
+                        <p className="text-xl">{item.brand}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-xl">{item.description}</p>
+                        <p className="text-xl">{item.price}</p>
+                      </div>
                     </div>
                   </AccordionContent>
                 ))}

@@ -4,9 +4,11 @@ import { NextResponse } from "next/server";
 interface ProcessedItem {
   id: string;
   name?: string | null;
+  brand?: string | null;
   description?: string | null;
   price?: string | null;
   categoryIds: string[];
+  locationIds: string[];
 }
 
 interface CategoryWithItems {
@@ -26,6 +28,15 @@ export async function GET() {
       environment: Environment.Production,
     });
 
+    // Fetch locations
+    const locationsResponse = await client.locationsApi.listLocations();
+    console.log("Locations:");
+    locationsResponse.result.locations?.forEach((location) => {
+      console.log(
+        `ID: ${location.id}, Name: ${location.name}, Status: ${location.status}`,
+      );
+    });
+
     const response = await client.catalogApi.listCatalog(
       undefined,
       "ITEM,CATEGORY",
@@ -35,6 +46,13 @@ export async function GET() {
       response.result.objects?.filter(
         (obj): obj is CatalogObject => obj.type === "ITEM",
       ) || [];
+
+    //console.log("Items present at location 'Legend Has It':");
+    items.forEach((item) => {
+      if (item.presentAtLocationIds?.includes("L3Y8KW155RG0B")) {
+        //console.log(`ID: ${item.id}, Name: ${item.itemData?.name}`);
+      }
+    });
 
     const categories =
       response.result.objects?.filter(
@@ -59,7 +77,8 @@ export async function GET() {
     const processedItems: ProcessedItem[] = items.map(
       (item): ProcessedItem => ({
         id: item.id,
-        name: item.itemData?.name,
+        name: item.itemData?.name?.split(" - ")[0],
+        brand: item.itemData?.name?.split(" - ")[1],
         description: item.itemData?.description,
         price: item.itemData?.variations?.[0]?.itemVariationData?.priceMoney
           ?.amount
@@ -67,12 +86,16 @@ export async function GET() {
           : undefined,
         categoryIds:
           item.itemData?.categories?.map((cat) => cat.id ?? "") || [],
+        locationIds: item.presentAtLocationIds || [],
       }),
     );
 
     processedItems.forEach((item) => {
       item.categoryIds.forEach((categoryId) => {
-        if (categoryMap.has(categoryId)) {
+        if (
+          categoryMap.has(categoryId) &&
+          item.locationIds.includes("L3Y8KW155RG0B")
+        ) {
           categoryMap.get(categoryId)?.items.push(item);
         }
       });

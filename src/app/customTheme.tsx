@@ -8,7 +8,7 @@ const customTheme = (outerTheme: Theme) =>
       mode: outerTheme.palette.mode,
     },
     typography: {
-      fontFamily: '"Hypatia Sans Pro"',
+      fontFamily: '"Bigola Display"',
       fontSize: 16,
     },
     components: {
@@ -17,11 +17,11 @@ const customTheme = (outerTheme: Theme) =>
           root: {
             //color: "#dfcfc0",
             color: "#f4f4f4",
-            "--TextField-brandBorderColor": "#bc9952",
+            "--TextField-brandBorderColor": "#dfcfc0",
             "--TextField-brandBorderHoverColor": "#dfcfc0",
             "--TextField-brandBorderFocusedColor": "#bc9952",
             "& label": {
-              color: "#f4f4f4",
+              color: "#dfcfc0",
             },
             "& label.Mui-focused": {
               color: "var(--TextField-brandBorderFocusedColor)",
@@ -32,7 +32,7 @@ const customTheme = (outerTheme: Theme) =>
       MuiInput: {
         styleOverrides: {
           root: {
-            color: "#f4f4f4",
+            color: "#dfcfc0",
             "&::before": {
               borderBottom: "1px solid var(--TextField-brandBorderColor)",
             },
@@ -50,7 +50,7 @@ const customTheme = (outerTheme: Theme) =>
         styleOverrides: {
           input: {
             "&::placeholder": {
-              color: "#bc9952",
+              color: "#dfcfc0",
               opacity: 1,
             },
           },
