@@ -166,8 +166,8 @@ export default function Menu() {
                   <h2 className="font-bigola">{category}</h2>
                 </AccordionTrigger>
                 {items.map((item) => (
-                  <AccordionContent>
-                    <div key={item.id} className="px-3 font-hypatia">
+                  <AccordionContent key={item.id}>
+                    <div className="px-3 font-hypatia">
                       <div className="flex justify-between text-2xl text-customWhite">
                         <p>{item.name}</p>
                         <p>{item.price}</p>
