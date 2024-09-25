@@ -46,7 +46,7 @@ export default function Events() {
     }
 
     gsap.set(eventRefs.current, {
-      x: "75%",
+      x: "50%",
       opacity: 0,
     });
 
@@ -95,8 +95,8 @@ export default function Events() {
     } finally {
       setTimeout(() => {
         setProgress(100);
-        setTimeout(() => setLoading(false), 300);
-      }, 300);
+        setTimeout(() => setLoading(false), 500);
+      }, 200);
     }
   };
 
@@ -110,24 +110,31 @@ export default function Events() {
       <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-14 md:pl-[300px] md:pr-6 md:pt-6"
+        className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-16 md:pl-[300px] md:pr-6 md:pt-6"
       >
         <MobileHeading section={"Events"} />
         {loading ? (
-          <div id="event-subheading" className="opacity-0">
-            <h2 className="mt-3 font-bigola text-4xl text-customCream">
-              Loading events
+          <div
+            id="event-subheading"
+            className="flex h-[75vh] w-full flex-col items-center justify-center opacity-0"
+          >
+            <h2 className="mb-6 mt-3 font-bigola text-4xl text-customCream md:text-5xl">
+              Loading events...
             </h2>
-
-            <Progress value={progress} className="text-customCream" />
+            <Progress
+              value={progress}
+              className="w-[50%] max-w-[350px] text-customCream"
+            />
           </div>
         ) : events.length === 0 ? (
-          <h2
+          <div
             id="event-subheading"
-            className="mt-3 font-bigola text-4xl text-customCream opacity-0"
+            className="flex h-[75vh] w-full flex-col items-center justify-center opacity-0"
           >
-            Stay tuned for upcoming events!
-          </h2>
+            <h2 className="mt-3 font-bigola text-4xl text-customCream">
+              Stay tuned for upcoming events!
+            </h2>
+          </div>
         ) : (
           <div className="w-full">
             {events.map((event, index) => (

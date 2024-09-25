@@ -1,6 +1,5 @@
 "use client";
 import { useState, useRef } from "react";
-import { useRouter } from "next/navigation";
 
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileHeading from "@/components/mobile-heading/MobileHeading";
@@ -11,7 +10,6 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Button } from "@mui/material";
-import { ArrowBackIosRounded } from "@mui/icons-material";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -41,7 +39,6 @@ const initialForm: ContactForm = {
 };
 
 export default function Contact() {
-  const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
   const outerTheme = useTheme();
@@ -52,7 +49,7 @@ export default function Contact() {
     if (!containerRef.current) return;
 
     gsap.set("#form #input-section", {
-      x: "75%",
+      x: "50%",
       opacity: 0,
     });
 
@@ -64,7 +61,7 @@ export default function Contact() {
         x: 0,
         opacity: 1,
       },
-      0.05,
+      0.15,
     );
   }, []);
 
@@ -143,19 +140,6 @@ export default function Contact() {
     }
   };
 
-  const handleAboutScroll = async (e: React.MouseEvent) => {
-    e.preventDefault();
-
-    await router.push("/");
-    setTimeout(() => {
-      const aboutSection = document.getElementById("about-content");
-
-      if (aboutSection) {
-        aboutSection.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 300);
-  };
-
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -163,7 +147,7 @@ export default function Contact() {
         <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
         <div
           ref={containerRef}
-          className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-14 md:pl-[300px] md:pr-6 md:pt-6"
+          className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-16 md:pl-[300px] md:pr-6 md:pt-6"
         >
           <MobileHeading section={"Let's connect"} />
           <ThemeProvider theme={customTheme(outerTheme)}>

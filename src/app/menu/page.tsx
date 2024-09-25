@@ -53,7 +53,7 @@ export default function Menu() {
     }
 
     gsap.set(categoryRefs.current, {
-      x: "75%",
+      x: "50%",
       opacity: 0,
     });
 
@@ -92,8 +92,8 @@ export default function Menu() {
     } finally {
       setTimeout(() => {
         setProgress(100);
-        setTimeout(() => setLoading(false), 300);
-      }, 300);
+        setTimeout(() => setLoading(false), 500);
+      }, 200);
     }
   };
 
@@ -107,23 +107,31 @@ export default function Menu() {
       <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-14 md:pl-[300px] md:pr-6 md:pt-6"
+        className="z-10 flex w-screen flex-col items-center p-3 pb-16 md:pl-[300px] md:pr-6 md:pt-6"
       >
         <MobileHeading section={"Menu"} />
         {loading ? (
-          <div id="event-subheading" className="opacity-0">
-            <h2 className="my-3 text-center font-bigola text-4xl text-customCream">
-              Loading menu
+          <div
+            id="event-subheading"
+            className="flex h-[75vh] w-full flex-col items-center justify-center opacity-0"
+          >
+            <h2 className="mb-6 mt-3 font-bigola text-3xl text-customCream md:text-5xl">
+              Loading menu...
             </h2>
-            <Progress value={progress} className="text-customCream" />
+            <Progress
+              value={progress}
+              className="w-[50%] max-w-[350px] text-customCream"
+            />
           </div>
         ) : menu === null ? (
-          <h2
+          <div
             id="event-subheading"
-            className="mt-3 text-center font-bigola text-4xl text-customCream opacity-0"
+            className="flex h-[75vh] w-full items-center justify-center opacity-0"
           >
-            Error loading menu. Please try again.
-          </h2>
+            <h2 className="mt-3 font-bigola text-5xl text-customCream">
+              Error loading menu. Please try again.
+            </h2>
+          </div>
         ) : (
           <Accordion
             type="single"

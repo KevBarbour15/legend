@@ -56,7 +56,7 @@ const MobileMenu: React.FC = () => {
           ))}
         </ul>
       </div>
-      <div className="mb-14 ml-3 w-fit font-bigola">
+      <div className="mb-16 ml-3 w-fit font-bigola">
         <a
           className="cursor-pointer"
           target="_blank"

@@ -57,7 +57,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
     gsap.set(containerRef.current, { y: 200, opacity: 0 });
 
     tl.current = gsap.timeline().to(containerRef.current, {
-      delay: 0.15,
+      delay: 0.05,
       duration: 0.5,
       y: 0,
       opacity: 1,
@@ -76,14 +76,14 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
     recordPlayerTl.current = gsap.timeline({}).to("#player", {
       opacity: 1,
       duration: 0.2,
-      delay: 0.15,
+      delay: 0.05,
       ease: "linear",
     });
 
     playlistTl.current = gsap.timeline({}).to("#playlist", {
       opacity: 1,
       duration: 0.2,
-      delay: 0.15,
+      delay: 0.05,
       ease: "linear",
     });
   }, []);
