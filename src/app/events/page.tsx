@@ -27,6 +27,7 @@ function generateProgress(min: number, max: number) {
 
 export default function Events() {
   const [events, setEvents] = useState<Event[]>([]);
+  const [displayEvents, setDisplayEvents] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -50,7 +51,7 @@ export default function Events() {
       opacity: 0,
     });
 
-    if (!loading && eventRefs.current.length > 0) {
+    if (!loading && eventRefs.current.length > 0 && displayEvents) {
       eventsTL.current = gsap
         .timeline({})
         .to(
@@ -74,7 +75,7 @@ export default function Events() {
           0.15,
         );
     }
-  }, [events]);
+  }, [displayEvents]);
 
   const fetchEvents = async () => {
     try {
@@ -95,7 +96,8 @@ export default function Events() {
     } finally {
       setTimeout(() => {
         setProgress(100);
-        setTimeout(() => setLoading(false), 500);
+        setLoading(false);
+        setTimeout(() => setDisplayEvents(true), 500);
       }, 200);
     }
   };
