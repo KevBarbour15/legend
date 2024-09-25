@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
 
 import EventCard from "@/components/event-card/EventCard";
 import SideMenu from "@/components/side-menu/SideMenu";
@@ -9,6 +8,7 @@ import MobileHeading from "@/components/mobile-heading/MobileHeading";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
+import { Progress } from "@/components/ui/progress";
 interface Event {
   _id: string;
   title: string;
@@ -21,23 +21,30 @@ interface Event {
   is_public: boolean;
 }
 
+function generateProgress(min: number, max: number) {
+  return Math.random() * (max - min) + min;
+}
+
 export default function Events() {
-  const router = useRouter();
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const eventsTL = useRef<gsap.core.Timeline | null>(null);
   const eventRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [progress, setProgress] = useState<number>(0);
 
   useGSAP(() => {
     if (!containerRef.current) return;
 
-    gsap.fromTo(
-      "#event-subheading",
-      { opacity: 0 },
-      { opacity: 1, ease: "linear", y: 0, delay: 0.05 },
-    );
+    if (loading) {
+      gsap.fromTo(
+        "#event-subheading",
+        { opacity: 0 },
+        { opacity: 1, ease: "linear", y: 0, delay: 0.05 },
+      );
+    }
+
     gsap.set(eventRefs.current, {
       x: "75%",
       opacity: 0,
@@ -67,23 +74,29 @@ export default function Events() {
           0.15,
         );
     }
-  }, [events]);
+  }, [events, loading]);
 
   const fetchEvents = async () => {
     try {
+      setProgress(generateProgress(5, 35));
       const response = await fetch("/api/events");
 
       if (!response.ok) {
+        setProgress(0);
         throw new Error("Failed to fetch events.");
       }
 
       const data: Event[] = await response.json();
       setEvents(data);
     } catch (error) {
+      setProgress(0);
       console.log("Error: ", error);
       setError("Failed to fetch events.");
     } finally {
-      setLoading(false);
+      setTimeout(() => {
+        setProgress(100);
+        setTimeout(() => setLoading(false), 300);
+      }, 300);
     }
   };
 
@@ -101,18 +114,19 @@ export default function Events() {
       >
         <MobileHeading section={"Events"} />
         {loading ? (
-          <h2
-            id="event-subheading"
-            className="mt-3 font-bigola text-4xl text-customCream opacity-0"
-          >
-            Loading events...
-          </h2>
+          <div id="event-subheading" className="opacity-0">
+            <h2 className="mt-3 font-bigola text-4xl text-customCream">
+              Loading events
+            </h2>
+
+            <Progress value={progress} className="text-customCream" />
+          </div>
         ) : events.length === 0 ? (
           <h2
             id="event-subheading"
             className="mt-3 font-bigola text-4xl text-customCream opacity-0"
           >
-            Stay tuned for upcoming events...
+            Stay tuned for upcoming events!
           </h2>
         ) : (
           <div className="w-full">

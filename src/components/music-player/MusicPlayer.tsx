@@ -166,7 +166,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       <Collapse
         in={playlistVisible}
         id="playlist"
-        className="z-10 opacity-0 drop-shadow-record md:mx-0 md:ml-6"
+        className="z-10 mx-3 opacity-0 drop-shadow-record md:mx-0 md:ml-6 md:mr-0"
       >
         <div
           className="mt-3 block rounded-3xl border border-customNavy bg-gradient-to-r from-customCream to-customWhite"
@@ -209,7 +209,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         </div>
       </Collapse>
 
-      <div className="mt-3 flex justify-between rounded-t-2xl border border-customNavy bg-gradient-to-r from-customCream to-customWhite p-1 drop-shadow-record md:mb-6 md:ml-6 md:rounded-3xl md:py-0">
+      <div className="mx-3 my-3 flex justify-between rounded-3xl border border-customNavy bg-gradient-to-r from-customCream to-customWhite p-1 drop-shadow-record md:mb-6 md:ml-6 md:mr-0">
         <IconButton
           className="hidden text-customNavy transition-colors md:block md:px-1 md:py-0 md:hover:text-customGold"
           onClick={togglePlayer}

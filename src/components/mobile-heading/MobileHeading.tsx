@@ -42,14 +42,12 @@ const MobileHeading: React.FC<MobileHeadingProps> = ({ section }) => {
     <div
       ref={containerRef}
       id="mobile-heading"
-      className="w-full border-b border-customGold pb-3 text-customCream opacity-0 md:hidden"
+      className="w-full border-b border-customGold pb-3 opacity-0 md:hidden"
     >
       <div>
-        <Button onClick={handleAboutScroll}>
-          <ArrowBackIosRounded className="mr-6 text-customCream" />
-          <span className="font-bigola text-2xl capitalize text-customCream">
-            {section}
-          </span>
+        <Button onClick={handleAboutScroll} className="p-0 text-customGold">
+          <ArrowBackIosRounded className="mr-3" />
+          <span className="font-bigola text-2xl capitalize">{section}</span>
         </Button>
       </div>
     </div>

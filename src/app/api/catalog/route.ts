@@ -77,8 +77,8 @@ export async function GET() {
     const processedItems: ProcessedItem[] = items.map(
       (item): ProcessedItem => ({
         id: item.id,
-        name: item.itemData?.name?.split(" - ")[0],
-        brand: item.itemData?.name?.split(" - ")[1],
+        name: item.itemData?.name?.split("-")[0],
+        brand: item.itemData?.name?.split("-")[1],
         description: item.itemData?.description,
         price: item.itemData?.variations?.[0]?.itemVariationData?.priceMoney
           ?.amount
