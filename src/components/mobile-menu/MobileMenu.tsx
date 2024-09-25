@@ -6,6 +6,7 @@ const links = [
   { path: "/", label: "About" },
   { path: "/contact", label: "Contact" },
   { path: "/events", label: "Events" },
+  { path: "/menu", label: "Menu" },
 ];
 
 const MobileMenu: React.FC = () => {
