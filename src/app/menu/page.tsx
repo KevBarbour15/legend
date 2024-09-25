@@ -6,8 +6,10 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import SideMenu from "@/components/side-menu/SideMenu";
+import MobileHeading from "@/components/mobile-heading/MobileHeading";
+
 import { Button } from "@mui/material";
-import { ArrowBackIos } from "@mui/icons-material";
+import { ArrowBackIosRounded } from "@mui/icons-material";
 
 import {
   Accordion,
@@ -40,23 +42,10 @@ export default function Menu() {
   useGSAP(() => {
     if (!containerRef.current) return;
 
-    gsap.set("#no-events", {
-      opacity: 0,
-      y: 15,
-    });
-
-    if (loading) {
-      gsap.fromTo(
-        "#events-heading",
-        { opacity: 0, y: -50 },
-        { opacity: 1, duration: 0.15, ease: "linear", y: 0 },
-      );
-    }
-
     gsap.fromTo(
       "#event-subheading",
-      { opacity: 0, y: -50 },
-      { opacity: 1, duration: 0.15, ease: "linear", y: 0 },
+      { opacity: 0 },
+      { opacity: 1, ease: "linear", y: 0, delay: 0.05 },
     );
 
     gsap.set(categoryRefs.current, {
@@ -100,50 +89,26 @@ export default function Menu() {
     fetchMenu();
   }, []);
 
-  const handleAboutScroll = async (e: React.MouseEvent) => {
-    e.preventDefault();
-
-    await router.push("/");
-    setTimeout(() => {
-      const aboutSection = document.getElementById("about-content");
-
-      if (aboutSection) {
-        aboutSection.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 150);
-  };
-
   return (
     <>
       <SideMenu />
       <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col p-3 pb-24 md:w-screen md:pl-[275px] md:pr-6 md:pt-6"
+        className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-14 md:pl-[300px] md:pr-6 md:pt-6"
       >
-        <div
-          id="events-heading"
-          className="w-full border-b border-customGold pb-3 text-3xl text-customCream opacity-0 md:hidden"
-        >
-          <div>
-            <Button onClick={handleAboutScroll}>
-              <ArrowBackIos className="mr-6 text-customCream" />
-              <span className="font-bigola text-customCream">Menu</span>
-            </Button>
-          </div>
-        </div>
-
+        <MobileHeading section={"Menu"} />
         {loading ? (
           <h2
             id="event-subheading"
-            className="mt-3 text-center font-bigola text-4xl text-customCream opacity-0 lg:text-5xl"
+            className="mt-3 text-center font-bigola text-4xl text-customCream opacity-0"
           >
             Loading Menu...
           </h2>
         ) : menu === null ? (
           <h2
             id="event-subheading"
-            className="mt-3 text-center font-bigola text-4xl text-customCream opacity-0 lg:text-5xl"
+            className="mt-3 text-center font-bigola text-4xl text-customCream opacity-0"
           >
             Error Loading Menu...
           </h2>

@@ -1,14 +1,13 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import EventCard from "@/components/event-card/EventCard";
 import { useRouter } from "next/navigation";
+
+import EventCard from "@/components/event-card/EventCard";
+import SideMenu from "@/components/side-menu/SideMenu";
+import MobileHeading from "@/components/mobile-heading/MobileHeading";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-
-import SideMenu from "@/components/side-menu/SideMenu";
-import { Button } from "@mui/material";
-import { ArrowBackIos } from "@mui/icons-material";
 
 interface Event {
   _id: string;
@@ -33,22 +32,12 @@ export default function Events() {
 
   useGSAP(() => {
     if (!containerRef.current) return;
-    gsap.set("#events-heading", {
-      opacity: 0,
-      y: 35,
-    });
-
-    gsap.set("#no-events", {
-      opacity: 0,
-      y: 35,
-    });
 
     gsap.fromTo(
       "#event-subheading",
-      { opacity: 0, y: 35 },
-      { opacity: 1, duration: 0.15, delay: 0.1, ease: "sine.inOut", y: 0 },
+      { opacity: 0 },
+      { opacity: 1, ease: "linear", y: 0, delay: 0.05 },
     );
-
     gsap.set(eventRefs.current, {
       x: "75%",
       opacity: 0,
@@ -78,31 +67,6 @@ export default function Events() {
           0.15,
         );
     }
-
-    if (!loading && eventRefs.current.length == 0) {
-      eventsTL.current = gsap
-        .timeline({})
-        .to(
-          "#events-heading",
-          {
-            duration: 0.35,
-            opacity: 1,
-            ease: "sine.inOut",
-            y: 0,
-          },
-          0.15,
-        )
-        .to(
-          "#no-events",
-          {
-            duration: 0.35,
-            opacity: 1,
-            ease: "sine.inOut",
-            y: 0,
-          },
-          0.35,
-        );
-    }
   }, [events]);
 
   const fetchEvents = async () => {
@@ -127,19 +91,6 @@ export default function Events() {
     fetchEvents();
   }, []);
 
-  const handleAboutScroll = async (e: React.MouseEvent) => {
-    e.preventDefault();
-
-    await router.push("/");
-
-    setTimeout(() => {
-      const aboutSection = document.getElementById("about-content");
-      if (aboutSection) {
-        aboutSection.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 300);
-  };
-
   return (
     <>
       <SideMenu />
@@ -148,31 +99,18 @@ export default function Events() {
         ref={containerRef}
         className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-14 md:pl-[300px] md:pr-6 md:pt-6"
       >
-        <div
-          id="events-heading"
-          className="w-full border-b border-customGold pb-3 text-3xl text-customCream opacity-0 md:hidden md:pb-6"
-        >
-          <div>
-            <Button onClick={handleAboutScroll}>
-              <ArrowBackIos className="mr-6 text-customCream" />
-              <span className="font-bigola text-lg capitalize text-customCream">
-                Events
-              </span>
-            </Button>
-          </div>
-        </div>
-
+        <MobileHeading section={"Events"} />
         {loading ? (
           <h2
             id="event-subheading"
-            className="font-bigola text-3xl text-customCream opacity-0 md:text-5xl"
+            className="mt-3 font-bigola text-4xl text-customCream opacity-0"
           >
             Loading events...
           </h2>
         ) : events.length === 0 ? (
           <h2
-            id="no-events"
-            className="font-bigola text-3xl text-customCream opacity-0 md:text-5xl"
+            id="event-subheading"
+            className="mt-3 font-bigola text-4xl text-customCream opacity-0"
           >
             Stay tuned for upcoming events...
           </h2>

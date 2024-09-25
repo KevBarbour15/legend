@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 import SideMenu from "@/components/side-menu/SideMenu";
+import MobileHeading from "@/components/mobile-heading/MobileHeading";
 
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
@@ -10,7 +11,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Button } from "@mui/material";
-import { ArrowBackIos } from "@mui/icons-material";
+import { ArrowBackIosRounded } from "@mui/icons-material";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -50,39 +51,21 @@ export default function Contact() {
   useGSAP(() => {
     if (!containerRef.current) return;
 
-    gsap.set("#contact-heading", {
-      opacity: 0,
-      y: -15,
-    });
-
     gsap.set("#form #input-section", {
+      x: "75%",
       opacity: 0,
-      y: 35,
     });
 
-    tl.current = gsap
-      .timeline({})
-      .to(
-        "#contact-heading",
-        {
-          duration: 0.15,
-          opacity: 1,
-          ease: "sine.inOut",
-          y: 0,
-        },
-        0.05,
-      )
-      .to(
-        "#form #input-section",
-        {
-          duration: 0.15,
-          opacity: 1,
-          y: 0,
-          ease: "sine.inOut",
-          stagger: 0.025,
-        },
-        0.3,
-      );
+    tl.current = gsap.timeline({}).to(
+      "#form #input-section",
+      {
+        duration: 0.25,
+        stagger: 0.05,
+        x: 0,
+        opacity: 1,
+      },
+      0.05,
+    );
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -180,32 +163,14 @@ export default function Contact() {
         <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
         <div
           ref={containerRef}
-          className="z-10 flex w-screen flex-col items-center justify-center px-3 pb-12 pt-3 md:pb-6 md:pl-[300px] md:pr-6 md:pt-6"
+          className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-14 md:pl-[300px] md:pr-6 md:pt-6"
         >
-          <div
-            id="contact-heading"
-            className="w-full border-b border-customCream pb-3 text-3xl text-customCream opacity-0 md:hidden"
-          >
-            <div>
-              <Button onClick={handleAboutScroll}>
-                <ArrowBackIos className="mr-6 text-customCream" />
-                <span className="font-bigola text-lg capitalize text-customCream">
-                  Let's Connect
-                </span>
-              </Button>
-            </div>
-          </div>
-          <h2
-            id="contact-heading"
-            className="hidden text-center font-bigola text-5xl text-customCream opacity-0 md:flex"
-          >
-            Let's Connect
-          </h2>
+          <MobileHeading section={"Let's connect"} />
           <ThemeProvider theme={customTheme(outerTheme)}>
             <Box
               component="form"
               id="form"
-              className="flex w-full flex-col items-center py-3 md:py-6"
+              className="flex w-full flex-col items-center py-3 md:pb-6"
               onSubmit={handleSubmit}
             >
               <div id="input-section" className="w-full font-hypatia opacity-0">
@@ -213,7 +178,7 @@ export default function Contact() {
                   <TextField
                     className="flex-1 sm:mr-3"
                     type="text"
-                    label="First Name"
+                    label="First name"
                     value={contactForm.firstName}
                     required
                     onChange={(e) =>
@@ -227,7 +192,7 @@ export default function Contact() {
                   <TextField
                     className="mt-3 flex-1 sm:mt-0"
                     type="text"
-                    label="Last Name"
+                    label="Last name"
                     value={contactForm.lastName}
                     required
                     onChange={(e) =>
@@ -242,7 +207,7 @@ export default function Contact() {
               </div>
               <div id="input-section" className="my-3 w-full opacity-0">
                 <TextField
-                  className="w-full"
+                  className="w-full py-3"
                   type="email"
                   label="Email"
                   value={contactForm.email}
@@ -269,7 +234,7 @@ export default function Contact() {
               <div id="input-section" className="my-3 w-full opacity-0">
                 <DatePicker
                   value={contactForm.preferredDate}
-                  label="Preferred Date *"
+                  label="Preferred date *"
                   onChange={(newValue) =>
                     setContactForm({
                       ...contactForm,
@@ -297,7 +262,7 @@ export default function Contact() {
               <Button
                 id="input-section"
                 type="submit"
-                className="rounded-full p-3 font-bigola text-2xl capitalize text-customCream opacity-0 transition-all hover:text-customGold"
+                className="rounded-full p-3 font-bigola text-2xl capitalize text-customGold opacity-0 transition-all hover:text-customWhite"
               >
                 Submit
               </Button>

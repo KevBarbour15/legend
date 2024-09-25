@@ -15,12 +15,13 @@ const customTheme = (outerTheme: Theme) =>
       MuiTextField: {
         styleOverrides: {
           root: {
-            color: "#dfcfc0",
-            "--TextField-brandBorderColor": "#dfcfc0",
-            "--TextField-brandBorderHoverColor": "#f4f4f4",
-            "--TextField-brandBorderFocusedColor": "#f4f4f4",
+            //color: "#dfcfc0",
+            color: "#f4f4f4",
+            "--TextField-brandBorderColor": "#bc9952",
+            "--TextField-brandBorderHoverColor": "#dfcfc0",
+            "--TextField-brandBorderFocusedColor": "#bc9952",
             "& label": {
-              color: "#dfcfc0",
+              color: "#f4f4f4",
             },
             "& label.Mui-focused": {
               color: "var(--TextField-brandBorderFocusedColor)",
@@ -31,7 +32,7 @@ const customTheme = (outerTheme: Theme) =>
       MuiInput: {
         styleOverrides: {
           root: {
-            color: "#dfcfc0",
+            color: "#f4f4f4",
             "&::before": {
               borderBottom: "1px solid var(--TextField-brandBorderColor)",
             },
@@ -40,7 +41,7 @@ const customTheme = (outerTheme: Theme) =>
             },
             "&.Mui-focused:after": {
               borderBottom:
-                "2px solid var(--TextField-brandBorderFocusedColor)",
+                "1px solid var(--TextField-brandBorderFocusedColor)",
             },
           },
         },
@@ -49,7 +50,7 @@ const customTheme = (outerTheme: Theme) =>
         styleOverrides: {
           input: {
             "&::placeholder": {
-              color: "#f4f4f4",
+              color: "#bc9952",
               opacity: 1,
             },
           },
@@ -58,7 +59,7 @@ const customTheme = (outerTheme: Theme) =>
       MuiIconButton: {
         styleOverrides: {
           sizeMedium: {
-            color: "#dfcfc0",
+            color: "#f4f4f4",
           },
         },
       },
