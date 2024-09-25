@@ -33,10 +33,10 @@ const customTheme = (outerTheme: Theme) =>
           root: {
             color: "#dfcfc0",
             "&::before": {
-              borderBottom: "2px solid var(--TextField-brandBorderColor)",
+              borderBottom: "1px solid var(--TextField-brandBorderColor)",
             },
             "&:hover:not(.Mui-disabled, .Mui-error):before": {
-              borderBottom: "2px solid var(--TextField-brandBorderHoverColor)",
+              borderBottom: "1px solid var(--TextField-brandBorderHoverColor)",
             },
             "&.Mui-focused:after": {
               borderBottom:

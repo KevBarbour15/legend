@@ -21,9 +21,9 @@ export default function Home() {
     tl.current = gsap.timeline({
       ease: "sine.inOut",
       scrollTrigger: {
-        trigger: "#about-section",
-        start: "top 90%",
-        end: "top 60%",
+        trigger: "#hidden-bg",
+        start: "center center",
+        end: "center 25%",
         scrub: 1,
       },
     });
@@ -78,7 +78,7 @@ export default function Home() {
             scrollTrigger: {
               trigger: section,
               start: "top bottom-=25",
-              end: "top 85%",
+              end: "top 75%",
               scrub: 1,
             },
           },
@@ -100,7 +100,7 @@ export default function Home() {
         <div className="top-bg hidden h-screen w-full md:block"></div>
         <div
           id="about-content"
-          className="relative block h-auto p-3 md:ml-[224px] md:p-6"
+          className="relative block h-auto p-3 md:ml-[275px] md:py-6 md:pl-0 md:pr-6"
         >
           <div
             id="about-section"
