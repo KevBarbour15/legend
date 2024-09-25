@@ -74,7 +74,7 @@ export default function Events() {
           0.15,
         );
     }
-  }, [events, loading]);
+  }, [events]);
 
   const fetchEvents = async () => {
     try {
@@ -129,7 +129,7 @@ export default function Events() {
         ) : events.length === 0 ? (
           <div
             id="event-subheading"
-            className="flex h-[75vh] w-full flex-col items-center justify-center opacity-0"
+            className="flex h-[75vh] w-full flex-col items-center justify-center"
           >
             <h2 className="mt-3 font-bigola text-4xl text-customCream">
               Stay tuned for upcoming events!

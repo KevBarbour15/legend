@@ -69,7 +69,7 @@ export default function Menu() {
         0,
       );
     }
-  }, [menu, loading]);
+  }, [menu]);
 
   const fetchMenu = async () => {
     try {
@@ -126,7 +126,7 @@ export default function Menu() {
         ) : menu === null ? (
           <div
             id="event-subheading"
-            className="flex h-[75vh] w-full items-center justify-center opacity-0"
+            className="flex h-[75vh] w-full items-center justify-center"
           >
             <h2 className="mt-3 font-bigola text-5xl text-customCream">
               Error loading menu. Please try again.
