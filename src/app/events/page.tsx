@@ -50,8 +50,8 @@ export default function Events() {
     );
 
     gsap.set(eventRefs.current, {
+      x: "75%",
       opacity: 0,
-      y: 50,
     });
 
     if (!loading && eventRefs.current.length > 0) {
@@ -71,10 +71,9 @@ export default function Events() {
           eventRefs.current,
           {
             duration: 0.25,
+            stagger: 0.05,
+            x: 0,
             opacity: 1,
-            stagger: 0.1,
-            y: 0,
-            ease: "sine.inOut",
           },
           0.15,
         );
@@ -151,7 +150,7 @@ export default function Events() {
       >
         <div
           id="events-heading"
-          className="w-full border-b border-customCream pb-3 text-3xl text-customCream opacity-0 md:hidden md:pb-6"
+          className="w-full border-b border-customGold pb-3 text-3xl text-customCream opacity-0 md:hidden md:pb-6"
         >
           <div>
             <Button onClick={handleAboutScroll}>
@@ -185,7 +184,7 @@ export default function Events() {
                 ref={(el) => {
                   eventRefs.current[index] = el;
                 }}
-                className={`w-full border-customCream opacity-0 ${index === 0 ? "md:border-t" : "border-t"} ${
+                className={`w-full border-customGold opacity-0 ${index === 0 ? "md:border-t" : "border-t"} ${
                   index === events.length - 1 ? "border-b" : ""
                 }`}
               >
