@@ -48,14 +48,26 @@ export async function GET() {
       response.result.objects?.filter(
         (obj): obj is CatalogObject => obj.type === "ITEM",
       ) || [];
-
-    //console.log("Items present at location 'Legend Has It':");
+    /*
+    console.log("Items present at location 'Legend Has It':");
     items.forEach((item) => {
-      if (item.presentAtLocationIds?.includes("L3Y8KW155RG0B")) {
-        //console.log(`ID: ${item.id}, Name: ${item.itemData?.name}`);
+      if (item) {
+        console.log(`ID: ${item.id}, Name: ${item.itemData?.name}`);
+      }
+
+      if (item.itemData?.name === "La Boheme - Alaro") {
+        if (!item.presentAtLocationIds?.includes("L3Y8KW155RG0B")) {
+          console.log("****");
+          console.log("Found 'La Boheme - Alaro'");
+          console.log(
+            "It does not have a presentAtLocationId of 'L3Y8KW155RG0B'",
+          );
+          console.log(item);
+          console.log("****");
+        }
       }
     });
-
+*/
     const categories =
       response.result.objects?.filter(
         (obj): obj is CatalogObject =>

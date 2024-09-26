@@ -107,7 +107,7 @@ export default function Menu() {
       <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col items-center p-3 pb-16 md:pl-[300px] md:pr-6 md:pt-6"
+        className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-20 md:pb-6 md:pl-[300px] md:pr-6 md:pt-6"
       >
         <MobileHeading section={"Menu"} />
         {loading ? (
@@ -120,7 +120,7 @@ export default function Menu() {
             </h2>
             <Progress
               value={progress}
-              className="w-[50%] max-w-[350px] text-customCream"
+              className="w-[75vw] max-w-[350px] text-customCream"
             />
           </div>
         ) : menu === null ? (
