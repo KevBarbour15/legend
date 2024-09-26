@@ -11,6 +11,7 @@ const slides = [
   "/images/carousel/6.jpg",
   "/images/carousel/7.jpg",
   "/images/carousel/8.jpg",
+  "/images/carousel/9.jpg",
 ];
 
 const Carousel: React.FC = () => {

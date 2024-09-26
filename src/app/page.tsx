@@ -106,18 +106,7 @@ export default function Home() {
             id="about-section"
             className="opacity-0 md:aspect-video md:overflow-hidden"
           >
-            <video
-              controls
-              height="100%"
-              width="100%"
-              preload="none"
-              className="h-full w-full object-cover"
-              poster="/images/video-thumbnail.jpg"
-            >
-              <source src="/video/opening.mp4" type="video/mp4" />
-              Your browser does not support this content.
-              <img src="/images/about-image.jpg" />
-            </video>
+            <img src="/images/about-image.jpg" className="object-cover" />
           </div>
 
           <div className="font-hypatia text-lg text-customNavy">
