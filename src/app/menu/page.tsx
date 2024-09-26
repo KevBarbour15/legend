@@ -140,7 +140,7 @@ export default function Menu() {
                   categoryRefs.current[index] = el;
                 }}
                 value={category}
-                className={`${index === 0 ? "md:border-t" : "border-b"} opacity-0 md:border-customGold`}
+                className={`${index === 0 ? "md:border-t" : ""} border-b border-customGold opacity-0`}
                 key={category}
               >
                 <AccordionTrigger className="cursor-pointer text-customCream transition-colors">
