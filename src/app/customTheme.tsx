@@ -15,8 +15,8 @@ const customTheme = (outerTheme: Theme) =>
       MuiTextField: {
         styleOverrides: {
           root: {
-            //color: "#dfcfc0",
-            color: "#f4f4f4",
+            color: "#dfcfc0",
+            //color: "#f4f4f4",
             "--TextField-brandBorderColor": "#dfcfc0",
             "--TextField-brandBorderHoverColor": "#dfcfc0",
             "--TextField-brandBorderFocusedColor": "#bc9952",
@@ -59,7 +59,7 @@ const customTheme = (outerTheme: Theme) =>
       MuiIconButton: {
         styleOverrides: {
           sizeMedium: {
-            color: "#f4f4f4",
+            color: "#dfcfc0",
           },
         },
       },
