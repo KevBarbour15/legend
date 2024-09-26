@@ -1,31 +1,23 @@
 "use client";
 import { useState, useRef } from "react";
 
+import { ContactForm } from "@/types";
+
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileHeading from "@/components/mobile-heading/MobileHeading";
 
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
-
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+
+import customTheme from "@/app/customTheme";
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import customTheme from "@/app/customTheme";
 import { ThemeProvider, useTheme } from "@mui/material/styles";
 
-interface ContactForm {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  howDidYouHear: string;
-  preferredDate: Date | null;
-  message: string;
-  error: string;
-}
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 
 const initialForm: ContactForm = {
   firstName: "",

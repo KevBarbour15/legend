@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 
+import { Event } from "@/types.ts";
+
 import EventCard from "@/components/event-card/EventCard";
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileHeading from "@/components/mobile-heading/MobileHeading";
@@ -9,17 +11,6 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import { Progress } from "@/components/ui/progress";
-interface Event {
-  _id: string;
-  title: string;
-  date: string;
-  time: string;
-  description: string;
-  notes: string;
-  image_url: string;
-  is_photo: boolean;
-  is_public: boolean;
-}
 
 function generateProgress(min: number, max: number) {
   return Math.random() * (max - min) + min;

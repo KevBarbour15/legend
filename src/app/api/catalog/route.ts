@@ -51,8 +51,8 @@ export async function GET() {
 
     console.log("Items present at location 'Legend Has It':");
     items.forEach((item) => {
-      if (item) {
-        //console.log(`ID: ${item.id}, Name: ${item.itemData?.name}`);
+      if (item.itemData?.name === "La Boheme - Alaro") {
+        console.log(`ID: ${item.id}, Name: ${item.itemData?.name}`);
         console.log(item);
       }
     });
@@ -107,7 +107,12 @@ export async function GET() {
     const menuStructure: MenuStructure = {};
     categoryMap.forEach((category) => {
       if (category.name) {
-        menuStructure[category.name] = category.items;
+        const sortedItems = category.items.sort((a, b) => {
+          const brandA = a.brand?.toLowerCase() ?? "";
+          const brandB = b.brand?.toLowerCase() ?? "";
+          return brandA.localeCompare(brandB);
+        });
+        menuStructure[category.name] = sortedItems;
       }
     });
 
