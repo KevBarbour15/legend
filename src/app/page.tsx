@@ -3,8 +3,15 @@ import { useRef } from "react";
 import ImageCarousel from "@/components/carousel/Carousel";
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileMenu from "@/components/mobile-menu/MobileMenu";
-import { Instagram, Facebook, YouTube } from "@mui/icons-material";
+
+import {
+  Instagram,
+  Facebook,
+  YouTube,
+  LoginRounded,
+} from "@mui/icons-material";
 import { IconButton } from "@mui/material";
+import Link from "next/link";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -184,6 +191,11 @@ export default function Home() {
           </div>
           <div id="about-section" className="opacity-0">
             <ImageCarousel />
+          </div>
+          <div className="w-fulltext-right">
+            <Link className="text-customNavy" href="/dashboard">
+              <LoginRounded />
+            </Link>
           </div>
         </div>
       </div>
