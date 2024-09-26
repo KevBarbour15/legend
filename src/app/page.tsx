@@ -192,7 +192,7 @@ export default function Home() {
           <div id="about-section" className="opacity-0">
             <ImageCarousel />
           </div>
-          <div className="w-fulltext-right">
+          <div className="w-full text-right">
             <Link className="text-customNavy" href="/dashboard">
               <LoginRounded />
             </Link>
