@@ -52,28 +52,13 @@ export default function Events() {
     });
 
     if (!loading && eventRefs.current.length > 0 && displayEvents) {
-      eventsTL.current = gsap
-        .timeline({})
-        .to(
-          "#events-heading",
-          {
-            duration: 0.15,
-            opacity: 1,
-            ease: "sine.inOut",
-            y: 0,
-          },
-          0.05,
-        )
-        .to(
-          eventRefs.current,
-          {
-            duration: 0.25,
-            stagger: 0.05,
-            x: 0,
-            opacity: 1,
-          },
-          0.15,
-        );
+      eventsTL.current = gsap.timeline({}).to(eventRefs.current, {
+        delay: 0.15,
+        duration: 0.25,
+        stagger: 0.05,
+        x: 0,
+        opacity: 1,
+      });
     }
   }, [displayEvents]);
 
@@ -96,9 +81,10 @@ export default function Events() {
     } finally {
       setTimeout(() => {
         setProgress(100);
-        setLoading(false);
-        setTimeout(() => setDisplayEvents(true), 500);
-      }, 200);
+
+        setTimeout(() => setLoading(false), 200);
+        setTimeout(() => setDisplayEvents(true), 250);
+      }, 300);
     }
   };
 

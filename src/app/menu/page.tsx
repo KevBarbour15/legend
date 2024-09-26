@@ -39,6 +39,7 @@ export default function Menu() {
   const [menu, setMenu] = useState<MenuStructure | null>(null);
   const categoryRefs = useRef<(HTMLDivElement | null)[]>([]);
   const categoriesTL = useRef<gsap.core.Timeline | null>(null);
+  const [displayMenu, setDisplayMenu] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
 
   useGSAP(() => {
@@ -57,19 +58,16 @@ export default function Menu() {
       opacity: 0,
     });
 
-    if (!loading && categoryRefs.current.length > 0) {
-      categoriesTL.current = gsap.timeline({}).to(
-        categoryRefs.current,
-        {
-          duration: 0.25,
-          stagger: 0.05,
-          x: 0,
-          opacity: 1,
-        },
-        0,
-      );
+    if (!loading && categoryRefs.current.length > 0 && displayMenu) {
+      categoriesTL.current = gsap.timeline({}).to(categoryRefs.current, {
+        delay: 0.15,
+        duration: 0.25,
+        stagger: 0.05,
+        x: 0,
+        opacity: 1,
+      });
     }
-  }, [menu]);
+  }, [displayMenu]);
 
   const fetchMenu = async () => {
     try {
@@ -92,8 +90,10 @@ export default function Menu() {
     } finally {
       setTimeout(() => {
         setProgress(100);
-        setTimeout(() => setLoading(false), 500);
-      }, 200);
+
+        setTimeout(() => setLoading(false), 200);
+        setTimeout(() => setDisplayMenu(true), 250);
+      }, 300);
     }
   };
 
@@ -133,18 +133,14 @@ export default function Menu() {
             </h2>
           </div>
         ) : (
-          <Accordion
-            type="single"
-            collapsible
-            className="w-full md:border-t md:border-customGold"
-          >
+          <Accordion type="single" collapsible className="w-full">
             {Object.entries(menu).map(([category, items], index) => (
               <AccordionItem
                 ref={(el) => {
                   categoryRefs.current[index] = el;
                 }}
                 value={category}
-                className="border-customGold opacity-0"
+                className={`${index === 0 ? "md:border-t" : "border-b"} opacity-0 md:border-customGold`}
                 key={category}
               >
                 <AccordionTrigger className="cursor-pointer text-customCream transition-colors">
