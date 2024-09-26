@@ -35,7 +35,7 @@ const MobileHeading: React.FC<MobileHeadingProps> = ({ section }) => {
       if (aboutSection) {
         aboutSection.scrollIntoView({ behavior: "smooth" });
       }
-    }, 150);
+    }, 300);
   };
 
   return (
