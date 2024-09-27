@@ -102,9 +102,9 @@ export default function Home() {
       <div ref={containerRef} className="block w-screen">
         <div
           id="hidden-bg"
-          className="fixed inset-0 z-[-1] h-svh w-screen bg-customCream opacity-0"
+          className="fixed inset-0 z-[-1] h-dvh w-screen bg-customCream opacity-0"
         ></div>
-        <div className="top-bg hidden h-svh w-screen md:block"></div>
+        <div className="top-bg hidden h-dvh w-screen md:block"></div>
         <div
           id="about-content"
           className="relative block h-auto p-3 md:ml-[275px] md:py-6 md:pl-0 md:pr-6"
@@ -192,9 +192,7 @@ export default function Home() {
           <div id="about-section" className="opacity-0">
             <ImageCarousel />
           </div>
-          <div className="w-full text-right">
-           
-          </div>
+          <div className="w-full text-right"></div>
         </div>
       </div>
     </>
