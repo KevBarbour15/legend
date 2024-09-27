@@ -132,7 +132,7 @@ export default function Events() {
         {loading ? (
           <div
             id="event-subheading"
-            className="flex h-[75vh] w-full flex-col items-center justify-center opacity-0"
+            className="flex h-[50vh] w-full flex-col items-center justify-center opacity-0"
           >
             <h2 className="mb-6 mt-3 font-bigola text-4xl text-customCream md:text-5xl">
               Loading events...
@@ -179,7 +179,7 @@ export default function Events() {
                   ))}
                 </div>
               ) : (
-                <div className="text-center text-xl md:text-3xl">
+                <div className="flex h-[50vh] w-full flex-col items-center justify-center text-center">
                   <EmptyMessage
                     message="Stay tuned for upcoming events!"
                     refProp={upcomingEmptyMessageRef}
@@ -212,7 +212,7 @@ export default function Events() {
                   ))}
                 </div>
               ) : (
-                <div className="text-center text-xl md:text-3xl">
+                <div className="flex h-[50vh] w-full flex-col items-center justify-center text-center">
                   <EmptyMessage
                     message="No past events to display."
                     refProp={pastEmptyMessageRef}

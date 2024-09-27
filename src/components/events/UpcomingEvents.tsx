@@ -87,7 +87,7 @@ const UpcomingEventsList: React.FC = () => {
         </h2>
       ) : events.length === 0 ? (
         <h2
-          id="no-events"
+          id="event-subheading"
           className="text-center font-bigola text-4xl text-black"
         >
           No events found.

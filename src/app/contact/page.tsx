@@ -91,19 +91,21 @@ export default function Contact() {
       });
 
       if (response.ok) {
+        setContactForm(initialForm);
+
         await subscribeToMailchimp(
           contactForm.email,
           contactForm.firstName,
           contactForm.lastName,
         );
-
-        setContactForm(initialForm);
       } else {
         const errorData = await response.json();
         setContactForm({ ...contactForm, error: errorData.error });
+        console.log("The error seems to be with mailchimp");
       }
     } catch (error) {
       setContactForm({ ...contactForm, error: "Failed to submit form." });
+      console.log("Not with mailchimp");
     }
   };
 
