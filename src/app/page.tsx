@@ -102,7 +102,7 @@ export default function Home() {
       <div ref={containerRef} className="block w-screen">
         <div
           id="hidden-bg"
-          className="fixed inset-0 z-[-1] h-dvh w-screen bg-customCream opacity-0"
+          className="fixed inset-0 z-[-1] h-screen w-screen bg-customCream opacity-0"
         ></div>
         <div className="top-bg hidden h-dvh w-screen md:block"></div>
         <div

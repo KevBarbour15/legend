@@ -101,11 +101,9 @@ export default function Contact() {
       } else {
         const errorData = await response.json();
         setContactForm({ ...contactForm, error: errorData.error });
-        console.log("The error seems to be with mailchimp");
       }
     } catch (error) {
       setContactForm({ ...contactForm, error: "Failed to submit form." });
-      console.log("Not with mailchimp");
     }
   };
 
