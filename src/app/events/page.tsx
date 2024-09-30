@@ -156,7 +156,7 @@ export default function Events() {
             </TabsList>
             <TabsContent
               value="upcoming"
-              className="w-full border-t border-customGold md:border-0"
+              className={`w-full ${pastEvents.length > 0 ? "border-t border-customGold md:border-0" : ""}`}
             >
               {upcomingEvents.length > 0 ? (
                 <div>
@@ -189,7 +189,7 @@ export default function Events() {
             </TabsContent>
             <TabsContent
               value="past"
-              className="w-full border-t border-customGold md:border-0"
+              className={`w-full ${pastEvents.length > 0 ? "border-t border-customGold md:border-0" : ""}`}
             >
               {pastEvents.length > 0 ? (
                 <div>
