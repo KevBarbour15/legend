@@ -131,12 +131,12 @@ const UpcomingEventsList: React.FC = () => {
                           </Button>
                         </div>
                       </div>
-                      <div className="w-full p-0 md:w-[275px]">
+                      <div className="aspect-square w-full p-0 md:ml-6 md:w-[275px] md:flex-shrink-0">
                         {event.is_photo ? (
                           <img
                             src={event.image_url}
                             alt="event"
-                            className="aspect-square h-auto w-full border border-black object-cover object-center"
+                            className="aspect-square h-full w-full border border-black object-cover object-center"
                           />
                         ) : (
                           <video

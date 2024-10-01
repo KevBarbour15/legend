@@ -115,7 +115,7 @@ export default function Menu() {
             id="event-subheading"
             className="flex h-[75vh] w-full flex-col items-center justify-center opacity-0"
           >
-            <h2 className="mb-6 mt-3 font-bigola text-3xl text-customCream md:text-5xl">
+            <h2 className="mb-6 mt-3 font-bigola text-3xl text-customCream md:text-4xl">
               Loading menu...
             </h2>
             <Progress
@@ -128,7 +128,7 @@ export default function Menu() {
             id="event-subheading"
             className="flex h-[75vh] w-full items-center justify-center"
           >
-            <h2 className="mt-3 font-bigola text-5xl text-customCream">
+            <h2 className="mb-6 mt-3 font-bigola text-3xl text-customCream md:text-4xl">
               Error loading menu. Please try again.
             </h2>
           </div>

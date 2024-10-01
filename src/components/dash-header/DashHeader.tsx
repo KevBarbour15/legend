@@ -24,7 +24,7 @@ const DashHeader: React.FC<DashProps> = ({ setActiveTab, activeTab }) => {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-black p-3 md:px-6">
-      <div className="container flex items-center">
+      <div className="flex w-full items-center">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon">
