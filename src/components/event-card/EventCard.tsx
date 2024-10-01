@@ -43,39 +43,45 @@ const EventCard: React.FC<EventCardProps> = ({ event, fetchEvents }) => {
         ref={containerRef}
         className="flex w-full flex-col py-3 text-left text-customCream"
       >
-        <div className="flex flex-col justify-between font-bigola md:flex-row">
-          <div className="flex flex-col gap-3 pb-3 md:pb-0 md:pr-12">
+        <div className="flex flex-col font-bigola md:flex-row md:items-start md:justify-between">
+          <div className="flex flex-col gap-3 pb-3 md:flex-grow md:pb-0 md:pr-6">
             <h2 className="text-xl text-customGold md:text-2xl">
               {formattedDate}
             </h2>
             <h2 className="text-3xl md:text-5xl">{event.title}</h2>
-
-            <h2 className="text-xl md:text-2xl">{formattedTime}</h2>
-            <p className="font-hypatia text-xl md:text-2xl">
+            <h2 className="text-xl md:text-xl">{formattedTime}</h2>
+            <p className="font-hypatia text-xl md:text-xl">
               {event.description}
             </p>
           </div>
 
-          {event.is_photo ? (
-            <Button onClick={handleImageModalOpen} className="p-0">
-              <img
-                src={event.image_url}
-                alt="event"
-                className="aspect-square h-auto w-full object-cover object-center md:h-250px md:w-250px"
-              ></img>
+          <div className="md:flex-shrink-0">
+            <Button
+              onClick={handleImageModalOpen}
+              className="w-full p-0 md:w-auto"
+            >
+              {event.is_photo ? (
+                <div className="aspect-square w-full md:h-[275px] md:w-[275px]">
+                  <img
+                    src={event.image_url}
+                    alt="event"
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
+              ) : (
+                <div className="aspect-square w-full md:h-[275px] md:w-[275px]">
+                  <video
+                    src={event.image_url}
+                    className="h-full w-full object-cover object-center"
+                    loop
+                    autoPlay
+                    muted
+                    playsInline
+                  />
+                </div>
+              )}
             </Button>
-          ) : (
-            <Button onClick={handleImageModalOpen} className="p-0">
-              <video
-                src={event.image_url}
-                className="aspect-square h-auto w-full object-cover object-center md:h-250px md:w-250px"
-                loop
-                autoPlay
-                muted
-                playsInline
-              ></video>
-            </Button>
-          )}
+          </div>
         </div>
       </div>
 

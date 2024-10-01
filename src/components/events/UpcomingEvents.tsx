@@ -131,7 +131,7 @@ const UpcomingEventsList: React.FC = () => {
                           </Button>
                         </div>
                       </div>
-                      <div className="w-full p-0 md:w-[200px]">
+                      <div className="w-full p-0 md:w-[275px]">
                         {event.is_photo ? (
                           <img
                             src={event.image_url}
