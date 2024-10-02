@@ -26,6 +26,8 @@ export default function Events() {
   const [progress, setProgress] = useState<number>(0);
 
   const animateEvents = useCallback(() => {
+    if (!containerRef.current) return;
+
     const currentRefs =
       activeTab === "upcoming" ? upcomingEventRefs : pastEventRefs;
     const currentEmptyRef =
@@ -35,22 +37,22 @@ export default function Events() {
       gsap.fromTo(
         "#event-subheading",
         { opacity: 0 },
-        { opacity: 1, ease: "linear", y: 0, delay: 0.05 },
+        { opacity: 1, duration: 0.25 },
       );
     }
 
     if (!loading && displayEvents) {
       if (currentRefs.current.length > 0) {
-        gsap.set(currentRefs.current, { x: "50%", opacity: 0 });
+        gsap.set(currentRefs.current, { x: "75%", opacity: 0 });
         gsap.to(currentRefs.current, {
           delay: 0.15,
-          duration: 0.25,
-          stagger: 0.05,
+          duration: 0.35,
+          stagger: 0.075,
           x: 0,
           opacity: 1,
         });
       } else if (currentEmptyRef.current) {
-        gsap.set(currentEmptyRef.current, { opacity: 0, scale: 0.75 });
+        gsap.set(currentEmptyRef.current, { opacity: 0, scale: 0.95 });
         gsap.to(currentEmptyRef.current, {
           delay: 0.15,
           duration: 0.25,
@@ -67,15 +69,19 @@ export default function Events() {
 
   const fetchEvents = async () => {
     try {
-      setProgress(generateProgress(5, 35));
+      setProgress(generateProgress(1, 35));
       const response = await fetch("/api/events");
 
       if (!response.ok) {
         setProgress(0);
         throw new Error("Failed to fetch events.");
       }
+      setProgress(generateProgress(36, 75));
 
       const data: Event[] = await response.json();
+
+      setProgress(generateProgress(76, 95));
+
       setEvents(data);
     } catch (error) {
       setProgress(0);
@@ -85,8 +91,8 @@ export default function Events() {
       setTimeout(() => {
         setProgress(100);
         setTimeout(() => setLoading(false), 200);
-        setTimeout(() => setDisplayEvents(true), 250);
-      }, 300);
+        setTimeout(() => setDisplayEvents(true), 350);
+      }, 350);
     }
   };
 
@@ -116,7 +122,9 @@ export default function Events() {
       ref={refProp}
       className="flex h-[75vh] w-full flex-col items-center justify-center opacity-0"
     >
-      <h2 className="mt-3 font-bigola text-4xl text-customCream">{message}</h2>
+      <h2 className="mb-6 mt-3 font-bigola text-3xl text-customGold md:text-4xl">
+        {message}
+      </h2>
     </div>
   );
 
@@ -134,7 +142,7 @@ export default function Events() {
             id="event-subheading"
             className="flex h-[75vh] w-full flex-col items-center justify-center opacity-0"
           >
-            <h2 className="mb-6 mt-3 font-bigola text-3xl text-customCream md:text-4xl">
+            <h2 className="mb-6 mt-3 font-bigola text-3xl text-customGold md:text-4xl">
               Loading events...
             </h2>
             <Progress

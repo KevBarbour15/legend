@@ -1,5 +1,6 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
+import { MenuItem, MenuStructure } from "@/types.ts";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -15,18 +16,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-
-interface MenuItem {
-  id: string;
-  name: string | undefined;
-  brand: string | undefined;
-  description: string | undefined;
-  price: string | undefined;
-}
-
-interface MenuStructure {
-  [categoryName: string]: MenuItem[];
-}
 
 function generateProgress(min: number, max: number) {
   return Math.random() * (max - min) + min;
@@ -49,20 +38,20 @@ export default function Menu() {
       gsap.fromTo(
         "#event-subheading",
         { opacity: 0 },
-        { opacity: 1, ease: "linear", y: 0, delay: 0.05 },
+        { opacity: 1, duration: 0.25 },
       );
     }
 
     gsap.set(categoryRefs.current, {
-      x: "50%",
+      x: "75%",
       opacity: 0,
     });
 
     if (!loading && categoryRefs.current.length > 0 && displayMenu) {
       categoriesTL.current = gsap.timeline({}).to(categoryRefs.current, {
         delay: 0.15,
-        duration: 0.25,
-        stagger: 0.05,
+        duration: 0.35,
+        stagger: 0.075,
         x: 0,
         opacity: 1,
       });
@@ -71,7 +60,7 @@ export default function Menu() {
 
   const fetchMenu = async () => {
     try {
-      setProgress(generateProgress(5, 35));
+      setProgress(generateProgress(1, 35));
       const response = await fetch("/api/catalog");
 
       if (!response.ok) {
@@ -79,9 +68,12 @@ export default function Menu() {
         throw new Error("Failed to fetch events.");
       }
 
+      setProgress(generateProgress(36, 75));
+
       const data = await response.json();
 
-      setProgress(generateProgress(45, 85));
+      setProgress(generateProgress(76, 95));
+
       setMenu(data);
     } catch (error) {
       setProgress(0);
@@ -92,14 +84,23 @@ export default function Menu() {
         setProgress(100);
 
         setTimeout(() => setLoading(false), 200);
-        setTimeout(() => setDisplayMenu(true), 250);
-      }, 300);
+        setTimeout(() => setDisplayMenu(true), 350);
+      }, 350);
     }
   };
 
   useEffect(() => {
     fetchMenu();
   }, []);
+
+  const Divider = () => (
+    <div className="flex w-full items-center px-3 md:mx-6">
+      <div
+        className="w-full border-t border-dashed border-customWhite"
+        aria-hidden="true"
+      ></div>
+    </div>
+  );
 
   return (
     <>
@@ -115,7 +116,7 @@ export default function Menu() {
             id="event-subheading"
             className="flex h-[75vh] w-full flex-col items-center justify-center opacity-0"
           >
-            <h2 className="mb-6 mt-3 font-bigola text-3xl text-customCream md:text-4xl">
+            <h2 className="mb-6 mt-3 font-bigola text-3xl text-customGold md:text-4xl">
               Loading menu...
             </h2>
             <Progress
@@ -152,18 +153,32 @@ export default function Menu() {
                   {items.map((item) => (
                     <div
                       key={item.id}
-                      className="flex justify-between pl-3 pr-6 font-hypatia text-customWhite"
+                      className="block text-nowrap px-3 pb-3 font-hypatia text-base text-customWhite md:text-lg"
                     >
-                      <div>
-                        <p className="font-bigola text-2xl text-customGold">
-                          {item.name}
-                        </p>
-                        <p className="text-lg">{item.brand}</p>
+                      <div className="flex w-full justify-between font-bigola text-lg text-customGold md:text-2xl">
+                        <p className="text-left">{item.name}</p>
+                        <Divider />
+                        <p className="text-right">{item.price}</p>
                       </div>
-                      <div className="text-right">
-                        <p className="text-lg">{item.description}</p>
-                        <p className="text-lg">{item.price}</p>
+                      <div className="mt-1 flex w-full justify-between">
+                        <p className="font-hypatiaSemibold">{item.brand}</p>
+                        <Divider />
+                        <p>{item.description}</p>
                       </div>
+
+                      {item.city && item.abv && (
+                        <div className="mt-1 flex w-full justify-between">
+                          <p>
+                            {item.city}
+                            <span>, CA</span>
+                          </p>
+                          <Divider />
+                          <p>
+                            <span>ABV </span>
+                            {item.abv}
+                          </p>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </AccordionContent>

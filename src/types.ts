@@ -20,3 +20,17 @@ export interface ContactForm {
   message: string;
   error: string;
 }
+
+export interface MenuItem {
+  id: string;
+  name: string | undefined;
+  brand: string | undefined;
+  description: string | undefined;
+  price: string | undefined;
+  abv: string | undefined;
+  city: string | undefined;
+}
+
+export interface MenuStructure {
+  [categoryName: string]: MenuItem[];
+}
