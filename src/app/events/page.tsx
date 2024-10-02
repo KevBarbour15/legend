@@ -42,6 +42,17 @@ export default function Events() {
     }
 
     if (!loading && displayEvents) {
+      gsap.fromTo(
+        "#events-tabs",
+        {
+          opacity: 0,
+        },
+        {
+          duration: 0.35,
+          opacity: 1,
+        },
+      );
+
       if (currentRefs.current.length > 0) {
         gsap.set(currentRefs.current, { x: "75%", opacity: 0 });
         gsap.to(currentRefs.current, {
@@ -134,7 +145,7 @@ export default function Events() {
       <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-20 md:pb-6 md:pl-[300px] md:pr-6 md:pt-6"
+        className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-20 md:pb-6 md:pl-[325px] md:pr-6 md:pt-6"
       >
         <MobileHeading section={"Events"} />
         {loading ? (
@@ -158,14 +169,15 @@ export default function Events() {
               setActiveTab(value as "upcoming" | "past")
             }
           >
-            <TabsList className="my-3 grid w-full grid-cols-2 font-bigola md:mb-6 md:mt-0 md:w-[400px]">
+            <TabsList
+              id="events-tabs"
+              className="my-3 grid w-full grid-cols-2 font-bigola opacity-0 md:mb-6 md:mt-0 md:w-[400px]"
+            >
               <TabsTrigger value="upcoming">Upcoming Events</TabsTrigger>
               <TabsTrigger value="past">Past Events</TabsTrigger>
             </TabsList>
-            <TabsContent
-              value="upcoming"
-              className={`w-full ${pastEvents.length > 0 ? "border-t border-customGold md:border-0" : ""}`}
-            >
+
+            <TabsContent value="upcoming" className="w-full">
               {upcomingEvents.length > 0 ? (
                 <div>
                   {upcomingEvents.map((event, index) => (
@@ -174,7 +186,7 @@ export default function Events() {
                       ref={(el) => {
                         upcomingEventRefs.current[index] = el;
                       }}
-                      className={`w-full border-customGold opacity-0 ${index === 0 ? "md:border-t" : "border-t"} ${
+                      className={`w-full border-customGold opacity-0 ${index === 0 ? "border-t border-customGold" : ""} ${
                         index === upcomingEvents.length - 1 ? "border-b" : ""
                       }`}
                     >
@@ -187,7 +199,7 @@ export default function Events() {
                   ))}
                 </div>
               ) : (
-                <div className="flex h-[50vh] w-full flex-col items-center justify-center text-center">
+                <div className="flex w-full flex-col items-center justify-center text-center">
                   <EmptyMessage
                     message="Stay tuned for upcoming events!"
                     refProp={upcomingEmptyMessageRef}
@@ -195,10 +207,7 @@ export default function Events() {
                 </div>
               )}
             </TabsContent>
-            <TabsContent
-              value="past"
-              className={`w-full ${pastEvents.length > 0 ? "border-t border-customGold md:border-0" : ""}`}
-            >
+            <TabsContent value="past" className="w-full">
               {pastEvents.length > 0 ? (
                 <div>
                   {pastEvents.map((event, index) => (
@@ -207,7 +216,7 @@ export default function Events() {
                       ref={(el) => {
                         pastEventRefs.current[index] = el;
                       }}
-                      className={`w-full border-customGold opacity-0 ${index === 0 ? "md:border-t" : "border-t"} ${
+                      className={`w-full border-customGold opacity-0 ${index === 0 ? "border-t border-customGold" : ""} ${
                         index === pastEvents.length - 1 ? "border-b" : ""
                       }`}
                     >
@@ -220,7 +229,7 @@ export default function Events() {
                   ))}
                 </div>
               ) : (
-                <div className="flex h-[50vh] w-full flex-col items-center justify-center text-center">
+                <div className="flex w-full flex-col items-center justify-center text-center">
                   <EmptyMessage
                     message="No past events to display."
                     refProp={pastEmptyMessageRef}
