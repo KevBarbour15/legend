@@ -1,25 +1,7 @@
 import { Client, Environment, CatalogObject } from "square";
 import { NextResponse } from "next/server";
 
-interface ProcessedItem {
-  id: string;
-  name?: string | null;
-  brand?: string | null;
-  description?: string | null;
-  price?: string | null;
-  categoryIds: string[];
-  locationIds: string[];
-}
-
-interface CategoryWithItems {
-  id: string;
-  name?: string | null;
-  items: ProcessedItem[];
-}
-
-interface MenuStructure {
-  [categoryName: string]: ProcessedItem[];
-}
+import { MenuStructure, CategoryWithItems, ProcessedItem } from "@/types.ts";
 
 export async function GET() {
   try {
@@ -28,34 +10,17 @@ export async function GET() {
       environment: Environment.Production,
     });
 
-    // Fetch locations
     const locationsResponse = await client.locationsApi.listLocations();
-    //console.log("Locations:");
-    /*
-    locationsResponse.result.locations?.forEach((location) => {
-      console.log(
-        `ID: ${location.id}, Name: ${location.name}, Status: ${location.status}`,
-      );
-    });
-*/
 
     const response = await client.catalogApi.listCatalog(
       undefined,
-      "ITEM,CATEGORY",
+      "ITEM,CATEGORY,ITEM_VARIATION",
     );
 
     const items =
       response.result.objects?.filter(
         (obj): obj is CatalogObject => obj.type === "ITEM",
       ) || [];
-
-    console.log("Items present at location 'Legend Has It':");
-    items.forEach((item) => {
-      if (item.itemData?.name === "La Boheme - Alaro") {
-        console.log(`ID: ${item.id}, Name: ${item.itemData?.name}`);
-        console.log(item);
-      }
-    });
 
     const categories =
       response.result.objects?.filter(
@@ -67,37 +32,79 @@ export async function GET() {
       ) || [];
 
     const categoryMap = new Map<string, CategoryWithItems>();
+    const childCategoryMap = new Map<string, CategoryWithItems>();
+
+    const excludedCategories: string[] = [
+      "Lagers, Pilsners, Kolsch",
+      "IPAs",
+      "Seltzers and Ciders",
+      "Sours and Stouts",
+    ];
+
     categories.forEach((category) => {
       if (category.id) {
-        categoryMap.set(category.id, {
+        const categoryData = {
           id: category.id,
           name: category.categoryData?.name,
           items: [],
-        });
+          childCategories: [],
+        };
+
+        if (excludedCategories.includes(category.categoryData?.name || "")) {
+          childCategoryMap.set(category.id, categoryData);
+        } else {
+          categoryMap.set(category.id, categoryData);
+        }
       }
     });
 
-    const processedItems: ProcessedItem[] = items.map(
-      (item): ProcessedItem => ({
+    const processedItems: ProcessedItem[] = items.map((item): ProcessedItem => {
+      const variation = item.itemData?.variations?.[0];
+      const customAttributes = variation?.customAttributeValues;
+
+      let abv: string | undefined;
+      let city: string | undefined;
+
+      if (customAttributes) {
+        Object.values(customAttributes).forEach((attr) => {
+          if (attr.name === "ABV") {
+            abv = attr.stringValue ?? undefined;
+          } else if (attr.name === "City") {
+            city = attr.stringValue ?? undefined;
+          }
+        });
+      }
+
+      return {
         id: item.id,
         name: item.itemData?.name?.split("-")[0],
         brand: item.itemData?.name?.split("-")[1],
         description: item.itemData?.description,
-        price: item.itemData?.variations?.[0]?.itemVariationData?.priceMoney
-          ?.amount
-          ? `$${(Number(item.itemData.variations[0].itemVariationData.priceMoney.amount) / 100).toFixed(2)}`
+        price: variation?.itemVariationData?.priceMoney?.amount
+          ? `$${(Number(variation.itemVariationData.priceMoney.amount) / 100).toFixed(2)}`
           : undefined,
+        abv,
+        city,
         categoryIds:
           item.itemData?.categories?.map((cat) => cat.id ?? "") || [],
         locationIds: item.presentAtLocationIds || [],
-      }),
-    );
+      };
+    });
+
+    const cannedBeerId: string = "MKQBBK2KQOI7NFS4TD6WGBQC";
 
     processedItems.forEach((item) => {
       item.categoryIds.forEach((categoryId) => {
         if (
+          childCategoryMap.has(categoryId) &&
+          item.locationIds.includes("L3Y8KW155RG0B") &&
+          item.categoryIds.includes(cannedBeerId)
+        ) {
+          childCategoryMap.get(categoryId)?.items.push(item);
+        } else if (
           categoryMap.has(categoryId) &&
-          item.locationIds.includes("L3Y8KW155RG0B")
+          item.locationIds.includes("L3Y8KW155RG0B") &&
+          !item.categoryIds.includes(cannedBeerId)
         ) {
           categoryMap.get(categoryId)?.items.push(item);
         }
@@ -105,18 +112,54 @@ export async function GET() {
     });
 
     const menuStructure: MenuStructure = {};
+    const orderedCategories = [
+      "Draft Beer",
+      "Canned Beer",
+      "Natural Wine",
+      "Non Alcoholic",
+    ];
+
+    orderedCategories.forEach((categoryName) => {
+      menuStructure[categoryName] = [];
+    });
+
+    childCategoryMap.forEach((category) => {
+      category.items.sort((a, b) => {
+        const brandA = a.brand?.toLowerCase() ?? "";
+        const brandB = b.brand?.toLowerCase() ?? "";
+        return brandA.localeCompare(brandB);
+      });
+    });
+
     categoryMap.forEach((category) => {
       if (category.name) {
-        const sortedItems = category.items.sort((a, b) => {
-          const brandA = a.brand?.toLowerCase() ?? "";
-          const brandB = b.brand?.toLowerCase() ?? "";
-          return brandA.localeCompare(brandB);
-        });
-        menuStructure[category.name] = sortedItems;
+        if (category.name === "Canned Beer") {
+          const cannedBeerCategory: CategoryWithItems = {
+            id: category.id,
+            name: category.name,
+            items: [],
+            childCategories: Array.from(childCategoryMap.values()),
+          };
+          menuStructure[category.name] = cannedBeerCategory;
+        } else if (orderedCategories.includes(category.name)) {
+          const sortedItems = category.items.sort((a, b) => {
+            const brandA = a.brand?.toLowerCase() ?? "";
+            const brandB = b.brand?.toLowerCase() ?? "";
+            return brandA.localeCompare(brandB);
+          });
+          menuStructure[category.name] = sortedItems;
+        }
       }
     });
 
-    return NextResponse.json(menuStructure);
+    const orderedMenuStructure: MenuStructure = {};
+    orderedCategories.forEach((categoryName) => {
+      if (menuStructure[categoryName]) {
+        orderedMenuStructure[categoryName] = menuStructure[categoryName];
+      }
+    });
+
+    return NextResponse.json(orderedMenuStructure);
   } catch (error) {
     console.error("Error fetching catalog:", error);
     return NextResponse.json(

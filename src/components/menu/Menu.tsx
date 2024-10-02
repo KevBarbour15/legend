@@ -1,22 +1,27 @@
 "use client";
 import React, { useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
+
 import Link from "next/link";
 import "./menu.css";
-import LoginSharpIcon from "@mui/icons-material/LoginSharp";
-import Close from "@mui/icons-material/Close";
 
 import Image from "next/image";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-import InstagramIcon from "@mui/icons-material/Instagram";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import FacebookIcon from "@mui/icons-material/Facebook";
+import {
+  Instagram,
+  Facebook,
+  YouTube,
+  LoginRounded,
+  CloseRounded,
+} from "@mui/icons-material";
+
+import { IconButton } from "@mui/material";
 
 const links = [
-  { path: "/", label: "Home" },
-  { path: "/about", label: "About" },
+  { path: "/", label: "About" },
   { path: "/contact", label: "Contact" },
   { path: "/menu", label: "Menu" },
   { path: "/events", label: "Events" },
@@ -30,80 +35,63 @@ interface MenuProps {
 const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
   const container = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
-
-  useEffect(() => {
-    const handleResize = () => {
-      let vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty("--vh", `${vh}px`);
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const router = useRouter();
 
   useGSAP(() => {
     if (!container.current) return;
 
     gsap.set(".menu-link-item-holder", { y: 75, scale: 1, opacity: 0 });
-    gsap.set(".menu-logo-icon", { opacity: 0, rotation: 360 });
+    gsap.set(".menu-logo-icon", { opacity: 0 });
     gsap.set(".menu-overlay", { opacity: 0 });
-    gsap.set(".menu-info-row svg", { opacity: 0.5, scale: 0, rotation: 360 });
-    gsap.set(".menu-close-icon", { opacity: 0, rotation: 360, scale: 0 });
+    gsap.set(".menu-info-row svg", { opacity: 0.5, scale: 0 });
+    gsap.set(".menu-close-icon", { opacity: 0, scale: 0 });
     gsap.set(".menu-login-icon", { opacity: 0, scale: 0 });
 
     tl.current = gsap
-      .timeline({ PauseRoundedd: true })
-      .to("#player-container", {}, 0)
-      .to(
-        ".menu-overlay",
-        {
-          duration: 0.35,
-          ease: "power4.inOut",
-          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-          opacity: 1,
-        },
-        0,
-      )
+      .timeline()
+      .to(".menu-overlay", {
+        duration: 0.35,
+        delay: -0.15,
+        ease: "power4.inOut",
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+        opacity: 1,
+      })
       .to(".menu-link-item-holder", {
         y: 0,
         duration: 0.25,
         stagger: 0.075,
-        delay: -0.35,
+        delay: -0.15,
         ease: "linear",
         opacity: 1,
       })
       .to(".menu-logo-icon", {
         opacity: 1,
         duration: 0.2,
-        delay: -0.35,
+        delay: -0.15,
         scale: 1,
-        rotation: 0,
       })
       .to(".menu-close-icon", {
         opacity: 1,
         duration: 0.2,
-        delay: -0.35,
-        rotation: 0,
+        delay: -0.15,
         scale: 1,
       })
       .to(".menu-login-icon", {
         opacity: 1,
         duration: 0.2,
-        delay: -0.35,
+        delay: -0.15,
         scale: 1,
       })
       .to(".menu-info-row svg", {
         opacity: 1,
-        delay: -0.5,
+        delay: -0.15,
+        duration: 0.2,
         scale: 1,
-        rotation: 0,
       })
       .to("body", {
         backgroundColor: "var(--custom-cream)",
-        delay: -0.5,
         ease: "expo.out",
+        delay: -0.15,
       });
   }, []);
 
@@ -115,22 +103,33 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
     }
   }, [menuStatus]);
 
+  const handleAboutScroll = async (e: React.MouseEvent) => {
+    e.preventDefault();
+
+    await router.push("/");
+    setTimeout(() => {
+      const aboutSection = document.getElementById("about-content");
+
+      if (aboutSection) {
+        aboutSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 300);
+  };
+
   return (
     <div className="menu-container" ref={container}>
       <div className="menu-overlay">
-        <Close className="menu-close-icon" onClick={toggleMenu} />
+        <CloseRounded className="menu-close-icon" onClick={toggleMenu} />
         <div className="menu-logo-container">
-          <Link href="/">
-            <Image
-              className="menu-logo-icon"
-              src="/images/monogram.png"
-              alt="Legend Has It logo"
-              width={125}
-              height={125}
-              priority
-              onClick={toggleMenu}
-            />
-          </Link>
+          <Image
+            className="menu-logo-icon"
+            src="/images/monogram.png"
+            alt="Legend Has It logo"
+            width={125}
+            height={125}
+            priority
+            onClick={toggleMenu}
+          />
         </div>
         <div className="menu-links-container">
           <div className="menu-links">
@@ -147,27 +146,27 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
         </div>
         <div className="menu-info-container">
           <div className="menu-info-row">
-            <a
+            <Link
               href="https://www.instagram.com/legendhasithifi/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <InstagramIcon />
-            </a>
-            <a
+              <Instagram />
+            </Link>
+            <Link
               href="https://www.youtube.com/@legendhasithifi"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <YouTubeIcon />
-            </a>
-            <a
+              <YouTube />
+            </Link>
+            <Link
               href="https://www.facebook.com/legendhasithifi"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FacebookIcon />
-            </a>
+              <Facebook />
+            </Link>
           </div>
         </div>
         <Link
@@ -175,7 +174,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
           href="/dashboard"
           onClick={toggleMenu}
         >
-          <LoginSharpIcon />
+          <LoginRounded />
         </Link>
       </div>
     </div>

@@ -1,8 +1,11 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { Button } from "@mui/material";
-import { ArrowBackIosRounded } from "@mui/icons-material";
+import Menu from "@/components/menu/Menu";
+
+import { MenuRounded } from "@mui/icons-material";
+
+import { Button } from "@/components/ui/button";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -12,8 +15,13 @@ interface MobileHeadingProps {
 }
 
 const MobileHeading: React.FC<MobileHeadingProps> = ({ section }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -39,18 +47,23 @@ const MobileHeading: React.FC<MobileHeadingProps> = ({ section }) => {
   };
 
   return (
-    <div
-      ref={containerRef}
-      id="mobile-heading"
-      className="w-full border-b border-customGold pb-3 opacity-0 md:hidden"
-    >
-      <div>
-        <Button onClick={handleAboutScroll} className="p-0 text-customGold">
-          <ArrowBackIosRounded className="mr-3" />
-          <span className="font-bigola text-2xl capitalize">{section}</span>
+    <>
+      <Menu menuStatus={menuOpen} toggleMenu={toggleMenu} />
+      <div
+        ref={containerRef}
+        id="mobile-heading"
+        className="flex w-full justify-between border-b border-customGold pb-3 text-customGold opacity-0 md:hidden"
+      >
+        <span className="font-bigola text-2xl capitalize">{section}</span>
+        <Button
+          onClick={toggleMenu}
+          size="mobileHeading"
+          className="bg-transparent text-customGold"
+        >
+          <MenuRounded className="text-3xl" />
         </Button>
       </div>
-    </div>
+    </>
   );
 };
 

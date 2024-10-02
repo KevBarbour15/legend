@@ -41,20 +41,17 @@ export default function Contact() {
     if (!containerRef.current) return;
 
     gsap.set("#form #input-section", {
-      x: "50%",
+      x: "75%",
       opacity: 0,
     });
 
-    tl.current = gsap.timeline({}).to(
-      "#form #input-section",
-      {
-        duration: 0.25,
-        stagger: 0.05,
-        x: 0,
-        opacity: 1,
-      },
-      0.15,
-    );
+    tl.current = gsap.timeline({}).to("#form #input-section", {
+      delay: 0.15,
+      duration: 0.35,
+      stagger: 0.075,
+      x: 0,
+      opacity: 1,
+    });
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -139,7 +136,7 @@ export default function Contact() {
         <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
         <div
           ref={containerRef}
-          className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-20 md:pb-6 md:pl-[300px] md:pr-6 md:pt-6"
+          className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-20 md:pb-6 md:pl-[325px] md:pr-6 md:pt-6"
         >
           <MobileHeading section={"Let's connect"} />
           <ThemeProvider theme={customTheme(outerTheme)}>
@@ -235,13 +232,14 @@ export default function Contact() {
                   }
                 />
               </div>
-              <Button
-                id="input-section"
-                type="submit"
-                className="rounded-full p-3 font-bigola text-2xl capitalize text-customCream opacity-0 transition-all hover:text-customGold"
-              >
-                Submit
-              </Button>
+              <div id="input-section" className="w-full text-center opacity-0">
+                <Button
+                  type="submit"
+                  className="rounded-full p-3 font-bigola text-2xl capitalize text-customCream transition-all hover:text-customGold"
+                >
+                  Submit
+                </Button>
+              </div>
             </Box>
           </ThemeProvider>
         </div>
