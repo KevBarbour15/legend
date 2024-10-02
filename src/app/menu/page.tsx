@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
-import { MenuItem, MenuStructure } from "@/types.ts";
+import { MenuStructure, CategoryWithItems, ProcessedItem } from "@/types.ts";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -102,6 +102,58 @@ export default function Menu() {
     </div>
   );
 
+  const renderMenuItem = (item: ProcessedItem) => (
+    <div
+      key={item.id}
+      className="block text-nowrap px-3 pb-3 font-hypatia text-base text-customWhite md:text-lg"
+    >
+      <div className="flex w-full justify-between font-bigola text-lg text-customGold md:text-2xl">
+        <p className="text-left">{item.name}</p>
+        <Divider />
+        <p className="text-right">{item.price}</p>
+      </div>
+      <div className="mt-1 flex w-full justify-between">
+        <p className="font-hypatiaSemibold">{item.brand}</p>
+        <Divider />
+        <p>{item.description}</p>
+      </div>
+      {item.city && item.abv && (
+        <div className="mt-1 flex w-full justify-between">
+          <p>
+            {item.city}
+            <span>, CA</span>
+          </p>
+          <Divider />
+          <p>
+            <span>ABV </span>
+            {item.abv}
+          </p>
+        </div>
+      )}
+    </div>
+  );
+
+  const renderCannedBeerCategory = (category: CategoryWithItems) => (
+    <Accordion type="single" collapsible className="w-full px-3">
+      {category.childCategories.map((childCategory, index) => (
+        <AccordionItem
+          value={childCategory.id}
+          className="border-b border-customGold"
+          key={childCategory.id}
+        >
+          <AccordionTrigger className="cursor-pointer text-customWhite transition-colors">
+            <h3 className="font-bigola text-xl md:text-3xl">
+              {childCategory.name}
+            </h3>
+          </AccordionTrigger>
+          <AccordionContent className="border-t border-customGold pt-3">
+            {childCategory.items.map(renderMenuItem)}
+          </AccordionContent>
+        </AccordionItem>
+      ))}
+    </Accordion>
+  );
+
   return (
     <>
       <SideMenu />
@@ -135,55 +187,33 @@ export default function Menu() {
           </div>
         ) : (
           <Accordion type="single" collapsible className="w-full">
-            {Object.entries(menu).map(([category, items], index) => (
-              <AccordionItem
-                ref={(el) => {
-                  categoryRefs.current[index] = el;
-                }}
-                value={category}
-                className={`${index === 0 ? "md:border-t" : ""} border-b border-customGold opacity-0`}
-                key={category}
-              >
-                <AccordionTrigger className="cursor-pointer text-customCream transition-colors">
-                  <h2 className="font-bigola text-2xl md:text-4xl">
-                    {category}
-                  </h2>
-                </AccordionTrigger>
-                <AccordionContent className="border-t border-customGold pt-3">
-                  {items.map((item) => (
-                    <div
-                      key={item.id}
-                      className="block text-nowrap px-3 pb-3 font-hypatia text-base text-customWhite md:text-lg"
-                    >
-                      <div className="flex w-full justify-between font-bigola text-lg text-customGold md:text-2xl">
-                        <p className="text-left">{item.name}</p>
-                        <Divider />
-                        <p className="text-right">{item.price}</p>
-                      </div>
-                      <div className="mt-1 flex w-full justify-between">
-                        <p className="font-hypatiaSemibold">{item.brand}</p>
-                        <Divider />
-                        <p>{item.description}</p>
-                      </div>
-
-                      {item.city && item.abv && (
-                        <div className="mt-1 flex w-full justify-between">
-                          <p>
-                            {item.city}
-                            <span>, CA</span>
-                          </p>
-                          <Divider />
-                          <p>
-                            <span>ABV </span>
-                            {item.abv}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
+            {Object.entries(menu).map(
+              ([categoryName, categoryContent], index) => (
+                <AccordionItem
+                  ref={(el) => {
+                    categoryRefs.current[index] = el;
+                  }}
+                  value={categoryName}
+                  className={`${index === 0 ? "md:border-t" : ""} border-b border-customGold opacity-0`}
+                  key={categoryName}
+                >
+                  <AccordionTrigger className="cursor-pointer text-customCream transition-colors">
+                    <h2 className="font-bigola text-2xl md:text-4xl">
+                      {categoryName}
+                    </h2>
+                  </AccordionTrigger>
+                  <AccordionContent className="border-t border-customGold pt-3">
+                    {categoryName === "Canned Beer"
+                      ? renderCannedBeerCategory(
+                          categoryContent as CategoryWithItems,
+                        )
+                      : (categoryContent as ProcessedItem[]).map(
+                          renderMenuItem,
+                        )}
+                  </AccordionContent>
+                </AccordionItem>
+              ),
+            )}
           </Accordion>
         )}
       </div>

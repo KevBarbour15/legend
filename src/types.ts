@@ -31,6 +31,25 @@ export interface MenuItem {
   city: string | undefined;
 }
 
+export interface CategoryWithItems {
+  id: string;
+  name?: string | null;
+  items: ProcessedItem[];
+  childCategories: CategoryWithItems[];
+}
+
 export interface MenuStructure {
-  [categoryName: string]: MenuItem[];
+  [categoryName: string]: ProcessedItem[] | CategoryWithItems;
+}
+
+export interface ProcessedItem {
+  id: string;
+  name?: string | null;
+  brand?: string | null;
+  description?: string | null;
+  price?: string | null;
+  city?: string | null;
+  abv?: string | null;
+  categoryIds: string[];
+  locationIds: string[];
 }
