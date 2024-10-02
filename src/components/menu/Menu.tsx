@@ -43,9 +43,9 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
     gsap.set(".menu-link-item-holder", { y: 75, scale: 1, opacity: 0 });
     gsap.set(".menu-logo-icon", { opacity: 0 });
     gsap.set(".menu-overlay", { opacity: 0 });
-    gsap.set(".menu-info-row svg", { opacity: 0.5, scale: 0 });
-    gsap.set(".menu-close-icon", { opacity: 0, scale: 0 });
-    gsap.set(".menu-login-icon", { opacity: 0, scale: 0 });
+    gsap.set(".menu-info-row", { opacity: 0 });
+    gsap.set(".menu-close-icon", { opacity: 0 });
+    gsap.set(".menu-login-icon", { opacity: 0 });
 
     tl.current = gsap
       .timeline()
@@ -68,30 +68,21 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
         opacity: 1,
         duration: 0.2,
         delay: -0.15,
-        scale: 1,
       })
       .to(".menu-close-icon", {
         opacity: 1,
         duration: 0.2,
         delay: -0.15,
-        scale: 1,
       })
       .to(".menu-login-icon", {
         opacity: 1,
         duration: 0.2,
         delay: -0.15,
-        scale: 1,
       })
-      .to(".menu-info-row svg", {
+      .to(".menu-info-row", {
         opacity: 1,
         delay: -0.15,
         duration: 0.2,
-        scale: 1,
-      })
-      .to("body", {
-        backgroundColor: "var(--custom-cream)",
-        ease: "expo.out",
-        delay: -0.15,
       });
   }, []);
 
@@ -145,28 +136,33 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
           </div>
         </div>
         <div className="menu-info-container">
-          <div className="menu-info-row">
-            <Link
+          <div className="menu-info-row opacity-0">
+            <IconButton
+              className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
               href="https://www.instagram.com/legendhasithifi/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Instagram />
-            </Link>
-            <Link
-              href="https://www.youtube.com/@legendhasithifi"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <YouTube />
-            </Link>
-            <Link
+              <Instagram fontSize="inherit" />
+            </IconButton>
+
+            <IconButton
+              className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
               href="https://www.facebook.com/legendhasithifi"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Facebook />
-            </Link>
+              <Facebook fontSize="inherit" />
+            </IconButton>
+
+            <IconButton
+              className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
+              href="https://www.youtube.com/@legendhasithifi"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <YouTube fontSize="inherit" />
+            </IconButton>
           </div>
         </div>
         <Link
