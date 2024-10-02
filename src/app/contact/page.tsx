@@ -149,7 +149,7 @@ export default function Contact() {
               <div id="input-section" className="w-full font-hypatia opacity-0">
                 <div className="flex w-full flex-col justify-between sm:flex-row">
                   <TextField
-                    className="flex-1 sm:mr-3"
+                    className="mb-3 flex-1 sm:mr-3 md:my-3"
                     type="text"
                     label="First name"
                     value={contactForm.firstName}
@@ -163,7 +163,7 @@ export default function Contact() {
                     variant="standard"
                   />
                   <TextField
-                    className="mt-3 flex-1 sm:mt-0"
+                    className="my-3 flex-1"
                     type="text"
                     label="Last name"
                     value={contactForm.lastName}
@@ -180,7 +180,7 @@ export default function Contact() {
               </div>
               <div id="input-section" className="my-3 w-full opacity-0">
                 <TextField
-                  className="w-full py-3"
+                  className="w-full"
                   type="email"
                   label="Email"
                   value={contactForm.email}
