@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 
 import { MenuStructure, CategoryWithItems, ProcessedItem } from "@/types.ts";
 
+import { getItemBrand, getItemName } from "@/utils/getItemInfo";
+
 export async function GET() {
   try {
     const client = new Client({
@@ -77,8 +79,8 @@ export async function GET() {
 
       return {
         id: item.id,
-        name: item.itemData?.name?.split("-")[0],
-        brand: item.itemData?.name?.split("-")[1],
+        name: getItemName(item.itemData?.name),
+        brand: getItemBrand(item.itemData?.name),
         description: item.itemData?.description,
         price: variation?.itemVariationData?.priceMoney?.amount
           ? `$${(Number(variation.itemVariationData.priceMoney.amount) / 100).toFixed(2)}`
