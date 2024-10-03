@@ -113,9 +113,18 @@ export default function Events() {
 
   const filterEvents = (type: "upcoming" | "past") => {
     const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
     return events.filter((event) => {
-      const eventDate = new Date(event.date);
-      return type === "upcoming" ? eventDate >= now : eventDate < now;
+      const [year, month, day] = event.date.split("-").map(Number);
+      const eventDate = new Date(year, month - 1, day);
+      eventDate.setHours(0, 0, 0, 0);
+
+      if (type === "upcoming") {
+        return eventDate >= today;
+      } else {
+        return eventDate < today;
+      }
     });
   };
 
@@ -186,7 +195,7 @@ export default function Events() {
                       ref={(el) => {
                         upcomingEventRefs.current[index] = el;
                       }}
-                      className={`w-full border-customGold opacity-0 ${index === 0 ? "border-t border-customGold" : ""} ${
+                      className={`w-full border-t border-customGold opacity-0 ${
                         index === upcomingEvents.length - 1 ? "border-b" : ""
                       }`}
                     >
@@ -216,8 +225,8 @@ export default function Events() {
                       ref={(el) => {
                         pastEventRefs.current[index] = el;
                       }}
-                      className={`w-full border-customGold opacity-0 ${index === 0 ? "border-t border-customGold" : ""} ${
-                        index === pastEvents.length - 1 ? "border-b" : ""
+                      className={`w-full border-t border-customGold opacity-0 ${
+                        index === upcomingEvents.length - 1 ? "border-b" : ""
                       }`}
                     >
                       <EventCard
