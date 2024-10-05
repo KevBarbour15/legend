@@ -28,12 +28,20 @@ export async function GET() {
       response.result.objects?.filter(
         (obj): obj is CatalogObject =>
           obj.type === "CATEGORY" &&
-          obj.categoryData?.categoryType === "MENU_CATEGORY" &&
+          obj.categoryData?.categoryType === "REGULAR_CATEGORY" &&
           obj.categoryData?.name !== "Merchandise" &&
           obj.categoryData?.name !== "Bar Menu",
       ) || [];
 
+    categories.forEach((category) => {
+      console.log("Category: ", category.categoryData?.name);
+      if (category.categoryData?.name === "Canned / Bottled") {
+        console.log("Category ID: ", category.id);
+      }
+    });
+
     const categoryMap = new Map<string, CategoryWithItems>();
+
     const childCategoryMap = new Map<string, CategoryWithItems>();
 
     const excludedCategories: string[] = [
@@ -53,7 +61,9 @@ export async function GET() {
         };
 
         if (excludedCategories.includes(category.categoryData?.name || "")) {
+          //console.log("Excluded category: ", category.categoryData?.name);
           childCategoryMap.set(category.id, categoryData);
+          //console.log(childCategoryMap);
         } else {
           categoryMap.set(category.id, categoryData);
         }
@@ -93,7 +103,7 @@ export async function GET() {
       };
     });
 
-    const cannedBeerId: string = "MKQBBK2KQOI7NFS4TD6WGBQC";
+    const cannedBeerId: string = "RTQX7QKR7THOLQWVJABI5DVF";
 
     processedItems.forEach((item) => {
       item.categoryIds.forEach((categoryId) => {
@@ -114,10 +124,11 @@ export async function GET() {
     });
 
     const menuStructure: MenuStructure = {};
+
     const orderedCategories = [
-      "Draft Beer",
-      "Canned Beer",
-      "Natural Wine",
+      "Draft",
+      "Canned / Bottled",
+      "Wine",
       "Non Alcoholic",
     ];
 
@@ -135,7 +146,7 @@ export async function GET() {
 
     categoryMap.forEach((category) => {
       if (category.name) {
-        if (category.name === "Canned Beer") {
+        if (category.name === "Canned / Bottled") {
           const cannedBeerCategory: CategoryWithItems = {
             id: category.id,
             name: category.name,
@@ -160,6 +171,8 @@ export async function GET() {
         orderedMenuStructure[categoryName] = menuStructure[categoryName];
       }
     });
+
+    //console.log("Ordered menu structure: ", orderedMenuStructure);
 
     return NextResponse.json(orderedMenuStructure);
   } catch (error) {

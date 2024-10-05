@@ -203,7 +203,7 @@ export default function Menu() {
                     </h2>
                   </AccordionTrigger>
                   <AccordionContent className="border-t border-customGold pt-3">
-                    {categoryName === "Canned Beer"
+                    {categoryName === "Canned / Bottled"
                       ? renderCannedBeerCategory(
                           categoryContent as CategoryWithItems,
                         )
