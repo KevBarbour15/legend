@@ -11,6 +11,15 @@
   justify-content: space-between;
   clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
 }
+.menu-login-link {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  cursor: pointer;
+  color: var(--custom-navy);
+  font-size: 30px;
+  padding: 0;
+}
 
 .menu-close-icon {
   position: absolute;
@@ -93,15 +102,6 @@
 .menu-info-row svg {
   height: 60px;
   width: 60px;
-}
-
-.menu-login-icon {
-  position: absolute;
-  bottom: 0.75rem;
-  right: 0.75rem;
-  cursor: pointer;
-  color: var(--custom-navy);
-  font-size: 30px;
 }
 
 @media (max-width: 900px) {

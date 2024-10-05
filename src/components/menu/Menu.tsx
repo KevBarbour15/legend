@@ -2,6 +2,8 @@
 import React, { useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
+import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
+
 import Link from "next/link";
 import "./menu.css";
 
@@ -110,6 +112,9 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
   return (
     <div className="menu-container" ref={container}>
       <div className="menu-overlay">
+        <LoginLink postLoginRedirectURL="/dashboard">
+          <LoginRounded className="menu-login-link" />
+        </LoginLink>
         <CloseRounded className="menu-close-icon" onClick={toggleMenu} />
         <div className="menu-logo-container">
           <Image
@@ -165,13 +170,6 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
             </IconButton>
           </div>
         </div>
-        <Link
-          className="menu-login-icon"
-          href="/dashboard"
-          onClick={toggleMenu}
-        >
-          <LoginRounded />
-        </Link>
       </div>
     </div>
   );
