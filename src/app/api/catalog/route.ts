@@ -12,7 +12,7 @@ export async function GET() {
       environment: Environment.Production,
     });
 
-    const locationsResponse = await client.locationsApi.listLocations();
+    //const locationsResponse = await client.locationsApi.listLocations();
 
     const response = await client.catalogApi.listCatalog(
       undefined,
@@ -61,11 +61,10 @@ export async function GET() {
         };
 
         if (excludedCategories.includes(category.categoryData?.name || "")) {
-          //console.log("Excluded category: ", category.categoryData?.name);
           childCategoryMap.set(category.id, categoryData);
-          //console.log(childCategoryMap);
         } else {
           categoryMap.set(category.id, categoryData);
+          console.log(category);
         }
       }
     });
