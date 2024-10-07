@@ -66,7 +66,7 @@ const ReadMessagesList: React.FC = () => {
     fetchMessages();
   }, []);
 
-  const unreadMessages = messages
+  const readMessages = messages
     .filter((message) => message.read)
     .sort(
       (a, b) => new Date(b.sentAt).getTime() - new Date(a.sentAt).getTime(),
@@ -82,13 +82,13 @@ const ReadMessagesList: React.FC = () => {
         <h2 className="text-center font-bigola text-4xl text-black">
           Loading messages...
         </h2>
-      ) : unreadMessages.length === 0 ? (
+      ) : readMessages.length === 0 ? (
         <h2 className="text-center font-bigola text-4xl text-black">
           No messages found.
         </h2>
       ) : (
         <>
-          {unreadMessages.map((message, index) => (
+          {readMessages.map((message, index) => (
             <div key={index}>
               <MessageCard
                 message={message}

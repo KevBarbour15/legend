@@ -33,22 +33,6 @@ const UpcomingEventsList: React.FC = () => {
   const [editingEvent, setEditingEvent] = useState<Event | null>(null);
   const [deletingEvent, setDeletingEvent] = useState<Event | null>(null);
 
-  const openEditModal = (event: Event) => {
-    setEditingEvent(event);
-  };
-
-  const closeEditModal = () => {
-    setEditingEvent(null);
-  };
-
-  const openDeleteModal = (event: Event) => {
-    setDeletingEvent(event);
-  };
-
-  const closeDeleteModal = () => {
-    setDeletingEvent(null);
-  };
-
   const fetchEvents = async () => {
     try {
       const response = await fetch("/api/events");
@@ -69,6 +53,23 @@ const UpcomingEventsList: React.FC = () => {
     fetchEvents();
   }, []);
 
+  const openEditModal = (event: Event) => {
+    setEditingEvent(event);
+  };
+
+  const closeEditModal = () => {
+    setEditingEvent(null);
+  };
+
+  const openDeleteModal = (event: Event) => {
+    setDeletingEvent(event);
+  };
+
+  const closeDeleteModal = () => {
+    setDeletingEvent(null);
+    fetchEvents();
+  };
+
   const sortedEvents = events
     .filter((event) => new Date(event.date).getTime() >= new Date().getTime())
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
@@ -80,14 +81,14 @@ const UpcomingEventsList: React.FC = () => {
     >
       {loading ? (
         <h2
-          id="event-subheading"
+          //id="event-subheading"
           className="text-center font-bigola text-4xl text-black"
         >
           Loading events...
         </h2>
-      ) : events.length === 0 ? (
+      ) : sortedEvents.length === 0 ? (
         <h2
-          id="event-subheading"
+          //id="event-subheading"
           className="text-center font-bigola text-4xl text-black"
         >
           No events found.

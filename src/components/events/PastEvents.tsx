@@ -86,7 +86,7 @@ const PastEventsList: React.FC = () => {
         >
           Loading events...
         </h2>
-      ) : events.length === 0 ? (
+      ) : sortedEvents.length === 0 ? (
         <h2
           id="event-subheading"
           className="text-center font-bigola text-4xl text-black"
