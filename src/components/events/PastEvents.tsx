@@ -70,9 +70,22 @@ const PastEventsList: React.FC = () => {
     fetchEvents();
   };
 
-  const sortedEvents = events
-    .filter((event) => new Date(event.date).getTime() < new Date().getTime())
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  const filterEvents = () => {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+    return events
+      .filter((event) => {
+        const [year, month, day] = event.date.split("-").map(Number);
+        const eventDate = new Date(year, month - 1, day);
+        eventDate.setHours(0, 0, 0, 0);
+
+        return eventDate < today;
+      })
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  };
+
+  const sortedEvents = filterEvents();
 
   return (
     <div

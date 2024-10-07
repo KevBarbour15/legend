@@ -134,14 +134,14 @@ export default function Menu() {
   );
 
   const renderCannedBeerCategory = (category: CategoryWithItems) => (
-    <Accordion type="single" collapsible className="w-full px-3">
+    <Accordion type="single" collapsible className="w-full px-3 pt-0">
       {category.childCategories.map((childCategory, index) => (
         <AccordionItem
           value={childCategory.id}
           className="border-b border-customGold"
           key={childCategory.id}
         >
-          <AccordionTrigger className="cursor-pointer text-customWhite transition-colors">
+          <AccordionTrigger className="cursor-pointer text-customCream transition-colors">
             <h3 className="font-bigola text-xl md:text-3xl">
               {childCategory.name}
             </h3>

@@ -150,7 +150,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
         <AccordionItem value={`Message ${index}`}>
           <AccordionTrigger>
             <div className="flex w-full justify-between font-bigola text-xl">
-              <div className="flex gap-1">
+              <div className="flex gap-1 capitalize">
                 <p>{message.firstName}</p>
                 <p>{message.lastName}</p>
               </div>

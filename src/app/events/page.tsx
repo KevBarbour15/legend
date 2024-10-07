@@ -128,8 +128,12 @@ export default function Events() {
     });
   };
 
-  const upcomingEvents = filterEvents("upcoming");
-  const pastEvents = filterEvents("past");
+  const upcomingEvents = filterEvents("upcoming").sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+  );
+  const pastEvents = filterEvents("past").sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  );
 
   const EmptyMessage = ({
     message,
@@ -226,7 +230,7 @@ export default function Events() {
                         pastEventRefs.current[index] = el;
                       }}
                       className={`w-full border-t border-customGold opacity-0 ${
-                        index === upcomingEvents.length - 1 ? "border-b" : ""
+                        index === pastEvents.length - 1 ? "border-b" : ""
                       }`}
                     >
                       <EventCard
