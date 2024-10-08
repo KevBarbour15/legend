@@ -126,7 +126,7 @@ const Menu: React.FC = () => {
   );
 
   const renderCannedBeerCategory = (category: CategoryWithItems) => (
-    <Accordion type="single" collapsible className="w-full px-3">
+    <Accordion type="single" collapsible className="w-full pl-3">
       {category.childCategories.map((childCategory, index) => (
         <AccordionItem
           value={childCategory.id}
