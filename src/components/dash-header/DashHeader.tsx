@@ -82,12 +82,12 @@ const DashHeader: React.FC<DashProps> = ({ setActiveTab, activeTab }) => {
           />
         </div>
         <div className="flex items-center justify-between">
-          <div className="mr-3 font-bigola text-base font-bold md:mr-6 md:text-xl">
-            <p>Logout</p>
-          </div>
           <LogoutLink postLogoutRedirectURL={postLogoutRedirectURL}>
-            <Button variant="outline" size="icon" className="text-black">
-              <LogOut className="" />
+            <Button variant="outline" className="text-black">
+              <div className="mr-3 font-bigola text-base font-bold md:mr-6 md:text-xl">
+                <p>Logout</p>
+              </div>
+              <LogOut />
             </Button>
           </LogoutLink>
         </div>

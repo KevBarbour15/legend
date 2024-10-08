@@ -4,7 +4,10 @@ import { useRouter } from "next/navigation";
 
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
+import { LogIn } from "lucide-react";
+
 import Link from "next/link";
+
 import "./menu.css";
 
 import Image from "next/image";
@@ -16,7 +19,6 @@ import {
   Instagram,
   Facebook,
   YouTube,
-  LoginRounded,
   CloseRounded,
 } from "@mui/icons-material";
 
@@ -96,6 +98,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
     }
   }, [menuStatus]);
 
+  /*
   const handleAboutScroll = async (e: React.MouseEvent) => {
     e.preventDefault();
 
@@ -108,13 +111,10 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
       }
     }, 300);
   };
-
+  */
   return (
     <div className="menu-container" ref={container}>
       <div className="menu-overlay">
-        <LoginLink postLoginRedirectURL="/dashboard">
-          <LoginRounded className="menu-login-link" />
-        </LoginLink>
         <CloseRounded className="menu-close-icon" onClick={toggleMenu} />
         <div className="menu-logo-container">
           <Image
@@ -169,6 +169,9 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
               <YouTube fontSize="inherit" />
             </IconButton>
           </div>
+          <LoginLink postLoginRedirectURL="/dashboard">
+            <LogIn className="menu-login-link" />
+          </LoginLink>
         </div>
       </div>
     </div>

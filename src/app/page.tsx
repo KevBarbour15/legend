@@ -1,18 +1,18 @@
 "use client";
 import { useRef } from "react";
+
 import ImageCarousel from "@/components/carousel/Carousel";
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileMenu from "@/components/mobile-menu/MobileMenu";
 
-import {
-  Instagram,
-  Facebook,
-  YouTube,
-  LoginRounded,
-} from "@mui/icons-material";
+import { Instagram, Facebook, YouTube } from "@mui/icons-material";
 
 import { IconButton } from "@mui/material";
-import Link from "next/link";
+
+import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
+
+import { Button } from "@/components/ui/button";
+import { Key } from "lucide-react";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -194,7 +194,14 @@ export default function Home() {
           <div id="about-section" className="opacity-0">
             <ImageCarousel />
           </div>
-          <div className="w-full text-right"></div>
+          <div className="mt-6 hidden w-full items-center justify-end md:flex">
+            <LoginLink postLoginRedirectURL="/dashboard">
+              <Button className="border border-customNavy bg-transparent font-bigola text-base font-bold text-customNavy transition-all hover:bg-customNavy hover:text-customCream">
+                <span className="mr-3">Owner</span>
+                <Key />
+              </Button>
+            </LoginLink>
+          </div>
         </div>
       </div>
     </>

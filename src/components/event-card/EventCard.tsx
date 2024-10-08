@@ -84,12 +84,12 @@ const EventCard: React.FC<EventCardProps> = ({ event, fetchEvents }) => {
               <img
                 src={event.image_url}
                 alt="event"
-                className="event-media aspect-square w-full object-cover object-center md:h-[75vh] md:w-auto"
+                className="event-media aspect-square w-full object-cover object-center md:h-[50vh] md:w-auto"
               ></img>
             ) : (
               <video
                 src={event.image_url}
-                className="event-media aspect-square w-full object-cover object-center md:h-[75vh] md:w-auto"
+                className="event-media aspect-square w-full object-cover object-center md:h-[50vh] md:w-auto"
                 loop
                 autoPlay
                 muted

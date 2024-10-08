@@ -156,7 +156,7 @@ const Menu: React.FC = () => {
         {loading ? (
           <div
             id="event-subheading"
-            className="flex h-[75vh] w-full flex-col items-center justify-center opacity-0"
+            className="flex h-[50vh] w-full flex-col items-center justify-center opacity-0"
           >
             <h2 className="mb-6 mt-3 font-bigola text-3xl text-customGold md:text-4xl">
               Loading menu...
@@ -169,7 +169,7 @@ const Menu: React.FC = () => {
         ) : menu === null ? (
           <div
             id="event-subheading"
-            className="flex h-[75vh] w-full items-center justify-center"
+            className="flex h-[50vh] w-full items-center justify-center"
           >
             <h2 className="mb-6 mt-3 font-bigola text-3xl text-customCream md:text-4xl">
               Error loading menu. Please try again.

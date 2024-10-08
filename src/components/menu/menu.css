@@ -5,16 +5,16 @@
   width: 100vw;
   height: 100dvh;
   background-color: var(--custom-cream);
-  z-index: 10;
-  display: flex;
+  z-index: 200;
+  display: none;
   flex-direction: row;
   justify-content: space-between;
   clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
 }
 .menu-login-link {
   position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
+  bottom: 0.75rem;
+  right: 0.75rem;
   cursor: pointer;
   color: var(--custom-navy);
   font-size: 30px;
@@ -104,15 +104,11 @@
   width: 60px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 767px) {
   .menu-overlay {
+    display: flex;
     flex-direction: column;
   }
-
-  .menu-logo-icon {
-    //display: none;
-  }
-
   .links-container {
     padding-top: 8em;
   }

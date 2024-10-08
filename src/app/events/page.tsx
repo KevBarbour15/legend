@@ -44,17 +44,6 @@ export default function Events() {
     }
 
     if (!loading && displayEvents) {
-      gsap.fromTo(
-        "#events-tabs",
-        {
-          opacity: 0,
-        },
-        {
-          duration: 0.35,
-          opacity: 1,
-        },
-      );
-
       if (currentRefs.current.length > 0) {
         gsap.set(currentRefs.current, { x: "75%", opacity: 0 });
         gsap.to(currentRefs.current, {
@@ -146,7 +135,7 @@ export default function Events() {
   }) => (
     <div
       ref={refProp}
-      className="flex h-[75vh] w-full flex-col items-center justify-center opacity-0"
+      className="flex h-[50vh] w-full flex-col items-center justify-center opacity-0"
     >
       <h2 className="mb-6 mt-3 font-bigola text-3xl text-customGold md:text-4xl">
         {message}
@@ -166,7 +155,7 @@ export default function Events() {
         {loading ? (
           <div
             id="event-subheading"
-            className="flex h-[75vh] w-full flex-col items-center justify-center opacity-0"
+            className="flex h-[50vh] w-full flex-col items-center justify-center opacity-0"
           >
             <h2 className="mb-6 mt-3 font-bigola text-3xl text-customGold md:text-4xl">
               Loading events...
@@ -184,10 +173,7 @@ export default function Events() {
               setActiveTab(value as "upcoming" | "past")
             }
           >
-            <TabsList
-              id="events-tabs"
-              className="my-3 grid w-full grid-cols-2 border-customGold bg-customNavy font-bigola opacity-0 md:mb-6 md:mt-0 md:w-[400px]"
-            >
+            <TabsList className="my-3 grid w-full grid-cols-2 bg-transparent font-bigola text-customGold md:mb-6 md:mt-0 md:w-[400px]">
               <TabsTrigger value="upcoming">Upcoming Events</TabsTrigger>
               <TabsTrigger value="past">Past Events</TabsTrigger>
             </TabsList>
