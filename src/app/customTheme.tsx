@@ -16,7 +16,6 @@ const customTheme = (outerTheme: Theme) =>
         styleOverrides: {
           root: {
             color: "#dfcfc0",
-            //color: "#f4f4f4",
             "--TextField-brandBorderColor": "#dfcfc0",
             "--TextField-brandBorderHoverColor": "#dfcfc0",
             "--TextField-brandBorderFocusedColor": "#bc9952",

@@ -46,10 +46,9 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="relative">
-      <div className="fixed left-0 top-0 z-[-1] h-screen w-screen bg-customWhite"></div>
-      <div className="z-10 pb-12">
-        <DashHeader setActiveTab={setActiveTab} activeTab={activeTab} />
+    <div className="fixed top-0 h-screen w-screen overflow-auto bg-customWhite">
+      <DashHeader setActiveTab={setActiveTab} activeTab={activeTab} />
+      <div className="container py-3 md:py-6">
         <CurrentComponent />
       </div>
     </div>

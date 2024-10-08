@@ -1,5 +1,8 @@
-import { formatTime } from "@/utils/time";
 import React, { useRef, useState } from "react";
+
+import { EventCardProps } from "@/types/events";
+
+import { formatTime } from "@/utils/time";
 
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
@@ -7,25 +10,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Close from "@mui/icons-material/Close";
 
-interface Event {
-  _id: string;
-  title: string;
-  date: string;
-  time: string;
-  description: string;
-  notes: string;
-  image_url: string;
-  is_photo: boolean;
-  is_public: boolean;
-}
-
-interface EventCardProps {
-  event: Event;
-  fetchEvents: () => void;
-}
-
 const EventCard: React.FC<EventCardProps> = ({ event, fetchEvents }) => {
-  const [openDelete, setOpenDelete] = useState<boolean>(false);
   const formattedDate = new Date(event.date).toLocaleDateString("en-US", {
     timeZone: "UTC",
   });
@@ -55,13 +40,13 @@ const EventCard: React.FC<EventCardProps> = ({ event, fetchEvents }) => {
             </p>
           </div>
 
-          <div className="md:flex-shrink-0">
+          <div className="my-auto md:flex-shrink-0">
             <Button
               onClick={handleImageModalOpen}
               className="w-full p-0 md:w-auto"
             >
               {event.is_photo ? (
-                <div className="aspect-square w-full md:h-[275px] md:w-[275px]">
+                <div className="aspect-square w-full md:h-[225px] md:w-[225px] lg:h-[300px] lg:w-[300px]">
                   <img
                     src={event.image_url}
                     alt="event"
@@ -93,7 +78,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, fetchEvents }) => {
               onClick={handleImageModalClose}
               className="fixed right-3 top-3 md:right-6 md:top-6"
             >
-              <Close className="text-customWhite transition-all hover:scale-125 hover:text-customCream" />
+              <Close className="text-customWhite transition-all hover:text-customCream" />
             </IconButton>
             {event.is_photo ? (
               <img

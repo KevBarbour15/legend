@@ -6,22 +6,22 @@ import gsap from "gsap";
 
 import { useGSAP } from "@gsap/react";
 import ReactHowler from "react-howler";
+
 import { IconButton, Collapse } from "@mui/material";
 
 import {
-  PlayArrowRounded,
-  PauseRounded,
-  SkipPreviousRounded,
-  SkipNextRounded,
-  ExpandMoreRounded,
-  ExpandLessRounded,
-  LibraryMusicRounded,
-  VolumeOffRounded,
-  VolumeUpRounded,
-  AudiotrackRounded,
-  PersonRounded,
-  GraphicEqRounded,
-} from "@mui/icons-material";
+  List,
+  ChevronsUp,
+  Play,
+  Pause,
+  VolumeOff,
+  Volume2,
+  AudioLines,
+  SkipForward,
+  SkipBack,
+  Music,
+  User,
+} from "lucide-react";
 
 interface Track {
   title: string;
@@ -54,14 +54,13 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
   useGSAP(() => {
     if (!containerRef.current) return;
 
-    gsap.set(containerRef.current, { y: 200, opacity: 0 });
+    gsap.set(containerRef.current, { opacity: 0 });
 
     tl.current = gsap.timeline().to(containerRef.current, {
       delay: 0.05,
-      duration: 0.5,
-      y: 0,
+      duration: 0.25,
       opacity: 1,
-      ease: "sine.inOut",
+      ease: "linear",
     });
 
     recordTl.current = gsap.timeline({ repeat: -1 }).to("#now-playing", {
@@ -70,15 +69,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       ease: "linear",
     });
 
-    gsap.set("#player", { opacity: 0 });
     gsap.set("#playlist", { opacity: 0 });
-
-    recordPlayerTl.current = gsap.timeline({}).to("#player", {
-      opacity: 1,
-      duration: 0.2,
-      delay: 0.05,
-      ease: "linear",
-    });
 
     playlistTl.current = gsap.timeline({}).to("#playlist", {
       opacity: 1,
@@ -144,110 +135,101 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
   return (
     <div
       ref={containerRef}
-      id="player-container"
       className={`fixed bottom-0 left-0 right-0 z-[150] flex h-auto w-full flex-col opacity-0 md:w-fit ${pathName === "/dashboard" ? "hidden" : ""}`}
     >
-      {/* Player Popup */}
-      <Collapse in={visible} id="player" className="opacity-0">
-        <div className="relative left-6 hidden md:block">
-          <img
-            id="now-playing"
-            className="absolute left-[105px] top-[40.75%] z-[3] w-[32px]"
-            src="./images/small-logo.png"
-          ></img>
-          <img
-            className="p-0 drop-shadow-record md:w-[200px]"
-            src="./images/player.svg"
-          ></img>
-        </div>
-      </Collapse>
-
-      {/* Playlist Popup */}
-      <Collapse
-        in={playlistVisible}
-        id="playlist"
-        className="z-10 mx-3 opacity-0 drop-shadow-record md:mx-0 md:ml-6 md:mr-0"
+      <div
+        id="player-container"
+        className="flex flex-col border border-customNavy border-t-customGold bg-customNavy drop-shadow-record md:mb-6 md:ml-6 md:mr-0 md:rounded-lg md:border-customGold"
       >
-        <div
-          className="mt-3 block rounded-md border border-customNavy bg-gradient-to-r from-customCream to-customWhite"
-          id="playlist-border"
-        >
-          {tracks.map((track, index) => (
-            <div
-              id="playlist-border"
-              key={index}
-              className={`flex h-full flex-row p-1 ${
-                index !== tracks.length - 1 ? "border-b border-customNavy" : ""
-              }`}
-            >
+        <Collapse in={playlistVisible} id="playlist" className="z-10 opacity-0">
+          <div className="block" id="playlist-border">
+            {tracks.map((track, index) => (
               <div
-                className={`flex w-auto flex-1 flex-col px-1 font-hypatia transition-colors ${index === currentTrackIndex ? "text-customGold" : "text-customNavy"} `}
-                id="playlist-item"
+                id="playlist-border"
+                key={index}
+                className="flex h-full flex-row border-b border-customGold p-1"
               >
-                <div className="flex flex-row">
-                  <PersonRounded className="pr-2" />
-                  <p className="text-lg">{track.artist}</p>
+                <div
+                  className={`flex w-auto flex-1 flex-col px-1 font-bigola transition-colors ${index === currentTrackIndex ? "text-customGold" : "text-customCream"} `}
+                  id="playlist-item"
+                >
+                  <div className="flex flex-row">
+                    <User className="pr-2 drop-shadow-text" />
+                    <p className="text-lg drop-shadow-text">{track.artist}</p>
+                  </div>
+                  <div className="flex flex-row">
+                    <Music className="pr-2 drop-shadow-text" />
+                    <p className="text-lg drop-shadow-text">{track.title}</p>
+                  </div>
                 </div>
-                <div className="flex flex-row">
-                  <AudiotrackRounded className="pr-2" />
-                  <p className="text-lg">{track.title}</p>
+                <div className="flex items-center justify-center">
+                  {index == currentTrackIndex ? (
+                    <AudioLines className="mr-1 text-customGold drop-shadow-text transition-all" />
+                  ) : (
+                    <IconButton className="md:hover:text-custom m-0 flex p-1 text-customCream drop-shadow-text transition-colors hover:text-customGold">
+                      <Play onClick={() => handleTrackChange(index)} />
+                    </IconButton>
+                  )}
                 </div>
               </div>
-              <div className="flex items-center justify-center">
-                {index == currentTrackIndex ? (
-                  <GraphicEqRounded className="mr-2 text-customGold transition-all" />
-                ) : (
-                  <IconButton className="m-0 flex text-customNavy transition-colors md:hover:text-customGold">
-                    <PlayArrowRounded
-                      onClick={() => handleTrackChange(index)}
-                    />
-                  </IconButton>
-                )}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </Collapse>
+        <Collapse in={visible} className="hidden p-0 md:block">
+          <div className="relative border-b border-customGold p-2">
+            <img
+              id="now-playing"
+              className="absolute left-[105.5px] top-[42%] z-[3] w-[28px]"
+              src="./images/small-logo.png"
+            ></img>
+            <img
+              className="drop-shadow-record md:w-[185px]"
+              src="./images/player.svg"
+            ></img>
+          </div>
+        </Collapse>
+        <div className="flex justify-between p-1">
+          <IconButton
+            className="hidden p-1 text-customCream drop-shadow-text transition-colors md:block md:hover:text-customGold"
+            onClick={togglePlayer}
+          >
+            <ChevronsUp
+              className={`transition-all ${visible ? "rotate-180 transform" : ""}`}
+            />
+          </IconButton>
+          <IconButton className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold">
+            {mute ? (
+              <VolumeOff onClick={handleMute} />
+            ) : (
+              <Volume2 onClick={handleMute} />
+            )}
+          </IconButton>
+          <IconButton
+            onClick={handlePreviousTrack}
+            className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
+          >
+            <SkipBack />
+          </IconButton>
+
+          <IconButton
+            onClick={handlePlayPauseRounded}
+            className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
+          >
+            {playing ? <Pause /> : <Play />}
+          </IconButton>
+          <IconButton
+            onClick={handleNextTrack}
+            className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
+          >
+            <SkipForward />
+          </IconButton>
+          <IconButton
+            onClick={togglePlaylist}
+            className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
+          >
+            <List />
+          </IconButton>
         </div>
-      </Collapse>
-
-      <div className="mx-3 my-3 flex justify-between rounded-md border border-customNavy bg-gradient-to-r from-customCream to-customWhite p-1 drop-shadow-record md:mb-6 md:ml-6 md:mr-0">
-        <IconButton
-          className="hidden text-customNavy transition-colors md:block md:px-1 md:py-0 md:hover:text-customGold"
-          onClick={togglePlayer}
-        >
-          {visible ? <ExpandMoreRounded /> : <ExpandLessRounded />}
-        </IconButton>
-        <IconButton className="text-customNavy transition-colors md:px-1 md:py-0 md:hover:text-customGold">
-          {mute ? (
-            <VolumeOffRounded onClick={handleMute} />
-          ) : (
-            <VolumeUpRounded onClick={handleMute} />
-          )}
-        </IconButton>
-        <IconButton
-          onClick={handlePreviousTrack}
-          className="text-customNavy transition-colors md:px-1 md:py-0 md:hover:text-customGold"
-        >
-          <SkipPreviousRounded />
-        </IconButton>
-
-        <IconButton
-          onClick={handlePlayPauseRounded}
-          className="text-customNavy transition-colors md:px-1 md:py-0 md:hover:text-customGold"
-        >
-          {playing ? <PauseRounded /> : <PlayArrowRounded />}
-        </IconButton>
-        <IconButton
-          onClick={handleNextTrack}
-          className="text-customNavy transition-colors md:px-1 md:py-0 md:hover:text-customGold"
-        >
-          <SkipNextRounded />
-        </IconButton>
-        <IconButton
-          onClick={togglePlaylist}
-          className="text-customNavy transition-colors md:px-1 md:py-0 md:hover:text-customGold"
-        >
-          <LibraryMusicRounded />
-        </IconButton>
       </div>
       <ReactHowler
         src={tracks[currentTrackIndex].url}

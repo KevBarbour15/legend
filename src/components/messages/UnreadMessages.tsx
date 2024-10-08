@@ -1,25 +1,14 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 
+import { Message } from "@/types/messages";
+
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import MessageCard from "@/components/message-card/MessageCard";
 
-interface Message {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  preferredDate: string;
-  sentAt: Date;
-  howDidYouHear: string;
-  budget: string;
-  message: string;
-  read: boolean;
-  contacted: boolean;
-  _id: string;
-}
+import { Accordion } from "@/components/ui/accordion";
 
 const UnreadMessagesList: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -35,13 +24,10 @@ const UnreadMessagesList: React.FC = () => {
       opacity: 0,
     });
 
-    tL.current = gsap
-      .timeline({ defaults: { ease: "power3.inOut" } })
-      .to("#messages-container", {
-        delay: 0.35,
-        duration: 0.5,
-        opacity: 1,
-      });
+    tL.current = gsap.timeline().to("#messages-container", {
+      duration: 0.25,
+      opacity: 1,
+    });
   }, []);
 
   const fetchMessages = async () => {
@@ -76,7 +62,7 @@ const UnreadMessagesList: React.FC = () => {
     <div
       ref={containerRef}
       id="messages-container"
-      className="z-10 flex w-screen flex-col p-3 text-black md:p-6"
+      className="block text-black"
     >
       {loading ? (
         <h2 className="text-center font-bigola text-4xl text-black">
@@ -88,15 +74,21 @@ const UnreadMessagesList: React.FC = () => {
         </h2>
       ) : (
         <>
-          {unreadMessages.map((message, index) => (
-            <div key={index}>
-              <MessageCard
-                message={message}
-                index={index}
-                fetchMessages={fetchMessages}
-              />
-            </div>
-          ))}
+          <Accordion
+            type="single"
+            collapsible
+            className="w-full border-b border-black"
+          >
+            {unreadMessages.map((message, index) => (
+              <div key={index}>
+                <MessageCard
+                  message={message}
+                  index={index}
+                  fetchMessages={fetchMessages}
+                />
+              </div>
+            ))}
+          </Accordion>
         </>
       )}
     </div>

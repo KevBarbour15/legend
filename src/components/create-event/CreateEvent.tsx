@@ -1,9 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+
+
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import {
@@ -86,11 +90,8 @@ const CreateEvent: React.FC = () => {
   };
 
   return (
-    <div
-      ref={containerRef}
-      className="z-10 flex w-screen flex-col p-3 text-black md:p-6"
-    >
-      <Card className="p-3">
+    <div ref={containerRef} className="text-black">
+      <Card className="p-3 md:p-6">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
             <FormField
@@ -141,13 +142,19 @@ const CreateEvent: React.FC = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Image or Video URL</FormLabel>
+                  <FormDescription>
+                    For video, convert to video format to MP4 before uploading
+                    to Imgur.
+                  </FormDescription>
+                  <FormDescription>
+                    To add image/video, right click the media in Imgur and copy
+                    address.
+                  </FormDescription>
+
                   <FormControl>
-                    <Input
-                      placeholder="Add image address from Imgur"
-                      {...field}
-                    />
+                    <Input placeholder=" Paste media URL here." {...field} />
                   </FormControl>
-                  <FormDescription>For video, convert to MP4</FormDescription>
+
                   <FormMessage />
                 </FormItem>
               )}
@@ -160,11 +167,12 @@ const CreateEvent: React.FC = () => {
                   <div className="space-y-0.5">
                     <FormLabel className="text-base">Media Type</FormLabel>
                     <FormDescription>
-                      Choose between photo or video
+                      Specify whether photo or video for proper display
+                      formatting.
                     </FormDescription>
                   </div>
                   <FormControl>
-                    <div className="ml-3 flex items-center gap-3">
+                    <div className="flex items-center gap-3">
                       <p>Video</p>
                       <Switch
                         checked={field.value}
@@ -185,7 +193,7 @@ const CreateEvent: React.FC = () => {
                   <FormControl>
                     <Textarea
                       placeholder="Add any additional information/ideas here."
-                      className="resize-none"
+                      className="h-32 resize-none"
                       {...field}
                     />
                   </FormControl>

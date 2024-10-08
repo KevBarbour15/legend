@@ -1,9 +1,11 @@
 "use client";
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Event } from "@/types.ts";
+import { Event } from "@/types/events";
+
 import EventCard from "@/components/event-card/EventCard";
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileHeading from "@/components/mobile-heading/MobileHeading";
+
 import gsap from "gsap";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -158,7 +160,7 @@ export default function Events() {
       <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-20 md:pb-6 md:pl-[325px] md:pr-6 md:pt-6"
+        className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-20 md:pb-6 md:pl-[250px] md:pr-6 md:pt-6"
       >
         <MobileHeading section={"Events"} />
         {loading ? (
@@ -184,7 +186,7 @@ export default function Events() {
           >
             <TabsList
               id="events-tabs"
-              className="my-3 grid w-full grid-cols-2 font-bigola opacity-0 md:mb-6 md:mt-0 md:w-[400px]"
+              className="my-3 grid w-full grid-cols-2 border-customGold bg-customNavy font-bigola opacity-0 md:mb-6 md:mt-0 md:w-[400px]"
             >
               <TabsTrigger value="upcoming">Upcoming Events</TabsTrigger>
               <TabsTrigger value="past">Past Events</TabsTrigger>

@@ -80,13 +80,14 @@ export default function Home() {
             opacity: 0,
           },
           {
+            delay: 0.15,
             duration: 1,
             opacity: 1,
             y: 0,
             scrollTrigger: {
               trigger: section,
-              start: "top bottom-=25",
-              end: "top 75%",
+              start: "top bottom-=50",
+              end: "top 65%",
               scrub: 1,
             },
           },
@@ -108,7 +109,7 @@ export default function Home() {
         <div className="top-bg hidden h-dvh w-screen md:block"></div>
         <div
           id="about-content"
-          className="relative block h-auto p-3 md:ml-[275px] md:py-6 md:pl-0 md:pr-6"
+          className="relative block h-auto p-3 md:py-6 md:pl-[250px] md:pr-6"
         >
           <div
             id="about-section"

@@ -126,7 +126,7 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
                 id="description"
                 value={editedEvent.description}
                 onChange={handleEditChange("description")}
-                className="col-span-3"
+                className="col-span-3 h-32 resize-none"
               />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
@@ -137,7 +137,7 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
                 id="notes"
                 value={editedEvent.notes}
                 onChange={handleEditChange("notes")}
-                className="col-span-3"
+                className="col-span-3 h-32 resize-none"
               />
             </div>
           </div>

@@ -7,6 +7,7 @@ import { useGSAP } from "@gsap/react";
 
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileHeading from "@/components/mobile-heading/MobileHeading";
+import Divider from "@/components/divider/Divider";
 
 import { Progress } from "@/components/ui/progress";
 
@@ -21,7 +22,7 @@ function generateProgress(min: number, max: number) {
   return Math.random() * (max - min) + min;
 }
 
-export default function Menu() {
+const Menu: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
@@ -93,28 +94,19 @@ export default function Menu() {
     fetchMenu();
   }, []);
 
-  const Divider = () => (
-    <div className="flex w-full items-center px-3 md:mx-6">
-      <div
-        className="w-full border-t border-dashed border-customWhite"
-        aria-hidden="true"
-      ></div>
-    </div>
-  );
-
   const renderMenuItem = (item: ProcessedItem) => (
     <div
       key={item.id}
-      className="block text-nowrap px-3 pb-3 font-hypatia text-base text-customWhite md:text-lg"
+      className="block text-nowrap pb-3 font-hypatia text-base text-customWhite md:text-lg"
     >
       <div className="flex w-full justify-between font-bigola text-lg text-customGold md:text-2xl">
         <p className="text-left">{item.name}</p>
-        <Divider />
+        <Divider borderColor={"border-customWhite"} />
         <p className="text-right">{item.price}</p>
       </div>
       <div className="mt-1 flex w-full justify-between">
         <p className="font-hypatiaSemibold">{item.brand}</p>
-        <Divider />
+        <Divider borderColor={"border-customWhite"} />
         <p>{item.description}</p>
       </div>
       {item.city && item.abv && (
@@ -123,7 +115,7 @@ export default function Menu() {
             {item.city}
             <span>, CA</span>
           </p>
-          <Divider />
+          <Divider borderColor={"border-customWhite"} />
           <p>
             <span>ABV </span>
             {item.abv}
@@ -134,19 +126,17 @@ export default function Menu() {
   );
 
   const renderCannedBeerCategory = (category: CategoryWithItems) => (
-    <Accordion type="single" collapsible className="w-full px-3 pt-0">
+    <Accordion type="single" collapsible className="w-full px-3">
       {category.childCategories.map((childCategory, index) => (
         <AccordionItem
           value={childCategory.id}
-          className="border-b border-customGold"
+          className={`${index !== category.childCategories.length - 1 ? "border-b border-customGold" : ""}`}
           key={childCategory.id}
         >
-          <AccordionTrigger className="cursor-pointer text-customCream transition-colors">
-            <h3 className="font-bigola text-xl md:text-3xl">
-              {childCategory.name}
-            </h3>
+          <AccordionTrigger className="cursor-pointer text-xl text-customCream md:text-3xl">
+            <h3 className="font-bigola">{childCategory.name}</h3>
           </AccordionTrigger>
-          <AccordionContent className="border-t border-customGold pt-3">
+          <AccordionContent className="border-customGold">
             {childCategory.items.map(renderMenuItem)}
           </AccordionContent>
         </AccordionItem>
@@ -157,10 +147,10 @@ export default function Menu() {
   return (
     <>
       <SideMenu />
-      <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
+      <div className="absolute left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-20 md:pb-6 md:pl-[325px] md:pr-6 md:pt-6"
+        className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-20 md:pb-6 md:pl-[250px] md:pr-6 md:pt-6"
       >
         <MobileHeading section={"Menu"} />
         {loading ? (
@@ -197,12 +187,12 @@ export default function Menu() {
                   className={`${index === 0 ? "md:border-t" : ""} border-b border-customGold opacity-0`}
                   key={categoryName}
                 >
-                  <AccordionTrigger className="cursor-pointer text-customCream transition-colors">
-                    <h2 className="font-bigola text-2xl md:text-4xl">
-                      {categoryName}
-                    </h2>
+                  <AccordionTrigger className="text-customCream">
+                    <h2 className="font-bigola">{categoryName}</h2>
                   </AccordionTrigger>
-                  <AccordionContent className="border-t border-customGold pt-3">
+                  <AccordionContent
+                    className={`border-customGold ${categoryName === "Canned / Bottled" ? "pt-0" : ""}`}
+                  >
                     {categoryName === "Canned / Bottled"
                       ? renderCannedBeerCategory(
                           categoryContent as CategoryWithItems,
@@ -219,4 +209,6 @@ export default function Menu() {
       </div>
     </>
   );
-}
+};
+
+export default Menu;
