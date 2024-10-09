@@ -139,7 +139,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
     >
       <div
         id="player-container"
-        className="flex flex-col rounded-t-md border border-customGold bg-opacity-85 drop-shadow-record backdrop-blur-lg md:mb-6 md:ml-6 md:mr-0 md:rounded-lg md:bg-customNavy md:bg-opacity-100"
+        className="flex flex-col rounded-t-md border border-customGold drop-shadow-record backdrop-blur-3xl md:mb-6 md:ml-6 md:mr-0 md:rounded-lg md:bg-customNavy md:bg-opacity-100"
       >
         <Collapse in={playlistVisible} id="playlist" className="z-10 opacity-0">
           <div className="block" id="playlist-border">

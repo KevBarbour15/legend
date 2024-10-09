@@ -46,10 +46,12 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="fixed top-0 h-screen w-screen overflow-auto bg-customWhite">
+    <div className="flex h-screen flex-col bg-customWhite">
       <DashHeader setActiveTab={setActiveTab} activeTab={activeTab} />
-      <div className="container py-3 md:py-6">
-        <CurrentComponent />
+      <div className="flex-1 overflow-y-auto">
+        <div className="container py-3 md:py-6">
+          <CurrentComponent />
+        </div>
       </div>
     </div>
   );
