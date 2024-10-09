@@ -193,7 +193,12 @@ export async function GET() {
       }
     });
     console.log("Updated menu structure at " + new Date().toISOString());
-    return NextResponse.json(orderedMenuStructure);
+    return NextResponse.json(orderedMenuStructure, {
+      headers: {
+        "Cache-Control": "no-store, max-age=0",
+        Pragma: "no-cache",
+      },
+    });
   } catch (error) {
     console.error("Error fetching catalog:", error);
     return NextResponse.json(
