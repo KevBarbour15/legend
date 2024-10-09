@@ -12,8 +12,6 @@ export async function GET() {
       environment: Environment.Production,
     });
 
-    //const locationsResponse = await client.locationsApi.listLocations();
-
     const response = await client.catalogApi.listCatalog(
       undefined,
       "ITEM,CATEGORY,ITEM_VARIATION",
@@ -23,6 +21,32 @@ export async function GET() {
       response.result.objects?.filter(
         (obj): obj is CatalogObject => obj.type === "ITEM",
       ) || [];
+
+    const variationIds = items.flatMap(
+      (item) =>
+        item.itemData?.variations
+          ?.map((variation) => variation.id)
+          .filter((id): id is string => id !== undefined) || [],
+    );
+
+    let inventoryCounts = [];
+
+    const inventoryResponse =
+      await client.inventoryApi.batchRetrieveInventoryCounts({
+        catalogObjectIds: variationIds,
+        locationIds: ["L3Y8KW155RG0B"],
+      });
+    inventoryCounts = inventoryResponse.result?.counts || [];
+
+    // Create a map of variation IDs to inventory counts
+    const inventoryMap = new Map(
+      inventoryCounts.map((count) => [
+        count.catalogObjectId,
+        parseInt(count.quantity || "0"),
+      ]),
+    );
+
+    console.log(inventoryMap);
 
     const categories =
       response.result.objects?.filter(
@@ -34,9 +58,9 @@ export async function GET() {
       ) || [];
 
     categories.forEach((category) => {
-      console.log("Category: ", category.categoryData?.name);
+      //console.log("Category: ", category.categoryData?.name);
       if (category.categoryData?.name === "Canned / Bottled") {
-        console.log("Category ID: ", category.id);
+        //console.log("Category ID: ", category.id);
       }
     });
 
@@ -64,7 +88,6 @@ export async function GET() {
           childCategoryMap.set(category.id, categoryData);
         } else {
           categoryMap.set(category.id, categoryData);
-          console.log(category);
         }
       }
     });
@@ -86,6 +109,10 @@ export async function GET() {
         });
       }
 
+      const inventoryCount = variation?.id
+        ? inventoryMap.get(variation.id)
+        : undefined;
+
       return {
         id: item.id,
         name: getItemName(item.itemData?.name),
@@ -99,23 +126,26 @@ export async function GET() {
         categoryIds:
           item.itemData?.categories?.map((cat) => cat.id ?? "") || [],
         locationIds: item.presentAtLocationIds || [],
+        inStock: inventoryCount !== undefined ? inventoryCount > 0 : false,
       };
     });
 
-    const cannedBeerId: string = "RTQX7QKR7THOLQWVJABI5DVF";
+    const cannedBottledBeerId: string = "RTQX7QKR7THOLQWVJABI5DVF";
 
     processedItems.forEach((item) => {
       item.categoryIds.forEach((categoryId) => {
         if (
           childCategoryMap.has(categoryId) &&
           item.locationIds.includes("L3Y8KW155RG0B") &&
-          item.categoryIds.includes(cannedBeerId)
+          item.categoryIds.includes(cannedBottledBeerId) &&
+          item.inStock
         ) {
           childCategoryMap.get(categoryId)?.items.push(item);
         } else if (
           categoryMap.has(categoryId) &&
           item.locationIds.includes("L3Y8KW155RG0B") &&
-          !item.categoryIds.includes(cannedBeerId)
+          !item.categoryIds.includes(cannedBottledBeerId) &&
+          item.inStock
         ) {
           categoryMap.get(categoryId)?.items.push(item);
         }
@@ -170,8 +200,6 @@ export async function GET() {
         orderedMenuStructure[categoryName] = menuStructure[categoryName];
       }
     });
-
-    //console.log("Ordered menu structure: ", orderedMenuStructure);
 
     return NextResponse.json(orderedMenuStructure);
   } catch (error) {

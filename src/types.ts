@@ -40,6 +40,7 @@ export interface ProcessedItem {
   abv?: string | null;
   categoryIds: string[];
   locationIds: string[];
+  inStock: boolean;
 }
 
 
