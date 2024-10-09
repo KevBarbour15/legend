@@ -153,21 +153,29 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                   className={`flex w-auto flex-1 flex-col px-1 font-bigola transition-colors ${index === currentTrackIndex ? "text-customGold" : "text-customCream"} `}
                   id="playlist-item"
                 >
-                  <div className="flex flex-row">
+                  <div className="flex flex-row" id="player-toggle">
                     <User className="pr-2 drop-shadow-text" />
-                    <p className="text-lg drop-shadow-text">{track.artist}</p>
+                    <p className="text-lg drop-shadow-text" id="player-toggle">
+                      {track.artist}
+                    </p>
                   </div>
-                  <div className="flex flex-row">
+                  <div className="flex flex-row" id="player-toggle">
                     <Music className="pr-2 drop-shadow-text" />
                     <p className="text-lg drop-shadow-text">{track.title}</p>
                   </div>
                 </div>
                 <div className="flex items-center justify-center">
                   {index == currentTrackIndex ? (
-                    <AudioLines className="mr-1 text-customGold drop-shadow-text transition-all" />
+                    <AudioLines
+                      id="player-toggle"
+                      className="mr-1 text-customGold drop-shadow-text"
+                    />
                   ) : (
                     <IconButton className="md:hover:text-custom m-0 flex p-1 text-customCream drop-shadow-text transition-colors hover:text-customGold">
-                      <Play onClick={() => handleTrackChange(index)} />
+                      <Play
+                        id="player-toggle"
+                        onClick={() => handleTrackChange(index)}
+                      />
                     </IconButton>
                   )}
                 </div>
@@ -176,7 +184,10 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
           </div>
         </Collapse>
         <Collapse in={visible} className="hidden p-0 md:block">
-          <div className="relative border-b border-customGold p-2">
+          <div
+            className="relative border-b border-customGold p-2"
+            id="playlist-border"
+          >
             <img
               id="now-playing"
               className="absolute left-[105.5px] top-[42%] z-[3] w-[28px]"
@@ -194,40 +205,45 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             onClick={togglePlayer}
           >
             <ChevronsUp
-              className={`transition-all ${visible ? "rotate-180 transform" : ""}`}
+              id="player-toggle"
+              className={` ${visible ? "rotate-180 transform" : ""}`}
             />
           </IconButton>
           <IconButton className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold">
             {mute ? (
-              <VolumeOff onClick={handleMute} />
+              <VolumeOff id="player-toggle" onClick={handleMute} />
             ) : (
-              <Volume2 onClick={handleMute} />
+              <Volume2 id="player-toggle" onClick={handleMute} />
             )}
           </IconButton>
           <IconButton
             onClick={handlePreviousTrack}
             className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
           >
-            <SkipBack />
+            <SkipBack id="player-toggle" />
           </IconButton>
 
           <IconButton
             onClick={handlePlayPauseRounded}
             className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
           >
-            {playing ? <Pause /> : <Play />}
+            {playing ? (
+              <Pause id="player-toggle" />
+            ) : (
+              <Play id="player-toggle" />
+            )}
           </IconButton>
           <IconButton
             onClick={handleNextTrack}
             className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
           >
-            <SkipForward />
+            <SkipForward id="player-toggle" />
           </IconButton>
           <IconButton
             onClick={togglePlaylist}
             className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
           >
-            <List />
+            <List id="player-toggle" />
           </IconButton>
         </div>
       </div>

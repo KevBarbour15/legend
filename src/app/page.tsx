@@ -59,6 +59,28 @@ export default function Home() {
         0,
       )
       .to(
+        "#player-container",
+        {
+          //backgroundColor: "#dfcfc0",
+          //borderColor: "#244154",
+        },
+        0,
+      )
+      .to(
+        "#playlist-border",
+        {
+          //borderColor: "#244154",
+        },
+        0,
+      )
+      .to(
+        "#player-toggle",
+        {
+          //color: "#244154",
+        },
+        0,
+      )
+      .to(
         "#hidden-bg",
         {
           opacity: 1,
