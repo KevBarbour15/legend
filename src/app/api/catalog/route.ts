@@ -192,7 +192,7 @@ export async function GET() {
         orderedMenuStructure[categoryName] = menuStructure[categoryName];
       }
     });
-
+    console.log("Updated menu structure at " + new Date().toISOString());
     return NextResponse.json(orderedMenuStructure);
   } catch (error) {
     console.error("Error fetching catalog:", error);

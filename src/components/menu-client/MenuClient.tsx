@@ -24,11 +24,31 @@ import {
 const MenuClient: React.FC<MenuProps> = ({
   initialData,
   error: initialError,
+  initialTimestamp,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [menu, setMenu] = useState<MenuStructure | null>(initialData);
   const categoryRefs = useRef<(HTMLDivElement | null)[]>([]);
   const categoriesTL = useRef<gsap.core.Timeline | null>(null);
+  const [timestamp, setTimestamp] = useState(initialTimestamp);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/catalog");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setMenu(data);
+        setTimestamp(new Date().toISOString());
+      } catch (e) {}
+    };
+
+    const intervalId = setInterval(fetchData, 10000);
+    console.log(`[${timestamp}] Menu data fetched successfully`);
+    return () => clearInterval(intervalId);
+  }, []);
 
   useGSAP(() => {
     if (!containerRef.current) return;

@@ -22,6 +22,7 @@ export interface MenuItem {
 export interface MenuProps {
   initialData: MenuStructure | null;
   error?: string;
+  initialTimestamp?: string;
 }
 
 export interface CategoryWithItems {
