@@ -19,6 +19,11 @@ export interface MenuItem {
   city: string | undefined;
 }
 
+export interface MenuProps {
+  initialData: MenuStructure | null;
+  error?: string;
+}
+
 export interface CategoryWithItems {
   id: string;
   name?: string | null;
@@ -42,5 +47,3 @@ export interface ProcessedItem {
   locationIds: string[];
   inStock: boolean;
 }
-
-

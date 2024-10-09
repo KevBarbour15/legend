@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import Menu from "@/components/menu/Menu";
+import Menu from "@/components/dropdown-menu/DropdownMenu";
 
 import { MenuRounded } from "@mui/icons-material";
 

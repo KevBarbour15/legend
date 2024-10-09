@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef } from "react";
-import NavMenu from "@/components/menu/Menu";
+import NavMenu from "@/components/dropdown-menu/DropdownMenu";
 import Image from "next/image";
 import { Menu } from "@mui/icons-material";
 

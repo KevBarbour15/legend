@@ -46,7 +46,7 @@ export async function GET() {
       ]),
     );
 
-    console.log(inventoryMap);
+    //console.log(inventoryMap);
 
     const categories =
       response.result.objects?.filter(
@@ -57,15 +57,7 @@ export async function GET() {
           obj.categoryData?.name !== "Bar Menu",
       ) || [];
 
-    categories.forEach((category) => {
-      //console.log("Category: ", category.categoryData?.name);
-      if (category.categoryData?.name === "Canned / Bottled") {
-        //console.log("Category ID: ", category.id);
-      }
-    });
-
     const categoryMap = new Map<string, CategoryWithItems>();
-
     const childCategoryMap = new Map<string, CategoryWithItems>();
 
     const excludedCategories: string[] = [
