@@ -8,6 +8,8 @@ import { headers } from "next/headers";
 // Remove the revalidate export
 //export const revalidate = 60;
 
+export const dynamic = "force-dynamic";
+
 async function getMenuData(): Promise<{
   menuData: MenuStructure | null;
   error?: string;
