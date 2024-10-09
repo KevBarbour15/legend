@@ -1,5 +1,6 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
+
 import {
   MenuStructure,
   CategoryWithItems,
@@ -45,7 +46,7 @@ const MenuClient: React.FC<MenuProps> = ({
       } catch (e) {}
     };
 
-    const intervalId = setInterval(fetchData, 10000);
+    const intervalId = setInterval(fetchData, 1000000);
     console.log(`[${timestamp}] Menu data fetched successfully`);
     return () => clearInterval(intervalId);
   }, []);
