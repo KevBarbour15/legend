@@ -8,7 +8,7 @@ export async function getMenu(): Promise<MenuStructure> {
     : `http://localhost:${process.env.PORT || 3000}`;
 
   const apiUrl = `${baseUrl}/api/catalog`;
-
+  console.log("apiUrl:", apiUrl);
   try {
     const response = await fetch(apiUrl, {
       cache: "no-store",
