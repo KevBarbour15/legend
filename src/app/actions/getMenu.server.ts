@@ -1,13 +1,13 @@
 "use server";
-
 import { MenuStructure } from "@/types/menu.ts";
+import { headers } from "next/headers";
 
 export async function getMenu(): Promise<MenuStructure> {
-  const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : `http://localhost:${process.env.PORT || 3000}`;
+  const headersList = headers();
+  const host = headersList.get("host") || "localhost:3000";
+  const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
 
-  const apiUrl = `${baseUrl}/api/catalog`;
+  const apiUrl = `${protocol}://${host}/api/catalog`;
   console.log("apiUrl:", apiUrl);
   try {
     const response = await fetch(apiUrl, {
