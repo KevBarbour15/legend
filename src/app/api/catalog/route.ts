@@ -23,8 +23,16 @@ export async function GET() {
       response.result.objects?.filter(
         (obj): obj is CatalogObject => obj.type === "ITEM",
       ) || [];
-
-    //console.log(items[1]);
+    let idx = 0;
+    for (const item of items) {
+      if (item.itemData?.name == "Kevin's Pale Ale - Denver") {
+        //console.log(item.itemData);
+      }
+      if (idx === 10) {
+        //console.log(item.itemData);
+      }
+      idx++;
+    }
 
     const variationIds = items.flatMap(
       (item) =>
@@ -91,7 +99,9 @@ export async function GET() {
     const processedItems: ProcessedItem[] = items.map((item): ProcessedItem => {
       const variation = item.itemData?.variations?.[0];
       const customAttributes = variation?.customAttributeValues;
-
+      if (item.itemData?.name == "Kevin's Pale Ale - Denver") {
+        console.log(item.itemData);
+      }
       let abv: string | undefined;
       let city: string | undefined;
 
@@ -144,6 +154,8 @@ export async function GET() {
           item.inStock
         ) {
           categoryMap.get(categoryId)?.items.push(item);
+        } else if (item.name == "Kevin's Pale Ale") {
+          childCategoryMap.get(categoryId)?.items.push(item);
         }
       });
     });

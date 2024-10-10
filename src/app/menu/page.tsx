@@ -3,9 +3,9 @@ import MenuClient from "@/components/menu-client/MenuClient";
 import { headers } from "next/headers";
 
 // Force dynamic rendering
-export const dynamic = "force-dynamic";
+//export const dynamic = "force-dynamic";
 
-export const revalidate = 60;
+//export const revalidate = 60;
 
 async function getMenuData(): Promise<{
   menuData: MenuStructure | null;
@@ -19,7 +19,7 @@ async function getMenuData(): Promise<{
     const headersList = headers();
     const host = headersList.get("host") || "localhost:3000";
     const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
-    console.log(`[${timestamp}] Protocol: ${protocol}, Host: ${host}`);
+  
 
     const apiUrl = `${protocol}://${host}/api/catalog`;
     console.log(`[${timestamp}] Fetching from: ${apiUrl}`);
