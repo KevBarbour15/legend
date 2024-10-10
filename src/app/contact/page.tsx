@@ -43,13 +43,13 @@ export default function Contact() {
     gsap.set("#form #input-section", {
       x: "50%",
       opacity: 0,
-      rotateX: 90,
+      rotateX: 45,
     });
 
     tl.current = gsap.timeline({}).to("#form #input-section", {
       delay: 0.15,
       duration: 0.4,
-      stagger: 0.15,
+      stagger: 0.125,
       x: 0,
       opacity: 1,
       rotateX: 0,

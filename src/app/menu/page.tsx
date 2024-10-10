@@ -78,7 +78,7 @@ const Menu: React.FC = ({}) => {
     gsap.set(categoryRefs.current, {
       x: "50%",
       opacity: 0,
-      rotateX: 90,
+      rotateX: 45,
     });
 
     if (!loading && displayMenu) {
@@ -86,7 +86,7 @@ const Menu: React.FC = ({}) => {
         categoriesTL.current = gsap.timeline({}).to(categoryRefs.current, {
           delay: 0.15,
           duration: 0.4,
-          stagger: 0.15,
+          stagger: 0.125,
           x: 0,
           rotateX: 0,
           opacity: 1,
@@ -137,7 +137,7 @@ const Menu: React.FC = ({}) => {
           className={`${index !== category.childCategories.length - 1 ? "border-b border-customGold" : ""}`}
           key={childCategory.id}
         >
-          <AccordionTrigger className="cursor-pointer text-xl text-customCream md:text-3xl">
+          <AccordionTrigger className="cursor-pointer text-lg text-customCream md:text-3xl">
             <h3 className="font-bigola">{childCategory.name}</h3>
           </AccordionTrigger>
           <AccordionContent className="border-customGold">

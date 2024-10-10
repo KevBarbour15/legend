@@ -46,11 +46,11 @@ export default function Events() {
 
     if (!loading && displayEvents) {
       if (currentRefs.current.length > 0) {
-        gsap.set(currentRefs.current, { x: "50%", opacity: 0, rotateX: 90 });
+        gsap.set(currentRefs.current, { x: "50%", opacity: 0, rotateX: 45 });
         gsap.to(currentRefs.current, {
           delay: 0.15,
           duration: 0.4,
-          stagger: 0.15,
+          stagger: 0.125,
           x: 0,
           opacity: 1,
           rotateX: 0,
