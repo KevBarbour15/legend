@@ -149,54 +149,55 @@ const Menu: React.FC = ({}) => {
   return (
     <>
       <SideMenu />
-      <div className="absolute left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
-      <div
-        ref={containerRef}
-        className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-20 md:pb-6 md:pl-[250px] md:pr-6 md:pt-6"
-      >
-        <MobileHeading section={"Menu"} />
-        {loading ? (
-          <Loading progress={progress} message={"Loading menu..."} />
-        ) : menu === null ? (
-          <div
-            id="event-subheading"
-            className="flex h-[50vh] w-full items-center justify-center"
-          >
-            <h2 className="mb-6 mt-3 text-center font-bigola text-3xl text-customCream md:text-4xl">
-              Error loading menu. Please try again.
-            </h2>
-          </div>
-        ) : (
-          <Accordion type="single" collapsible className="w-full">
-            {Object.entries(menu).map(
-              ([categoryName, categoryContent], index) => (
-                <AccordionItem
-                  ref={(el) => {
-                    categoryRefs.current[index] = el;
-                  }}
-                  value={categoryName}
-                  className={`${index === 0 ? "md:border-t" : ""} border-b border-customGold opacity-0`}
-                  key={categoryName}
-                >
-                  <AccordionTrigger className="text-customCream">
-                    <h2 className="font-bigola">{categoryName}</h2>
-                  </AccordionTrigger>
-                  <AccordionContent
-                    className={`border-customGold ${categoryName === "Canned / Bottled" ? "pt-0" : ""}`}
+      <div className="fixed left-0 top-0 z-[-1] h-full min-h-screen w-screen overflow-y-auto backdrop-blur-sm">
+        <div
+          ref={containerRef}
+          className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-20 md:pb-6 md:pl-[250px] md:pr-6 md:pt-6"
+        >
+          <MobileHeading section={"Menu"} />
+          {loading ? (
+            <Loading progress={progress} message={"Loading menu..."} />
+          ) : menu === null ? (
+            <div
+              id="event-subheading"
+              className="flex h-[50vh] w-full items-center justify-center"
+            >
+              <h2 className="mb-6 mt-3 text-center font-bigola text-3xl text-customCream md:text-4xl">
+                Error loading menu. Please try again.
+              </h2>
+            </div>
+          ) : (
+            <Accordion type="single" collapsible className="w-full">
+              {Object.entries(menu).map(
+                ([categoryName, categoryContent], index) => (
+                  <AccordionItem
+                    ref={(el) => {
+                      categoryRefs.current[index] = el;
+                    }}
+                    value={categoryName}
+                    className={`${index === 0 ? "md:border-t" : ""} border-b border-customGold opacity-0`}
+                    key={categoryName}
                   >
-                    {categoryName === "Canned / Bottled"
-                      ? renderCannedBeerCategory(
-                          categoryContent as CategoryWithItems,
-                        )
-                      : (categoryContent as ProcessedItem[]).map(
-                          renderMenuItem,
-                        )}
-                  </AccordionContent>
-                </AccordionItem>
-              ),
-            )}
-          </Accordion>
-        )}
+                    <AccordionTrigger className="text-customCream">
+                      <h2 className="font-bigola">{categoryName}</h2>
+                    </AccordionTrigger>
+                    <AccordionContent
+                      className={`border-customGold ${categoryName === "Canned / Bottled" ? "pt-0" : ""}`}
+                    >
+                      {categoryName === "Canned / Bottled"
+                        ? renderCannedBeerCategory(
+                            categoryContent as CategoryWithItems,
+                          )
+                        : (categoryContent as ProcessedItem[]).map(
+                            renderMenuItem,
+                          )}
+                    </AccordionContent>
+                  </AccordionItem>
+                ),
+              )}
+            </Accordion>
+          )}
+        </div>
       </div>
     </>
   );

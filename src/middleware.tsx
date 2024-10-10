@@ -8,7 +8,6 @@ export default function middleware(req: NextRequest) {
     { path: "/api/message", methods: ["GET", "DELETE", "PUT"] },
   ];
 
-  // Check if the request is for a protected route
   for (const route of protectedRoutes) {
     if (
       req.nextUrl.pathname.startsWith(route.path) &&
@@ -18,10 +17,8 @@ export default function middleware(req: NextRequest) {
     }
   }
 
-  // CORS handling for all routes, including public ones
   const response = NextResponse.next();
 
-  // In production, replace "*" with your actual frontend origin
   const allowedOrigin =
     process.env.NODE_ENV === "production"
       ? "https://your-frontend-domain.com"

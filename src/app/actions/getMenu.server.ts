@@ -6,9 +6,8 @@ export async function getMenu(): Promise<MenuStructure> {
   const headersList = headers();
   const host = headersList.get("host") || "localhost:3000";
   const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
-
   const apiUrl = `${protocol}://${host}/api/catalog`;
-  console.log("apiUrl:", apiUrl);
+
   try {
     const response = await fetch(apiUrl, {
       cache: "no-store",
