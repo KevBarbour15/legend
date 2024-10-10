@@ -5,7 +5,7 @@ export default function middleware(req: NextRequest) {
   const protectedRoutes = [
     { path: "/dashboard", methods: ["GET"] },
     { path: "/api/events", methods: ["POST", "PUT", "DELETE"] },
-    { path: "api/message", methods: ["GET", "DELETE", "PUT"] },
+    { path: "/api/message", methods: ["GET", "DELETE", "PUT"] },
   ];
 
   for (const route of protectedRoutes) {
@@ -19,7 +19,12 @@ export default function middleware(req: NextRequest) {
 
   const response = NextResponse.next();
 
-  response.headers.set("Access-Control-Allow-Origin", "*");
+  const allowedOrigin =
+    process.env.NODE_ENV === "production"
+      ? "https://your-frontend-domain.com"
+      : "*";
+
+  response.headers.set("Access-Control-Allow-Origin", allowedOrigin);
   response.headers.set(
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, OPTIONS",
@@ -30,7 +35,7 @@ export default function middleware(req: NextRequest) {
   );
 
   if (req.method === "OPTIONS") {
-    response.headers.set("Access-Control-Max-Age", "86400"); // Cache preflight response for 24 hours
+    response.headers.set("Access-Control-Max-Age", "86400");
     return new NextResponse(null, { status: 204, headers: response.headers });
   }
 
@@ -38,5 +43,11 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard", "/api/message", "/api/events"],
+  matcher: [
+    "/dashboard",
+    "/api/message",
+    "/api/events",
+    "/api/catalog",
+    "/((?!_next/static|favicon.ico).*)",
+  ],
 };

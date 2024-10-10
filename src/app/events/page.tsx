@@ -5,9 +5,10 @@ import { Event } from "@/types/events";
 import EventCard from "@/components/event-card/EventCard";
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileHeading from "@/components/mobile-heading/MobileHeading";
+import Loading from "@/components/loading/Loading";
 
 import gsap from "gsap";
-import { Progress } from "@/components/ui/progress";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 function generateProgress(min: number, max: number) {
@@ -146,100 +147,90 @@ export default function Events() {
   return (
     <>
       <SideMenu />
-      <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
-      <div
-        ref={containerRef}
-        className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-20 md:pb-6 md:pl-[250px] md:pr-6 md:pt-6"
-      >
-        <MobileHeading section={"Events"} />
-        {loading ? (
-          <div
-            id="event-subheading"
-            className="flex h-[50vh] w-full flex-col items-center justify-center opacity-0"
-          >
-            <h2 className="mb-6 mt-3 font-bigola text-3xl text-customGold md:text-4xl">
-              Loading events...
-            </h2>
-            <Progress
-              value={progress}
-              className="w-[75vw] max-w-[350px] text-customCream"
-            />
-          </div>
-        ) : (
-          <Tabs
-            defaultValue="upcoming"
-            className="flex w-full flex-col items-center"
-            onValueChange={(value) =>
-              setActiveTab(value as "upcoming" | "past")
-            }
-          >
-            <TabsList className="my-3 grid w-full grid-cols-2 bg-transparent font-bigola text-customGold md:mb-6 md:mt-0 md:w-[400px]">
-              <TabsTrigger value="upcoming">Upcoming Events</TabsTrigger>
-              <TabsTrigger value="past">Past Events</TabsTrigger>
-            </TabsList>
+      <div className="fixed left-0 top-0 z-[-1] h-full min-h-screen w-screen overflow-y-auto backdrop-blur-sm">
+        <div
+          ref={containerRef}
+          className="z-10 flex w-screen flex-col items-center justify-center p-3 pb-20 md:pb-6 md:pl-[250px] md:pr-6 md:pt-6"
+        >
+          <MobileHeading section={"Events"} />
+          {loading ? (
+            <Loading progress={progress} message={"Loading events..."} />
+          ) : (
+            <Tabs
+              defaultValue="upcoming"
+              className="flex w-full flex-col items-center"
+              onValueChange={(value) =>
+                setActiveTab(value as "upcoming" | "past")
+              }
+            >
+              <TabsList className="my-3 grid w-full grid-cols-2 bg-transparent font-bigola text-customGold md:mb-6 md:mt-0 md:w-[400px]">
+                <TabsTrigger value="upcoming">Upcoming Events</TabsTrigger>
+                <TabsTrigger value="past">Past Events</TabsTrigger>
+              </TabsList>
 
-            <TabsContent value="upcoming" className="w-full">
-              {upcomingEvents.length > 0 ? (
-                <div>
-                  {upcomingEvents.map((event, index) => (
-                    <div
-                      key={event._id}
-                      ref={(el) => {
-                        upcomingEventRefs.current[index] = el;
-                      }}
-                      className={`w-full border-t border-customGold opacity-0 ${
-                        index === upcomingEvents.length - 1 ? "border-b" : ""
-                      }`}
-                    >
-                      <EventCard
-                        fetchEvents={fetchEvents}
-                        key={index}
-                        event={event}
-                      />
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="flex w-full flex-col items-center justify-center text-center">
-                  <EmptyMessage
-                    message="Stay tuned for upcoming events!"
-                    refProp={upcomingEmptyMessageRef}
-                  />
-                </div>
-              )}
-            </TabsContent>
-            <TabsContent value="past" className="w-full">
-              {pastEvents.length > 0 ? (
-                <div>
-                  {pastEvents.map((event, index) => (
-                    <div
-                      key={event._id}
-                      ref={(el) => {
-                        pastEventRefs.current[index] = el;
-                      }}
-                      className={`w-full border-t border-customGold opacity-0 ${
-                        index === pastEvents.length - 1 ? "border-b" : ""
-                      }`}
-                    >
-                      <EventCard
-                        fetchEvents={fetchEvents}
-                        key={index}
-                        event={event}
-                      />
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="flex w-full flex-col items-center justify-center text-center">
-                  <EmptyMessage
-                    message="No past events to display."
-                    refProp={pastEmptyMessageRef}
-                  />
-                </div>
-              )}
-            </TabsContent>
-          </Tabs>
-        )}
+              <TabsContent value="upcoming" className="w-full">
+                {upcomingEvents.length > 0 ? (
+                  <div>
+                    {upcomingEvents.map((event, index) => (
+                      <div
+                        key={event._id}
+                        ref={(el) => {
+                          upcomingEventRefs.current[index] = el;
+                        }}
+                        className={`w-full border-t border-customGold opacity-0 ${
+                          index === upcomingEvents.length - 1 ? "border-b" : ""
+                        }`}
+                      >
+                        <EventCard
+                          fetchEvents={fetchEvents}
+                          key={index}
+                          event={event}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="flex w-full flex-col items-center justify-center text-center">
+                    <EmptyMessage
+                      message="Stay tuned for upcoming events!"
+                      refProp={upcomingEmptyMessageRef}
+                    />
+                  </div>
+                )}
+              </TabsContent>
+              <TabsContent value="past" className="w-full">
+                {pastEvents.length > 0 ? (
+                  <div>
+                    {pastEvents.map((event, index) => (
+                      <div
+                        key={event._id}
+                        ref={(el) => {
+                          pastEventRefs.current[index] = el;
+                        }}
+                        className={`w-full border-t border-customGold opacity-0 ${
+                          index === pastEvents.length - 1 ? "border-b" : ""
+                        }`}
+                      >
+                        <EventCard
+                          fetchEvents={fetchEvents}
+                          key={index}
+                          event={event}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="flex w-full flex-col items-center justify-center text-center">
+                    <EmptyMessage
+                      message="No past events to display."
+                      refProp={pastEmptyMessageRef}
+                    />
+                  </div>
+                )}
+              </TabsContent>
+            </Tabs>
+          )}
+        </div>
       </div>
     </>
   );

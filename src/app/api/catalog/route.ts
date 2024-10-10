@@ -1,9 +1,14 @@
 import { Client, Environment, CatalogObject } from "square";
 import { NextResponse } from "next/server";
-
-import { MenuStructure, CategoryWithItems, ProcessedItem } from "@/types.ts";
-
+import {
+  MenuStructure,
+  CategoryWithItems,
+  ProcessedItem,
+} from "@/types/menu.ts";
 import { getItemBrand, getItemName } from "@/utils/getItemInfo";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function GET() {
   try {
@@ -38,15 +43,12 @@ export async function GET() {
       });
     inventoryCounts = inventoryResponse.result?.counts || [];
 
-    // Create a map of variation IDs to inventory counts
     const inventoryMap = new Map(
       inventoryCounts.map((count) => [
         count.catalogObjectId,
         parseInt(count.quantity || "0"),
       ]),
     );
-
-    //console.log(inventoryMap);
 
     const categories =
       response.result.objects?.filter(
@@ -87,7 +89,6 @@ export async function GET() {
     const processedItems: ProcessedItem[] = items.map((item): ProcessedItem => {
       const variation = item.itemData?.variations?.[0];
       const customAttributes = variation?.customAttributeValues;
-
       let abv: string | undefined;
       let city: string | undefined;
 
@@ -140,6 +141,8 @@ export async function GET() {
           item.inStock
         ) {
           categoryMap.get(categoryId)?.items.push(item);
+        } else if (item.name == "Kevin's Pale Ale" && item.inStock) {
+          childCategoryMap.get(categoryId)?.items.push(item);
         }
       });
     });
@@ -192,20 +195,22 @@ export async function GET() {
         orderedMenuStructure[categoryName] = menuStructure[categoryName];
       }
     });
-    console.log("Updated menu structure at " + new Date().toISOString());
+
     return NextResponse.json(orderedMenuStructure, {
       headers: {
         "Cache-Control": "no-store, max-age=0",
         Pragma: "no-cache",
+        "X-Response-Time": new Date().toISOString(),
       },
     });
   } catch (error) {
     console.error("Error fetching catalog:", error);
+    console.error(
+      "Error details:",
+      JSON.stringify(error, Object.getOwnPropertyNames(error)),
+    );
     return NextResponse.json(
-      {
-        error: "Error fetching catalog",
-        details: error instanceof Error ? error.message : "Unknown error",
-      },
+      { error: "Internal Server Error", details: error },
       { status: 500 },
     );
   }
