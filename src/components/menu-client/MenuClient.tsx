@@ -33,6 +33,7 @@ const MenuClient: React.FC<MenuProps> = ({
   const categoriesTL = useRef<gsap.core.Timeline | null>(null);
   const [timestamp, setTimestamp] = useState(initialTimestamp);
 
+  /*
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -50,6 +51,7 @@ const MenuClient: React.FC<MenuProps> = ({
     console.log(`[${timestamp}] Menu data fetched successfully`);
     return () => clearInterval(intervalId);
   }, []);
+*/
 
   useGSAP(() => {
     if (!containerRef.current) return;

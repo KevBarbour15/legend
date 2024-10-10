@@ -6,7 +6,9 @@ import { MenuStructure, CategoryWithItems, ProcessedItem } from "@/types.ts";
 import { getItemBrand, getItemName } from "@/utils/getItemInfo";
 
 export async function GET() {
+  console.log("API route called at", new Date().toISOString());
   try {
+    console.log("Fetching data from Square API");
     const client = new Client({
       accessToken: process.env.SQUARE_ACCESS_TOKEN,
       environment: Environment.Production,
@@ -22,7 +24,7 @@ export async function GET() {
         (obj): obj is CatalogObject => obj.type === "ITEM",
       ) || [];
 
-    console.log(items[1]);
+    //console.log(items[1]);
 
     const variationIds = items.flatMap(
       (item) =>
@@ -204,10 +206,7 @@ export async function GET() {
   } catch (error) {
     console.error("Error fetching catalog:", error);
     return NextResponse.json(
-      {
-        error: "Error fetching catalog",
-        details: error instanceof Error ? error.message : "Unknown error",
-      },
+      { error: "Internal Server Error" },
       { status: 500 },
     );
   }
