@@ -22,6 +22,8 @@ export async function GET() {
         (obj): obj is CatalogObject => obj.type === "ITEM",
       ) || [];
 
+    console.log(items[1]);
+
     const variationIds = items.flatMap(
       (item) =>
         item.itemData?.variations

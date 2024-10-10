@@ -5,7 +5,7 @@ import { headers } from "next/headers";
 // Force dynamic rendering
 export const dynamic = "force-dynamic";
 
-export const revalidate = 10;
+export const revalidate = 30;
 
 async function getMenuData(): Promise<{
   menuData: MenuStructure | null;
