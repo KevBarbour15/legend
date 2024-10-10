@@ -46,13 +46,14 @@ export default function Events() {
 
     if (!loading && displayEvents) {
       if (currentRefs.current.length > 0) {
-        gsap.set(currentRefs.current, { x: "75%", opacity: 0 });
+        gsap.set(currentRefs.current, { x: "50%", opacity: 0, rotateX: 90 });
         gsap.to(currentRefs.current, {
           delay: 0.15,
-          duration: 0.35,
-          stagger: 0.075,
+          duration: 0.4,
+          stagger: 0.15,
           x: 0,
           opacity: 1,
+          rotateX: 0,
         });
       } else if (currentEmptyRef.current) {
         gsap.set(currentEmptyRef.current, { opacity: 0, scale: 0.95 });

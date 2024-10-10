@@ -41,16 +41,18 @@ export default function Contact() {
     if (!containerRef.current) return;
 
     gsap.set("#form #input-section", {
-      x: "75%",
+      x: "50%",
       opacity: 0,
+      rotateX: 90,
     });
 
     tl.current = gsap.timeline({}).to("#form #input-section", {
       delay: 0.15,
-      duration: 0.35,
-      stagger: 0.075,
+      duration: 0.4,
+      stagger: 0.15,
       x: 0,
       opacity: 1,
+      rotateX: 0,
     });
   }, []);
 
