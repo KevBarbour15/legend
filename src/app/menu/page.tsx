@@ -3,12 +3,9 @@ import MenuClient from "@/components/menu-client/MenuClient";
 import { headers } from "next/headers";
 
 // Force dynamic rendering
-//export const dynamic = "force-dynamic";
-
-// Remove the revalidate export
-//export const revalidate = 60;
-
 export const dynamic = "force-dynamic";
+
+export const revalidate = 10;
 
 async function getMenuData(): Promise<{
   menuData: MenuStructure | null;
