@@ -1,4 +1,7 @@
 import React from "react";
+
+import Link from "next/link";
+
 import { Menu } from "lucide-react";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
@@ -18,6 +21,7 @@ import {
   CalendarPlus,
   LogOut,
   MailOpen,
+  Home,
 } from "lucide-react";
 
 interface DashProps {
@@ -68,6 +72,11 @@ const DashHeader: React.FC<DashProps> = ({ setActiveTab, activeTab }) => {
               >
                 <MailOpen className="mr-3 md:mr-6" /> Read Messages
               </DropdownMenuItem>
+              <LogoutLink postLogoutRedirectURL={postLogoutRedirectURL}>
+                <DropdownMenuItem>
+                  <LogOut className="mr-3 md:mr-6" /> Logout
+                </DropdownMenuItem>
+              </LogoutLink>
             </DropdownMenuContent>
           </DropdownMenu>
           <div className="ml-3 font-bigola text-base font-bold md:ml-6 md:text-xl">
@@ -81,16 +90,11 @@ const DashHeader: React.FC<DashProps> = ({ setActiveTab, activeTab }) => {
             alt="Small Logo"
           />
         </div>
-        <div className="flex items-center justify-between">
-          <LogoutLink postLogoutRedirectURL={postLogoutRedirectURL}>
-            <Button variant="outline" className="text-black">
-              <div className="mr-3 font-bigola text-base font-bold md:mr-6 md:text-xl">
-                <p>Logout</p>
-              </div>
-              <LogOut />
-            </Button>
-          </LogoutLink>
-        </div>
+        <Link href="/">
+          <Button variant="outline" size="icon" className="text-black">
+            <Home />
+          </Button>
+        </Link>
       </div>
     </header>
   );

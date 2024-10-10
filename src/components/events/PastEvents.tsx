@@ -44,7 +44,7 @@ const PastEventsList: React.FC = () => {
 
         return eventDate < today;
       })
-      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   };
 
   const sortedEvents = filterEvents();
