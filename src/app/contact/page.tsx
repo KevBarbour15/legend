@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef } from "react";
 
-import { ContactForm } from "@/types";
+import { ContactForm } from "@/types/contact";
 
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileHeading from "@/components/mobile-heading/MobileHeading";

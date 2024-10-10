@@ -1,15 +1,17 @@
 import { Client, Environment, CatalogObject } from "square";
 import { NextResponse } from "next/server";
-import { MenuStructure, CategoryWithItems, ProcessedItem } from "@/types.ts";
+import {
+  MenuStructure,
+  CategoryWithItems,
+  ProcessedItem,
+} from "@/types/menu.ts";
 import { getItemBrand, getItemName } from "@/utils/getItemInfo";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export async function GET() {
-  console.log("API route called at", new Date().toISOString());
   try {
-    console.log("Fetching data from Square API");
     const client = new Client({
       accessToken: process.env.SQUARE_ACCESS_TOKEN,
       environment: Environment.Production,
@@ -41,15 +43,12 @@ export async function GET() {
       });
     inventoryCounts = inventoryResponse.result?.counts || [];
 
-    // Create a map of variation IDs to inventory counts
     const inventoryMap = new Map(
       inventoryCounts.map((count) => [
         count.catalogObjectId,
         parseInt(count.quantity || "0"),
       ]),
     );
-
-    //console.log(inventoryMap);
 
     const categories =
       response.result.objects?.filter(

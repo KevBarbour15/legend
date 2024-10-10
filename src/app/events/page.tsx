@@ -5,9 +5,10 @@ import { Event } from "@/types/events";
 import EventCard from "@/components/event-card/EventCard";
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileHeading from "@/components/mobile-heading/MobileHeading";
+import Loading from "@/components/loading/Loading";
 
 import gsap from "gsap";
-import { Progress } from "@/components/ui/progress";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 function generateProgress(min: number, max: number) {
@@ -153,18 +154,7 @@ export default function Events() {
       >
         <MobileHeading section={"Events"} />
         {loading ? (
-          <div
-            id="event-subheading"
-            className="flex h-[50vh] w-full flex-col items-center justify-center opacity-0"
-          >
-            <h2 className="mb-6 mt-3 font-bigola text-3xl text-customGold md:text-4xl">
-              Loading events...
-            </h2>
-            <Progress
-              value={progress}
-              className="w-[75vw] max-w-[350px] text-customCream"
-            />
-          </div>
+          <Loading progress={progress} message={"Loading events..."} />
         ) : (
           <Tabs
             defaultValue="upcoming"
