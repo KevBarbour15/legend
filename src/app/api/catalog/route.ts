@@ -1,9 +1,10 @@
 import { Client, Environment, CatalogObject } from "square";
 import { NextResponse } from "next/server";
-
 import { MenuStructure, CategoryWithItems, ProcessedItem } from "@/types.ts";
-
 import { getItemBrand, getItemName } from "@/utils/getItemInfo";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function GET() {
   console.log("API route called at", new Date().toISOString());
@@ -23,16 +24,6 @@ export async function GET() {
       response.result.objects?.filter(
         (obj): obj is CatalogObject => obj.type === "ITEM",
       ) || [];
-    let idx = 0;
-    for (const item of items) {
-      if (item.itemData?.name == "Kevin's Pale Ale - Denver") {
-        //console.log(item.itemData);
-      }
-      if (idx === 10) {
-        //console.log(item.itemData);
-      }
-      idx++;
-    }
 
     const variationIds = items.flatMap(
       (item) =>
@@ -210,12 +201,17 @@ export async function GET() {
       headers: {
         "Cache-Control": "no-store, max-age=0",
         Pragma: "no-cache",
+        "X-Response-Time": new Date().toISOString(),
       },
     });
   } catch (error) {
     console.error("Error fetching catalog:", error);
+    console.error(
+      "Error details:",
+      JSON.stringify(error, Object.getOwnPropertyNames(error)),
+    );
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: "Internal Server Error", details: error },
       { status: 500 },
     );
   }

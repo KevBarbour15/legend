@@ -3,9 +3,10 @@ import MenuClient from "@/components/menu-client/MenuClient";
 import { headers } from "next/headers";
 
 // Force dynamic rendering
-//export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 
-//export const revalidate = 60;
+// Revalidate every 60 seconds
+export const revalidate = 60;
 
 async function getMenuData(): Promise<{
   menuData: MenuStructure | null;
@@ -25,7 +26,12 @@ async function getMenuData(): Promise<{
 
     const response = await fetch(apiUrl, {
       cache: "no-store",
-      headers: { "x-timestamp": timestamp },
+      headers: {
+        "x-timestamp": timestamp,
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        Pragma: "no-cache",
+        Expires: "0",
+      },
     });
 
     if (!response.ok) {
@@ -34,11 +40,13 @@ async function getMenuData(): Promise<{
 
     const menuData = await response.json();
     console.log(`[${timestamp}] Menu data fetched successfully`);
+    console.log(JSON.stringify(menuData, null, 2)); // Log full menu data
+
     const cannedBottled = menuData["Canned / Bottled"];
-    const childCategories = cannedBottled.childCategories;
+    const childCategories = cannedBottled?.childCategories || [];
     for (const childCategory of childCategories) {
       if (childCategory.name === "Lagers, Pilsners, Kolsch") {
-        console.log(childCategory);
+        console.log(JSON.stringify(childCategory, null, 2));
       }
     }
 
@@ -60,6 +68,7 @@ export default async function MenuPage() {
   return (
     <>
       <MenuClient initialData={menuData} error={error} />
+      <div style={{ display: "none" }}>Last updated: {timestamp}</div>
     </>
   );
 }
