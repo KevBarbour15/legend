@@ -99,9 +99,6 @@ export async function GET() {
     const processedItems: ProcessedItem[] = items.map((item): ProcessedItem => {
       const variation = item.itemData?.variations?.[0];
       const customAttributes = variation?.customAttributeValues;
-      if (item.itemData?.name == "Kevin's Pale Ale - Denver") {
-        console.log(item.itemData);
-      }
       let abv: string | undefined;
       let city: string | undefined;
 
@@ -154,7 +151,7 @@ export async function GET() {
           item.inStock
         ) {
           categoryMap.get(categoryId)?.items.push(item);
-        } else if (item.name == "Kevin's Pale Ale") {
+        } else if (item.name == "Kevin's Pale Ale" && item.inStock) {
           childCategoryMap.get(categoryId)?.items.push(item);
         }
       });
@@ -208,7 +205,7 @@ export async function GET() {
         orderedMenuStructure[categoryName] = menuStructure[categoryName];
       }
     });
-    console.log("Updated menu structure at " + new Date().toISOString());
+
     return NextResponse.json(orderedMenuStructure, {
       headers: {
         "Cache-Control": "no-store, max-age=0",

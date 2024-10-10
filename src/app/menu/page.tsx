@@ -19,7 +19,6 @@ async function getMenuData(): Promise<{
     const headersList = headers();
     const host = headersList.get("host") || "localhost:3000";
     const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
-  
 
     const apiUrl = `${protocol}://${host}/api/catalog`;
     console.log(`[${timestamp}] Fetching from: ${apiUrl}`);
@@ -35,7 +34,14 @@ async function getMenuData(): Promise<{
 
     const menuData = await response.json();
     console.log(`[${timestamp}] Menu data fetched successfully`);
-    console.log(menuData);
+    const cannedBottled = menuData["Canned / Bottled"];
+    const childCategories = cannedBottled.childCategories;
+    for (const childCategory of childCategories) {
+      if (childCategory.name === "Lagers, Pilsners, Kolsch") {
+        console.log(childCategory);
+      }
+    }
+
     return { menuData, timestamp, error: undefined };
   } catch (error) {
     console.error(`[${timestamp}] Failed to fetch menu data:`, error);
