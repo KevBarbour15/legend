@@ -35,6 +35,7 @@ async function getMenuData(): Promise<{
 
     const menuData = await response.json();
     console.log(`[${timestamp}] Menu data fetched successfully`);
+    console.log(menuData);
     return { menuData, timestamp, error: undefined };
   } catch (error) {
     console.error(`[${timestamp}] Failed to fetch menu data:`, error);
