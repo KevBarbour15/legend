@@ -19,11 +19,14 @@ export default function middleware(req: NextRequest) {
 
   const response = NextResponse.next();
 
+  /*
   const allowedOrigin =
     process.env.NODE_ENV === "production"
       ? "https://your-frontend-domain.com"
       : "*";
+*/
 
+  const allowedOrigin = "*";
   response.headers.set("Access-Control-Allow-Origin", allowedOrigin);
   response.headers.set(
     "Access-Control-Allow-Methods",
@@ -47,7 +50,7 @@ export const config = {
     "/dashboard",
     "/api/message",
     "/api/events",
-    "/api/catalog",
+
     "/((?!_next/static|favicon.ico).*)",
   ],
 };
