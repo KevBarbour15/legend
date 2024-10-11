@@ -226,9 +226,8 @@ export async function GET() {
       }
     });
 
-    const exportPath = path.join(process.cwd(), "data", "fallbackMenu.json");
     await fs.writeFile(
-      exportPath,
+      FALLBACK_MENU_PATH,
       JSON.stringify(orderedMenuStructure, null, 2),
     );
 
