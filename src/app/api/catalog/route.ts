@@ -59,6 +59,7 @@ export async function GET() {
       }
     });
 
+    /*
     //console.log(categoriesArr);
     //console.log(CURRENT_CATEGORIES);
 
@@ -78,7 +79,7 @@ export async function GET() {
         },
       });
     }
-
+*/
     const categoryMap = new Map<string, CategoryWithItems>();
     const childCategoryMap = new Map<string, CategoryWithItems>();
 
@@ -226,12 +227,12 @@ export async function GET() {
         orderedMenuStructure[categoryName] = menuStructure[categoryName];
       }
     });
-
+    /*
     await fs.writeFile(
       FALLBACK_MENU_PATH,
       JSON.stringify(orderedMenuStructure, null, 2),
     );
-
+*/
     return NextResponse.json(orderedMenuStructure, {
       headers: {
         "Cache-Control": "no-store, max-age=0",
