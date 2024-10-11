@@ -60,7 +60,7 @@ export async function GET() {
 
     console.log(categoriesArr);
     console.log(CURRENT_CATEGORIES);
-
+    /*
     if (!compareCategories(categoriesArr, CURRENT_CATEGORIES)) {
       console.error(
         "Categories have changed. Please update the menu structure.",
@@ -77,7 +77,7 @@ export async function GET() {
         },
       });
     }
-
+*/
     const categoryMap = new Map<string, CategoryWithItems>();
     const childCategoryMap = new Map<string, CategoryWithItems>();
 
