@@ -1,0 +1,1297 @@
+{
+  "Draft": [
+    {
+      "id": "XUKAMZOES74F2H6OPWN5SDTO",
+      "name": "Fog of War",
+      "brand": "At Ease",
+      "description": "Hazy IPA",
+      "price": "$9.00",
+      "abv": "6.7%",
+      "city": "Sacramento",
+      "categoryIds": [
+        "TAWB7MI5VAORKNW3H754QJER",
+        "5TI6QDZ6CX7SX2WBPNCJ4O2G"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "VF6IONHUI7OROUSDT42XDH2M",
+      "name": "Side Pull Pillows",
+      "brand": "Burning Barrel",
+      "description": "Pilsner",
+      "price": "$9.00",
+      "abv": "5.4%",
+      "city": "Rancho Cordova",
+      "categoryIds": [
+        "TAWB7MI5VAORKNW3H754QJER",
+        "5TI6QDZ6CX7SX2WBPNCJ4O2G"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "VNR6LA6NPTX5SCXSQVPWKUK5",
+      "name": "Catch of the Day",
+      "brand": "Jackrabbit",
+      "description": "Kolsch",
+      "price": "$9.00",
+      "abv": "4.9%",
+      "city": "West Sacramento",
+      "categoryIds": [
+        "TAWB7MI5VAORKNW3H754QJER",
+        "5TI6QDZ6CX7SX2WBPNCJ4O2G"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "IIBJHYDBI7ULVQ3VEVLX5XUU",
+      "name": "CaliCrawler",
+      "brand": "King Cong",
+      "description": "West Coast IPA",
+      "price": "$9.00",
+      "abv": "6.8%",
+      "city": "Sacramento",
+      "categoryIds": [
+        "TAWB7MI5VAORKNW3H754QJER"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "O5M3LLDVLAJTI4BC5S5AQ2OB",
+      "name": "Island Vibes",
+      "brand": "LogOff",
+      "description": "Sour",
+      "price": "$10.00",
+      "abv": "6.5%",
+      "city": "Rancho Cordova",
+      "categoryIds": [
+        "TAWB7MI5VAORKNW3H754QJER",
+        "5TI6QDZ6CX7SX2WBPNCJ4O2G"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "5Q2F3J37XB7NRVDQVWKFPYB7",
+      "name": "Grizzly Chadams",
+      "brand": "Porchlight",
+      "description": "West Coast IPA",
+      "price": "$9.00",
+      "abv": "6.7%",
+      "city": "Sacramento",
+      "categoryIds": [
+        "TAWB7MI5VAORKNW3H754QJER",
+        "5TI6QDZ6CX7SX2WBPNCJ4O2G"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "K43H7KEXZIJVXIN7W6VMORYU",
+      "name": "Like Riding a Bike",
+      "brand": "Urban Roots",
+      "description": "West Coast IPA",
+      "price": "$9.00",
+      "abv": "6.2%",
+      "city": "Sacramento",
+      "categoryIds": [
+        "TAWB7MI5VAORKNW3H754QJER",
+        "5TI6QDZ6CX7SX2WBPNCJ4O2G"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    }
+  ],
+  "Canned / Bottled": {
+    "id": "RTQX7QKR7THOLQWVJABI5DVF",
+    "name": "Canned / Bottled",
+    "items": [],
+    "childCategories": [
+      {
+        "id": "GI6NEJEENA6U74IVSGLQT2U5",
+        "name": "Lagers, Pilsners, Kolsch",
+        "items": [
+          {
+            "id": "LHU75DZAZI4VTYZTYVSZDZLI",
+            "name": "Rabbit Hole",
+            "brand": "Alaro",
+            "description": "French Style Saison",
+            "price": "$10.00",
+            "abv": "5.8%",
+            "city": "Sacramento",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "NMTK5JKMFFRS2QE2E5JBVEJV",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "GI6NEJEENA6U74IVSGLQT2U5"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "75Y2ASJGLJZIJFOBZSIFHTMI",
+            "name": "Rukus Red",
+            "brand": "Alaro",
+            "description": "Red Ale",
+            "price": "$10.00",
+            "abv": "6.3%",
+            "city": "Sacramento",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "NMTK5JKMFFRS2QE2E5JBVEJV",
+              "GI6NEJEENA6U74IVSGLQT2U5"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "QPOOUYGXSFHMQ4RFBS6WT47J",
+            "name": "Maltinator",
+            "brand": "Big Sexy",
+            "description": "Doppelbock",
+            "price": "$9.00",
+            "abv": "7.6%",
+            "city": "Sacramento",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "NMTK5JKMFFRS2QE2E5JBVEJV",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "GI6NEJEENA6U74IVSGLQT2U5"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "67D5UJX56756EFDIUH33DPQK",
+            "name": "Skull Skull Skull",
+            "brand": "Break Even",
+            "description": "Rice Lager",
+            "price": "$9.00",
+            "abv": "4.7%",
+            "city": "Amador City",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "NMTK5JKMFFRS2QE2E5JBVEJV",
+              "GI6NEJEENA6U74IVSGLQT2U5"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "75FTCNLNUT2QKFNWKAIQ7TEV",
+            "name": "Veedels Brau Kolsch",
+            "brand": "Crooked Lane",
+            "description": "Kolsch",
+            "price": "$8.00",
+            "abv": "5.3%",
+            "city": "Auburn",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "NMTK5JKMFFRS2QE2E5JBVEJV",
+              "GI6NEJEENA6U74IVSGLQT2U5",
+              "MKQBBK2KQOI7NFS4TD6WGBQC"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "63EBCGCAE7PJQN5HKBRXO34J",
+            "name": "K Beer",
+            "brand": "Dokkaebier",
+            "description": "Lager",
+            "price": "$7.00",
+            "abv": "4.9%",
+            "city": "Oakland",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "NMTK5JKMFFRS2QE2E5JBVEJV",
+              "GI6NEJEENA6U74IVSGLQT2U5",
+              "MKQBBK2KQOI7NFS4TD6WGBQC"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "IT7FPPKPKPUXC5LUEVXFVYRZ",
+            "name": "American Wheat",
+            "brand": "Dust Bowl",
+            "description": "Wheat",
+            "price": "$5.00",
+            "abv": "4.5%",
+            "city": "Turlock",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "NMTK5JKMFFRS2QE2E5JBVEJV",
+              "GI6NEJEENA6U74IVSGLQT2U5"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "YGQRV6NJ6DSXFTWKRQINCVOL",
+            "name": "El Campion",
+            "brand": "King Cong",
+            "description": "Mexican Lite Lager",
+            "price": "$9.00",
+            "abv": "4.8%",
+            "city": "Sacramento",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "NMTK5JKMFFRS2QE2E5JBVEJV",
+              "GI6NEJEENA6U74IVSGLQT2U5"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "RIB425QURRR6K6WGYIDXIJD7",
+            "name": "Death and Taxes",
+            "brand": "Moonlight",
+            "description": "Black Lager",
+            "price": "$9.00",
+            "abv": "5.3%",
+            "city": "Santa Rosa",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "NMTK5JKMFFRS2QE2E5JBVEJV",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "GI6NEJEENA6U74IVSGLQT2U5"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "QUN3YCTISQ2LISGWEESHE2WM",
+            "name": "Porch Lite American Lager",
+            "brand": "Porchlight",
+            "description": "Lager",
+            "price": "$4.00",
+            "abv": "4.8%",
+            "city": "Sacramento",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "NMTK5JKMFFRS2QE2E5JBVEJV",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "GI6NEJEENA6U74IVSGLQT2U5"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "D2YECAAY7VG6C3BR4ZYRYCTM",
+            "name": "Especial",
+            "brand": "Temescal",
+            "description": "Mexican Lager",
+            "price": "$8.00",
+            "abv": "5.4%",
+            "city": "Oakland",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "NMTK5JKMFFRS2QE2E5JBVEJV",
+              "GI6NEJEENA6U74IVSGLQT2U5"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "4TRBNI5RRM7FHTIQAEG326C5",
+            "name": "Floofster",
+            "brand": "Urban Roots",
+            "description": "Bavarian Hefeweizen",
+            "price": "$8.00",
+            "abv": "4.8%",
+            "city": "Sacramento",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "NMTK5JKMFFRS2QE2E5JBVEJV",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "GI6NEJEENA6U74IVSGLQT2U5"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "OLY6C27EWQXWYM4ITKSOCL7N",
+            "name": "All The Smoke",
+            "brand": "Urban Roots",
+            "description": "Smoked Helles Lager",
+            "price": "$8.00",
+            "abv": "4.8%",
+            "city": "Sacramento",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "NMTK5JKMFFRS2QE2E5JBVEJV",
+              "GI6NEJEENA6U74IVSGLQT2U5"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          }
+        ],
+        "childCategories": []
+      },
+      {
+        "id": "6DINGP6WRDKTUYFCCHLFSEBC",
+        "name": "IPAs",
+        "items": [
+          {
+            "id": "JMKG6ILHLONZ53FWV235VXYR",
+            "name": "Cold Pressed Hazy",
+            "brand": "Alvarado Street",
+            "description": "Hazy IPA",
+            "price": "$9.00",
+            "abv": "6.5%",
+            "city": "Salinas",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "OIOCNZEABVOA27LYJTIXO2FV",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "6DINGP6WRDKTUYFCCHLFSEBC"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "OKOS73SJAQZNMAHSJ4LLGPMP",
+            "name": "Gold Digger",
+            "brand": "Auburn Ale House",
+            "description": "IPA",
+            "price": "$5.00",
+            "abv": "6.3%",
+            "city": "Auburn",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "OIOCNZEABVOA27LYJTIXO2FV",
+              "6DINGP6WRDKTUYFCCHLFSEBC"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "FENPWTA7BUTZBGF5ALVO3BO3",
+            "name": "Double Tap",
+            "brand": "Berryessa",
+            "description": "DIPA",
+            "price": "$10.00",
+            "abv": "8.5%",
+            "city": "Winters",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "OIOCNZEABVOA27LYJTIXO2FV",
+              "6DINGP6WRDKTUYFCCHLFSEBC"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "QWVGS263NYO55FE7LX5WMPEP",
+            "name": "Hazy Plains",
+            "brand": "Big Sexy",
+            "description": "Hazy IPA",
+            "price": "$9.00",
+            "abv": "6.5%",
+            "city": "Sacramento",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "OIOCNZEABVOA27LYJTIXO2FV",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "6DINGP6WRDKTUYFCCHLFSEBC"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "L67VXC326WMGCUQNFUPZSLWO",
+            "name": "Send in the Clouds",
+            "brand": "Bike Dog",
+            "description": "Hazy IPA",
+            "price": "$8.00",
+            "abv": "6.4%",
+            "city": "Sacramento",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "OIOCNZEABVOA27LYJTIXO2FV",
+              "6DINGP6WRDKTUYFCCHLFSEBC",
+              "MKQBBK2KQOI7NFS4TD6WGBQC"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "GFQ7ILWBIOYDDKER75VQIEJ4",
+            "name": "Dreamseed",
+            "brand": "Break Even",
+            "description": "Pale Ale / Session IPA",
+            "price": "$9.00",
+            "abv": "5%",
+            "city": "Amador City",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "OIOCNZEABVOA27LYJTIXO2FV",
+              "6DINGP6WRDKTUYFCCHLFSEBC"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "N3PKTNBSI7PRWF5TQBDZKA6H",
+            "name": "The Head of Joaquin Murieta",
+            "brand": "Break Even",
+            "description": "Hazy IPA",
+            "price": "$9.00",
+            "abv": "7%",
+            "city": "Amador City",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "OIOCNZEABVOA27LYJTIXO2FV",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "6DINGP6WRDKTUYFCCHLFSEBC"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "AD7HHPJWYWYRHYG7GM6HGUNG",
+            "name": "Double Moonage",
+            "brand": "Cellarmaker",
+            "description": "Double Hazy IPA",
+            "price": "$11.00",
+            "abv": "8.2%",
+            "city": "Oakland",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "OIOCNZEABVOA27LYJTIXO2FV",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "6DINGP6WRDKTUYFCCHLFSEBC"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "JXOUTYH62TQ444KSMXXWX34L",
+            "name": "Discover the Unicorn",
+            "brand": "Crooked Lane",
+            "description": "IPA",
+            "price": "$10.00",
+            "abv": "7%",
+            "city": "Auburn",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "OIOCNZEABVOA27LYJTIXO2FV",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "6DINGP6WRDKTUYFCCHLFSEBC"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "DHKCLPAUEFDMCN5XVUDUZYYD",
+            "name": "Henhouse IPA",
+            "brand": "Henhouse",
+            "description": "IPA",
+            "price": "$5.00",
+            "abv": "6%",
+            "city": "Santa Rosa",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "OIOCNZEABVOA27LYJTIXO2FV",
+              "6DINGP6WRDKTUYFCCHLFSEBC"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "GHQ5BVWHEX3QCN6YPSUKDFP6",
+            "name": "Orangutang",
+            "brand": "King Cong",
+            "description": "Double IPA",
+            "price": "$10.00",
+            "abv": "8%",
+            "city": "Sacramento",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "OIOCNZEABVOA27LYJTIXO2FV",
+              "6DINGP6WRDKTUYFCCHLFSEBC"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "U3L6Z54TI443F6PTFBHEJOH2",
+            "name": "Juice Check",
+            "brand": "LogOff",
+            "description": "Double Hazy IPA",
+            "price": "$11.00",
+            "abv": "8.5%",
+            "city": "Rancho Cordova",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "OIOCNZEABVOA27LYJTIXO2FV",
+              "6DINGP6WRDKTUYFCCHLFSEBC",
+              "MKQBBK2KQOI7NFS4TD6WGBQC"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "7NSZ27GVZETZ6SNRLPC5ADVZ",
+            "name": "Mystic Cloud",
+            "brand": "Oak Park",
+            "description": "Hazy IPA",
+            "price": "$9.00",
+            "abv": "7.2%",
+            "city": "Sacramento",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "OIOCNZEABVOA27LYJTIXO2FV",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "6DINGP6WRDKTUYFCCHLFSEBC"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "UMQMVQR74NVZJ3FODW4H2FWM",
+            "name": "The Coachman",
+            "brand": "Societe",
+            "description": "Session IPA",
+            "price": "$6.00",
+            "abv": "4.9%",
+            "city": "San Diego",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "OIOCNZEABVOA27LYJTIXO2FV",
+              "6DINGP6WRDKTUYFCCHLFSEBC"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          }
+        ],
+        "childCategories": []
+      },
+      {
+        "id": "5R7DENAMOCVQ5T4AXSUIMLAG",
+        "name": "Seltzers and Ciders",
+        "items": [
+          {
+            "id": "J36GR7S7K6QP2XJBPI7V4FBZ",
+            "name": "Get Crooked",
+            "brand": "Crooked Lane",
+            "description": "Seltzer",
+            "price": "$8.00",
+            "abv": "6%",
+            "city": "Auburn",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "SBGF65IZLCR37HEUXL5EP27L",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "5R7DENAMOCVQ5T4AXSUIMLAG"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "44PA66JXTJP4HGFM466CIIOO",
+            "name": "Pineapple Punch",
+            "brand": "Dr. Hops",
+            "description": "Kombucha",
+            "price": "$7.00",
+            "abv": "6%",
+            "city": "San Leandro",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "5R7DENAMOCVQ5T4AXSUIMLAG",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "SBGF65IZLCR37HEUXL5EP27L"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "MP7UG7OG7FSSVTJYUNNNENWB",
+            "name": "Strawberry Smash",
+            "brand": "Dr. Hops",
+            "description": "Kombucha",
+            "price": "$7.00",
+            "abv": "6%",
+            "city": "San Leandro",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "5R7DENAMOCVQ5T4AXSUIMLAG",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "SBGF65IZLCR37HEUXL5EP27L"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "PBEZYPZSGYVJYJLWFYC3PEP6",
+            "name": "Boocha Colada",
+            "brand": "Gold Vibe",
+            "description": "Kombucha",
+            "price": "$6.00",
+            "abv": "6.6%",
+            "city": "Grass Valley",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "SBGF65IZLCR37HEUXL5EP27L",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "5R7DENAMOCVQ5T4AXSUIMLAG"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "KCCZ7OOJ565NNZMGFA7YB5BR",
+            "name": "LogOff Blast",
+            "brand": "LogOff",
+            "description": "Seltzer",
+            "price": "$8.00",
+            "abv": "4.5%",
+            "city": "Rancho Cordova",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "SBGF65IZLCR37HEUXL5EP27L",
+              "5R7DENAMOCVQ5T4AXSUIMLAG"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "VZC36LPDPJGHZABMH3NY4I27",
+            "name": "Heart of the City",
+            "brand": "Oak Park",
+            "description": "Seltzer",
+            "price": "$7.00",
+            "abv": "5%",
+            "city": "Sacramento",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "SBGF65IZLCR37HEUXL5EP27L",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "5R7DENAMOCVQ5T4AXSUIMLAG"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "ALHM5NVDKGAUPQ2N3FY3Y7NT",
+            "name": "Southern Aspect",
+            "brand": "Ponderosa Cider Co.",
+            "description": "Cider",
+            "price": "$10.00",
+            "abv": "7%",
+            "city": "Auburn",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "SBGF65IZLCR37HEUXL5EP27L",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "5R7DENAMOCVQ5T4AXSUIMLAG"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "B4YIGIW6SP3RF6NRKYKNUH5Y",
+            "name": "Blackberry",
+            "brand": "Solid Ground",
+            "description": "Cider",
+            "price": "$9.00",
+            "abv": "6.9%",
+            "city": "Diamond Springs",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "SBGF65IZLCR37HEUXL5EP27L",
+              "5R7DENAMOCVQ5T4AXSUIMLAG"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "HUZBFWZXYOAR6TOEQNFZTTQE",
+            "name": "Cran+Rose Hips",
+            "brand": "Solid Ground Cider",
+            "description": "Cider",
+            "price": "$9.00",
+            "abv": "6.9%",
+            "city": "Diamond Springs",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "SBGF65IZLCR37HEUXL5EP27L",
+              "5R7DENAMOCVQ5T4AXSUIMLAG"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "BXL7XHU4ONVHG545FNTE45CR",
+            "name": "Sakura",
+            "brand": "Soso Saka Soda",
+            "description": "Soso Saka Soda - Sakura",
+            "price": "$5.00",
+            "abv": "5%",
+            "categoryIds": [
+              "5R7DENAMOCVQ5T4AXSUIMLAG",
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "SBGF65IZLCR37HEUXL5EP27L"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          }
+        ],
+        "childCategories": []
+      },
+      {
+        "id": "NVRLZDDGGVUM3UL6D5NTSPJP",
+        "name": "Sours and Stouts",
+        "items": [
+          {
+            "id": "H7EKTLH33ZT5BJMXX2ILSHTZ",
+            "name": "Desert Bender",
+            "brand": "Bike Dog",
+            "description": "Sour",
+            "price": "$11.00",
+            "abv": "7.2%",
+            "city": "Sacramento",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "HMSXBHERAQQVTZJIENZA7OGV",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "NVRLZDDGGVUM3UL6D5NTSPJP"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "U3ODWHEMVHV4XDTHWN52ALH3",
+            "name": "Melted Dreams",
+            "brand": "Burning Barrel",
+            "description": "Sour",
+            "price": "$10.00",
+            "abv": "7%",
+            "city": "Rancho Cordova",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "HMSXBHERAQQVTZJIENZA7OGV",
+              "NVRLZDDGGVUM3UL6D5NTSPJP"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "6OCHBZBDOXVTYT6APYZQVSFD",
+            "name": "Train Robber Cobbler",
+            "brand": "Burning Barrel",
+            "description": "Smoothie Sour",
+            "price": "$10.00",
+            "abv": "7%",
+            "city": "Rancho Cordova",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "HMSXBHERAQQVTZJIENZA7OGV",
+              "NVRLZDDGGVUM3UL6D5NTSPJP"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "XRIL5MWFPUZOXBSBRJVHDX53",
+            "name": "POG Frog",
+            "brand": "Burning Barrel",
+            "description": "Sour",
+            "price": "$11.00",
+            "abv": "6.8%",
+            "city": "Rancho Cordova",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "HMSXBHERAQQVTZJIENZA7OGV",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "NVRLZDDGGVUM3UL6D5NTSPJP"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "55QOE7RCVYM7OHMOK5CFUCQO",
+            "name": "Coffee and Cigarettes",
+            "brand": "Cellarmaker",
+            "description": "Porter",
+            "price": "$11.00",
+            "abv": "7.7%",
+            "city": "Oakland",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "HMSXBHERAQQVTZJIENZA7OGV",
+              "NVRLZDDGGVUM3UL6D5NTSPJP"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "JPPIJY4EJQ33GEU4T7AGBDA2",
+            "name": "Kimchi Sour",
+            "brand": "Dokkaebier",
+            "description": "Sour",
+            "price": "$8.00",
+            "abv": "6.6%",
+            "city": "Oakland",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "HMSXBHERAQQVTZJIENZA7OGV",
+              "NVRLZDDGGVUM3UL6D5NTSPJP"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "V6VXTXT6NZC6TAXSVJ6S66KH",
+            "name": "Rainbow Parfait",
+            "brand": "Fieldwork",
+            "description": "Sour",
+            "price": "$11.00",
+            "abv": "6.4%",
+            "city": "Berkeley",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "NVRLZDDGGVUM3UL6D5NTSPJP",
+              "HMSXBHERAQQVTZJIENZA7OGV",
+              "MKQBBK2KQOI7NFS4TD6WGBQC"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "B2EQONO2PQFREPXVALWCRR7E",
+            "name": "Chocolate Stout",
+            "brand": "Jackrabbit",
+            "description": "Chocolate Oatmeal Stout",
+            "price": "$9.00",
+            "abv": "5.5%",
+            "city": "West Sacramento",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "HMSXBHERAQQVTZJIENZA7OGV",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "NVRLZDDGGVUM3UL6D5NTSPJP"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          },
+          {
+            "id": "GKF6K4FNWFQRIKMFPMTV5TIN",
+            "name": "Kiltlifter",
+            "brand": "Moylans",
+            "description": "Scotch Ale",
+            "price": "$8.00",
+            "abv": "8%",
+            "city": "Novato",
+            "categoryIds": [
+              "RTQX7QKR7THOLQWVJABI5DVF",
+              "MKQBBK2KQOI7NFS4TD6WGBQC",
+              "HMSXBHERAQQVTZJIENZA7OGV",
+              "NVRLZDDGGVUM3UL6D5NTSPJP"
+            ],
+            "locationIds": [
+              "L3Y8KW155RG0B"
+            ],
+            "inStock": true
+          }
+        ],
+        "childCategories": []
+      }
+    ]
+  },
+  "Wine": [
+    {
+      "id": "WBG7T24IIWWLDPD6CK5GWOC2",
+      "name": "Village",
+      "brand": "Accenti",
+      "description": "Red",
+      "price": "$16.00",
+      "categoryIds": [
+        "EDMDIDX4O4WKK3PLMRKPQVVB",
+        "RD4KR7JDVUYOYSBQM3F6CF7C"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "GCX55PHO4VJ4VDQGEE3MVD4C",
+      "name": "Doctor Vineyard",
+      "brand": "Accenti",
+      "description": "Sparkling Rose",
+      "price": "$14.00",
+      "categoryIds": [
+        "EDMDIDX4O4WKK3PLMRKPQVVB",
+        "RD4KR7JDVUYOYSBQM3F6CF7C"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "ZXWN5EGJ4OXMJE5UYICWSGPC",
+      "name": "Block Party",
+      "brand": "Catch & Release",
+      "description": "Orange",
+      "price": "$16.00",
+      "categoryIds": [
+        "EDMDIDX4O4WKK3PLMRKPQVVB",
+        "RD4KR7JDVUYOYSBQM3F6CF7C"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "32QFHVCP7SNVUYKUNBETBUNF",
+      "name": "Pet Nat",
+      "brand": "Donkey & Goat",
+      "description": "Sparkling rose",
+      "price": "$16.00",
+      "categoryIds": [
+        "EDMDIDX4O4WKK3PLMRKPQVVB",
+        "RD4KR7JDVUYOYSBQM3F6CF7C"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "4BP2P7APYS7LYJ3PEWCJIWSQ",
+      "name": "Tessier",
+      "brand": "Electric Ladyland",
+      "description": "White",
+      "price": "$14.00",
+      "categoryIds": [
+        "EDMDIDX4O4WKK3PLMRKPQVVB",
+        "RD4KR7JDVUYOYSBQM3F6CF7C"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "HS33ZSOH5XXF27CFLC5XCBSB",
+      "name": "Freddo",
+      "brand": "Field Recordings",
+      "description": "Chillable red",
+      "price": "$14.00",
+      "categoryIds": [
+        "EDMDIDX4O4WKK3PLMRKPQVVB",
+        "RD4KR7JDVUYOYSBQM3F6CF7C"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "ZWNETRK6EXTU6XHUAF6336Z2",
+      "name": "Salad Days",
+      "brand": "Field Recordings",
+      "description": "Sparkling White",
+      "price": "$12.00",
+      "categoryIds": [
+        "EDMDIDX4O4WKK3PLMRKPQVVB",
+        "RD4KR7JDVUYOYSBQM3F6CF7C"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "4CCM4HJJPYRJC7YTOJNG6FNI",
+      "name": "So Far Out",
+      "brand": "Memory Palace",
+      "description": "White",
+      "price": "$12.00",
+      "categoryIds": [
+        "EDMDIDX4O4WKK3PLMRKPQVVB",
+        "RD4KR7JDVUYOYSBQM3F6CF7C"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "B5ZZBK2YK3KVPM7TCVIAPLTT",
+      "name": "Gamay Noir",
+      "brand": "Tessier",
+      "description": "Chillable red",
+      "price": "$16.00",
+      "categoryIds": [
+        "EDMDIDX4O4WKK3PLMRKPQVVB",
+        "RD4KR7JDVUYOYSBQM3F6CF7C"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    }
+  ],
+  "Non Alcoholic": [
+    {
+      "id": "MLEXVQCBW6I7XE5IT5TJ6QY2",
+      "name": "Watermelon",
+      "brand": "Culture Pop",
+      "description": "Probiotic Soda",
+      "price": "$4.00",
+      "categoryIds": [
+        "EWKUTB3CYBHM7ATBMULETQ3C",
+        "TXKNBLVCREK77Q3AEKRC5C77"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "W6YX3TZ6WDYS4BU6QJRIL2GF",
+      "name": "Orange Mango",
+      "brand": "Culture Pop",
+      "description": "Probiotic Soda",
+      "price": "$4.00",
+      "categoryIds": [
+        "EWKUTB3CYBHM7ATBMULETQ3C",
+        "TXKNBLVCREK77Q3AEKRC5C77"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "IIIEQHZB33GX4O23ZLWMCPL5",
+      "name": "Day Money",
+      "brand": "Fieldwork",
+      "description": "Grapfruit Blonde",
+      "price": "$7.00",
+      "abv": "0.5%",
+      "city": "Berkeley",
+      "categoryIds": [
+        "EWKUTB3CYBHM7ATBMULETQ3C",
+        "TXKNBLVCREK77Q3AEKRC5C77"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "SBUBMGNXQJ44PNYQH72QM5C2",
+      "name": "Encore",
+      "brand": "Fieldwork",
+      "description": "Hazy IPA",
+      "price": "$7.00",
+      "abv": "0.5%",
+      "city": "Berkeley",
+      "categoryIds": [
+        "EWKUTB3CYBHM7ATBMULETQ3C",
+        "TXKNBLVCREK77Q3AEKRC5C77"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "2P64MV4LVPCVBPG4YTQCLOCD",
+      "name": "Headliner",
+      "brand": "Fieldwork",
+      "description": "IPA",
+      "price": "$7.00",
+      "abv": "0.5%",
+      "city": "Berkeley",
+      "categoryIds": [
+        "EWKUTB3CYBHM7ATBMULETQ3C",
+        "TXKNBLVCREK77Q3AEKRC5C77"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "MUPZIDPSGX4M6HR33JWIIKO7",
+      "name": "BEER-ISH",
+      "brand": "Oak Park",
+      "description": "Lager",
+      "price": "$6.00",
+      "abv": "0.5%",
+      "city": "Sacramento",
+      "categoryIds": [
+        "EWKUTB3CYBHM7ATBMULETQ3C",
+        "TXKNBLVCREK77Q3AEKRC5C77"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "TSJ6R4MFR4HMZMSILW6GX25V",
+      "name": "Grapefruit Kiss",
+      "brand": "Orca",
+      "description": "Grapefruit Soda",
+      "price": "$4.00",
+      "categoryIds": [
+        "EWKUTB3CYBHM7ATBMULETQ3C",
+        "TXKNBLVCREK77Q3AEKRC5C77"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    },
+    {
+      "id": "QRTYIBVDG5FBE7RDADGLSQN4",
+      "name": "Bubble Up",
+      "brand": "Orca",
+      "description": "Lemon Lime Soda",
+      "price": "$4.00",
+      "categoryIds": [
+        "EWKUTB3CYBHM7ATBMULETQ3C",
+        "TXKNBLVCREK77Q3AEKRC5C77"
+      ],
+      "locationIds": [
+        "L3Y8KW155RG0B"
+      ],
+      "inStock": true
+    }
+  ]
+}

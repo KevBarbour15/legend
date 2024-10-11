@@ -1,11 +1,26 @@
 import { Client, Environment, CatalogObject } from "square";
 import { NextResponse } from "next/server";
+
 import {
   MenuStructure,
   CategoryWithItems,
   ProcessedItem,
 } from "@/types/menu.ts";
+
+import {
+  CURRENT_CATEGORIES,
+  EXCLUDED_CATEGORIES,
+  ORDERED_CATEGORIES,
+  CANNED_BOTTLED_BEER_ID,
+  BAR_INVENTORY_LOCATION_ID,
+  FALLBACK_MENU_PATH,
+} from "@/config/menu";
+
 import { getItemBrand, getItemName } from "@/utils/getItemInfo";
+import { compareCategories } from "@/utils/compareCategories";
+
+import fs from "fs/promises";
+import path from "path";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -21,6 +36,65 @@ export async function GET() {
       undefined,
       "ITEM,CATEGORY,ITEM_VARIATION",
     );
+
+    const categories =
+      response.result.objects?.filter(
+        (obj): obj is CatalogObject =>
+          obj.type === "CATEGORY" &&
+          obj.categoryData?.categoryType === "REGULAR_CATEGORY" &&
+          obj.categoryData?.name !== "Merchandise" &&
+          obj.categoryData?.name !== "Sake and Soju" &&
+          obj.categoryData?.name !== "Bar Menu",
+      ) || [];
+
+    /**
+     * Check if the categories have changed.
+     * If the categories have changed, log an error and return the fallback menu
+     */
+    const categoriesArr: string[] = [];
+
+    categories.forEach((category) => {
+      if (category.categoryData?.name) {
+        categoriesArr.push(category.categoryData?.name);
+      }
+    });
+
+    if (!compareCategories(categoriesArr, CURRENT_CATEGORIES)) {
+      console.error(
+        "Categories have changed. Please update the menu structure.",
+      );
+
+      const fallbackData = await fs.readFile(FALLBACK_MENU_PATH, "utf8");
+      const fallbackMenu = JSON.parse(fallbackData);
+
+      return NextResponse.json(fallbackMenu, {
+        headers: {
+          "Cache-Control": "no-store, max-age=0",
+          Pragma: "no-cache",
+          "X-Response-Time": new Date().toISOString(),
+        },
+      });
+    }
+
+    const categoryMap = new Map<string, CategoryWithItems>();
+    const childCategoryMap = new Map<string, CategoryWithItems>();
+
+    categories.forEach((category) => {
+      if (category.id) {
+        const categoryData = {
+          id: category.id,
+          name: category.categoryData?.name,
+          items: [],
+          childCategories: [],
+        };
+
+        if (EXCLUDED_CATEGORIES.includes(category.categoryData?.name || "")) {
+          childCategoryMap.set(category.id, categoryData);
+        } else {
+          categoryMap.set(category.id, categoryData);
+        }
+      }
+    });
 
     const items =
       response.result.objects?.filter(
@@ -39,7 +113,7 @@ export async function GET() {
     const inventoryResponse =
       await client.inventoryApi.batchRetrieveInventoryCounts({
         catalogObjectIds: variationIds,
-        locationIds: ["L3Y8KW155RG0B"],
+        locationIds: [BAR_INVENTORY_LOCATION_ID],
       });
     inventoryCounts = inventoryResponse.result?.counts || [];
 
@@ -49,42 +123,6 @@ export async function GET() {
         parseInt(count.quantity || "0"),
       ]),
     );
-
-    const categories =
-      response.result.objects?.filter(
-        (obj): obj is CatalogObject =>
-          obj.type === "CATEGORY" &&
-          obj.categoryData?.categoryType === "REGULAR_CATEGORY" &&
-          obj.categoryData?.name !== "Merchandise" &&
-          obj.categoryData?.name !== "Bar Menu",
-      ) || [];
-
-    const categoryMap = new Map<string, CategoryWithItems>();
-    const childCategoryMap = new Map<string, CategoryWithItems>();
-
-    const excludedCategories: string[] = [
-      "Lagers, Pilsners, Kolsch",
-      "IPAs",
-      "Seltzers and Ciders",
-      "Sours and Stouts",
-    ];
-
-    categories.forEach((category) => {
-      if (category.id) {
-        const categoryData = {
-          id: category.id,
-          name: category.categoryData?.name,
-          items: [],
-          childCategories: [],
-        };
-
-        if (excludedCategories.includes(category.categoryData?.name || "")) {
-          childCategoryMap.set(category.id, categoryData);
-        } else {
-          categoryMap.set(category.id, categoryData);
-        }
-      }
-    });
 
     const processedItems: ProcessedItem[] = items.map((item): ProcessedItem => {
       const variation = item.itemData?.variations?.[0];
@@ -123,40 +161,29 @@ export async function GET() {
       };
     });
 
-    const cannedBottledBeerId: string = "RTQX7QKR7THOLQWVJABI5DVF";
-
     processedItems.forEach((item) => {
       item.categoryIds.forEach((categoryId) => {
         if (
           childCategoryMap.has(categoryId) &&
-          item.locationIds.includes("L3Y8KW155RG0B") &&
-          item.categoryIds.includes(cannedBottledBeerId) &&
+          item.locationIds.includes(BAR_INVENTORY_LOCATION_ID) &&
+          item.categoryIds.includes(CANNED_BOTTLED_BEER_ID) &&
           item.inStock
         ) {
           childCategoryMap.get(categoryId)?.items.push(item);
         } else if (
           categoryMap.has(categoryId) &&
-          item.locationIds.includes("L3Y8KW155RG0B") &&
-          !item.categoryIds.includes(cannedBottledBeerId) &&
+          item.locationIds.includes(BAR_INVENTORY_LOCATION_ID) &&
+          !item.categoryIds.includes(CANNED_BOTTLED_BEER_ID) &&
           item.inStock
         ) {
           categoryMap.get(categoryId)?.items.push(item);
-        } else if (item.name == "Kevin's Pale Ale" && item.inStock) {
-          childCategoryMap.get(categoryId)?.items.push(item);
         }
       });
     });
 
     const menuStructure: MenuStructure = {};
 
-    const orderedCategories = [
-      "Draft",
-      "Canned / Bottled",
-      "Wine",
-      "Non Alcoholic",
-    ];
-
-    orderedCategories.forEach((categoryName) => {
+    ORDERED_CATEGORIES.forEach((categoryName) => {
       menuStructure[categoryName] = [];
     });
 
@@ -178,7 +205,7 @@ export async function GET() {
             childCategories: Array.from(childCategoryMap.values()),
           };
           menuStructure[category.name] = cannedBeerCategory;
-        } else if (orderedCategories.includes(category.name)) {
+        } else if (ORDERED_CATEGORIES.includes(category.name)) {
           const sortedItems = category.items.sort((a, b) => {
             const brandA = a.brand?.toLowerCase() ?? "";
             const brandB = b.brand?.toLowerCase() ?? "";
@@ -190,11 +217,18 @@ export async function GET() {
     });
 
     const orderedMenuStructure: MenuStructure = {};
-    orderedCategories.forEach((categoryName) => {
+
+    ORDERED_CATEGORIES.forEach((categoryName) => {
       if (menuStructure[categoryName]) {
         orderedMenuStructure[categoryName] = menuStructure[categoryName];
       }
     });
+
+    const exportPath = path.join(process.cwd(), "data", "fallbackMenu.json");
+    await fs.writeFile(
+      exportPath,
+      JSON.stringify(orderedMenuStructure, null, 2),
+    );
 
     return NextResponse.json(orderedMenuStructure, {
       headers: {
