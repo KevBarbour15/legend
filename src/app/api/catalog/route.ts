@@ -226,11 +226,12 @@ export async function GET() {
       }
     });
 
+    /*
     await fs.writeFile(
       FALLBACK_MENU_PATH,
       JSON.stringify(orderedMenuStructure, null, 2),
     );
-
+*/
     return NextResponse.json(orderedMenuStructure, {
       headers: {
         "Cache-Control": "no-store, max-age=0",
