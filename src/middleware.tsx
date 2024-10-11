@@ -50,7 +50,7 @@ export const config = {
     "/dashboard",
     "/api/message",
     "/api/events",
-
+    "/api/catalog",
     "/((?!_next/static|favicon.ico).*)",
   ],
 };
