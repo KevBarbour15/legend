@@ -43,7 +43,6 @@ export async function GET() {
           obj.type === "CATEGORY" &&
           obj.categoryData?.categoryType === "REGULAR_CATEGORY" &&
           obj.categoryData?.name !== "Merchandise" &&
-          obj.categoryData?.name !== "Sake and Soju" &&
           obj.categoryData?.name !== "Bar Menu",
       ) || [];
 
@@ -58,6 +57,9 @@ export async function GET() {
         categoriesArr.push(category.categoryData?.name);
       }
     });
+
+    console.log(categoriesArr);
+    console.log(CURRENT_CATEGORIES);
 
     if (!compareCategories(categoriesArr, CURRENT_CATEGORIES)) {
       console.error(

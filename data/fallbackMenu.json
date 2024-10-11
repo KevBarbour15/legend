@@ -52,22 +52,6 @@
       "inStock": true
     },
     {
-      "id": "IIBJHYDBI7ULVQ3VEVLX5XUU",
-      "name": "CaliCrawler",
-      "brand": "King Cong",
-      "description": "West Coast IPA",
-      "price": "$9.00",
-      "abv": "6.8%",
-      "city": "Sacramento",
-      "categoryIds": [
-        "TAWB7MI5VAORKNW3H754QJER"
-      ],
-      "locationIds": [
-        "L3Y8KW155RG0B"
-      ],
-      "inStock": true
-    },
-    {
       "id": "O5M3LLDVLAJTI4BC5S5AQ2OB",
       "name": "Island Vibes",
       "brand": "LogOff",

@@ -33,19 +33,6 @@ const MobileHeading: React.FC<MobileHeadingProps> = ({ section }) => {
     );
   }, []);
 
-  const handleAboutScroll = async (e: React.MouseEvent) => {
-    e.preventDefault();
-
-    await router.push("/");
-    setTimeout(() => {
-      const aboutSection = document.getElementById("about-content");
-
-      if (aboutSection) {
-        aboutSection.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 300);
-  };
-
   return (
     <>
       <Menu menuStatus={menuOpen} toggleMenu={toggleMenu} />
@@ -54,7 +41,7 @@ const MobileHeading: React.FC<MobileHeadingProps> = ({ section }) => {
         id="mobile-heading"
         className="flex w-full justify-between border-b border-customGold pb-3 text-customGold opacity-0 md:hidden"
       >
-        <span className="font-bigola text-2xl capitalize">{section}</span>
+        <span className="font-bigola text-2xl">{section}</span>
         <Button
           onClick={toggleMenu}
           size="mobileHeading"

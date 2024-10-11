@@ -40,20 +40,31 @@ export default function Contact() {
   useGSAP(() => {
     if (!containerRef.current) return;
 
+    gsap.set("#section-heading", {
+      opacity: 0,
+    });
+
     gsap.set("#form #input-section", {
       x: "50%",
       opacity: 0,
       rotateX: 45,
     });
 
-    tl.current = gsap.timeline({}).to("#form #input-section", {
-      delay: 0.15,
-      duration: 0.4,
-      stagger: 0.125,
-      x: 0,
-      opacity: 1,
-      rotateX: 0,
-    });
+    tl.current = gsap
+      .timeline({})
+      .to("#section-heading", {
+        duration: 0.35,
+        opacity: 1,
+        delay: 0.05,
+      })
+      .to("#form #input-section", {
+        delay: 0.15,
+        duration: 0.4,
+        stagger: 0.125,
+        x: 0,
+        opacity: 1,
+        rotateX: 0,
+      });
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -140,12 +151,25 @@ export default function Contact() {
           ref={containerRef}
           className="z-10 flex w-screen flex-col items-center justify-center overflow-y-auto p-3 pb-20 md:pb-6 md:pl-[250px] md:pr-6 md:pt-6"
         >
-          <MobileHeading section={"Let's connect"} />
+          <MobileHeading section={"Let's connect!"} />
+          <h2
+            id="section-heading"
+            className="hidden pb-3 font-bigola text-3xl text-customGold opacity-0 md:block"
+          >
+            Let's connect!
+          </h2>
+          <p
+            id="section-heading"
+            className="py-3 font-hypatia text-xl text-customCream opacity-0 md:pb-3 md:pt-0 md:text-center"
+          >
+            If you have any questions, ideas, or want to collaborate with us,
+            please fill out the form below.
+          </p>
           <ThemeProvider theme={customTheme(outerTheme)}>
             <Box
               component="form"
               id="form"
-              className="flex w-full flex-col items-center py-3 md:pb-6"
+              className="flex w-full flex-col items-center pb-3 md:pb-6"
               onSubmit={handleSubmit}
             >
               <div id="input-section" className="w-full font-hypatia opacity-0">
