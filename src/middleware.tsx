@@ -19,7 +19,8 @@ export default function middleware(req: NextRequest) {
 
   const response = NextResponse.next();
 
-  response.headers.set("Access-Control-Allow-Origin", "*");
+  const allowedOrigin = "*";
+  response.headers.set("Access-Control-Allow-Origin", allowedOrigin);
   response.headers.set(
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, OPTIONS",
