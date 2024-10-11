@@ -38,10 +38,5 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/dashboard",
-    "/api/message",
-    "/api/events",
-    "/((?!_next/static|favicon.ico).*)",
-  ],
+  matcher: ["/dashboard", "/api/message", "/api/events"],
 };
