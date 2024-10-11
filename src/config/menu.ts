@@ -47,10 +47,3 @@ export const ORDERED_CATEGORIES: string[] = [
 export const CANNED_BOTTLED_BEER_ID: string = "RTQX7QKR7THOLQWVJABI5DVF";
 
 export const BAR_INVENTORY_LOCATION_ID: string = "L3Y8KW155RG0B";
-
-const PROJECT_ROOT = process.cwd();
-export const FALLBACK_MENU_PATH: string = path.join(
-  PROJECT_ROOT,
-  "data",
-  "fallbackMenu.json",
-);

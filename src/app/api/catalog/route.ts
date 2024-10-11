@@ -1,5 +1,6 @@
 import { Client, Environment, CatalogObject } from "square";
 import { NextResponse } from "next/server";
+import { MongoClient, ObjectId } from "mongodb";
 
 import {
   MenuStructure,
@@ -16,7 +17,6 @@ import {
   ORDERED_CATEGORIES,
   CANNED_BOTTLED_BEER_ID,
   BAR_INVENTORY_LOCATION_ID,
-  FALLBACK_MENU_PATH,
 } from "@/config/menu";
 
 const PROJECT_ROOT = process.cwd();
@@ -70,10 +70,7 @@ export async function GET() {
         "Categories have changed. Please update the menu structure.",
       );
 
-      const fallbackData = await fs.readFile(FALLBACK_MENU_PATH, "utf8");
-      const fallbackMenu = JSON.parse(fallbackData);
-
-      return NextResponse.json(fallbackMenu, {
+      return NextResponse.json({
         headers: {
           "Cache-Control": "no-store, max-age=0",
           Pragma: "no-cache",
@@ -230,11 +227,6 @@ export async function GET() {
       }
     });
 
-    await fs.writeFile(
-      FALLBACK_MENU_PATH,
-      JSON.stringify(orderedMenuStructure, null, 2),
-    );
-
     return NextResponse.json(orderedMenuStructure, {
       headers: {
         "Cache-Control": "no-store, max-age=0",
@@ -244,27 +236,10 @@ export async function GET() {
     });
   } catch (error) {
     console.error("Error fetching catalog:", error);
-    console.error(
-      "Error details:",
-      JSON.stringify(error, Object.getOwnPropertyNames(error)),
+
+    return NextResponse.json(
+      { error: "Internal Server Error", details: error },
+      { status: 500 },
     );
-
-    try {
-      const fallbackData = await fs.readFile(FALLBACK_MENU_PATH, "utf8");
-      const fallbackMenu = JSON.parse(fallbackData);
-
-      return NextResponse.json(fallbackMenu, {
-        headers: {
-          "Cache-Control": "no-store, max-age=0",
-          Pragma: "no-cache",
-          "X-Response-Time": new Date().toISOString(),
-        },
-      });
-    } catch (error) {
-      return NextResponse.json(
-        { error: "Internal Server Error", details: error },
-        { status: 500 },
-      );
-    }
   }
 }
