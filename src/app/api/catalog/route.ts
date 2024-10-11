@@ -43,6 +43,7 @@ export async function GET() {
           obj.type === "CATEGORY" &&
           obj.categoryData?.categoryType === "REGULAR_CATEGORY" &&
           obj.categoryData?.name !== "Merchandise" &&
+          obj.categoryData?.name !== "Sake and Soju" &&
           obj.categoryData?.name !== "Bar Menu",
       ) || [];
 
@@ -58,9 +59,9 @@ export async function GET() {
       }
     });
 
-    console.log(categoriesArr);
-    console.log(CURRENT_CATEGORIES);
-    /*
+    //console.log(categoriesArr);
+    //console.log(CURRENT_CATEGORIES);
+
     if (!compareCategories(categoriesArr, CURRENT_CATEGORIES)) {
       console.error(
         "Categories have changed. Please update the menu structure.",
@@ -77,7 +78,7 @@ export async function GET() {
         },
       });
     }
-*/
+
     const categoryMap = new Map<string, CategoryWithItems>();
     const childCategoryMap = new Map<string, CategoryWithItems>();
 
@@ -226,12 +227,11 @@ export async function GET() {
       }
     });
 
-    /*
     await fs.writeFile(
       FALLBACK_MENU_PATH,
       JSON.stringify(orderedMenuStructure, null, 2),
     );
-*/
+
     return NextResponse.json(orderedMenuStructure, {
       headers: {
         "Cache-Control": "no-store, max-age=0",

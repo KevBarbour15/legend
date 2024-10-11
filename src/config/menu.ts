@@ -16,7 +16,6 @@ export const CURRENT_CATEGORIES: string[] = [
   "Sours and Stouts",
   "Canned / Bottled",
   "Draft",
-  "Sake and Soju",
   "Wine",
   "Non Alcoholic",
 ];
