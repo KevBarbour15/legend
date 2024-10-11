@@ -6,6 +6,7 @@ export async function getMenu(): Promise<MenuStructure> {
   const headersList = headers();
   const host = headersList.get("host") || "localhost:3000";
   const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
+  console.log("protocol", protocol);
   const apiUrl = `${protocol}://${host}/api/catalog`;
 
   try {
@@ -17,8 +18,6 @@ export async function getMenu(): Promise<MenuStructure> {
         Expires: "0",
       },
     });
-
-    console.log("response: ", response);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
