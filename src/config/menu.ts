@@ -9,6 +9,9 @@
  * These are used to compare the current categories to the categories
  * in the Square API.
  */
+
+import path from "path";
+
 export const CURRENT_CATEGORIES: string[] = [
   "Lagers, Pilsners, Kolsch",
   "IPAs",
@@ -45,4 +48,9 @@ export const CANNED_BOTTLED_BEER_ID: string = "RTQX7QKR7THOLQWVJABI5DVF";
 
 export const BAR_INVENTORY_LOCATION_ID: string = "L3Y8KW155RG0B";
 
-export const FALLBACK_MENU_PATH: string = "data/fallbackMenu.json";
+const PROJECT_ROOT = process.cwd();
+export const FALLBACK_MENU_PATH: string = path.join(
+  PROJECT_ROOT,
+  "data",
+  "fallbackMenu.json",
+);

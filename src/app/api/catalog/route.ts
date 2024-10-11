@@ -7,6 +7,9 @@ import {
   ProcessedItem,
 } from "@/types/menu.ts";
 
+import fs from "fs/promises";
+import path from "path";
+
 import {
   CURRENT_CATEGORIES,
   EXCLUDED_CATEGORIES,
@@ -16,11 +19,11 @@ import {
   FALLBACK_MENU_PATH,
 } from "@/config/menu";
 
+const PROJECT_ROOT = process.cwd();
+const fallbackPath = path.join(PROJECT_ROOT, "data", "fallbackMenu.json");
+
 import { getItemBrand, getItemName } from "@/utils/getItemInfo";
 import { compareCategories } from "@/utils/compareCategories";
-
-import fs from "fs/promises";
-import path from "path";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -59,7 +62,6 @@ export async function GET() {
       }
     });
 
-    /*
     //console.log(categoriesArr);
     //console.log(CURRENT_CATEGORIES);
 
@@ -79,7 +81,7 @@ export async function GET() {
         },
       });
     }
-*/
+
     const categoryMap = new Map<string, CategoryWithItems>();
     const childCategoryMap = new Map<string, CategoryWithItems>();
 
@@ -227,12 +229,12 @@ export async function GET() {
         orderedMenuStructure[categoryName] = menuStructure[categoryName];
       }
     });
-    /*
+
     await fs.writeFile(
       FALLBACK_MENU_PATH,
       JSON.stringify(orderedMenuStructure, null, 2),
     );
-*/
+
     return NextResponse.json(orderedMenuStructure, {
       headers: {
         "Cache-Control": "no-store, max-age=0",
@@ -246,9 +248,23 @@ export async function GET() {
       "Error details:",
       JSON.stringify(error, Object.getOwnPropertyNames(error)),
     );
-    return NextResponse.json(
-      { error: "Internal Server Error", details: error },
-      { status: 500 },
-    );
+
+    try {
+      const fallbackData = await fs.readFile(FALLBACK_MENU_PATH, "utf8");
+      const fallbackMenu = JSON.parse(fallbackData);
+
+      return NextResponse.json(fallbackMenu, {
+        headers: {
+          "Cache-Control": "no-store, max-age=0",
+          Pragma: "no-cache",
+          "X-Response-Time": new Date().toISOString(),
+        },
+      });
+    } catch (error) {
+      return NextResponse.json(
+        { error: "Internal Server Error", details: error },
+        { status: 500 },
+      );
+    }
   }
 }
