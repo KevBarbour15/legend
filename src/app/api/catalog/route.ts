@@ -13,7 +13,6 @@ import {
   ORDERED_CATEGORIES,
   CANNED_BOTTLED_BEER_ID,
   BAR_INVENTORY_LOCATION_ID,
-  FALLBACK_MENU_PATH,
 } from "@/config/menu";
 
 import { getItemBrand, getItemName } from "@/utils/getItemInfo";
@@ -65,17 +64,6 @@ export async function GET() {
       console.error(
         "Categories have changed. Please update the menu structure.",
       );
-
-      const fallbackData = await fs.readFile(FALLBACK_MENU_PATH, "utf8");
-      const fallbackMenu = JSON.parse(fallbackData);
-
-      return NextResponse.json(fallbackMenu, {
-        headers: {
-          "Cache-Control": "no-store, max-age=0",
-          Pragma: "no-cache",
-          "X-Response-Time": new Date().toISOString(),
-        },
-      });
     }
 
     const categoryMap = new Map<string, CategoryWithItems>();
@@ -225,12 +213,6 @@ export async function GET() {
         orderedMenuStructure[categoryName] = menuStructure[categoryName];
       }
     });
-
-    const exportPath = path.join(process.cwd(), "data", "fallbackMenu.json");
-    await fs.writeFile(
-      exportPath,
-      JSON.stringify(orderedMenuStructure, null, 2),
-    );
 
     return NextResponse.json(orderedMenuStructure, {
       headers: {
