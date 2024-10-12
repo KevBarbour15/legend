@@ -42,7 +42,7 @@ export async function GET() {
           obj.type === "CATEGORY" &&
           obj.categoryData?.categoryType === "REGULAR_CATEGORY" &&
           obj.categoryData?.name !== "Merchandise" &&
-        
+          obj.categoryData?.name !== "Sake and Soju" &&
           obj.categoryData?.name !== "Bar Menu",
       ) || [];
 
@@ -185,6 +185,13 @@ export async function GET() {
           item.inStock
         ) {
           categoryMap.get(categoryId)?.items.push(item);
+        } else if (
+          childCategoryMap.has(categoryId) &&
+          item.name === "Kevin's Pale Ale" &&
+          item.inStock
+        ) {
+          // this is for testing purposes
+          childCategoryMap.get(categoryId)?.items.push(item);
         }
       });
     });
