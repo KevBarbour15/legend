@@ -54,7 +54,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, fetchEvents }) => {
                   />
                 </div>
               ) : (
-                <div className="aspect-square w-full md:h-[275px] md:w-[275px]">
+                <div className="aspect-square w-full md:h-[225px] md:w-[225px] lg:h-[300px] lg:w-[300px]">
                   <video
                     src={event.image_url}
                     className="h-full w-full object-cover object-center"
