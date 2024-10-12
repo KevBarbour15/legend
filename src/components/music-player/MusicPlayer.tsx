@@ -10,20 +10,20 @@ import ReactHowler from "react-howler";
 import { IconButton, Collapse } from "@mui/material";
 
 import {
-  List,
-  ChevronsUp,
+  CaretDoubleUp,
+  Playlist,
+  Person,
   Play,
   Pause,
-  VolumeOff,
-  Volume2,
-  AudioLines,
+  VinylRecord,
+  SpeakerSlash,
+  SpeakerSimpleHigh,
   SkipForward,
   SkipBack,
-  Music,
-  User,
-} from "lucide-react";
+} from "@phosphor-icons/react";
 
-// quick note
+import Equalizer from "@/components/equalizer/Equalizer";
+
 interface Track {
   title: string;
   url: string;
@@ -154,26 +154,38 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                   className={`flex w-auto flex-1 flex-col px-1 font-bigola transition-colors ${index === currentTrackIndex ? "text-customGold" : "text-customCream"} `}
                   id="playlist-item"
                 >
-                  <div className="flex flex-row" id="player-toggle">
-                    <User className="pr-2 drop-shadow-text" />
-                    <p className="text-lg drop-shadow-text" id="player-toggle">
+                  <div
+                    className="flex flex-row items-center"
+                    id="player-toggle"
+                  >
+                    <Person
+                      size={22}
+                      weight="duotone"
+                      className="pr-2 drop-shadow-text"
+                    />
+                    <p
+                      className="text-base drop-shadow-text"
+                      id="player-toggle"
+                    >
                       {track.artist}
                     </p>
                   </div>
                   <div className="flex flex-row" id="player-toggle">
-                    <Music className="pr-2 drop-shadow-text" />
-                    <p className="text-lg drop-shadow-text">{track.title}</p>
+                    <VinylRecord
+                      size={22}
+                      weight="duotone"
+                      className="pr-2 drop-shadow-text"
+                    />
+                    <p className="text-base drop-shadow-text">{track.title}</p>
                   </div>
                 </div>
                 <div className="flex items-center justify-center">
                   {index == currentTrackIndex ? (
-                    <AudioLines
-                      id="player-toggle"
-                      className="mr-1 text-customGold drop-shadow-text"
-                    />
+                    <Equalizer playing={playing} />
                   ) : (
                     <IconButton className="md:hover:text-custom m-0 flex p-1 text-customCream drop-shadow-text transition-colors hover:text-customGold">
                       <Play
+                        weight="duotone"
                         id="player-toggle"
                         onClick={() => handleTrackChange(index)}
                       />
@@ -205,23 +217,32 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             className="hidden p-1 text-customCream drop-shadow-text transition-colors md:block md:hover:text-customGold"
             onClick={togglePlayer}
           >
-            <ChevronsUp
+            <CaretDoubleUp
+              weight="duotone"
               id="player-toggle"
               className={` ${visible ? "rotate-180 transform" : ""}`}
             />
           </IconButton>
           <IconButton className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold">
             {mute ? (
-              <VolumeOff id="player-toggle" onClick={handleMute} />
+              <SpeakerSimpleHigh
+                weight="duotone"
+                id="player-toggle"
+                onClick={handleMute}
+              />
             ) : (
-              <Volume2 id="player-toggle" onClick={handleMute} />
+              <SpeakerSlash
+                weight="duotone"
+                id="player-toggle"
+                onClick={handleMute}
+              />
             )}
           </IconButton>
           <IconButton
             onClick={handlePreviousTrack}
             className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
           >
-            <SkipBack id="player-toggle" />
+            <SkipBack id="player-toggle" weight="duotone" />
           </IconButton>
 
           <IconButton
@@ -229,22 +250,22 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
           >
             {playing ? (
-              <Pause id="player-toggle" />
+              <Pause id="player-toggle" weight="duotone" />
             ) : (
-              <Play id="player-toggle" />
+              <Play id="player-toggle" weight="duotone" />
             )}
           </IconButton>
           <IconButton
             onClick={handleNextTrack}
             className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
           >
-            <SkipForward id="player-toggle" />
+            <SkipForward id="player-toggle" weight="duotone" />
           </IconButton>
           <IconButton
             onClick={togglePlaylist}
             className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
           >
-            <List id="player-toggle" />
+            <Playlist id="player-toggle" weight="duotone" />
           </IconButton>
         </div>
       </div>
