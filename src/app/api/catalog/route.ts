@@ -42,7 +42,7 @@ export async function GET() {
           obj.type === "CATEGORY" &&
           obj.categoryData?.categoryType === "REGULAR_CATEGORY" &&
           obj.categoryData?.name !== "Merchandise" &&
-          obj.categoryData?.name !== "Sake and Soju" &&
+          //obj.categoryData?.name !== "Sake and Soju" &&
           obj.categoryData?.name !== "Bar Menu",
       ) || [];
 
