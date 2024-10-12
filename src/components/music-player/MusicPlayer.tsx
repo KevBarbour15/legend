@@ -34,7 +34,7 @@ interface MusicPlayerProps {
 }
 
 const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
-  const [playing, setPlaying] = useState<boolean>(true);
+  const [playing, setPlaying] = useState<boolean>(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
   const [mute, setMute] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
@@ -201,9 +201,10 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             className="relative border-b border-customGold p-2"
             id="playlist-border"
           >
+            <div className="absolute left-[119px] top-[48.85%] z-[4] h-[3px] w-[3px] rounded-full bg-black"></div>
             <img
               id="now-playing"
-              className="absolute left-[105.5px] top-[42%] z-[3] w-[28px]"
+              className="absolute left-[105px] top-[41.5%] z-[3] w-[30px]"
               src="./images/small-logo.png"
             ></img>
             <img
