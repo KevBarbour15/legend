@@ -75,13 +75,14 @@ const Menu: React.FC = ({}) => {
       );
     }
 
-    gsap.set(categoryRefs.current, {
-      x: "50%",
-      opacity: 0,
-      rotateX: 45,
-    });
-
+   
     if (!loading && displayMenu) {
+       gsap.set(categoryRefs.current, {
+         x: "50%",
+         opacity: 0,
+         rotateX: 45,
+       });
+
       if (categoryRefs.current.length > 0)
         categoriesTL.current = gsap.timeline({}).to(categoryRefs.current, {
           delay: 0.15,
@@ -95,7 +96,17 @@ const Menu: React.FC = ({}) => {
   }, [displayMenu]);
 
   useEffect(() => {
-    fetchMenu();
+    console.log("called");
+    let isMounted = true;
+    const fetchMenuData = async () => {
+      if (isMounted) {
+        await fetchMenu();
+      }
+    };
+    fetchMenuData();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const renderMenuItem = (item: ProcessedItem) => (

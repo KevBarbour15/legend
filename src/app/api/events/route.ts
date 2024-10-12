@@ -1,4 +1,3 @@
-// pages/api/events.ts
 import { NextRequest, NextResponse } from "next/server";
 import Event from "@/models/Event";
 import { connectToMongoDB } from "@/lib/db";
@@ -21,6 +20,8 @@ export async function GET(req: NextRequest) {
 
 // POST request handler ************************************************************************************************
 export async function POST(req: NextRequest) {
+  await connectToMongoDB();
+
   try {
     const body = await req.json();
 
@@ -60,6 +61,7 @@ export async function POST(req: NextRequest) {
 // PUT request handler ************************************************************************************************
 export async function PUT(req: NextRequest) {
   await connectToMongoDB();
+
   try {
     const { _id, title, date, time, description, image_url, notes } =
       await req.json();
@@ -86,6 +88,7 @@ export async function PUT(req: NextRequest) {
 // DELETE request handler ************************************************************************************************
 export async function DELETE(req: NextRequest) {
   await connectToMongoDB();
+
   try {
     const { eventId } = await req.json();
     await Event.findByIdAndDelete(eventId);

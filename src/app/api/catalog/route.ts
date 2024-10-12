@@ -1,6 +1,9 @@
 import { Client, Environment, CatalogObject } from "square";
 import { NextResponse } from "next/server";
 
+import { saveFallbackMenu } from "@/app/actions/saveFallbackMenu";
+import { getFallbackMenu } from "@/app/actions/getFallbackMenu";
+
 import {
   MenuStructure,
   CategoryWithItems,
@@ -17,9 +20,6 @@ import {
 
 import { getItemBrand, getItemName } from "@/utils/getItemInfo";
 import { compareCategories } from "@/utils/compareCategories";
-
-import fs from "fs/promises";
-import path from "path";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -42,6 +42,7 @@ export async function GET() {
           obj.type === "CATEGORY" &&
           obj.categoryData?.categoryType === "REGULAR_CATEGORY" &&
           obj.categoryData?.name !== "Merchandise" &&
+          obj.categoryData?.name !== "Sake and Soju" &&
           obj.categoryData?.name !== "Bar Menu",
       ) || [];
 
@@ -57,13 +58,30 @@ export async function GET() {
       }
     });
 
-    console.log(categoriesArr);
-    console.log(CURRENT_CATEGORIES);
-
     if (!compareCategories(categoriesArr, CURRENT_CATEGORIES)) {
       console.error(
         "Categories have changed. Please update the menu structure.",
       );
+
+      const fallbackMenu = await getFallbackMenu();
+
+      if (fallbackMenu.success) {
+        return NextResponse.json(fallbackMenu.menu, {
+          headers: {
+            "Cache-Control": "no-store, max-age=0",
+            Pragma: "no-cache",
+            "X-Response-Time": new Date().toISOString(),
+          },
+        });
+      } else {
+        return NextResponse.json(
+          {
+            error: "Internal Server Error",
+            details: "Failed to retrieve fallback menu.",
+          },
+          { status: 500 },
+        );
+      }
     }
 
     const categoryMap = new Map<string, CategoryWithItems>();
@@ -167,6 +185,13 @@ export async function GET() {
           item.inStock
         ) {
           categoryMap.get(categoryId)?.items.push(item);
+        } else if (
+          childCategoryMap.has(categoryId) &&
+          item.name === "Kevin's Pale Ale" &&
+          item.inStock
+        ) {
+          // this is for testing purposes
+          childCategoryMap.get(categoryId)?.items.push(item);
         }
       });
     });
@@ -214,6 +239,8 @@ export async function GET() {
       }
     });
 
+    await saveFallbackMenu(orderedMenuStructure);
+
     return NextResponse.json(orderedMenuStructure, {
       headers: {
         "Cache-Control": "no-store, max-age=0",
@@ -223,10 +250,7 @@ export async function GET() {
     });
   } catch (error) {
     console.error("Error fetching catalog:", error);
-    console.error(
-      "Error details:",
-      JSON.stringify(error, Object.getOwnPropertyNames(error)),
-    );
+
     return NextResponse.json(
       { error: "Internal Server Error", details: error },
       { status: 500 },

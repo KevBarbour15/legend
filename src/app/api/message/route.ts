@@ -1,9 +1,11 @@
-// pages/api/events.ts
 import { NextRequest, NextResponse } from "next/server";
 import Message from "@/models/Message";
+import { connectToMongoDB } from "@/lib/db";
 
 // GET request handler ************************************************************************************************
 export async function GET(req: NextRequest) {
+  await connectToMongoDB();
+
   try {
     const messages = await Message.find();
 
@@ -19,6 +21,8 @@ export async function GET(req: NextRequest) {
 
 // POST request handler ************************************************************************************************
 export async function POST(req: NextRequest) {
+  await connectToMongoDB();
+
   try {
     const {
       firstName,
@@ -59,6 +63,8 @@ export async function POST(req: NextRequest) {
 
 // PUT request handler ************************************************************************************************
 export async function PUT(req: NextRequest) {
+  await connectToMongoDB();
+
   try {
     // parse the action from the query params
     const { searchParams } = new URL(req.url);
@@ -82,6 +88,8 @@ export async function PUT(req: NextRequest) {
 }
 
 async function updateContactedStatus(req: NextRequest) {
+  await connectToMongoDB();
+
   try {
     const { _id, contacted } = await req.json();
 
@@ -112,6 +120,8 @@ async function updateContactedStatus(req: NextRequest) {
 }
 
 async function updateReadStatus(req: NextRequest) {
+  await connectToMongoDB();
+
   try {
     const { _id, read } = await req.json();
 
@@ -143,6 +153,8 @@ async function updateReadStatus(req: NextRequest) {
 
 // DELETE request handler ************************************************************************************************
 export async function DELETE(req: NextRequest) {
+  await connectToMongoDB();
+
   try {
     const { messageId } = await req.json();
     await Message.findByIdAndDelete(messageId);
