@@ -95,7 +95,17 @@ const Menu: React.FC = ({}) => {
   }, [displayMenu]);
 
   useEffect(() => {
-    fetchMenu();
+    console.log("called");
+    let isMounted = true;
+    const fetchMenuData = async () => {
+      if (isMounted) {
+        await fetchMenu();
+      }
+    };
+    fetchMenuData();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const renderMenuItem = (item: ProcessedItem) => (

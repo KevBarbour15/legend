@@ -1,6 +1,7 @@
 import { Client, Environment, CatalogObject } from "square";
 import { NextResponse } from "next/server";
-import { MongoClient, ObjectId } from "mongodb";
+
+import { saveFallbackMenu } from "@/app/actions/saveFallbackMenu";
 
 import {
   MenuStructure,
@@ -18,9 +19,6 @@ import {
   CANNED_BOTTLED_BEER_ID,
   BAR_INVENTORY_LOCATION_ID,
 } from "@/config/menu";
-
-const PROJECT_ROOT = process.cwd();
-const fallbackPath = path.join(PROJECT_ROOT, "data", "fallbackMenu.json");
 
 import { getItemBrand, getItemName } from "@/utils/getItemInfo";
 import { compareCategories } from "@/utils/compareCategories";
@@ -62,21 +60,10 @@ export async function GET() {
       }
     });
 
-    //console.log(categoriesArr);
-    //console.log(CURRENT_CATEGORIES);
-
     if (!compareCategories(categoriesArr, CURRENT_CATEGORIES)) {
       console.error(
         "Categories have changed. Please update the menu structure.",
       );
-
-      return NextResponse.json({
-        headers: {
-          "Cache-Control": "no-store, max-age=0",
-          Pragma: "no-cache",
-          "X-Response-Time": new Date().toISOString(),
-        },
-      });
     }
 
     const categoryMap = new Map<string, CategoryWithItems>();
@@ -226,6 +213,8 @@ export async function GET() {
         orderedMenuStructure[categoryName] = menuStructure[categoryName];
       }
     });
+
+    await saveFallbackMenu(orderedMenuStructure);
 
     return NextResponse.json(orderedMenuStructure, {
       headers: {
