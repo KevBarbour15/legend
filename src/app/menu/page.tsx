@@ -9,6 +9,8 @@ import {
   ProcessedItem,
 } from "@/types/menu.ts";
 
+import { BeerBottle, BeerStein, Wine, PintGlass } from "@phosphor-icons/react";
+
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -75,13 +77,12 @@ const Menu: React.FC = ({}) => {
       );
     }
 
-   
     if (!loading && displayMenu) {
-       gsap.set(categoryRefs.current, {
-         x: "50%",
-         opacity: 0,
-         rotateX: 45,
-       });
+      gsap.set(categoryRefs.current, {
+        x: "50%",
+        opacity: 0,
+        rotateX: 45,
+      });
 
       if (categoryRefs.current.length > 0)
         categoriesTL.current = gsap.timeline({}).to(categoryRefs.current, {
@@ -108,6 +109,19 @@ const Menu: React.FC = ({}) => {
       isMounted = false;
     };
   }, []);
+
+  const getIcon = (categoryName: string) => {
+    switch (categoryName.toLowerCase()) {
+      case "canned / bottled":
+        return <BeerBottle weight="duotone" />;
+      case "draft":
+        return <BeerStein weight="duotone" />;
+      case "wine":
+        return <Wine weight="duotone" />;
+      case "non alcoholic":
+        return <PintGlass weight="duotone" />;
+    }
+  };
 
   const renderMenuItem = (item: ProcessedItem) => (
     <div
@@ -148,7 +162,10 @@ const Menu: React.FC = ({}) => {
           className={`${index !== category.childCategories.length - 1 ? "border-b border-customGold" : ""}`}
           key={childCategory.id}
         >
-          <AccordionTrigger className="cursor-pointer text-lg text-customCream md:text-3xl">
+          <AccordionTrigger
+            className="cursor-pointer text-lg text-customCream md:text-3xl"
+            icon={<BeerBottle weight="duotone" />}
+          >
             <h3 className="font-bigola">{childCategory.name}</h3>
           </AccordionTrigger>
           <AccordionContent className="border-customGold">
@@ -191,7 +208,10 @@ const Menu: React.FC = ({}) => {
                   className={`${index === 0 ? "md:border-t" : ""} border-b border-customGold opacity-0`}
                   key={categoryName}
                 >
-                  <AccordionTrigger className="text-customCream">
+                  <AccordionTrigger
+                    className="text-customCream"
+                    icon={getIcon(categoryName)}
+                  >
                     <h2 className="font-bigola">{categoryName}</h2>
                   </AccordionTrigger>
                   <AccordionContent
