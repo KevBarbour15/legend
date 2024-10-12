@@ -2,15 +2,13 @@ import { Client, Environment, CatalogObject } from "square";
 import { NextResponse } from "next/server";
 
 import { saveFallbackMenu } from "@/app/actions/saveFallbackMenu";
+import { getFallbackMenu } from "@/app/actions/getFallbackMenu";
 
 import {
   MenuStructure,
   CategoryWithItems,
   ProcessedItem,
 } from "@/types/menu.ts";
-
-import fs from "fs/promises";
-import path from "path";
 
 import {
   CURRENT_CATEGORIES,
@@ -44,7 +42,7 @@ export async function GET() {
           obj.type === "CATEGORY" &&
           obj.categoryData?.categoryType === "REGULAR_CATEGORY" &&
           obj.categoryData?.name !== "Merchandise" &&
-          obj.categoryData?.name !== "Sake and Soju" &&
+        
           obj.categoryData?.name !== "Bar Menu",
       ) || [];
 
@@ -64,6 +62,26 @@ export async function GET() {
       console.error(
         "Categories have changed. Please update the menu structure.",
       );
+
+      const fallbackMenu = await getFallbackMenu();
+
+      if (fallbackMenu.success) {
+        return NextResponse.json(fallbackMenu.menu, {
+          headers: {
+            "Cache-Control": "no-store, max-age=0",
+            Pragma: "no-cache",
+            "X-Response-Time": new Date().toISOString(),
+          },
+        });
+      } else {
+        return NextResponse.json(
+          {
+            error: "Internal Server Error",
+            details: "Failed to retrieve fallback menu.",
+          },
+          { status: 500 },
+        );
+      }
     }
 
     const categoryMap = new Map<string, CategoryWithItems>();

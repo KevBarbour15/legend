@@ -10,6 +10,9 @@ export async function saveFallbackMenu(
 ): Promise<SaveFallbackMenuResponse> {
   await connectToMongoDB();
 
+  const session = await FallbackMenu.startSession();
+  session.startTransaction();
+
   try {
     if (!menu) {
       return {
@@ -18,29 +21,43 @@ export async function saveFallbackMenu(
       };
     }
 
-    const menus = await FallbackMenu.find();
+    const menus = await FallbackMenu.find().session(session);
 
-    console.log(menus.length);
+    if (menus.length >= 2) {
+      const oldMenu = menus.find((menu) => !menu.isLatest);
+      if (oldMenu) {
+        await oldMenu.deleteOne({ session });
+      }
 
-    const fallbackMenu = new FallbackMenu({
+      await FallbackMenu.findOneAndUpdate(
+        { isLatest: true },
+        { isLatest: false },
+      ).session(session);
+    }
+
+    const newMenu = new FallbackMenu({
       menu,
+      isLatest: true,
     });
 
-    const response = await fallbackMenu.save();
+    await newMenu.save({ session });
 
-    if (response) {
-      console.log("Fallback menu saved successfully.");
-    }
+    await session.commitTransaction();
+
+    return { success: true };
   } catch (error) {
     console.error("Error saving fallback menu:", error);
 
+    await session.abortTransaction();
+
     return {
       success: false,
-      error: "Failed to save fallback menu.",
+      error:
+        error instanceof Error
+          ? error.message
+          : "Failed to save fallback menu.",
     };
+  } finally {
+    session.endSession();
   }
-
-  return {
-    success: true,
-  };
 }

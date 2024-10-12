@@ -1,23 +1,43 @@
 import mongoose, { Connection } from "mongoose";
 
 let cachedConnection: Connection | null = null;
+let isConnecting = false;
 
-export async function connectToMongoDB() {
-  // If a cached connection exists, return it
+export async function connectToMongoDB(): Promise<Connection> {
   if (cachedConnection) {
     return cachedConnection;
   }
+
+  if (!process.env.MONGODB_URI) {
+    throw new Error("MONGODB_URI is not defined in the environment variables");
+  }
+
+  if (isConnecting) {
+    // If a connection is in progress, wait for it to complete
+    while (isConnecting) {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+    if (cachedConnection) {
+      return cachedConnection;
+    }
+  }
+
   try {
-    // If no cached connection exists, establish a new connection to MongoDB
-    const cnx = await mongoose.connect(process.env.MONGODB_URI!);
-    // Cache the connection for future use
-    cachedConnection = cnx.connection;
-    // Log message indicating a new MongoDB connection is established
-    console.log("New mongodb connection established");
+    isConnecting = true;
+    if (mongoose.connection.readyState === 1) {
+      cachedConnection = mongoose.connection;
+      isConnecting = false;
+      return cachedConnection;
+    }
+
+    const connection = await mongoose.connect(process.env.MONGODB_URI);
+    cachedConnection = connection.connection;
+    console.log("New MongoDB connection established");
     return cachedConnection;
   } catch (error) {
-    // If an error occurs during connection, log the error and throw it
-    console.log(error);
+    console.error("MongoDB connection error:", error);
     throw error;
+  } finally {
+    isConnecting = false;
   }
 }

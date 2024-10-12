@@ -75,13 +75,14 @@ const Menu: React.FC = ({}) => {
       );
     }
 
-    gsap.set(categoryRefs.current, {
-      x: "50%",
-      opacity: 0,
-      rotateX: 45,
-    });
-
+   
     if (!loading && displayMenu) {
+       gsap.set(categoryRefs.current, {
+         x: "50%",
+         opacity: 0,
+         rotateX: 45,
+       });
+
       if (categoryRefs.current.length > 0)
         categoriesTL.current = gsap.timeline({}).to(categoryRefs.current, {
           delay: 0.15,
