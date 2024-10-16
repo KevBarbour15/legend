@@ -64,7 +64,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
               layoutId={`card-${event._id}`}
               className="relative flex h-fit max-h-[75vh] w-full max-w-95vw flex-col overflow-hidden rounded-lg border border-customGold bg-customNavy px-3 pt-3 drop-shadow-text sm:max-h-[90vh] sm:max-w-[425px]"
             >
-              {event.is_photo && (
+              {event.is_photo ? (
                 <motion.div
                   layoutId={`image-${event._id}`}
                   className="flex-shrink-0"
@@ -76,6 +76,20 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                     src={event.image_url}
                     alt={event.title}
                     className="aspect-square w-full rounded-t-lg object-cover object-top"
+                  />
+                </motion.div>
+              ) : (
+                <motion.div
+                  layoutId={`video-${event._id}`}
+                  className="flex-shrink-0"
+                >
+                  <video
+                    src={event.image_url}
+                    className="aspect-square h-auto w-full border border-black object-cover object-center"
+                    loop
+                    autoPlay
+                    muted
+                    playsInline
                   />
                 </motion.div>
               )}
@@ -125,17 +139,32 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
         className="cursor-pointer rounded-lg border border-customGold border-transparent p-3 transition-all duration-300 md:hover:border-customGold md:hover:bg-customNavy"
       >
         <div className="flex h-full space-x-3">
-          {event.is_photo && (
+          {event.is_photo ? (
             <motion.div
               layoutId={`image-${event._id}`}
               className="flex-shrink-0"
             >
               <Image
-                width={175}
-                height={175}
+                priority
+                width={200}
+                height={200}
                 src={event.image_url}
                 alt={event.title}
-                className="aspect-square h-[125px] w-[125px] rounded-lg object-cover object-top md:h-[225px] md:w-[225px]"
+                className="aspect-square h-[125px] w-[125px] rounded-t-lg object-cover object-top md:h-[200px] md:w-[200px]"
+              />
+            </motion.div>
+          ) : (
+            <motion.div
+              layoutId={`video-${event._id}`}
+              className="flex-shrink-0"
+            >
+              <video
+                src={event.image_url}
+                className="aspect-square h-[125px] w-[125px] border border-black object-cover object-center md:h-[200px] md:w-[200px]"
+                loop
+                autoPlay
+                muted
+                playsInline
               />
             </motion.div>
           )}
