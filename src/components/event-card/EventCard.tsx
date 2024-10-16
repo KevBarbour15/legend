@@ -172,13 +172,13 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
             <div className="flex w-full flex-col justify-end border-b border-dashed md:pb-3">
               <motion.h3
                 layoutId={`date-${event._id}`}
-                className="font-bigola text-base text-customWhite sm:text-2xl"
+                className="font-bigola text-base text-customWhite md:text-2xl"
               >
                 {formattedDate}
               </motion.h3>
               <motion.h3
                 layoutId={`title-${event._id}`}
-                className="text-balance font-bigola text-2xl text-customGold md:text-5xl"
+                className="md::w-1/2 text-balance font-bigola text-2xl text-customGold md:text-5xl"
               >
                 {event.title}
               </motion.h3>
