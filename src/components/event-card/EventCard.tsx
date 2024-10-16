@@ -102,7 +102,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                   {event.title}
                 </motion.h3>
               </div>
-              <div className="flex items-center justify-between text-nowrap border-b border-customGold py-3 font-hypatia text-base text-customGold">
+              <div className="flex items-center justify-between text-nowrap border-b border-customGold pb-3 font-hypatia text-base text-customWhite md:py-3">
                 <motion.h3 layoutId={`date-${event._id}`}>
                   {formattedDate}
                 </motion.h3>
@@ -136,7 +136,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
       <motion.div
         layoutId={`card-${event._id}`}
         onClick={handleCardClick}
-        className="cursor-pointer rounded-lg border border-customGold border-transparent p-3 transition-all duration-300 md:hover:border-customGold md:hover:bg-customNavy"
+        className="cursor-pointer rounded-lg border border-customGold border-transparent py-3 transition-all duration-300 md:p-3 md:hover:border-customGold md:hover:bg-customNavy"
       >
         <div className="flex h-full space-x-3">
           {event.is_photo ? (
@@ -150,7 +150,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                 height={200}
                 src={event.image_url}
                 alt={event.title}
-                className="aspect-square h-[125px] w-[125px] rounded-t-lg object-cover object-top md:h-[200px] md:w-[200px]"
+                className="aspect-square h-[100px] w-[100px] rounded-lg object-cover object-top md:h-[200px] md:w-[200px]"
               />
             </motion.div>
           ) : (
@@ -160,7 +160,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
             >
               <video
                 src={event.image_url}
-                className="aspect-square h-[125px] w-[125px] border border-black object-cover object-center md:h-[200px] md:w-[200px]"
+                className="aspect-square h-[100px] w-[100px] rounded-lg border border-black object-cover object-center md:h-[200px] md:w-[200px]"
                 loop
                 autoPlay
                 muted
