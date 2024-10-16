@@ -4,10 +4,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
-
-
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import {
@@ -49,17 +45,6 @@ const CreateEvent: React.FC = () => {
     },
   });
 
-  useGSAP(() => {
-    if (!containerRef.current) return;
-    gsap.set(containerRef.current, { opacity: 0 });
-
-    tl.current = gsap.timeline({}).to(containerRef.current, {
-      delay: 0.35,
-      duration: 0.5,
-      opacity: 1,
-    });
-  }, []);
-
   useEffect(() => {
     const today = new Date();
     const formattedDate = today.toISOString().split("T")[0];
@@ -90,7 +75,7 @@ const CreateEvent: React.FC = () => {
   };
 
   return (
-    <div ref={containerRef} className="text-black">
+    <div className="text-black">
       <Card className="p-3 md:p-6">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">

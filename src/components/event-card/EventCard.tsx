@@ -43,7 +43,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
     return createPortal(
       <AnimatePresence>
         {isActive && (
-          <div className="fixed inset-0 z-[200] grid place-items-center bg-black bg-opacity-50">
+          <div className="fixed inset-0 z-[200] grid place-items-center bg-black bg-opacity-65 px-3">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -58,11 +58,11 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
               className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full md:right-6 md:top-6"
               onClick={() => setIsActive(false)}
             >
-              <X size={32} className="text-customGold" />
+              <X size={32} className="text-customWhite" />
             </motion.button>
             <motion.div
               layoutId={`card-${event._id}`}
-              className="relative flex h-fit max-h-[80vh] w-full max-w-90vw flex-col overflow-hidden rounded-lg border border-customGold bg-customNavy px-3 pt-3 drop-shadow-text sm:max-h-[90vh] sm:max-w-[425px]"
+              className="relative flex h-fit max-h-[85vh] w-full flex-col overflow-hidden rounded-lg border border-customGold bg-customNavy px-3 pt-3 drop-shadow-text sm:max-h-[95vh] sm:max-w-[425px] md:px-3"
             >
               {event.is_photo ? (
                 <motion.div
@@ -75,7 +75,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                     height={300}
                     src={event.image_url}
                     alt={event.title}
-                    className="aspect-square w-full rounded-t-lg object-cover object-center"
+                    className="aspect-square w-full rounded-t-lg border-b border-customGold object-cover object-center pb-3"
                   />
                 </motion.div>
               ) : (
@@ -85,7 +85,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                 >
                   <video
                     src={event.image_url}
-                    className="aspect-square h-auto w-full rounded-t-lg object-cover object-center"
+                    className="aspect-square w-full rounded-t-lg border-b border-customGold object-cover object-center pb-3"
                     loop
                     autoPlay
                     muted
@@ -97,7 +97,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
               <div className="mt-3">
                 <motion.h3
                   layoutId={`title-${event._id}`}
-                  className="font-bigola text-2xl text-customGold"
+                  className="text-balance text-left font-bigola text-2xl text-customGold"
                 >
                   {event.title}
                 </motion.h3>
@@ -113,7 +113,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                   {formattedTime}
                 </motion.h3>
               </div>
-              <div className="flex-grow overflow-y-auto [mask:linear-gradient(to_bottom,white,white,transparent)]">
+              <div className="flex-grow overflow-y-auto [mask:linear-gradient(to_bottom,transparent,white,white,white,white,white,white,white,white,white,transparent)]">
                 <motion.p
                   layoutId={`description-${event._id}`}
                   className="py-3 font-hypatia text-lg text-customWhite"
@@ -136,7 +136,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
       <motion.div
         layoutId={`card-${event._id}`}
         onClick={handleCardClick}
-        className="cursor-pointer rounded-lg border border-customGold border-transparent py-3 transition-all duration-300 md:p-3 md:hover:border-customGold md:hover:bg-customNavy"
+        className="cursor-pointer rounded-lg py-3 transition-all duration-300 md:p-3 md:hover:bg-customNavy"
       >
         <div className="flex h-full space-x-3">
           {event.is_photo ? (
@@ -150,7 +150,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                 height={200}
                 src={event.image_url}
                 alt={event.title}
-                className="aspect-square h-[100px] w-[100px] rounded-lg border border-customGold object-cover object-center md:h-[200px] md:w-[200px]"
+                className="aspect-square h-[100px] w-[100px] rounded-lg border border-customGold object-cover object-center md:h-[215px] md:w-[215px]"
               />
             </motion.div>
           ) : (
@@ -160,7 +160,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
             >
               <video
                 src={event.image_url}
-                className="aspect-square h-[100px] w-[100px] rounded-lg border border-customGold object-cover object-center md:h-[200px] md:w-[200px]"
+                className="aspect-square h-[100px] w-[100px] rounded-lg border border-customGold object-cover object-center md:h-[215px] md:w-[215px]"
                 loop
                 autoPlay
                 muted
@@ -172,13 +172,13 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
             <div className="flex w-full flex-col justify-end border-b border-dashed md:pb-3">
               <motion.h3
                 layoutId={`date-${event._id}`}
-                className="font-bigola text-base text-customWhite md:text-2xl"
+                className="text-left font-bigola text-base text-customWhite md:text-2xl"
               >
                 {formattedDate}
               </motion.h3>
               <motion.h3
                 layoutId={`title-${event._id}`}
-                className="md::w-1/2 text-balance font-bigola text-2xl text-customGold md:text-5xl"
+                className="text-balance font-bigola text-2xl text-customGold sm:text-4xl md:text-5xl lg:w-3/4"
               >
                 {event.title}
               </motion.h3>

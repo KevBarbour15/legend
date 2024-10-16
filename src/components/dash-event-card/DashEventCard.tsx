@@ -51,7 +51,7 @@ const DashEventCard: React.FC<DashEventCardProps> = ({
         className="border-t border-black"
       >
         <AccordionTrigger>
-          <div className="flex w-full justify-between pr-3 font-bigola text-base md:pr-6 md:text-xl">
+          <div className="flex w-full items-center justify-between text-balance pr-3 text-left font-bigola text-base md:pr-6 md:text-xl">
             <p>{event.title}</p>
             <p>
               {new Date(event.date).toLocaleDateString("en-US", {
