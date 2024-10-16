@@ -180,6 +180,7 @@ export default function Events() {
                 <>
                   {upcomingEvents.map((event, index) => (
                     <div
+                      className="opacity-0"
                       key={event._id}
                       ref={(el) => {
                         upcomingEventRefs.current[index] = el;
@@ -207,6 +208,7 @@ export default function Events() {
                       ref={(el) => {
                         pastEventRefs.current[index] = el;
                       }}
+                      className="opacity-0"
                     >
                       <EventCard key={index} event={event} />
                     </div>

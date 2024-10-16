@@ -135,7 +135,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                 height={175}
                 src={event.image_url}
                 alt={event.title}
-                className="aspect-square h-[100px] w-[100px] rounded-lg object-cover object-top md:h-[175px] md:w-[175px]"
+                className="aspect-square h-[125px] w-[125px] rounded-lg object-cover object-top md:h-[225px] md:w-[225px]"
               />
             </motion.div>
           )}
