@@ -29,11 +29,11 @@ const Equalizer: React.FC<EqualizerProps> = ({ playing }) => {
       tlRef.current!.to(
         bar,
         {
-          height: gsap.utils.random(5, 35),
-          duration: 0.25,
-          ease: "sin.inOut",
+          height: gsap.utils.random(10, 35),
+          duration: gsap.utils.random(0.15, 0.5),
+          ease: "linear",
         },
-        index * 0.1,
+        0.025,
       );
     });
 
@@ -49,13 +49,13 @@ const Equalizer: React.FC<EqualizerProps> = ({ playing }) => {
   }, [playing]);
 
   return (
-    <div className="mr-1 flex h-10 items-end justify-center space-x-[1px]">
-      <div ref={bar1Ref} className="h-1 w-0.5 bg-customGold" />
-      <div ref={bar2Ref} className="h-3 w-0.5 bg-customGold" />
-      <div ref={bar3Ref} className="h-2 w-0.5 bg-customGold" />
-      <div ref={bar4Ref} className="h-4 w-0.5 bg-customGold" />
-      <div ref={bar5Ref} className="h-1 w-0.5 bg-customGold" />
-      <div ref={bar6Ref} className="h-3 w-0.5 bg-customGold" />
+    <div className="mr-1 flex h-10 items-end justify-center space-x-[1.5px] overflow-hidden drop-shadow-text">
+      <div ref={bar1Ref} className="h-1 w-0.5 rounded-full bg-customGold" />
+      <div ref={bar2Ref} className="h-3 w-0.5 rounded-full bg-customGold" />
+      <div ref={bar3Ref} className="h-2 w-0.5 rounded-full bg-customGold" />
+      <div ref={bar4Ref} className="h-4 w-0.5 rounded-full bg-customGold" />
+      <div ref={bar5Ref} className="h-1 w-0.5 rounded-full bg-customGold" />
+      <div ref={bar6Ref} className="h-3 w-0.5 rounded-full bg-customGold" />
     </div>
   );
 };

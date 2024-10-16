@@ -170,7 +170,7 @@ export default function Events() {
               setActiveTab(value as "upcoming" | "past")
             }
           >
-            <TabsList className="my-3 grid w-full grid-cols-2 bg-transparent font-bigola text-customGold md:mb-6 md:mt-0 md:w-[400px]">
+            <TabsList className="mt-3 grid w-full grid-cols-2 bg-transparent font-bigola md:mb-6 md:mt-0 md:w-[400px]">
               <TabsTrigger value="upcoming">Upcoming Events</TabsTrigger>
               <TabsTrigger value="past">Past Events</TabsTrigger>
             </TabsList>
