@@ -1,4 +1,4 @@
-import Head from "next/head";
+import Script from "next/script";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import BackgroundOverlay from "@/components/bg-overlay/BackgroundOverlay";
@@ -72,13 +72,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script
-          id="mcjs"
-          type="text/javascript"
-          dangerouslySetInnerHTML={{
-            __html: `!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/783ca62931283b3104dae7fdb/5f76e1f7d9803b38a26cab6bc.js");`,
-          }}
-        />
+        <Script id="mcjs" strategy="beforeInteractive">
+          {`!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/783ca62931283b3104dae7fdb/5f76e1f7d9803b38a26cab6bc.js");`}
+        </Script>
         <title>Legend Has It</title>
       </head>
       <body className={inter.className}>
@@ -89,3 +85,15 @@ export default function RootLayout({
     </html>
   );
 }
+
+/*
+
+ <script
+          id="mcjs"
+          type="text/javascript"
+          dangerouslySetInnerHTML={{
+            __html: `!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/783ca62931283b3104dae7fdb/5f76e1f7d9803b38a26cab6bc.js");`,
+          }}
+        />
+
+        */
