@@ -150,7 +150,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                 height={200}
                 src={event.image_url}
                 alt={event.title}
-                className="aspect-square h-[100px] w-[100px] rounded-lg object-cover object-center md:h-[200px] md:w-[200px]"
+                className="aspect-square h-[100px] w-[100px] rounded-lg border border-customGold object-cover object-center md:h-[200px] md:w-[200px] md:border-0"
               />
             </motion.div>
           ) : (
@@ -160,7 +160,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
             >
               <video
                 src={event.image_url}
-                className="aspect-square h-[100px] w-[100px] rounded-lg object-cover object-center md:h-[200px] md:w-[200px]"
+                className="aspect-square h-[100px] w-[100px] rounded-lg border border-customGold object-cover object-center md:h-[200px] md:w-[200px] md:border-0"
                 loop
                 autoPlay
                 muted
