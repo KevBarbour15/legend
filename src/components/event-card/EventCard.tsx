@@ -62,7 +62,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
             </motion.button>
             <motion.div
               layoutId={`card-${event._id}`}
-              className="relative flex h-fit max-h-[75vh] w-full max-w-95vw flex-col overflow-hidden rounded-lg border border-customGold bg-customNavy px-3 pt-3 drop-shadow-text sm:max-h-[85vh] sm:max-w-[425px]"
+              className="relative flex h-fit max-h-[75vh] w-full max-w-95vw flex-col overflow-hidden rounded-lg border border-customGold bg-customNavy px-3 pt-3 drop-shadow-text sm:max-h-[90vh] sm:max-w-[425px]"
             >
               {event.is_photo && (
                 <motion.div
@@ -139,22 +139,19 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
               />
             </motion.div>
           )}
-          <div className="flex w-full items-center">
-            <div className="flex w-full flex-col items-center sm:flex-row">
-              <motion.h3
-                layoutId={`title-${event._id}`}
-                className="text-nowrap font-bigola text-xl capitalize text-customGold sm:text-3xl"
-              >
-                {event.title}
-              </motion.h3>
-              <div className="hidden sm:flex sm:w-full">
-                <Divider borderColor={"border-customWhite"} />
-              </div>
+          <div className="flex w-full">
+            <div className="flex w-full flex-col justify-end space-y-3 border-b border-dashed pb-3">
               <motion.h3
                 layoutId={`date-${event._id}`}
-                className="font-bigola text-xl text-customWhite sm:text-3xl sm:text-customGold"
+                className="font-bigola text-xl text-customWhite sm:text-2xl"
               >
                 {formattedDate}
+              </motion.h3>
+              <motion.h3
+                layoutId={`title-${event._id}`}
+                className="font-bigola text-2xl text-customGold sm:text-5xl"
+              >
+                {event.title}
               </motion.h3>
             </div>
           </div>
