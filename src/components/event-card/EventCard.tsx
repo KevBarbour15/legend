@@ -58,7 +58,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
               className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full md:right-6 md:top-6"
               onClick={() => setIsActive(false)}
             >
-              <X size={32} />
+              <X size={32} className="text-customCream" />
             </motion.button>
             <motion.div
               layoutId={`card-${event._id}`}
@@ -122,7 +122,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
       <motion.div
         layoutId={`card-${event._id}`}
         onClick={handleCardClick}
-        className="cursor-pointer rounded-lg border border-customGold border-transparent p-3 transition-all duration-300 hover:border-customGold hover:bg-customNavy"
+        className="cursor-pointer rounded-lg border border-customGold border-transparent p-3 transition-all duration-300 md:hover:border-customGold md:hover:bg-customNavy"
       >
         <div className="flex h-full space-x-3">
           {event.is_photo && (
@@ -140,10 +140,10 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
             </motion.div>
           )}
           <div className="flex w-full">
-            <div className="flex w-full flex-col justify-end space-y-3 border-b border-dashed pb-3">
+            <div className="flex w-full flex-col justify-end border-b border-dashed md:pb-3">
               <motion.h3
                 layoutId={`date-${event._id}`}
-                className="font-bigola text-xl text-customWhite sm:text-2xl"
+                className="font-bigola text-base text-customWhite sm:text-2xl"
               >
                 {formattedDate}
               </motion.h3>
