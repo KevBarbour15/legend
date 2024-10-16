@@ -49,7 +49,7 @@ const Equalizer: React.FC<EqualizerProps> = ({ playing }) => {
   }, [playing]);
 
   return (
-    <div className="mr-1 flex h-10 items-end justify-center space-x-[1.5px] overflow-hidden drop-shadow-text">
+    <div className="mr-1 flex h-10 items-end justify-center space-x-[1.5px] overflow-hidden shadow-md">
       <div ref={bar1Ref} className="h-1 w-0.5 rounded-full bg-customGold" />
       <div ref={bar2Ref} className="h-3 w-0.5 rounded-full bg-customGold" />
       <div ref={bar3Ref} className="h-2 w-0.5 rounded-full bg-customGold" />

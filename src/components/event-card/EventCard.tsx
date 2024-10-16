@@ -62,7 +62,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
             </motion.button>
             <motion.div
               layoutId={`card-${event._id}`}
-              className="relative flex h-fit max-h-[85svh] w-full flex-col overflow-hidden rounded-lg border border-customGold bg-customNavy px-3 pt-3 drop-shadow-text sm:max-h-[95vh] sm:max-w-[425px] md:px-3"
+              className="relative flex h-fit max-h-[85svh] w-full flex-col overflow-hidden rounded-lg border border-customGold bg-customNavy px-3 pt-3 shadow-md sm:max-h-[95vh] sm:max-w-[425px] md:px-6 md:pt-6"
             >
               {event.is_photo ? (
                 <motion.div
@@ -75,7 +75,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                     height={300}
                     src={event.image_url}
                     alt={event.title}
-                    className="aspect-square w-full rounded-t-lg object-cover object-center"
+                    className="aspect-square w-full rounded-lg object-cover object-center"
                   />
                 </motion.div>
               ) : (
@@ -85,7 +85,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                 >
                   <video
                     src={event.image_url}
-                    className="aspect-square w-full rounded-t-lg object-cover object-center"
+                    className="aspect-square w-full rounded-lg object-cover object-center"
                     loop
                     autoPlay
                     muted
@@ -120,7 +120,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
               <div className="flex-grow overflow-y-auto [mask:linear-gradient(to_bottom,transparent,white,white,white,white,white,white,white,white,white,transparent)]">
                 <motion.p
                   layoutId={`description-${event._id}`}
-                  className="py-3 font-hypatia text-lg leading-tight text-customWhite"
+                  className="py-3 font-hypatia text-lg leading-tight text-customWhite md:pb-6"
                 >
                   {event.description}
                 </motion.p>
@@ -140,9 +140,9 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
       <motion.div
         layoutId={`card-${event._id}`}
         onClick={handleCardClick}
-        className="cursor-pointer rounded-lg py-3 transition-all duration-300 md:p-3 md:hover:bg-customNavy"
+        className="cursor-pointer rounded-lg bg-transparent pr-6 transition-all duration-300 md:hover:bg-black md:hover:bg-opacity-15 md:hover:shadow-lg"
       >
-        <div className="flex h-full space-x-3">
+        <div className="flex h-full space-x-3 md:space-x-6">
           {event.is_photo ? (
             <motion.div
               layoutId={`image-${event._id}`}

@@ -170,17 +170,17 @@ export default function Events() {
               setActiveTab(value as "upcoming" | "past")
             }
           >
-            <TabsList className="mt-3 grid w-full grid-cols-2 bg-transparent font-bigola md:mb-6 md:mt-0 md:w-[400px]">
+            <TabsList className="my-3 grid w-full grid-cols-2 bg-transparent font-bigola md:mb-6 md:mt-0 md:w-[400px]">
               <TabsTrigger value="upcoming">Upcoming Events</TabsTrigger>
               <TabsTrigger value="past">Past Events</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="upcoming" className="w-full space-y-3">
+            <TabsContent value="upcoming" className="w-full">
               {upcomingEvents.length > 0 ? (
                 <>
                   {upcomingEvents.map((event, index) => (
                     <div
-                      className="opacity-0"
+                      className="mb-3 opacity-0 md:mb-6"
                       key={event._id}
                       ref={(el) => {
                         upcomingEventRefs.current[index] = el;
@@ -208,7 +208,7 @@ export default function Events() {
                       ref={(el) => {
                         pastEventRefs.current[index] = el;
                       }}
-                      className="opacity-0"
+                      className="mb-3 opacity-0 md:mb-6"
                     >
                       <EventCard key={index} event={event} />
                     </div>
