@@ -71,7 +71,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Head>
+      <head>
         <script
           id="mcjs"
           type="text/javascript"
@@ -79,9 +79,8 @@ export default function RootLayout({
             __html: `!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/783ca62931283b3104dae7fdb/5f76e1f7d9803b38a26cab6bc.js");`,
           }}
         />
-
         <title>Legend Has It</title>
-      </Head>
+      </head>
       <body className={inter.className}>
         <BackgroundOverlay />
         {children}
