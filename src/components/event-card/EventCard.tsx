@@ -58,11 +58,11 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
               className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full md:right-6 md:top-6"
               onClick={() => setIsActive(false)}
             >
-              <X size={32} className="text-customCream" />
+              <X size={32} className="text-customGold" />
             </motion.button>
             <motion.div
               layoutId={`card-${event._id}`}
-              className="relative flex h-fit max-h-[75vh] w-full max-w-95vw flex-col overflow-hidden rounded-lg border border-customGold bg-customNavy px-3 pt-3 drop-shadow-text sm:max-h-[90vh] sm:max-w-[425px]"
+              className="relative flex h-fit max-h-[80vh] w-full max-w-90vw flex-col overflow-hidden rounded-lg border border-customGold bg-customNavy px-3 pt-3 drop-shadow-text sm:max-h-[90vh] sm:max-w-[425px]"
             >
               {event.is_photo ? (
                 <motion.div
@@ -150,7 +150,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                 height={200}
                 src={event.image_url}
                 alt={event.title}
-                className="aspect-square h-[100px] w-[100px] rounded-lg border border-customGold object-cover object-center md:h-[200px] md:w-[200px] md:border-0"
+                className="aspect-square h-[100px] w-[100px] rounded-lg border border-customGold object-cover object-center md:h-[200px] md:w-[200px]"
               />
             </motion.div>
           ) : (
@@ -160,7 +160,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
             >
               <video
                 src={event.image_url}
-                className="aspect-square h-[100px] w-[100px] rounded-lg border border-customGold object-cover object-center md:h-[200px] md:w-[200px] md:border-0"
+                className="aspect-square h-[100px] w-[100px] rounded-lg border border-customGold object-cover object-center md:h-[200px] md:w-[200px]"
                 loop
                 autoPlay
                 muted
@@ -178,7 +178,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
               </motion.h3>
               <motion.h3
                 layoutId={`title-${event._id}`}
-                className="font-bigola text-2xl text-customGold sm:text-5xl"
+                className="text-balance font-bigola text-2xl text-customGold md:text-5xl"
               >
                 {event.title}
               </motion.h3>
