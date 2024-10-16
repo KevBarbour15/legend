@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
-import { LogIn } from "lucide-react";
+import { X, Key } from "@phosphor-icons/react";
 
 import Link from "next/link";
 
@@ -115,7 +115,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
   return (
     <div className="menu-container" ref={container}>
       <div className="menu-overlay">
-        <CloseRounded className="menu-close-icon" onClick={toggleMenu} />
+        <X className="menu-close-icon" onClick={toggleMenu} />
         <div className="menu-logo-container">
           <Image
             className="menu-logo-icon"
@@ -170,7 +170,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
             </IconButton>
           </div>
           <LoginLink postLoginRedirectURL="/dashboard">
-            <LogIn className="menu-login-link" />
+            <Key className="menu-login-link" />
           </LoginLink>
         </div>
       </div>

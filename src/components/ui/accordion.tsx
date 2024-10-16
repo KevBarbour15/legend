@@ -3,7 +3,7 @@
 import * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 
-import { ChevronsDown } from "lucide-react";
+import { CaretDown } from "@phosphor-icons/react";
 
 import { cn } from "@/lib/utils";
 
@@ -36,12 +36,12 @@ const AccordionTrigger = React.forwardRef<
       {icon ? (
         React.cloneElement(icon as React.ReactElement, {
           className: "flex-shrink-0 p-0 transition-transform duration-300",
-          style: { width: "28px", height: "28px" },
+          style: { width: "30px", height: "30px" },
         })
       ) : (
-        <ChevronsDown
+        <CaretDown
           className="flex-shrink-0 p-0 transition-transform duration-300"
-          style={{ width: "28px", height: "28px" }}
+          style={{ width: "30px", height: "30px" }}
         />
       )}
     </AccordionPrimitive.Trigger>

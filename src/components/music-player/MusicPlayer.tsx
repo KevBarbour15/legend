@@ -2,6 +2,8 @@
 import { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
+import { MusicPlayerProps } from "@/types/music-player";
+
 import gsap from "gsap";
 
 import { useGSAP } from "@gsap/react";
@@ -23,15 +25,6 @@ import {
 } from "@phosphor-icons/react";
 
 import Equalizer from "@/components/equalizer/Equalizer";
-
-interface Track {
-  title: string;
-  url: string;
-  artist: string;
-}
-interface MusicPlayerProps {
-  tracks: Track[];
-}
 
 const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
   const [playing, setPlaying] = useState<boolean>(true);
@@ -140,7 +133,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
     >
       <div
         id="player-container"
-        className="flex flex-col rounded-t-md border border-customGold bg-customNavy md:mb-6 md:ml-6 md:mr-0 md:rounded-lg"
+        className="flex flex-col rounded-t-lg border border-customGold bg-customNavy drop-shadow-text md:mb-6 md:ml-6 md:mr-0 md:rounded-lg"
       >
         <Collapse in={playlistVisible} id="playlist" className="z-10 opacity-0">
           <div className="block" id="playlist-border">
@@ -203,7 +196,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
           >
             <img
               id="now-playing"
-              className="absolute left-[105.5px] top-[42%] z-[3] w-[28px]"
+              className="absolute left-[105px] top-[41.5%] z-[3] w-[30px]"
               src="./images/small-logo.png"
             ></img>
             <img

@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Close from "@mui/icons-material/Close";
 
-const EventCard: React.FC<EventCardProps> = ({ event, fetchEvents }) => {
+const EventCard: React.FC<EventCardProps> = ({ event }) => {
   const formattedDate = new Date(event.date).toLocaleDateString("en-US", {
     timeZone: "UTC",
   });
