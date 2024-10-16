@@ -8,7 +8,7 @@ import { useOutsideClick } from "@/hooks/use-outside-click";
 
 import { EventCardProps } from "@/types/events";
 
-import EventCard from "@/components/event-card-2/EventCard";
+import EventCard from "@/components/event-card/EventCard";
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileHeading from "@/components/mobile-heading/MobileHeading";
 import Loading from "@/components/loading/Loading";

@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Script from "next/script";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -67,32 +66,26 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <>
-      <html lang="en">
-        <Head>
-          <Script
-            id="mcjs"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/783ca62931283b3104dae7fdb/5f76e1f7d9803b38a26cab6bc.js");`,
-            }}
-          />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-          />
-          <title>Legend Has It</title>
-        </Head>
-        <body className={inter.className}>
-          <BackgroundOverlay />
-          {children}
-          <MusicPlayer tracks={tracks} />
-        </body>
-      </html>
-    </>
+    <html lang="en">
+      <head>
+        <Script
+          id="mcjs"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/783ca62931283b3104dae7fdb/5f76e1f7d9803b38a26cab6bc.js");`,
+          }}
+        />
+        <title>Legend Has It</title>
+      </head>
+      <body className={inter.className}>
+        <BackgroundOverlay />
+        {children}
+        <MusicPlayer tracks={tracks} />
+      </body>
+    </html>
   );
 }
