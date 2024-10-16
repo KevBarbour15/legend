@@ -107,12 +107,18 @@ const SideMenu: React.FC = () => {
             rel="noopener noreferrer"
             href="https://www.google.com/maps/dir//410+L+St,+Sacramento,+CA+95814/@38.5798987,-121.5844553,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x809ad12b9928b091:0x8fd24ebe337fbfe7!2m2!1d-121.5020543!2d38.5799276?entry=ttu&g_ep=EgoyMDI0MDkwNC4wIKXMDSoASAFQAw%3D%3D"
           >
-            <div id="menu-text" className="flex justify-between text-5xl">
+            <div
+              id="menu-text"
+              className="flex justify-between text-5xl leading-none"
+            >
               <p>410</p>
               <p>L</p>
               <p>St</p>
             </div>
-            <p id="menu-text" className="flex justify-between text-2xl">
+            <p
+              id="menu-text"
+              className="flex justify-between text-2xl leading-none"
+            >
               <span>S</span>
               <span>a</span>
               <span>c</span>
@@ -124,7 +130,10 @@ const SideMenu: React.FC = () => {
               <span>t</span>
               <span>o</span>
             </p>
-            <div id="menu-text" className="flex justify-between text-5xl">
+            <div
+              id="menu-text"
+              className="flex justify-between text-5xl leading-none"
+            >
               <p>CA,</p>
               <p>95814</p>
             </div>

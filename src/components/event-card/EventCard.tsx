@@ -62,7 +62,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
             </motion.button>
             <motion.div
               layoutId={`card-${event._id}`}
-              className="relative flex h-fit max-h-[85vh] w-full flex-col overflow-hidden rounded-lg border border-customGold bg-customNavy px-3 pt-3 drop-shadow-text sm:max-h-[95vh] sm:max-w-[425px] md:px-3"
+              className="relative flex h-fit max-h-[85svh] w-full flex-col overflow-hidden rounded-lg border border-customGold bg-customNavy px-3 pt-3 drop-shadow-text sm:max-h-[95vh] sm:max-w-[425px] md:px-3"
             >
               {event.is_photo ? (
                 <motion.div
@@ -75,7 +75,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                     height={300}
                     src={event.image_url}
                     alt={event.title}
-                    className="aspect-square w-full rounded-t-lg border-b border-customGold object-cover object-center pb-3"
+                    className="aspect-square w-full rounded-t-lg object-cover object-center"
                   />
                 </motion.div>
               ) : (
@@ -85,7 +85,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                 >
                   <video
                     src={event.image_url}
-                    className="aspect-square w-full rounded-t-lg border-b border-customGold object-cover object-center pb-3"
+                    className="aspect-square w-full rounded-t-lg object-cover object-center"
                     loop
                     autoPlay
                     muted
@@ -94,29 +94,33 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                 </motion.div>
               )}
 
-              <div className="mt-3">
-                <motion.h3
-                  layoutId={`title-${event._id}`}
-                  className="text-balance text-left font-bigola text-2xl text-customGold"
-                >
+              <motion.h2
+                layoutId={`title-${event._id}`}
+                className="text-balance py-3 text-left font-bigola text-xl text-customGold"
+              >
+                <h2 className="leading-none sm:text-2xl md:text-3xl">
                   {event.title}
-                </motion.h3>
-              </div>
-              <div className="flex items-center justify-between text-nowrap border-b border-customGold pb-3 font-hypatia text-base text-customWhite md:py-3">
-                <motion.h3 layoutId={`date-${event._id}`}>
-                  {formattedDate}
-                </motion.h3>
+                </h2>
+              </motion.h2>
+
+              <div className="flex items-center justify-between text-nowrap border-b border-customGold pb-3 font-hypatia text-base text-customWhite">
+                <motion.p layoutId={`date-${event._id}`}>
+                  <p className="leading-none">{formattedDate}</p>
+                </motion.p>
 
                 <Divider borderColor={"border-customWhite"} />
 
-                <motion.h3 layoutId={`time-${event._id}`}>
-                  {formattedTime}
-                </motion.h3>
+                <motion.p
+                  layoutId={`time-${event._id}`}
+                  className="leading-none"
+                >
+                  <p className="leading-none">{formattedTime}</p>
+                </motion.p>
               </div>
               <div className="flex-grow overflow-y-auto [mask:linear-gradient(to_bottom,transparent,white,white,white,white,white,white,white,white,white,transparent)]">
                 <motion.p
                   layoutId={`description-${event._id}`}
-                  className="py-3 font-hypatia text-lg text-customWhite"
+                  className="py-3 font-hypatia text-lg leading-tight text-customWhite"
                 >
                   {event.description}
                 </motion.p>
@@ -168,21 +172,20 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
               />
             </motion.div>
           )}
-          <div className="flex w-full">
-            <div className="flex w-full flex-col justify-end border-b border-dashed md:pb-3">
-              <motion.h3
-                layoutId={`date-${event._id}`}
-                className="text-left font-bigola text-base text-customWhite md:text-2xl"
-              >
-                {formattedDate}
-              </motion.h3>
-              <motion.h3
-                layoutId={`title-${event._id}`}
-                className="text-balance font-bigola text-2xl text-customGold sm:text-4xl md:text-5xl lg:w-3/4"
-              >
-                {event.title}
-              </motion.h3>
-            </div>
+
+          <div className="flex w-full flex-col justify-end border-b border-customGold pb-2 md:pb-3">
+            <motion.p
+              layoutId={`date-${event._id}`}
+              className="text-left font-bigola text-sm text-customGold md:text-2xl"
+            >
+              {formattedDate}
+            </motion.p>
+            <motion.h3
+              layoutId={`title-${event._id}`}
+              className="text-balance font-bigola text-2xl leading-none text-customCream sm:text-4xl md:text-5xl lg:w-3/4"
+            >
+              {event.title}
+            </motion.h3>
           </div>
         </div>
       </motion.div>

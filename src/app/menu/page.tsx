@@ -97,7 +97,6 @@ const Menu: React.FC = ({}) => {
   }, [displayMenu]);
 
   useEffect(() => {
-    console.log("called");
     let isMounted = true;
     const fetchMenuData = async () => {
       if (isMounted) {
@@ -129,17 +128,17 @@ const Menu: React.FC = ({}) => {
       className="block text-nowrap pb-3 font-hypatia text-base text-customWhite md:text-lg"
     >
       <div className="flex w-full justify-between font-bigola text-lg text-customGold md:text-2xl">
-        <p className="text-left">{item.name}</p>
+        <p className="text-left leading-none">{item.name}</p>
         <Divider borderColor={"border-customWhite"} />
-        <p className="text-right">{item.price}</p>
+        <p className="text-right leading-none">{item.price}</p>
       </div>
-      <div className="mt-1 flex w-full justify-between">
-        <p className="font-hypatiaSemibold">{item.brand}</p>
+      <div className="mt-1 flex w-full justify-between font-hypatiaSemibold leading-tight">
+        <p>{item.brand}</p>
         <Divider borderColor={"border-customWhite"} />
         <p>{item.description}</p>
       </div>
       {item.city && item.abv && (
-        <div className="mt-1 flex w-full justify-between">
+        <div className="mt-1 flex w-full justify-between leading-none">
           <p>
             {item.city}
             <span>, CA</span>
@@ -163,10 +162,10 @@ const Menu: React.FC = ({}) => {
           key={childCategory.id}
         >
           <AccordionTrigger
-            className="cursor-pointer text-lg text-customCream md:text-3xl"
+            className="cursor-pointer font-bigola text-xl leading-none text-customCream md:text-4xl"
             icon={<BeerBottle weight="duotone" />}
           >
-            <h3 className="font-bigola">{childCategory.name}</h3>
+            <h3>{childCategory.name}</h3>
           </AccordionTrigger>
           <AccordionContent className="border-customGold">
             {childCategory.items.map(renderMenuItem)}
@@ -192,7 +191,7 @@ const Menu: React.FC = ({}) => {
             id="event-subheading"
             className="flex h-[50vh] w-full items-center justify-center"
           >
-            <h2 className="mb-6 mt-3 text-center font-bigola text-3xl text-customCream md:text-4xl">
+            <h2 className="my-3 text-center font-bigola text-3xl text-customCream md:text-4xl">
               Error loading menu. Please try again.
             </h2>
           </div>
@@ -209,10 +208,10 @@ const Menu: React.FC = ({}) => {
                   key={categoryName}
                 >
                   <AccordionTrigger
-                    className="text-customCream"
+                    className="cursor-pointer font-bigola text-xl leading-none text-customCream md:text-4xl"
                     icon={getIcon(categoryName)}
                   >
-                    <h2 className="font-bigola">{categoryName}</h2>
+                    <h2>{categoryName}</h2>
                   </AccordionTrigger>
                   <AccordionContent
                     className={`border-customGold ${categoryName === "Canned / Bottled" ? "pt-0" : ""}`}
