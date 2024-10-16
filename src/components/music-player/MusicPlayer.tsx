@@ -2,6 +2,8 @@
 import { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
+import { MusicPlayerProps } from "@/types/music-player";
+
 import gsap from "gsap";
 
 import { useGSAP } from "@gsap/react";
@@ -24,17 +26,8 @@ import {
 
 import Equalizer from "@/components/equalizer/Equalizer";
 
-interface Track {
-  title: string;
-  url: string;
-  artist: string;
-}
-interface MusicPlayerProps {
-  tracks: Track[];
-}
-
 const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
-  const [playing, setPlaying] = useState<boolean>(false);
+  const [playing, setPlaying] = useState<boolean>(true);
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
   const [mute, setMute] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
@@ -140,7 +133,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
     >
       <div
         id="player-container"
-        className="flex flex-col rounded-t-md border border-customGold bg-customNavy md:mb-6 md:ml-6 md:mr-0 md:rounded-lg"
+        className="flex flex-col rounded-t-lg border border-customGold bg-customNavy drop-shadow-text md:mb-6 md:ml-6 md:mr-0 md:rounded-lg"
       >
         <Collapse in={playlistVisible} id="playlist" className="z-10 opacity-0">
           <div className="block" id="playlist-border">
@@ -201,7 +194,6 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             className="relative border-b border-customGold p-2"
             id="playlist-border"
           >
-            <div className="absolute left-[119px] top-[48.85%] z-[4] h-[3px] w-[3px] rounded-full bg-black"></div>
             <img
               id="now-playing"
               className="absolute left-[105px] top-[41.5%] z-[3] w-[30px]"

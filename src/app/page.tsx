@@ -59,28 +59,6 @@ export default function Home() {
         0,
       )
       .to(
-        "#player-container",
-        {
-          //backgroundColor: "#dfcfc0",
-          //borderColor: "#244154",
-        },
-        0,
-      )
-      .to(
-        "#playlist-border",
-        {
-          //borderColor: "#244154",
-        },
-        0,
-      )
-      .to(
-        "#player-toggle",
-        {
-          //color: "#244154",
-        },
-        0,
-      )
-      .to(
         "#hidden-bg",
         {
           opacity: 1,
@@ -218,7 +196,7 @@ export default function Home() {
           </div>
           <div className="mt-6 hidden w-full items-center justify-end md:flex">
             <LoginLink postLoginRedirectURL="/dashboard">
-              <Button className="border border-customNavy bg-transparent font-bigola text-base font-bold text-customNavy transition-all hover:bg-customNavy hover:text-customCream">
+              <Button className="border border-customNavy bg-transparent font-bigola text-base font-bold text-customNavy transition-all hover:bg-customGold hover:drop-shadow-record">
                 <span className="mr-3">Owner</span>
                 <Key />
               </Button>

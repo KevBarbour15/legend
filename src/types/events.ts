@@ -12,7 +12,6 @@ export interface Event {
 
 export interface EventCardProps {
   event: Event;
-  fetchEvents: () => void;
 }
 
 export interface DashEventCardProps {

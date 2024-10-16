@@ -132,8 +132,8 @@ const config: Config = {
         },
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        "accordion-down": "accordion-down 0.35s linear",
+        "accordion-up": "accordion-up 0.35s linear",
       },
     },
   },

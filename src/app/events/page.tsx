@@ -2,7 +2,13 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Event } from "@/types/events";
 
-import EventCard from "@/components/event-card/EventCard";
+import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
+import { useOutsideClick } from "@/hooks/use-outside-click";
+
+import { EventCardProps } from "@/types/events";
+
+import EventCard from "@/components/event-card-2/EventCard";
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileHeading from "@/components/mobile-heading/MobileHeading";
 import Loading from "@/components/loading/Loading";
@@ -169,27 +175,20 @@ export default function Events() {
               <TabsTrigger value="past">Past Events</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="upcoming" className="w-full">
+            <TabsContent value="upcoming" className="w-full space-y-3">
               {upcomingEvents.length > 0 ? (
-                <div>
+                <>
                   {upcomingEvents.map((event, index) => (
                     <div
                       key={event._id}
                       ref={(el) => {
                         upcomingEventRefs.current[index] = el;
                       }}
-                      className={`w-full border-t border-customGold opacity-0 ${
-                        index === upcomingEvents.length - 1 ? "border-b" : ""
-                      }`}
                     >
-                      <EventCard
-                        fetchEvents={fetchEvents}
-                        key={index}
-                        event={event}
-                      />
+                      <EventCard key={index} event={event} />
                     </div>
                   ))}
-                </div>
+                </>
               ) : (
                 <div className="flex w-full flex-col items-center justify-center text-center">
                   <EmptyMessage
@@ -201,25 +200,18 @@ export default function Events() {
             </TabsContent>
             <TabsContent value="past" className="w-full">
               {pastEvents.length > 0 ? (
-                <div>
+                <>
                   {pastEvents.map((event, index) => (
                     <div
                       key={event._id}
                       ref={(el) => {
                         pastEventRefs.current[index] = el;
                       }}
-                      className={`w-full border-t border-customGold opacity-0 ${
-                        index === pastEvents.length - 1 ? "border-b" : ""
-                      }`}
                     >
-                      <EventCard
-                        fetchEvents={fetchEvents}
-                        key={index}
-                        event={event}
-                      />
+                      <EventCard key={index} event={event} />
                     </div>
                   ))}
-                </div>
+                </>
               ) : (
                 <div className="flex w-full flex-col items-center justify-center text-center">
                   <EmptyMessage
