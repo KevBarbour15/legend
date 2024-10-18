@@ -1,8 +1,8 @@
 import { Client, Environment, CatalogObject } from "square";
 import { NextResponse } from "next/server";
 
-import { saveFallbackMenu } from "@/app/actions/saveFallbackMenu";
-import { getFallbackMenu } from "@/app/actions/getFallbackMenu";
+import { saveFallbackMenu } from "@/app/actions/saveFallbackMenu.server";
+import { getFallbackMenu } from "@/app/actions/getFallbackMenu.server";
 
 import {
   MenuStructure,

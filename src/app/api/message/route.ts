@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import Message from "@/models/Message";
 import { connectToMongoDB } from "@/lib/db";
 
+import { sendNotificationEmail } from "@/app/actions/sendNotificationEmail.server";
+
 // GET request handler ************************************************************************************************
 export async function GET(req: NextRequest) {
   await connectToMongoDB();
@@ -46,7 +48,28 @@ export async function POST(req: NextRequest) {
       message: message,
     });
 
-    await newMessage.save();
+    const response = await newMessage.save();
+
+    if (response._id) {
+      const subject = `New message from ${firstName} ${lastName}.`;
+      const text = `You have received a new message from ${firstName} ${lastName}.
+
+Email: ${email}
+
+Phone: ${phone}
+
+Message: ${message}`;
+      
+      
+      try {
+        await sendNotificationEmail({
+          subject: subject,
+          text: text,
+        });
+      } catch (error) {
+        console.log("Error sending email: ", error);
+      }
+    }
 
     return NextResponse.json(
       { message: "Message successfully sent." },
