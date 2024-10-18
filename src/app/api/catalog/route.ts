@@ -31,30 +31,34 @@ export async function GET() {
       environment: Environment.Production,
     });
 
-    const response = await client.catalogApi.listCatalog(
-      undefined,
-      "ITEM,CATEGORY,ITEM_VARIATION",
+    let allObjects: CatalogObject[] = [];
+    let cursor: string | undefined;
+    let pageCount = 0;
+
+    do {
+      const response = await client.catalogApi.listCatalog(
+        cursor,
+        "ITEM,CATEGORY,ITEM_VARIATION",
+      );
+      pageCount++;
+
+      allObjects = allObjects.concat(response.result.objects || []);
+      cursor = response.result.cursor;
+    } while (cursor);
+
+    const categories = allObjects.filter(
+      (obj): obj is CatalogObject =>
+        obj.type === "CATEGORY" &&
+        obj.categoryData?.categoryType === "REGULAR_CATEGORY" &&
+        obj.categoryData?.name !== "Merchandise" &&
+        obj.categoryData?.name !== "Sake and Soju" &&
+        obj.categoryData?.name !== "Bar Menu",
     );
 
-    const categories =
-      response.result.objects?.filter(
-        (obj): obj is CatalogObject =>
-          obj.type === "CATEGORY" &&
-          obj.categoryData?.categoryType === "REGULAR_CATEGORY" &&
-          obj.categoryData?.name !== "Merchandise" &&
-          obj.categoryData?.name !== "Sake and Soju" &&
-          obj.categoryData?.name !== "Bar Menu",
-      ) || [];
-
-    /**
-     * Check if the categories have changed.
-     * If the categories have changed, log an error and return the fallback menu
-     */
     const categoriesArr: string[] = [];
-
     categories.forEach((category) => {
       if (category.categoryData?.name) {
-        categoriesArr.push(category.categoryData?.name);
+        categoriesArr.push(category.categoryData.name);
       }
     });
 
@@ -105,9 +109,8 @@ export async function GET() {
     });
 
     const items =
-      response.result.objects?.filter(
-        (obj): obj is CatalogObject => obj.type === "ITEM",
-      ) || [];
+      allObjects.filter((obj): obj is CatalogObject => obj.type === "ITEM") ||
+      [];
 
     const variationIds = items.flatMap(
       (item) =>

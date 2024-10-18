@@ -10,8 +10,6 @@
  * in the Square API.
  */
 
-import path from "path";
-
 export const CURRENT_CATEGORIES: string[] = [
   "Lagers, Pilsners, Kolsch",
   "IPAs",
