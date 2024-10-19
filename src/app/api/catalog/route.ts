@@ -171,6 +171,7 @@ async function fetchInventory(
         catalogObjectIds: batchIds,
         locationIds: [BAR_INVENTORY_LOCATION_ID],
         cursor,
+        states: ["IN_STOCK"],
       });
 
     allInventoryCounts = allInventoryCounts.concat(
