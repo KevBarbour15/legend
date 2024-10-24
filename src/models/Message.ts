@@ -1,23 +1,26 @@
 import mongoose, { Document, Schema } from "mongoose";
 export interface IMessage extends Document {
-  firstName: string;
-  lastName: string;
+  formType: string;
+  name: string;
   email: string;
   phone: string;
-  preferredDate: string;
+  eventDate?: string;
+  eventTime?: string;
+  eventType?: string;
+  guests?: number;
+  musicType?: string;
   sentAt: Date;
-  howDidYouHear: string;
-  budget: string;
   message: string;
   read: boolean;
+  contacted: boolean;
 }
 
 const MessageSchema: Schema = new Schema({
-  firstName: {
+  formType: {
     type: String,
     required: true,
   },
-  lastName: {
+  name: {
     type: String,
     required: true,
   },
@@ -29,19 +32,27 @@ const MessageSchema: Schema = new Schema({
     type: String,
     required: true,
   },
-  preferredDate: {
+  eventDate: {
     type: String,
-    required: true,
+    required: false,
+  },
+  eventType: {
+    type: String,
+    required: false,
+  },
+  eventTime: {
+    type: String,
+    required: false,
   },
   sentAt: {
     type: Date,
     default: Date.now,
   },
-  howDidYouHear: {
-    type: String,
+  guests: {
+    type: Number,
     required: false,
   },
-  budget: {
+  musicType: {
     type: String,
     required: false,
   },

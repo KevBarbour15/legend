@@ -1,61 +1,62 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
 
 import { EqualizerProps } from "@/types/equalizer";
 
 const Equalizer: React.FC<EqualizerProps> = ({ playing }) => {
-  const bar1Ref = useRef(null);
-  const bar2Ref = useRef(null);
-  const bar3Ref = useRef(null);
-  const bar4Ref = useRef(null);
-  const bar5Ref = useRef(null);
-  const bar6Ref = useRef(null);
-  const tlRef = useRef<gsap.core.Timeline | null>(null);
+  const barRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const animationRef = useRef(null);
 
-  useGSAP(() => {
-    const bars = [
-      bar1Ref.current,
-      bar2Ref.current,
-      bar3Ref.current,
-      bar4Ref.current,
-      bar5Ref.current,
-      bar6Ref.current,
-    ];
-
-    tlRef.current = gsap.timeline({ repeat: -1, yoyo: true, paused: true });
-
-    bars.forEach((bar, index) => {
-      tlRef.current!.to(
-        bar,
-        {
-          height: gsap.utils.random(10, 35),
-          duration: gsap.utils.random(0.15, 0.5),
-          ease: "linear",
-        },
-        0.025,
-      );
+  const animateBars = useCallback(() => {
+    barRefs.current.forEach((bar) => {
+      if (bar) {
+        gsap.to(bar, {
+          height: `${gsap.utils.random(2, 30)}px`,
+          duration: gsap.utils.random(0.2, 0.35),
+          ease: "bounce",
+        });
+      }
     });
-
-    return () => tlRef.current?.kill();
   }, []);
 
   useEffect(() => {
+    let interval: any;
+
     if (playing) {
-      tlRef.current?.play();
-    } else {
-      tlRef.current?.pause();
+      animateBars();
+
+      interval = setInterval(() => {
+        animateBars();
+      }, 200);
     }
-  }, [playing]);
+
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+      barRefs.current.forEach((bar) => {
+        if (bar) {
+          gsap.to(bar, {
+            height: "8px",
+            duration: 0.5,
+          });
+        }
+      });
+    };
+  }, [playing, animateBars]);
 
   return (
-    <div className="mr-1 flex h-10 items-end justify-center space-x-[1.5px] overflow-hidden shadow-md">
-      <div ref={bar1Ref} className="h-1 w-0.5 rounded-full bg-customGold" />
-      <div ref={bar2Ref} className="h-3 w-0.5 rounded-full bg-customGold" />
-      <div ref={bar3Ref} className="h-2 w-0.5 rounded-full bg-customGold" />
-      <div ref={bar4Ref} className="h-4 w-0.5 rounded-full bg-customGold" />
-      <div ref={bar5Ref} className="h-1 w-0.5 rounded-full bg-customGold" />
-      <div ref={bar6Ref} className="h-3 w-0.5 rounded-full bg-customGold" />
+    <div className="mr-1 flex items-center justify-center space-x-[1px]">
+      {[...Array(5)].map((_, index) => (
+        <div
+          key={index}
+          ref={(el) => {
+            barRefs.current[index] = el;
+          }}
+          className="w-[2.25px] rounded-full bg-customGold transition-all"
+          style={{ minHeight: "2px" }}
+        />
+      ))}
     </div>
   );
 };

@@ -2,12 +2,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Event } from "@/types/events";
 
-import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
-import { useOutsideClick } from "@/hooks/use-outside-click";
-
-import { EventCardProps } from "@/types/events";
-
 import EventCard from "@/components/event-card/EventCard";
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileHeading from "@/components/mobile-heading/MobileHeading";

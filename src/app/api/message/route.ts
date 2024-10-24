@@ -27,40 +27,55 @@ export async function POST(req: NextRequest) {
 
   try {
     const {
-      firstName,
-      lastName,
+      name,
       email,
       phone,
-      preferredDate,
-      budget,
-      howDidYouHear,
       message,
+      formType,
+      eventDate,
+      eventType,
+      musicType,
+      guests,
+      eventTime,
     } = await req.json();
 
-    const newMessage = new Message({
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      phone: phone,
-      preferredDate: preferredDate,
-      budget: budget,
-      howDidYouHear: howDidYouHear,
-      message: message,
-    });
+    let newMessage;
 
+    if (formType === "event") {
+      newMessage = new Message({
+        name: name,
+        email: email,
+        phone: phone,
+        message: message,
+        formType: formType,
+        eventDate: eventDate,
+        eventTime: eventTime,
+        eventType: eventType,
+        musicType: musicType,
+        guests: guests,
+      });
+    } else {
+      newMessage = new Message({
+        name: name,
+        email: email,
+        phone: phone,
+        message: message,
+        formType: formType,
+      });
+    }
+  
     const response = await newMessage.save();
 
     if (response._id) {
-      const subject = `New message from ${firstName} ${lastName}.`;
-      const text = `You have received a new message from ${firstName} ${lastName}.
+      const subject = `New message from ${name}.`;
+      const text = `You have received a new message from ${name}.
 
 Email: ${email}
 
 Phone: ${phone}
 
 Message: ${message}`;
-      
-      
+
       try {
         await sendNotificationEmail({
           subject: subject,

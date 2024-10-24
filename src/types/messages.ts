@@ -1,13 +1,15 @@
 export interface Message {
   _id: string;
-  firstName: string;
-  lastName: string;
+  formType: string;
+  name: string;
   email: string;
   phone: string;
-  preferredDate: string;
+  eventDate?: Date;
+  eventTime?: string;
+  eventType?: string;
+  guests?: number;
+  musicType?: string;
   sentAt: Date;
-  howDidYouHear: string;
-  budget: string;
   message: string;
   read: boolean;
   contacted: boolean;
