@@ -13,7 +13,7 @@ const Equalizer: React.FC<EqualizerProps> = ({ playing }) => {
         gsap.to(bar, {
           height: `${gsap.utils.random(2, 30)}px`,
           duration: gsap.utils.random(0.2, 0.35),
-          ease: "bounce",
+          ease: "linear",
         });
       }
     });
@@ -37,7 +37,7 @@ const Equalizer: React.FC<EqualizerProps> = ({ playing }) => {
       barRefs.current.forEach((bar) => {
         if (bar) {
           gsap.to(bar, {
-            height: "8px",
+            height: "4px",
             duration: 0.5,
           });
         }
@@ -47,13 +47,13 @@ const Equalizer: React.FC<EqualizerProps> = ({ playing }) => {
 
   return (
     <div className="mr-1 flex items-center justify-center space-x-[1px]">
-      {[...Array(5)].map((_, index) => (
+      {[...Array(6)].map((_, index) => (
         <div
           key={index}
           ref={(el) => {
             barRefs.current[index] = el;
           }}
-          className="w-[2.25px] rounded-full bg-customGold transition-all"
+          className="w-[2px] rounded-full bg-customGold transition-all"
           style={{ minHeight: "2px" }}
         />
       ))}

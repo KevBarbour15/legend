@@ -16,25 +16,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
-const djFormSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().min(1, "Phone number is required"),
-  eventDate: z.date({
-    required_error: "Date of event is required",
-  }),
-  message: z.string().min(1, "Message is required"),
-});
+import { baseFormSchema, FormData, DjFormProps } from "@/types/forms";
 
-type djFormProps = {
-  onSubmit: (values: z.infer<typeof djFormSchema>) => Promise<void>;
-};
-
-export default function DjForm({ onSubmit }: djFormProps) {
+export default function GeneralForm({ onSubmit }: DjFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
 
-  const form = useForm<z.infer<typeof djFormSchema>>({
-    resolver: zodResolver(djFormSchema),
+  const form = useForm<FormData>({
+    resolver: zodResolver(baseFormSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -47,18 +35,16 @@ export default function DjForm({ onSubmit }: djFormProps) {
     if (!formRef.current) return;
 
     gsap.set(".form-field", {
-      x: "50%",
+      y: "-50",
       opacity: 0,
-      rotateX: 45,
     });
 
     gsap.to(".form-field", {
       delay: 0.15,
-      duration: 0.4,
-      stagger: 0.125,
-      x: 0,
+      duration: 0.25,
+      stagger: 0.075,
+      y: 0,
       opacity: 1,
-      rotateX: 0,
     });
   }, []);
 
@@ -81,8 +67,10 @@ export default function DjForm({ onSubmit }: djFormProps) {
             name="name"
             render={({ field }) => (
               <FormItem className="flex-1">
-                <FormLabel>Name</FormLabel>
-                <FormControl>
+                <FormLabel className="font-bigola text-customCream">
+                  Name
+                </FormLabel>
+                <FormControl className="border border-customGold font-hypatia text-customCream">
                   <Input {...field} />
                 </FormControl>
                 <FormMessage />
@@ -95,8 +83,10 @@ export default function DjForm({ onSubmit }: djFormProps) {
           name="email"
           render={({ field }) => (
             <FormItem className="form-field w-full opacity-0">
-              <FormLabel>Email</FormLabel>
-              <FormControl>
+              <FormLabel className="font-bigola text-customCream">
+                Email
+              </FormLabel>
+              <FormControl className="border border-customGold font-hypatia text-customCream">
                 <Input type="email" {...field} />
               </FormControl>
               <FormMessage />
@@ -108,8 +98,10 @@ export default function DjForm({ onSubmit }: djFormProps) {
           name="phone"
           render={({ field }) => (
             <FormItem className="form-field w-full opacity-0">
-              <FormLabel>Phone</FormLabel>
-              <FormControl>
+              <FormLabel className="font-bigola text-customCream">
+                Phone
+              </FormLabel>
+              <FormControl className="border border-customGold font-hypatia text-customCream">
                 <Input type="tel" {...field} />
               </FormControl>
               <FormMessage />
@@ -122,8 +114,10 @@ export default function DjForm({ onSubmit }: djFormProps) {
           name="message"
           render={({ field }) => (
             <FormItem className="form-field w-full opacity-0">
-              <FormLabel>Experience, style, etc</FormLabel>
-              <FormControl>
+              <FormLabel className="font-bigola text-customCream">
+                Experience, style, etc
+              </FormLabel>
+              <FormControl className="border border-customGold font-hypatia text-customCream">
                 <Textarea {...field} />
               </FormControl>
               <FormMessage />
@@ -132,7 +126,7 @@ export default function DjForm({ onSubmit }: djFormProps) {
         />
         <Button
           type="submit"
-          className="form-field mx-auto w-full rounded-lg border border-customGold bg-customNavy p-3 font-bigola text-2xl text-customGold opacity-0 sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
+          className="form-field mx-auto w-full rounded-lg border border-customGold bg-customNavy p-3 font-bigola text-2xl text-customCream opacity-0 sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
         >
           Submit
         </Button>

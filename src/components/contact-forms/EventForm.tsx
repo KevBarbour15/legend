@@ -52,18 +52,16 @@ export default function EventForm({ onSubmit }: EventFormProps) {
     if (!formRef.current) return;
 
     gsap.set(".form-field", {
-      x: "50%",
+      y: "-50",
       opacity: 0,
-      rotateX: 45,
     });
 
     gsap.to(".form-field", {
       delay: 0.15,
-      duration: 0.2,
+      duration: 0.25,
       stagger: 0.075,
-      x: 0,
+      y: 0,
       opacity: 1,
-      rotateX: 0,
     });
   }, []);
 
@@ -88,8 +86,10 @@ export default function EventForm({ onSubmit }: EventFormProps) {
             name="name"
             render={({ field }) => (
               <FormItem className="flex-1">
-                <FormLabel>Name</FormLabel>
-                <FormControl>
+                <FormLabel className="font-bigola text-customCream">
+                  Name
+                </FormLabel>
+                <FormControl className="border border-customGold font-hypatia text-customCream">
                   <Input {...field} />
                 </FormControl>
                 <FormMessage />
@@ -102,8 +102,10 @@ export default function EventForm({ onSubmit }: EventFormProps) {
           name="email"
           render={({ field }) => (
             <FormItem className="form-field w-full opacity-0">
-              <FormLabel>Email</FormLabel>
-              <FormControl>
+              <FormLabel className="font-bigola text-customCream">
+                Email
+              </FormLabel>
+              <FormControl className="border border-customGold font-hypatia text-customCream">
                 <Input type="email" {...field} />
               </FormControl>
               <FormMessage />
@@ -115,8 +117,10 @@ export default function EventForm({ onSubmit }: EventFormProps) {
           name="phone"
           render={({ field }) => (
             <FormItem className="form-field w-full opacity-0">
-              <FormLabel>Phone</FormLabel>
-              <FormControl>
+              <FormLabel className="font-bigola text-customCream">
+                Phone
+              </FormLabel>
+              <FormControl className="border border-customGold font-hypatia text-customCream">
                 <Input type="tel" {...field} />
               </FormControl>
               <FormMessage />
@@ -128,8 +132,10 @@ export default function EventForm({ onSubmit }: EventFormProps) {
           name="eventDate"
           render={({ field }) => (
             <FormItem className="form-field w-full opacity-0">
-              <FormLabel>Date of event</FormLabel>
-              <FormControl>
+              <FormLabel className="font-bigola text-customCream">
+                Date of event
+              </FormLabel>
+              <FormControl className="border border-customGold font-hypatia text-customCream">
                 <DatePicker
                   value={field.value}
                   onChange={(date: Date | undefined) => field.onChange(date)}
@@ -144,8 +150,10 @@ export default function EventForm({ onSubmit }: EventFormProps) {
           name="eventTime"
           render={({ field }) => (
             <FormItem className="form-field w-full opacity-0">
-              <FormLabel>Time of interest: (1-4 pm, 3-10 pm, etc.)</FormLabel>
-              <FormControl>
+              <FormLabel className="font-bigola text-customCream">
+                Time of interest: (1-4 pm, 3-10 pm, etc.)
+              </FormLabel>
+              <FormControl className="border border-customGold font-hypatia text-customCream">
                 <Input {...field} />
               </FormControl>
               <FormMessage />
@@ -157,9 +165,11 @@ export default function EventForm({ onSubmit }: EventFormProps) {
           name="eventType"
           render={({ field }) => (
             <FormItem className="form-field w-full opacity-0">
-              <FormLabel>Type of event</FormLabel>
+              <FormLabel className="font-bigola text-customCream">
+                Type of event
+              </FormLabel>
               <Select onValueChange={field.onChange} value={field.value}>
-                <FormControl>
+                <FormControl className="border border-customGold font-hypatia text-customCream">
                   <SelectTrigger>
                     <SelectValue placeholder="Select event type" />
                   </SelectTrigger>
@@ -182,12 +192,14 @@ export default function EventForm({ onSubmit }: EventFormProps) {
           name="guests"
           render={({ field }) => (
             <FormItem className="form-field w-full opacity-0">
-              <FormLabel>Number of guests</FormLabel>
+              <FormLabel className="font-bigola text-customCream">
+                Number of guests
+              </FormLabel>
               <Select
                 onValueChange={(value) => field.onChange(Number(value))}
                 value={field.value?.toString()}
               >
-                <FormControl>
+                <FormControl className="border border-customGold font-hypatia text-customCream">
                   <SelectTrigger>
                     <SelectValue placeholder="Select number" />
                   </SelectTrigger>
@@ -209,9 +221,11 @@ export default function EventForm({ onSubmit }: EventFormProps) {
           name="musicType"
           render={({ field }) => (
             <FormItem className="form-field w-full opacity-0">
-              <FormLabel>Music options</FormLabel>
+              <FormLabel className="font-bigola text-customCream">
+                Music options
+              </FormLabel>
               <Select onValueChange={field.onChange} value={field.value}>
-                <FormControl>
+                <FormControl className="border border-customGold font-hypatia text-customCream">
                   <SelectTrigger>
                     <SelectValue placeholder="Select event type" />
                   </SelectTrigger>
@@ -238,8 +252,10 @@ export default function EventForm({ onSubmit }: EventFormProps) {
           name="message"
           render={({ field }) => (
             <FormItem className="form-field w-full opacity-0">
-              <FormLabel>What else should we know?</FormLabel>
-              <FormControl>
+              <FormLabel className="font-bigola text-customCream">
+                What else should we know?
+              </FormLabel>
+              <FormControl className="border border-customGold font-hypatia text-customCream">
                 <Textarea {...field} />
               </FormControl>
               <FormMessage />
@@ -248,7 +264,7 @@ export default function EventForm({ onSubmit }: EventFormProps) {
         />
         <Button
           type="submit"
-          className="form-field mx-auto w-full rounded-lg border border-customGold bg-customNavy p-3 font-bigola text-2xl text-customGold opacity-0 sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
+          className="form-field mx-auto w-full rounded-lg border border-customGold bg-customNavy p-3 font-bigola text-2xl text-customCream opacity-0 sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
         >
           Submit
         </Button>

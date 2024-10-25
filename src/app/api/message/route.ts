@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
 // POST request handler ************************************************************************************************
 export async function POST(req: NextRequest) {
   await connectToMongoDB();
-
+  console.log("POST request received.");
   try {
     const {
       name,
