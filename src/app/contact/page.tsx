@@ -1,141 +1,62 @@
 "use client";
 import { useState, useRef } from "react";
-
-import { ContactForm } from "@/types/contact";
-
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileHeading from "@/components/mobile-heading/MobileHeading";
+import EventForm from "@/components/contact-forms/EventForm";
+import GeneralForm from "@/components/contact-forms/GeneralForm";
+import DjForm from "@/components/contact-forms/DjForm";
 
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-
-import customTheme from "@/app/customTheme";
-import { Button } from "@mui/material";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { ThemeProvider, useTheme } from "@mui/material/styles";
-
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
-
-const initialForm: ContactForm = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  phone: "",
-  howDidYouHear: "",
-  preferredDate: null,
-  message: "",
-  error: "",
-};
+import { FormData, FormType } from "@/types/forms.ts";
 
 export default function Contact() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const tl = useRef<gsap.core.Timeline | null>(null);
-  const outerTheme = useTheme();
+  const [activeTab, setActiveTab] = useState<FormType>("event");
 
-  const [contactForm, setContactForm] = useState<ContactForm>(initialForm);
-
-  useGSAP(() => {
-    if (!containerRef.current) return;
-
-    gsap.set("#section-heading", {
-      opacity: 0,
-    });
-
-    gsap.set("#form #input-section", {
-      x: "50%",
-      opacity: 0,
-      rotateX: 45,
-    });
-
-    tl.current = gsap
-      .timeline({})
-      .to("#section-heading", {
-        duration: 0.35,
-        opacity: 1,
-        delay: 0.05,
-      })
-      .to("#form #input-section", {
-        delay: 0.15,
-        duration: 0.4,
-        stagger: 0.125,
-        x: 0,
-        opacity: 1,
-        rotateX: 0,
-      });
-  }, []);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (
-      !contactForm.firstName ||
-      !contactForm.lastName ||
-      !contactForm.email ||
-      !contactForm.phone ||
-      !contactForm.preferredDate ||
-      !contactForm.message
-    ) {
-      setContactForm({ ...contactForm, error: "Please fill out all fields." });
-      return;
-    }
-    setContactForm({ ...contactForm, error: "" });
+  const handleSubmit = async (formType: FormType, values: FormData) => {
+    console.log("Form submitted:", formType, values);
 
     try {
-      const dateString = contactForm.preferredDate.toLocaleDateString();
+      const processedValues = {
+        ...values,
+        eventDate: values.eventDate?.toLocaleDateString(),
+      };
+
       const response = await fetch("/api/message", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          firstName: contactForm.firstName,
-          lastName: contactForm.lastName,
-          email: contactForm.email,
-          phone: contactForm.phone,
-          preferredDate: dateString,
-          howDidYouHear: contactForm.howDidYouHear,
-          message: contactForm.message,
+          ...processedValues,
+          formType: formType,
         }),
       });
 
       if (response.ok) {
-        setContactForm(initialForm);
-
-        await subscribeToMailchimp(
-          contactForm.email,
-          contactForm.firstName,
-          contactForm.lastName,
-        );
+        await subscribeToMailchimp(values.email, values.name);
       } else {
         const errorData = await response.json();
-        setContactForm({ ...contactForm, error: errorData.error });
+        console.error(errorData.error);
       }
     } catch (error) {
-      setContactForm({ ...contactForm, error: "Failed to submit form." });
+      console.error("Failed to submit form:", error);
     }
   };
 
-  const subscribeToMailchimp = async (
-    email: string,
-    firstName: string,
-    lastName: string,
-  ) => {
+  const subscribeToMailchimp = async (email: string, name: string) => {
     try {
       const response = await fetch("/api/subscribe", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, firstName, lastName }),
+        body: JSON.stringify({ email, name }),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
         console.error("Failed to subscribe to Mailchimp:", errorData.error);
-      } else {
-        console.log("Subscribed to Mailchimp");
       }
     } catch (error) {
       console.error("Error subscribing to Mailchimp:", error);
@@ -144,132 +65,48 @@ export default function Contact() {
 
   return (
     <>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <SideMenu />
-        <div className="fixed left-0 top-0 z-[-1] h-screen w-screen backdrop-blur-sm"></div>
-        <div
-          ref={containerRef}
-          className="z-10 flex w-screen flex-col items-center justify-center overflow-y-auto p-3 pb-20 md:pb-6 md:pl-[250px] md:pr-6 md:pt-6"
+      <SideMenu />
+      <div className="fixed left-0 top-0 z-[-1] h-full min-h-screen w-screen backdrop-blur-sm"></div>
+      <div
+        ref={containerRef}
+        className="z-10 flex w-screen flex-col items-center justify-center overflow-y-auto p-3 pb-20 md:pb-6 md:pl-[250px] md:pr-6 md:pt-6"
+      >
+        <MobileHeading section={"Contact"} />
+        <Tabs
+          defaultValue="event"
+          className="flex w-full flex-col items-center"
+          onValueChange={(value) => setActiveTab(value as FormType)}
         >
-          <MobileHeading section={"Let's connect!"} />
-          <h2
-            id="section-heading"
-            className="hidden pb-3 font-bigola text-3xl text-customGold opacity-0 md:block"
+          <TabsList className="my-3 grid w-full grid-cols-3 bg-transparent font-bigola md:mb-6 md:mt-0 md:w-fit">
+            <TabsTrigger value="event">
+              Event <span className="md:flex">&nbsp;Inquiry</span>
+            </TabsTrigger>
+            <TabsTrigger value="dj">
+              DJ <span className="md:flex">&nbsp;Inquiry</span>
+            </TabsTrigger>
+            <TabsTrigger value="general">
+              General <span className="md:flex">&nbsp;Inquiry</span>
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent
+            value="event"
+            className="flex w-full flex-col items-center"
           >
-            Let's connect!
-          </h2>
-          <p
-            id="section-heading"
-            className="py-3 font-hypatia text-xl text-customCream opacity-0 md:pb-3 md:pt-0 md:text-center"
+            <EventForm onSubmit={(values) => handleSubmit("event", values)} />
+          </TabsContent>
+          <TabsContent value="dj" className="flex w-full flex-col items-center">
+            <DjForm onSubmit={(values) => handleSubmit("dj", values)} />
+          </TabsContent>
+          <TabsContent
+            value="general"
+            className="flex w-full flex-col items-center"
           >
-            If you have any questions, ideas, or want to collaborate with us,
-            please fill out the form below.
-          </p>
-          <ThemeProvider theme={customTheme(outerTheme)}>
-            <Box
-              component="form"
-              id="form"
-              className="flex w-full flex-col items-center pb-3 md:pb-6"
-              onSubmit={handleSubmit}
-            >
-              <div id="input-section" className="w-full font-hypatia opacity-0">
-                <div className="flex w-full flex-col justify-between sm:flex-row">
-                  <TextField
-                    className="mb-3 flex-1 sm:mr-3 md:my-3"
-                    type="text"
-                    label="First name"
-                    value={contactForm.firstName}
-                    required
-                    onChange={(e) =>
-                      setContactForm({
-                        ...contactForm,
-                        firstName: e.target.value,
-                      })
-                    }
-                    variant="standard"
-                  />
-                  <TextField
-                    className="my-3 flex-1"
-                    type="text"
-                    label="Last name"
-                    value={contactForm.lastName}
-                    required
-                    onChange={(e) =>
-                      setContactForm({
-                        ...contactForm,
-                        lastName: e.target.value,
-                      })
-                    }
-                    variant="standard"
-                  />
-                </div>
-              </div>
-              <div id="input-section" className="my-3 w-full opacity-0">
-                <TextField
-                  className="w-full"
-                  type="email"
-                  label="Email"
-                  value={contactForm.email}
-                  required
-                  onChange={(e) =>
-                    setContactForm({ ...contactForm, email: e.target.value })
-                  }
-                  variant="standard"
-                />
-              </div>
-              <div id="input-section" className="my-3 w-full opacity-0">
-                <TextField
-                  className="w-full"
-                  type="tel"
-                  label="Phone"
-                  value={contactForm.phone}
-                  required
-                  onChange={(e) =>
-                    setContactForm({ ...contactForm, phone: e.target.value })
-                  }
-                  variant="standard"
-                />
-              </div>
-              <div id="input-section" className="my-3 w-full opacity-0">
-                <DatePicker
-                  value={contactForm.preferredDate}
-                  label="Preferred date *"
-                  onChange={(newValue) =>
-                    setContactForm({
-                      ...contactForm,
-                      preferredDate: newValue,
-                    })
-                  }
-                  slotProps={{ textField: { variant: "standard" } }}
-                  className="w-full"
-                />
-              </div>
-              <div id="input-section" className="my-3 w-full opacity-0">
-                <TextField
-                  className="w-full"
-                  label="Add any additional information/ideas here."
-                  value={contactForm.message}
-                  required
-                  rows={4}
-                  multiline
-                  variant="standard"
-                  onChange={(e) =>
-                    setContactForm({ ...contactForm, message: e.target.value })
-                  }
-                />
-              </div>
-              <div id="input-section" className="w-full text-center opacity-0">
-                <Button
-                  type="submit"
-                  className="rounded-full p-3 font-bigola text-2xl capitalize text-customCream transition-all hover:text-customGold"
-                >
-                  Submit
-                </Button>
-              </div>
-            </Box>
-          </ThemeProvider>
-        </div>
-      </LocalizationProvider>
+            <GeneralForm
+              onSubmit={(values) => handleSubmit("general", values)}
+            />
+          </TabsContent>
+        </Tabs>
+      </div>
     </>
   );
 }

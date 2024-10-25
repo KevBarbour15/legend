@@ -151,32 +151,21 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                     className="flex flex-row items-center"
                     id="player-toggle"
                   >
-                    <Person
-                      size={22}
-                      weight="duotone"
-                      className="pr-2 drop-shadow-text"
-                    />
-                    <p
-                      className="text-base drop-shadow-text"
-                      id="player-toggle"
-                    >
+                    <Person size={22} weight="duotone" className="pr-2" />
+                    <p className="text-base" id="player-toggle">
                       {track.artist}
                     </p>
                   </div>
                   <div className="flex flex-row" id="player-toggle">
-                    <VinylRecord
-                      size={22}
-                      weight="duotone"
-                      className="pr-2 drop-shadow-text"
-                    />
-                    <p className="text-base drop-shadow-text">{track.title}</p>
+                    <VinylRecord size={22} weight="duotone" className="pr-2" />
+                    <p className="text-base">{track.title}</p>
                   </div>
                 </div>
                 <div className="flex items-center justify-center">
                   {index == currentTrackIndex ? (
                     <Equalizer playing={playing} />
                   ) : (
-                    <IconButton className="md:hover:text-custom m-0 flex p-1 text-customCream drop-shadow-text transition-colors hover:text-customGold">
+                    <IconButton className="md:hover:text-custom m-0 flex p-1 text-customCream transition-colors hover:text-customGold">
                       <Play
                         weight="duotone"
                         id="player-toggle"
@@ -207,7 +196,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         </Collapse>
         <div className="flex justify-between px-1 py-2 md:py-1">
           <IconButton
-            className="hidden p-1 text-customCream drop-shadow-text transition-colors md:block md:hover:text-customGold"
+            className="hidden p-1 text-customCream transition-colors md:block md:hover:text-customGold"
             onClick={togglePlayer}
           >
             <CaretDoubleUp
@@ -216,7 +205,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               className={` ${visible ? "rotate-180 transform" : ""}`}
             />
           </IconButton>
-          <IconButton className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold">
+          <IconButton className="p-1 text-customCream transition-colors md:hover:text-customGold">
             {mute ? (
               <SpeakerSimpleHigh
                 weight="duotone"
@@ -233,14 +222,14 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
           </IconButton>
           <IconButton
             onClick={handlePreviousTrack}
-            className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
+            className="p-1 text-customCream transition-colors md:hover:text-customGold"
           >
             <SkipBack id="player-toggle" weight="duotone" />
           </IconButton>
 
           <IconButton
             onClick={handlePlayPauseRounded}
-            className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
+            className="p-1 text-customCream transition-colors md:hover:text-customGold"
           >
             {playing ? (
               <Pause id="player-toggle" weight="duotone" />
@@ -250,13 +239,13 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
           </IconButton>
           <IconButton
             onClick={handleNextTrack}
-            className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
+            className="p-1 text-customCream transition-colors md:hover:text-customGold"
           >
             <SkipForward id="player-toggle" weight="duotone" />
           </IconButton>
           <IconButton
             onClick={togglePlaylist}
-            className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
+            className="p-1 text-customCream transition-colors md:hover:text-customGold"
           >
             <Playlist id="player-toggle" weight="duotone" />
           </IconButton>

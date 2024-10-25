@@ -2,12 +2,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Event } from "@/types/events";
 
-import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
-import { useOutsideClick } from "@/hooks/use-outside-click";
-
-import { EventCardProps } from "@/types/events";
-
 import EventCard from "@/components/event-card/EventCard";
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileHeading from "@/components/mobile-heading/MobileHeading";
@@ -52,14 +46,13 @@ export default function Events() {
 
     if (!loading && displayEvents) {
       if (currentRefs.current.length > 0) {
-        gsap.set(currentRefs.current, { x: "50%", opacity: 0, rotateX: 45 });
+        gsap.set(currentRefs.current, { y: "-50", opacity: 0 });
         gsap.to(currentRefs.current, {
           delay: 0.15,
-          duration: 0.4,
-          stagger: 0.125,
-          x: 0,
+          duration: 0.25,
+          stagger: 0.075,
+          y: 0,
           opacity: 1,
-          rotateX: 0,
         });
       } else if (currentEmptyRef.current) {
         gsap.set(currentEmptyRef.current, { opacity: 0, scale: 0.95 });

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MessageCardProps } from "@/types/messages";
 
 import Divider from "../divider/Divider";
@@ -14,7 +14,18 @@ import {
 
 import { Button } from "@/components/ui/button";
 
-import { Phone, Mail, MessageCircle, CalendarRange, Send } from "lucide-react";
+import {
+  ChatCircle,
+  Phone,
+  Mailbox,
+  CalendarBlank,
+  Clock,
+  Users,
+  UserCircle,
+  MusicNote,
+  Envelope,
+  EnvelopeOpen,
+} from "@phosphor-icons/react";
 
 import {
   Dialog,
@@ -35,6 +46,41 @@ const MessageCard: React.FC<MessageCardProps> = ({
   const [contacted, setContacted] = useState<boolean>(message.contacted);
   const [read, setRead] = useState<boolean>(message.read);
   const [open, setOpen] = useState<boolean>(false);
+  const [inquiryType, setInquiryType] = useState<string>("");
+  const [eventType, setEventType] = useState<string>("");
+  const [musicType, setMusicType] = useState<string>("");
+  const [eventDate, setEventDate] = useState<string>("");
+
+  const formatDate = (eventDate: any) => {
+    if (eventDate instanceof Date) {
+      return setEventDate(eventDate.toDateString());
+    }
+    return setEventDate(new Date(eventDate).toDateString());
+  };
+
+  useEffect(() => {
+    if (message.formType === "dj") {
+      setInquiryType("~ DJ Inquiry ~");
+    } else if (message.formType === "event") {
+      setInquiryType("~ Event Inquiry ~");
+      if (message.eventType === "meeting") {
+        setEventType("~ Meeting / Workspace ~");
+      } else {
+        setEventType("~ Birthday / Graduation / Wedding ~");
+      }
+      if (message.musicType === "personal") {
+        setMusicType("Personal device");
+      } else if (message.musicType === "dj") {
+        setMusicType("DJ");
+      } else {
+        setMusicType("House vinyl");
+      }
+
+      formatDate(message.eventDate);
+    } else {
+      setInquiryType("~ General Inquiry ~");
+    }
+  }, []);
 
   const handleContacted = async () => {
     const newContacted = !contacted;
@@ -124,12 +170,15 @@ const MessageCard: React.FC<MessageCardProps> = ({
         <AccordionTrigger>
           <div className="flex w-full justify-between pr-3 font-bigola text-base md:pr-6 md:text-xl">
             <div className="flex gap-1 capitalize">
-              <p>{message.firstName}</p>
-              <p>{message.lastName}</p>
+              <p>{message.name}</p>
             </div>
             <div>
               <p className="flex items-center gap-3 md:gap-6">
-                <Send />
+                {message.read ? (
+                  <EnvelopeOpen size={32} weight="duotone" />
+                ) : (
+                  <Envelope size={32} weight="duotone" />
+                )}
                 {new Date(message.sentAt).toLocaleDateString("en-US", {
                   timeZone: "UTC",
                 })}
@@ -140,13 +189,18 @@ const MessageCard: React.FC<MessageCardProps> = ({
         <AccordionContent className="border-black py-3">
           <Card className="p-3 md:p-6">
             <CardContent className="text-base md:text-lg">
-              <div className="border-b border-black font-semibold">
+              <div className="border-b border-black font-hypatiaSemibold">
+                <h2 className="mb-3 text-center font-bigola text-2xl">
+                  {inquiryType}
+                </h2>
+                <div className="mb-3 flex w-full items-center justify-between text-nowrap capitalize">
+                  <UserCircle size={36} weight="duotone" />
+                  <Divider borderColor="grey" />
+                  <p className="capitalize">{message.name}</p>
+                </div>
                 <div className="mb-3 flex w-full items-center justify-between">
-                  <Mail
-                    className="flex-shrink-0"
-                    style={{ color: "black", width: "28px", height: "28px" }}
-                  />
-                  <Divider borderColor={"border-black"} />
+                  <Mailbox size={36} weight="duotone" />
+                  <Divider borderColor="grey" />
                   <a
                     href={`mailto:${message.email}`}
                     className="cursor-pointer transition-all hover:underline"
@@ -155,39 +209,48 @@ const MessageCard: React.FC<MessageCardProps> = ({
                   </a>
                 </div>
                 <div className="mb-3 flex w-full items-center justify-between">
-                  <Phone
-                    className="flex-shrink-0"
-                    style={{ color: "black", width: "28px", height: "28px" }}
-                  />
-                  <Divider borderColor={"border-black"} />
+                  <Phone size={36} weight="duotone" />
+                  <Divider borderColor="grey" />
                   <p>{message.phone}</p>
                 </div>
+              </div>
+              {message.formType === "event" && (
+                <div className="text-nowrap border-b border-black py-3 font-hypatiaSemibold capitalize">
+                  <h3 className="mb-3 text-center font-bigola text-xl">
+                    {eventType}
+                  </h3>
+                  <div className="mb-3 flex w-full items-center justify-between">
+                    <CalendarBlank size={36} weight="duotone" />
+                    <Divider borderColor="grey" />
+                    <p>{eventDate}</p>
+                  </div>
+                  <div className="mb-3 flex w-full items-center justify-between">
+                    <Clock size={36} weight="duotone" />
+                    <Divider borderColor="grey" />
+                    <p>{message.eventTime}</p>
+                  </div>
+                  <div className="mb-3 flex w-full items-center justify-between">
+                    <Users size={36} weight="duotone" />
+                    <Divider borderColor="grey" />
+                    <p>{message.guests} guests</p>
+                  </div>
+                  <div className="mb-3 flex w-full items-center justify-between">
+                    <MusicNote size={32} weight="duotone" />
+                    <Divider borderColor="grey" />
+                    <p>{musicType}</p>
+                  </div>
+                </div>
+              )}
+              <div className="flex w-full items-center border-b border-black font-hypatia">
+                <div className="flex h-full items-center justify-between py-3 pr-3">
+                  <ChatCircle size={36} weight="duotone" />
+                </div>
+                <p className="py-3 pl-3 text-left">
+                  "{message.message.trim()}"
+                </p>
+              </div>
 
-                <div className="mb-3 flex w-full items-center justify-between">
-                  <CalendarRange
-                    className="flex-shrink-0"
-                    style={{ color: "black", width: "28px", height: "28px" }}
-                  />
-                  <Divider borderColor={"border-black"} />
-                  <p>{message.preferredDate}</p>
-                </div>
-              </div>
-              <div className="flex w-full flex-col border-b border-black pb-3">
-                <div className="flex w-full items-center justify-between py-3">
-                  <MessageCircle
-                    className="flex-shrink-0"
-                    style={{ color: "black", width: "28px", height: "28px" }}
-                  />
-                  <Divider borderColor={"border-black"} />
-                  <img
-                    className="h-8 w-8"
-                    src="./images/monogram.png"
-                    alt="Small Logo"
-                  />
-                </div>
-                <p className="text-justify">"{message.message.trim()}"</p>
-              </div>
-              <div className="flex justify-between">
+              <div className="flex justify-between font-hypatia">
                 <div className="block pt-3 md:mt-0">
                   <div className="flex items-center justify-start gap-3 pb-3 md:gap-6">
                     <Switch checked={read} onCheckedChange={handleRead} />
@@ -201,7 +264,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
                     <p>Contacted</p>
                   </div>
                 </div>
-                <div className="flex flex-col justify-end text-black">
+                <div className="flex flex-col justify-end font-bigola text-black">
                   <Dialog>
                     <DialogTrigger>
                       <Button>Delete</Button>
@@ -221,11 +284,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
                             Cancel
                           </Button>
                         </DialogClose>
-                        <Button
-                          className=""
-                          onClick={confirmDelete}
-                          variant="destructive"
-                        >
+                        <Button onClick={confirmDelete} variant="destructive">
                           Delete
                         </Button>
                       </DialogFooter>

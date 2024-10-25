@@ -4,7 +4,7 @@ export interface ContactForm {
   email: string;
   phone: string;
   howDidYouHear: string;
-  preferredDate: Date | null;
+  eventDate: Date | null;
   message: string;
   error: string;
 }

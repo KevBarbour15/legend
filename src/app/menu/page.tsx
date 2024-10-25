@@ -79,18 +79,16 @@ const Menu: React.FC = ({}) => {
 
     if (!loading && displayMenu) {
       gsap.set(categoryRefs.current, {
-        x: "50%",
+        y: "-50",
         opacity: 0,
-        rotateX: 45,
       });
 
       if (categoryRefs.current.length > 0)
         categoriesTL.current = gsap.timeline({}).to(categoryRefs.current, {
           delay: 0.15,
-          duration: 0.4,
-          stagger: 0.125,
-          x: 0,
-          rotateX: 0,
+          duration: 0.25,
+          stagger: 0.075,
+          y: 0,
           opacity: 1,
         });
     }
