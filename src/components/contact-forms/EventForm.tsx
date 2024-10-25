@@ -174,11 +174,11 @@ export default function EventForm({ onSubmit }: EventFormProps) {
                     <SelectValue placeholder="Select event type" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent className="bg-customCream font-hypatia text-lg text-customNavy">
-                  <SelectItem value="meeting">
+                <SelectContent className="max-w-screen bg-customCream font-hypatia text-lg text-customNavy">
+                  <SelectItem value="meeting" className="max-w-screen">
                     Meeting / Workspace (2 hour minimum)
                   </SelectItem>
-                  <SelectItem value="birthday">
+                  <SelectItem value="birthday" className="max-w-screen">
                     Birthday / Graduation / Wedding (4 hour minimum)
                   </SelectItem>
                 </SelectContent>
@@ -204,9 +204,13 @@ export default function EventForm({ onSubmit }: EventFormProps) {
                     <SelectValue placeholder="Select number" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent className="bg-customCream font-hypatia text-lg text-customNavy">
+                <SelectContent className="max-w-screen bg-customCream font-hypatia text-lg text-customNavy">
                   {Array.from({ length: 49 }, (_, i) => i + 1).map((num) => (
-                    <SelectItem key={num} value={num.toString()}>
+                    <SelectItem
+                      key={num}
+                      value={num.toString()}
+                      className="max-w-screen text-lg"
+                    >
                       {num}
                     </SelectItem>
                   ))}
@@ -230,14 +234,28 @@ export default function EventForm({ onSubmit }: EventFormProps) {
                     <SelectValue placeholder="Select event type" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent className="bg-customCream font-hypatia text-lg text-customNavy">
-                  <SelectItem value="dj">
+                <SelectContent
+                  className="max-h-[80vh] max-w-[95vw] bg-customCream font-hypatia text-lg text-customNavy"
+                  position="popper"
+                  side="bottom"
+                  align="start"
+                >
+                  <SelectItem
+                    value="dj"
+                    className="whitespace-normal text-wrap text-lg"
+                  >
                     I am interested in having a DJ (Additional cost associated).
                   </SelectItem>
-                  <SelectItem value="personal">
+                  <SelectItem
+                    value="personal"
+                    className="whitespace-normal text-wrap text-lg"
+                  >
                     I will play music from my personal device.
                   </SelectItem>
-                  <SelectItem value="house">
+                  <SelectItem
+                    value="house"
+                    className="whitespace-normal text-wrap text-lg"
+                  >
                     I will listen to what the bartender is playing from the
                     house vinyl collection (No requests, please).
                   </SelectItem>
