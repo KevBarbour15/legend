@@ -23,8 +23,6 @@ import {
   Users,
   UserCircle,
   MusicNote,
-  Envelope,
-  EnvelopeOpen,
 } from "@phosphor-icons/react";
 
 import {
@@ -174,11 +172,6 @@ const MessageCard: React.FC<MessageCardProps> = ({
             </div>
             <div>
               <p className="flex items-center gap-3 md:gap-6">
-                {message.read ? (
-                  <EnvelopeOpen size={32} weight="duotone" />
-                ) : (
-                  <Envelope size={32} weight="duotone" />
-                )}
                 {new Date(message.sentAt).toLocaleDateString("en-US", {
                   timeZone: "UTC",
                 })}
