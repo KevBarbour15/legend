@@ -174,7 +174,7 @@ export default function EventForm({ onSubmit }: EventFormProps) {
                     <SelectValue placeholder="Select event type" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
+                <SelectContent className="bg-customCream font-hypatia text-lg text-customNavy">
                   <SelectItem value="meeting">
                     Meeting / Workspace (2 hour minimum)
                   </SelectItem>
@@ -204,7 +204,7 @@ export default function EventForm({ onSubmit }: EventFormProps) {
                     <SelectValue placeholder="Select number" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
+                <SelectContent className="bg-customCream font-hypatia text-lg text-customNavy">
                   {Array.from({ length: 49 }, (_, i) => i + 1).map((num) => (
                     <SelectItem key={num} value={num.toString()}>
                       {num}
@@ -230,7 +230,7 @@ export default function EventForm({ onSubmit }: EventFormProps) {
                     <SelectValue placeholder="Select event type" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
+                <SelectContent className="bg-customCream font-hypatia text-lg text-customNavy">
                   <SelectItem value="dj">
                     I am interested in having a DJ (Additional cost associated).
                   </SelectItem>
