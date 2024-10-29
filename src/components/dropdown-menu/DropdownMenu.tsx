@@ -109,9 +109,9 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
       if (aboutSection) {
         aboutSection.scrollIntoView({ behavior: "smooth" });
       }
-    }, 300);
+    }, 500);
   };
-  */
+*/
   return (
     <div className="menu-container" ref={container}>
       <div className="menu-overlay">

@@ -5,6 +5,8 @@ import BackgroundOverlay from "@/components/bg-overlay/BackgroundOverlay";
 import MusicPlayer from "@/components/music-player/MusicPlayer";
 import "./globals.css";
 
+import { Toaster } from "@/components/ui/toaster";
+
 const inter = Inter({ subsets: ["latin"] });
 
 const tracks: {
@@ -70,22 +72,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <head>
-        <title>Legend Has It</title>
-      </head>
-      <body className={inter.className}>
-        <Script
-          id="mcjs"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/783ca62931283b3104dae7fdb/5f76e1f7d9803b38a26cab6bc.js");`,
-          }}
-        />
-        <BackgroundOverlay />
-        {children}
-        <MusicPlayer tracks={tracks} />
-      </body>
-    </html>
+    <>
+      <html lang="en">
+        <head>
+          <title>Legend Has It</title>
+        </head>
+        <body className={inter.className}>
+          <Script
+            id="mcjs"
+            strategy="beforeInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/783ca62931283b3104dae7fdb/5f76e1f7d9803b38a26cab6bc.js");`,
+            }}
+          />
+          <Toaster />
+          <BackgroundOverlay />
+          {children}
+          <MusicPlayer tracks={tracks} />
+        </body>
+      </html>
+    </>
   );
 }

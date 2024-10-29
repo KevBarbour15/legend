@@ -21,6 +21,17 @@ export const eventFormSchema = baseFormSchema.extend({
   }),
 });
 
+export const eventTypes = {
+  meeting: "Meeting / Workspace",
+  birthday: "Birthday / Graduation / Wedding",
+};
+
+export const musicTypes = {
+  dj: "DJ",
+  personal: "Personal device",
+  house: "House vinyl",
+};
+
 export type FormData = z.infer<typeof baseFormSchema> & {
   name: String;
   email: String;
@@ -37,10 +48,26 @@ export type FormType = "event" | "dj" | "general";
 
 export type EventFormData = z.infer<typeof eventFormSchema>;
 
+export type EventFormProps = {
+  onSubmit: (values: EventFormData) => Promise<void>;
+};
+
 export type DjFormProps = {
   onSubmit: (values: FormData) => Promise<void>;
 };
 
-export type GenrelFormProps = {
+export type GeneralFormProps = {
   onSubmit: (values: FormData) => Promise<void>;
+};
+
+export type EventFormRef = {
+  reset: () => void;
+};
+
+export type DjFormRef = {
+  reset: () => void;
+};
+
+export type GeneralFormRef = {
+  reset: () => void;
 };

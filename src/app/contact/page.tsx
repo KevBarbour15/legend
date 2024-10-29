@@ -7,15 +7,27 @@ import EventForm from "@/components/contact-forms/EventForm";
 import GeneralForm from "@/components/contact-forms/GeneralForm";
 import DjForm from "@/components/contact-forms/DjForm";
 
-import { FormData, FormType } from "@/types/forms.ts";
+import { useToast } from "@/hooks/use-toast";
+
+import {
+  FormData,
+  FormType,
+  EventFormRef,
+  DjFormRef,
+  GeneralFormRef,
+} from "@/types/forms.ts";
 
 export default function Contact() {
   const containerRef = useRef<HTMLDivElement>(null);
+
   const [activeTab, setActiveTab] = useState<FormType>("event");
+  const { toast } = useToast();
+
+  const eventFormRef = useRef<EventFormRef>(null);
+  const djFormRef = useRef<DjFormRef>(null);
+  const generalFormRef = useRef<GeneralFormRef>(null);
 
   const handleSubmit = async (formType: FormType, values: FormData) => {
-    console.log("Form submitted:", formType, values);
-
     try {
       const processedValues = {
         ...values,
@@ -34,13 +46,34 @@ export default function Contact() {
       });
 
       if (response.ok) {
+        toast({
+          title: "Thank you for reaching out!",
+          description: "We'll get back to you soon.",
+        });
+
         await subscribeToMailchimp(values.email, values.name);
+
+        switch (formType) {
+          case "event":
+            eventFormRef.current?.reset();
+            break;
+          case "dj":
+            djFormRef.current?.reset();
+            break;
+          case "general":
+            generalFormRef.current?.reset();
+            break;
+        }
       } else {
         const errorData = await response.json();
         console.error(errorData.error);
       }
     } catch (error) {
       console.error("Failed to submit form:", error);
+      toast({
+        title: "Failed to submit form.",
+        description: "Please try again.",
+      });
     }
   };
 
@@ -92,16 +125,23 @@ export default function Contact() {
             value="event"
             className="flex w-full flex-col items-center"
           >
-            <EventForm onSubmit={(values) => handleSubmit("event", values)} />
+            <EventForm
+              ref={eventFormRef}
+              onSubmit={(values) => handleSubmit("event", values)}
+            />
           </TabsContent>
           <TabsContent value="dj" className="flex w-full flex-col items-center">
-            <DjForm onSubmit={(values) => handleSubmit("dj", values)} />
+            <DjForm
+              onSubmit={(values) => handleSubmit("dj", values)}
+              ref={djFormRef}
+            />
           </TabsContent>
           <TabsContent
             value="general"
             className="flex w-full flex-col items-center"
           >
             <GeneralForm
+              ref={generalFormRef}
               onSubmit={(values) => handleSubmit("general", values)}
             />
           </TabsContent>
