@@ -149,4 +149,6 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
   },
 );
 
+GeneralForm.displayName = "GeneralForm";
+
 export default GeneralForm;

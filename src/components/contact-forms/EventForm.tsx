@@ -313,4 +313,6 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
   },
 );
 
+EventForm.displayName = "EventForm";
+
 export default EventForm;

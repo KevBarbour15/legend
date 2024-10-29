@@ -51,8 +51,9 @@ const DashEventCard: React.FC<DashEventCardProps> = ({
         className="border-t border-black"
       >
         <AccordionTrigger>
-          <div className="flex w-full items-center justify-between text-balance pr-3 text-left font-bigola text-base md:pr-6 md:text-xl">
+          <div className="flex w-full justify-between text-nowrap pr-3 text-base font-semibold capitalize md:pr-6 md:text-xl">
             <p>{event.title}</p>
+            <Divider borderColor="grey" />
             <p>
               {new Date(event.date).toLocaleDateString("en-US", {
                 timeZone: "UTC",
@@ -68,7 +69,7 @@ const DashEventCard: React.FC<DashEventCardProps> = ({
                   className="flex-shrink-0"
                   style={{ color: "black", width: "28px", height: "28px" }}
                 />
-                <Divider borderColor={"border-black"} />
+                <Divider borderColor={"grey"} />
                 <p className="text-nowrap font-semibold">
                   {formatTime(event.time)}
                 </p>
@@ -79,7 +80,7 @@ const DashEventCard: React.FC<DashEventCardProps> = ({
                     className="flex-shrink-0"
                     style={{ color: "black", width: "28px", height: "28px" }}
                   />
-                  <Divider borderColor={"border-black"} />
+                  <Divider borderColor={"grey"} />
                   <img
                     className="h-8 w-8"
                     src="./images/monogram.png"

@@ -60,9 +60,9 @@ const MessageCard: React.FC<MessageCardProps> = ({
 
   useEffect(() => {
     if (message.formType === "dj") {
-      setInquiryType("~ DJ Inquiry ~");
+      setInquiryType("DJ Inquiry");
     } else if (message.formType === "event") {
-      setInquiryType("~ Event Inquiry ~");
+      setInquiryType("Event Inquiry");
       if (message.eventType === "meeting") {
         setEventType(eventTypes.meeting);
       } else {
@@ -78,7 +78,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
 
       formatDate(message.eventDate);
     } else {
-      setInquiryType("~ General Inquiry ~");
+      setInquiryType("General Inquiry");
     }
   }, []);
 
@@ -168,10 +168,11 @@ const MessageCard: React.FC<MessageCardProps> = ({
         className="border-t border-black"
       >
         <AccordionTrigger>
-          <div className="flex w-full justify-between pr-3 font-bigola text-base md:pr-6 md:text-xl">
-            <div className="flex gap-1 capitalize">
+          <div className="flex w-full justify-between text-nowrap pr-3 text-base font-semibold capitalize md:pr-6 md:text-xl">
+            <div className="flex gap-1">
               <p>{message.name}</p>
             </div>
+            <Divider borderColor="grey" />
             <div>
               <p className="flex items-center gap-3 md:gap-6">
                 {new Date(message.sentAt).toLocaleDateString("en-US", {
@@ -184,8 +185,8 @@ const MessageCard: React.FC<MessageCardProps> = ({
         <AccordionContent className="border-black py-3">
           <Card className="p-3 md:p-6">
             <CardContent className="text-base md:text-lg">
-              <div className="text-nowrap border-b border-black font-hypatiaSemibold">
-                <h2 className="mb-3 text-center font-bigola text-2xl">
+              <div className="text-nowrap border-b border-black">
+                <h2 className="mb-3 text-center text-2xl font-semibold">
                   {inquiryType}
                 </h2>
                 <div className="mb-3 flex w-full items-center justify-between capitalize">
@@ -210,8 +211,8 @@ const MessageCard: React.FC<MessageCardProps> = ({
                 </div>
               </div>
               {message.formType === "event" && (
-                <div className="text-nowrap border-b border-black py-3 font-hypatiaSemibold capitalize">
-                  <h3 className="mb-3 text-center font-bigola text-xl">
+                <div className="text-nowrap border-b border-black py-3 capitalize">
+                  <h3 className="mb-3 text-center text-xl font-semibold">
                     {eventType}
                   </h3>
                   <div className="mb-3 flex w-full items-center justify-between">
@@ -236,7 +237,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
                   </div>
                 </div>
               )}
-              <div className="flex w-full items-center border-b border-black font-hypatia">
+              <div className="flex w-full items-center border-b border-black">
                 <div className="flex h-full items-center justify-between py-3 pr-3">
                   <ChatCircle size={36} weight="duotone" />
                 </div>
@@ -245,7 +246,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
                 </p>
               </div>
 
-              <div className="flex justify-between font-hypatia">
+              <div className="flex justify-between">
                 <div className="block pt-3 md:mt-0">
                   <div className="flex items-center justify-start gap-3 pb-3 md:gap-6">
                     <Switch checked={read} onCheckedChange={handleRead} />
@@ -259,7 +260,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
                     <p>Contacted</p>
                   </div>
                 </div>
-                <div className="flex flex-col justify-end font-bigola text-black">
+                <div className="flex flex-col justify-end text-black">
                   <Dialog>
                     <DialogTrigger>
                       <Button>Delete</Button>

@@ -148,4 +148,6 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
   );
 });
 
+DjForm.displayName = "DjForm";
+
 export default DjForm;
