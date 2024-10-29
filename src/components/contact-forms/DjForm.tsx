@@ -1,7 +1,7 @@
-import { useRef } from "react";
+import { useRef, forwardRef, useImperativeHandle } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import {
@@ -16,11 +16,15 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
-import { baseFormSchema, FormData, DjFormProps } from "@/types/forms";
+import {
+  baseFormSchema,
+  FormData,
+  DjFormProps,
+  DjFormRef,
+} from "@/types/forms";
 
-export default function GeneralForm({ onSubmit }: DjFormProps) {
+const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
   const formRef = useRef<HTMLFormElement>(null);
-
   const form = useForm<FormData>({
     resolver: zodResolver(baseFormSchema),
     defaultValues: {
@@ -30,21 +34,30 @@ export default function GeneralForm({ onSubmit }: DjFormProps) {
       message: "",
     },
   });
+  const tl = useRef<gsap.core.Timeline | null>(null);
+
+  useImperativeHandle(ref, () => ({
+    reset: () => {
+      form.reset();
+    },
+  }));
 
   useGSAP(() => {
     if (!formRef.current) return;
 
-    gsap.set(".form-field", {
-      y: "-50",
+    gsap.set(".dj-form-field", {
       opacity: 0,
+      y: 100,
     });
 
-    gsap.to(".form-field", {
+    tl.current = gsap.timeline({});
+    tl.current.to(".dj-form-field", {
       delay: 0.15,
-      duration: 0.25,
-      stagger: 0.075,
+      duration: 0.2,
+      stagger: 0.05,
       y: 0,
       opacity: 1,
+      ease: "sine.inOut",
     });
   }, []);
 
@@ -55,34 +68,34 @@ export default function GeneralForm({ onSubmit }: DjFormProps) {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex w-full flex-col space-y-3 md:w-[550px]"
       >
-        <p className="form-field text-pretty font-hypatia text-customCream opacity-0">
+        <p className="dj-form-field text-pretty font-hypatia text-customCream opacity-0">
           Thank you for your interest to DJ at Legend Has It. Please take a
           minute to fill out the form below so we can get to know you and your
           style. Below, please provide as much detail as possible in regard to
           your music style/genre(s), past experience, etc.
         </p>
-        <div className="form-field w-full opacity-0">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem className="flex-1">
-                <FormLabel className="font-bigola text-customCream">
-                  Name
-                </FormLabel>
-                <FormControl className="border border-customGold font-hypatia text-customCream">
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem className="dj-form-field w-full opacity-0">
+              <FormLabel className="font-bigola text-customCream">
+                Name
+              </FormLabel>
+              <FormControl className="border border-customGold font-hypatia text-customCream">
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="email"
           render={({ field }) => (
-            <FormItem className="form-field w-full opacity-0">
+            <FormItem className="dj-form-field w-full opacity-0">
               <FormLabel className="font-bigola text-customCream">
                 Email
               </FormLabel>
@@ -97,7 +110,7 @@ export default function GeneralForm({ onSubmit }: DjFormProps) {
           control={form.control}
           name="phone"
           render={({ field }) => (
-            <FormItem className="form-field w-full opacity-0">
+            <FormItem className="dj-form-field w-full opacity-0">
               <FormLabel className="font-bigola text-customCream">
                 Phone
               </FormLabel>
@@ -113,7 +126,7 @@ export default function GeneralForm({ onSubmit }: DjFormProps) {
           control={form.control}
           name="message"
           render={({ field }) => (
-            <FormItem className="form-field w-full opacity-0">
+            <FormItem className="dj-form-field w-full opacity-0">
               <FormLabel className="font-bigola text-customCream">
                 Experience, style, etc
               </FormLabel>
@@ -126,11 +139,13 @@ export default function GeneralForm({ onSubmit }: DjFormProps) {
         />
         <Button
           type="submit"
-          className="form-field mx-auto w-full rounded-lg border border-customGold bg-customNavy p-3 font-bigola text-2xl text-customCream opacity-0 sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
+          className="dj-form-field mx-auto w-full rounded-lg border border-customGold bg-customNavy p-3 font-bigola text-2xl text-customCream opacity-0 sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
         >
           Submit
         </Button>
       </form>
     </Form>
   );
-}
+});
+
+export default DjForm;

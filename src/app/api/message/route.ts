@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import Message from "@/models/Message";
 import { connectToMongoDB } from "@/lib/db";
 
+import { musicTypes, eventTypes } from "@/types/forms";
+
 import { sendNotificationEmail } from "@/app/actions/sendNotificationEmail.server";
 
 // GET request handler ************************************************************************************************
@@ -24,7 +26,7 @@ export async function GET(req: NextRequest) {
 // POST request handler ************************************************************************************************
 export async function POST(req: NextRequest) {
   await connectToMongoDB();
-  console.log("POST request received.");
+
   try {
     const {
       name,
@@ -39,7 +41,9 @@ export async function POST(req: NextRequest) {
       eventTime,
     } = await req.json();
 
-    let newMessage;
+    let newMessage: any;
+    let musicDescription: string = "";
+    let eventTypeDescription: string = "";
 
     if (formType === "event") {
       newMessage = new Message({
@@ -54,6 +58,13 @@ export async function POST(req: NextRequest) {
         musicType: musicType,
         guests: guests,
       });
+
+      if (musicType === "dj") musicDescription = musicTypes.dj;
+      if (musicType === "personal") musicDescription = musicTypes.personal;
+      if (musicType === "house") musicDescription = musicTypes.house;
+
+      if (eventType === "meeting") eventTypeDescription = eventTypes.meeting;
+      if (eventType === "birthday") eventTypeDescription = eventTypes.birthday;
     } else {
       newMessage = new Message({
         name: name,
@@ -63,18 +74,41 @@ export async function POST(req: NextRequest) {
         formType: formType,
       });
     }
-  
+
     const response = await newMessage.save();
 
     if (response._id) {
-      const subject = `New message from ${name}.`;
-      const text = `You have received a new message from ${name}.
+      const subject: string = `New ${formType} inquiry from ${name}.`;
+
+      // format the email text
+      let text: string = "";
+      if (formType === "event") {
+        text = `You have received a ${formType} inquiry from ${name}.
+
+Email: ${email}
+
+Phone: ${phone}
+
+Message: ${message} 
+
+Event Date: ${eventDate}
+
+Event Time: ${eventTime}
+
+Event Type: ${eventTypeDescription}
+
+Music Type: ${musicDescription}
+
+Number of Guests: ${guests}`;
+      } else {
+        text = `You have received a ${formType} inquiry from ${name}.
 
 Email: ${email}
 
 Phone: ${phone}
 
 Message: ${message}`;
+      }
 
       try {
         await sendNotificationEmail({

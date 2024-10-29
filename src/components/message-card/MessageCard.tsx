@@ -36,6 +36,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+import { musicTypes, eventTypes } from "@/types/forms";
+
 const MessageCard: React.FC<MessageCardProps> = ({
   message,
   fetchMessages,
@@ -62,16 +64,16 @@ const MessageCard: React.FC<MessageCardProps> = ({
     } else if (message.formType === "event") {
       setInquiryType("~ Event Inquiry ~");
       if (message.eventType === "meeting") {
-        setEventType("~ Meeting / Workspace ~");
+        setEventType(eventTypes.meeting);
       } else {
-        setEventType("~ Birthday / Graduation / Wedding ~");
+        setEventType(eventTypes.birthday);
       }
       if (message.musicType === "personal") {
-        setMusicType("Personal device");
+        setMusicType(musicTypes.personal);
       } else if (message.musicType === "dj") {
-        setMusicType("DJ");
+        setMusicType(musicTypes.dj);
       } else {
-        setMusicType("House vinyl");
+        setMusicType(musicTypes.house);
       }
 
       formatDate(message.eventDate);
@@ -182,11 +184,11 @@ const MessageCard: React.FC<MessageCardProps> = ({
         <AccordionContent className="border-black py-3">
           <Card className="p-3 md:p-6">
             <CardContent className="text-base md:text-lg">
-              <div className="border-b border-black font-hypatiaSemibold">
+              <div className="text-nowrap border-b border-black font-hypatiaSemibold">
                 <h2 className="mb-3 text-center font-bigola text-2xl">
                   {inquiryType}
                 </h2>
-                <div className="mb-3 flex w-full items-center justify-between text-nowrap capitalize">
+                <div className="mb-3 flex w-full items-center justify-between capitalize">
                   <UserCircle size={36} weight="duotone" />
                   <Divider borderColor="grey" />
                   <p className="capitalize">{message.name}</p>
