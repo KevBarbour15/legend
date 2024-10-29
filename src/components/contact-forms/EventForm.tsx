@@ -194,7 +194,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
                       <SelectValue placeholder="Select event type" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent className="max-w-screen bg-customCream font-hypatia text-lg text-customNavy">
+                  <SelectContent className="max-w-screen bg-customCream font-hypatia text-customNavy">
                     <SelectItem value="meeting" className="max-w-screen">
                       Meeting / Workspace (2 hour minimum)
                     </SelectItem>
@@ -224,7 +224,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
                       <SelectValue placeholder="Select number" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent className="max-w-screen bg-customCream font-hypatia text-lg text-customNavy">
+                  <SelectContent className="max-w-screen bg-customCream font-hypatia text-customNavy">
                     {Array.from({ length: 49 }, (_, i) => i + 1).map((num) => (
                       <SelectItem
                         key={num}
@@ -255,27 +255,27 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent
-                    className="max-h-[80vh] max-w-[95vw] bg-customCream font-hypatia text-lg text-customNavy"
+                    className="max-h-[80vh] max-w-[95vw] bg-customCream font-hypatia text-customNavy"
                     position="popper"
                     side="bottom"
                     align="start"
                   >
                     <SelectItem
                       value="dj"
-                      className="whitespace-normal text-wrap text-lg"
+                      className="whitespace-normal text-wrap"
                     >
                       I am interested in having a DJ (Additional cost
                       associated).
                     </SelectItem>
                     <SelectItem
                       value="personal"
-                      className="whitespace-normal text-wrap text-lg"
+                      className="whitespace-normal text-wrap"
                     >
                       I will play music from my personal device.
                     </SelectItem>
                     <SelectItem
                       value="house"
-                      className="whitespace-normal text-wrap text-lg"
+                      className="whitespace-normal text-wrap"
                     >
                       I will listen to what the bartender is playing from the
                       house vinyl collection (No requests, please).
