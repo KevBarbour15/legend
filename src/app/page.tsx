@@ -109,7 +109,7 @@ export default function Home() {
         <div className="top-bg hidden h-dvh w-screen md:block"></div>
         <div
           id="about-content"
-          className="relative block h-auto p-3 md:py-6 md:pl-[250px] md:pr-6"
+          className="relative block h-auto p-3 md:py-6 md:pl-[258px] md:pr-6"
         >
           <div
             id="about-section"

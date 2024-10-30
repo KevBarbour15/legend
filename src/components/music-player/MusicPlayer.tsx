@@ -65,14 +65,14 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
 
     playlistTl.current = gsap.timeline({}).to("#playlist", {
       opacity: 1,
-      duration: 0.25,
+      duration: 0.35,
       delay: 0.05,
       ease: "sine.inOut",
     });
 
     recordPlayerTl.current = gsap.timeline({}).to("#record-player", {
       opacity: 1,
-      duration: 0.25,
+      duration: 0.35,
       delay: 0.05,
       ease: "sine.inOut",
     });
@@ -138,10 +138,14 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
     >
       <div
         id="player-container"
-        className="fixed bottom-0 left-0 right-0 mx-3 mb-3 flex flex-col rounded-sm drop-shadow-record md:mb-6 md:ml-6 md:mr-0 md:flex-row"
+        className="fixed bottom-0 left-0 right-0 mx-3 mb-3 flex flex-col drop-shadow-record md:mb-6 md:ml-6 md:mr-0 md:flex-row"
       >
-        <div className="w-full rounded-sm bg-customNavy p-0 md:w-fit">
-          <Collapse in={visible} id="record-player" className="hidden md:block">
+        <div className="w-full md:w-fit md:rounded-sm md:bg-customGold md:bg-opacity-65 md:p-1">
+          <Collapse
+            in={visible}
+            id="record-player"
+            className="hidden rounded-sm bg-customNavy opacity-0 md:block"
+          >
             <div
               className="relative rounded-sm"
               style={{
@@ -150,7 +154,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                 backgroundSize: "cover",
               }}
             >
-              <div className="bg-customNavy bg-opacity-20 p-2">
+              <div className="rounded-sm bg-customNavy bg-opacity-10 p-2">
                 <img
                   id="now-playing"
                   className="absolute left-[104.5px] top-[44%] z-[3] w-[32px] drop-shadow-text"
@@ -229,7 +233,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       </div>
       <div
         id="playlist"
-        className="z-10 mb-16 rounded-sm px-3 md:fixed md:bottom-0 md:left-[255px] md:mb-0 md:px-0 md:pb-6"
+        className="z-10 mb-[70px] rounded-sm px-3 md:fixed md:bottom-0 md:left-[255px] md:mb-0 md:px-0 md:pb-6"
       >
         <Collapse in={playlistVisible}>
           <div
@@ -242,21 +246,23 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
           >
             <div className="h-full rounded-sm bg-black bg-opacity-45">
               <img
-                className="h-20 p-3 drop-shadow-text"
+                className="h-16 p-3 drop-shadow-text md:h-20"
                 src="./images/small-logo.png"
               ></img>
               <div className="h-fit">
                 {tracks.map((track, index) => (
                   <div key={index} className="flex h-full flex-row p-1 md:px-3">
                     <div className="mr-3 flex flex-col justify-between px-1 font-bigola text-customCream drop-shadow-text md:px-0">
-                      <p className="text-2xl leading-none">{index + 1}.</p>
-                      <p className="text-lg">by</p>
+                      <p className="text-xl leading-none md:text-2xl">
+                        {index + 1}.
+                      </p>
+                      <p className="text-base md:text-xl">by</p>
                     </div>
                     <div className="flex w-full flex-col justify-between px-1 font-bigola text-customCream drop-shadow-text md:px-0">
-                      <div className="text-2xl leading-none">
+                      <div className="text-xl leading-none md:text-2xl">
                         <p>{track.title}</p>
                       </div>
-                      <div className="text-lg">
+                      <div className="text-base md:text-xl">
                         <p>{track.artist}</p>
                       </div>
                     </div>

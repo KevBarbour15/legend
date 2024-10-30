@@ -5,7 +5,7 @@ import Menu from "@/components/dropdown-menu/DropdownMenu";
 
 import { MenuRounded } from "@mui/icons-material";
 
-import { Button } from "@/components/ui/button";
+import { IconButton } from "@mui/material";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -42,13 +42,12 @@ const MobileHeading: React.FC<MobileHeadingProps> = ({ section }) => {
         className="flex w-full justify-between border-b border-customGold pb-3 text-customGold opacity-0 md:hidden"
       >
         <span className="font-bigola text-2xl">{section}</span>
-        <Button
+        <IconButton
           onClick={toggleMenu}
-          size="mobileHeading"
-          className="bg-transparent text-customGold"
+          className="bg-transparent p-0 text-customGold"
         >
           <MenuRounded className="text-3xl" />
-        </Button>
+        </IconButton>
       </div>
     </>
   );
