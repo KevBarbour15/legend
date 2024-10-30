@@ -46,14 +46,14 @@ const Equalizer: React.FC<EqualizerProps> = ({ playing }) => {
   }, [playing, animateBars]);
 
   return (
-    <div className="mr-1 flex items-center justify-center space-x-[1px]">
+    <div className="mr-1 flex items-center justify-center space-x-[1px] md:mr-0">
       {[...Array(6)].map((_, index) => (
         <div
           key={index}
           ref={(el) => {
             barRefs.current[index] = el;
           }}
-          className="w-[2px] rounded-full bg-customGold transition-all"
+          className="w-[2.25px] rounded-full bg-customCream drop-shadow-text"
           style={{ minHeight: "2px" }}
         />
       ))}

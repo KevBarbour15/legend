@@ -196,7 +196,7 @@ export default function Home() {
           </div>
           <div className="mt-6 hidden w-full items-center justify-end md:flex">
             <LoginLink postLoginRedirectURL="/dashboard">
-              <Button className="border border-customNavy bg-transparent font-bigola text-base font-bold text-customNavy transition-all hover:bg-customGold hover:drop-shadow-record">
+              <Button className="border border-customNavy bg-transparent font-bigola text-base font-bold text-customNavy transition-all hover:bg-customGold hover:drop-shadow-text">
                 <span className="mr-3">Owner</span>
                 <Key />
               </Button>

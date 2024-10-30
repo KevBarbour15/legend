@@ -90,9 +90,10 @@ const config: Config = {
         customNavy: "#244154",
         customCream: "#dfcfc0",
         customGold: "#bc9952",
+        customSilver: "#C0C0C0",
       },
       dropShadow: {
-        record: "0.5px 1.75px 2.5px rgba(0, 0, 0, 0.65)",
+        record: "0.75px 2.75px 5.5px rgba(0, 0, 0, 0.65)",
         text: ".75px 0.75px 1.15px rgba(0, 0, 0, 0.95)",
       },
       boxShadow: {

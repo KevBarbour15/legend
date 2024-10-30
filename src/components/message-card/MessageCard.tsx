@@ -190,12 +190,12 @@ const MessageCard: React.FC<MessageCardProps> = ({
                   {inquiryType}
                 </h2>
                 <div className="mb-3 flex w-full items-center justify-between capitalize">
-                  <UserCircle size={36} weight="duotone" />
+                  <UserCircle size={36} weight="regular" />
                   <Divider borderColor="grey" />
                   <p className="capitalize">{message.name}</p>
                 </div>
                 <div className="mb-3 flex w-full items-center justify-between">
-                  <Mailbox size={36} weight="duotone" />
+                  <Mailbox size={36} weight="regular" />
                   <Divider borderColor="grey" />
                   <a
                     href={`mailto:${message.email}`}
@@ -205,7 +205,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
                   </a>
                 </div>
                 <div className="mb-3 flex w-full items-center justify-between">
-                  <Phone size={36} weight="duotone" />
+                  <Phone size={36} weight="regular" />
                   <Divider borderColor="grey" />
                   <p>{message.phone}</p>
                 </div>
@@ -216,22 +216,22 @@ const MessageCard: React.FC<MessageCardProps> = ({
                     {eventType}
                   </h3>
                   <div className="mb-3 flex w-full items-center justify-between">
-                    <CalendarBlank size={36} weight="duotone" />
+                    <CalendarBlank size={36} weight="regular" />
                     <Divider borderColor="grey" />
                     <p>{eventDate}</p>
                   </div>
                   <div className="mb-3 flex w-full items-center justify-between">
-                    <Clock size={36} weight="duotone" />
+                    <Clock size={36} weight="regular" />
                     <Divider borderColor="grey" />
                     <p>{message.eventTime}</p>
                   </div>
                   <div className="mb-3 flex w-full items-center justify-between">
-                    <Users size={36} weight="duotone" />
+                    <Users size={36} weight="regular" />
                     <Divider borderColor="grey" />
                     <p>{message.guests} guests</p>
                   </div>
                   <div className="mb-3 flex w-full items-center justify-between">
-                    <MusicNote size={32} weight="duotone" />
+                    <MusicNote size={32} weight="regular" />
                     <Divider borderColor="grey" />
                     <p>{musicType}</p>
                   </div>
@@ -239,7 +239,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
               )}
               <div className="flex w-full items-center border-b border-black">
                 <div className="flex h-full items-center justify-between py-3 pr-3">
-                  <ChatCircle size={36} weight="duotone" />
+                  <ChatCircle size={36} weight="regular" />
                 </div>
                 <p className="py-3 pl-3 text-left">
                   "{message.message.trim()}"

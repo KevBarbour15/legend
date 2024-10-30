@@ -13,11 +13,9 @@ import { IconButton, Collapse } from "@mui/material";
 
 import {
   CaretDoubleUp,
-  Playlist,
-  Person,
+  VinylRecord,
   Play,
   Pause,
-  VinylRecord,
   SpeakerSlash,
   SpeakerSimpleHigh,
   SkipForward,
@@ -67,9 +65,16 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
 
     playlistTl.current = gsap.timeline({}).to("#playlist", {
       opacity: 1,
-      duration: 0.2,
+      duration: 0.25,
       delay: 0.05,
-      ease: "linear",
+      ease: "sine.inOut",
+    });
+
+    recordPlayerTl.current = gsap.timeline({}).to("#record-player", {
+      opacity: 1,
+      duration: 0.25,
+      delay: 0.05,
+      ease: "sine.inOut",
     });
   }, []);
 
@@ -129,127 +134,150 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
   return (
     <div
       ref={containerRef}
-      className={`fixed bottom-0 left-0 right-0 z-[150] flex h-auto w-full flex-col opacity-0 md:w-fit ${pathName === "/dashboard" ? "hidden" : ""}`}
+      className={`fixed bottom-0 left-0 right-0 z-[150] flex flex-col-reverse opacity-0 md:flex-row ${pathName === "/dashboard" ? "hidden" : ""}`}
     >
       <div
         id="player-container"
-        className="flex flex-col rounded-t-lg border border-customGold bg-customNavy drop-shadow-text md:mb-6 md:ml-6 md:mr-0 md:rounded-lg"
+        className="fixed bottom-0 left-0 right-0 mx-3 mb-3 flex flex-col rounded-sm drop-shadow-record md:mb-6 md:ml-6 md:mr-0 md:flex-row"
       >
-        <Collapse in={playlistVisible} id="playlist" className="z-10 opacity-0">
-          <div className="block" id="playlist-border">
-            {tracks.map((track, index) => (
-              <div
-                id="playlist-border"
-                key={index}
-                className="flex h-full flex-row border-b border-customGold p-1"
-              >
-                <div
-                  className={`flex w-auto flex-1 flex-col px-1 font-bigola transition-colors ${index === currentTrackIndex ? "text-customGold" : "text-customCream"} `}
-                  id="playlist-item"
-                >
-                  <div
-                    className="flex flex-row items-center"
-                    id="player-toggle"
-                  >
-                    <Person size={22} weight="duotone" className="pr-2" />
-                    <p className="text-base" id="player-toggle">
-                      {track.artist}
-                    </p>
-                  </div>
-                  <div className="flex flex-row" id="player-toggle">
-                    <VinylRecord size={22} weight="duotone" className="pr-2" />
-                    <p className="text-base">{track.title}</p>
-                  </div>
-                </div>
-                <div className="flex items-center justify-center">
-                  {index == currentTrackIndex ? (
-                    <Equalizer playing={playing} />
-                  ) : (
-                    <IconButton className="md:hover:text-custom m-0 flex p-1 text-customCream transition-colors hover:text-customGold">
-                      <Play
-                        weight="duotone"
-                        id="player-toggle"
-                        onClick={() => handleTrackChange(index)}
-                      />
-                    </IconButton>
-                  )}
-                </div>
+        <div className="w-full rounded-sm bg-customNavy p-0 md:w-fit">
+          <Collapse in={visible} id="record-player" className="hidden md:block">
+            <div
+              className="relative rounded-sm"
+              style={{
+                backgroundImage: "url('/images/oak.jpg')",
+                backgroundPosition: "center",
+                backgroundSize: "cover",
+              }}
+            >
+              <div className="bg-customNavy bg-opacity-20 p-2">
+                <img
+                  id="now-playing"
+                  className="absolute left-[104.5px] top-[44%] z-[3] w-[32px] drop-shadow-text"
+                  src="./images/alt-logo.png"
+                ></img>
+                <img
+                  className="drop-shadow-record md:w-[185px]"
+                  src="./images/player.svg"
+                ></img>
+                <div className="absolute left-[118.5px] top-[48.75%] z-[3] h-[3.75px] w-[3.75px] rounded-full bg-black"></div>
               </div>
-            ))}
-          </div>
-        </Collapse>
-        <Collapse in={visible} className="hidden p-0 md:block">
+            </div>
+          </Collapse>
           <div
-            className="relative border-b border-customGold p-2"
-            id="playlist-border"
+            style={{
+              backgroundImage: "url('/images/metal.jpg')",
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+            }}
+            className="z-[11] rounded-sm"
           >
-            <img
-              id="now-playing"
-              className="absolute left-[105px] top-[41.5%] z-[3] w-[30px]"
-              src="./images/small-logo.png"
-            ></img>
-            <img
-              className="drop-shadow-record md:w-[185px]"
-              src="./images/player.svg"
-            ></img>
+            <div className="flex justify-between rounded-sm bg-customNavy bg-opacity-50 px-1 py-2 md:bg-opacity-65 md:py-1">
+              <IconButton
+                className="hidden p-1 text-customCream drop-shadow-text transition-colors md:block md:hover:text-customGold"
+                onClick={togglePlayer}
+              >
+                <CaretDoubleUp
+                  weight="duotone"
+                  id="player-toggle"
+                  className={` ${visible ? "rotate-180 transform" : ""}`}
+                />
+              </IconButton>
+              <IconButton className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold">
+                {mute ? (
+                  <SpeakerSlash
+                    weight="fill"
+                    id="player-toggle"
+                    onClick={handleMute}
+                  />
+                ) : (
+                  <SpeakerSimpleHigh
+                    weight="fill"
+                    id="player-toggle"
+                    onClick={handleMute}
+                  />
+                )}
+              </IconButton>
+              <IconButton
+                onClick={handlePreviousTrack}
+                className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
+              >
+                <SkipBack id="player-toggle" weight="fill" />
+              </IconButton>
+
+              <IconButton
+                onClick={handlePlayPauseRounded}
+                className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
+              >
+                {playing ? <Pause weight="fill" /> : <Play weight="fill" />}
+              </IconButton>
+              <IconButton
+                onClick={handleNextTrack}
+                className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
+              >
+                <SkipForward weight="fill" />
+              </IconButton>
+              <IconButton
+                onClick={togglePlaylist}
+                className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
+              >
+                <VinylRecord weight="duotone" />
+              </IconButton>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        id="playlist"
+        className="z-10 mb-16 rounded-sm px-3 md:fixed md:bottom-0 md:left-[255px] md:mb-0 md:px-0 md:pb-6"
+      >
+        <Collapse in={playlistVisible}>
+          <div
+            className="aspect-square w-full rounded-sm drop-shadow-record md:h-[425px] md:w-auto"
+            style={{
+              backgroundImage: "url('/images/album-art.jpg')",
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+            }}
+          >
+            <div className="h-full rounded-sm bg-black bg-opacity-45">
+              <img
+                className="h-20 p-3 drop-shadow-text"
+                src="./images/small-logo.png"
+              ></img>
+              <div className="h-fit">
+                {tracks.map((track, index) => (
+                  <div key={index} className="flex h-full flex-row p-1 md:px-3">
+                    <div className="mr-3 flex flex-col justify-between px-1 font-bigola text-customCream drop-shadow-text md:px-0">
+                      <p className="text-2xl leading-none">{index + 1}.</p>
+                      <p className="text-lg">by</p>
+                    </div>
+                    <div className="flex w-full flex-col justify-between px-1 font-bigola text-customCream drop-shadow-text md:px-0">
+                      <div className="text-2xl leading-none">
+                        <p>{track.title}</p>
+                      </div>
+                      <div className="text-lg">
+                        <p>{track.artist}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-center">
+                      {index == currentTrackIndex ? (
+                        <Equalizer playing={playing} />
+                      ) : (
+                        <IconButton className="m-0 flex p-1 text-customCream drop-shadow-text md:px-0 md:hover:text-customGold">
+                          <Play
+                            weight="fill"
+                            onClick={() => handleTrackChange(index)}
+                          />
+                        </IconButton>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </Collapse>
-        <div className="flex justify-between px-1 py-2 md:py-1">
-          <IconButton
-            className="hidden p-1 text-customCream transition-colors md:block md:hover:text-customGold"
-            onClick={togglePlayer}
-          >
-            <CaretDoubleUp
-              weight="duotone"
-              id="player-toggle"
-              className={` ${visible ? "rotate-180 transform" : ""}`}
-            />
-          </IconButton>
-          <IconButton className="p-1 text-customCream transition-colors md:hover:text-customGold">
-            {mute ? (
-              <SpeakerSimpleHigh
-                weight="duotone"
-                id="player-toggle"
-                onClick={handleMute}
-              />
-            ) : (
-              <SpeakerSlash
-                weight="duotone"
-                id="player-toggle"
-                onClick={handleMute}
-              />
-            )}
-          </IconButton>
-          <IconButton
-            onClick={handlePreviousTrack}
-            className="p-1 text-customCream transition-colors md:hover:text-customGold"
-          >
-            <SkipBack id="player-toggle" weight="duotone" />
-          </IconButton>
-
-          <IconButton
-            onClick={handlePlayPauseRounded}
-            className="p-1 text-customCream transition-colors md:hover:text-customGold"
-          >
-            {playing ? (
-              <Pause id="player-toggle" weight="duotone" />
-            ) : (
-              <Play id="player-toggle" weight="duotone" />
-            )}
-          </IconButton>
-          <IconButton
-            onClick={handleNextTrack}
-            className="p-1 text-customCream transition-colors md:hover:text-customGold"
-          >
-            <SkipForward id="player-toggle" weight="duotone" />
-          </IconButton>
-          <IconButton
-            onClick={togglePlaylist}
-            className="p-1 text-customCream transition-colors md:hover:text-customGold"
-          >
-            <Playlist id="player-toggle" weight="duotone" />
-          </IconButton>
-        </div>
       </div>
       <ReactHowler
         src={tracks[currentTrackIndex].url}

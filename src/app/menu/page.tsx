@@ -111,13 +111,13 @@ const Menu: React.FC = ({}) => {
   const getIcon = (categoryName: string) => {
     switch (categoryName.toLowerCase()) {
       case "canned / bottled":
-        return <BeerBottle weight="duotone" />;
+        return <BeerBottle weight="fill" />;
       case "draft":
-        return <BeerStein weight="duotone" />;
+        return <BeerStein weight="fill" />;
       case "wine":
-        return <Wine weight="duotone" />;
+        return <Wine weight="fill" />;
       case "non alcoholic":
-        return <PintGlass weight="duotone" />;
+        return <PintGlass weight="fill" />;
     }
   };
 
@@ -162,7 +162,7 @@ const Menu: React.FC = ({}) => {
         >
           <AccordionTrigger
             className="cursor-pointer font-bigola text-xl leading-none text-customCream md:text-4xl"
-            icon={<BeerBottle weight="duotone" />}
+            icon={<BeerBottle weight="fill" />}
           >
             <h3>{childCategory.name}</h3>
           </AccordionTrigger>
