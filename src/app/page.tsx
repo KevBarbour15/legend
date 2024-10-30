@@ -5,14 +5,16 @@ import ImageCarousel from "@/components/carousel/Carousel";
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileMenu from "@/components/mobile-menu/MobileMenu";
 
-import { Instagram, Facebook, YouTube } from "@mui/icons-material";
+import {
+  InstagramLogo,
+  FacebookLogo,
+  YoutubeLogo,
+  Key,
+} from "@phosphor-icons/react";
 
 import { IconButton } from "@mui/material";
 
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
-
-import { Button } from "@/components/ui/button";
-import { Key } from "lucide-react";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -170,7 +172,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Instagram fontSize="inherit" />
+              <InstagramLogo size={48} weight="duotone" />
             </IconButton>
 
             <IconButton
@@ -179,7 +181,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Facebook fontSize="inherit" />
+              <FacebookLogo size={48} weight="duotone" />
             </IconButton>
 
             <IconButton
@@ -188,19 +190,19 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <YouTube fontSize="inherit" />
+              <YoutubeLogo size={48} weight="duotone" />
             </IconButton>
           </div>
           <div id="about-section" className="opacity-0">
             <ImageCarousel />
           </div>
-          <div className="mt-6 hidden w-full items-center justify-end md:flex">
-            <LoginLink postLoginRedirectURL="/dashboard">
-              <Button className="border border-customNavy bg-transparent font-bigola text-base font-bold text-customNavy transition-all hover:bg-customGold hover:drop-shadow-text">
-                <span className="mr-3">Owner</span>
-                <Key />
-              </Button>
-            </LoginLink>
+
+          <div className="mt-6 hidden w-full justify-end rounded-full md:flex">
+            <IconButton className="h-fit w-fit p-0 text-customNavy transition-all hover:text-customGold">
+              <LoginLink postLoginRedirectURL="/dashboard">
+                <Key weight="duotone" size={32} />
+              </LoginLink>
+            </IconButton>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { EmblaCarouselType } from "embla-carousel";
 import IconButton from "@mui/material/IconButton";
-import { ChevronsLeft, ChevronsRight } from "lucide-react";
+import { CaretDoubleLeft, CaretDoubleRight } from "@phosphor-icons/react";
 
 // Hook to manage prev/next button states
 type UsePrevNextButtonsType = {
@@ -56,9 +56,9 @@ export const PrevButton: React.FC<IconButtonProps> = (props) => {
   return (
     <IconButton
       {...restProps}
-      className="mb-6 mt-3 text-customNavy transition-colors md:mb-0 md:hover:text-customGold"
+      className="mb-6 mt-3 p-0 text-customNavy transition-colors md:mb-0 md:hover:text-customGold"
     >
-      <ChevronsLeft />
+      <CaretDoubleLeft size={40} weight="duotone" />
       {children}
     </IconButton>
   );
@@ -70,9 +70,9 @@ export const NextButton: React.FC<IconButtonProps> = (props) => {
   return (
     <IconButton
       {...restProps}
-      className="mb-6 mt-3 text-customNavy transition-colors md:mb-0 md:hover:text-customGold"
+      className="mb-6 mt-3 p-0 text-customNavy transition-colors md:mb-0 md:hover:text-customGold"
     >
-      <ChevronsRight />
+      <CaretDoubleRight size={40} weight="duotone" />
       {children}
     </IconButton>
   );
