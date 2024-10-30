@@ -139,7 +139,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
           />
           <Button
             type="submit"
-            className="general-form-field mx-auto w-full rounded-lg border border-customGold bg-transparent p-3 font-bigola text-2xl text-customCream opacity-0 active:bg-customNavy active:text-customCream sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
+            className="general-form-field mx-auto w-full rounded-sm border border-customGold bg-transparent p-3 font-bigola text-2xl text-customCream opacity-0 active:bg-customNavy active:text-customCream sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
           >
             Submit
           </Button>

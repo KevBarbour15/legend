@@ -62,7 +62,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
             </motion.button>
             <motion.div
               layoutId={`card-${event._id}`}
-              className="relative flex h-fit max-h-[85svh] w-full flex-col overflow-hidden rounded-lg border border-customGold bg-customNavy px-3 pt-3 shadow-md sm:max-h-[95vh] sm:max-w-[425px] md:px-6 md:pt-6"
+              className="relative flex h-fit max-h-[85svh] w-full flex-col overflow-hidden rounded-sm border border-customGold bg-customNavy px-3 pt-3 shadow-md sm:max-h-[95vh] sm:max-w-[425px] md:px-6 md:pt-6"
             >
               {event.is_photo ? (
                 <motion.div
@@ -75,7 +75,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                     height={300}
                     src={event.image_url}
                     alt={event.title}
-                    className="aspect-square w-full rounded-lg object-cover object-center"
+                    className="aspect-square w-full rounded-sm object-cover object-center"
                   />
                 </motion.div>
               ) : (
@@ -85,7 +85,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                 >
                   <video
                     src={event.image_url}
-                    className="aspect-square w-full rounded-lg object-cover object-center"
+                    className="aspect-square w-full rounded-sm object-cover object-center"
                     loop
                     autoPlay
                     muted
@@ -140,7 +140,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
       <motion.div
         layoutId={`card-${event._id}`}
         onClick={handleCardClick}
-        className="cursor-pointer rounded-lg bg-transparent pr-6 transition-all duration-300 md:hover:bg-black md:hover:bg-opacity-15 md:hover:shadow-lg"
+        className="cursor-pointer rounded-sm bg-transparent transition-all duration-300 md:hover:bg-black md:hover:bg-opacity-15 md:hover:shadow-lg"
       >
         <div className="flex h-full space-x-3 md:space-x-6">
           {event.is_photo ? (
@@ -154,7 +154,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                 height={200}
                 src={event.image_url}
                 alt={event.title}
-                className="aspect-square h-[100px] w-[100px] rounded-lg border border-customGold object-cover object-center md:h-[215px] md:w-[215px]"
+                className="aspect-square h-[115px] w-[115px] rounded-sm object-cover object-center md:h-[225px] md:w-[225px]"
               />
             </motion.div>
           ) : (
@@ -164,7 +164,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
             >
               <video
                 src={event.image_url}
-                className="aspect-square h-[100px] w-[100px] rounded-lg border border-customGold object-cover object-center md:h-[215px] md:w-[215px]"
+                className="aspect-square h-[115px] w-[115px] rounded-sm object-cover object-center md:h-[225px] md:w-[225px]"
                 loop
                 autoPlay
                 muted

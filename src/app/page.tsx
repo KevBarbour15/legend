@@ -88,8 +88,8 @@ export default function Home() {
             y: 0,
             scrollTrigger: {
               trigger: section,
-              start: "top bottom-=50",
-              end: "top 65%",
+              start: "top bottom",
+              end: "top 75%",
               scrub: 1,
             },
           },
@@ -111,7 +111,7 @@ export default function Home() {
         <div className="top-bg hidden h-dvh w-screen md:block"></div>
         <div
           id="about-content"
-          className="relative block h-auto p-3 md:py-6 md:pl-[258px] md:pr-6"
+          className="relative mx-auto block h-auto p-3 md:py-6 md:pl-[258px] md:pr-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
         >
           <div
             id="about-section"
@@ -120,7 +120,7 @@ export default function Home() {
             <img src="/images/about-image.jpg" className="object-cover" />
           </div>
 
-          <div className="font-hypatia text-lg text-customNavy">
+          <div className="font-hypatia text-lg text-customNavy md:text-xl">
             <p id="about-section" className="my-6 opacity-0">
               Welcome to Legend Has It, Sacramento's first hi-fi listening bar,
               where music meets the art of sound. We offer an immersive

@@ -151,7 +151,7 @@ export default function Events() {
       <div className="fixed left-0 top-0 z-[-1] h-full min-h-screen w-screen backdrop-blur-sm"></div>
       <div
         ref={containerRef}
-        className="z-10 flex w-screen flex-col items-center justify-center overflow-y-auto p-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6"
+        className="z-10 mx-auto flex w-screen flex-col items-center justify-center overflow-y-auto p-3 pb-20 md:pb-0 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
       >
         <MobileHeading section={"Events"} />
         {loading ? (
@@ -174,7 +174,7 @@ export default function Events() {
                 <>
                   {upcomingEvents.map((event, index) => (
                     <div
-                      className="mb-6 opacity-0"
+                      className="opacity-0"
                       key={event._id}
                       ref={(el) => {
                         upcomingEventRefs.current[index] = el;

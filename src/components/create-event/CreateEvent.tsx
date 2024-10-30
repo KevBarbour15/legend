@@ -148,7 +148,7 @@ const CreateEvent: React.FC = () => {
               control={form.control}
               name="is_photo"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                <FormItem className="flex flex-row items-center justify-between rounded-sm border p-4">
                   <div className="space-y-0.5">
                     <FormLabel className="text-base">Media Type</FormLabel>
                     <FormDescription>
