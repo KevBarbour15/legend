@@ -22,11 +22,12 @@ const Loading: React.FC<LoadingProps> = ({ progress, message, loading }) => {
 
     tl.current = gsap.timeline({ repeat: -1, repeatDelay: 0.1 });
     tl.current.to(p.chars, {
-      duration: 0.25,
-      opacity: 0.15,
+      duration: 0.35,
+      opacity: 0.5,
+      scale: 1.25,
       ease: "power1.inOut",
       stagger: {
-        each: 0.1,
+        each: 0.15,
         repeat: 1,
         yoyo: true,
       },
