@@ -1,8 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/hooks/use-outside-click";
+
 import { X } from "@phosphor-icons/react";
+import { IconButton } from "@mui/material";
+
 import { EventCardProps } from "@/types/events";
 import { createPortal } from "react-dom";
 import Divider from "@/components/divider/Divider";
@@ -58,8 +62,11 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
               className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full md:right-6 md:top-6"
               onClick={() => setIsActive(false)}
             >
-              <X size={32} className="text-customWhite" />
+              <IconButton aria-label="Close Modal" className="p-0">
+                <X size={32} className="text-customCream" />
+              </IconButton>
             </motion.button>
+
             <motion.div
               layoutId={`card-${event._id}`}
               className="relative flex h-fit max-h-[85svh] w-full flex-col overflow-hidden rounded-sm border border-customGold bg-customNavy px-3 pt-3 shadow-md sm:max-h-[95vh] sm:max-w-[425px] md:px-6 md:pt-6"
