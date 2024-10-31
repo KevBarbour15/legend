@@ -174,7 +174,7 @@ export default function Events() {
 
             <TabsContent value="upcoming" className="w-full">
               {upcomingEvents.length > 0 ? (
-                <>
+                <div className="space-y-3 md:space-y-6">
                   {upcomingEvents.map((event, index) => (
                     <div
                       className="opacity-0"
@@ -186,7 +186,7 @@ export default function Events() {
                       <EventCard key={index} event={event} />
                     </div>
                   ))}
-                </>
+                </div>
               ) : (
                 <div className="flex w-full flex-col items-center justify-center text-center">
                   <EmptyMessage
@@ -198,19 +198,19 @@ export default function Events() {
             </TabsContent>
             <TabsContent value="past" className="w-full">
               {pastEvents.length > 0 ? (
-                <>
+                <div className="space-y-3 md:space-y-6">
                   {pastEvents.map((event, index) => (
                     <div
                       key={event._id}
                       ref={(el) => {
                         pastEventRefs.current[index] = el;
                       }}
-                      className="mb-6 opacity-0"
+                      className="opacity-0"
                     >
                       <EventCard key={index} event={event} />
                     </div>
                   ))}
-                </>
+                </div>
               ) : (
                 <div className="flex w-full flex-col items-center justify-center text-center">
                   <EmptyMessage
