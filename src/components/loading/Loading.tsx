@@ -10,7 +10,7 @@ const Loading: React.FC<LoadingProps> = ({ progress, message, loading }) => {
     >
       <h2
         id="loading-text"
-        className="mb-6 mt-3 font-bigola text-3xl text-customGold md:text-4xl"
+        className="mb-6 mt-3 font-bigola text-3xl text-customCream md:text-4xl"
       >
         {message}
       </h2>

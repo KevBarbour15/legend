@@ -1,26 +1,20 @@
 "use client";
 import React, { useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
-import { X, Key } from "@phosphor-icons/react";
-
-import Link from "next/link";
-
 import "./menu.css";
-
 import Image from "next/image";
-
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import {
-  Instagram,
-  Facebook,
-  YouTube,
-  CloseRounded,
-} from "@mui/icons-material";
+  X,
+  InstagramLogo,
+  FacebookLogo,
+  YoutubeLogo,
+  Key,
+} from "@phosphor-icons/react";
 
 import { IconButton } from "@mui/material";
 
@@ -52,7 +46,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
     gsap.set(".menu-login-link", { opacity: 0 });
 
     tl.current = gsap
-      .timeline()
+      .timeline({ paused: true })
       .to(".menu-overlay", {
         duration: 0.35,
         delay: -0.15,
@@ -98,20 +92,17 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
     }
   }, [menuStatus]);
 
-  /*
-  const handleAboutScroll = async (e: React.MouseEvent) => {
+  const handleLinkClick = async (path: string, e: React.MouseEvent) => {
     e.preventDefault();
 
-    await router.push("/");
-    setTimeout(() => {
-      const aboutSection = document.getElementById("about-content");
+    tl.current?.reverse();
 
-      if (aboutSection) {
-        aboutSection.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 500);
+    await new Promise((resolve) => setTimeout(resolve, 150));
+
+    toggleMenu();
+    router.push(path);
   };
-*/
+
   return (
     <div className="menu-container" ref={container}>
       <div className="menu-overlay">
@@ -131,10 +122,14 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
           <div className="menu-links">
             {links.map((link, idx) => (
               <div className="menu-link-item" key={idx}>
-                <div className="menu-link-item-holder" onClick={toggleMenu}>
-                  <Link href={link.path} className="menu-link">
+                <div className="menu-link-item-holder">
+                  <a
+                    href={link.path}
+                    className="menu-link"
+                    onClick={(e) => handleLinkClick(link.path, e)}
+                  >
                     {link.label}
-                  </Link>
+                  </a>
                 </div>
               </div>
             ))}
@@ -148,7 +143,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Instagram fontSize="inherit" />
+              <InstagramLogo size={32} weight="duotone" />
             </IconButton>
 
             <IconButton
@@ -157,7 +152,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Facebook fontSize="inherit" />
+              <FacebookLogo size={32} weight="duotone" />
             </IconButton>
 
             <IconButton
@@ -166,11 +161,11 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <YouTube fontSize="inherit" />
+              <YoutubeLogo size={32} weight="duotone" />
             </IconButton>
           </div>
           <LoginLink postLoginRedirectURL="/dashboard">
-            <Key className="menu-login-link" />
+            <Key className="menu-login-link" weight="duotone" />
           </LoginLink>
         </div>
       </div>
