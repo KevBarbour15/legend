@@ -1,9 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import DashHeader from "@/components/dash-header/DashHeader";
 import CreateEvent from "@/components/create-event/CreateEvent";
-import LiveStream from "@/components/live-stream/LiveStream";
+
 import UnreadMessagesList from "@/components/messages/UnreadMessages";
 import ReadMessagesList from "@/components/messages/ReadMessages";
 import UpcomingEventsList from "@/components/events/UpcomingEvents";
@@ -12,7 +12,6 @@ import PastEventsList from "@/components/events/PastEvents";
 const DefaultComponent: React.FC = () => <div>No component selected</div>;
 
 CreateEvent.displayName = "CreateEvent";
-LiveStream.displayName = "LiveStream";
 UpcomingEventsList.displayName = "UpcomingEventsList";
 PastEventsList.displayName = "PastEventsList";
 UnreadMessagesList.displayName = "MessagesList";
@@ -32,9 +31,7 @@ export default function Dashboard() {
     case "Past Events":
       CurrentComponent = PastEventsList;
       break;
-    case "Live Stream":
-      CurrentComponent = LiveStream;
-      break;
+
     case "Unread Messages":
       CurrentComponent = UnreadMessagesList;
       break;
