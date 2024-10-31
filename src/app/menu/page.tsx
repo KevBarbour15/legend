@@ -60,7 +60,7 @@ const Menu: React.FC = ({}) => {
     } finally {
       setTimeout(() => {
         setProgress(100);
-        setTimeout(() => setLoading(false), 200);
+        setTimeout(() => setLoading(false), 300);
         setTimeout(() => setDisplayMenu(true), 350);
       }, 350);
     }
@@ -184,7 +184,11 @@ const Menu: React.FC = ({}) => {
       >
         <MobileHeading section={"Menu"} />
         {loading ? (
-          <Loading progress={progress} message={"Loading menu..."} />
+          <Loading
+            progress={progress}
+            message={"Loading menu..."}
+            loading={loading}
+          />
         ) : menu === null ? (
           <div
             id="event-subheading"

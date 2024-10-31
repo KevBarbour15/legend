@@ -85,7 +85,6 @@ export default function Events() {
       const data: Event[] = await response.json();
 
       setProgress(generateProgress(76, 95));
-
       setEvents(data);
     } catch (error) {
       setProgress(0);
@@ -94,7 +93,7 @@ export default function Events() {
     } finally {
       setTimeout(() => {
         setProgress(100);
-        setTimeout(() => setLoading(false), 200);
+        setTimeout(() => setLoading(false), 300);
         setTimeout(() => setDisplayEvents(true), 350);
       }, 350);
     }
@@ -155,7 +154,11 @@ export default function Events() {
       >
         <MobileHeading section={"Events"} />
         {loading ? (
-          <Loading progress={progress} message={"Loading events..."} />
+          <Loading
+            progress={progress}
+            message={"Loading events..."}
+            loading={loading}
+          />
         ) : (
           <Tabs
             defaultValue="upcoming"
