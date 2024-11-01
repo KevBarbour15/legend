@@ -56,7 +56,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
       })
       .to(".menu-link-item-holder", {
         y: 0,
-        duration: 0.25,
+        duration: 0.2,
         stagger: 0.075,
         delay: -0.15,
         ease: "linear",
@@ -97,7 +97,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
 
     tl.current?.reverse();
 
-    await new Promise((resolve) => setTimeout(resolve, 450));
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     toggleMenu();
     router.push(path);

@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-import { MusicPlayerProps } from "@/types/music-player";
+import { MusicPlayerProps } from "@/data/music-player";
 
 import gsap from "gsap";
 

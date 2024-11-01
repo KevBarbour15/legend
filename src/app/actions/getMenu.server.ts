@@ -1,5 +1,5 @@
 "use server";
-import { MenuStructure } from "@/types/menu.ts";
+import { MenuStructure } from "@/data/menu.ts";
 import { headers } from "next/headers";
 
 export async function getMenu(): Promise<MenuStructure> {

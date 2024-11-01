@@ -4,38 +4,9 @@
  */
 
 /**
- * The categories that are currently in use.
- * These should be updated if the categories in the Square API change.
- * These are used to compare the current categories to the categories
- * in the Square API.
- */
-
-export const CURRENT_CATEGORIES: string[] = [
-  "Lagers, Pilsners, Kolsch",
-  "IPAs",
-  "Seltzers and Ciders",
-  "Sours and Stouts",
-  "Canned / Bottled",
-  "Draft",
-  "Wine",
-  "Non Alcoholic",
-];
-
-/**
- * Categories that should be excluded from the parent menu
- * but still displayed in the child menu "Canned / Bottled".
- */
-export const EXCLUDED_CATEGORIES: string[] = [
-  "Lagers, Pilsners, Kolsch",
-  "IPAs",
-  "Seltzers and Ciders",
-  "Sours and Stouts",
-];
-
-/**
  * The order in which the categories should be displayed.
  */
-export const ORDERED_CATEGORIES: string[] = [
+export const ORDER_OF_CATEGORIES: string[] = [
   "Draft",
   "Canned / Bottled",
   "Wine",

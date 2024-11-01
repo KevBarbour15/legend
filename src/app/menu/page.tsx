@@ -7,7 +7,7 @@ import {
   MenuStructure,
   CategoryWithItems,
   ProcessedItem,
-} from "@/types/menu.ts";
+} from "@/data/menu.ts";
 
 import { BeerBottle, BeerStein, Wine, PintGlass } from "@phosphor-icons/react";
 

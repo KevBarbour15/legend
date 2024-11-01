@@ -16,12 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
-import {
-  baseFormSchema,
-  FormData,
-  DjFormProps,
-  DjFormRef,
-} from "@/types/forms";
+import { baseFormSchema, FormData, DjFormProps, DjFormRef } from "@/data/forms";
 
 const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -45,17 +40,14 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
   useGSAP(() => {
     if (!formRef.current) return;
 
-    gsap.set(".dj-form-field", {
+    gsap.set("#dj-form", {
       opacity: 0,
-      y: 100,
     });
 
     tl.current = gsap.timeline({});
-    tl.current.to(".dj-form-field", {
+    tl.current.to("#dj-form", {
       delay: 0.15,
-      duration: 0.2,
-      stagger: 0.05,
-      y: 0,
+      duration: 0.25,
       opacity: 1,
       ease: "sine.inOut",
     });
@@ -65,10 +57,11 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
     <Form {...form}>
       <form
         ref={formRef}
+        id="dj-form"
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex w-full flex-col space-y-3 md:w-[550px]"
       >
-        <p className="dj-form-field text-pretty font-hypatia text-customCream opacity-0">
+        <p className="text-pretty font-hypatia text-customCream">
           Thank you for your interest to DJ at Legend Has It. Please take a
           minute to fill out the form below so we can get to know you and your
           style. Below, please provide as much detail as possible in regard to
@@ -79,7 +72,7 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           control={form.control}
           name="name"
           render={({ field }) => (
-            <FormItem className="dj-form-field w-full opacity-0">
+            <FormItem className="w-full">
               <FormLabel className="font-bigola text-customCream">
                 Name
               </FormLabel>
@@ -95,7 +88,7 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           control={form.control}
           name="email"
           render={({ field }) => (
-            <FormItem className="dj-form-field w-full opacity-0">
+            <FormItem className="w-full">
               <FormLabel className="font-bigola text-customCream">
                 Email
               </FormLabel>
@@ -110,7 +103,7 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           control={form.control}
           name="phone"
           render={({ field }) => (
-            <FormItem className="dj-form-field w-full opacity-0">
+            <FormItem className="w-full">
               <FormLabel className="font-bigola text-customCream">
                 Phone
               </FormLabel>
@@ -126,7 +119,7 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           control={form.control}
           name="message"
           render={({ field }) => (
-            <FormItem className="dj-form-field w-full opacity-0">
+            <FormItem className="w-full">
               <FormLabel className="font-bigola text-customCream">
                 Experience, style, etc
               </FormLabel>
@@ -139,7 +132,7 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
         />
         <Button
           type="submit"
-          className="dj-form-field mx-auto w-full rounded-sm border border-customGold bg-transparent p-3 font-bigola text-2xl text-customCream opacity-0 active:bg-customNavy active:text-customCream sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
+          className="mx-auto w-full rounded-sm border border-customGold bg-transparent p-3 font-bigola text-2xl text-customCream active:bg-customNavy active:text-customCream sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
         >
           Submit
         </Button>

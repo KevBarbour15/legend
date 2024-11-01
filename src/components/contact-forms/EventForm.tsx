@@ -29,7 +29,7 @@ import {
   EventFormData,
   EventFormProps,
   EventFormRef,
-} from "@/types/forms.ts";
+} from "@/data/forms.ts";
 
 const EventForm = forwardRef<EventFormRef, EventFormProps>(
   ({ onSubmit }, ref) => {
@@ -69,17 +69,14 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
     useGSAP(() => {
       if (!formRef.current) return;
 
-      gsap.set(".event-form-field", {
-        x: "-100",
+      gsap.set("#event-form", {
         opacity: 0,
       });
 
       tl.current = gsap.timeline({});
-      tl.current.to(".event-form-field", {
+      tl.current.to("#event-form", {
         delay: 0.15,
-        duration: 0.2,
-        stagger: 0.05,
-        x: 0,
+        duration: 0.25,
         opacity: 1,
         ease: "sine.inOut",
       });
@@ -89,10 +86,11 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
       <Form {...form}>
         <form
           ref={formRef}
+          id="event-form"
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex w-full flex-col space-y-3 md:w-[550px]"
+          className="flex w-full flex-col space-y-3 opacity-0 md:w-[550px]"
         >
-          <p className="event-form-field text-pretty font-hypatia text-customCream opacity-0">
+          <p className="text-pretty font-hypatia text-customCream">
             Thank you for inquiring about hosting your special event at Legend
             Has It. We appreciate your interest and look forward to helping you
             create a memorable experience. Please complete this form to give us
@@ -105,7 +103,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             control={form.control}
             name="name"
             render={({ field }) => (
-              <FormItem className="event-form-field w-full opacity-0">
+              <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customCream">
                   Name
                 </FormLabel>
@@ -121,7 +119,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem className="event-form-field w-full opacity-0">
+              <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customCream">
                   Email
                 </FormLabel>
@@ -136,7 +134,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             control={form.control}
             name="phone"
             render={({ field }) => (
-              <FormItem className="event-form-field w-full opacity-0">
+              <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customCream">
                   Phone
                 </FormLabel>
@@ -151,7 +149,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             control={form.control}
             name="eventDate"
             render={({ field }) => (
-              <FormItem className="event-form-field w-full opacity-0">
+              <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customCream">
                   Date of event
                 </FormLabel>
@@ -169,7 +167,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             control={form.control}
             name="eventTime"
             render={({ field }) => (
-              <FormItem className="event-form-field w-full opacity-0">
+              <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customCream">
                   Time of interest: (1-4 pm, 3-10 pm, etc.)
                 </FormLabel>
@@ -184,7 +182,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             control={form.control}
             name="eventType"
             render={({ field }) => (
-              <FormItem className="event-form-field w-full opacity-0">
+              <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customCream">
                   Type of event
                 </FormLabel>
@@ -211,7 +209,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             control={form.control}
             name="guests"
             render={({ field }) => (
-              <FormItem className="event-form-field w-full opacity-0">
+              <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customCream">
                   Number of guests
                 </FormLabel>
@@ -244,7 +242,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             control={form.control}
             name="musicType"
             render={({ field }) => (
-              <FormItem className="event-form-field w-full opacity-0">
+              <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customCream">
                   Music options
                 </FormLabel>
@@ -290,7 +288,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             control={form.control}
             name="message"
             render={({ field }) => (
-              <FormItem className="event-form-field w-full opacity-0">
+              <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customCream">
                   What else should we know?
                 </FormLabel>
@@ -303,7 +301,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
           />
           <Button
             type="submit"
-            className="event-form-field mx-auto w-full rounded-sm border border-customGold bg-transparent p-3 font-bigola text-2xl text-customCream opacity-0 active:bg-customNavy active:text-customCream sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
+            className="mx-auto w-full rounded-sm border border-customGold bg-transparent p-3 font-bigola text-2xl text-customCream active:bg-customNavy active:text-customCream sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
           >
             Submit
           </Button>

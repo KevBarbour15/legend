@@ -1,4 +1,4 @@
-import { GetFallbackMenuResponse } from "@/types/fallback-menu";
+import { GetFallbackMenuResponse } from "@/data/fallback-menu";
 
 import { connectToMongoDB } from "@/lib/db";
 

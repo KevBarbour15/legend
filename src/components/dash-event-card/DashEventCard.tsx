@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { DashEventCardProps, Event } from "@/types/events";
+import { DashEventCardProps, Event } from "@/data/events";
 
 import { formatTime } from "@/utils/time";
 

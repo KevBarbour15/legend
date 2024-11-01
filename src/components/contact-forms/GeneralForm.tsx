@@ -21,7 +21,7 @@ import {
   FormData,
   GeneralFormProps,
   GeneralFormRef,
-} from "@/types/forms";
+} from "@/data/forms";
 
 const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
   ({ onSubmit }, ref) => {
@@ -46,19 +46,16 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
     useGSAP(() => {
       if (!formRef.current) return;
 
-      gsap.set(".general-form-field", {
-        x: "100",
+      gsap.set("#general-form", {
         opacity: 0,
       });
 
       tl.current = gsap.timeline({});
-      tl.current.to(".general-form-field", {
+      tl.current.to("#general-form", {
         delay: 0.15,
-        duration: 0.2,
-        stagger: 0.05,
-        x: 0,
+        duration: 0.25,
         opacity: 1,
-        ease: "sin.inOut",
+        ease: "sine.inOut",
       });
     }, []);
 
@@ -66,10 +63,11 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
       <Form {...form}>
         <form
           ref={formRef}
+          id="general-form"
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex w-full flex-col space-y-3 md:w-[550px]"
+          className="flex w-full flex-col space-y-3 md:w-[550px] opacity-0"
         >
-          <p className="general-form-field text-pretty font-hypatia text-customCream opacity-0">
+          <p className="general-form-field text-pretty font-hypatia text-customCream">
             Thank you for reaching out to Legend Has It. Please take a minute
             and fill out the form below to give us a better understanding of how
             we can help.
@@ -79,7 +77,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             control={form.control}
             name="name"
             render={({ field }) => (
-              <FormItem className="general-form-field w-full opacity-0">
+              <FormItem className="general-form-field w-full">
                 <FormLabel className="font-bigola text-customCream">
                   Name
                 </FormLabel>
@@ -95,7 +93,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem className="general-form-field w-full opacity-0">
+              <FormItem className="general-form-field w-full">
                 <FormLabel className="font-bigola text-customCream">
                   Email
                 </FormLabel>
@@ -110,7 +108,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             control={form.control}
             name="phone"
             render={({ field }) => (
-              <FormItem className="general-form-field w-full opacity-0">
+              <FormItem className="general-form-field w-full">
                 <FormLabel className="font-bigola text-customCream">
                   Phone
                 </FormLabel>
@@ -126,7 +124,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             control={form.control}
             name="message"
             render={({ field }) => (
-              <FormItem className="general-form-field w-full opacity-0">
+              <FormItem className="general-form-field w-full">
                 <FormLabel className="font-bigola text-customCream">
                   Message
                 </FormLabel>
@@ -139,7 +137,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
           />
           <Button
             type="submit"
-            className="general-form-field mx-auto w-full rounded-sm border border-customGold bg-transparent p-3 font-bigola text-2xl text-customCream opacity-0 active:bg-customNavy active:text-customCream sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
+            className="general-form-field mx-auto w-full rounded-sm border border-customGold bg-transparent p-3 font-bigola text-2xl text-customCream active:bg-customNavy active:text-customCream sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
           >
             Submit
           </Button>

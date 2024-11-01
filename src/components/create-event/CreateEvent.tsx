@@ -19,14 +19,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
-const formSchema = z.object({
-  title: z.string().min(1, "Event name is required"),
-  date: z.string().min(1, "Date is required"),
-  time: z.string().min(1, "Time is required"),
-  image_url: z.string().url("Invalid URL"),
-  description: z.string().min(1, "Description is required"),
-  is_photo: z.boolean(),
-});
+import { formSchema } from "@/data/create-event";
 
 const CreateEvent: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);

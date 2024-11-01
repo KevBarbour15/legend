@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 
-import { Message } from "@/types/messages";
+import { Message } from "@/data/messages";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";

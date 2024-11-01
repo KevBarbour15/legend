@@ -7,7 +7,7 @@ import { useOutsideClick } from "@/hooks/use-outside-click";
 import { X } from "@phosphor-icons/react";
 import { IconButton } from "@mui/material";
 
-import { EventCardProps } from "@/types/events";
+import { EventCardProps } from "@/data/events";
 import { createPortal } from "react-dom";
 import Divider from "@/components/divider/Divider";
 import { formatTime } from "@/utils/time";
