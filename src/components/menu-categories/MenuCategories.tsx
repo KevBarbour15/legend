@@ -113,6 +113,31 @@ const MenuCategories: React.FC = () => {
     }
   };
 
+  const removeCategory = async (title: string, type: string) => {
+    try {
+      const response = await fetch("/api/menu-categories", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ title: type, type: type }),
+      });
+
+      const data = await response.json();
+
+      console.log(data);
+      if (response.ok) {
+        setError(null);
+        fetchCategoriesData();
+      } else {
+        setError(data.error || "Failed to delete.");
+      }
+    } catch (error) {
+      console.error("Error: ", error);
+      setError("Network error occurred. Please try again.");
+    }
+  };
+
   const fetchCategoriesData = async () => {
     try {
       const response = await fetch("/api/menu-categories", {
@@ -173,7 +198,7 @@ const MenuCategories: React.FC = () => {
             </Form>
           </div>
           <div className="basis-1/2">
-            <Table className="max-h-72 w-full p-3 transition-all duration-300">
+            <Table className="h-auto w-full p-3 transition-all duration-300">
               <TableCaption>Current Categories</TableCaption>
               <TableHeader>
                 <TableRow>
@@ -191,7 +216,9 @@ const MenuCategories: React.FC = () => {
                     <TableCell className="basis-1/2">{category}</TableCell>
 
                     <TableCell className="flex basis-1/4 justify-end text-right">
-                      <Button>
+                      <Button
+                        onClick={() => removeCategory(category, "parent")}
+                      >
                         <X size={18} />
                       </Button>
                     </TableCell>
@@ -233,7 +260,7 @@ const MenuCategories: React.FC = () => {
             </Form>
           </div>
           <div className="basis-1/2">
-            <Table className="max-h-72 w-full p-3 transition-all duration-300">
+            <Table className="h-auto w-full p-3 transition-all duration-300">
               <TableCaption>Current Subcategories</TableCaption>
               <TableHeader>
                 <TableRow>
@@ -251,7 +278,9 @@ const MenuCategories: React.FC = () => {
                     <TableCell className="basis-1/2">{category}</TableCell>
 
                     <TableCell className="flex basis-1/4 justify-end text-right">
-                      <X size={18} />
+                      <Button onClick={() => removeCategory(category, "child")}>
+                        <X size={18} />
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}

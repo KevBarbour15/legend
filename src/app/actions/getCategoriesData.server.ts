@@ -6,7 +6,9 @@ export async function getCategoriesData(): Promise<CategoriesData> {
   try {
     await connectToMongoDB();
 
-    const categories = await Categories.findOne({});
+    const categories = await Categories.find({});
+
+    console.log(categories);
 
     if (!categories) {
       return {
@@ -15,9 +17,8 @@ export async function getCategoriesData(): Promise<CategoriesData> {
       };
     }
 
-    const parentCategories = categories.parentCategories;
-
-    const childCategories = categories.childCategories;
+    const parentCategories: any[] = [];
+    const childCategories: any[] = [];
 
     return {
       parentCategories: parentCategories,

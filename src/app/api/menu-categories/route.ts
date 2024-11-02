@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import Categories from "@/models/MenuCategories";
+import CategoriesType from "@/models/MenuCategories";
 import { connectToMongoDB } from "@/lib/db";
 import { getCategoriesData } from "@/app/actions/getCategoriesData.server.ts";
 import { CategoryRequest } from "@/data/menu-categories";
@@ -46,18 +46,18 @@ export async function addParentCategory({ title }: CategoryRequest) {
       );
     }
 
-    let categories = await Categories.findOne({});
+    let category = await CategoriesType.findOne({ title: "parentCategory" });
 
-    if (!categories) {
-      categories = await Categories.create({
-        parentCategories: [],
-        childCategories: [],
+    if (!category) {
+      category = await CategoriesType.create({
+        title: "parentCategory",
+        categories: [],
       });
     }
 
-    const response = await Categories.findOneAndUpdate(
-      {},
-      { $addToSet: { parentCategories: title.trim() } },
+    const response = await CategoriesType.findOneAndUpdate(
+      { title: "parentCategory" },
+      { $addToSet: { categories: title.trim() } },
       {
         new: true,
         runValidators: true,
@@ -96,18 +96,18 @@ export async function addChildCategory({ title }: CategoryRequest) {
       );
     }
 
-    let categories = await Categories.findOne({});
+    let category = await CategoriesType.findOne({ title: "childCategory" });
 
-    if (!categories) {
-      categories = await Categories.create({
-        parentCategories: [],
-        childCategories: [],
+    if (!category) {
+      category = await CategoriesType.create({
+        title: "childCategory",
+        categories: [],
       });
     }
 
-    const response = await Categories.findOneAndUpdate(
-      {},
-      { $addToSet: { childCategories: title.trim() } },
+    const response = await CategoriesType.findOneAndUpdate(
+      { title: "childCategory" },
+      { $addToSet: { categories: title.trim() } },
       {
         new: true,
         runValidators: true,
@@ -142,11 +142,60 @@ export async function GET() {
     await connectToMongoDB();
     const categories = await getCategoriesData();
 
+    console.log("Categories:", categories);
+
     return NextResponse.json(categories, { status: 200 });
   } catch (error) {
     console.error("Error in GET categories:", error);
     return NextResponse.json(
       { error: "Failed to fetch categories" },
+      { status: 500 },
+    );
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  try {
+    await connectToMongoDB();
+
+    const body = await req.json();
+    const { title, type } = body;
+
+    if (!title || !type) {
+      return NextResponse.json(
+        { error: "Title and type are required" },
+        { status: 400 },
+      );
+    }
+
+    if (type !== "parent" && type !== "child") {
+      return NextResponse.json(
+        { error: "Invalid type. Must be 'parent' or 'child'" },
+        { status: 400 },
+      );
+    }
+
+    const category = type === "parent" ? "parentCategories" : "childCategories";
+
+    const response = await CategoriesType.findOneAndDelete(
+      {},
+      { category: title },
+    );
+
+    console.log(response);
+
+    if (!response) {
+      return NextResponse.json(
+        { error: "Database operation failed" },
+        { status: 500 },
+      );
+    }
+
+    return NextResponse.json("Successfully deleted.", { status: 200 });
+  } catch (error) {
+    console.error("Failed to delete category.", error);
+    return NextResponse.json(
+      { error: "Failed to delete category." },
       { status: 500 },
     );
   }

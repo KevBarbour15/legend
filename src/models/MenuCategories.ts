@@ -1,16 +1,16 @@
 import mongoose, { Document, Schema } from "mongoose";
 
 export interface ICategories extends Document {
-  parentCategories: string[];
-  childCategories: string[];
+  title: string;
+  categories: string[];
 }
 
 const CategoriesSchema: Schema = new Schema({
-  parentCategories: {
-    type: Array,
+  title: {
+    type: String,
     required: true,
   },
-  childCategories: {
+  categories: {
     type: Array,
     required: true,
   },
