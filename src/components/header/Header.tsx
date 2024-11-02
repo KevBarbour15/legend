@@ -68,7 +68,6 @@ const Header: React.FC = () => {
         <div className="w-14">&nbsp;</div>
 
         <div id="logo" className="opacity-0">
-          {/* turn to link once full site is live */}
           <Image
             src="/images/logo.png"
             alt="Legend Has It logo"

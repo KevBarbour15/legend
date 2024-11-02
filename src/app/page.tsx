@@ -172,7 +172,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <InstagramLogo size={48} weight="duotone" />
+              <InstagramLogo size={48} weight="fill" />
             </IconButton>
 
             <IconButton
@@ -181,7 +181,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FacebookLogo size={48} weight="duotone" />
+              <FacebookLogo size={48} weight="fill" />
             </IconButton>
 
             <IconButton
@@ -190,7 +190,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <YoutubeLogo size={48} weight="duotone" />
+              <YoutubeLogo size={48} weight="fill" />
             </IconButton>
           </div>
           <div id="about-section" className="opacity-0">

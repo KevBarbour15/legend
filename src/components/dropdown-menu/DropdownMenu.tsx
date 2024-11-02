@@ -143,7 +143,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <InstagramLogo size={32} weight="duotone" />
+              <InstagramLogo size={32} weight="fill" />
             </IconButton>
 
             <IconButton
@@ -152,7 +152,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FacebookLogo size={32} weight="duotone" />
+              <FacebookLogo size={32} weight="fill" />
             </IconButton>
 
             <IconButton
@@ -165,7 +165,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
             </IconButton>
           </div>
           <LoginLink postLoginRedirectURL="/dashboard">
-            <Key className="menu-login-link" weight="duotone" />
+            <Key className="menu-login-link" weight="fill" />
           </LoginLink>
         </div>
       </div>

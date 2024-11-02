@@ -96,9 +96,6 @@ const config: Config = {
         record: "0.75px 2.75px 5.5px rgba(0, 0, 0, 0.65)",
         text: ".75px 0.75px 1.15px rgba(0, 0, 0, 0.95)",
       },
-      boxShadow: {
-        top: "0 -2.5px 3.5px -1.5px rgba(0, 0, 0, 0.35)",
-      },
       minHeight: {
         pageHeight: "calc(100vh - 135px)",
       },

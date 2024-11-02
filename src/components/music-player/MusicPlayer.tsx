@@ -157,14 +157,13 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               <div className="rounded-sm bg-customNavy bg-opacity-10 p-2">
                 <img
                   id="now-playing"
-                  className="absolute left-[104.5px] top-[44%] z-[3] w-[32px] drop-shadow-text"
-                  src="./images/alt-logo.png"
+                  className="absolute left-[100.5px] top-[38.25%] z-[3] w-[38px]"
+                  src="./images/monogram-record.png"
                 ></img>
                 <img
                   className="drop-shadow-record md:w-[185px]"
                   src="./images/player.svg"
                 ></img>
-                <div className="absolute left-[118.5px] top-[48.75%] z-[3] h-[3.75px] w-[3.75px] rounded-full bg-black"></div>
               </div>
             </div>
           </Collapse>

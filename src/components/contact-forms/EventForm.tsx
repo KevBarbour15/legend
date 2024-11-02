@@ -199,7 +199,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
                       Meeting / Workspace (2 hour minimum)
                     </SelectItem>
                     <SelectItem value="birthday" className="max-w-screen">
-                      Birthday / Graduation / Wedding (4 hour minimum)
+                      Birthday / Graduation / Wedding / Holiday (4 hour minimum)
                     </SelectItem>
                   </SelectContent>
                 </Select>
