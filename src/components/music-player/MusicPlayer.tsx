@@ -25,7 +25,7 @@ import {
 import Equalizer from "@/components/equalizer/Equalizer";
 
 const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
-  const [playing, setPlaying] = useState<boolean>(false);
+  const [playing, setPlaying] = useState<boolean>(true);
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
   const [mute, setMute] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
@@ -140,7 +140,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         id="player-container"
         className="fixed bottom-0 left-0 right-0 mx-3 mb-3 flex flex-col drop-shadow-record md:mb-6 md:ml-6 md:mr-0 md:w-fit md:flex-row"
       >
-        <div className="w-full md:w-fit md:bg-black md:p-1">
+        <div className="w-full md:w-fit bg-black p-1">
           <Collapse
             in={visible}
             id="record-player"
@@ -240,7 +240,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
           <div
             className="aspect-square w-full rounded-sm drop-shadow-record md:h-[425px] md:w-auto"
             style={{
-              backgroundImage: "url('/images/album-art.jpg')",
+              backgroundImage: "url('/images/album-art-3.jpg')",
               backgroundPosition: "center",
               backgroundSize: "cover",
             }}
@@ -248,7 +248,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             <div className="h-full rounded-sm bg-black bg-opacity-45">
               <img
                 className="h-16 p-3 drop-shadow-text md:h-20"
-                src="./images/small-logo.png"
+                src="./images/alt-logo.png"
               ></img>
               <div className="h-fit">
                 {tracks.map((track, index) => (
