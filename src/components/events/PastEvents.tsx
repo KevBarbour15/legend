@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 
-import { Event } from "@/types/events";
+import { Event } from "@/data/events";
 
 import DashEventCard from "@/components/dash-event-card/DashEventCard";
 

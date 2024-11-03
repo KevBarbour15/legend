@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DividerProps } from "@/types/divider";
+import { DividerProps } from "@/data/divider";
 
 const Divider: React.FC<DividerProps> = ({ borderColor }) => {
   return (

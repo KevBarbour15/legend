@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Message from "@/models/Message";
 import { connectToMongoDB } from "@/lib/db";
 
-import { musicTypes, eventTypes } from "@/types/forms";
+import { musicTypes, eventTypes } from "@/data/forms";
 
 import { sendNotificationEmail } from "@/app/actions/sendNotificationEmail.server";
 

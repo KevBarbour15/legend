@@ -3,13 +3,12 @@ import { NextResponse } from "next/server";
 
 import { saveFallbackMenu } from "@/app/actions/saveFallbackMenu.server";
 import { getFallbackMenu } from "@/app/actions/getFallbackMenu.server";
+import { getCategoriesData } from "@/app/actions/getCategoriesData.server.ts";
 
-import { MenuStructure, CategoryWithItems, ProcessedItem } from "@/types/menu";
+import { MenuStructure, CategoryWithItems, ProcessedItem } from "@/data/menu";
 
 import {
-  CURRENT_CATEGORIES,
-  EXCLUDED_CATEGORIES,
-  ORDERED_CATEGORIES,
+  ORDER_OF_CATEGORIES,
   CANNED_BOTTLED_BEER_ID,
   BAR_INVENTORY_LOCATION_ID,
 } from "@/config/menu";
@@ -19,6 +18,10 @@ import { compareCategories } from "@/utils/compareCategories";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
+
+let parentCategories: string[] = [];
+let childCategories: string[] = [];
+let allCategories: string[] = [];
 
 export async function GET() {
   try {
@@ -30,11 +33,22 @@ export async function GET() {
     const allObjects = await fetchAllCatalogObjects(client);
     const categories = filterCategories(allObjects);
 
+    categories.forEach((category) => {
+      console.log(category.categoryData?.name);
+    });
+
+    const data = await getCategoriesData();
+
+    parentCategories = data.parentCategories;
+    childCategories = data.childCategories;
+    allCategories = [...parentCategories, ...childCategories];
+
     if (!validateCategories(categories)) {
       return await handleCategoryMismatch();
     }
 
     const { categoryMap, childCategoryMap } = createCategoryMaps(categories);
+
     const items = allObjects.filter(
       (obj): obj is CatalogObject => obj.type === "ITEM",
     );
@@ -86,9 +100,9 @@ function filterCategories(objects: CatalogObject[]): CatalogObject[] {
     (obj): obj is CatalogObject =>
       obj.type === "CATEGORY" &&
       obj.categoryData?.categoryType === "REGULAR_CATEGORY" &&
-      obj.categoryData?.name !== "Merchandise" &&
-      obj.categoryData?.name !== "Sake and Soju" &&
-      obj.categoryData?.name !== "Bar Menu",
+      !!obj.categoryData?.name &&
+      (parentCategories.includes(obj.categoryData.name) ||
+        childCategories.includes(obj.categoryData.name)),
   );
 }
 
@@ -96,7 +110,8 @@ function validateCategories(categories: CatalogObject[]): boolean {
   const categoryNames = categories
     .map((category) => category.categoryData?.name)
     .filter((name): name is string => !!name);
-  return compareCategories(categoryNames, CURRENT_CATEGORIES);
+
+  return compareCategories(categoryNames, allCategories);
 }
 
 async function handleCategoryMismatch() {
@@ -138,7 +153,7 @@ function createCategoryMaps(categories: CatalogObject[]): {
         childCategories: [],
       };
 
-      if (EXCLUDED_CATEGORIES.includes(category.categoryData.name)) {
+      if (childCategories.includes(category.categoryData.name)) {
         childCategoryMap.set(category.id, categoryData);
       } else {
         categoryMap.set(category.id, categoryData);
@@ -267,7 +282,7 @@ function createMenuStructure(
 ): MenuStructure {
   const menuStructure: MenuStructure = {};
 
-  ORDERED_CATEGORIES.forEach((categoryName) => {
+  ORDER_OF_CATEGORIES.forEach((categoryName) => {
     menuStructure[categoryName] = [];
   });
 
@@ -288,7 +303,7 @@ function createMenuStructure(
           items: [],
           childCategories: Array.from(childCategoryMap.values()),
         };
-      } else if (ORDERED_CATEGORIES.includes(category.name)) {
+      } else if (ORDER_OF_CATEGORIES.includes(category.name)) {
         menuStructure[category.name] = category.items.sort((a, b) =>
           (a.brand?.toLowerCase() ?? "").localeCompare(
             b.brand?.toLowerCase() ?? "",
@@ -303,7 +318,7 @@ function createMenuStructure(
 
 function orderMenuStructure(menuStructure: MenuStructure): MenuStructure {
   const orderedMenuStructure: MenuStructure = {};
-  ORDERED_CATEGORIES.forEach((categoryName) => {
+  ORDER_OF_CATEGORIES.forEach((categoryName) => {
     if (menuStructure[categoryName]) {
       orderedMenuStructure[categoryName] = menuStructure[categoryName];
     }

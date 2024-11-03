@@ -1,5 +1,5 @@
-import { SaveFallbackMenuResponse } from "@/types/fallback-menu";
-import { MenuStructure } from "@/types/menu";
+import { SaveFallbackMenuResponse } from "@/data/fallback-menu";
+import { MenuStructure } from "@/data/menu";
 
 import { connectToMongoDB } from "@/lib/db";
 

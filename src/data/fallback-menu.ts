@@ -1,4 +1,4 @@
-import { MenuStructure } from "@/types/menu";
+import { MenuStructure } from "@/data/menu";
 export interface SaveFallbackMenuResponse {
   success: boolean;
   error?: string;

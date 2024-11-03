@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MessageCardProps } from "@/types/messages";
+import { MessageCardProps } from "@/data/messages";
 
 import Divider from "../divider/Divider";
 
@@ -36,7 +36,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { musicTypes, eventTypes } from "@/types/forms";
+import { musicTypes, eventTypes } from "@/data/forms";
 
 const MessageCard: React.FC<MessageCardProps> = ({
   message,

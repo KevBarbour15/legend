@@ -1,4 +1,4 @@
-import { LoadingProps } from "@/types/loading.ts";
+import { LoadingProps } from "@/data/loading.ts";
 
 import { Progress } from "@/components/ui/progress";
 

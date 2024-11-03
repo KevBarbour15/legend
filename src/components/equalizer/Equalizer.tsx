@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useCallback } from "react";
 import { gsap } from "gsap";
 
-import { EqualizerProps } from "@/types/equalizer";
+import { EqualizerProps } from "@/data/equalizer";
 
 const Equalizer: React.FC<EqualizerProps> = ({ playing }) => {
   const barRefs = useRef<(HTMLDivElement | null)[]>([]);

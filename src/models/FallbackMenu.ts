@@ -1,5 +1,5 @@
 import mongoose, { Document, Schema } from "mongoose";
-import { MenuStructure } from "@/types/menu";
+import { MenuStructure } from "@/data/menu";
 
 export interface IFallbackMenu extends Document {
   menu: MenuStructure;

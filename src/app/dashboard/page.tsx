@@ -8,6 +8,7 @@ import UnreadMessagesList from "@/components/messages/UnreadMessages";
 import ReadMessagesList from "@/components/messages/ReadMessages";
 import UpcomingEventsList from "@/components/events/UpcomingEvents";
 import PastEventsList from "@/components/events/PastEvents";
+import MenuCategories from "@/components/menu-categories/MenuCategories";
 
 const DefaultComponent: React.FC = () => <div>No component selected</div>;
 
@@ -15,6 +16,7 @@ CreateEvent.displayName = "CreateEvent";
 UpcomingEventsList.displayName = "UpcomingEventsList";
 PastEventsList.displayName = "PastEventsList";
 UnreadMessagesList.displayName = "MessagesList";
+MenuCategories.displayName = "MenuCategories";
 DefaultComponent.displayName = "DefaultComponent";
 
 export default function Dashboard() {
@@ -31,12 +33,14 @@ export default function Dashboard() {
     case "Past Events":
       CurrentComponent = PastEventsList;
       break;
-
     case "Unread Messages":
       CurrentComponent = UnreadMessagesList;
       break;
     case "Read Messages":
       CurrentComponent = ReadMessagesList;
+      break;
+    case "Menu Categories":
+      CurrentComponent = MenuCategories;
       break;
     default:
       CurrentComponent = DefaultComponent;

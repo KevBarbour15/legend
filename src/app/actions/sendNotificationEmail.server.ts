@@ -1,6 +1,6 @@
 import sgMail from "@sendgrid/mail";
 
-import { NotificationData } from "@/types/notification";
+import { NotificationData } from "@/data/notification";
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
 

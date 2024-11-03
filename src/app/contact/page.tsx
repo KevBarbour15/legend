@@ -15,7 +15,7 @@ import {
   EventFormRef,
   DjFormRef,
   GeneralFormRef,
-} from "@/types/forms.ts";
+} from "@/data/forms.ts";
 
 export default function Contact() {
   const containerRef = useRef<HTMLDivElement>(null);
