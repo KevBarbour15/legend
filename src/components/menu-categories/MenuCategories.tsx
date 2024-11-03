@@ -113,14 +113,14 @@ const MenuCategories: React.FC = () => {
     }
   };
 
-  const removeCategory = async (title: string, type: string) => {
+  const removeCategory = async (type: string, title: string) => {
     try {
       const response = await fetch("/api/menu-categories", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title: type, type: type }),
+        body: JSON.stringify({ type: type, title: title }),
       });
 
       const data = await response.json();

@@ -12,7 +12,7 @@ import ReactHowler from "react-howler";
 import { IconButton, Collapse } from "@mui/material";
 
 import {
-  CaretDoubleUp,
+  CaretUp,
   VinylRecord,
   Play,
   Pause,
@@ -144,10 +144,10 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
           <Collapse
             in={visible}
             id="record-player"
-            className="hidden rounded-sm bg-customNavy opacity-0 md:block"
+            className="hidden rounded-t-sm bg-customNavy opacity-0 md:block"
           >
             <div
-              className="relative rounded-sm"
+              className="relative rounded-t-sm"
               style={{
                 backgroundImage: "url('/images/oak.jpg')",
                 backgroundPosition: "center",
@@ -174,14 +174,16 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               backgroundPosition: "center",
               backgroundSize: "cover",
             }}
-            className="z-[11] rounded-sm"
+            className={`z-[11] rounded-sm ${visible ? "md:rounded-b-sm md:rounded-t-none" : ""}`}
           >
-            <div className="flex justify-between rounded-sm bg-customNavy bg-opacity-50 px-1 py-2 md:bg-opacity-65 md:py-1">
+            <div
+              className={`flex justify-between rounded-sm bg-customNavy bg-opacity-50 px-1 py-2 md:bg-opacity-65 md:py-1 ${visible ? "md:rounded-b-sm md:rounded-t-none" : ""}`}
+            >
               <IconButton
                 className="hidden p-1 text-customCream drop-shadow-text transition-colors md:block md:hover:text-customGold"
                 onClick={togglePlayer}
               >
-                <CaretDoubleUp
+                <CaretUp
                   weight="duotone"
                   id="player-toggle"
                   className={` ${visible ? "rotate-180 transform" : ""}`}

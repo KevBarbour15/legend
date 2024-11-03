@@ -37,18 +37,11 @@ export async function GET() {
       console.log(category.categoryData?.name);
     });
 
-    // retrieve current categories from database
     const data = await getCategoriesData();
 
     parentCategories = data.parentCategories;
     childCategories = data.childCategories;
     allCategories = [...parentCategories, ...childCategories];
-
-    if (parentCategories.length === 0 || childCategories.length === 0) {
-      return await handleCategoryMismatch();
-    } else {
-      console.log("Retrieved categories from database.");
-    }
 
     if (!validateCategories(categories)) {
       return await handleCategoryMismatch();
@@ -117,6 +110,7 @@ function validateCategories(categories: CatalogObject[]): boolean {
   const categoryNames = categories
     .map((category) => category.categoryData?.name)
     .filter((name): name is string => !!name);
+
   return compareCategories(categoryNames, allCategories);
 }
 

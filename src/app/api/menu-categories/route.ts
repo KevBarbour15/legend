@@ -168,30 +168,33 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    if (type !== "parent" && type !== "child") {
-      return NextResponse.json(
-        { error: "Invalid type. Must be 'parent' or 'child'" },
-        { status: 400 },
-      );
-    }
+    const categoryTitle =
+      title === "parent" ? "parentCategory" : "childCategory";
 
-    const category = type === "parent" ? "parentCategories" : "childCategories";
-
-    const response = await CategoriesType.findOneAndDelete(
-      {},
-      { category: title },
+    const response = await CategoriesType.findOneAndUpdate(
+      { title: categoryTitle },
+      {
+        $pull: {
+          categories: type,
+        },
+      },
+      { new: true },
     );
-
-    console.log(response);
 
     if (!response) {
       return NextResponse.json(
-        { error: "Database operation failed" },
-        { status: 500 },
+        { error: "Category type not found" },
+        { status: 404 },
       );
     }
 
-    return NextResponse.json("Successfully deleted.", { status: 200 });
+    return NextResponse.json(
+      {
+        message: "Category successfully deleted",
+        updatedCategories: response.categories,
+      },
+      { status: 200 },
+    );
   } catch (error) {
     console.error("Failed to delete category.", error);
     return NextResponse.json(

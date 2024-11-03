@@ -8,7 +8,7 @@ export async function getCategoriesData(): Promise<CategoriesData> {
 
     const categories = await Categories.find({});
 
-    console.log(categories);
+    //console.log(categories);
 
     if (!categories) {
       return {
@@ -17,8 +17,8 @@ export async function getCategoriesData(): Promise<CategoriesData> {
       };
     }
 
-    const parentCategories: any[] = [];
-    const childCategories: any[] = [];
+    const parentCategories: string[] = categories[0].categories;
+    const childCategories: string[] = categories[1].categories;
 
     return {
       parentCategories: parentCategories,
