@@ -39,6 +39,10 @@ export async function GET() {
 
     const data = await getCategoriesData();
 
+    if (parentCategories.length === 0 || allCategories.length === 0) {
+      handleCategoryMismatch();
+    }
+
     parentCategories = data.parentCategories;
     childCategories = data.childCategories;
     allCategories = [...parentCategories, ...childCategories];
