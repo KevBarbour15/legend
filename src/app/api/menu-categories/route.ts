@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function addParentCategory({ title }: CategoryRequest) {
+async function addParentCategory({ title }: CategoryRequest) {
   try {
     if (!title) {
       return NextResponse.json(
@@ -87,7 +87,7 @@ export async function addParentCategory({ title }: CategoryRequest) {
   }
 }
 
-export async function addChildCategory({ title }: CategoryRequest) {
+async function addChildCategory({ title }: CategoryRequest) {
   try {
     if (!title) {
       return NextResponse.json(
