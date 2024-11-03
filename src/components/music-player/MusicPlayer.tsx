@@ -25,7 +25,7 @@ import {
 import Equalizer from "@/components/equalizer/Equalizer";
 
 const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
-  const [playing, setPlaying] = useState<boolean>(true);
+  const [playing, setPlaying] = useState<boolean>(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
   const [mute, setMute] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
@@ -140,7 +140,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         id="player-container"
         className="fixed bottom-0 left-0 right-0 mx-3 mb-3 flex flex-col drop-shadow-record md:mb-6 md:ml-6 md:mr-0 md:w-fit md:flex-row"
       >
-        <div className="w-full md:w-fit md:rounded-sm md:bg-customGold md:bg-opacity-65 md:p-1">
+        <div className="w-full md:w-fit md:bg-black md:p-1">
           <Collapse
             in={visible}
             id="record-player"
@@ -157,12 +157,12 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               <div className="rounded-sm bg-customNavy bg-opacity-10 p-2">
                 <img
                   id="now-playing"
-                  className="absolute left-[100.5px] top-[38.25%] z-[3] w-[38px]"
-                  src="./images/monogram-record.png"
+                  className="absolute left-[103px] top-[40.75%] z-[3] w-[28px]"
+                  src="./images/small-logo-record.png"
                 ></img>
                 <img
                   className="drop-shadow-record md:w-[185px]"
-                  src="./images/player.svg"
+                  src="./images/player.png"
                 ></img>
               </div>
             </div>
