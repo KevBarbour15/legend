@@ -141,7 +141,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         id="player-container"
         className="fixed bottom-0 left-0 right-0 mx-3 mb-3 flex flex-col drop-shadow-record md:mb-6 md:ml-6 md:mr-0 md:w-fit md:flex-row"
       >
-        <div className="w-full md:w-fit md:bg-black md:p-1">
+        <div className="w-full md:w-fit bg-black p-1">
           <Collapse
             in={visible}
             id="record-player"
