@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { EmblaCarouselType } from "embla-carousel";
 import IconButton from "@mui/material/IconButton";
-import { CaretDoubleLeft, CaretDoubleRight } from "@phosphor-icons/react";
+import { CaretLeft, CaretRight } from "@phosphor-icons/react";
 
 // Hook to manage prev/next button states
 type UsePrevNextButtonsType = {
@@ -58,7 +58,7 @@ export const PrevButton: React.FC<IconButtonProps> = (props) => {
       {...restProps}
       className="mb-6 mt-3 p-0 text-customNavy transition-colors md:mb-0 md:hover:text-customGold"
     >
-      <CaretDoubleLeft size={40} weight="duotone" />
+      <CaretLeft size={40} weight="fill" />
       {children}
     </IconButton>
   );
@@ -72,7 +72,7 @@ export const NextButton: React.FC<IconButtonProps> = (props) => {
       {...restProps}
       className="mb-6 mt-3 p-0 text-customNavy transition-colors md:mb-0 md:hover:text-customGold"
     >
-      <CaretDoubleRight size={40} weight="duotone" />
+      <CaretRight size={40} weight="fill" />
       {children}
     </IconButton>
   );

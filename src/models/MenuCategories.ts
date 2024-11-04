@@ -3,6 +3,7 @@ import mongoose, { Document, Schema } from "mongoose";
 export interface ICategories extends Document {
   title: string;
   categories: string[];
+  parent: string;
 }
 
 const CategoriesSchema: Schema = new Schema({
@@ -13,6 +14,10 @@ const CategoriesSchema: Schema = new Schema({
   categories: {
     type: Array,
     required: true,
+  },
+  parent: {
+    type: String,
+    required: false,
   },
 });
 

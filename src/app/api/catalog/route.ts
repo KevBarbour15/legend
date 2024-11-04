@@ -8,7 +8,6 @@ import { getCategoriesData } from "@/app/actions/getCategoriesData.server.ts";
 import { MenuStructure, CategoryWithItems, ProcessedItem } from "@/data/menu";
 
 import {
-  ORDER_OF_CATEGORIES,
   CANNED_BOTTLED_BEER_ID,
   BAR_INVENTORY_LOCATION_ID,
 } from "@/config/menu";
@@ -16,15 +15,20 @@ import {
 import { getItemBrand, getItemName } from "@/utils/getItemInfo";
 import { compareCategories } from "@/utils/compareCategories";
 
+// Force dynamic rendering and disable caching for this API route
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
+// Track category hierarchies and relationships
 let parentCategories: string[] = [];
 let childCategories: string[] = [];
 let allCategories: string[] = [];
+let parentName: string | null = null;
 
+// Main API handler for GET requests
 export async function GET() {
   try {
+    // Initialize Square client
     const client = new Client({
       accessToken: process.env.SQUARE_ACCESS_TOKEN,
       environment: Environment.Production,
@@ -32,10 +36,6 @@ export async function GET() {
 
     const allObjects = await fetchAllCatalogObjects(client);
     const categories = filterCategories(allObjects);
-
-    categories.forEach((category) => {
-      console.log(category.categoryData?.name);
-    });
 
     const data = await getCategoriesData();
 
@@ -45,6 +45,8 @@ export async function GET() {
 
     parentCategories = data.parentCategories;
     childCategories = data.childCategories;
+    parentName = data.parentName;
+
     allCategories = [...parentCategories, ...childCategories];
 
     if (!validateCategories(categories)) {
@@ -81,6 +83,9 @@ export async function GET() {
   }
 }
 
+// Helper Functions *************************************************************
+
+// Fetches all catalog objects from Square API with pagination
 async function fetchAllCatalogObjects(
   client: Client,
 ): Promise<CatalogObject[]> {
@@ -99,6 +104,7 @@ async function fetchAllCatalogObjects(
   return allObjects;
 }
 
+// Filters catalog objects to only include valid categories that match our predefined lists
 function filterCategories(objects: CatalogObject[]): CatalogObject[] {
   return objects.filter(
     (obj): obj is CatalogObject =>
@@ -110,6 +116,7 @@ function filterCategories(objects: CatalogObject[]): CatalogObject[] {
   );
 }
 
+// Ensures all required categories exist in Square's catalog
 function validateCategories(categories: CatalogObject[]): boolean {
   const categoryNames = categories
     .map((category) => category.categoryData?.name)
@@ -118,6 +125,7 @@ function validateCategories(categories: CatalogObject[]): boolean {
   return compareCategories(categoryNames, allCategories);
 }
 
+// Fallback handler when category structure doesn't match expectations
 async function handleCategoryMismatch() {
   console.error("Categories have changed. Please update the menu structure.");
   const fallbackMenu = await getFallbackMenu();
@@ -141,6 +149,7 @@ async function handleCategoryMismatch() {
   }
 }
 
+// Creates two maps: one for parent categories and one for child categories
 function createCategoryMaps(categories: CatalogObject[]): {
   categoryMap: Map<string, CategoryWithItems>;
   childCategoryMap: Map<string, CategoryWithItems>;
@@ -168,6 +177,7 @@ function createCategoryMaps(categories: CatalogObject[]): {
   return { categoryMap, childCategoryMap };
 }
 
+// Fetches inventory counts from Square API in batches
 async function fetchInventory(
   client: Client,
   items: CatalogObject[],
@@ -207,6 +217,7 @@ async function fetchInventory(
   );
 }
 
+// Processes raw catalog items into a cleaner format with additional metadata
 function processItems(
   items: CatalogObject[],
   inventoryMap: Map<string, number>,
@@ -248,6 +259,10 @@ function processItems(
   });
 }
 
+// Assigns items to their respective categories based on business rules:
+// 1. Canned/bottled beers go to child categories
+// 2. Other items go to parent categories
+// 3. Special case for "Kevin's Pale Ale" for testing
 function assignItemsToCategories(
   items: ProcessedItem[],
   categoryMap: Map<string, CategoryWithItems>,
@@ -270,6 +285,7 @@ function assignItemsToCategories(
       ) {
         categoryMap.get(categoryId)?.items.push(item);
       } else if (
+        // for testing purposes
         childCategoryMap.has(categoryId) &&
         item.name === "Kevin's Pale Ale" &&
         item.inStock
@@ -280,13 +296,16 @@ function assignItemsToCategories(
   });
 }
 
+// Creates the final menu structure with proper hierarchy:
+// - Parent categories at the top level
+// - Child categories nested under the designated parent
 function createMenuStructure(
   categoryMap: Map<string, CategoryWithItems>,
   childCategoryMap: Map<string, CategoryWithItems>,
 ): MenuStructure {
   const menuStructure: MenuStructure = {};
 
-  ORDER_OF_CATEGORIES.forEach((categoryName) => {
+  allCategories.forEach((categoryName) => {
     menuStructure[categoryName] = [];
   });
 
@@ -300,14 +319,20 @@ function createMenuStructure(
 
   categoryMap.forEach((category) => {
     if (category.name) {
-      if (category.name === "Canned / Bottled") {
+      if (category.name === parentName) {
         menuStructure[category.name] = {
           id: category.id,
           name: category.name,
           items: [],
-          childCategories: Array.from(childCategoryMap.values()),
+          childCategories: Array.from(childCategoryMap.values()).sort(
+            (a, b) => {
+              const indexA = childCategories.indexOf(a.name ?? "");
+              const indexB = childCategories.indexOf(b.name ?? "");
+              return indexA - indexB;
+            },
+          ),
         };
-      } else if (ORDER_OF_CATEGORIES.includes(category.name)) {
+      } else if (parentCategories.includes(category.name)) {
         menuStructure[category.name] = category.items.sort((a, b) =>
           (a.brand?.toLowerCase() ?? "").localeCompare(
             b.brand?.toLowerCase() ?? "",
@@ -320,12 +345,14 @@ function createMenuStructure(
   return menuStructure;
 }
 
+// Ensures the final menu structure follows
 function orderMenuStructure(menuStructure: MenuStructure): MenuStructure {
   const orderedMenuStructure: MenuStructure = {};
-  ORDER_OF_CATEGORIES.forEach((categoryName) => {
+  parentCategories.forEach((categoryName) => {
     if (menuStructure[categoryName]) {
       orderedMenuStructure[categoryName] = menuStructure[categoryName];
     }
   });
+
   return orderedMenuStructure;
 }
