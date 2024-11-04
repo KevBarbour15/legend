@@ -18,21 +18,10 @@ import {
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import ParentCategoriesTable from "@/components/draggable-tables/ParentCategoriesTable";
+import ChildCategoriesTable from "@/components/draggable-tables/ChildCategoriesTable";
 
 import { parentFormSchema, childFormSchema } from "@/data/menu-categories";
-
-import { X } from "@phosphor-icons/react";
-
-import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
 const MenuCategories: React.FC = () => {
   const [isSubmittingParent, setIsSubmittingParent] = useState<boolean>(false);
@@ -161,6 +150,8 @@ const MenuCategories: React.FC = () => {
     }
   };
 
+  const onDragEnd = async (result: any) => {};
+
   useEffect(() => {
     fetchCategoriesData();
   }, []);
@@ -182,10 +173,7 @@ const MenuCategories: React.FC = () => {
                     <FormItem>
                       <FormLabel>Add Menu Category</FormLabel>
                       <FormControl>
-                        <Input
-                          placeholder="For ex: Canned / Bottled, Wine, etc"
-                          {...field}
-                        />
+                        <Input placeholder="For ex: Draft, etc" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -197,39 +185,28 @@ const MenuCategories: React.FC = () => {
               </form>
             </Form>
           </div>
-          <div className="basis-1/2">
-            <Table className="h-auto w-full p-3 transition-all duration-300">
-              <TableCaption>Current Categories</TableCaption>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="basis-1/4 text-left">Order</TableHead>
-                  <TableHead className="basis-1/2">Category</TableHead>
-                  <TableHead className="basis-1/4 text-right">Remove</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody className="w-full">
-                {parentCategories.map((category, idx) => (
-                  <TableRow key={idx}>
-                    <TableCell className="basis-1/4 font-medium">
-                      {idx + 1}
-                    </TableCell>
-                    <TableCell className="basis-1/2">{category}</TableCell>
+          <div className="relative basis-1/2">
+            <div
+              className={`absolute inset-0 transition-all duration-100 ease-in-out ${loading ? "opacity-100" : "pointer-events-none opacity-0"} flex items-center justify-center text-xl font-medium`}
+            >
+              <p>Loading...</p>
+            </div>
 
-                    <TableCell className="flex basis-1/4 justify-end text-right">
-                      <Button
-                        onClick={() => removeCategory(category, "parent")}
-                      >
-                        <X size={18} />
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <div
+              className={`min-h-32 transition-all duration-300 ease-in-out ${loading ? "opacity-0" : "opacity-100"} `}
+            >
+              {!loading && (
+                <ParentCategoriesTable
+                  categories={parentCategories}
+                  removeCategory={removeCategory}
+                  onDragEnd={onDragEnd}
+                />
+              )}
+            </div>
           </div>
         </div>
       </Card>
-      <Card className="p-3 md:p-6">
+      <Card className="h-auto min-h-32 p-3 transition-all duration-300 ease-in-out md:p-6">
         <div className="flex flex-col space-y-3 md:flex-row md:space-x-6 md:space-y-0">
           <div className="basis-1/2">
             <Form {...childForm}>
@@ -244,10 +221,7 @@ const MenuCategories: React.FC = () => {
                     <FormItem>
                       <FormLabel>Add Menu Subcategory</FormLabel>
                       <FormControl>
-                        <Input
-                          placeholder="For ex: IPAs, Lagers, etc"
-                          {...field}
-                        />
+                        <Input placeholder="For ex: IPAs, etc" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -259,33 +233,25 @@ const MenuCategories: React.FC = () => {
               </form>
             </Form>
           </div>
-          <div className="basis-1/2">
-            <Table className="h-auto w-full p-3 transition-all duration-300">
-              <TableCaption>Current Subcategories</TableCaption>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="basis-1/4 text-left">Order</TableHead>
-                  <TableHead className="basis-1/2">Subcategory</TableHead>
-                  <TableHead className="basis-1/4 text-right">Remove</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody className="w-full">
-                {childCategories.map((category, idx) => (
-                  <TableRow key={idx}>
-                    <TableCell className="basis-1/4 font-medium">
-                      {idx + 1}
-                    </TableCell>
-                    <TableCell className="basis-1/2">{category}</TableCell>
 
-                    <TableCell className="flex basis-1/4 justify-end text-right">
-                      <Button onClick={() => removeCategory(category, "child")}>
-                        <X size={18} />
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+          <div className="relative basis-1/2">
+            <div
+              className={`absolute inset-0 transition-all duration-100 ease-in-out ${loading ? "opacity-100" : "pointer-events-none opacity-0"} flex items-center justify-center text-xl font-medium`}
+            >
+              <p>Loading...</p>
+            </div>
+
+            <div
+              className={`min-h-32 transition-all duration-300 ease-in-out ${loading ? "opacity-0" : "opacity-100"} `}
+            >
+              {!loading && (
+                <ChildCategoriesTable
+                  categories={childCategories}
+                  removeCategory={removeCategory}
+                  onDragEnd={onDragEnd}
+                />
+              )}
+            </div>
           </div>
         </div>
       </Card>

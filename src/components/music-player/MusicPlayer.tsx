@@ -20,12 +20,13 @@ import {
   SpeakerSimpleHigh,
   SkipForward,
   SkipBack,
+  X,
 } from "@phosphor-icons/react";
 
 import Equalizer from "@/components/equalizer/Equalizer";
 
 const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
-  const [playing, setPlaying] = useState<boolean>(false);
+  const [playing, setPlaying] = useState<boolean>(true);
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
   const [mute, setMute] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
@@ -183,7 +184,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                 onClick={togglePlayer}
               >
                 <CaretUp
-                  weight="duotone"
+                  weight="fill"
                   id="player-toggle"
                   className={` ${visible ? "rotate-180 transform" : ""}`}
                 />
@@ -226,7 +227,11 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                 onClick={togglePlaylist}
                 className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
               >
-                <VinylRecord weight="duotone" />
+                {playlistVisible ? (
+                  <X weight="regular" />
+                ) : (
+                  <VinylRecord weight="duotone" />
+                )}
               </IconButton>
             </div>
           </div>
@@ -240,32 +245,26 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
           <div
             className="aspect-square w-full rounded-sm drop-shadow-record md:h-[425px] md:w-auto"
             style={{
-              backgroundImage: "url('/images/album-art.jpg')",
+              backgroundImage: "url('/images/album-art-3.jpg')",
               backgroundPosition: "center",
               backgroundSize: "cover",
             }}
           >
-            <div className="h-full rounded-sm bg-black bg-opacity-45">
+            <div className="h-full w-full rounded-sm bg-black bg-opacity-45">
               <img
-                className="h-16 p-3 drop-shadow-text md:h-20"
-                src="./images/small-logo.png"
+                className="mx-auto h-16 p-3 drop-shadow-text md:h-20"
+                src="./images/alt-logo.png"
               ></img>
               <div className="h-fit">
                 {tracks.map((track, index) => (
                   <div key={index} className="flex h-full flex-row p-1 md:px-3">
                     <div className="mr-3 flex flex-col justify-between px-1 font-bigola text-customCream drop-shadow-text md:px-0">
-                      <p className="text-xl leading-none md:text-2xl">
-                        {index + 1}.
-                      </p>
-                      <p className="text-base md:text-xl">by</p>
+                      <p className="text-xl">{index + 1}.</p>
+                      <p className="text-base">by</p>
                     </div>
                     <div className="flex w-full flex-col justify-between px-1 font-bigola text-customCream drop-shadow-text md:px-0">
-                      <div className="text-xl leading-none md:text-2xl">
-                        <p>{track.title}</p>
-                      </div>
-                      <div className="text-base md:text-xl">
-                        <p>{track.artist}</p>
-                      </div>
+                      <p className="text-xl">{track.title}</p>
+                      <p className="text-base">{track.artist}</p>
                     </div>
                     <div className="flex items-center justify-center">
                       {index == currentTrackIndex ? (
