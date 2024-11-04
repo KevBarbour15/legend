@@ -4,7 +4,11 @@ export function compareCategories(arr1: string[], arr2: string[]): boolean {
   const sortedArr2 = [...arr2].sort();
 
   for (let i = 0; i < sortedArr1.length; i++) {
-    if (sortedArr1[i] !== sortedArr2[i]) return false;
+    if (sortedArr1[i] !== sortedArr2[i]) {
+      console.log(sortedArr1[i], sortedArr2[i]);
+      console.log("false");
+      return false;
+    }
   }
 
   return true;

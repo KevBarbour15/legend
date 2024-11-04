@@ -137,13 +137,11 @@ async function addChildCategory({ title }: CategoryRequest) {
   }
 }
 
-
 export async function GET() {
   try {
     await connectToMongoDB();
     const categories = await getCategoriesData();
-
-    console.log("Categories:", categories);
+    
 
     return NextResponse.json(categories, { status: 200 });
   } catch (error) {
@@ -210,7 +208,7 @@ export async function PUT(req: NextRequest) {
     await connectToMongoDB();
 
     const body = await req.json();
-    const { categories, type } = body;
+    const { categories, type, parentName } = body;
 
     if (!categories || !type) {
       return NextResponse.json(
@@ -223,6 +221,15 @@ export async function PUT(req: NextRequest) {
       return updateParentCategory({ categories });
     } else if (type === "child") {
       return updateChildCategory({ categories });
+    } else if (type === "parentName") {
+      if (!parentName) {
+        console.log("Parent name is required!");
+        return NextResponse.json(
+          { error: "Parent name is required" },
+          { status: 400 },
+        );
+      }
+      return updateParentName(parentName);
     } else {
       return NextResponse.json(
         { error: "Invalid category type" },
@@ -313,6 +320,48 @@ async function updateChildCategory({ categories }: UpdateCategoriesData) {
     );
   } catch (error) {
     console.error("Error updating child category:", error);
+    return NextResponse.json(
+      { error: "Server error occurred" },
+      { status: 500 },
+    );
+  }
+}
+
+async function updateParentName(parentName: string) {
+  try {
+    if (!parentName) {
+      console.log("Parent name is required!");
+      return NextResponse.json(
+        { error: "Parent name is required!" },
+        { status: 400 },
+      );
+    }
+
+    const response = await CategoriesType.findOneAndUpdate(
+      { title: "childCategory" },
+      { parent: parentName },
+      {
+        new: true,
+        runValidators: true,
+      },
+    );
+
+    if (!response) {
+      return NextResponse.json(
+        { error: "Database operation failed" },
+        { status: 500 },
+      );
+    }
+
+    return NextResponse.json(
+      {
+        message: "Parent name successfully updated.",
+        categories: response.childCategories,
+      },
+      { status: 200 },
+    );
+  } catch (error) {
+    console.error("Error updating parent name category:", error);
     return NextResponse.json(
       { error: "Server error occurred" },
       { status: 500 },

@@ -33,8 +33,7 @@ function generateProgress(min: number, max: number) {
 const Menu: React.FC = ({}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [menu, setMenu] = useState<MenuStructure | null>(null);
-  const categoryRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const categoriesTL = useRef<gsap.core.Timeline | null>(null);
+  const tl = useRef<gsap.core.Timeline | null>(null);
   const [displayMenu, setDisplayMenu] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -78,20 +77,15 @@ const Menu: React.FC = ({}) => {
     }
 
     if (!loading && displayMenu) {
-      gsap.set(categoryRefs.current, {
+      gsap.set("#menu", {
         opacity: 0,
-        y: 100,
       });
 
-      if (categoryRefs.current.length > 0)
-        categoriesTL.current = gsap.timeline({}).to(categoryRefs.current, {
-          delay: 0.15,
-          duration: 0.2,
-          stagger: 0.05,
-          y: 0,
-          opacity: 1,
-          ease: "sine.inOut",
-        });
+      tl.current = gsap.timeline({}).to("#menu", {
+        duration: 0.25,
+        opacity: 1,
+        ease: "sine.inOut",
+      });
     }
   }, [displayMenu]);
 
@@ -116,7 +110,7 @@ const Menu: React.FC = ({}) => {
         return <BeerStein weight="fill" />;
       case "wine":
         return <Wine weight="fill" />;
-      case "non alcoholic":
+      default:
         return <PintGlass weight="fill" />;
     }
   };
@@ -200,36 +194,35 @@ const Menu: React.FC = ({}) => {
           </div>
         ) : (
           <Accordion type="single" collapsible className="w-full">
-            {Object.entries(menu).map(
-              ([categoryName, categoryContent], index) => (
-                <AccordionItem
-                  ref={(el) => {
-                    categoryRefs.current[index] = el;
-                  }}
-                  value={categoryName}
-                  className={`${index === 0 ? "md:border-t" : ""} border-b border-customGold opacity-0`}
-                  key={categoryName}
-                >
-                  <AccordionTrigger
-                    className="cursor-pointer font-bigola text-xl leading-none text-customCream md:text-4xl"
-                    icon={getIcon(categoryName)}
+            <div className="w-full opacity-0" id="menu">
+              {Object.entries(menu).map(
+                ([categoryName, categoryContent], index) => (
+                  <AccordionItem
+                    value={categoryName}
+                    className={`${index === 0 ? "md:border-t" : ""} border-b border-customGold`}
+                    key={categoryName}
                   >
-                    <h2>{categoryName}</h2>
-                  </AccordionTrigger>
-                  <AccordionContent
-                    className={`border-customGold ${categoryName === "Canned / Bottled" ? "pt-0" : ""}`}
-                  >
-                    {categoryName === "Canned / Bottled"
-                      ? renderCannedBeerCategory(
-                          categoryContent as CategoryWithItems,
-                        )
-                      : (categoryContent as ProcessedItem[]).map(
-                          renderMenuItem,
-                        )}
-                  </AccordionContent>
-                </AccordionItem>
-              ),
-            )}
+                    <AccordionTrigger
+                      className="cursor-pointer font-bigola text-xl leading-none text-customCream md:text-4xl"
+                      icon={getIcon(categoryName)}
+                    >
+                      <h2>{categoryName}</h2>
+                    </AccordionTrigger>
+                    <AccordionContent
+                      className={`border-customGold ${categoryName === "Canned / Bottled" ? "pt-0" : ""}`}
+                    >
+                      {categoryName === "Canned / Bottled"
+                        ? renderCannedBeerCategory(
+                            categoryContent as CategoryWithItems,
+                          )
+                        : (categoryContent as ProcessedItem[]).map(
+                            renderMenuItem,
+                          )}
+                    </AccordionContent>
+                  </AccordionItem>
+                ),
+              )}
+            </div>
           </Accordion>
         )}
       </div>

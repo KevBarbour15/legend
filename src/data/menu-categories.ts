@@ -17,6 +17,7 @@ export interface CategoryRequest {
 export interface CategoriesData {
   parentCategories: string[];
   childCategories: string[];
+  parentName: string | null;
 }
 
 export interface UpdateCategoriesData {
