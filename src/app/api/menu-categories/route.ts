@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import CategoriesType from "@/models/MenuCategories";
 import { connectToMongoDB } from "@/lib/db";
 import { getCategoriesData } from "@/app/actions/getCategoriesData.server.ts";
-import { CategoryRequest } from "@/data/menu-categories";
+import { CategoryRequest, UpdateCategoriesData } from "@/data/menu-categories";
 
 export async function POST(req: NextRequest) {
   try {
@@ -137,6 +137,7 @@ async function addChildCategory({ title }: CategoryRequest) {
   }
 }
 
+
 export async function GET() {
   try {
     await connectToMongoDB();
@@ -199,6 +200,121 @@ export async function DELETE(req: NextRequest) {
     console.error("Failed to delete category.", error);
     return NextResponse.json(
       { error: "Failed to delete category." },
+      { status: 500 },
+    );
+  }
+}
+
+export async function PUT(req: NextRequest) {
+  try {
+    await connectToMongoDB();
+
+    const body = await req.json();
+    const { categories, type } = body;
+
+    if (!categories || !type) {
+      return NextResponse.json(
+        { error: "All fields are required!" },
+        { status: 400 },
+      );
+    }
+
+    if (type === "parent") {
+      return updateParentCategory({ categories });
+    } else if (type === "child") {
+      return updateChildCategory({ categories });
+    } else {
+      return NextResponse.json(
+        { error: "Invalid category type" },
+        { status: 400 },
+      );
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    return NextResponse.json(
+      { error: "Server error occurred" },
+      { status: 500 },
+    );
+  }
+}
+
+async function updateParentCategory({ categories }: UpdateCategoriesData) {
+  try {
+    if (!categories) {
+      return NextResponse.json(
+        { error: "Categories are required!" },
+        { status: 400 },
+      );
+    }
+
+    const response = await CategoriesType.findOneAndUpdate(
+      { title: "parentCategory" },
+      { categories },
+      {
+        new: true,
+        runValidators: true,
+      },
+    );
+
+    if (!response) {
+      return NextResponse.json(
+        { error: "Database operation failed" },
+        { status: 500 },
+      );
+    }
+
+    return NextResponse.json(
+      {
+        message: "Parent categories successfully updated.",
+        categories: response.parentCategories,
+      },
+      { status: 200 },
+    );
+  } catch (error) {
+    console.error("Error updating parent category:", error);
+    return NextResponse.json(
+      { error: "Server error occurred" },
+      { status: 500 },
+    );
+  }
+}
+
+async function updateChildCategory({ categories }: UpdateCategoriesData) {
+  try {
+    if (!categories) {
+      return NextResponse.json(
+        { error: "Categories are required!" },
+        { status: 400 },
+      );
+    }
+
+    const response = await CategoriesType.findOneAndUpdate(
+      { title: "childCategory" },
+      { categories },
+      {
+        new: true,
+        runValidators: true,
+      },
+    );
+
+    if (!response) {
+      return NextResponse.json(
+        { error: "Database operation failed" },
+        { status: 500 },
+      );
+    }
+
+    return NextResponse.json(
+      {
+        message: "Child categories successfully updated.",
+        categories: response.childCategories,
+      },
+      { status: 200 },
+    );
+  } catch (error) {
+    console.error("Error updating child category:", error);
+    return NextResponse.json(
+      { error: "Server error occurred" },
       { status: 500 },
     );
   }

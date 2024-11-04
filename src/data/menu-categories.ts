@@ -18,3 +18,7 @@ export interface CategoriesData {
   parentCategories: string[];
   childCategories: string[];
 }
+
+export interface UpdateCategoriesData {
+  categories: string[];
+}

@@ -19,11 +19,11 @@ import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 const ChildCategoriesTable: React.FC<ChildTableProps> = ({
   categories,
   removeCategory,
-  onDragEnd,
+  onDragChildEnd,
 }) => {
   return (
     <>
-      <DragDropContext onDragEnd={onDragEnd}>
+      <DragDropContext onDragEnd={onDragChildEnd}>
         <Table className="h-auto w-full p-3 transition-all duration-300">
           <TableCaption>Current Subcategories</TableCaption>
           <TableHeader>

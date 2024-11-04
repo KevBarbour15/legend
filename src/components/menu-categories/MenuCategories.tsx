@@ -23,6 +23,8 @@ import ChildCategoriesTable from "@/components/draggable-tables/ChildCategoriesT
 
 import { parentFormSchema, childFormSchema } from "@/data/menu-categories";
 
+import { DropResult } from "@hello-pangea/dnd";
+
 const MenuCategories: React.FC = () => {
   const [isSubmittingParent, setIsSubmittingParent] = useState<boolean>(false);
   const [isSubmittingChild, setIsSubmittingChild] = useState<boolean>(false);
@@ -150,7 +152,44 @@ const MenuCategories: React.FC = () => {
     }
   };
 
-  const onDragEnd = async (result: any) => {};
+  const onDragParentEnd = async (result: DropResult) => {
+    if (!result.destination) return;
+    const items = Array.from(parentCategories);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    setParentCategories(items);
+
+    try {
+      const response = await fetch("/api/menu-categories", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ categories: items, type: "parent" }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setError(null);
+      } else {
+        setError(data.error || "Failed to update categories.");
+      }
+    } catch (error) {
+      console.error("Error: ", error);
+      setError("Network error occurred. Please try again.");
+    }
+  };
+
+  const onDragChildEnd = async (result: DropResult) => {
+    if (!result.destination) return;
+    const items = Array.from(childCategories);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    setChildCategories(items);
+  };
 
   useEffect(() => {
     fetchCategoriesData();
@@ -199,7 +238,7 @@ const MenuCategories: React.FC = () => {
                 <ParentCategoriesTable
                   categories={parentCategories}
                   removeCategory={removeCategory}
-                  onDragEnd={onDragEnd}
+                  onDragParentEnd={onDragParentEnd}
                 />
               )}
             </div>
@@ -248,7 +287,7 @@ const MenuCategories: React.FC = () => {
                 <ChildCategoriesTable
                   categories={childCategories}
                   removeCategory={removeCategory}
-                  onDragEnd={onDragEnd}
+                  onDragChildEnd={onDragChildEnd}
                 />
               )}
             </div>

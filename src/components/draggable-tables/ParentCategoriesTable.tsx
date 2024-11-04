@@ -15,30 +15,13 @@ import {
 
 import { X } from "@phosphor-icons/react";
 
-import {
-  DragDropContext,
-  Droppable,
-  Draggable,
-  DropResult,
-} from "@hello-pangea/dnd";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
 const ParentCategoryTable: React.FC<ParentTableProps> = ({
   categories,
   removeCategory,
-  onDragEnd,
+  onDragParentEnd,
 }) => {
-  const [updatedCategories, setUpdatedCategories] =
-    useState<string[]>(categories);
-
-  const onDragParentEnd = (result: DropResult) => {
-    if (!result.destination) return;
-    const items = Array.from(categories);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-
-    setUpdatedCategories(items);
-  };
-
   return (
     <>
       <DragDropContext onDragEnd={onDragParentEnd}>

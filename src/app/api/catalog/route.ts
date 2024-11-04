@@ -270,6 +270,7 @@ function assignItemsToCategories(
       ) {
         categoryMap.get(categoryId)?.items.push(item);
       } else if (
+        // for testing purposes
         childCategoryMap.has(categoryId) &&
         item.name === "Kevin's Pale Ale" &&
         item.inStock
@@ -286,7 +287,7 @@ function createMenuStructure(
 ): MenuStructure {
   const menuStructure: MenuStructure = {};
 
-  ORDER_OF_CATEGORIES.forEach((categoryName) => {
+  parentCategories.forEach((categoryName) => {
     menuStructure[categoryName] = [];
   });
 
@@ -300,14 +301,15 @@ function createMenuStructure(
 
   categoryMap.forEach((category) => {
     if (category.name) {
-      if (category.name === "Canned / Bottled") {
+      if (childCategories.includes(category.name)) {
+        console.log("")
         menuStructure[category.name] = {
           id: category.id,
           name: category.name,
           items: [],
           childCategories: Array.from(childCategoryMap.values()),
         };
-      } else if (ORDER_OF_CATEGORIES.includes(category.name)) {
+      } else if (parentCategories.includes(category.name)) {
         menuStructure[category.name] = category.items.sort((a, b) =>
           (a.brand?.toLowerCase() ?? "").localeCompare(
             b.brand?.toLowerCase() ?? "",
@@ -322,7 +324,7 @@ function createMenuStructure(
 
 function orderMenuStructure(menuStructure: MenuStructure): MenuStructure {
   const orderedMenuStructure: MenuStructure = {};
-  ORDER_OF_CATEGORIES.forEach((categoryName) => {
+  parentCategories.forEach((categoryName) => {
     if (menuStructure[categoryName]) {
       orderedMenuStructure[categoryName] = menuStructure[categoryName];
     }
