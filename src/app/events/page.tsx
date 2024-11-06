@@ -198,7 +198,7 @@ export default function Events() {
             </TabsContent>
             <TabsContent value="past" className="w-full">
               {pastEvents.length > 0 ? (
-                <div className="space-y-3 md:space-y-6">
+                <div className="mb-6 space-y-3 md:space-y-6">
                   {pastEvents.map((event, index) => (
                     <div
                       key={event._id}

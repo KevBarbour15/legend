@@ -39,15 +39,19 @@ export async function GET() {
 
     const data = await getCategoriesData();
 
-    if (parentCategories.length === 0 || allCategories.length === 0) {
-      handleCategoryMismatch();
-    }
-
     parentCategories = data.parentCategories;
     childCategories = data.childCategories;
     parentName = data.parentName;
 
     allCategories = [...parentCategories, ...childCategories];
+
+    if (
+      parentCategories.length === 0 ||
+      childCategories.length === 0 ||
+      allCategories.length === 0
+    ) {
+      return await handleCategoryMismatch();
+    }
 
     if (!validateCategories(categories)) {
       return await handleCategoryMismatch();

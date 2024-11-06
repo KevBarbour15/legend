@@ -12,6 +12,8 @@ import {
   Key,
 } from "@phosphor-icons/react";
 
+import { Button } from "@/components/ui/button";
+
 import { IconButton } from "@mui/material";
 
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
@@ -21,9 +23,41 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  MailchimpFormRef,
+  mailchimpFormSchema,
+  MailchimpFormData,
+} from "@/data/forms";
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+
+import { Input } from "@/components/ui/input";
+
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
+  const mailchimpFormRef = useRef<MailchimpFormRef>(null);
+
+  const form = useForm<MailchimpFormData>({
+    resolver: zodResolver(mailchimpFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+    },
+  });
+
+  const onSubmit = async (values: MailchimpFormData) => {
+    console.log(values);
+  };
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -162,47 +196,72 @@ export default function Home() {
               <p>3pm - 12am</p>
             </div>
           </div>
-          <div
-            id="about-section"
-            className="flex justify-center gap-12 pb-6 font-bigola opacity-0 md:gap-24"
-          >
-            <IconButton
-              className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
-              href="https://www.instagram.com/legendhasithifi/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <InstagramLogo size={48} weight="fill" />
-            </IconButton>
 
-            <IconButton
-              className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
-              href="https://www.facebook.com/legendhasithifi"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FacebookLogo size={48} weight="fill" />
-            </IconButton>
-
-            <IconButton
-              className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
-              href="https://www.youtube.com/@legendhasithifi"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <YoutubeLogo size={48} weight="fill" />
-            </IconButton>
-          </div>
           <div id="about-section" className="opacity-0">
             <ImageCarousel />
           </div>
+          <div className="flex flex-col items-center md:flex-row">
+            <div className="flex w-full basis-1/2 items-end">
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="flex flex-row gap-3"
+                >
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem className="w-full">
+                        <FormLabel className="font-bigola text-customCream">
+                          Email
+                        </FormLabel>
+                        <FormControl className="border border-customGold font-hypatia text-customCream">
+                          <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button className="">Submit</Button>
+                </form>
+              </Form>
+            </div>
 
+            <div className="flex basis-1/2 items-end justify-between font-bigola">
+              <IconButton
+                className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
+                href="https://www.instagram.com/legendhasithifi/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <InstagramLogo size={48} weight="fill" />
+              </IconButton>
+
+              <IconButton
+                className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
+                href="https://www.facebook.com/legendhasithifi"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FacebookLogo size={48} weight="fill" />
+              </IconButton>
+
+              <IconButton
+                className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
+                href="https://www.youtube.com/@legendhasithifi"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <YoutubeLogo size={48} weight="fill" />
+              </IconButton>
+            </div>
+          </div>
           <div className="mt-6 hidden w-full justify-end rounded-full md:flex">
-            <IconButton className="h-fit w-fit p-0 text-customNavy transition-all hover:text-customGold">
+            <Button className="h-fit w-fit border border-transparent bg-customNavy p-1 text-customCream transition-all hover:border-customNavy hover:bg-customCream hover:text-customNavy">
               <LoginLink postLoginRedirectURL="/dashboard">
-                <Key weight="duotone" size={32} />
+                <Key weight="regular" size={24} />
               </LoginLink>
-            </IconButton>
+            </Button>
           </div>
         </div>
       </div>

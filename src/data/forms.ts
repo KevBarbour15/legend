@@ -7,6 +7,11 @@ export const baseFormSchema = z.object({
   message: z.string().min(1, "Message is required"),
 });
 
+export const mailchimpFormSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+});
+
 export const eventFormSchema = baseFormSchema.extend({
   eventDate: z.date({
     required_error: "Date of event is required",
@@ -48,6 +53,8 @@ export type FormType = "event" | "dj" | "general";
 
 export type EventFormData = z.infer<typeof eventFormSchema>;
 
+export type MailchimpFormData = z.infer<typeof mailchimpFormSchema>;
+
 export type EventFormProps = {
   onSubmit: (values: EventFormData) => Promise<void>;
 };
@@ -69,5 +76,9 @@ export type DjFormRef = {
 };
 
 export type GeneralFormRef = {
+  reset: () => void;
+};
+
+export type MailchimpFormRef = {
   reset: () => void;
 };
