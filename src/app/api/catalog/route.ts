@@ -14,6 +14,7 @@ import {
 
 import { getItemBrand, getItemName } from "@/utils/getItemInfo";
 import { compareCategories } from "@/utils/compareCategories";
+import { connectToMongoDB } from "@/lib/db";
 
 // Force dynamic rendering and disable caching for this API route
 export const dynamic = "force-dynamic";
@@ -28,6 +29,8 @@ let parentName: string | null = null;
 // Main API handler for GET requests
 export async function GET() {
   try {
+    await connectToMongoDB();
+
     // Initialize Square client
     const client = new Client({
       accessToken: process.env.SQUARE_ACCESS_TOKEN,
@@ -35,9 +38,9 @@ export async function GET() {
     });
 
     const allObjects = await fetchAllCatalogObjects(client);
-    const categories = filterCategories(allObjects);
 
     const data = await getCategoriesData();
+    //console.log(data);
 
     parentCategories = data.parentCategories;
     childCategories = data.childCategories;
@@ -53,8 +56,11 @@ export async function GET() {
     }
 
     allCategories = [...parentCategories, ...childCategories];
-    console.log(allCategories);
-    if (!validateCategories(categories)) {
+
+    const categories = await filterCategories(allObjects);
+
+    //console.log(allCategories);
+    if (validateCategories(categories) === false) {
       console.log("Error 2");
       return await handleCategoryMismatch();
     }
@@ -111,7 +117,9 @@ async function fetchAllCatalogObjects(
 }
 
 // Filters catalog objects to only include valid categories that match our predefined lists
-function filterCategories(objects: CatalogObject[]): CatalogObject[] {
+async function filterCategories(
+  objects: CatalogObject[],
+): Promise<CatalogObject[]> {
   return objects.filter(
     (obj): obj is CatalogObject =>
       obj.type === "CATEGORY" &&
