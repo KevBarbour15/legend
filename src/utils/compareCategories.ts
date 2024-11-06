@@ -1,4 +1,7 @@
 export function compareCategories(arr1: string[], arr2: string[]): boolean {
+  console.log(arr1);
+  console.log("**********");
+  console.log(arr2);
   if (arr1.length !== arr2.length) {
     console.log("Categories Length Mismatch");
     console.log(arr1.length + " ------ " + arr2.length);

@@ -27,7 +27,7 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "flex flex-1 cursor-pointer items-center justify-between px-0 py-3 text-lg transition-all duration-300 md:text-3xl [&[data-state=open]>svg]:rotate-180",
+        "flex flex-1 cursor-pointer items-center justify-between px-0 py-3 text-lg transition-all duration-200 md:text-3xl [&[data-state=open]>svg]:rotate-180",
         className,
       )}
       {...props}
@@ -35,13 +35,13 @@ const AccordionTrigger = React.forwardRef<
       {children}
       {icon ? (
         React.cloneElement(icon as React.ReactElement, {
-          className: "flex-shrink-0 p-0 transition-transform duration-300",
+          className: "flex-shrink-0 p-0 transition-transform duration-200",
           style: { width: "30px", height: "30px" },
         })
       ) : (
         <CaretDown
           weight="fill"
-          className="flex-shrink-0 p-0 transition-transform duration-300"
+          className="flex-shrink-0 p-0 transition-transform duration-200"
           style={{ width: "30px", height: "30px" }}
         />
       )}
