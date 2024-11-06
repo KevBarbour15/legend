@@ -87,7 +87,9 @@ const DashEventCard: React.FC<DashEventCardProps> = ({
                     alt="Small Logo"
                   />
                 </div>
-                <p className="text-justify">{event.description}</p>
+                <p className="whitespace-pre-wrap text-justify">
+                  {event.description}
+                </p>
               </div>
 
               <div className="flex h-full w-full items-end py-6 md:pb-0">
