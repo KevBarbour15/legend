@@ -170,6 +170,37 @@ export default function Home() {
               through sound.
             </p>
           </div>
+          <div
+            id="about-section"
+            className="flex basis-1/2 items-end justify-between font-bigola"
+          >
+            <IconButton
+              className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
+              href="https://www.instagram.com/legendhasithifi/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <InstagramLogo size={48} weight="fill" />
+            </IconButton>
+
+            <IconButton
+              className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
+              href="https://www.facebook.com/legendhasithifi"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FacebookLogo size={48} weight="fill" />
+            </IconButton>
+
+            <IconButton
+              className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
+              href="https://www.youtube.com/@legendhasithifi"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <YoutubeLogo size={48} weight="fill" />
+            </IconButton>
+          </div>
           <div className="block py-6 font-bigola text-xl text-customNavy md:mb-0 md:text-3xl">
             <h2 id="about-section" className="mb-3 opacity-0 md:mb-6">
               Hours
@@ -200,6 +231,7 @@ export default function Home() {
           <div id="about-section" className="opacity-0">
             <ImageCarousel />
           </div>
+          {/*
           <div className="flex flex-col items-center md:flex-row">
             <div className="flex w-full basis-1/2 items-end">
               <Form {...form}>
@@ -256,6 +288,7 @@ export default function Home() {
               </IconButton>
             </div>
           </div>
+          */}
           <div className="mt-6 hidden w-full justify-end rounded-full md:flex">
             <Button className="h-fit w-fit border border-transparent bg-customNavy p-1 text-customCream transition-all hover:border-customNavy hover:bg-customCream hover:text-customNavy">
               <LoginLink postLoginRedirectURL="/dashboard">

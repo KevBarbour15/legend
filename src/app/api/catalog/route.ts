@@ -43,17 +43,19 @@ export async function GET() {
     childCategories = data.childCategories;
     parentName = data.parentName;
 
-    allCategories = [...parentCategories, ...childCategories];
-
     if (
       parentCategories.length === 0 ||
       childCategories.length === 0 ||
-      allCategories.length === 0
+      !parentName
     ) {
+      console.log("Error 1");
       return await handleCategoryMismatch();
     }
 
+    allCategories = [...parentCategories, ...childCategories];
+    console.log(allCategories);
     if (!validateCategories(categories)) {
+      console.log("Error 2");
       return await handleCategoryMismatch();
     }
 
