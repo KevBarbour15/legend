@@ -127,7 +127,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
               <div className="flex-grow overflow-y-auto [mask:linear-gradient(to_bottom,transparent,white,white,white,white,white,white,white,white,white,transparent)]">
                 <motion.p
                   layoutId={`description-${event._id}`}
-                  className="py-3 font-hypatia text-lg leading-tight text-customWhite md:pb-6"
+                  className="whitespace-pre-wrap py-3 font-hypatia text-lg leading-tight text-customWhite md:pb-6"
                 >
                   {event.description}
                 </motion.p>
