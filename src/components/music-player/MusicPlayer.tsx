@@ -245,12 +245,12 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
           <div
             className="aspect-square w-full rounded-sm drop-shadow-record md:h-[425px] md:w-auto"
             style={{
-              backgroundImage: "url('/images/album-art-3.jpg')",
+              backgroundImage: "url('/images/cover-alt.jpg')",
               backgroundPosition: "center",
               backgroundSize: "cover",
             }}
           >
-            <div className="h-full w-full rounded-sm bg-black bg-opacity-45">
+            <div className="h-full w-full rounded-sm bg-black bg-opacity-35">
               <img
                 className="mx-auto h-16 p-3 drop-shadow-text md:h-20"
                 src="./images/alt-logo.png"
