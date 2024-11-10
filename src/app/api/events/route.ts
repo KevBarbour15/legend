@@ -27,7 +27,14 @@ export async function POST(req: NextRequest) {
 
     const { title, date, time, description, image_url, is_photo } = body;
 
-    if (!title || !date || !time || !description || !image_url || !is_photo) {
+    if (
+      !title ||
+      !date ||
+      !time ||
+      !description ||
+      !image_url ||
+      is_photo === undefined
+    ) {
       return NextResponse.json(
         { error: "All fields are required!" },
         { status: 400 },
