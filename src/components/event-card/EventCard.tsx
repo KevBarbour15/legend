@@ -83,6 +83,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                     src={event.image_url}
                     alt={event.title}
                     className="aspect-square w-full rounded-sm object-cover object-center"
+                    loading="eager"
                   />
                 </motion.div>
               ) : (
