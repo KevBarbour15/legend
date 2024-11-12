@@ -78,7 +78,7 @@ export default function RootLayout({
         <head>
           <title>Legend Has It</title>
         </head>
-        <body className={inter.className}>
+        <body className={inter.className} suppressHydrationWarning={true}>
           <Script
             id="mcjs"
             strategy="beforeInteractive"

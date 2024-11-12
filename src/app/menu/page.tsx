@@ -9,7 +9,13 @@ import {
   ProcessedItem,
 } from "@/data/menu.ts";
 
-import { BeerBottle, BeerStein, Wine, PintGlass } from "@phosphor-icons/react";
+import {
+  BeerBottle,
+  BeerStein,
+  Wine,
+  CaretDown,
+  PintGlass,
+} from "@phosphor-icons/react";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -156,7 +162,7 @@ const Menu: React.FC = ({}) => {
         >
           <AccordionTrigger
             className="cursor-pointer font-bigola text-xl leading-none text-customCream md:text-4xl"
-            icon={<BeerBottle weight="fill" />}
+            icon={<CaretDown weight="regular" />}
           >
             <h3>{childCategory.name}</h3>
           </AccordionTrigger>

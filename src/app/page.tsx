@@ -1,6 +1,8 @@
 "use client";
 import { useRef } from "react";
 
+import Image from "next/image";
+
 import ImageCarousel from "@/components/carousel/Carousel";
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileMenu from "@/components/mobile-menu/MobileMenu";
@@ -149,9 +151,14 @@ export default function Home() {
         >
           <div
             id="about-section"
-            className="opacity-0 md:aspect-video md:overflow-hidden"
+            className="relative opacity-0 md:aspect-video md:overflow-hidden"
           >
-            <img src="/images/about-image.jpg" className="object-cover" />
+            <Image
+              src="/images/about-image.jpg"
+              className="object-cover"
+              fill
+              alt="Grand Opening"
+            />
           </div>
 
           <div className="font-hypatia text-lg text-customNavy md:text-xl">

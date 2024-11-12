@@ -158,8 +158,8 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
             >
               <Image
                 priority
-                width={200}
-                height={200}
+                width={225}
+                height={225}
                 src={event.image_url}
                 alt={event.title}
                 className="aspect-square h-[115px] w-[115px] rounded-sm object-cover object-center md:h-[225px] md:w-[225px]"
