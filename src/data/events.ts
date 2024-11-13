@@ -18,7 +18,7 @@ export interface EventCardProps {
 export interface DashEventCardProps {
   event: Event;
   fetchEvents: () => void;
-  idx: number;
+  index: number;
 }
 
 export type PreloadedMedia = HTMLImageElement | HTMLVideoElement;
