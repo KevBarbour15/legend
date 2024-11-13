@@ -1,10 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["i.imgur.com"],
-    unoptimized: false,
-    dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    domains: ["i.imgur.com", "imgur.com", "i.stack.imgur.com"],
   },
 };
 
