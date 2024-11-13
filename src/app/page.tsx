@@ -118,7 +118,7 @@ export default function Home() {
             opacity: 0,
           },
           {
-            delay: 0.15,
+            delay: 0.35,
             duration: 1,
             opacity: 1,
             y: 0,

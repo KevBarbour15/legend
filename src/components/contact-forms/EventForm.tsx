@@ -75,7 +75,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
 
       tl.current = gsap.timeline({});
       tl.current.to("#event-form", {
-        delay: 0.15,
+        delay: 0.35,
         duration: 0.25,
         opacity: 1,
         ease: "sine.inOut",

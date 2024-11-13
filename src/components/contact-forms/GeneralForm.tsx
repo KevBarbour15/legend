@@ -52,7 +52,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
 
       tl.current = gsap.timeline({});
       tl.current.to("#general-form", {
-        delay: 0.15,
+        delay: 0.35,
         duration: 0.25,
         opacity: 1,
         ease: "sine.inOut",
@@ -65,7 +65,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
           ref={formRef}
           id="general-form"
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex w-full flex-col space-y-3 md:w-[550px] opacity-0"
+          className="flex w-full flex-col space-y-3 opacity-0 md:w-[550px]"
         >
           <p className="general-form-field text-pretty font-hypatia text-customCream">
             Thank you for reaching out to Legend Has It. Please take a minute
