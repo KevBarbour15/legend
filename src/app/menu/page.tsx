@@ -17,6 +17,8 @@ import {
   PintGlass,
 } from "@phosphor-icons/react";
 
+import { generateProgress } from "@/utils/progress";
+
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -32,15 +34,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-function generateProgress(min: number, max: number) {
-  return Math.random() * (max - min) + min;
-}
-
 const Menu: React.FC = ({}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [menu, setMenu] = useState<MenuStructure | null>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
-  const [displayMenu, setDisplayMenu] = useState<boolean>(false);
+
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [progress, setProgress] = useState<number>(0);
@@ -66,7 +64,6 @@ const Menu: React.FC = ({}) => {
       setTimeout(() => {
         setProgress(100);
         setTimeout(() => setLoading(false), 300);
-        setTimeout(() => setDisplayMenu(true), 350);
       }, 350);
     }
   };
@@ -74,26 +71,25 @@ const Menu: React.FC = ({}) => {
   useGSAP(() => {
     if (!containerRef.current) return;
 
-    if (loading && !displayMenu) {
+    if (loading) {
       gsap.fromTo(
         "#event-subheading",
         { opacity: 0 },
         { opacity: 1, duration: 0.25 },
       );
+      return;
     }
 
-    if (!loading && displayMenu) {
-      gsap.set("#menu", {
-        opacity: 0,
-      });
+    gsap.set("#menu", {
+      opacity: 0,
+    });
 
-      tl.current = gsap.timeline({}).to("#menu", {
-        duration: 0.25,
-        opacity: 1,
-        ease: "sine.inOut",
-      });
-    }
-  }, [displayMenu]);
+    tl.current = gsap.timeline({}).to("#menu", {
+      duration: 0.25,
+      opacity: 1,
+      ease: "sine.inOut",
+    });
+  }, [loading]);
 
   useEffect(() => {
     let isMounted = true;

@@ -12,10 +12,13 @@ export interface Event {
 
 export interface EventCardProps {
   event: Event;
+  preloadedMedia: PreloadedMedia;
 }
 
 export interface DashEventCardProps {
   event: Event;
   fetchEvents: () => void;
-  index: number;
+  idx: number;
 }
+
+export type PreloadedMedia = HTMLImageElement | HTMLVideoElement;
