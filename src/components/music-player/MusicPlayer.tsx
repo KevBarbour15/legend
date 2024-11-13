@@ -161,13 +161,21 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                   id="now-playing"
                   height={28}
                   width={28}
-                  alt="Record Logo"
                   className="absolute left-[103px] top-[40.75%] z-[3] w-[28px]"
                   src="/images/small-logo-record.png"
+                  style={{
+                    height: "auto",
+                    width: "auto",
+                  }}
+                  alt="Record Logo"
                 />
                 <Image
                   className="drop-shadow-record md:w-[185px]"
                   src="/images/player.png"
+                  style={{
+                    height: "auto",
+                    width: "auto",
+                  }}
                   alt="Player"
                   height={185}
                   width={185}

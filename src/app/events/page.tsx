@@ -25,11 +25,15 @@ export default function Events() {
   const upcomingEmptyMessageRef = useRef<HTMLDivElement>(null);
   const pastEmptyMessageRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState<number>(0);
-  const [preloadedMedia, setPreloadedMedia] = useState<
-    Map<string, PreloadedMedia>
-  >(new Map());
+  const [preloadedMedia, setPreloadedMedia] = useState<Map<string, string>>(
+    new Map(),
+  );
 
   const preloadMedia = async (event: Event) => {
+    if (preloadedMedia.has(event._id)) {
+      return;
+    }
+
     return new Promise((resolve, reject) => {
       if (event.is_photo) {
         const img = new Image();
@@ -39,7 +43,7 @@ export default function Events() {
           setPreloadedMedia((prev) => {
             const newMap = new Map(prev);
 
-            newMap.set(event._id, img);
+            newMap.set(event._id, img.src);
             return newMap;
           });
           resolve(img);
@@ -49,7 +53,7 @@ export default function Events() {
         video.onloadeddata = () => {
           setPreloadedMedia((prev) => {
             const newMap = new Map(prev);
-            newMap.set(event._id, video);
+            newMap.set(event._id, video.src);
             return newMap;
           });
           resolve(video);
@@ -232,9 +236,7 @@ export default function Events() {
                           <EventCard
                             key={idx}
                             event={event}
-                            preloadedMedia={
-                              preloadedMedia.get(event._id) as PreloadedMedia
-                            }
+                            preloadedMedia={preloadedMedia.get(event._id) || ""}
                           />
                         </div>
                       ))}
@@ -262,9 +264,7 @@ export default function Events() {
                           <EventCard
                             key={idx}
                             event={event}
-                            preloadedMedia={
-                              preloadedMedia.get(event._id) as PreloadedMedia
-                            }
+                            preloadedMedia={preloadedMedia.get(event._id) || ""}
                           />
                         </div>
                       ))}
