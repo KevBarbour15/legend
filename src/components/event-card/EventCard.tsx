@@ -12,7 +12,7 @@ import { createPortal } from "react-dom";
 import Divider from "@/components/divider/Divider";
 import { formatTime } from "@/utils/time";
 
-const EventCard: React.FC<EventCardProps> = ({ event }) => {
+const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
   const [isActive, setIsActive] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const formattedTime = formatTime(event.time);
@@ -77,13 +77,11 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                   className="flex-shrink-0"
                 >
                   <Image
-                    priority
                     width={300}
                     height={300}
-                    src={event.image_url}
+                    src={preloadedMedia.src}
                     alt={event.title}
                     className="aspect-square w-full rounded-sm object-cover object-center"
-                    loading="eager"
                   />
                 </motion.div>
               ) : (
@@ -92,7 +90,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                   className="flex-shrink-0"
                 >
                   <video
-                    src={event.image_url}
+                    src={preloadedMedia.src}
                     className="aspect-square w-full rounded-sm object-cover object-center"
                     loop
                     autoPlay
@@ -157,10 +155,9 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
               className="flex-shrink-0"
             >
               <Image
-                priority
                 width={225}
                 height={225}
-                src={event.image_url}
+                src={preloadedMedia.src}
                 alt={event.title}
                 className="aspect-square h-[115px] w-[115px] rounded-sm object-cover object-center md:h-[225px] md:w-[225px]"
               />
@@ -171,7 +168,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
               className="flex-shrink-0"
             >
               <video
-                src={event.image_url}
+                src={preloadedMedia.src}
                 className="aspect-square h-[115px] w-[115px] rounded-sm object-cover object-center md:h-[225px] md:w-[225px]"
                 loop
                 autoPlay
