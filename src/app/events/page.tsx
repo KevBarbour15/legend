@@ -74,7 +74,12 @@ export default function Events() {
   const fetchEvents = async () => {
     try {
       setProgress(generateProgress(1, 35));
-      const response = await fetch("/api/events");
+      const response = await fetch("/api/events", {
+        cache: "force-cache",
+        next: {
+          revalidate: 3600,
+        },
+      });
 
       if (!response.ok) {
         setProgress(0);
