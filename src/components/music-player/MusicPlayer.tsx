@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
+import Image from "next/image";
 import { MusicPlayerProps } from "@/data/music-player";
 
 import gsap from "gsap";
@@ -141,7 +142,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         id="player-container"
         className="fixed bottom-0 left-0 right-0 mx-3 mb-3 flex flex-col drop-shadow-record md:mb-6 md:ml-6 md:mr-0 md:w-fit md:flex-row"
       >
-        <div className="w-full md:w-fit bg-black p-1">
+        <div className="w-full bg-black p-1 md:w-fit">
           <Collapse
             in={visible}
             id="record-player"
@@ -156,15 +157,21 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               }}
             >
               <div className="rounded-sm bg-customNavy bg-opacity-10 p-2">
-                <img
+                <Image
                   id="now-playing"
+                  height={28}
+                  width={28}
+                  alt="Record Logo"
                   className="absolute left-[103px] top-[40.75%] z-[3] w-[28px]"
-                  src="./images/small-logo-record.png"
-                ></img>
-                <img
+                  src="/images/small-logo-record.png"
+                />
+                <Image
                   className="drop-shadow-record md:w-[185px]"
-                  src="./images/player.png"
-                ></img>
+                  src="/images/player.png"
+                  alt="Player"
+                  height={185}
+                  width={185}
+                />
               </div>
             </div>
           </Collapse>
@@ -251,10 +258,13 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             }}
           >
             <div className="h-full w-full rounded-sm bg-black bg-opacity-35">
-              <img
-                className="mx-auto h-16 p-3 drop-shadow-text md:h-20"
-                src="./images/alt-logo.png"
-              ></img>
+              <Image
+                className="h-auto w-24 p-3 drop-shadow-text md:w-28"
+                src="/images/alt-logo.png"
+                alt="Alt Logo"
+                height={96}
+                width={96}
+              />
               <div className="h-fit">
                 {tracks.map((track, index) => (
                   <div key={index} className="flex h-full flex-row p-1 md:px-3">

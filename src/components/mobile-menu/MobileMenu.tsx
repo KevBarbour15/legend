@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 const links = [
   { path: "/", label: "About" },
@@ -37,10 +38,13 @@ const MobileMenu: React.FC = () => {
       }}
     >
       <div className="flex flex-grow flex-col justify-start pl-3 pt-3">
-        <img
-          className="mb-3 w-[135px] md:hidden"
-          src="./images/alt-logo.png"
+        <Image
+          className="mb-3 w-[115px] md:hidden"
+          src="/images/alt-logo.png"
           alt="Logo"
+          height={115}
+          width={115}
+          priority
         />
         <ul className="font-bigola text-4xl" id="menu-text">
           {links.map((link, idx) => (
@@ -56,7 +60,7 @@ const MobileMenu: React.FC = () => {
           ))}
         </ul>
       </div>
-      <div className="mb-16 ml-3 w-fit font-bigola">
+      <div className="mb-20 ml-3 w-fit font-bigola">
         <a
           className="cursor-pointer"
           target="_blank"

@@ -47,29 +47,32 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
     return createPortal(
       <AnimatePresence>
         {isActive && (
-          <div className="fixed inset-0 z-[200] grid place-items-center bg-black bg-opacity-65 px-3">
+          <div className="fixed inset-0 z-[200] grid place-items-center bg-black bg-opacity-85 px-3">
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { duration: 0.15 } }}
+              exit={{ opacity: 0, transition: { duration: 0.15 } }}
               className="fixed inset-0"
               onClick={() => setIsActive(false)}
             />
-            <motion.button
+            <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { duration: 0.15 } }}
+              exit={{ opacity: 0, transition: { duration: 0.15 } }}
               className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full md:right-6 md:top-6"
-              onClick={() => setIsActive(false)}
             >
-              <IconButton aria-label="Close Modal" className="p-0">
-                <X size={32} className="text-customCream" />
+              <IconButton
+                aria-label="Close Modal"
+                className="onClick={() => setIsActive(false)} p-0"
+                onClick={() => setIsActive(false)}
+              >
+                <X size={32} className="text-customGold" />
               </IconButton>
-            </motion.button>
+            </motion.div>
 
             <motion.div
               layoutId={`card-${event._id}`}
-              className="relative flex h-fit max-h-[85svh] w-full flex-col overflow-hidden rounded-sm border border-customGold bg-customNavy px-3 pt-3 shadow-md sm:max-h-[95vh] sm:max-w-[425px] md:px-6 md:pt-6"
+              className="relative flex h-fit max-h-[85svh] w-full flex-col overflow-hidden rounded-sm border border-customGold bg-customNavy px-6 pt-6 shadow-md sm:max-h-[95vh] sm:max-w-[425px]"
             >
               {event.is_photo ? (
                 <motion.div
@@ -82,6 +85,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                     src={preloadedMedia.src}
                     alt={event.title}
                     className="aspect-square w-full rounded-sm object-cover object-center"
+                    priority
                   />
                 </motion.div>
               ) : (
@@ -100,36 +104,36 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                 </motion.div>
               )}
 
-              <motion.h2
+              <motion.div
                 layoutId={`title-${event._id}`}
                 className="text-balance py-3 text-left font-bigola text-xl text-customGold"
               >
                 <h2 className="leading-none sm:text-2xl md:text-3xl">
                   {event.title}
                 </h2>
-              </motion.h2>
+              </motion.div>
 
               <div className="flex items-center justify-between text-nowrap border-b border-customGold pb-3 font-hypatia text-base text-customWhite">
-                <motion.p layoutId={`date-${event._id}`}>
+                <motion.div layoutId={`date-${event._id}`}>
                   <p className="leading-none">{formattedDate}</p>
-                </motion.p>
+                </motion.div>
 
                 <Divider borderColor={"border-customWhite"} />
 
-                <motion.p
+                <motion.div
                   layoutId={`time-${event._id}`}
                   className="leading-none"
                 >
                   <p className="leading-none">{formattedTime}</p>
-                </motion.p>
+                </motion.div>
               </div>
               <div className="flex-grow overflow-y-auto [mask-image:linear-gradient(180deg,transparent,black_0.75rem,black_calc(100%-1.5rem),transparent)]">
-                <motion.p
+                <motion.div
                   layoutId={`description-${event._id}`}
-                  className="whitespace-pre-wrap py-3 font-hypatia text-lg leading-tight text-customWhite md:pb-6"
+                  className="whitespace-pre-wrap pb-6 pt-3 font-hypatia text-lg leading-tight text-customWhite"
                 >
                   {event.description}
-                </motion.p>
+                </motion.div>
               </div>
             </motion.div>
           </div>
@@ -148,7 +152,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
         onClick={handleCardClick}
         className="cursor-pointer rounded-sm bg-transparent transition-all duration-300 md:hover:bg-black md:hover:bg-opacity-15 md:hover:shadow-lg"
       >
-        <div className="flex h-full space-x-3 md:space-x-6">
+        <div className="flex h-full gap-3 md:gap-6">
           {event.is_photo ? (
             <motion.div
               layoutId={`image-${event._id}`}

@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
+import Image from "next/image";
+
 // animation imports
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -96,10 +98,13 @@ const SideMenu: React.FC = () => {
           ))}
         </ul>
         <div className="menu-link mt-12 pr-3 font-bigola" id="hover">
-          <img
+          <Image
             className="mb-6 w-[150px] md:hidden"
-            src="./images/alt-logo.png"
+            src="/images/alt-logo.png"
             alt="Alternative Logo"
+            height={150}
+            width={150}
+            priority
           />
           <a
             className="cursor-pointer text-customCream"
