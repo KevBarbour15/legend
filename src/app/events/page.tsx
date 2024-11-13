@@ -8,7 +8,7 @@ import MobileHeading from "@/components/mobile-heading/MobileHeading";
 import Loading from "@/components/loading/Loading";
 
 import gsap from "gsap";
-
+import { useGSAP } from "@gsap/react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 function generateProgress(min: number, max: number) {
@@ -28,6 +28,25 @@ export default function Events() {
   const pastEmptyMessageRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState<number>(0);
 
+  const animateTabs = useCallback(() => {
+    if (!containerRef.current) return;
+    if (loading) {
+      gsap.fromTo(
+        "#event-subheading",
+        { opacity: 0 },
+        { opacity: 1, duration: 0.05 },
+      );
+    }
+
+    if (!loading) {
+      gsap.fromTo(
+        "#event-tabs",
+        { opacity: 0 },
+        { opacity: 1, duration: 0.35 },
+      );
+    }
+  }, [loading]);
+
   const animateEvents = useCallback(() => {
     if (!containerRef.current) return;
 
@@ -36,19 +55,15 @@ export default function Events() {
     const currentEmptyRef =
       activeTab === "upcoming" ? upcomingEmptyMessageRef : pastEmptyMessageRef;
 
-    if (loading) {
-      gsap.fromTo(
-        "#event-subheading",
-        { opacity: 0 },
-        { opacity: 1, duration: 0.25 },
-      );
-    }
-
     if (!loading && displayEvents) {
       if (currentRefs.current.length > 0) {
+        gsap.set("#events-container", { opacity: 0 });
         gsap.set(currentRefs.current, { opacity: 0, y: 100 });
+        gsap.to("#events-container", {
+          opacity: 1,
+        });
         gsap.to(currentRefs.current, {
-          delay: 0.15,
+          delay: 0.35,
           duration: 0.2,
           stagger: 0.05,
           y: 0,
@@ -56,24 +71,24 @@ export default function Events() {
           ease: "sine.inOut",
         });
       } else if (currentEmptyRef.current) {
-        gsap.set(currentEmptyRef.current, { opacity: 0, scale: 0.95 });
+        gsap.set(currentEmptyRef.current, { opacity: 0 });
         gsap.to(currentEmptyRef.current, {
-          delay: 0.15,
+          delay: 0.35,
           duration: 0.25,
-          scale: 1,
           opacity: 1,
         });
       }
     }
   }, [loading, displayEvents, activeTab]);
 
-  useEffect(() => {
+  useGSAP(() => {
+    animateTabs();
     animateEvents();
-  }, [animateEvents, activeTab]);
+  }, [animateEvents, activeTab, animateTabs]);
 
   const fetchEvents = async () => {
     try {
-      setProgress(generateProgress(1, 35));
+      setProgress(generateProgress(1, 25));
       const response = await fetch("/api/events", {
         cache: "force-cache",
         next: {
@@ -85,21 +100,24 @@ export default function Events() {
         setProgress(0);
         throw new Error("Failed to fetch events.");
       }
-      setProgress(generateProgress(36, 75));
+      setProgress(generateProgress(26, 50));
 
       const data: Event[] = await response.json();
 
-      setProgress(generateProgress(76, 95));
+      setProgress(generateProgress(51, 75));
       setEvents(data);
     } catch (error) {
       setProgress(0);
       console.log("Error: ", error);
       setError("Failed to fetch events.");
     } finally {
+      setProgress(generateProgress(76, 95));
       setTimeout(() => {
         setProgress(100);
-        setTimeout(() => setLoading(false), 300);
-        setTimeout(() => setDisplayEvents(true), 350);
+        setTimeout(() => {
+          setLoading(false);
+          setDisplayEvents(true);
+        }, 300);
       }, 350);
     }
   };
@@ -158,13 +176,14 @@ export default function Events() {
         className="z-10 mx-auto flex w-screen flex-col items-center justify-center overflow-y-auto p-3 pb-20 md:pb-0 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
       >
         <MobileHeading section={"Events"} />
-        {loading ? (
+        {loading && (
           <Loading
             progress={progress}
             message={"Loading events..."}
             loading={loading}
           />
-        ) : (
+        )}
+        <div id="event-tabs" className="w-full opacity-0">
           <Tabs
             defaultValue="upcoming"
             className="flex w-full flex-col items-center"
@@ -177,56 +196,58 @@ export default function Events() {
               <TabsTrigger value="past">Past Events</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="upcoming" className="w-full">
-              {upcomingEvents.length > 0 ? (
-                <div className="space-y-3 md:space-y-6">
-                  {upcomingEvents.map((event, index) => (
-                    <div
-                      className="opacity-0"
-                      key={event._id}
-                      ref={(el) => {
-                        upcomingEventRefs.current[index] = el;
-                      }}
-                    >
-                      <EventCard key={index} event={event} />
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="flex w-full flex-col items-center justify-center text-center">
-                  <EmptyMessage
-                    message="Stay tuned for upcoming events!"
-                    refProp={upcomingEmptyMessageRef}
-                  />
-                </div>
-              )}
-            </TabsContent>
-            <TabsContent value="past" className="w-full">
-              {pastEvents.length > 0 ? (
-                <div className="mb-6 space-y-3 md:space-y-6">
-                  {pastEvents.map((event, index) => (
-                    <div
-                      key={event._id}
-                      ref={(el) => {
-                        pastEventRefs.current[index] = el;
-                      }}
-                      className="opacity-0"
-                    >
-                      <EventCard key={index} event={event} />
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="flex w-full flex-col items-center justify-center text-center">
-                  <EmptyMessage
-                    message="No past events to display."
-                    refProp={pastEmptyMessageRef}
-                  />
-                </div>
-              )}
-            </TabsContent>
+            <div id="events-container" className="w-full opacity-0">
+              <TabsContent value="upcoming" className="w-full">
+                {upcomingEvents.length > 0 ? (
+                  <div className="space-y-3 md:space-y-6">
+                    {upcomingEvents.map((event, index) => (
+                      <div
+                        className="opacity-0"
+                        key={event._id}
+                        ref={(el) => {
+                          upcomingEventRefs.current[index] = el;
+                        }}
+                      >
+                        <EventCard key={index} event={event} />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="flex w-full flex-col items-center justify-center text-center">
+                    <EmptyMessage
+                      message="Stay tuned for upcoming events!"
+                      refProp={upcomingEmptyMessageRef}
+                    />
+                  </div>
+                )}
+              </TabsContent>
+              <TabsContent value="past" className="w-full">
+                {pastEvents.length > 0 ? (
+                  <div className="mb-6 space-y-3 md:space-y-6">
+                    {pastEvents.map((event, index) => (
+                      <div
+                        key={event._id}
+                        ref={(el) => {
+                          pastEventRefs.current[index] = el;
+                        }}
+                        className="opacity-0"
+                      >
+                        <EventCard key={index} event={event} />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="flex w-full flex-col items-center justify-center text-center">
+                    <EmptyMessage
+                      message="No past events to display."
+                      refProp={pastEmptyMessageRef}
+                    />
+                  </div>
+                )}
+              </TabsContent>
+            </div>
           </Tabs>
-        )}
+        </div>
       </div>
     </>
   );

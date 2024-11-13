@@ -125,7 +125,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
                   <p className="leading-none">{formattedTime}</p>
                 </motion.p>
               </div>
-              <div className="flex-grow overflow-y-auto [mask:linear-gradient(to_bottom,transparent,white,white,white,white,white,white,white,white,white,transparent)]">
+              <div className="flex-grow overflow-y-auto [mask-image:linear-gradient(180deg,transparent,black_0.75rem,black_calc(100%-1.5rem),transparent)]">
                 <motion.p
                   layoutId={`description-${event._id}`}
                   className="whitespace-pre-wrap py-3 font-hypatia text-lg leading-tight text-customWhite md:pb-6"
