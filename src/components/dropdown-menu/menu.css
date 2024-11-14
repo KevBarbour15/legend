@@ -11,12 +11,13 @@
   justify-content: space-between;
   clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
 }
+
 .menu-login-link {
   position: absolute;
   bottom: 0.75rem;
   right: 0.75rem;
   cursor: pointer;
-  color: var(--custom-navy);
+  color: var(--custom-cream);
   font-size: 30px;
   padding: 0;
 }
@@ -77,7 +78,7 @@
 }
 
 .menu-link-item-holder a {
-  color: var(--custom-navy);
+  color: var(--custom-cream);
   font-size: 80px;
   font-family: "Bigola Display";
   text-decoration: none;

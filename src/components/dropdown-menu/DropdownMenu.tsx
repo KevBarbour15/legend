@@ -40,7 +40,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
 
     gsap.set(".menu-link-item-holder", { y: 75, scale: 1, opacity: 0 });
     gsap.set(".menu-logo-icon", { opacity: 0 });
-    gsap.set(".menu-overlay", { opacity: 0 });
+    gsap.set(".menu-overlay", { opacity: 0.5 });
     gsap.set(".menu-info-row", { opacity: 0 });
     gsap.set(".menu-close-icon", { opacity: 0 });
     gsap.set(".menu-login-link", { opacity: 0 });
@@ -97,7 +97,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
 
     tl.current?.reverse();
 
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 750));
 
     toggleMenu();
     router.push(path);
@@ -110,7 +110,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
         <div className="menu-logo-container">
           <Image
             className="menu-logo-icon"
-            src="/images/monogram.png"
+            src="/images/alt-logo.png"
             alt="Legend Has It logo"
             width={125}
             height={125}
@@ -138,7 +138,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
         <div className="menu-info-container">
           <div className="menu-info-row opacity-0">
             <IconButton
-              className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
+              className="text-5xl text-customCream"
               href="https://www.instagram.com/legendhasithifi/"
               target="_blank"
               rel="noopener noreferrer"
@@ -147,7 +147,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
             </IconButton>
 
             <IconButton
-              className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
+              className="text-5xl text-customCream"
               href="https://www.facebook.com/legendhasithifi"
               target="_blank"
               rel="noopener noreferrer"
@@ -156,17 +156,19 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
             </IconButton>
 
             <IconButton
-              className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
+              className="text-5xl text-customCream"
               href="https://www.youtube.com/@legendhasithifi"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <YoutubeLogo size={32} weight="duotone" />
+              <YoutubeLogo size={32} weight="fill" />
             </IconButton>
           </div>
-          <LoginLink postLoginRedirectURL="/dashboard">
-            <Key className="menu-login-link" weight="fill" />
-          </LoginLink>
+          <IconButton className="menu-login-link text-customCream">
+            <LoginLink postLoginRedirectURL="/dashboard">
+              <Key weight="regular" />
+            </LoginLink>
+          </IconButton>
         </div>
       </div>
     </div>

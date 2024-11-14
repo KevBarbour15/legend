@@ -27,7 +27,7 @@ import {
 import Equalizer from "@/components/equalizer/Equalizer";
 
 const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
-  const [playing, setPlaying] = useState<boolean>(true);
+  const [playing, setPlaying] = useState<boolean>(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
   const [mute, setMute] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
@@ -161,7 +161,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                   id="now-playing"
                   height={28}
                   width={28}
-                  className="absolute left-[103px] top-[40.75%] z-[3] w-[28px]"
+                  className="absolute left-[105.5px] top-[40.5%] z-[3] w-[28px]"
                   src="/images/small-logo-record.png"
                   style={{
                     height: "auto",
