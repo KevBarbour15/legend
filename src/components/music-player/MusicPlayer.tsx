@@ -27,7 +27,7 @@ import {
 import Equalizer from "@/components/equalizer/Equalizer";
 
 const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
-  const [playing, setPlaying] = useState<boolean>(false);
+  const [playing, setPlaying] = useState<boolean>(true);
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
   const [mute, setMute] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
