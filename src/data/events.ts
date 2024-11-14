@@ -22,3 +22,11 @@ export interface DashEventCardProps {
 }
 
 export type PreloadedMedia = HTMLImageElement | HTMLVideoElement;
+
+export interface DeleteEventDialogProps {
+  openDeleteModal: boolean;
+  fetchEvents: () => void;
+  closeDeleteModal: () => void;
+  event: Event;
+}
+

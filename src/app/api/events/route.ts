@@ -70,7 +70,7 @@ export async function PUT(req: NextRequest) {
   await connectToMongoDB();
 
   try {
-    const { _id, title, date, time, description, image_url, notes } =
+    const { _id, title, date, time, description, image_url, notes, is_photo } =
       await req.json();
 
     await Event.findByIdAndUpdate(_id, {
@@ -80,6 +80,7 @@ export async function PUT(req: NextRequest) {
       description,
       image_url,
       notes,
+      is_photo,
     });
 
     return NextResponse.json({ message: "Event updated." }, { status: 200 });

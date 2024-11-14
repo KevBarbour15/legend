@@ -7,9 +7,14 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
+
+import { IconButton } from "@mui/material";
+import { X } from "@phosphor-icons/react";
+
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 
 interface Event {
   _id: string;
@@ -44,6 +49,10 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
       setEditedEvent({ ...editedEvent, [field]: e.target.value });
     };
 
+  const handleSwitchChange = (checked: boolean) => {
+    setEditedEvent({ ...editedEvent, is_photo: checked });
+  };
+
   const confirmEdit = async () => {
     try {
       const response = await fetch(`/api/events?action=EditCalendar`, {
@@ -67,12 +76,12 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
   return (
     <>
       <Dialog open={openEditModal} onOpenChange={closeEditModal}>
-        <DialogContent className="w-full text-black">
+        <DialogContent>
           <DialogHeader>
             <DialogTitle>Edit Event</DialogTitle>
           </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
+          <div className="grid gap-3">
+            <div className="grid grid-cols-4 items-center gap-3 md:gap-6">
               <Label htmlFor="title" className="text-right">
                 Title
               </Label>
@@ -83,7 +92,7 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
                 className="col-span-3"
               />
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
+            <div className="grid grid-cols-4 items-center gap-6">
               <Label htmlFor="date" className="text-right">
                 Date
               </Label>
@@ -95,7 +104,7 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
                 className="col-span-3"
               />
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
+            <div className="grid grid-cols-4 items-center gap-6">
               <Label htmlFor="time" className="text-right">
                 Time
               </Label>
@@ -107,9 +116,20 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
                 className="col-span-3"
               />
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
+            <div className="grid grid-cols-4 items-center gap-6">
+              <Label className="text-right">Media Type</Label>
+              <div className="col-span-3 flex items-center gap-3">
+                <span>Video</span>
+                <Switch
+                  checked={editedEvent.is_photo}
+                  onCheckedChange={handleSwitchChange}
+                />
+                <span>Photo</span>
+              </div>
+            </div>
+            <div className="grid grid-cols-4 items-center gap-6">
               <Label htmlFor="image_url" className="text-right">
-                Image URL
+                Media URL
               </Label>
               <Input
                 id="image_url"
@@ -118,7 +138,8 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
                 className="col-span-3"
               />
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
+
+            <div className="grid grid-cols-4 items-center gap-6">
               <Label htmlFor="description" className="text-right">
                 Description
               </Label>
@@ -129,7 +150,7 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
                 className="col-span-3 h-32 resize-none"
               />
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
+            <div className="grid grid-cols-4 items-center gap-6">
               <Label htmlFor="notes" className="text-right">
                 Notes
               </Label>

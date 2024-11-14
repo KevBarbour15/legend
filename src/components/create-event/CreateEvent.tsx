@@ -4,6 +4,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,8 +26,17 @@ import { formSchema } from "@/data/create-event";
 
 const CreateEvent: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const tl = useRef<gsap.core.Timeline | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useGSAP(() => {
+    if (!containerRef.current) return;
+
+    gsap.fromTo(
+      "#create-container",
+      { opacity: 0 },
+      { opacity: 1, duration: 0.35, delay: 0.15, ease: "sine.inOut" },
+    );
+  }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -68,7 +80,11 @@ const CreateEvent: React.FC = () => {
   };
 
   return (
-    <div className="text-black">
+    <div
+      ref={containerRef}
+      id="create-container"
+      className="text-black opacity-0"
+    >
       <Card className="p-3 md:p-6">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
@@ -116,35 +132,12 @@ const CreateEvent: React.FC = () => {
             />
             <FormField
               control={form.control}
-              name="image_url"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Image or Video URL</FormLabel>
-                  <FormDescription>
-                    For video, convert to video format to MP4 before uploading
-                    to Imgur.
-                  </FormDescription>
-                  <FormDescription>
-                    To add image/video, right click the media in Imgur and copy
-                    address.
-                  </FormDescription>
-
-                  <FormControl>
-                    <Input placeholder=" Paste media URL here." {...field} />
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
               name="is_photo"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-sm border p-4">
-                  <div className="space-y-0.5">
-                    <FormLabel className="text-base">Media Type</FormLabel>
-                    <FormDescription>
+                <FormItem>
+                  <div className="text-pretty pr-3 text-sm md:text-base">
+                    <FormLabel>Media Type</FormLabel>
+                    <FormDescription className="basis-1/2 text-pretty text-sm italic md:text-base">
                       Specify whether photo or video for proper display
                       formatting.
                     </FormDescription>
@@ -162,6 +155,27 @@ const CreateEvent: React.FC = () => {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="image_url"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Media URL</FormLabel>
+                  <FormDescription className="text-pretty text-sm italic md:text-base">
+                    To add image/video, upload to Imgur, right click the media
+                    in Imgur and copy media address. For video, convert to video
+                    format to MP4 before uploading to Imgur.
+                  </FormDescription>
+
+                  <FormControl>
+                    <Input placeholder=" Paste media URL here." {...field} />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             <FormField
               control={form.control}
               name="description"

@@ -1,38 +1,36 @@
-import React, { useState, useRef, useEffect } from "react";
+"use client";
+import { useState, useEffect, useRef, useMemo } from "react";
 
 import { Event } from "@/data/events";
 
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
+import { generateProgress } from "@/utils/progress";
+
 import DashEventCard from "@/components/dash-event-card/DashEventCard";
+import Loading from "@/components/loading/Loading";
 
 import { Accordion } from "@/components/ui/accordion";
 
 const UpcomingEventsList: React.FC = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<Error | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState<number>(0);
 
-  const fetchEvents = async () => {
-    try {
-      const response = await fetch("/api/events");
-      if (!response.ok) {
-        throw new Error("Failed to fetch events.");
-      }
-      const data: Event[] = await response.json();
-      setEvents(data);
-    } catch (error) {
-      console.log("Error: ", error);
-      setError("Failed to fetch events.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  useGSAP(() => {
+    if (!containerRef.current) return;
+    if (loading) return;
+    gsap.fromTo(
+      "#events-container",
+      { opacity: 0 },
+      { opacity: 1, duration: 0.35, delay: 0.15, ease: "sine.inOut" },
+    );
+  }, [loading]);
 
-  useEffect(() => {
-    fetchEvents();
-  }, []);
-
-  const filterEvents = () => {
+  const sortedEvents = useMemo(() => {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
@@ -45,28 +43,63 @@ const UpcomingEventsList: React.FC = () => {
         return eventDate >= today;
       })
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  }, [events]);
+
+  const updateProgress = (start: number, end: number, delay = 0) => {
+    setTimeout(() => setProgress(generateProgress(start, end)), delay);
   };
 
-  const sortedEvents = filterEvents();
+  const fetchEvents = async () => {
+    try {
+      updateProgress(34, 66);
+      const response = await fetch("/api/events");
+
+      if (!response.ok) {
+        setProgress(0);
+        setError(new Error(`Failed to fetch events: ${response.statusText}`));
+        setLoading(false);
+        throw new Error(`Failed to fetch events: ${response.statusText}`);
+      }
+
+      const data: Event[] = await response.json();
+      updateProgress(67, 99, 750);
+      setEvents(data);
+    } catch (error) {
+      const err =
+        error instanceof Error ? error : new Error("Unknown error occurred");
+      console.error("Error: ", err);
+      setError(err);
+      setProgress(0);
+    } finally {
+      updateProgress(100, 100);
+      setTimeout(() => setLoading(false), 750);
+    }
+  };
+
+  useEffect(() => {
+    setProgress(generateProgress(1, 33));
+    fetchEvents();
+  }, []);
 
   return (
-    <div ref={containerRef} className="flex flex-col text-black">
+    <div ref={containerRef} id="events-container" className="block text-black">
       {loading ? (
-        <h2
-          id="event-subheading"
-          className="text-center font-bigola text-4xl text-black"
-        >
-          Loading events...
-        </h2>
-      ) : sortedEvents.length === 0 ? (
-        <h2
-          id="event-subheading"
-          className="text-center font-bigola text-4xl text-black"
-        >
-          No events found.
-        </h2>
+        <Loading
+          progress={progress}
+          message="Loading events..."
+          textColor="black"
+          borderColor="border-black"
+        />
+      ) : error ? (
+        <div className="flex h-[50vh] w-full flex-col items-center justify-center">
+          <h2 className="mb-6 text-3xl md:text-4xl">{error.message}</h2>
+        </div>
+      ) : !loading && sortedEvents.length === 0 ? (
+        <div className="flex h-[50vh] w-full flex-col items-center justify-center">
+          <h2 className="mb-6 text-3xl md:text-4xl">No events found.</h2>
+        </div>
       ) : (
-        <>
+        <div>
           <Accordion
             type="single"
             collapsible
@@ -82,7 +115,7 @@ const UpcomingEventsList: React.FC = () => {
               </div>
             ))}
           </Accordion>
-        </>
+        </div>
       )}
     </div>
   );

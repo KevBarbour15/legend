@@ -123,10 +123,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
 
                 <Divider borderColor={"border-customWhite"} />
 
-                <motion.div
-                  layoutId={`time-${event._id}`}
-                  className="leading-none"
-                >
+                <motion.div layoutId={`time-${event._id}`}>
                   <p className="leading-none">{formattedTime}</p>
                 </motion.div>
               </div>

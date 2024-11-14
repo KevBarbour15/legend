@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
+
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 import {
   Form,
@@ -42,6 +45,7 @@ const updateParentSchema = z.object({
 // Main component for managing menu categories and their relationships
 const MenuCategories: React.FC = () => {
   // State management for loading, submission states, and data
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isSubmittingParent, setIsSubmittingParent] = useState<boolean>(false);
   const [isSubmittingChild, setIsSubmittingChild] = useState<boolean>(false);
   const [parentCategories, setParentCategories] = useState<string[]>([]);
@@ -49,6 +53,16 @@ const MenuCategories: React.FC = () => {
   const [parentName, setParentName] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+
+  useGSAP(() => {
+    if (!containerRef.current) return;
+
+    gsap.fromTo(
+      "#menu-categories-container",
+      { opacity: 0 },
+      { opacity: 1, duration: 0.35, delay: 0.15, ease: "sine.inOut" },
+    );
+  }, []);
 
   // Form initialization using react-hook-form with zod validation
   const parentForm = useForm<z.infer<typeof parentFormSchema>>({
@@ -284,7 +298,11 @@ const MenuCategories: React.FC = () => {
   }, []);
 
   return (
-    <div className="space-y-3 text-black md:space-y-6">
+    <div
+      ref={containerRef}
+      id="menu-categories-container"
+      className="space-y-3 text-black opacity-0 md:space-y-6"
+    >
       {/* Parent Categories Section */}
       <Card className="p-3 md:p-6">
         <div className="flex flex-col space-y-3 md:flex-row md:space-x-6 md:space-y-0">

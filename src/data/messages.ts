@@ -20,3 +20,12 @@ export interface MessageCardProps {
   fetchMessages: () => void;
   index: number;
 }
+
+export interface DeleteMessageDialogProps {
+  openDeleteModal: boolean;
+  fetchMessages: () => void;
+  closeDeleteModal: () => void;
+  message: {
+    _id: string;
+  };
+}

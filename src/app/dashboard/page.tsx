@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import DashHeader from "@/components/dash-header/DashHeader";
 import CreateEvent from "@/components/create-event/CreateEvent";
@@ -21,6 +21,14 @@ DefaultComponent.displayName = "DefaultComponent";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState<string>("Create Event");
+  const [headerHeight, setHeaderHeight] = useState<number>(0);
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (headerRef.current) {
+      setHeaderHeight(headerRef.current.offsetHeight);
+    }
+  }, []);
 
   let CurrentComponent: React.ComponentType<any>;
   switch (activeTab) {
@@ -47,9 +55,15 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-customWhite">
-      <DashHeader setActiveTab={setActiveTab} activeTab={activeTab} />
-      <div className="container min-h-screen overflow-y-scroll pb-12 pt-3 md:pt-6">
+    <div
+      className="font-funnelDisplay h-auto min-h-screen w-full bg-customWhite"
+      style={{ paddingTop: `${headerHeight}px` }}
+    >
+      <header ref={headerRef} className="fixed top-0 z-50 w-full bg-black py-3">
+        <DashHeader setActiveTab={setActiveTab} activeTab={activeTab} />
+      </header>
+
+      <div className="container overflow-y-scroll py-3">
         <CurrentComponent />
       </div>
     </div>

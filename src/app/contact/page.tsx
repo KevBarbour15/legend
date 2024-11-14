@@ -140,14 +140,17 @@ export default function Contact() {
           </TabsList>
           <TabsContent
             value="event"
-            className="flex w-full flex-col items-center"
+            className="flex w-full flex-col items-center font-hypatia"
           >
             <EventForm
               ref={eventFormRef}
               onSubmit={(values) => handleSubmit("event", values)}
             />
           </TabsContent>
-          <TabsContent value="dj" className="flex w-full flex-col items-center">
+          <TabsContent
+            value="dj"
+            className="flex w-full flex-col items-center font-hypatia"
+          >
             <DjForm
               onSubmit={(values) => handleSubmit("dj", values)}
               ref={djFormRef}
@@ -155,7 +158,7 @@ export default function Contact() {
           </TabsContent>
           <TabsContent
             value="general"
-            className="flex w-full flex-col items-center"
+            className="flex w-full flex-col items-center font-hypatia"
           >
             <GeneralForm
               ref={generalFormRef}

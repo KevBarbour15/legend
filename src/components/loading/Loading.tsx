@@ -2,21 +2,20 @@ import { LoadingProps } from "@/data/loading.ts";
 
 import { Progress } from "@/components/ui/progress";
 
-const Loading: React.FC<LoadingProps> = ({ progress, message, loading }) => {
+const Loading: React.FC<LoadingProps> = ({
+  progress,
+  message,
+  textColor,
+  borderColor,
+}) => {
   return (
     <div
-      id="event-subheading"
-      className="flex h-[50vh] w-full flex-col items-center justify-center opacity-0"
+      className={`flex h-[50vh] w-full flex-col items-center justify-center ${textColor}`}
     >
-      <h2
-        id="loading-text"
-        className="mb-6 mt-3 font-bigola text-3xl text-customCream md:text-4xl"
-      >
-        {message}
-      </h2>
+      <h2 className="mb-6 text-center text-3xl md:text-4xl">{message}</h2>
       <Progress
         value={progress}
-        className="w-[75vw] max-w-[350px] text-customCream"
+        className={`w-[75vw] max-w-[350px] ${borderColor}`}
       />
     </div>
   );

@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
 import { ParentTableProps } from "@/data/draggable-table";
 
 import { Button } from "@/components/ui/button";
+import { IconButton } from "@mui/material";
 
 import {
   Table,
@@ -53,11 +53,12 @@ const ParentCategoryTable: React.FC<ParentTableProps> = ({
                         <TableCell className="font-medium">{idx + 1}</TableCell>
                         <TableCell>{category}</TableCell>
                         <TableCell className="justify-end text-right">
-                          <Button
+                          <IconButton
                             onClick={() => removeCategory(category, "parent")}
+                            className="text-black transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-red-500"
                           >
-                            <X size={16} />
-                          </Button>
+                            <X size={18} />
+                          </IconButton>
                         </TableCell>
                       </TableRow>
                     )}

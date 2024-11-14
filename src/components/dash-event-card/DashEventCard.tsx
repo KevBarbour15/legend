@@ -51,10 +51,12 @@ const DashEventCard: React.FC<DashEventCardProps> = ({
         className="border-t border-black"
       >
         <AccordionTrigger>
-          <div className="flex w-full justify-between text-nowrap pr-3 text-base font-semibold capitalize md:pr-6 md:text-xl">
-            <p>{event.title}</p>
-            <Divider borderColor="grey" />
-            <p>
+          <div className="flex min-w-0 flex-1 items-center justify-between pr-3 text-base capitalize md:pr-6 md:text-xl">
+            <p className="min-w-0 flex-1 truncate pr-6 text-left">
+              {event.title}
+            </p>
+
+            <p className="flex-shrink-0">
               {new Date(event.date).toLocaleDateString("en-US", {
                 timeZone: "UTC",
               })}
@@ -62,9 +64,12 @@ const DashEventCard: React.FC<DashEventCardProps> = ({
           </div>
         </AccordionTrigger>
         <AccordionContent className="border-black py-3 text-black">
-          <Card className="flex flex-col p-3 md:flex-row md:justify-between md:p-6">
+          <Card className="flex flex-col-reverse gap-3 p-3 md:flex-row md:justify-between md:gap-0 md:p-6">
             <div className="flex w-full flex-col">
-              <div className="flex w-full items-center justify-between border-b border-black pb-3">
+              <h2 className="mx-auto w-full text-wrap text-center text-2xl font-semibold capitalize">
+                {event.title}
+              </h2>
+              <div className="flex w-full items-center justify-between border-b border-black py-3">
                 <Clock
                   className="flex-shrink-0"
                   style={{ color: "black", width: "28px", height: "28px" }}
@@ -74,25 +79,19 @@ const DashEventCard: React.FC<DashEventCardProps> = ({
                   {formatTime(event.time)}
                 </p>
               </div>
-              <div className="flex w-full flex-col border-b border-black pb-3">
-                <div className="flex w-full items-center justify-between py-3">
+              <div className="flex w-full border-b border-black py-3">
+                <div className="flex h-full pr-3">
                   <Info
                     className="flex-shrink-0"
                     style={{ color: "black", width: "28px", height: "28px" }}
                   />
-                  <Divider borderColor={"grey"} />
-                  <img
-                    className="h-8 w-8"
-                    src="./images/monogram.png"
-                    alt="Small Logo"
-                  />
                 </div>
-                <p className="whitespace-pre-wrap text-justify">
+                <p className="whitespace-pre-wrap text-pretty">
                   {event.description}
                 </p>
               </div>
 
-              <div className="flex h-full w-full items-end py-6 md:pb-0">
+              <div className="flex h-full w-full items-end pt-3">
                 <Button
                   className="mr-3"
                   onClick={() => openEditModal(event)}
@@ -105,12 +104,12 @@ const DashEventCard: React.FC<DashEventCardProps> = ({
                 </Button>
               </div>
             </div>
-            <div className="my-auto aspect-square w-full p-0 sm:flex-shrink-0 md:ml-6 md:mt-auto md:h-[175px] md:w-[175px] lg:h-[225px] lg:w-[225px]">
+            <div className="my-auto h-full w-full p-0 sm:flex-shrink-0 md:ml-6 md:mt-auto md:w-[175px] lg:w-[225px]">
               {event.is_photo ? (
                 <img
                   src={event.image_url}
                   alt="event"
-                  className="aspect-square h-auto w-full border border-black object-cover object-center"
+                  className="h-auto w-full border border-black object-cover object-center"
                 />
               ) : (
                 <video

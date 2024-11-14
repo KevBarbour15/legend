@@ -19,8 +19,22 @@
 }
 
 @font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: "Roboto Medium";
   src: url("/fonts/Roboto-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto Bold";
+  src: url("/fonts/Roboto-Bold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -68,15 +82,15 @@
 }
 
 @font-face {
-  font-family: "Ubuntu Regular";
-  src: url("/fonts/Ubuntu-Regular.ttf") format("truetype");
+  font-family: "Funnel Display";
+  src: url("/fonts/FunnelDisplay.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Ubuntu Light";
-  src: url("/fonts/Ubuntu-Light.ttf") format("truetype");
+  font-family: "Poppins";
+  src: url("/fonts/Poppins-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }

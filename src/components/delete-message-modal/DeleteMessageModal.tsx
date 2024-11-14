@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   Dialog,
   DialogContent,
@@ -8,41 +7,45 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+
 import { Button } from "@/components/ui/button";
 
-import { DeleteEventDialogProps } from "@/data/events";
+import { DeleteMessageDialogProps } from "@/data/messages";
 
-const DeleteEventDialog: React.FC<DeleteEventDialogProps> = ({
+const DeleteMessageDialog: React.FC<DeleteMessageDialogProps> = ({
   openDeleteModal,
   closeDeleteModal,
-  fetchEvents,
-  event,
+  fetchMessages,
+  message,
 }) => {
   const confirmDelete = async () => {
     try {
-      const response = await fetch("/api/events", {
+      const response = await fetch("/api/message", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ eventId: event._id }),
+        body: JSON.stringify({
+          messageId: message._id,
+        }),
       });
 
       if (response.ok) {
         closeDeleteModal();
-        fetchEvents();
+        fetchMessages();
       }
     } catch (error) {
-      console.log("Error: ", error);
+      console.error("Failed to delete message.");
     }
   };
+
   return (
     <Dialog open={openDeleteModal} onOpenChange={closeDeleteModal}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Delete Event</DialogTitle>
+          <DialogTitle>Delete Message</DialogTitle>
           <DialogDescription>
-            Are you sure you want to delete this event? This action cannot be
+            Are you sure you want to delete this message? This action cannot be
             undone.
           </DialogDescription>
         </DialogHeader>
@@ -63,4 +66,4 @@ const DeleteEventDialog: React.FC<DeleteEventDialogProps> = ({
   );
 };
 
-export default DeleteEventDialog;
+export default DeleteMessageDialog;

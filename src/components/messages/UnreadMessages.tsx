@@ -1,62 +1,78 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 
 import { Message } from "@/data/messages";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
+import { generateProgress } from "@/utils/progress";
+
 import MessageCard from "@/components/message-card/MessageCard";
+import Loading from "@/components/loading/Loading";
 
 import { Accordion } from "@/components/ui/accordion";
 
 const UnreadMessagesList: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<Error | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const tL = useRef<gsap.core.Timeline | null>(null);
+  const [progress, setProgress] = useState<number>(0);
 
   useGSAP(() => {
     if (!containerRef.current) return;
+    if (loading) return;
+    gsap.fromTo(
+      "#messages-container",
+      { opacity: 0 },
+      { opacity: 1, duration: 0.35, delay: 0.15, ease: "sine.inOut" },
+    );
+  }, [loading]);
 
-    gsap.set("#messages-container", {
-      opacity: 0,
-    });
+  const unreadMessages = useMemo(
+    () =>
+      messages
+        .filter((message) => !message.read)
+        .sort(
+          (a, b) => new Date(b.sentAt).getTime() - new Date(a.sentAt).getTime(),
+        ),
+    [messages],
+  );
 
-    tL.current = gsap.timeline().to("#messages-container", {
-      duration: 0.25,
-      opacity: 1,
-    });
-  }, []);
+  const updateProgress = (start: number, end: number, delay = 0) => {
+    setTimeout(() => setProgress(generateProgress(start, end)), delay);
+  };
 
   const fetchMessages = async () => {
     try {
+      updateProgress(34, 66);
       const response = await fetch("/api/message");
 
       if (!response.ok) {
-        throw new Error("Failed to fetch messages.");
+        throw new Error(`Failed to fetch messages: ${response.statusText}`);
       }
 
       const data: Message[] = await response.json();
+      updateProgress(67, 99, 750);
       setMessages(data);
     } catch (error) {
-      console.log("Error: ", error);
-      setError("Failed to fetch messages.");
+      const err =
+        error instanceof Error ? error : new Error("Unknown error occurred");
+      console.error("Error: ", err);
+      setError(err);
+      setProgress(0);
     } finally {
-      setLoading(false);
+      updateProgress(100, 100);
+      setTimeout(() => setLoading(false), 750);
     }
   };
 
   useEffect(() => {
+    setProgress(generateProgress(1, 33));
     fetchMessages();
   }, []);
-
-  const unreadMessages = messages
-    .filter((message) => !message.read)
-    .sort(
-      (a, b) => new Date(b.sentAt).getTime() - new Date(a.sentAt).getTime(),
-    );
 
   return (
     <div
@@ -65,15 +81,22 @@ const UnreadMessagesList: React.FC = () => {
       className="block text-black"
     >
       {loading ? (
-        <h2 className="text-center font-bigola text-4xl text-black">
-          Loading messages...
-        </h2>
-      ) : unreadMessages.length === 0 ? (
-        <h2 className="text-center font-bigola text-4xl text-black">
-          No messages found.
-        </h2>
+        <Loading
+          progress={progress}
+          message="Loading messages..."
+          textColor="black"
+          borderColor="border-black"
+        />
+      ) : error ? (
+        <div className="flex h-[50vh] w-full flex-col items-center justify-center">
+          <h2 className="mb-6 text-3xl md:text-4xl">{error.message}</h2>
+        </div>
+      ) : !loading && unreadMessages.length === 0 ? (
+        <div className="flex h-[50vh] w-full flex-col items-center justify-center">
+          <h2 className="mb-6 text-3xl md:text-4xl">No messages found.</h2>
+        </div>
       ) : (
-        <>
+        <div>
           <Accordion
             type="single"
             collapsible
@@ -89,7 +112,7 @@ const UnreadMessagesList: React.FC = () => {
               </div>
             ))}
           </Accordion>
-        </>
+        </div>
       )}
     </div>
   );

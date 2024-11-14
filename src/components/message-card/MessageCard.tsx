@@ -37,6 +37,7 @@ import {
 } from "@/components/ui/dialog";
 
 import { musicTypes, eventTypes } from "@/data/forms";
+import DeleteMessageDialog from "../delete-message-modal/DeleteMessageModal";
 
 const MessageCard: React.FC<MessageCardProps> = ({
   message,
@@ -50,6 +51,9 @@ const MessageCard: React.FC<MessageCardProps> = ({
   const [eventType, setEventType] = useState<string>("");
   const [musicType, setMusicType] = useState<string>("");
   const [eventDate, setEventDate] = useState<string>("");
+  const [deletingMessage, setDeletingMessage] = useState<typeof message | null>(
+    null,
+  );
 
   const formatDate = (eventDate: any) => {
     if (eventDate instanceof Date) {
@@ -135,30 +139,12 @@ const MessageCard: React.FC<MessageCardProps> = ({
     }
   };
 
-  const handleDeleteClose = () => {
-    setOpen(false);
+  const openDeleteModal = (message: any) => {
+    setDeletingMessage(message);
   };
 
-  const confirmDelete = async () => {
-    try {
-      const response = await fetch("/api/message", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          messageId: message._id,
-        }),
-      });
-
-      if (response.ok) {
-        fetchMessages();
-        handleDeleteClose();
-      }
-    } catch (error) {
-      console.error("Failed to delete message.");
-      handleDeleteClose();
-    }
+  const closeDeleteModal = () => {
+    setDeletingMessage(null);
   };
 
   return (
@@ -190,12 +176,20 @@ const MessageCard: React.FC<MessageCardProps> = ({
                   {inquiryType}
                 </h2>
                 <div className="mb-3 flex w-full items-center justify-between capitalize">
-                  <UserCircle size={36} weight="regular" />
+                  <UserCircle
+                    size={32}
+                    weight="regular"
+                    className="flex-shrink-0"
+                  />
                   <Divider borderColor="grey" />
                   <p className="capitalize">{message.name}</p>
                 </div>
-                <div className="mb-3 flex w-full items-center justify-between">
-                  <Mailbox size={36} weight="regular" />
+                <div className="mb-3 inline-flex w-full items-center justify-between">
+                  <Mailbox
+                    size={32}
+                    weight="regular"
+                    className="flex-shrink-0"
+                  />
                   <Divider borderColor="grey" />
                   <a
                     href={`mailto:${message.email}`}
@@ -205,7 +199,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
                   </a>
                 </div>
                 <div className="mb-3 flex w-full items-center justify-between">
-                  <Phone size={36} weight="regular" />
+                  <Phone size={32} weight="regular" className="flex-shrink-0" />
                   <Divider borderColor="grey" />
                   <p>{message.phone}</p>
                 </div>
@@ -216,34 +210,52 @@ const MessageCard: React.FC<MessageCardProps> = ({
                     {eventType}
                   </h3>
                   <div className="mb-3 flex w-full items-center justify-between">
-                    <CalendarBlank size={36} weight="regular" />
+                    <CalendarBlank
+                      size={32}
+                      weight="regular"
+                      className="flex-shrink-0"
+                    />
                     <Divider borderColor="grey" />
                     <p>{eventDate}</p>
                   </div>
                   <div className="mb-3 flex w-full items-center justify-between">
-                    <Clock size={36} weight="regular" />
+                    <Clock
+                      size={32}
+                      weight="regular"
+                      className="flex-shrink-0"
+                    />
                     <Divider borderColor="grey" />
                     <p>{message.eventTime}</p>
                   </div>
                   <div className="mb-3 flex w-full items-center justify-between">
-                    <Users size={36} weight="regular" />
+                    <Users
+                      size={32}
+                      weight="regular"
+                      className="flex-shrink-0"
+                    />
                     <Divider borderColor="grey" />
                     <p>{message.guests} guests</p>
                   </div>
                   <div className="mb-3 flex w-full items-center justify-between">
-                    <MusicNote size={32} weight="regular" />
+                    <MusicNote
+                      size={32}
+                      weight="regular"
+                      className="flex-shrink-0"
+                    />
                     <Divider borderColor="grey" />
                     <p>{musicType}</p>
                   </div>
                 </div>
               )}
-              <div className="flex w-full items-center border-b border-black">
-                <div className="flex h-full items-center justify-between py-3 pr-3">
-                  <ChatCircle size={36} weight="regular" />
+              <div className="flex w-full items-center border-b border-black py-3">
+                <div className="flex h-full items-center justify-between pr-3">
+                  <ChatCircle
+                    size={32}
+                    weight="regular"
+                    className="flex-shrink-0"
+                  />
                 </div>
-                <p className="py-3 pl-3 text-left">
-                  "{message.message.trim()}"
-                </p>
+                <p className="text-left">"{message.message.trim()}"</p>
               </div>
 
               <div className="flex justify-between">
@@ -261,37 +273,23 @@ const MessageCard: React.FC<MessageCardProps> = ({
                   </div>
                 </div>
                 <div className="flex flex-col justify-end text-black">
-                  <Dialog>
-                    <DialogTrigger>
-                      <Button>Delete</Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>Delete Message</DialogTitle>
-                        <DialogDescription>
-                          Are you sure you want to delete this message? This
-                          cannot be undone.
-                        </DialogDescription>
-                      </DialogHeader>
-
-                      <DialogFooter>
-                        <DialogClose asChild>
-                          <Button variant="outline" className="text-black">
-                            Cancel
-                          </Button>
-                        </DialogClose>
-                        <Button onClick={confirmDelete} variant="destructive">
-                          Delete
-                        </Button>
-                      </DialogFooter>
-                    </DialogContent>
-                  </Dialog>
+                  <Button onClick={() => openDeleteModal(message)}>
+                    Delete
+                  </Button>
                 </div>
               </div>
             </CardContent>
           </Card>
         </AccordionContent>
       </AccordionItem>
+      {deletingMessage && (
+        <DeleteMessageDialog
+          fetchMessages={fetchMessages}
+          openDeleteModal={true}
+          closeDeleteModal={closeDeleteModal}
+          message={deletingMessage}
+        />
+      )}
     </>
   );
 };

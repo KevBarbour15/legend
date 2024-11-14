@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Event, PreloadedMedia } from "@/data/events";
 
 import EventCard from "@/components/event-card/EventCard";
@@ -85,26 +85,31 @@ export default function Events() {
     gsap.fromTo("#event-tabs", { opacity: 0 }, { opacity: 1, duration: 0.35 });
     if (currentRefs.current.length > 0) {
       gsap.set("#events-container", { opacity: 0 });
-      gsap.set(currentRefs.current, { opacity: 0, y: 0, rotationX: 45 });
+      gsap.set(currentRefs.current, { opacity: 0 });
       gsap.to("#events-container", {
         opacity: 1,
       });
       gsap.to(currentRefs.current, {
         delay: 0.35,
         duration: 0.35,
-        stagger: 0.05,
-        y: 0,
-        rotationX: 0,
+        stagger: 0.125,
         opacity: 1,
         ease: "linear",
       });
     } else if (currentEmptyRef.current) {
-      gsap.set(currentEmptyRef.current, { opacity: 0 });
-      gsap.to(currentEmptyRef.current, {
-        delay: 0.35,
-        duration: 0.25,
+      gsap.set("#events-container", { opacity: 0 });
+      gsap.to("#events-container", {
         opacity: 1,
       });
+      gsap.fromTo(
+        currentEmptyRef.current,
+        { opacity: 0 },
+        {
+          delay: 0.05,
+          duration: 0.35,
+          opacity: 1,
+        },
+      );
     }
   }, [loading, activeTab]);
 
@@ -112,9 +117,13 @@ export default function Events() {
     animateEvents();
   }, [animateEvents, activeTab]);
 
+  const updateProgress = (start: number, end: number, delay = 0) => {
+    setTimeout(() => setProgress(generateProgress(start, end)), delay);
+  };
+
   const fetchEvents = async () => {
     try {
-      setProgress(generateProgress(1, 25));
+      updateProgress(34, 66);
       const response = await fetch("/api/events", {
         cache: "default",
         headers: {
@@ -130,52 +139,44 @@ export default function Events() {
           statusText: response.statusText,
           body: errorText,
         });
-        throw new Error(
-          `Failed to fetch events. Status: ${response.status}. ${errorText}`,
-        );
+        setError(`Failed to fetch events: ${response.statusText}`);
+        throw new Error(`Failed to fetch events: ${response.statusText}`);
       }
-      setProgress(generateProgress(26, 50));
 
       const data: Event[] = await response.json();
-
-      setProgress(generateProgress(51, 75));
+      updateProgress(67, 99, 750);
       setEvents(data);
       await Promise.all(data.map(preloadMedia));
     } catch (error) {
+      const err =
+        error instanceof Error ? error : new Error("Unknown error occurred");
+      console.error("Error: ", err);
+      setError(err.message);
       setProgress(0);
-      console.log("Error: ", error);
-      setError("Failed to fetch events.");
     } finally {
-      setProgress(generateProgress(76, 95));
-      setTimeout(() => {
-        setProgress(100);
-        setTimeout(() => {
-          setLoading(false);
-        }, 300);
-      }, 350);
+      updateProgress(100, 100);
+      setTimeout(() => setLoading(false), 750);
     }
   };
 
-  useEffect(() => {
-    fetchEvents();
-  }, []);
+  const filterEvents = useMemo(() => {
+    return (type: "upcoming" | "past") => {
+      const now = new Date();
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-  const filterEvents = (type: "upcoming" | "past") => {
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      return events.filter((event) => {
+        const [year, month, day] = event.date.split("-").map(Number);
+        const eventDate = new Date(year, month - 1, day);
+        eventDate.setHours(0, 0, 0, 0);
 
-    return events.filter((event) => {
-      const [year, month, day] = event.date.split("-").map(Number);
-      const eventDate = new Date(year, month - 1, day);
-      eventDate.setHours(0, 0, 0, 0);
-
-      if (type === "upcoming") {
-        return eventDate >= today;
-      } else {
-        return eventDate < today;
-      }
-    });
-  };
+        if (type === "upcoming") {
+          return eventDate >= today;
+        } else {
+          return eventDate < today;
+        }
+      });
+    };
+  }, [events]);
 
   const upcomingEvents = filterEvents("upcoming").sort(
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
@@ -183,6 +184,11 @@ export default function Events() {
   const pastEvents = filterEvents("past").sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
+
+  useEffect(() => {
+    setProgress(generateProgress(1, 33));
+    fetchEvents();
+  }, []);
 
   const EmptyMessage = ({
     message,
@@ -193,7 +199,7 @@ export default function Events() {
   }) => (
     <div
       ref={refProp}
-      className="flex h-[50vh] w-full flex-col items-center justify-center opacity-0"
+      className="flex h-[50vh] w-full flex-col items-center justify-center"
     >
       <h2 className="my-3 text-center font-bigola text-3xl text-customCream md:text-4xl">
         {message}
@@ -211,11 +217,20 @@ export default function Events() {
       >
         <MobileHeading section={"Events"} />
         {loading ? (
-          <Loading
-            progress={progress}
-            message={"Loading events..."}
-            loading={loading}
-          />
+          <div className="font-bigola">
+            <Loading
+              progress={progress}
+              message={"Loading events..."}
+              textColor="text-customCream"
+              borderColor="border-customGold"
+            />
+          </div>
+        ) : error ? (
+          <div className="flex h-[50vh] w-full flex-col items-center justify-center">
+            <h2 className="mb-6 text-3xl text-customCream md:text-4xl">
+              {error}
+            </h2>
+          </div>
         ) : (
           <div id="event-tabs" className="w-full opacity-0">
             <Tabs

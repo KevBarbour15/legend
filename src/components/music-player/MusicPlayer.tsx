@@ -245,7 +245,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                 {playlistVisible ? (
                   <X weight="regular" />
                 ) : (
-                  <VinylRecord weight="duotone" />
+                  <VinylRecord weight="regular" />
                 )}
               </IconButton>
             </div>

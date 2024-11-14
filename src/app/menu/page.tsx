@@ -43,28 +43,32 @@ const Menu: React.FC = ({}) => {
   const [error, setError] = useState<string | null>(null);
   const [progress, setProgress] = useState<number>(0);
 
+  const updateProgress = (start: number, end: number, delay = 0) => {
+    setTimeout(() => setProgress(generateProgress(start, end)), delay);
+  };
+
   const fetchMenu = async () => {
-    setLoading(true);
-    setError(null);
-    setProgress(generateProgress(1, 25));
-
     try {
-      setTimeout(() => setProgress(generateProgress(36, 75)), 100);
-
+      updateProgress(34, 66);
       const data = await getMenu();
 
-      setTimeout(() => setProgress(generateProgress(76, 95)), 100);
+      if (!data) {
+        setProgress(0);
+        setError("Failed to fetch menu data");
+        throw new Error("Failed to fetch menu data");
+      }
 
+      updateProgress(67, 99, 150);
       setMenu(data);
-    } catch (err) {
+    } catch (error) {
+      const err =
+        error instanceof Error ? error : new Error("Unknown error occurred");
+      console.error("Error: ", err);
+      setError(err.message);
       setProgress(0);
-      setError("Failed to fetch menu data. Please try again later.");
-      console.error(err);
     } finally {
-      setTimeout(() => {
-        setProgress(100);
-        setTimeout(() => setLoading(false), 300);
-      }, 350);
+      updateProgress(100, 100);
+      setTimeout(() => setLoading(false), 150);
     }
   };
 
@@ -92,16 +96,8 @@ const Menu: React.FC = ({}) => {
   }, [loading]);
 
   useEffect(() => {
-    let isMounted = true;
-    const fetchMenuData = async () => {
-      if (isMounted) {
-        await fetchMenu();
-      }
-    };
-    fetchMenuData();
-    return () => {
-      isMounted = false;
-    };
+    setProgress(generateProgress(1, 33));
+    fetchMenu();
   }, []);
 
   const getIcon = (categoryName: string) => {
@@ -180,18 +176,24 @@ const Menu: React.FC = ({}) => {
       >
         <MobileHeading section={"Menu"} />
         {loading ? (
-          <Loading
-            progress={progress}
-            message={"Loading menu..."}
-            loading={loading}
-          />
-        ) : menu === null ? (
-          <div
-            id="event-subheading"
-            className="flex h-[50vh] w-full items-center justify-center"
-          >
-            <h2 className="my-3 text-center font-bigola text-3xl text-customCream md:text-4xl">
-              Error loading menu. Please try again.
+          <div className="font-bigola">
+            <Loading
+              progress={progress}
+              message={"Loading menu..."}
+              textColor="text-customCream"
+              borderColor="border-customGold"
+            />
+          </div>
+        ) : error ? (
+          <div className="flex h-[50vh] w-full flex-col items-center justify-center">
+            <h2 className="mb-6 text-3xl text-customCream md:text-4xl">
+              {error}
+            </h2>
+          </div>
+        ) : !menu ? (
+          <div className="flex h-[50vh] w-full flex-col items-center justify-center">
+            <h2 className="mb-6 text-3xl text-customCream md:text-4xl">
+              No menu data found.
             </h2>
           </div>
         ) : (
