@@ -85,17 +85,18 @@ export default function Events() {
     gsap.fromTo("#event-tabs", { opacity: 0 }, { opacity: 1, duration: 0.35 });
     if (currentRefs.current.length > 0) {
       gsap.set("#events-container", { opacity: 0 });
-      gsap.set(currentRefs.current, { opacity: 0, y: 100 });
+      gsap.set(currentRefs.current, { opacity: 0, y: 0, rotationX: 45 });
       gsap.to("#events-container", {
         opacity: 1,
       });
       gsap.to(currentRefs.current, {
         delay: 0.35,
-        duration: 0.2,
+        duration: 0.35,
         stagger: 0.05,
         y: 0,
+        rotationX: 0,
         opacity: 1,
-        ease: "sine.inOut",
+        ease: "linear",
       });
     } else if (currentEmptyRef.current) {
       gsap.set(currentEmptyRef.current, { opacity: 0 });

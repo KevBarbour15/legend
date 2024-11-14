@@ -66,7 +66,10 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                 className="onClick={() => setIsActive(false)} p-0"
                 onClick={() => setIsActive(false)}
               >
-                <X size={32} className="text-customGold" />
+                <X
+                  size={32}
+                  className="text-customGold transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customCream"
+                />
               </IconButton>
             </motion.div>
 

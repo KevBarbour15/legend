@@ -17,8 +17,8 @@
   bottom: 0.75rem;
   right: 0.75rem;
   cursor: pointer;
-  color: var(--custom-cream);
-  font-size: 30px;
+  color: var(--custom-gold);
+  font-size: 20px;
   padding: 0;
 }
 
@@ -27,7 +27,7 @@
   top: 0.75rem;
   right: 0.75rem;
   cursor: pointer;
-  color: var(--custom-navy);
+  color: var(--custom-gold);
   font-size: 30px;
 }
 
@@ -79,7 +79,7 @@
 
 .menu-link-item-holder a {
   color: var(--custom-cream);
-  font-size: 80px;
+  font-size: 85px;
   font-family: "Bigola Display";
   text-decoration: none;
   line-height: 85%;
@@ -123,8 +123,8 @@
   }
 
   .menu-info-row svg {
-    height: 40px;
-    width: 40px;
+    height: 50px;
+    width: 50px;
   }
 
   .menu-login-icon {

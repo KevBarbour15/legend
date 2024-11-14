@@ -97,9 +97,9 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
 
     tl.current?.reverse();
 
-    await new Promise((resolve) => setTimeout(resolve, 550));
+    await new Promise((resolve) => setTimeout(resolve, 650));
 
-    toggleMenu();
+    //toggleMenu();
     router.push(path);
   };
 
@@ -112,8 +112,8 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
             className="menu-logo-icon"
             src="/images/alt-logo.png"
             alt="Legend Has It logo"
-            width={125}
-            height={125}
+            width={150}
+            height={150}
             priority
             onClick={toggleMenu}
           />
@@ -164,11 +164,12 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
               <YoutubeLogo size={32} weight="fill" />
             </IconButton>
           </div>
-          <IconButton className="menu-login-link text-customCream">
-            <LoginLink postLoginRedirectURL="/dashboard">
+
+          <LoginLink postLoginRedirectURL="/dashboard">
+            <IconButton className="menu-login-link">
               <Key weight="regular" />
-            </LoginLink>
-          </IconButton>
+            </IconButton>
+          </LoginLink>
         </div>
       </div>
     </div>

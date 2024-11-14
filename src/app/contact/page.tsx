@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileHeading from "@/components/mobile-heading/MobileHeading";
 import EventForm from "@/components/contact-forms/EventForm";
@@ -8,6 +9,9 @@ import GeneralForm from "@/components/contact-forms/GeneralForm";
 import DjForm from "@/components/contact-forms/DjForm";
 
 import { useToast } from "@/hooks/use-toast";
+
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 import {
   FormData,
@@ -26,6 +30,16 @@ export default function Contact() {
   const eventFormRef = useRef<EventFormRef>(null);
   const djFormRef = useRef<DjFormRef>(null);
   const generalFormRef = useRef<GeneralFormRef>(null);
+
+  useGSAP(() => {
+    if (!containerRef.current) return;
+
+    gsap.fromTo(
+      "#tabs-container",
+      { opacity: 0 },
+      { delay: 0.15, opacity: 1, duration: 0.35 },
+    );
+  }, []);
 
   const handleSubmit = async (formType: FormType, values: FormData) => {
     try {
@@ -110,7 +124,10 @@ export default function Contact() {
           className="flex w-full flex-col items-center"
           onValueChange={(value) => setActiveTab(value as FormType)}
         >
-          <TabsList className="my-3 grid w-full grid-cols-3 bg-transparent font-bigola md:mb-6 md:mt-0 md:w-fit">
+          <TabsList
+            id="tabs-container"
+            className="my-3 grid w-full grid-cols-3 bg-transparent font-bigola opacity-0 md:mb-6 md:mt-0 md:w-fit"
+          >
             <TabsTrigger value="event">
               Event <span className="md:flex">&nbsp;Inquiry</span>
             </TabsTrigger>

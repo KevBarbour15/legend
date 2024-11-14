@@ -14,8 +14,6 @@ import {
   Key,
 } from "@phosphor-icons/react";
 
-import { Button } from "@/components/ui/button";
-
 import { IconButton } from "@mui/material";
 
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
@@ -183,7 +181,7 @@ export default function Home() {
             className="flex basis-1/2 items-end justify-between pt-6 font-bigola"
           >
             <IconButton
-              className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
+              className="text-5xl text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
               href="https://www.instagram.com/legendhasithifi/"
               target="_blank"
               rel="noopener noreferrer"
@@ -192,7 +190,7 @@ export default function Home() {
             </IconButton>
 
             <IconButton
-              className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
+              className="text-5xl text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
               href="https://www.facebook.com/legendhasithifi"
               target="_blank"
               rel="noopener noreferrer"
@@ -201,7 +199,7 @@ export default function Home() {
             </IconButton>
 
             <IconButton
-              className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
+              className="text-5xl text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
               href="https://www.youtube.com/@legendhasithifi"
               target="_blank"
               rel="noopener noreferrer"
@@ -298,11 +296,11 @@ export default function Home() {
           </div>
           */}
           <div className="mt-6 hidden w-full justify-end rounded-full md:flex">
-            <Button className="h-fit w-fit border border-transparent bg-customNavy p-1 text-customCream transition-all hover:border-customNavy hover:bg-customCream hover:text-customNavy">
+            <IconButton className="h-fit w-fit bg-transparent p-1 text-customNavy transition-all duration-300 hover:rotate-[360deg] hover:text-customGold">
               <LoginLink postLoginRedirectURL="/dashboard">
-                <Key weight="regular" size={24} />
+                <Key weight="fill" size={24} />
               </LoginLink>
-            </Button>
+            </IconButton>
           </div>
         </div>
       </div>
