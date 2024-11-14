@@ -84,8 +84,8 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                     height={300}
                     src={preloadedMedia.src}
                     alt={event.title}
-                    className="aspect-square w-full rounded-sm object-cover object-center"
-                    sizes="(max-width: 600px) 300px, (max-width: 1200px) 300px, 300px"
+                    className="h-auto w-full rounded-sm object-cover object-center"
+                    sizes="(max-width: 600px) 300px, (max-width: 1200px)  300px"
                   />
                 </motion.div>
               ) : (

@@ -114,11 +114,24 @@ export default function Events() {
   const fetchEvents = async () => {
     try {
       setProgress(generateProgress(1, 25));
-      const response = await fetch("/api/events");
+      const response = await fetch("/api/events", {
+        cache: "default",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (!response.ok) {
         setProgress(0);
-        throw new Error("Failed to fetch events.");
+        const errorText = await response.text();
+        console.error("Events API Error:", {
+          status: response.status,
+          statusText: response.statusText,
+          body: errorText,
+        });
+        throw new Error(
+          `Failed to fetch events. Status: ${response.status}. ${errorText}`,
+        );
       }
       setProgress(generateProgress(26, 50));
 
