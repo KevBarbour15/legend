@@ -85,8 +85,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                     src={preloadedMedia.src}
                     alt={event.title}
                     className="aspect-square w-full rounded-sm object-cover object-center"
-                    quality={65}
-                    sizes="(max-width: 300px)"
+                    sizes="(max-width: 600px) 300px, (max-width: 1200px) 300px, 300px"
                   />
                 </motion.div>
               ) : (
@@ -165,7 +164,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                 src={preloadedMedia.src}
                 alt={event.title}
                 priority
-                quality={65}
+                sizes="(max-width: 600px) 115px, (max-width: 1200px) 225px, 225px"
                 className="aspect-square h-[115px] w-[115px] rounded-sm object-cover object-center md:h-[225px] md:w-[225px]"
               />
             </motion.div>

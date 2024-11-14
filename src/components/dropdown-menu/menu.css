@@ -4,7 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100dvh;
-  background-color: var(--custom-cream);
+  background-color: var(--custom-navy);
   z-index: 200;
   display: none;
   flex-direction: row;
