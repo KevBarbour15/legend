@@ -75,7 +75,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
 
             <motion.div
               layoutId={`card-${event._id}`}
-              className="relative flex h-fit max-h-[85svh] w-full flex-col overflow-hidden rounded-sm border border-customGold bg-customNavy px-6 pt-6 shadow-md sm:max-h-[95vh] sm:max-w-[425px]"
+              className="relative flex h-fit max-h-[87.5svh] w-full flex-col overflow-hidden rounded-sm border border-customGold bg-customNavy px-3 pt-3 shadow-md sm:max-h-[95vh] sm:max-w-[425px] md:px-6 md:pt-6"
             >
               {event.is_photo ? (
                 <motion.div
@@ -133,7 +133,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               <div className="flex-grow overflow-y-auto [mask-image:linear-gradient(180deg,transparent,black_0.75rem,black_calc(100%-1.5rem),transparent)]">
                 <motion.div
                   layoutId={`description-${event._id}`}
-                  className="whitespace-pre-wrap pb-6 pt-3 font-hypatia text-lg leading-tight text-customWhite"
+                  className="whitespace-pre-wrap pb-3 pt-3 font-hypatia text-lg leading-tight text-customWhite md:pb-6"
                 >
                   {event.description}
                 </motion.div>
