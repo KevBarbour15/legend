@@ -82,10 +82,11 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                   <Image
                     width={300}
                     height={300}
-                    src={preloadedMedia}
+                    src={preloadedMedia.src}
                     alt={event.title}
                     className="aspect-square w-full rounded-sm object-cover object-center"
-                    priority
+                    quality={65}
+                    sizes="(max-width: 300px)"
                   />
                 </motion.div>
               ) : (
@@ -94,7 +95,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                   className="flex-shrink-0"
                 >
                   <video
-                    src={preloadedMedia}
+                    src={preloadedMedia.src}
                     className="aspect-square w-full rounded-sm object-cover object-center"
                     loop
                     autoPlay
@@ -161,9 +162,10 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               <Image
                 width={225}
                 height={225}
-                src={preloadedMedia}
+                src={preloadedMedia.src}
                 alt={event.title}
                 priority
+                quality={65}
                 className="aspect-square h-[115px] w-[115px] rounded-sm object-cover object-center md:h-[225px] md:w-[225px]"
               />
             </motion.div>
@@ -173,7 +175,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               className="flex-shrink-0"
             >
               <video
-                src={preloadedMedia}
+                src={preloadedMedia.src}
                 className="aspect-square h-[115px] w-[115px] rounded-sm object-cover object-center md:h-[225px] md:w-[225px]"
                 loop
                 autoPlay

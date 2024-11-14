@@ -12,7 +12,7 @@ export interface Event {
 
 export interface EventCardProps {
   event: Event;
-  preloadedMedia: string;
+  preloadedMedia: PreloadedMedia;
 }
 
 export interface DashEventCardProps {
