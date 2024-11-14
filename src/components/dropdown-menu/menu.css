@@ -93,16 +93,10 @@
 }
 
 .menu-info-row {
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   justify-content: space-between;
   color: var(--custom-gold);
-  width: 50%;
-}
-
-.menu-info-row svg {
-  height: 60px;
-  width: 60px;
 }
 
 @media (max-width: 767px) {
@@ -116,10 +110,6 @@
 
   .menu-link-item-holder a {
     font-size: 60px;
-  }
-
-  .menu-info-row {
-    width: 40%;
   }
 
   .menu-info-row svg {

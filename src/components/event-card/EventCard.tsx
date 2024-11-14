@@ -75,7 +75,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
 
             <motion.div
               layoutId={`card-${event._id}`}
-              className="relative flex h-fit max-h-[87.5svh] w-full flex-col overflow-hidden rounded-sm border border-customGold bg-customNavy px-3 pt-3 shadow-md sm:max-h-[95vh] sm:max-w-[425px] md:px-6 md:pt-6"
+              className="relative flex h-fit max-h-[87svh] w-full flex-col overflow-hidden rounded-sm border border-customGold bg-customNavy px-3 pt-3 shadow-md sm:max-h-[95vh] sm:max-w-[425px] md:px-6 md:pt-6"
             >
               {event.is_photo ? (
                 <motion.div
