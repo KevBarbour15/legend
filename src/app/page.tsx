@@ -151,13 +151,14 @@ export default function Home() {
         >
           <div
             id="about-section"
-            className="relative opacity-0 md:aspect-video md:overflow-hidden"
+            className="relative aspect-video opacity-0 md:overflow-hidden"
           >
             <Image
               src="/images/about-image.jpg"
               className="object-cover"
               fill
               alt="Grand Opening"
+              priority
             />
           </div>
 
@@ -179,7 +180,7 @@ export default function Home() {
           </div>
           <div
             id="about-section"
-            className="flex basis-1/2 items-end justify-between font-bigola"
+            className="flex basis-1/2 items-end justify-between pt-6 font-bigola"
           >
             <IconButton
               className="text-5xl text-customNavy transition-colors md:hover:text-customGold"

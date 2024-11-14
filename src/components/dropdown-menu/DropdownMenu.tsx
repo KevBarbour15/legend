@@ -97,7 +97,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
 
     tl.current?.reverse();
 
-    await new Promise((resolve) => setTimeout(resolve, 750));
+    await new Promise((resolve) => setTimeout(resolve, 550));
 
     toggleMenu();
     router.push(path);
