@@ -92,9 +92,9 @@ export default function Events() {
       gsap.to(currentRefs.current, {
         delay: 0.35,
         duration: 0.35,
-        stagger: 0.125,
+        stagger: 0.075,
         opacity: 1,
-        ease: "linear",
+        ease: "sine.inOut",
       });
     } else if (currentEmptyRef.current) {
       gsap.set("#events-container", { opacity: 0 });
@@ -118,10 +118,13 @@ export default function Events() {
   }, [animateEvents, activeTab]);
 
   const updateProgress = (start: number, end: number, delay = 0) => {
-    setTimeout(() => setProgress(generateProgress(start, end)), delay);
+    let p = generateProgress(start, end);
+    //console.log(p);
+    setTimeout(() => setProgress(p), delay);
   };
 
   const fetchEvents = async () => {
+    updateProgress(1, 33, 150);
     try {
       updateProgress(34, 66);
       const response = await fetch("/api/events", {
@@ -144,7 +147,7 @@ export default function Events() {
       }
 
       const data: Event[] = await response.json();
-      updateProgress(67, 99, 750);
+      updateProgress(67, 99, 350);
       setEvents(data);
       await Promise.all(data.map(preloadMedia));
     } catch (error) {
@@ -155,7 +158,7 @@ export default function Events() {
       setProgress(0);
     } finally {
       updateProgress(100, 100);
-      setTimeout(() => setLoading(false), 750);
+      setTimeout(() => setLoading(false), 350);
     }
   };
 
@@ -186,7 +189,7 @@ export default function Events() {
   );
 
   useEffect(() => {
-    setProgress(generateProgress(1, 33));
+    setProgress(1);
     fetchEvents();
   }, []);
 
