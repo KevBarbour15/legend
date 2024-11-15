@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import { format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
+
+import { CalendarBlank } from "@phosphor-icons/react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -28,7 +29,7 @@ export function DatePicker({ value, onChange }: DatePickerProps) {
             "w-full justify-start rounded-sm border border-customGold bg-transparent text-left font-hypatia hover:bg-transparent",
           )}
         >
-          <CalendarIcon className="mr-3 h-4 w-4 text-customCream hover:text-customCream" />
+          <CalendarBlank className="mr-3 h-4 w-4 p-0 text-customCream hover:text-customCream" />
           <div className="text-customCream">
             {value ? format(value, "PPP") : <span>Pick a date</span>}
           </div>

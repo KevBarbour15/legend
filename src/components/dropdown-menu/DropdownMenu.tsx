@@ -1,7 +1,6 @@
 "use client";
 import React, { useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 import "./menu.css";
 import Image from "next/image";
@@ -13,7 +12,6 @@ import {
   InstagramLogo,
   FacebookLogo,
   YoutubeLogo,
-  Key,
 } from "@phosphor-icons/react";
 
 import { IconButton } from "@mui/material";
@@ -47,12 +45,18 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
 
     tl.current = gsap
       .timeline({ paused: true })
+      .to(
+        ".menu-overlay",
+        {
+          opacity: 1,
+        },
+        0,
+      )
       .to(".menu-overlay", {
         duration: 0.35,
         delay: -0.15,
         ease: "power4.inOut",
         clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-        opacity: 1,
       })
       .to(".menu-link-item-holder", {
         y: 0,
@@ -95,12 +99,9 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
   const handleLinkClick = async (path: string, e: React.MouseEvent) => {
     e.preventDefault();
 
-    tl.current?.reverse();
-
-    await new Promise((resolve) => setTimeout(resolve, 600));
-
-    //toggleMenu();
-    router.push(path);
+    tl.current?.reverse().then(() => {
+      router.push(path);
+    });
   };
 
   return (
@@ -164,12 +165,6 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
               <YoutubeLogo size={32} weight="fill" />
             </IconButton>
           </div>
-
-          <LoginLink postLoginRedirectURL="/dashboard">
-            <IconButton className="menu-login-link">
-              <Key weight="regular" />
-            </IconButton>
-          </LoginLink>
         </div>
       </div>
     </div>

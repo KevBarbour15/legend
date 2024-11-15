@@ -38,51 +38,40 @@ const Menu: React.FC = ({}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [menu, setMenu] = useState<MenuStructure | null>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
-
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [progress, setProgress] = useState<number>(0);
 
-  const updateProgress = (start: number, end: number, delay = 0) => {
-    setTimeout(() => setProgress(generateProgress(start, end)), delay);
-  };
-
   const fetchMenu = async () => {
     try {
-      updateProgress(34, 66);
+      // animate progress bar to give user feedback / realism
+      // due to loading time, no need for timeouts
       const data = await getMenu();
+
+      setProgress(generateProgress(34, 66));
 
       if (!data) {
         setProgress(0);
         setError("Failed to fetch menu data");
         throw new Error("Failed to fetch menu data");
       }
+      setProgress(generateProgress(67, 99));
 
-      updateProgress(67, 99, 150);
       setMenu(data);
     } catch (error) {
       const err =
         error instanceof Error ? error : new Error("Unknown error occurred");
       console.error("Error: ", err);
       setError(err.message);
-      setProgress(0);
     } finally {
-      updateProgress(100, 100);
-      setTimeout(() => setLoading(false), 150);
+      setProgress(100);
+      await new Promise((resolve) => setTimeout(resolve, 350));
+      setLoading(false);
     }
   };
 
   useGSAP(() => {
-    if (!containerRef.current) return;
-
-    if (loading) {
-      gsap.fromTo(
-        "#event-subheading",
-        { opacity: 0 },
-        { opacity: 1, duration: 0.25 },
-      );
-      return;
-    }
+    if (loading || !containerRef.current) return;
 
     gsap.set("#menu", {
       opacity: 0,
@@ -186,13 +175,13 @@ const Menu: React.FC = ({}) => {
           </div>
         ) : error ? (
           <div className="flex h-[50vh] w-full flex-col items-center justify-center">
-            <h2 className="mb-6 text-3xl text-customCream md:text-4xl">
+            <h2 className="mb-6 text-center font-bigola text-3xl text-customCream md:text-4xl">
               {error}
             </h2>
           </div>
         ) : !menu ? (
           <div className="flex h-[50vh] w-full flex-col items-center justify-center">
-            <h2 className="mb-6 text-3xl text-customCream md:text-4xl">
+            <h2 className="mb-6 text-center font-bigola text-3xl text-customCream md:text-4xl">
               No menu data found.
             </h2>
           </div>

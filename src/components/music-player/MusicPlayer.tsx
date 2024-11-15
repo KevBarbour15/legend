@@ -179,6 +179,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                   alt="Player"
                   height={185}
                   width={185}
+                  priority
                 />
               </div>
             </div>

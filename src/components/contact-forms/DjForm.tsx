@@ -40,17 +40,18 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
   useGSAP(() => {
     if (!formRef.current) return;
 
-    gsap.set("#dj-form", {
-      opacity: 0,
-    });
-
-    tl.current = gsap.timeline({});
-    tl.current.to("#dj-form", {
-      delay: 0.35,
-      duration: 0.25,
-      opacity: 1,
-      ease: "sine.inOut",
-    });
+    gsap.fromTo(
+      "#dj-form",
+      {
+        opacity: 0,
+      },
+      {
+        delay: 0.35,
+        duration: 0.25,
+        opacity: 1,
+        ease: "sine.inOut",
+      },
+    );
   }, []);
 
   return (
@@ -132,7 +133,7 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
         />
         <Button
           type="submit"
-          className="mx-auto w-full rounded-sm border border-customGold bg-transparent p-3 font-bigola text-2xl text-customCream active:bg-customNavy active:text-customCream sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
+          className="mx-auto w-full rounded-sm border border-customGold bg-transparent p-3 font-bigola text-2xl text-customCream active:bg-customGold active:text-customCream sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
         >
           Submit
         </Button>

@@ -66,21 +66,12 @@ export default function Events() {
   };
 
   const animateEvents = useCallback(() => {
-    if (!containerRef.current) return;
+    if (loading || !containerRef.current) return;
 
     const currentRefs =
       activeTab === "upcoming" ? upcomingEventRefs : pastEventRefs;
     const currentEmptyRef =
       activeTab === "upcoming" ? upcomingEmptyMessageRef : pastEmptyMessageRef;
-
-    if (loading) {
-      gsap.fromTo(
-        "#event-subheading",
-        { opacity: 0 },
-        { opacity: 1, duration: 0.05 },
-      );
-      return;
-    }
 
     gsap.fromTo("#event-tabs", { opacity: 0 }, { opacity: 1, duration: 0.35 });
     if (currentRefs.current.length > 0) {
@@ -117,16 +108,12 @@ export default function Events() {
     animateEvents();
   }, [animateEvents, activeTab]);
 
-  const updateProgress = (start: number, end: number, delay = 0) => {
-    let p = generateProgress(start, end);
-    //console.log(p);
-    setTimeout(() => setProgress(p), delay);
-  };
-
   const fetchEvents = async () => {
-    updateProgress(1, 33, 150);
     try {
-      updateProgress(34, 66);
+      // animate progress bar to give user feedback / realism
+      setProgress(generateProgress(2, 25));
+      await new Promise((resolve) => setTimeout(resolve, 125));
+
       const response = await fetch("/api/events", {
         cache: "default",
         headers: {
@@ -134,8 +121,10 @@ export default function Events() {
         },
       });
 
+      setProgress(generateProgress(26, 50));
+      await new Promise((resolve) => setTimeout(resolve, 125));
+
       if (!response.ok) {
-        setProgress(0);
         const errorText = await response.text();
         console.error("Events API Error:", {
           status: response.status,
@@ -146,10 +135,15 @@ export default function Events() {
         throw new Error(`Failed to fetch events: ${response.statusText}`);
       }
 
+      setProgress(generateProgress(51, 75));
+      await new Promise((resolve) => setTimeout(resolve, 125));
+
       const data: Event[] = await response.json();
-      updateProgress(67, 99, 350);
       setEvents(data);
       await Promise.all(data.map(preloadMedia));
+
+      setProgress(generateProgress(75, 99));
+      await new Promise((resolve) => setTimeout(resolve, 125));
     } catch (error) {
       const err =
         error instanceof Error ? error : new Error("Unknown error occurred");
@@ -157,8 +151,9 @@ export default function Events() {
       setError(err.message);
       setProgress(0);
     } finally {
-      updateProgress(100, 100);
-      setTimeout(() => setLoading(false), 350);
+      setProgress(100);
+      await new Promise((resolve) => setTimeout(resolve, 350));
+      setLoading(false);
     }
   };
 
@@ -230,7 +225,7 @@ export default function Events() {
           </div>
         ) : error ? (
           <div className="flex h-[50vh] w-full flex-col items-center justify-center">
-            <h2 className="mb-6 text-3xl text-customCream md:text-4xl">
+            <h2 className="my-3 text-center font-bigola text-3xl text-customCream md:text-4xl">
               {error}
             </h2>
           </div>

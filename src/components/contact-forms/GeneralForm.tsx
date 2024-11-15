@@ -35,7 +35,6 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
         message: "",
       },
     });
-    const tl = useRef<gsap.core.Timeline | null>(null);
 
     useImperativeHandle(ref, () => ({
       reset: () => {
@@ -46,17 +45,18 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
     useGSAP(() => {
       if (!formRef.current) return;
 
-      gsap.set("#general-form", {
-        opacity: 0,
-      });
-
-      tl.current = gsap.timeline({});
-      tl.current.to("#general-form", {
-        delay: 0.35,
-        duration: 0.25,
-        opacity: 1,
-        ease: "sine.inOut",
-      });
+      gsap.fromTo(
+        "#general-form",
+        {
+          opacity: 0,
+        },
+        {
+          delay: 0.35,
+          duration: 0.25,
+          opacity: 1,
+          ease: "sine.inOut",
+        },
+      );
     }, []);
 
     return (
@@ -67,7 +67,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex w-full flex-col space-y-3 opacity-0 md:w-[550px]"
         >
-          <p className="general-form-field text-pretty font-hypatia text-customCream">
+          <p className="text-pretty font-hypatia text-customCream">
             Thank you for reaching out to Legend Has It. Please take a minute
             and fill out the form below to give us a better understanding of how
             we can help.
@@ -77,7 +77,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             control={form.control}
             name="name"
             render={({ field }) => (
-              <FormItem className="general-form-field w-full">
+              <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customCream">
                   Name
                 </FormLabel>
@@ -93,7 +93,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem className="general-form-field w-full">
+              <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customCream">
                   Email
                 </FormLabel>
@@ -108,7 +108,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             control={form.control}
             name="phone"
             render={({ field }) => (
-              <FormItem className="general-form-field w-full">
+              <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customCream">
                   Phone
                 </FormLabel>
@@ -124,7 +124,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             control={form.control}
             name="message"
             render={({ field }) => (
-              <FormItem className="general-form-field w-full">
+              <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customCream">
                   Message
                 </FormLabel>
@@ -137,7 +137,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
           />
           <Button
             type="submit"
-            className="general-form-field mx-auto w-full rounded-sm border border-customGold bg-transparent p-3 font-bigola text-2xl text-customCream active:bg-customNavy active:text-customCream sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
+            className="mx-auto w-full rounded-sm border border-customGold bg-transparent p-3 font-bigola text-2xl text-customCream active:bg-customGold active:text-customCream sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
           >
             Submit
           </Button>

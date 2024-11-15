@@ -15,6 +15,7 @@ import {
 } from "@phosphor-icons/react";
 
 import { IconButton } from "@mui/material";
+import { Button } from "@/components/ui/button";
 
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
@@ -25,18 +26,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  MailchimpFormRef,
-  mailchimpFormSchema,
-  MailchimpFormData,
-} from "@/data/forms";
+import { mailchimpFormSchema, MailchimpFormData } from "@/data/forms";
 
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 
@@ -45,18 +41,35 @@ import { Input } from "@/components/ui/input";
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
-  const mailchimpFormRef = useRef<MailchimpFormRef>(null);
 
   const form = useForm<MailchimpFormData>({
     resolver: zodResolver(mailchimpFormSchema),
     defaultValues: {
-      name: "",
       email: "",
     },
   });
 
   const onSubmit = async (values: MailchimpFormData) => {
-    console.log(values);
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: values.email,
+        }),
+      });
+
+      if (response.ok) {
+        form.reset();
+      } else {
+        const errorData = await response.json();
+        console.error("Failed to subscribe to Mailchimp:", errorData.error);
+      }
+    } catch (error) {
+      console.error("Error subscribing to Mailchimp:", error);
+    }
   };
 
   useGSAP(() => {
@@ -103,32 +116,26 @@ export default function Home() {
       );
 
     const sectionRefs = document.querySelectorAll("#about-section");
-    const sectionsTl = gsap.timeline();
-
     sectionRefs.forEach((section) => {
       if (!section) return;
-
-      sectionsTl.add(
-        gsap.fromTo(
-          section,
-          {
-            y: 35,
-            opacity: 0,
+      gsap.fromTo(
+        section,
+        {
+          y: 25,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          delay: 0.15,
+          duration: 0.35,
+          ease: "sine.inOut",
+          scrollTrigger: {
+            trigger: section,
+            start: "top bottom",
+            toggleActions: "play none none none",
           },
-          {
-            delay: 0.35,
-            duration: 1,
-            opacity: 1,
-            y: 0,
-            scrollTrigger: {
-              trigger: section,
-              start: "top bottom",
-              end: "top 75%",
-              scrub: 1,
-            },
-          },
-        ),
-        0,
+        },
       );
     });
   }, []);
@@ -161,13 +168,13 @@ export default function Home() {
           </div>
 
           <div className="font-hypatia text-lg text-customNavy md:text-xl">
-            <p id="about-section" className="my-6 opacity-0">
+            <p id="about-section" className="my-6 text-pretty opacity-0">
               Welcome to Legend Has It, Sacramento's first hi-fi listening bar,
               where music meets the art of sound. We offer an immersive
               experience for audiophiles and music lovers, celebrating the
               warmth of vinyl records and the richness of high-fidelity sound.
             </p>
-            <p id="about-section" className="opacity-0">
+            <p id="about-section" className="text-pretty opacity-0">
               Our carefully curated sound systems and eclectic vinyl collection
               create an intimate atmosphere, perfect for discovering new tunes
               or revisiting classics. Enjoy from our local craft beer menu
@@ -175,37 +182,6 @@ export default function Home() {
               music legends come to life, and every visit tells a new story
               through sound.
             </p>
-          </div>
-          <div
-            id="about-section"
-            className="flex basis-1/2 items-end justify-between pt-6 font-bigola"
-          >
-            <IconButton
-              className="text-5xl text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
-              href="https://www.instagram.com/legendhasithifi/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <InstagramLogo size={48} weight="fill" />
-            </IconButton>
-
-            <IconButton
-              className="text-5xl text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
-              href="https://www.facebook.com/legendhasithifi"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FacebookLogo size={48} weight="fill" />
-            </IconButton>
-
-            <IconButton
-              className="text-5xl text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
-              href="https://www.youtube.com/@legendhasithifi"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <YoutubeLogo size={48} weight="fill" />
-            </IconButton>
           </div>
           <div className="block py-6 font-bigola text-xl text-customNavy md:mb-0 md:text-3xl">
             <h2 id="about-section" className="mb-3 opacity-0 md:mb-6">
@@ -237,70 +213,83 @@ export default function Home() {
           <div id="about-section" className="opacity-0">
             <ImageCarousel />
           </div>
-          {/*
-          <div className="flex flex-col items-center md:flex-row">
-            <div className="flex w-full basis-1/2 items-end">
+
+          <div
+            className="mb-20 flex flex-col items-center gap-6 opacity-0 md:mb-0 md:mt-12 md:flex-row md:gap-0"
+            id="about-section"
+          >
+            <div className="flex w-full md:basis-1/2">
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
-                  className="flex flex-row gap-3"
+                  className="flex h-full grow flex-row gap-3 font-hypatia"
                 >
                   <FormField
                     control={form.control}
                     name="email"
                     render={({ field }) => (
-                      <FormItem className="w-full">
-                        <FormLabel className="font-bigola text-customCream">
-                          Email
-                        </FormLabel>
-                        <FormControl className="border border-customGold font-hypatia text-customCream">
-                          <Input {...field} />
+                      <FormItem className="grow">
+                        <FormControl className="border border-customNavy font-hypatia text-customNavy">
+                          <Input
+                            {...field}
+                            placeholder="Enter email to receive updates..."
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                  <Button className="">Submit</Button>
+                  <Button
+                    type="submit"
+                    className="rounded-sm border border-customNavy bg-transparent font-bigola text-customNavy active:bg-customNavy active:text-customGold sm:w-fit md:hover:bg-customNavy md:hover:italic md:hover:text-customGold"
+                  >
+                    Subscribe
+                  </Button>
                 </form>
               </Form>
             </div>
+            <div className="flex w-full basis-1/2">
+              <div className="flex w-full basis-1/2 justify-start gap-3 font-bigola md:justify-end">
+                <IconButton
+                  className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+                  href="https://www.instagram.com/legendhasithifi/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <InstagramLogo size={40} weight="fill" />
+                </IconButton>
 
-            <div className="flex basis-1/2 items-end justify-between font-bigola">
-              <IconButton
-                className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
-                href="https://www.instagram.com/legendhasithifi/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <InstagramLogo size={48} weight="fill" />
-              </IconButton>
+                <IconButton
+                  className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+                  href="https://www.facebook.com/legendhasithifi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FacebookLogo size={40} weight="fill" />
+                </IconButton>
 
-              <IconButton
-                className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
-                href="https://www.facebook.com/legendhasithifi"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FacebookLogo size={48} weight="fill" />
-              </IconButton>
+                <IconButton
+                  className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+                  href="https://www.youtube.com/@legendhasithifi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <YoutubeLogo size={40} weight="fill" />
+                </IconButton>
+              </div>
 
-              <IconButton
-                className="text-5xl text-customNavy transition-colors md:hover:text-customGold"
-                href="https://www.youtube.com/@legendhasithifi"
-                target="_blank"
-                rel="noopener noreferrer"
+              <div
+                className="flex w-full basis-1/2 justify-end"
+                id="about-section"
               >
-                <YoutubeLogo size={48} weight="fill" />
-              </IconButton>
+                <LoginLink postLoginRedirectURL="/dashboard">
+                  <Button className="mx-auto gap-3 rounded-sm border border-customNavy bg-transparent font-bigola text-customNavy active:bg-customNavy active:text-customGold sm:w-fit md:hover:bg-customNavy md:hover:italic md:hover:text-customGold">
+                    Owner
+                    <Key weight="fill" />
+                  </Button>
+                </LoginLink>
+              </div>
             </div>
-          </div>
-          */}
-          <div className="mt-6 hidden w-full justify-end rounded-full md:flex">
-            <IconButton className="h-fit w-fit bg-transparent p-1 text-customNavy transition-all duration-300 hover:rotate-[360deg] hover:text-customGold">
-              <LoginLink postLoginRedirectURL="/dashboard">
-                <Key weight="fill" size={24} />
-              </LoginLink>
-            </IconButton>
           </div>
         </div>
       </div>

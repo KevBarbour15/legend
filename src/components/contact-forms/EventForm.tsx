@@ -69,17 +69,18 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
     useGSAP(() => {
       if (!formRef.current) return;
 
-      gsap.set("#event-form", {
-        opacity: 0,
-      });
-
-      tl.current = gsap.timeline({});
-      tl.current.to("#event-form", {
-        delay: 0.35,
-        duration: 0.25,
-        opacity: 1,
-        ease: "sine.inOut",
-      });
+      gsap.fromTo(
+        "#event-form",
+        {
+          opacity: 0,
+        },
+        {
+          delay: 0.35,
+          duration: 0.25,
+          opacity: 1,
+          ease: "sine.inOut",
+        },
+      );
     }, []);
 
     return (
@@ -153,7 +154,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
                 <FormLabel className="font-bigola text-customCream">
                   Date of event
                 </FormLabel>
-                <FormControl className="border border-customGold font-hypatia text-customCream">
+                <FormControl className="border border-customGold font-bigola text-customNavy">
                   <DatePicker
                     value={field.value}
                     onChange={(date: Date | undefined) => field.onChange(date)}
@@ -189,14 +190,22 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
                 <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl className="border border-customGold font-hypatia text-customCream">
                     <SelectTrigger>
-                      <SelectValue placeholder="Select event type" />
+                      <div className="truncate">
+                        <SelectValue placeholder="Select event type..." />
+                      </div>
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent className="max-w-screen bg-customCream font-hypatia text-customNavy">
-                    <SelectItem value="meeting" className="max-w-screen">
+                  <SelectContent className="max-w-[95vw] font-bigola text-customNavy md:w-[550px]">
+                    <SelectItem
+                      value="meeting"
+                      className="whitespace-normal text-wrap md:hover:text-customGold"
+                    >
                       Meeting / Workspace (2 hour minimum)
                     </SelectItem>
-                    <SelectItem value="birthday" className="max-w-screen">
+                    <SelectItem
+                      value="birthday"
+                      className="whitespace-normal text-wrap md:hover:text-customGold"
+                    >
                       Birthday / Graduation / Wedding / Holiday (4 hour minimum)
                     </SelectItem>
                   </SelectContent>
@@ -219,15 +228,15 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
                 >
                   <FormControl className="border border-customGold font-hypatia text-customCream">
                     <SelectTrigger>
-                      <SelectValue placeholder="Select number" />
+                      <SelectValue placeholder="Select number of guests..." />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent className="max-w-screen bg-customCream font-hypatia text-customNavy">
+                  <SelectContent className="max-w-[95vw] font-bigola text-customNavy md:w-[550px]">
                     {Array.from({ length: 49 }, (_, i) => i + 1).map((num) => (
                       <SelectItem
                         key={num}
                         value={num.toString()}
-                        className="max-w-screen text-lg"
+                        className="max-w-screen md:hover:text-customGold"
                       >
                         {num}
                       </SelectItem>
@@ -247,33 +256,35 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
                   Music options
                 </FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl className="border border-customGold font-hypatia text-customCream">
+                  <FormControl className="border-customGold font-hypatia text-customCream">
                     <SelectTrigger>
-                      <SelectValue placeholder="Select event type" />
+                      <div className="truncate">
+                        <SelectValue placeholder="Select music option..." />
+                      </div>
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent
-                    className="max-h-[80vh] max-w-[95vw] bg-customCream font-hypatia text-customNavy"
+                    className="max-h-[80vh] max-w-[95vw] font-bigola text-customNavy md:w-[550px]"
                     position="popper"
                     side="bottom"
                     align="start"
                   >
                     <SelectItem
                       value="dj"
-                      className="whitespace-normal text-wrap"
+                      className="whitespace-normal text-wrap md:hover:text-customGold"
                     >
                       I am interested in having a DJ (Additional cost
                       associated).
                     </SelectItem>
                     <SelectItem
                       value="personal"
-                      className="whitespace-normal text-wrap"
+                      className="whitespace-normal text-wrap md:hover:text-customGold"
                     >
                       I will play music from my personal device.
                     </SelectItem>
                     <SelectItem
                       value="house"
-                      className="whitespace-normal text-wrap"
+                      className="whitespace-normal text-wrap md:hover:text-customGold"
                     >
                       I will listen to what the bartender is playing from the
                       house vinyl collection (No requests, please).
@@ -301,7 +312,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
           />
           <Button
             type="submit"
-            className="mx-auto w-full rounded-sm border border-customGold bg-transparent p-3 font-bigola text-2xl text-customCream active:bg-customNavy active:text-customCream sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
+            className="mx-auto w-full rounded-sm border border-customGold bg-transparent p-3 font-bigola text-2xl text-customCream active:bg-customGold active:text-customCream sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
           >
             Submit
           </Button>

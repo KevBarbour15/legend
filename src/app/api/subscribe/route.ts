@@ -15,16 +15,22 @@ export async function POST(req: NextRequest) {
     }
 
     const url = `https://${DATACENTER}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/`;
-    const { email, firstName, lastName } = await req.json();
+    const { email, name } = await req.json();
 
-    const data = {
-      merge_fields: {
-        FNAME: firstName,
-        LNAME: lastName,
-      },
-      email_address: email,
-      status: "subscribed",
-    };
+    let data;
+
+    if (!name) {
+      data = {
+        email_address: email,
+        status: "subscribed",
+      };
+    } else {
+      data = {
+        name: name,
+        email_address: email,
+        status: "subscribed",
+      };
+    }
 
     const headers = {
       "Content-Type": "application/json",
