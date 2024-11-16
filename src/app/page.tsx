@@ -11,7 +11,8 @@ import {
   InstagramLogo,
   FacebookLogo,
   YoutubeLogo,
-  Key,
+  Copyright,
+  Phone,
 } from "@phosphor-icons/react";
 
 import { IconButton } from "@mui/material";
@@ -215,7 +216,7 @@ export default function Home() {
           </div>
 
           <div
-            className="mb-20 flex flex-col items-center gap-6 opacity-0 md:mb-0 md:mt-12 md:flex-row md:gap-0"
+            className="mb-6 flex flex-col-reverse items-center gap-3 opacity-0  md:mt-6 md:flex-row md:gap-0"
             id="about-section"
           >
             <div className="flex w-full md:basis-1/2">
@@ -232,7 +233,7 @@ export default function Home() {
                         <FormControl className="border border-customNavy font-hypatia text-customNavy">
                           <Input
                             {...field}
-                            placeholder="Enter email to receive updates..."
+                            placeholder="Enter email to receive exclusive updates..."
                           />
                         </FormControl>
                         <FormMessage />
@@ -241,55 +242,63 @@ export default function Home() {
                   />
                   <Button
                     type="submit"
-                    className="rounded-sm border border-customNavy bg-transparent font-bigola text-customNavy active:bg-customNavy active:text-customGold sm:w-fit md:hover:bg-customNavy md:hover:italic md:hover:text-customGold"
+                    className="rounded-sm border border-customNavy bg-transparent font-bigola text-customNavy transition-all duration-300 ease-in-out active:bg-customNavy active:text-customGold sm:w-fit md:hover:bg-customNavy md:hover:text-customGold"
                   >
                     Subscribe
                   </Button>
                 </form>
               </Form>
             </div>
-            <div className="flex w-full basis-1/2">
-              <div className="flex w-full basis-1/2 justify-start gap-3 font-bigola md:justify-end">
-                <IconButton
-                  className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
-                  href="https://www.instagram.com/legendhasithifi/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <InstagramLogo size={40} weight="fill" />
-                </IconButton>
 
-                <IconButton
-                  className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
-                  href="https://www.facebook.com/legendhasithifi"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FacebookLogo size={40} weight="fill" />
-                </IconButton>
-
-                <IconButton
-                  className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
-                  href="https://www.youtube.com/@legendhasithifi"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <YoutubeLogo size={40} weight="fill" />
-                </IconButton>
-              </div>
-
-              <div
-                className="flex w-full basis-1/2 justify-end"
-                id="about-section"
+            <div className="flex w-full basis-1/2 justify-start gap-3 font-bigola md:justify-end">
+              <IconButton
+                className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+                href="https://www.instagram.com/legendhasithifi/"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <LoginLink postLoginRedirectURL="/dashboard">
-                  <Button className="mx-auto gap-3 rounded-sm border border-customNavy bg-transparent font-bigola text-customNavy active:bg-customNavy active:text-customGold sm:w-fit md:hover:bg-customNavy md:hover:italic md:hover:text-customGold">
-                    Owner
-                    <Key weight="fill" />
-                  </Button>
-                </LoginLink>
-              </div>
+                <InstagramLogo size={40} weight="fill" />
+              </IconButton>
+
+              <IconButton
+                className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+                href="https://www.facebook.com/legendhasithifi"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FacebookLogo size={40} weight="fill" />
+              </IconButton>
+
+              <IconButton
+                className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+                href="https://www.youtube.com/@legendhasithifi"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <YoutubeLogo size={40} weight="fill" />
+              </IconButton>
             </div>
+          </div>
+          <div
+            className="mb-16 flex w-full justify-between border-t border-customNavy pt-3 font-bigola text-sm text-customNavy opacity-0 md:mb-0"
+            id="about-section"
+          >
+            <div>
+              <a href="tel:+19166627942" className="flex items-center gap-1">
+                <Phone weight="regular" />
+                (916) 662-7942
+              </a>
+
+              <span className="flex items-center gap-1">
+                <Copyright weight="regular" /> 2024 Legend Has It
+              </span>
+            </div>
+            <LoginLink
+              postLoginRedirectURL="/dashboard"
+              className="flex items-end active:text-customGold"
+            >
+              Owner Login
+            </LoginLink>
           </div>
         </div>
       </div>

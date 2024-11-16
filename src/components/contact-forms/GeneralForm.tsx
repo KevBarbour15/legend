@@ -67,7 +67,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex w-full flex-col space-y-3 opacity-0 md:w-[550px]"
         >
-          <p className="text-pretty font-hypatia text-customCream">
+          <p className="text-pretty font-bigola font-hypatia text-lg leading-[1.15] text-customCream">
             Thank you for reaching out to Legend Has It. Please take a minute
             and fill out the form below to give us a better understanding of how
             we can help.
@@ -137,7 +137,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
           />
           <Button
             type="submit"
-            className="mx-auto w-full rounded-sm border border-customGold bg-transparent p-3 font-bigola text-2xl text-customCream active:bg-customGold active:text-customCream sm:w-fit md:p-6 md:hover:bg-customCream md:hover:text-customNavy"
+            className="mx-auto rounded-sm border border-customGold bg-transparent font-bigola text-base text-customCream transition-all duration-300 active:bg-customNavy active:text-customGold sm:w-fit md:hover:bg-customNavy md:hover:text-customGold"
           >
             Submit
           </Button>
