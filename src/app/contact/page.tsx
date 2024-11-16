@@ -111,62 +111,58 @@ export default function Contact() {
   };
 
   return (
-    <>
-      <SideMenu />
-      <div className="fixed left-0 top-0 z-[-1] h-full min-h-screen w-screen backdrop-blur-sm"></div>
-      <div
-        ref={containerRef}
-        className="z-10 mx-auto flex w-screen flex-col items-center justify-center overflow-y-auto p-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
+    <div
+      ref={containerRef}
+      className="z-10 mx-auto flex w-screen flex-col items-center justify-center overflow-y-auto p-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
+    >
+      <MobileHeading section={"Contact"} />
+      <Tabs
+        defaultValue="event"
+        className="flex w-full flex-col items-center"
+        onValueChange={(value) => setActiveTab(value as FormType)}
       >
-        <MobileHeading section={"Contact"} />
-        <Tabs
-          defaultValue="event"
-          className="flex w-full flex-col items-center"
-          onValueChange={(value) => setActiveTab(value as FormType)}
+        <TabsList
+          id="tabs-container"
+          className="my-3 grid w-full grid-cols-3 bg-transparent font-bigola opacity-0 md:mb-6 md:mt-0 md:w-fit"
         >
-          <TabsList
-            id="tabs-container"
-            className="my-3 grid w-full grid-cols-3 bg-transparent font-bigola opacity-0 md:mb-6 md:mt-0 md:w-fit"
-          >
-            <TabsTrigger value="event">
-              Event <span className="md:flex">&nbsp;Inquiry</span>
-            </TabsTrigger>
-            <TabsTrigger value="dj">
-              DJ <span className="md:flex">&nbsp;Inquiry</span>
-            </TabsTrigger>
-            <TabsTrigger value="general">
-              General <span className="md:flex">&nbsp;Inquiry</span>
-            </TabsTrigger>
-          </TabsList>
-          <TabsContent
-            value="event"
-            className="flex w-full flex-col items-center font-hypatia"
-          >
-            <EventForm
-              ref={eventFormRef}
-              onSubmit={(values) => handleSubmit("event", values)}
-            />
-          </TabsContent>
-          <TabsContent
-            value="dj"
-            className="flex w-full flex-col items-center font-hypatia"
-          >
-            <DjForm
-              onSubmit={(values) => handleSubmit("dj", values)}
-              ref={djFormRef}
-            />
-          </TabsContent>
-          <TabsContent
-            value="general"
-            className="flex w-full flex-col items-center font-hypatia"
-          >
-            <GeneralForm
-              ref={generalFormRef}
-              onSubmit={(values) => handleSubmit("general", values)}
-            />
-          </TabsContent>
-        </Tabs>
-      </div>
-    </>
+          <TabsTrigger value="event">
+            Event <span className="md:flex">&nbsp;Inquiry</span>
+          </TabsTrigger>
+          <TabsTrigger value="dj">
+            DJ <span className="md:flex">&nbsp;Inquiry</span>
+          </TabsTrigger>
+          <TabsTrigger value="general">
+            General <span className="md:flex">&nbsp;Inquiry</span>
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent
+          value="event"
+          className="flex w-full flex-col items-center font-hypatia"
+        >
+          <EventForm
+            ref={eventFormRef}
+            onSubmit={(values) => handleSubmit("event", values)}
+          />
+        </TabsContent>
+        <TabsContent
+          value="dj"
+          className="flex w-full flex-col items-center font-hypatia"
+        >
+          <DjForm
+            onSubmit={(values) => handleSubmit("dj", values)}
+            ref={djFormRef}
+          />
+        </TabsContent>
+        <TabsContent
+          value="general"
+          className="flex w-full flex-col items-center font-hypatia"
+        >
+          <GeneralForm
+            ref={generalFormRef}
+            onSubmit={(values) => handleSubmit("general", values)}
+          />
+        </TabsContent>
+      </Tabs>
+    </div>
   );
 }

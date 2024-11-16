@@ -150,7 +150,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       <motion.div
         layoutId={`card-${event._id}`}
         onClick={handleCardClick}
-        className="transform cursor-pointer rounded-sm border border-transparent transition-all duration-300 md:mr-3 md:hover:md:scale-105 md:hover:border-customGold md:hover:shadow-lg md:hover:backdrop-blur-md"
+        className="transform cursor-pointer rounded-sm border border-transparent transition-all duration-300 md:mr-3 md:hover:md:scale-105 md:hover:border-customGold md:hover:shadow-lg"
       >
         <div className="flex h-full space-x-3 md:space-x-6">
           {event.is_photo ? (

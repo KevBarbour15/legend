@@ -7,6 +7,7 @@ const BackgroundOverlay: React.FC = () => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    return;
     setIsMounted(true);
     if (typeof window !== "undefined") {
       setWindowHeight(window.innerHeight + "px");
@@ -29,7 +30,7 @@ const BackgroundOverlay: React.FC = () => {
       className="fixed inset-0 z-[-1] h-screen bg-cover bg-center"
       style={{
         backgroundImage: "url(/images/background.jpg)",
-        height: isMounted ? windowHeight : "100dvh",
+        //height: isMounted ? windowHeight : "100dvh",
       }}
     >
       <Image

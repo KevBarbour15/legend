@@ -3,7 +3,6 @@ import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Event, PreloadedMedia } from "@/data/events";
 
 import EventCard from "@/components/event-card/EventCard";
-import SideMenu from "@/components/side-menu/SideMenu";
 import MobileHeading from "@/components/mobile-heading/MobileHeading";
 import Loading from "@/components/loading/Loading";
 
@@ -81,10 +80,10 @@ export default function Events() {
         opacity: 1,
       });
       gsap.to(currentRefs.current, {
-        delay: 0.35,
+        delay: 0.15,
+        opacity: 1,
         duration: 0.35,
         stagger: 0.075,
-        opacity: 1,
         ease: "sine.inOut",
       });
     } else if (currentEmptyRef.current) {
@@ -206,109 +205,105 @@ export default function Events() {
   );
 
   return (
-    <>
-      <SideMenu />
-      <div className="fixed left-0 top-0 z-[-1] h-full min-h-screen w-screen backdrop-blur-sm"></div>
-      <div
-        ref={containerRef}
-        className="z-10 mx-auto flex w-screen flex-col items-center justify-center overflow-y-auto p-3 pb-20 md:pb-0 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
-      >
-        <MobileHeading section={"Events"} />
-        {loading ? (
-          <div className="font-bigola">
-            <Loading
-              progress={progress}
-              message={"Loading events..."}
-              textColor="text-customCream"
-              borderColor="border-customGold"
-            />
-          </div>
-        ) : error ? (
-          <div className="flex h-[50vh] w-full flex-col items-center justify-center">
-            <h2 className="my-3 text-center font-bigola text-3xl text-customCream md:text-4xl">
-              {error}
-            </h2>
-          </div>
-        ) : (
-          <div id="event-tabs" className="w-full opacity-0">
-            <Tabs
-              defaultValue="upcoming"
-              className="flex w-full flex-col items-center"
-              onValueChange={(value) =>
-                setActiveTab(value as "upcoming" | "past")
-              }
-            >
-              <TabsList className="my-6 grid w-full grid-cols-2 bg-transparent font-bigola md:mb-6 md:mt-0 md:w-[400px]">
-                <TabsTrigger value="upcoming">Upcoming Events</TabsTrigger>
-                <TabsTrigger value="past">Past Events</TabsTrigger>
-              </TabsList>
+    <div
+      ref={containerRef}
+      className="z-10 mx-auto flex w-screen flex-col items-center justify-center overflow-y-auto p-3 pb-20 md:pb-0 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
+    >
+      <MobileHeading section={"Events"} />
+      {loading ? (
+        <div className="font-bigola">
+          <Loading
+            progress={progress}
+            message={"Loading events..."}
+            textColor="text-customCream"
+            borderColor="border-customGold"
+          />
+        </div>
+      ) : error ? (
+        <div className="flex h-[50vh] w-full flex-col items-center justify-center">
+          <h2 className="my-3 text-center font-bigola text-3xl text-customCream md:text-4xl">
+            {error}
+          </h2>
+        </div>
+      ) : (
+        <div id="event-tabs" className="w-full opacity-0">
+          <Tabs
+            defaultValue="upcoming"
+            className="flex w-full flex-col items-center"
+            onValueChange={(value) =>
+              setActiveTab(value as "upcoming" | "past")
+            }
+          >
+            <TabsList className="my-6 grid w-full grid-cols-2 bg-transparent font-bigola md:mb-6 md:mt-0 md:w-[400px]">
+              <TabsTrigger value="upcoming">Upcoming Events</TabsTrigger>
+              <TabsTrigger value="past">Past Events</TabsTrigger>
+            </TabsList>
 
-              <div id="events-container" className="w-full opacity-0">
-                <TabsContent value="upcoming" className="w-full">
-                  {upcomingEvents.length > 0 ? (
-                    <div className="space-y-3 md:space-y-6">
-                      {upcomingEvents.map((event, idx) => (
-                        <div
-                          className="opacity-0"
-                          key={event._id}
-                          ref={(el) => {
-                            upcomingEventRefs.current[idx] = el;
-                          }}
-                        >
-                          <EventCard
-                            key={idx}
-                            event={event}
-                            preloadedMedia={
-                              preloadedMedia.get(event._id) as PreloadedMedia
-                            }
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="flex w-full flex-col items-center justify-center text-center">
-                      <EmptyMessage
-                        message="Stay tuned for upcoming events!"
-                        refProp={upcomingEmptyMessageRef}
-                      />
-                    </div>
-                  )}
-                </TabsContent>
-                <TabsContent value="past" className="w-full">
-                  {pastEvents.length > 0 ? (
-                    <div className="mb-6 space-y-3">
-                      {pastEvents.map((event, idx) => (
-                        <div
-                          key={event._id}
-                          ref={(el) => {
-                            pastEventRefs.current[idx] = el;
-                          }}
-                          className="opacity-0"
-                        >
-                          <EventCard
-                            key={idx}
-                            event={event}
-                            preloadedMedia={
-                              preloadedMedia.get(event._id) as PreloadedMedia
-                            }
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="flex w-full flex-col items-center justify-center text-center">
-                      <EmptyMessage
-                        message="No past events to display."
-                        refProp={pastEmptyMessageRef}
-                      />
-                    </div>
-                  )}
-                </TabsContent>
-              </div>
-            </Tabs>
-          </div>
-        )}
-      </div>
-    </>
+            <div id="events-container" className="w-full opacity-0">
+              <TabsContent value="upcoming" className="w-full">
+                {upcomingEvents.length > 0 ? (
+                  <div className="space-y-3 md:space-y-6">
+                    {upcomingEvents.map((event, idx) => (
+                      <div
+                        className="opacity-0"
+                        key={event._id}
+                        ref={(el) => {
+                          upcomingEventRefs.current[idx] = el;
+                        }}
+                      >
+                        <EventCard
+                          key={idx}
+                          event={event}
+                          preloadedMedia={
+                            preloadedMedia.get(event._id) as PreloadedMedia
+                          }
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="flex w-full flex-col items-center justify-center text-center">
+                    <EmptyMessage
+                      message="Stay tuned for upcoming events!"
+                      refProp={upcomingEmptyMessageRef}
+                    />
+                  </div>
+                )}
+              </TabsContent>
+              <TabsContent value="past" className="w-full">
+                {pastEvents.length > 0 ? (
+                  <div className="mb-6 space-y-3">
+                    {pastEvents.map((event, idx) => (
+                      <div
+                        key={event._id}
+                        ref={(el) => {
+                          pastEventRefs.current[idx] = el;
+                        }}
+                        className="opacity-0"
+                      >
+                        <EventCard
+                          key={idx}
+                          event={event}
+                          preloadedMedia={
+                            preloadedMedia.get(event._id) as PreloadedMedia
+                          }
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="flex w-full flex-col items-center justify-center text-center">
+                    <EmptyMessage
+                      message="No past events to display."
+                      refProp={pastEmptyMessageRef}
+                    />
+                  </div>
+                )}
+              </TabsContent>
+            </div>
+          </Tabs>
+        </div>
+      )}
+    </div>
   );
 }

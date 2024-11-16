@@ -22,7 +22,6 @@ import { generateProgress } from "@/utils/progress";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-import SideMenu from "@/components/side-menu/SideMenu";
 import MobileHeading from "@/components/mobile-heading/MobileHeading";
 import Divider from "@/components/divider/Divider";
 import Loading from "@/components/loading/Loading";
@@ -78,9 +77,9 @@ const Menu: React.FC = ({}) => {
     });
 
     tl.current = gsap.timeline({}).to("#menu", {
-      duration: 0.25,
+      delay: 0.15,
       opacity: 1,
-      ease: "sine.inOut",
+      duration: 0.35,
     });
   }, [loading]);
 
@@ -156,70 +155,66 @@ const Menu: React.FC = ({}) => {
   );
 
   return (
-    <>
-      <SideMenu />
-      <div className="fixed left-0 top-0 z-[-1] h-full min-h-screen w-screen backdrop-blur-sm"></div>
-      <div
-        ref={containerRef}
-        className="z-10 mx-auto flex w-screen flex-col items-center justify-center overflow-y-auto p-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
-      >
-        <MobileHeading section={"Menu"} />
-        {loading ? (
-          <div className="font-bigola">
-            <Loading
-              progress={progress}
-              message={"Loading menu..."}
-              textColor="text-customCream"
-              borderColor="border-customGold"
-            />
-          </div>
-        ) : error ? (
-          <div className="flex h-[50vh] w-full flex-col items-center justify-center">
-            <h2 className="mb-6 text-center font-bigola text-3xl text-customCream md:text-4xl">
-              {error}
-            </h2>
-          </div>
-        ) : !menu ? (
-          <div className="flex h-[50vh] w-full flex-col items-center justify-center">
-            <h2 className="mb-6 text-center font-bigola text-3xl text-customCream md:text-4xl">
-              No menu data found.
-            </h2>
-          </div>
-        ) : (
-          <Accordion type="single" collapsible className="w-full">
-            <div className="w-full opacity-0" id="menu">
-              {Object.entries(menu).map(
-                ([categoryName, categoryContent], index) => (
-                  <AccordionItem
-                    value={categoryName}
-                    className={`${index === 0 ? "md:border-t" : ""} border-b border-customGold`}
-                    key={categoryName}
+    <div
+      ref={containerRef}
+      className="z-10 mx-auto flex w-screen flex-col items-center justify-center overflow-y-auto p-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
+    >
+      <MobileHeading section={"Menu"} />
+      {loading ? (
+        <div className="font-bigola">
+          <Loading
+            progress={progress}
+            message={"Loading menu..."}
+            textColor="text-customCream"
+            borderColor="border-customGold"
+          />
+        </div>
+      ) : error ? (
+        <div className="flex h-[50vh] w-full flex-col items-center justify-center">
+          <h2 className="mb-6 text-center font-bigola text-3xl text-customCream md:text-4xl">
+            {error}
+          </h2>
+        </div>
+      ) : !menu ? (
+        <div className="flex h-[50vh] w-full flex-col items-center justify-center">
+          <h2 className="mb-6 text-center font-bigola text-3xl text-customCream md:text-4xl">
+            No menu data found.
+          </h2>
+        </div>
+      ) : (
+        <Accordion type="single" collapsible className="w-full">
+          <div className="w-full opacity-0" id="menu">
+            {Object.entries(menu).map(
+              ([categoryName, categoryContent], index) => (
+                <AccordionItem
+                  value={categoryName}
+                  className={`${index === 0 ? "md:border-t" : ""} border-b border-customGold`}
+                  key={categoryName}
+                >
+                  <AccordionTrigger
+                    className="cursor-pointer font-bigola text-xl leading-none text-customCream md:text-4xl"
+                    icon={getIcon(categoryName)}
                   >
-                    <AccordionTrigger
-                      className="cursor-pointer font-bigola text-xl leading-none text-customCream md:text-4xl"
-                      icon={getIcon(categoryName)}
-                    >
-                      <h2>{categoryName}</h2>
-                    </AccordionTrigger>
-                    <AccordionContent
-                      className={`border-customGold ${categoryName === "Canned / Bottled" ? "pt-0" : ""}`}
-                    >
-                      {categoryName === "Canned / Bottled"
-                        ? renderCannedBeerCategory(
-                            categoryContent as CategoryWithItems,
-                          )
-                        : (categoryContent as ProcessedItem[]).map(
-                            renderMenuItem,
-                          )}
-                    </AccordionContent>
-                  </AccordionItem>
-                ),
-              )}
-            </div>
-          </Accordion>
-        )}
-      </div>
-    </>
+                    <h2>{categoryName}</h2>
+                  </AccordionTrigger>
+                  <AccordionContent
+                    className={`border-customGold ${categoryName === "Canned / Bottled" ? "pt-0" : ""}`}
+                  >
+                    {categoryName === "Canned / Bottled"
+                      ? renderCannedBeerCategory(
+                          categoryContent as CategoryWithItems,
+                        )
+                      : (categoryContent as ProcessedItem[]).map(
+                          renderMenuItem,
+                        )}
+                  </AccordionContent>
+                </AccordionItem>
+              ),
+            )}
+          </div>
+        </Accordion>
+      )}
+    </div>
   );
 };
 
