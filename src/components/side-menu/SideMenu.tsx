@@ -114,7 +114,7 @@ const SideMenu: React.FC = () => {
           >
             <div
               id="menu-text"
-              className="flex justify-between text-6xl leading-[.8]"
+              className="flex justify-between text-6xl leading-[.65]"
             >
               <p>410</p>
               <p>L</p>
@@ -137,7 +137,7 @@ const SideMenu: React.FC = () => {
             </p>
             <div
               id="menu-text"
-              className="flex justify-between text-5xl leading-none"
+              className="flex justify-between text-5xl leading-[.8]"
             >
               <p>CA,</p>
               <p>95814</p>

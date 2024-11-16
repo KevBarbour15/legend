@@ -47,7 +47,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
     return createPortal(
       <AnimatePresence>
         {isActive && (
-          <div className="fixed inset-0 z-[200] grid place-items-center bg-black bg-opacity-85 px-3">
+          <div className="fixed inset-0 z-[200] grid place-items-center bg-black bg-opacity-65 px-3">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { duration: 0.15 } }}
@@ -63,19 +63,19 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
             >
               <IconButton
                 aria-label="Close Modal"
-                className="onClick={() => setIsActive(false)} p-0"
+                className="p-0"
                 onClick={() => setIsActive(false)}
               >
                 <X
                   size={32}
-                  className="text-customGold transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customCream"
+                  className="text-customCream transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
                 />
               </IconButton>
             </motion.div>
 
             <motion.div
               layoutId={`card-${event._id}`}
-              className="relative flex h-fit max-h-[87svh] w-full flex-col overflow-hidden rounded-sm border border-customGold bg-customNavy px-3 pt-3 shadow-md sm:max-h-[95vh] sm:max-w-[425px] md:px-6 md:pt-6"
+              className="relative flex h-fit max-h-[85svh] w-full flex-col overflow-hidden rounded-sm border border-customGold bg-customNavy bg-opacity-70 px-3 pt-3 shadow-md backdrop-blur-sm sm:max-h-[85vh] sm:max-w-[400px] md:px-6 md:pt-6"
             >
               {event.is_photo ? (
                 <motion.div
@@ -87,8 +87,8 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                     height={300}
                     src={preloadedMedia.src}
                     alt={event.title}
-                    className="h-auto w-full rounded-sm object-cover object-center"
-                    sizes="(max-width: 600px) 300px, (max-width: 1200px)  300px"
+                    className="aspect-square h-auto w-full rounded-sm object-cover object-center md:aspect-auto"
+                    sizes="(max-width: 600px) 250px, (max-width: 1200px)  250px"
                   />
                 </motion.div>
               ) : (
@@ -150,9 +150,9 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       <motion.div
         layoutId={`card-${event._id}`}
         onClick={handleCardClick}
-        className="cursor-pointer rounded-sm bg-transparent transition-all duration-300 md:hover:bg-black md:hover:bg-opacity-15 md:hover:shadow-lg"
+        className="transform cursor-pointer rounded-sm border border-transparent transition-all duration-300 md:mr-3 md:hover:md:scale-105 md:hover:border-customGold md:hover:shadow-lg md:hover:backdrop-blur-md"
       >
-        <div className="flex h-full gap-3 md:gap-6">
+        <div className="flex h-full space-x-3 md:space-x-6">
           {event.is_photo ? (
             <motion.div
               layoutId={`image-${event._id}`}
@@ -184,7 +184,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
             </motion.div>
           )}
 
-          <div className="flex w-full flex-col justify-end border-b border-customGold pb-2 md:pb-3">
+          <div className="flex w-full flex-col justify-end">
             <motion.p
               layoutId={`date-${event._id}`}
               className="text-left font-bigola text-sm text-customGold md:text-2xl"
@@ -193,9 +193,9 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
             </motion.p>
             <motion.h3
               layoutId={`title-${event._id}`}
-              className="text-balance font-bigola text-2xl leading-none text-customCream sm:text-4xl md:text-5xl lg:w-3/4"
+              className="text-balance p-0 font-bigola text-2xl text-customCream sm:text-4xl md:text-5xl lg:w-3/4"
             >
-              {event.title}
+              <span className="leading-[.8]">{event.title}</span>
             </motion.h3>
           </div>
         </div>

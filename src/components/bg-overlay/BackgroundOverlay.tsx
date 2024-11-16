@@ -25,10 +25,11 @@ const BackgroundOverlay: React.FC = () => {
 
   return (
     <div
-      className="background-overlay fixed inset-0 z-[-1] h-screen bg-cover bg-center transition-all"
+      id="background-overlay"
+      className="fixed inset-0 z-[-1] h-screen bg-cover bg-center"
       style={{
         backgroundImage: "url(/images/background.jpg)",
-        height: isMounted ? windowHeight : "100vh",
+        height: isMounted ? windowHeight : "100dvh",
       }}
     >
       <Image

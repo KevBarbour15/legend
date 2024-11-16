@@ -41,7 +41,6 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
     gsap.set(".menu-overlay", { opacity: 0.5 });
     gsap.set(".menu-info-row", { opacity: 0 });
     gsap.set(".menu-close-icon", { opacity: 0 });
-    gsap.set(".menu-login-link", { opacity: 0 });
 
     tl.current = gsap
       .timeline({ paused: true })
@@ -72,11 +71,6 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
         delay: -0.15,
       })
       .to(".menu-close-icon", {
-        opacity: 1,
-        duration: 0.2,
-        delay: -0.15,
-      })
-      .to(".menu-login-link", {
         opacity: 1,
         duration: 0.2,
         delay: -0.15,

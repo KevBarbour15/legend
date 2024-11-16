@@ -51,10 +51,10 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
     gsap.set(containerRef.current, { opacity: 0 });
 
     tl.current = gsap.timeline().to(containerRef.current, {
-      delay: 0.05,
-      duration: 0.25,
+      delay: 0.25,
+      duration: 0.75,
       opacity: 1,
-      ease: "linear",
+      ease: "sine.inOut",
     });
 
     recordTl.current = gsap.timeline({ repeat: -1 }).to("#now-playing", {
@@ -140,116 +140,95 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
     >
       <div
         id="player-container"
-        className="fixed bottom-0 left-0 right-0 mx-3 mb-3 flex flex-col drop-shadow-record md:mb-6 md:ml-6 md:mr-0 md:w-fit md:flex-row"
+        className="fixed bottom-0 left-0 right-0 mx-3 mb-3 flex flex-col md:mb-6 md:ml-6 md:mr-0 md:w-fit md:flex-row"
       >
-        <div className="w-full bg-black p-1 md:w-fit">
+        <div className="w-full md:w-fit">
           <Collapse
             in={visible}
             id="record-player"
-            className="hidden rounded-t-sm bg-customNavy opacity-0 md:block"
+            className="hidden opacity-0 md:block"
           >
-            <div
-              className="relative rounded-t-sm"
-              style={{
-                backgroundImage: "url('/images/oak.jpg')",
-                backgroundPosition: "center",
-                backgroundSize: "cover",
-              }}
-            >
-              <div className="rounded-sm bg-customNavy bg-opacity-10 p-2">
-                <Image
-                  id="now-playing"
-                  height={28}
-                  width={28}
-                  className="absolute left-[105.5px] top-[40.5%] z-[3] w-[28px]"
-                  src="/images/small-logo-record.png"
-                  style={{
-                    height: "auto",
-                    width: "auto",
-                  }}
-                  alt="Record Logo"
-                />
-                <Image
-                  className="drop-shadow-record md:w-[185px]"
-                  src="/images/player.png"
-                  style={{
-                    height: "auto",
-                    width: "auto",
-                  }}
-                  alt="Player"
-                  height={185}
-                  width={185}
-                  priority
-                />
-              </div>
+            <div className="mb-2">
+              <Image
+                id="now-playing"
+                height={24}
+                width={24}
+                style={{
+                  height: "auto",
+                  width: "auto",
+                }}
+                className="absolute left-[101.5px] top-[31.25%] z-[3] opacity-90"
+                src="/images/small-logo-record.png"
+                alt="Record Logo"
+              />
+              <Image
+                className="drop-shadow-record"
+                src="/images/player.png"
+                alt="Player"
+                style={{
+                  height: "auto",
+                  width: "auto",
+                }}
+                height={190}
+                width={190}
+                priority
+              />
             </div>
           </Collapse>
           <div
-            style={{
-              backgroundImage: "url('/images/metal.jpg')",
-              backgroundPosition: "center",
-              backgroundSize: "cover",
-            }}
-            className={`z-[11] rounded-sm ${visible ? "md:rounded-b-sm md:rounded-t-none" : ""}`}
+            className="z-[11] flex justify-between rounded-full bg-customCream bg-opacity-25 px-1 py-2 drop-shadow-record md:py-1"
+            id="controls-background"
           >
-            <div
-              className={`flex justify-between rounded-sm bg-customNavy bg-opacity-50 px-1 py-2 md:bg-opacity-65 md:py-1 ${visible ? "md:rounded-b-sm md:rounded-t-none" : ""}`}
+            <IconButton
+              id="player-button"
+              onClick={togglePlayer}
+              className={`hidden transform p-1 text-customCream drop-shadow-text transition-all md:block md:hover:text-customGold ${visible ? "rotate-180" : ""}`}
             >
-              <IconButton
-                className="hidden p-1 text-customCream drop-shadow-text transition-colors md:block md:hover:text-customGold"
-                onClick={togglePlayer}
-              >
-                <CaretUp
-                  weight="fill"
-                  id="player-toggle"
-                  className={` ${visible ? "rotate-180 transform" : ""}`}
-                />
-              </IconButton>
-              <IconButton className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold">
-                {mute ? (
-                  <SpeakerSlash
-                    weight="fill"
-                    id="player-toggle"
-                    onClick={handleMute}
-                  />
-                ) : (
-                  <SpeakerSimpleHigh
-                    weight="fill"
-                    id="player-toggle"
-                    onClick={handleMute}
-                  />
-                )}
-              </IconButton>
-              <IconButton
-                onClick={handlePreviousTrack}
-                className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
-              >
-                <SkipBack id="player-toggle" weight="fill" />
-              </IconButton>
+              <CaretUp weight="regular" />
+            </IconButton>
+            <IconButton
+              id="player-button"
+              className="p-1 text-customCream drop-shadow-text transition-all md:hover:text-customGold"
+            >
+              {mute ? (
+                <SpeakerSlash weight="fill" onClick={handleMute} />
+              ) : (
+                <SpeakerSimpleHigh weight="fill" onClick={handleMute} />
+              )}
+            </IconButton>
+            <IconButton
+              id="player-button"
+              onClick={handlePreviousTrack}
+              className="p-1 text-customCream drop-shadow-text transition-all md:hover:text-customGold"
+            >
+              <SkipBack id="player-toggle" weight="fill" />
+            </IconButton>
 
-              <IconButton
-                onClick={handlePlayPauseRounded}
-                className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
-              >
-                {playing ? <Pause weight="fill" /> : <Play weight="fill" />}
-              </IconButton>
-              <IconButton
-                onClick={handleNextTrack}
-                className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
-              >
-                <SkipForward weight="fill" />
-              </IconButton>
-              <IconButton
-                onClick={togglePlaylist}
-                className="p-1 text-customCream drop-shadow-text transition-colors md:hover:text-customGold"
-              >
-                {playlistVisible ? (
-                  <X weight="regular" />
-                ) : (
-                  <VinylRecord weight="regular" />
-                )}
-              </IconButton>
-            </div>
+            <IconButton
+              id="player-button"
+              onClick={handlePlayPauseRounded}
+              className="p-1 text-customCream drop-shadow-text transition-all md:hover:text-customGold"
+            >
+              {playing ? <Pause weight="fill" /> : <Play weight="fill" />}
+            </IconButton>
+            <IconButton
+              id="player-button"
+              onClick={handleNextTrack}
+              className="p-1 text-customCream drop-shadow-text transition-all md:hover:text-customGold"
+            >
+              <SkipForward weight="fill" />
+            </IconButton>
+            <IconButton
+              id="player-button"
+              onClick={togglePlaylist}
+              className="transform p-1 text-customCream drop-shadow-text transition-all md:hover:rotate-[360deg] md:hover:text-customGold"
+            >
+              {playlistVisible ? (
+                <X weight="regular" />
+              ) : (
+                <VinylRecord weight="regular" />
+              )}
+            </IconButton>
           </div>
         </div>
       </div>
@@ -289,7 +268,10 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                       {index == currentTrackIndex ? (
                         <Equalizer playing={playing} />
                       ) : (
-                        <IconButton className="m-0 flex p-1 text-customCream drop-shadow-text md:px-0 md:hover:text-customGold">
+                        <IconButton
+                          id="player-button"
+                          className="m-0 flex p-1 text-customCream drop-shadow-text md:px-0 md:hover:text-customGold"
+                        >
                           <Play
                             weight="fill"
                             onClick={() => handleTrackChange(index)}

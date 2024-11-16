@@ -6,6 +6,7 @@ import Image from "next/image";
 import ImageCarousel from "@/components/carousel/Carousel";
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileMenu from "@/components/mobile-menu/MobileMenu";
+import AudioStatic from "@/components/audio-static/AudioStatic";
 
 import {
   InstagramLogo,
@@ -13,6 +14,7 @@ import {
   YoutubeLogo,
   Copyright,
   Phone,
+  Key,
 } from "@phosphor-icons/react";
 
 import { IconButton } from "@mui/material";
@@ -77,16 +79,22 @@ export default function Home() {
     if (!containerRef.current) return;
 
     tl.current = gsap.timeline({
-      ease: "sine.inOut",
       scrollTrigger: {
         trigger: "#hidden-bg",
         start: "center center",
-        end: "center 25%",
+        end: "center top",
         scrub: 1,
       },
     });
 
     tl.current
+      .to(
+        "#background-overlay",
+        {
+          scale: 1.5,
+        },
+        0,
+      )
       .to(
         ".menu-link",
         {
@@ -105,6 +113,13 @@ export default function Home() {
         "#menu-text",
         {
           color: "#244154",
+        },
+        0,
+      )
+      .to(
+        "#controls-background",
+        {
+          backgroundColor: "rgba(36, 65, 84, 0.45)",
         },
         0,
       )
@@ -149,7 +164,9 @@ export default function Home() {
         <div
           id="hidden-bg"
           className="fixed inset-0 z-[-1] h-screen w-screen bg-customCream opacity-0"
-        ></div>
+        >
+          <AudioStatic />
+        </div>
         <div className="top-bg hidden h-dvh w-screen md:block"></div>
         <div
           id="about-content"
@@ -216,7 +233,7 @@ export default function Home() {
           </div>
 
           <div
-            className="mb-6 flex flex-col-reverse items-center gap-3 opacity-0  md:mt-6 md:flex-row md:gap-0"
+            className="mb-6 flex flex-col-reverse items-center gap-3 opacity-0 md:mt-6 md:flex-row md:gap-0"
             id="about-section"
           >
             <div className="flex w-full md:basis-1/2">
@@ -250,33 +267,33 @@ export default function Home() {
               </Form>
             </div>
 
-            <div className="flex w-full basis-1/2 justify-start gap-3 font-bigola md:justify-end">
-              <IconButton
+            <div className="flex w-full basis-1/2 justify-start gap-3 md:justify-end">
+              <a
                 className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
                 href="https://www.instagram.com/legendhasithifi/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <InstagramLogo size={40} weight="fill" />
-              </IconButton>
+              </a>
 
-              <IconButton
+              <a
                 className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
                 href="https://www.facebook.com/legendhasithifi"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <FacebookLogo size={40} weight="fill" />
-              </IconButton>
+              </a>
 
-              <IconButton
+              <a
                 className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
                 href="https://www.youtube.com/@legendhasithifi"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <YoutubeLogo size={40} weight="fill" />
-              </IconButton>
+              </a>
             </div>
           </div>
           <div
@@ -284,7 +301,10 @@ export default function Home() {
             id="about-section"
           >
             <div>
-              <a href="tel:+19166627942" className="flex items-center gap-1">
+              <a
+                href="tel:+19166627942"
+                className="flex items-center gap-1 transition-all duration-300 active:text-customGold md:hover:text-customGold"
+              >
                 <Phone weight="regular" />
                 (916) 662-7942
               </a>
@@ -293,12 +313,15 @@ export default function Home() {
                 <Copyright weight="regular" /> 2024 Legend Has It
               </span>
             </div>
-            <LoginLink
-              postLoginRedirectURL="/dashboard"
-              className="flex items-end active:text-customGold"
-            >
-              Owner Login
-            </LoginLink>
+            <div className="flex items-end">
+              <LoginLink
+                postLoginRedirectURL="/dashboard"
+                className="flex items-center gap-1 transition-all duration-300 active:text-customGold md:hover:text-customGold"
+              >
+                Owner Login
+                <Key weight="regular" />
+              </LoginLink>
+            </div>
           </div>
         </div>
       </div>

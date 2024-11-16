@@ -92,10 +92,21 @@ const config: Config = {
             height: "0",
           },
         },
+        "gradient-x": {
+          "0%, 100%": {
+            "background-size": "200% 200%",
+            "background-position": "left center",
+          },
+          "50%": {
+            "background-size": "200% 200%",
+            "background-position": "right center",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.3s ease-in-out",
         "accordion-up": "accordion-up 0.3s ease-in-out",
+        "gradient-x": "gradient-x 3s ease infinite",
       },
     },
   },

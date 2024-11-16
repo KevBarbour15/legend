@@ -1,9 +1,8 @@
 import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 
 import Menu from "@/components/dropdown-menu/DropdownMenu";
 
-import { MenuRounded } from "@mui/icons-material";
+import { List } from "@phosphor-icons/react";
 
 import { IconButton } from "@mui/material";
 
@@ -17,7 +16,6 @@ interface MobileHeadingProps {
 const MobileHeading: React.FC<MobileHeadingProps> = ({ section }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -39,14 +37,14 @@ const MobileHeading: React.FC<MobileHeadingProps> = ({ section }) => {
       <div
         ref={containerRef}
         id="mobile-heading"
-        className="flex w-full justify-between border-b border-customGold pb-3 text-customGold opacity-0 md:hidden"
+        className="flex w-full justify-between border-b border-customGold pb-3 text-customCream opacity-0 md:hidden"
       >
         <span className="font-bigola text-2xl">{section}</span>
         <IconButton
           onClick={toggleMenu}
-          className="bg-transparent p-0 text-customGold"
+          className="bg-transparent p-0 text-customCream"
         >
-          <MenuRounded className="text-3xl" />
+          <List weight="regular" size={28} />
         </IconButton>
       </div>
     </>
