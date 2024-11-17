@@ -195,7 +195,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               layoutId={`title-${event._id}`}
               className="text-balance p-0 font-bigola text-2xl text-customCream sm:text-4xl md:text-5xl lg:w-3/4"
             >
-              <span className="leading-[.8]">{event.title}</span>
+              <span className="leading-[.85]">{event.title}</span>
             </motion.h3>
           </div>
         </div>

@@ -39,7 +39,7 @@ const MobileHeading: React.FC<MobileHeadingProps> = ({ section }) => {
         id="mobile-heading"
         className="flex w-full justify-between border-b border-customGold pb-3 text-customCream opacity-0 md:hidden"
       >
-        <span className="font-bigola text-2xl">{section}</span>
+        <span className="font-bigola text-2xl italic">{section}</span>
         <IconButton
           onClick={toggleMenu}
           className="bg-transparent p-0 text-customCream"

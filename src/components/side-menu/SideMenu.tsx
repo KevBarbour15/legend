@@ -11,9 +11,9 @@ import { useGSAP } from "@gsap/react";
 
 const links = [
   { path: "/", label: "About" },
-  { path: "/contact", label: "Contact" },
-  { path: "/events", label: "Events" },
   { path: "/menu", label: "Menu" },
+  { path: "/events", label: "Events" },
+  { path: "/contact", label: "Contact" },
 ];
 
 const SideMenu: React.FC = () => {
@@ -85,7 +85,7 @@ const SideMenu: React.FC = () => {
             <li
               key={idx}
               id="hover"
-              className={`${link.path === "/" ? "about-link" : "menu-link"} m-0 p-0 leading-[.8] ${pathname === link.path && pathname !== "/" ? "text-customGold" : "text-customCream"} `}
+              className={`${link.path === "/" ? "about-link" : "menu-link"} m-0 p-0 leading-[.85] ${pathname === link.path && pathname !== "/" ? "text-customGold" : "text-customCream"} `}
             >
               {link.path === "/" ? (
                 <a onClick={handleAboutClick} className="cursor-pointer">
@@ -137,7 +137,7 @@ const SideMenu: React.FC = () => {
             </p>
             <div
               id="menu-text"
-              className="flex justify-between text-5xl leading-[.8]"
+              className="flex justify-between text-5xl leading-[.85]"
             >
               <p>CA,</p>
               <p>95814</p>

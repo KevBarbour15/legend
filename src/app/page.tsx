@@ -247,7 +247,7 @@ export default function Home() {
                     name="email"
                     render={({ field }) => (
                       <FormItem className="grow">
-                        <FormControl className="border border-customNavy font-hypatia text-customNavy">
+                        <FormControl className="border border-customNavy font-hypatia text-customNavy backdrop-blur-sm">
                           <Input
                             {...field}
                             placeholder="Enter email to receive exclusive updates..."
@@ -259,7 +259,7 @@ export default function Home() {
                   />
                   <Button
                     type="submit"
-                    className="rounded-sm border border-customNavy bg-transparent font-bigola text-customNavy transition-all duration-300 ease-in-out active:bg-customNavy active:text-customGold sm:w-fit md:hover:bg-customNavy md:hover:text-customGold"
+                    className="rounded-sm border border-customNavy bg-transparent font-bigola text-customNavy backdrop-blur-sm transition-all duration-300 ease-in-out hover:bg-customNavy hover:text-customCream active:bg-customNavy active:text-customCream"
                   >
                     Subscribe
                   </Button>
