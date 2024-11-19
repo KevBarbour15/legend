@@ -49,6 +49,8 @@ export const metadata: Metadata = {
     title: "Legend Has It",
     url: "https://www.legendhasithifi.com/",
     siteName: "Legend Has It",
+    description:
+      "Sacramento's first hi-fi listening bar, where music meets the art of sound.",
     images: [
       {
         url: "/images/meta-image.jpg",

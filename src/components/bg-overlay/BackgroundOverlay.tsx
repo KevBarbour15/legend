@@ -1,36 +1,14 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
 import Image from "next/image";
 
 const BackgroundOverlay: React.FC = () => {
-  const [windowHeight, setWindowHeight] = useState<string>("100vh");
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    return;
-    setIsMounted(true);
-    if (typeof window !== "undefined") {
-      setWindowHeight(window.innerHeight + "px");
-
-      const updateHeight = () => {
-        setWindowHeight(window.innerHeight + "px");
-      };
-
-      window.addEventListener("resize", updateHeight);
-
-      return () => {
-        window.removeEventListener("resize", updateHeight);
-      };
-    }
-  }, []);
-
   return (
     <div
       id="background-overlay"
       className="fixed inset-0 z-[-1] h-screen bg-cover bg-center"
       style={{
-        backgroundImage: "url(/images/background.jpg)",
-        //height: isMounted ? windowHeight : "100dvh",
+        backgroundImage: "url(/images/background.webp)",
       }}
     >
       <Image

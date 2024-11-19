@@ -56,7 +56,7 @@ export default function Dashboard() {
 
   return (
     <div
-      className="font-funnelDisplay h-auto min-h-screen w-full bg-customWhite"
+      className="h-auto min-h-screen w-full bg-customWhite font-funnelDisplay"
       style={{ paddingTop: `${headerHeight}px` }}
     >
       <header ref={headerRef} className="fixed top-0 z-50 w-full bg-black py-3">
