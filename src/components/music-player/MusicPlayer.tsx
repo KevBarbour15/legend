@@ -26,8 +26,7 @@ import {
 import Equalizer from "@/components/equalizer/Equalizer";
 
 const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
-  const [playing, setPlaying] = useState<boolean>(false);
-
+  const [playing, setPlaying] = useState<boolean>(true);
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
   const [mute, setMute] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
@@ -172,7 +171,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                 }}
                 src="/images/arm.png"
                 alt="Record"
-                className="drop-shadow-recordPlayer absolute right-[17px] top-[10.5px] z-[3] h-[98.5%]"
+                className="absolute right-[17px] top-[10.5px] z-[3] h-[98.5%] drop-shadow-recordPlayer"
               />
               <Image
                 height={128}
@@ -181,7 +180,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                   height: "auto",
                   width: "100%",
                 }}
-                className="drop-shadow-recordPlayer rounded-sm"
+                className="rounded-sm drop-shadow-recordPlayer"
                 src="/images/record-player.jpg"
                 alt="Record"
                 priority
@@ -189,7 +188,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             </div>
           </Collapse>
           <div
-            className="drop-shadow-recordPlayer z-[11] flex justify-between rounded-full bg-customCream bg-opacity-25 px-1 py-2 md:gap-2 md:py-1"
+            className="z-[11] flex justify-between rounded-full bg-customCream bg-opacity-25 px-1 py-2 drop-shadow-recordPlayer md:gap-2 md:py-1"
             id="controls-background"
           >
             <IconButton className="p-1 text-customCream drop-shadow-text transition-all md:hover:text-customGold">
@@ -237,7 +236,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       >
         <Collapse in={playlistVisible}>
           <div
-            className="drop-shadow-recordPlayer aspect-square w-full rounded-sm md:h-[425px] md:w-auto"
+            className="aspect-square w-full rounded-sm drop-shadow-recordPlayer md:h-[425px] md:w-auto"
             style={{
               backgroundImage: "url('/images/album-cover.jpg')",
               backgroundPosition: "center",

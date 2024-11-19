@@ -45,6 +45,8 @@ const tracks: {
 export const metadata: Metadata = {
   metadataBase: new URL("https://legend-zg4t.vercel.app/"),
   title: "Legend Has It",
+  description:
+    "Sacramento's first hi-fi listening bar, where music meets the art of sound.",
   openGraph: {
     title: "Legend Has It",
     url: "https://www.legendhasithifi.com/",

@@ -31,7 +31,7 @@ const Carousel: React.FC = () => {
           {slides.map((src, index) => (
             <div className="embla__slide" key={index}>
               <div className="embla__slide__inner h-[250px] w-auto md:h-[500px]">
-                <Image
+                <img
                   src={src}
                   alt="carousel"
                   className="h-[250px] md:h-[500px]"
@@ -39,8 +39,7 @@ const Carousel: React.FC = () => {
                     height: "100%",
                     width: "auto",
                   }}
-                  height={250}
-                  width={250}
+                  loading="lazy"
                 />
               </div>
             </div>
