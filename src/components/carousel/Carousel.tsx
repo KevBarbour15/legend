@@ -1,13 +1,14 @@
 import React from "react";
+import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import "./embla.css";
 import { usePrevNextButtons, PrevButton, NextButton } from "./Arrows";
 
 const slides = [
-  "/images/carousel/1.jpg",
   "/images/carousel/3.jpg",
   "/images/carousel/4.jpg",
   "/images/carousel/5.jpg",
+  "/images/carousel/1.jpg",
   "/images/carousel/6.jpg",
   "/images/carousel/7.jpg",
   "/images/carousel/8.jpg",
@@ -15,7 +16,7 @@ const slides = [
 ];
 
 const Carousel: React.FC = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({});
+  const [emblaRef, emblaApi] = useEmblaCarousel();
   const {
     prevBtnDisabled,
     nextBtnDisabled,
@@ -29,12 +30,17 @@ const Carousel: React.FC = () => {
         <div className="embla__container">
           {slides.map((src, index) => (
             <div className="embla__slide" key={index}>
-              <div className="embla__slide__inner h-[275px] md:h-[500px]">
-                <img
+              <div className="embla__slide__inner h-[250px] w-auto md:h-[500px]">
+                <Image
                   src={src}
-                  loading="lazy"
                   alt="carousel"
-                  className="h-[275px] md:h-[500px]"
+                  className="h-[250px] md:h-[500px]"
+                  style={{
+                    height: "100%",
+                    width: "auto",
+                  }}
+                  height={250}
+                  width={250}
                 />
               </div>
             </div>

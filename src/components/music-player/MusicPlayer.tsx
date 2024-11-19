@@ -13,7 +13,6 @@ import ReactHowler from "react-howler";
 import { IconButton, Collapse } from "@mui/material";
 
 import {
-  CaretUp,
   VinylRecord,
   Play,
   Pause,
@@ -27,7 +26,8 @@ import {
 import Equalizer from "@/components/equalizer/Equalizer";
 
 const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
-  const [playing, setPlaying] = useState<boolean>(true);
+  const [playing, setPlaying] = useState<boolean>(false);
+
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
   const [mute, setMute] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
@@ -37,6 +37,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
   const recordTl = useRef<gsap.core.Timeline | null>(null);
   const recordPlayerTl = useRef<gsap.core.Timeline | null>(null);
   const playlistTl = useRef<gsap.core.Timeline | null>(null);
+  const armTl = useRef<gsap.core.Timeline | null>(null);
   const pathName = usePathname();
 
   useEffect(() => {
@@ -57,10 +58,19 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       ease: "sine.inOut",
     });
 
-    recordTl.current = gsap.timeline({ repeat: -1 }).to("#now-playing", {
+    armTl.current = gsap.timeline().to("#arm", {
+      duration: 0.5,
+      ease: "sine.inOut",
+      rotation: 30,
+      transformOrigin: "top center",
+      x: 12,
+    });
+
+    recordTl.current = gsap.timeline().to("#now-playing", {
       duration: 1.8,
       rotation: 360,
       ease: "linear",
+      repeat: -1,
     });
 
     gsap.set("#playlist", { opacity: 0 });
@@ -79,10 +89,6 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       ease: "sine.inOut",
     });
   }, []);
-
-  const togglePlayer = () => {
-    playlistVisible ? setPlaylistVisible(false) : setVisible(!visible);
-  };
 
   const togglePlaylist = () => {
     setPlaylistVisible(!playlistVisible);
@@ -110,20 +116,15 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
 
   const handleTrackChange = (index: number) => {
     setCurrentTrackIndex(index);
-    setPlaying(true);
   };
 
-  useEffect(() => {
-    if (playing) {
+  useGSAP(() => {
+    if (visible && playing) {
       recordTl.current?.play();
+      armTl.current?.play();
     } else {
       recordTl.current?.pause();
-    }
-
-    if (visible) {
-      recordPlayerTl.current?.play();
-    } else {
-      recordPlayerTl.current?.reverse();
+      armTl.current?.reverse();
     }
 
     if (playlistVisible) {
@@ -146,50 +147,52 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
           <Collapse
             in={visible}
             id="record-player"
-            className="hidden opacity-0 md:block"
+            className="mb-2 hidden opacity-0 md:block"
           >
-            <div className="mb-2">
+            <div className="relative h-auto w-full">
               <Image
                 id="now-playing"
-                height={24}
-                width={24}
+                height={128}
+                width={128}
                 style={{
-                  height: "auto",
-                  width: "auto",
+                  height: "151px",
+                  width: "151px",
                 }}
-                className="absolute left-[101.5px] top-[31.25%] z-[3] opacity-90"
-                src="/images/small-logo-record.png"
-                alt="Record Logo"
+                className="absolute left-[4px] top-[1.05px] z-[3] drop-shadow-record"
+                src="/images/record.png"
+                alt="Record"
               />
               <Image
-                className="drop-shadow-record"
-                src="/images/player.png"
-                alt="Player"
+                id="arm"
+                height={128}
+                width={128}
                 style={{
-                  height: "auto",
+                  height: "90%",
                   width: "auto",
                 }}
-                height={190}
-                width={190}
+                src="/images/arm.png"
+                alt="Record"
+                className="drop-shadow-recordPlayer absolute right-[17px] top-[10.5px] z-[3] h-[98.5%]"
+              />
+              <Image
+                height={128}
+                width={128}
+                style={{
+                  height: "auto",
+                  width: "100%",
+                }}
+                className="drop-shadow-recordPlayer rounded-sm"
+                src="/images/record-player.jpg"
+                alt="Record"
                 priority
               />
             </div>
           </Collapse>
           <div
-            className="z-[11] flex justify-between rounded-full bg-customCream bg-opacity-25 px-1 py-2 drop-shadow-record md:py-1"
+            className="drop-shadow-recordPlayer z-[11] flex justify-between rounded-full bg-customCream bg-opacity-25 px-1 py-2 md:gap-2 md:py-1"
             id="controls-background"
           >
-            <IconButton
-              id="player-button"
-              onClick={togglePlayer}
-              className={`hidden transform p-1 text-customCream drop-shadow-text transition-all md:block md:hover:text-customGold ${visible ? "rotate-180" : ""}`}
-            >
-              <CaretUp weight="regular" />
-            </IconButton>
-            <IconButton
-              id="player-button"
-              className="p-1 text-customCream drop-shadow-text transition-all md:hover:text-customGold"
-            >
+            <IconButton className="p-1 text-customCream drop-shadow-text transition-all md:hover:text-customGold">
               {mute ? (
                 <SpeakerSlash weight="fill" onClick={handleMute} />
               ) : (
@@ -197,29 +200,25 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               )}
             </IconButton>
             <IconButton
-              id="player-button"
               onClick={handlePreviousTrack}
               className="p-1 text-customCream drop-shadow-text transition-all md:hover:text-customGold"
             >
-              <SkipBack id="player-toggle" weight="fill" />
+              <SkipBack weight="fill" />
             </IconButton>
 
             <IconButton
-              id="player-button"
               onClick={handlePlayPauseRounded}
               className="p-1 text-customCream drop-shadow-text transition-all md:hover:text-customGold"
             >
               {playing ? <Pause weight="fill" /> : <Play weight="fill" />}
             </IconButton>
             <IconButton
-              id="player-button"
               onClick={handleNextTrack}
               className="p-1 text-customCream drop-shadow-text transition-all md:hover:text-customGold"
             >
               <SkipForward weight="fill" />
             </IconButton>
             <IconButton
-              id="player-button"
               onClick={togglePlaylist}
               className="transform p-1 text-customCream drop-shadow-text transition-all md:hover:rotate-[360deg] md:hover:text-customGold"
             >
@@ -238,14 +237,14 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       >
         <Collapse in={playlistVisible}>
           <div
-            className="aspect-square w-full rounded-sm drop-shadow-record md:h-[425px] md:w-auto"
+            className="drop-shadow-recordPlayer aspect-square w-full rounded-sm md:h-[425px] md:w-auto"
             style={{
-              backgroundImage: "url('/images/cover-alt.jpg')",
+              backgroundImage: "url('/images/album-cover.jpg')",
               backgroundPosition: "center",
               backgroundSize: "cover",
             }}
           >
-            <div className="h-full w-full rounded-sm bg-black bg-opacity-35">
+            <div className="h-full w-full rounded-sm">
               <Image
                 className="h-auto w-24 p-3 drop-shadow-text md:w-28"
                 src="/images/alt-logo.png"

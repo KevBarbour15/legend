@@ -57,7 +57,8 @@ const config: Config = {
         customSilver: "#C0C0C0",
       },
       dropShadow: {
-        record: "0.75px 2.75px 5.5px rgba(0, 0, 0, 0.65)",
+        record: "0.75px 0.75px 0.75px rgba(0, 0, 0, 0.45)",
+        recordPlayer: "1.75px 2.75px 4.5px rgba(0, 0, 0, 0.85)",
         text: ".75px 0.75px 1.15px rgba(0, 0, 0, 0.95)",
       },
       minHeight: {
