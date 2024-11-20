@@ -109,7 +109,7 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
             alt="Legend Has It logo"
             width={150}
             height={150}
-            priority
+            priority={true}
             onClick={toggleMenu}
           />
         </div>

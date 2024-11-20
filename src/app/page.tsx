@@ -181,7 +181,8 @@ export default function Home() {
               className="object-cover"
               fill
               alt="Grand Opening"
-              priority
+              priority={true}
+              loading="eager"
             />
           </div>
 

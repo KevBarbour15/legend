@@ -111,7 +111,7 @@ const SideMenu: React.FC = () => {
             alt="Alternative Logo"
             height={150}
             width={150}
-            priority
+            priority={true}
           />
           <a
             className="cursor-pointer text-customCream"

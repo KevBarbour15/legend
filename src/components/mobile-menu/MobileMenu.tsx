@@ -44,7 +44,7 @@ const MobileMenu: React.FC = () => {
           alt="Logo"
           height={115}
           width={115}
-          priority
+          priority={true}
         />
         <ul className="pt-6 font-bigola text-4xl" id="menu-text">
           {links.map((link, idx) => (

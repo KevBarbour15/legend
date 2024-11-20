@@ -23,6 +23,7 @@
   src: url("/fonts/Roboto-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -30,6 +31,7 @@
   src: url("/fonts/Roboto-Medium.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -37,6 +39,7 @@
   src: url("/fonts/Roboto-Bold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -44,6 +47,7 @@
   src: url("/fonts/Avenir.ttc") format("truetype-collection");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -51,6 +55,7 @@
   src: url("/fonts/Bigola-Display-Regular.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -58,6 +63,7 @@
   src: url("/fonts/Hypatia-Sans-Pro.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -65,6 +71,7 @@
   src: url("/fonts/Hypatia-Sans-Pro-Bold.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -72,6 +79,7 @@
   src: url("/fonts/Hypatia-Sans-Pro-Semibold.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -79,6 +87,7 @@
   src: url("/fonts/Hypatia-Sans-Pro-Light.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -86,6 +95,7 @@
   src: url("/fonts/FunnelDisplay.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -93,6 +103,7 @@
   src: url("/fonts/Poppins-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 body {
@@ -150,7 +161,9 @@ body.menu-open {
 }
 
 @media screen and (max-width: 768px) {
-  input, textarea, select {
+  input,
+  textarea,
+  select {
     font-size: 16px; /* Prevents zoom on iOS */
   }
 }

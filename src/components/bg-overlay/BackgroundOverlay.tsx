@@ -18,7 +18,7 @@ const BackgroundOverlay: React.FC = () => {
         width={150}
         height={150}
         style={{ height: "auto", width: "auto" }}
-        priority
+        priority={true}
       />
     </div>
   );

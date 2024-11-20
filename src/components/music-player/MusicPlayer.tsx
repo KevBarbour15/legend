@@ -160,6 +160,8 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                 className="absolute left-[4px] top-[1.05px] z-[3] drop-shadow-record"
                 src="/images/record.png"
                 alt="Record"
+                priority={true}
+                loading="eager"
               />
               <Image
                 id="arm"
@@ -183,7 +185,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                 className="rounded-sm drop-shadow-recordPlayer"
                 src="/images/record-player.jpg"
                 alt="Record"
-                priority
+                priority={true}
               />
             </div>
           </Collapse>
