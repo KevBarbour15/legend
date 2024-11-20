@@ -34,7 +34,6 @@ const tracks: {
     title: "Lover In U",
     artist: "Fig Edits",
   },
-
   {
     url: "./audio/get-down-baby.mp3",
     title: "Get Down Baby",
@@ -43,7 +42,7 @@ const tracks: {
 ];
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://legend-zg4t.vercel.app/"),
+  metadataBase: new URL("https://www.legendhasithifi.com/"),
   title: "Legend Has It",
   description:
     "Sacramento's first hi-fi listening bar, where music meets the art of sound.",

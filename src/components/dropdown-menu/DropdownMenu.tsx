@@ -137,6 +137,8 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
               href="https://www.instagram.com/legendhasithifi/"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Follow Legend Has It on Instagram"
+              title="Follow us on Instagram"
             >
               <InstagramLogo size={32} weight="fill" />
             </IconButton>
@@ -146,6 +148,8 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
               href="https://www.facebook.com/legendhasithifi"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Follow Legend Has It on Facebook"
+              title="Follow us on Facebook"
             >
               <FacebookLogo size={32} weight="fill" />
             </IconButton>
@@ -155,6 +159,8 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
               href="https://www.youtube.com/@legendhasithifi"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Follow Legend Has It on YouTube"
+              title="Follow us on YouTube"
             >
               <YoutubeLogo size={32} weight="fill" />
             </IconButton>

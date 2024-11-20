@@ -48,6 +48,7 @@ const Menu: React.FC = ({}) => {
       const data = await getMenu();
 
       setProgress(generateProgress(34, 66));
+      await new Promise((resolve) => setTimeout(resolve, 5));
 
       if (!data) {
         setProgress(0);
@@ -55,6 +56,7 @@ const Menu: React.FC = ({}) => {
         throw new Error("Failed to fetch menu data");
       }
       setProgress(generateProgress(67, 99));
+      await new Promise((resolve) => setTimeout(resolve, 5));
 
       setMenu(data);
     } catch (error) {
@@ -141,7 +143,7 @@ const Menu: React.FC = ({}) => {
           key={childCategory.id}
         >
           <AccordionTrigger
-            className="cursor-pointer font-bigola text-xl leading-none text-customCream md:text-4xl"
+            className="cursor-pointer font-bigola text-2xl leading-none text-customCream md:text-4xl"
             icon={<CaretDown weight="regular" />}
           >
             <h3>{childCategory.name}</h3>
@@ -192,7 +194,7 @@ const Menu: React.FC = ({}) => {
                   key={categoryName}
                 >
                   <AccordionTrigger
-                    className="cursor-pointer font-bigola text-xl leading-none text-customCream md:text-4xl"
+                    className="cursor-pointer font-bigola text-2xl leading-none text-customCream md:text-4xl"
                     icon={getIcon(categoryName)}
                   >
                     <h2>{categoryName}</h2>

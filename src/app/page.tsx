@@ -273,6 +273,8 @@ export default function Home() {
                 href="https://www.instagram.com/legendhasithifi/"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Follow Legend Has It on Instagram"
+                title="Follow us on Instagram"
               >
                 <InstagramLogo size={40} weight="fill" />
               </a>
@@ -282,6 +284,8 @@ export default function Home() {
                 href="https://www.facebook.com/legendhasithifi"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Follow Legend Has It on Facebook"
+                title="Follow us on Facebook"
               >
                 <FacebookLogo size={40} weight="fill" />
               </a>
@@ -291,6 +295,8 @@ export default function Home() {
                 href="https://www.youtube.com/@legendhasithifi"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Follow Legend Has It on YouTube"
+                title="Follow us on YouTube"
               >
                 <YoutubeLogo size={40} weight="fill" />
               </a>

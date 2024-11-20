@@ -92,7 +92,15 @@ const SideMenu: React.FC = () => {
                   {link.label}
                 </a>
               ) : (
-                <Link href={link.path}>{link.label}</Link>
+                <li className="menu-link">
+                  <Link
+                    href={link.path}
+                    aria-label={`Navigate to ${link.label} page`}
+                    title={link.label}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
               )}
             </li>
           ))}

@@ -40,7 +40,6 @@ export async function GET() {
     const allObjects = await fetchAllCatalogObjects(client);
 
     const data = await getCategoriesData();
-    //console.log(data);
 
     parentCategories = data.parentCategories;
     childCategories = data.childCategories;
@@ -51,7 +50,6 @@ export async function GET() {
       childCategories.length === 0 ||
       !parentName
     ) {
-      console.log("Error 1");
       return await handleCategoryMismatch();
     }
 
@@ -59,9 +57,7 @@ export async function GET() {
 
     const categories = await filterCategories(allObjects);
 
-    //console.log(allCategories);
     if (validateCategories(categories) === false) {
-      console.log("Error 2");
       return await handleCategoryMismatch();
     }
 
@@ -108,6 +104,7 @@ async function fetchAllCatalogObjects(
     const response = await client.catalogApi.listCatalog(
       cursor,
       "ITEM,CATEGORY,ITEM_VARIATION",
+      undefined,
     );
     allObjects = allObjects.concat(response.result.objects || []);
     cursor = response.result.cursor;
@@ -203,25 +200,24 @@ async function fetchInventory(
         .filter((id): id is string => !!id) || [],
   );
 
-  let allInventoryCounts: InventoryCount[] = [];
-  let cursor: string | undefined;
   const batchSize = 100;
+  const batches = [];
 
-  do {
-    const batchIds = variationIds.splice(0, batchSize);
-    const inventoryResponse =
-      await client.inventoryApi.batchRetrieveInventoryCounts({
+  for (let i = 0; i < variationIds.length; i += batchSize) {
+    const batchIds = variationIds.slice(i, i + batchSize);
+    batches.push(
+      client.inventoryApi.batchRetrieveInventoryCounts({
         catalogObjectIds: batchIds,
         locationIds: [BAR_INVENTORY_LOCATION_ID],
-        cursor,
         states: ["IN_STOCK"],
-      });
-
-    allInventoryCounts = allInventoryCounts.concat(
-      inventoryResponse.result.counts || [],
+      }),
     );
-    cursor = inventoryResponse.result.cursor;
-  } while (cursor || variationIds.length > 0);
+  }
+
+  const responses = await Promise.all(batches);
+  const allInventoryCounts = responses.flatMap(
+    (response) => response.result.counts || [],
+  );
 
   return new Map(
     allInventoryCounts.map((count) => [
@@ -282,29 +278,26 @@ function assignItemsToCategories(
   categoryMap: Map<string, CategoryWithItems>,
   childCategoryMap: Map<string, CategoryWithItems>,
 ) {
+  const locationIdSet = new Set([BAR_INVENTORY_LOCATION_ID]);
+  const cannedBottledBeerSet = new Set([CANNED_BOTTLED_BEER_ID]);
+  const testItemName = "Kevin's Pale Ale";
+
   items.forEach((item) => {
+    const isInLocation = item.locationIds.some((id) => locationIdSet.has(id));
+    const isCannedBottled = item.categoryIds.some((id) =>
+      cannedBottledBeerSet.has(id),
+    );
+
+    if (!isInLocation || !item.inStock) return;
+
     item.categoryIds.forEach((categoryId) => {
       if (
         childCategoryMap.has(categoryId) &&
-        item.locationIds.includes(BAR_INVENTORY_LOCATION_ID) &&
-        item.categoryIds.includes(CANNED_BOTTLED_BEER_ID) &&
-        item.inStock
+        (isCannedBottled || item.name === testItemName)
       ) {
         childCategoryMap.get(categoryId)?.items.push(item);
-      } else if (
-        categoryMap.has(categoryId) &&
-        item.locationIds.includes(BAR_INVENTORY_LOCATION_ID) &&
-        !item.categoryIds.includes(CANNED_BOTTLED_BEER_ID) &&
-        item.inStock
-      ) {
+      } else if (categoryMap.has(categoryId) && !isCannedBottled) {
         categoryMap.get(categoryId)?.items.push(item);
-      } else if (
-        // for testing purposes
-        childCategoryMap.has(categoryId) &&
-        item.name === "Kevin's Pale Ale" &&
-        item.inStock
-      ) {
-        childCategoryMap.get(categoryId)?.items.push(item);
       }
     });
   });
