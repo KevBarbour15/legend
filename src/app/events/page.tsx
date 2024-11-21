@@ -3,7 +3,6 @@ import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Event, PreloadedMedia } from "@/data/events";
 
 import EventCard from "@/components/event-card/EventCard";
-import MobileHeading from "@/components/mobile-heading/MobileHeading";
 import Loading from "@/components/loading/Loading";
 
 import { generateProgress } from "@/utils/progress";
@@ -209,7 +208,6 @@ export default function Events() {
       ref={containerRef}
       className="z-10 mx-auto flex w-screen flex-col items-center justify-center overflow-y-auto p-3 pb-20 md:pb-0 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
     >
-      <MobileHeading section={"Events"} />
       {loading ? (
         <div className="font-bigola">
           <Loading

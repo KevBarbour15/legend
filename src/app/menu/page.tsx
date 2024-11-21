@@ -22,7 +22,6 @@ import { generateProgress } from "@/utils/progress";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-import MobileHeading from "@/components/mobile-heading/MobileHeading";
 import Divider from "@/components/divider/Divider";
 import Loading from "@/components/loading/Loading";
 
@@ -161,7 +160,6 @@ const Menu: React.FC = ({}) => {
       ref={containerRef}
       className="z-10 mx-auto flex w-screen flex-col items-center justify-center overflow-y-auto p-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
     >
-      <MobileHeading section={"Menu"} />
       {loading ? (
         <div className="font-bigola">
           <Loading

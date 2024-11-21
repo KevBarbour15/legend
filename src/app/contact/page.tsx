@@ -2,8 +2,6 @@
 import { useState, useRef } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import SideMenu from "@/components/side-menu/SideMenu";
-import MobileHeading from "@/components/mobile-heading/MobileHeading";
 import EventForm from "@/components/contact-forms/EventForm";
 import GeneralForm from "@/components/contact-forms/GeneralForm";
 import DjForm from "@/components/contact-forms/DjForm";
@@ -115,7 +113,6 @@ export default function Contact() {
       ref={containerRef}
       className="z-10 mx-auto flex w-screen flex-col items-center justify-center overflow-y-auto p-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
     >
-      <MobileHeading section={"Contact"} />
       <Tabs
         defaultValue="event"
         className="flex w-full flex-col items-center"

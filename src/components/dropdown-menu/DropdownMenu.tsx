@@ -1,9 +1,13 @@
 "use client";
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import "./menu.css";
+
+import { DropdownMenuProps } from "@/data/dropdown-menu";
+
 import Image from "next/image";
+
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -23,12 +27,7 @@ const links = [
   { path: "/events", label: "Events" },
 ];
 
-interface MenuProps {
-  menuStatus: boolean;
-  toggleMenu: () => void;
-}
-
-const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
+const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
   const container = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
   const router = useRouter();
@@ -92,10 +91,9 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
 
   const handleLinkClick = async (path: string, e: React.MouseEvent) => {
     e.preventDefault();
-
-    tl.current?.reverse().then(() => {
-      router.push(path);
-    });
+    
+    tl.current?.reverse();
+    router.push(path);
   };
 
   return (
@@ -122,6 +120,8 @@ const Menu: React.FC<MenuProps> = ({ menuStatus, toggleMenu }) => {
                     href={link.path}
                     className="menu-link"
                     onClick={(e) => handleLinkClick(link.path, e)}
+                    aria-label={`Navigate to ${link.label} page`}
+                    title={link.label}
                   >
                     {link.label}
                   </a>

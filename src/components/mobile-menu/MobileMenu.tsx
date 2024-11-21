@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 
 const links = [
@@ -12,13 +12,6 @@ const links = [
 
 const MobileMenu: React.FC = () => {
   const menuRef = useRef<HTMLDivElement>(null);
-  const [windowHeight, setWindowHeight] = useState<string>("100vh");
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setWindowHeight(window.innerHeight + "px");
-    }
-  }, []);
 
   const handleAboutClick = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -32,10 +25,7 @@ const MobileMenu: React.FC = () => {
   return (
     <div
       ref={menuRef}
-      className="flex h-screen flex-col justify-between text-customCream md:hidden"
-      style={{
-        height: `${windowHeight}`,
-      }}
+      className="flex h-dvh flex-col justify-between text-customCream md:hidden"
     >
       <div className="flex flex-grow flex-col justify-start pl-3 pt-3">
         <Image
@@ -50,11 +40,22 @@ const MobileMenu: React.FC = () => {
           {links.map((link, idx) => (
             <li key={idx} className="m-0 p-0 leading-[.85]">
               {link.label === "About" ? (
-                <a href="/" onClick={handleAboutClick}>
+                <a
+                  href="/"
+                  onClick={handleAboutClick}
+                  aria-label="Navigate to About page"
+                  title="About"
+                >
                   {link.label}
                 </a>
               ) : (
-                <Link href={link.path}>{link.label}</Link>
+                <Link
+                  href={link.path}
+                  aria-label={`Navigate to ${link.label} page`}
+                  title={link.label}
+                >
+                  {link.label}
+                </Link>
               )}
             </li>
           ))}
@@ -66,6 +67,8 @@ const MobileMenu: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.google.com/maps/dir//410+L+St,+Sacramento,+CA+95814/@38.5798987,-121.5844553,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x809ad12b9928b091:0x8fd24ebe337fbfe7!2m2!1d-121.5020543!2d38.5799276?entry=ttu&g_ep=EgoyMDI0MDkwNC4wIKXMDSoASAFQAw%3D%3D"
+          aria-label="Navigate to Google Maps"
+          title="Google Maps"
         >
           <div
             id="menu-text"

@@ -68,12 +68,11 @@ const SideMenu: React.FC = () => {
     } else {
       router.push("/");
 
-      setTimeout(() => {
-        const aboutSection = document.getElementById("about-content");
-        if (!aboutSection) return;
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
-        aboutSection.scrollIntoView({ behavior: "smooth" });
-      }, 300);
+      const aboutSection = document.getElementById("about-content");
+      if (!aboutSection) return;
+      aboutSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
