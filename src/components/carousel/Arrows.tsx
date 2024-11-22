@@ -58,7 +58,7 @@ export const PrevButton: React.FC<IconButtonProps> = (props) => {
       {...restProps}
       className="mb-6 mt-3 p-0 text-customNavy transition-colors md:mb-0 md:hover:text-customGold"
     >
-      <CaretLeft size={40} weight="regular" />
+      <CaretLeft size={40} weight="thin" />
       {children}
     </IconButton>
   );
@@ -72,7 +72,7 @@ export const NextButton: React.FC<IconButtonProps> = (props) => {
       {...restProps}
       className="mb-6 mt-3 p-0 text-customNavy transition-colors md:mb-0 md:hover:text-customGold"
     >
-      <CaretRight size={40} weight="regular" />
+      <CaretRight size={40} weight="thin" />
       {children}
     </IconButton>
   );

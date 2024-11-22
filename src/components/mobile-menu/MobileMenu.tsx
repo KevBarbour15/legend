@@ -26,19 +26,20 @@ const MobileMenu: React.FC = () => {
     <div
       ref={menuRef}
       className="flex h-dvh flex-col justify-between text-customCream md:hidden"
+      id="mobile-menu"
     >
-      <div className="flex flex-grow flex-col justify-start pl-3 pt-3">
+      <div className="fixed flex flex-grow flex-col justify-start pl-3 pt-3">
         <Image
-          className="w-[115px] md:hidden"
+          className="w-[200px] md:hidden"
           src="/images/alt-logo.png"
           alt="Logo"
-          height={115}
-          width={115}
+          height={200}
+          width={200}
           priority={true}
         />
-        <ul className="pt-6 font-bigola text-4xl" id="menu-text">
+        <ul className="pt-6 font-bigola text-6xl">
           {links.map((link, idx) => (
-            <li key={idx} className="m-0 p-0 leading-[.85]">
+            <li key={idx} className="m-0 p-0 leading-[0.85]">
               {link.label === "About" ? (
                 <a
                   href="/"
@@ -61,7 +62,7 @@ const MobileMenu: React.FC = () => {
           ))}
         </ul>
       </div>
-      <div className="mb-20 ml-3 w-fit font-bigola">
+      <div className="fixed bottom-20 left-0 ml-3 w-fit font-bigola">
         <a
           className="cursor-pointer"
           target="_blank"
@@ -71,16 +72,16 @@ const MobileMenu: React.FC = () => {
           title="Google Maps"
         >
           <div
-            id="menu-text"
-            className="flex justify-between text-4xl leading-[.85]"
+            id="mobile-menu"
+            className="flex justify-between gap-2 p-0 text-6xl leading-[.85]"
           >
-            <p>410</p>
-            <p>L</p>
-            <p>St</p>
+            <span>410</span>
+            <span>L</span>
+            <span>St</span>
           </div>
           <p
-            id="menu-text"
-            className="flex justify-between text-2xl leading-none"
+            id="mobile-menu"
+            className="flex justify-between text-3xl italic leading-[0.75]"
           >
             <span>S</span>
             <span>a</span>
@@ -94,11 +95,11 @@ const MobileMenu: React.FC = () => {
             <span>o</span>
           </p>
           <div
-            id="menu-text"
-            className="flex justify-between text-4xl leading-[.85]"
+            id="mobile-menu"
+            className="flex justify-between gap-1 text-5xl leading-none"
           >
-            <p>CA</p>
-            <p>95814</p>
+            <span>CA,</span>
+            <span>95814</span>
           </div>
         </a>
       </div>

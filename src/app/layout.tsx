@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import BackgroundOverlay from "@/components/bg-overlay/BackgroundOverlay";
 import MusicPlayer from "@/components/music-player/MusicPlayer";
-import MobileHeading from "@/components/mobile-heading/MobileHeading";
+import MobileHeader from "@/components/mobile-header/MobileHeader";
 import "./globals.css";
 
 import { Toaster } from "@/components/ui/toaster";
@@ -96,7 +96,7 @@ export default function RootLayout({
           />
           <Toaster />
           <BackgroundOverlay />
-          <MobileHeading />
+          <MobileHeader />
           {children}
           <MusicPlayer tracks={tracks} />
         </body>

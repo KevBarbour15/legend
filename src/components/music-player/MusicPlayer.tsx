@@ -48,11 +48,11 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
   useGSAP(() => {
     if (!containerRef.current) return;
 
-    gsap.set(containerRef.current, { opacity: 0 });
+    //gsap.set(containerRef.current, { opacity: 0 });
 
     tl.current = gsap.timeline().to(containerRef.current, {
-      delay: 0.25,
-      duration: 0.75,
+      delay: 0.15,
+      duration: 0.35,
       opacity: 1,
       ease: "sine.inOut",
     });
@@ -189,44 +189,41 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               />
             </div>
           </Collapse>
-          <div
-            className="z-[11] flex justify-between rounded-full bg-customCream bg-opacity-25 px-1 py-2 drop-shadow-recordPlayer md:gap-2 md:py-1"
-            id="controls-background"
-          >
-            <IconButton className="p-1 text-customCream drop-shadow-text transition-all md:hover:text-customGold">
+          <div className="z-[11] flex justify-between rounded-sm bg-black bg-opacity-50 px-1 py-2 drop-shadow-recordPlayer md:gap-2 md:py-1">
+            <IconButton className="p-1 text-customSilver drop-shadow-text transition-all md:hover:text-customGold">
               {mute ? (
-                <SpeakerSlash weight="fill" onClick={handleMute} />
+                <SpeakerSlash weight="thin" onClick={handleMute} />
               ) : (
-                <SpeakerSimpleHigh weight="fill" onClick={handleMute} />
+                <SpeakerSimpleHigh weight="thin" onClick={handleMute} />
               )}
             </IconButton>
             <IconButton
               onClick={handlePreviousTrack}
-              className="p-1 text-customCream drop-shadow-text transition-all md:hover:text-customGold"
+              className="p-1 text-customSilver drop-shadow-text transition-all md:hover:text-customGold"
             >
-              <SkipBack weight="fill" />
+              <SkipBack weight="thin" />
             </IconButton>
 
             <IconButton
               onClick={handlePlayPauseRounded}
-              className="p-1 text-customCream drop-shadow-text transition-all md:hover:text-customGold"
+              className="p-1 text-customSilver drop-shadow-text transition-all md:hover:text-customGold"
             >
-              {playing ? <Pause weight="fill" /> : <Play weight="fill" />}
+              {playing ? <Pause weight="thin" /> : <Play weight="thin" />}
             </IconButton>
             <IconButton
               onClick={handleNextTrack}
-              className="p-1 text-customCream drop-shadow-text transition-all md:hover:text-customGold"
+              className="p-1 text-customSilver drop-shadow-text transition-all md:hover:text-customGold"
             >
-              <SkipForward weight="fill" />
+              <SkipForward weight="thin" />
             </IconButton>
             <IconButton
               onClick={togglePlaylist}
-              className="transform p-1 text-customCream drop-shadow-text transition-all md:hover:rotate-[360deg] md:hover:text-customGold"
+              className="transform p-1 text-customSilver drop-shadow-text transition-all md:hover:rotate-[360deg] md:hover:text-customGold"
             >
               {playlistVisible ? (
-                <X weight="regular" />
+                <X weight="thin" />
               ) : (
-                <VinylRecord weight="regular" />
+                <VinylRecord weight="thin" />
               )}
             </IconButton>
           </div>

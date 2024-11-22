@@ -43,81 +43,61 @@ const DashHeader: React.FC<DashProps> = ({ setActiveTab, activeTab }) => {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <IconButton className="p-0 text-customWhite transition-all duration-300 md:hover:rotate-[360deg]">
-              <List size={32} weight="regular" />
+              <List size={32} weight="thin" />
             </IconButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="font-funnelDisplay">
             <DropdownMenuItem
               onClick={() => handleMenuItemClick("Create Event")}
             >
-              <CalendarPlus
-                className="mr-3 md:mr-6"
-                size={32}
-                weight="regular"
-              />
+              <CalendarPlus className="mr-3 md:mr-6" size={32} weight="thin" />
               Create Event
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => handleMenuItemClick("Upcoming Events")}
             >
-              <CalendarDots
-                className="mr-3 md:mr-6"
-                size={32}
-                weight="regular"
-              />
+              <CalendarDots className="mr-3 md:mr-6" size={32} weight="thin" />
               Upcoming Events
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => handleMenuItemClick("Past Events")}
             >
-              <CalendarCheck
-                className="mr-3 md:mr-6"
-                size={32}
-                weight="regular"
-              />
+              <CalendarCheck className="mr-3 md:mr-6" size={32} weight="thin" />
               Past Events
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => handleMenuItemClick("Unread Messages")}
             >
-              <Envelope className="mr-3 md:mr-6" size={32} weight="regular" />
+              <Envelope className="mr-3 md:mr-6" size={32} weight="thin" />
               Unread Messages
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => handleMenuItemClick("Read Messages")}
             >
-              <EnvelopeOpen
-                className="mr-3 md:mr-6"
-                size={32}
-                weight="regular"
-              />
+              <EnvelopeOpen className="mr-3 md:mr-6" size={32} weight="thin" />
               Read Messages
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => handleMenuItemClick("Menu Categories")}
             >
-              <BookOpenText
-                className="mr-3 md:mr-6"
-                size={32}
-                weight="regular"
-              />
+              <BookOpenText className="mr-3 md:mr-6" size={32} weight="thin" />
               Menu Categories
             </DropdownMenuItem>
             <LogoutLink postLogoutRedirectURL={postLogoutRedirectURL}>
               <DropdownMenuItem>
-                <SignOut size={32} weight="regular" className="mr-3 md:mr-6" />
+                <SignOut size={32} weight="thin" className="mr-3 md:mr-6" />
                 Logout
               </DropdownMenuItem>
             </LogoutLink>
           </DropdownMenuContent>
         </DropdownMenu>
-        <div className="font-funnelDisplay ml-3 text-base font-bold md:ml-6 md:text-xl">
+        <div className="ml-3 font-funnelDisplay text-base font-bold md:ml-6 md:text-xl">
           {activeTab}
         </div>
       </div>
       <Link href="/" className="h-full text-black">
         <IconButton className="p-0 text-customWhite transition-all duration-300 md:hover:rotate-[360deg]">
-          <HouseLine size={32} weight="regular" />
+          <HouseLine size={32} weight="thin" />
         </IconButton>
       </Link>
     </div>

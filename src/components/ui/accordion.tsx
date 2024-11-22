@@ -27,7 +27,7 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "flex w-full flex-1 items-center justify-between px-0 py-3 text-lg transition-all duration-300 selection:cursor-pointer md:text-3xl [&[data-state=open]>svg]:rotate-180",
+        "flex w-full flex-1 items-center justify-between px-0 py-3 transition-all duration-300 selection:cursor-pointer [&[data-state=open]>svg]:rotate-180",
         className,
       )}
       {...props}
@@ -40,7 +40,7 @@ const AccordionTrigger = React.forwardRef<
         })
       ) : (
         <CaretDown
-          weight="regular"
+          weight="thin"
           className="flex-shrink-0 p-0 transition-transform duration-200"
           style={{ width: "30px", height: "30px" }}
         />

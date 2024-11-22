@@ -11,7 +11,7 @@ import { IconButton } from "@mui/material";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-const MobileHeading: React.FC = () => {
+const MobileHeader: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const [pageName, setPageName] = useState<string>("/");
@@ -43,7 +43,7 @@ const MobileHeading: React.FC = () => {
         id="mobile-heading"
         className={`${
           pathname === "/" ? "hidden" : ""
-        } flex w-full justify-between border-b border-customGold p-3 text-customCream opacity-0 md:hidden ${pathname === "/dashboard" ? "hidden" : ""}`}
+        } mx-3 flex justify-between border-b border-customGold py-3 text-customCream opacity-0 md:hidden ${pathname === "/dashboard" ? "hidden" : ""}`}
       >
         <span className="font-bigola text-2xl capitalize italic">
           {pageName}
@@ -52,11 +52,11 @@ const MobileHeading: React.FC = () => {
           onClick={toggleMenu}
           className="bg-transparent p-0 text-customCream"
         >
-          <List weight="regular" size={28} />
+          <List weight="thin" size={28} />
         </IconButton>
       </div>
     </>
   );
 };
 
-export default MobileHeading;
+export default MobileHeader;

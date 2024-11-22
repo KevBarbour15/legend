@@ -38,7 +38,29 @@ const Menu: React.FC = ({}) => {
   const tl = useRef<gsap.core.Timeline | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const menuItemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [progress, setProgress] = useState<number>(0);
+  const [activeCategory, setActiveCategory] = useState<number | null>(null);
+  const [activeChildCategory, setActiveChildCategory] = useState<string | null>(
+    null,
+  );
+
+  const handleCategoryClick = (index: number) => {
+    if (activeCategory === index) {
+      setActiveCategory(null);
+      setActiveChildCategory(null);
+    } else {
+      setActiveCategory(index);
+    }
+  };
+
+  const handleChildCategoryClick = (id: string) => {
+    if (activeChildCategory === id) {
+      setActiveChildCategory(null);
+    } else {
+      setActiveChildCategory(id);
+    }
+  };
 
   const fetchMenu = async () => {
     try {
@@ -47,7 +69,7 @@ const Menu: React.FC = ({}) => {
       const data = await getMenu();
 
       setProgress(generateProgress(34, 66));
-      await new Promise((resolve) => setTimeout(resolve, 5));
+      await new Promise((resolve) => setTimeout(resolve, 15));
 
       if (!data) {
         setProgress(0);
@@ -55,7 +77,7 @@ const Menu: React.FC = ({}) => {
         throw new Error("Failed to fetch menu data");
       }
       setProgress(generateProgress(67, 99));
-      await new Promise((resolve) => setTimeout(resolve, 5));
+      await new Promise((resolve) => setTimeout(resolve, 15));
 
       setMenu(data);
     } catch (error) {
@@ -76,12 +98,27 @@ const Menu: React.FC = ({}) => {
     gsap.set("#menu", {
       opacity: 0,
     });
-
-    tl.current = gsap.timeline({}).to("#menu", {
-      delay: 0.15,
-      opacity: 1,
-      duration: 0.35,
+    gsap.set(menuItemRefs.current, {
+      opacity: 0,
+      y: 75,
+      clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
     });
+
+    tl.current = gsap
+      .timeline({})
+      .to("#menu", {
+        opacity: 1,
+        duration: 0.15,
+      })
+      .to(menuItemRefs.current, {
+        delay: 0.15,
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+        y: 0,
+        duration: 0.2,
+        stagger: 0.075,
+        ease: "linear",
+        opacity: 1,
+      });
   }, [loading]);
 
   useEffect(() => {
@@ -92,42 +129,41 @@ const Menu: React.FC = ({}) => {
   const getIcon = (categoryName: string) => {
     switch (categoryName.toLowerCase()) {
       case "canned / bottled":
-        return <BeerBottle weight="fill" />;
+        return <BeerBottle weight="thin" />;
       case "draft":
-        return <BeerStein weight="fill" />;
+        return <BeerStein weight="thin" />;
       case "wine":
-        return <Wine weight="fill" />;
+        return <Wine weight="thin" />;
       default:
-        return <PintGlass weight="fill" />;
+        return <PintGlass weight="thin" />;
     }
   };
 
   const renderMenuItem = (item: ProcessedItem) => (
     <div
       key={item.id}
-      className="block text-nowrap pb-3 font-hypatia text-base text-customWhite md:text-lg"
+      className="block text-nowrap px-3 pb-6 font-hypatia text-base text-customWhite md:text-lg"
     >
-      <div className="flex w-full justify-between font-bigola text-lg text-customGold md:text-2xl">
+      <div className="flex w-full justify-between font-bigola text-lg text-customCream md:text-2xl">
         <p className="text-left leading-none">{item.name}</p>
-        <Divider borderColor={"border-customWhite"} />
-        <p className="text-right leading-none">{item.price}</p>
+        <p className="text-right italic leading-none">{item.price}</p>
       </div>
-      <div className="mt-1 flex w-full justify-between font-hypatiaSemibold leading-tight">
+      <div className="mt-1 flex w-full justify-between font-hypatiaSemibold leading-tight text-customGold">
         <p>{item.brand}</p>
-        <Divider borderColor={"border-customWhite"} />
-        <p>{item.description}</p>
+        <Divider borderColor={"border-customCream"} />
+        <p className="italic">{item.description}</p>
       </div>
       {item.city && item.abv && (
-        <div className="mt-1 flex w-full justify-between leading-none">
-          <p>
-            {item.city}
-            <span>, CA</span>
+        <div className="mt-1 flex w-full justify-between leading-none text-customGold">
+          <p className="flex gap-1">
+            <p>{item.city}</p>
+            <p>, CA</p>
           </p>
-          <Divider borderColor={"border-customWhite"} />
-          <p>
-            <span>ABV </span>
-            {item.abv}
-          </p>
+          <Divider borderColor={"border-customCream"} />
+          <div className="flex gap-1 italic">
+            <p>ABV</p>
+            <p> {item.abv}</p>
+          </div>
         </div>
       )}
     </div>
@@ -142,10 +178,19 @@ const Menu: React.FC = ({}) => {
           key={childCategory.id}
         >
           <AccordionTrigger
-            className="cursor-pointer font-bigola text-2xl leading-none text-customCream md:text-4xl"
-            icon={<CaretDown weight="regular" />}
+            className={`cursor-pointer font-bigola text-2xl leading-none md:text-4xl ${
+              activeChildCategory === childCategory.id
+                ? "text-customGold"
+                : "text-customCream"
+            }`}
+            icon={<CaretDown weight="thin" />}
+            onClick={() => handleChildCategoryClick(childCategory.id)}
           >
-            <h3>{childCategory.name}</h3>
+            <h2
+              className={`transition-all duration-300 ${activeChildCategory === childCategory.id ? "translate-x-[15px] transform text-customGold" : "text-customCream"}`}
+            >
+              {childCategory.name}
+            </h2>
           </AccordionTrigger>
           <AccordionContent className="border-customGold">
             {childCategory.items.map(renderMenuItem)}
@@ -158,7 +203,7 @@ const Menu: React.FC = ({}) => {
   return (
     <div
       ref={containerRef}
-      className="z-10 mx-auto flex w-screen flex-col items-center justify-center overflow-y-auto p-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
+      className="z-10 mx-auto flex w-screen flex-col items-center justify-center overflow-y-auto px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
     >
       {loading ? (
         <div className="font-bigola">
@@ -186,29 +231,47 @@ const Menu: React.FC = ({}) => {
           <div className="w-full opacity-0" id="menu">
             {Object.entries(menu).map(
               ([categoryName, categoryContent], index) => (
-                <AccordionItem
-                  value={categoryName}
-                  className={`${index === 0 ? "md:border-t" : ""} border-b border-customGold`}
-                  key={categoryName}
-                >
-                  <AccordionTrigger
-                    className="cursor-pointer font-bigola text-2xl leading-none text-customCream md:text-4xl"
-                    icon={getIcon(categoryName)}
+                <div className="w-full" key={index}>
+                  <div
+                    ref={(el) => {
+                      menuItemRefs.current[index] = el;
+                    }}
+                    className="relative w-full"
                   >
-                    <h2>{categoryName}</h2>
-                  </AccordionTrigger>
-                  <AccordionContent
-                    className={`border-customGold ${categoryName === "Canned / Bottled" ? "pt-0" : ""}`}
-                  >
-                    {categoryName === "Canned / Bottled"
-                      ? renderCannedBeerCategory(
-                          categoryContent as CategoryWithItems,
-                        )
-                      : (categoryContent as ProcessedItem[]).map(
-                          renderMenuItem,
-                        )}
-                  </AccordionContent>
-                </AccordionItem>
+                    <AccordionItem
+                      value={categoryName}
+                      className={`${index === 0 ? "md:border-t" : ""} border-b border-customGold`}
+                      key={categoryName}
+                    >
+                      <AccordionTrigger
+                        className={`cursor-pointer font-bigola text-2xl leading-none transition-all duration-300 md:text-5xl ${
+                          activeCategory === index
+                            ? "text-customGold"
+                            : "text-customCream"
+                        }`}
+                        icon={getIcon(categoryName)}
+                        onClick={() => handleCategoryClick(index)}
+                      >
+                        <h2
+                          className={`transition-all duration-300 ${activeCategory === index ? "translate-x-[15px] transform text-customGold" : "text-customCream"}`}
+                        >
+                          {categoryName}
+                        </h2>
+                      </AccordionTrigger>
+                      <AccordionContent
+                        className={`border-customGold ${categoryName === "Canned / Bottled" ? "pt-0" : ""}`}
+                      >
+                        {categoryName === "Canned / Bottled"
+                          ? renderCannedBeerCategory(
+                              categoryContent as CategoryWithItems,
+                            )
+                          : (categoryContent as ProcessedItem[]).map(
+                              renderMenuItem,
+                            )}
+                      </AccordionContent>
+                    </AccordionItem>
+                  </div>
+                </div>
               ),
             )}
           </div>

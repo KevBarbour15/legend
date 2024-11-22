@@ -117,12 +117,13 @@ export default function Home() {
         0,
       )
       .to(
-        "#controls-background",
+        "#mobile-menu",
         {
-          backgroundColor: "rgba(36, 65, 84, 0.45)",
+          opacity: 0,
         },
         0,
       )
+
       .to(
         "#hidden-bg",
         {
@@ -187,13 +188,19 @@ export default function Home() {
           </div>
 
           <div className="font-hypatia text-lg text-customNavy md:text-xl">
-            <p id="about-section" className="my-6 text-pretty opacity-0">
+            <p
+              id="about-section"
+              className="my-6 text-pretty leading-[1.15] opacity-0"
+            >
               Welcome to Legend Has It, Sacramento's first hi-fi listening bar,
               where music meets the art of sound. We offer an immersive
               experience for audiophiles and music lovers, celebrating the
               warmth of vinyl records and the richness of high-fidelity sound.
             </p>
-            <p id="about-section" className="text-pretty opacity-0">
+            <p
+              id="about-section"
+              className="text-pretty leading-[1.15] opacity-0"
+            >
               Our carefully curated sound systems and eclectic vinyl collection
               create an intimate atmosphere, perfect for discovering new tunes
               or revisiting classics. Enjoy from our local craft beer menu
@@ -211,21 +218,21 @@ export default function Home() {
               className="mb-3 flex flex-row justify-between opacity-0 md:mb-6"
             >
               <p>Sunday - Tuesday:</p>
-              <p>Closed</p>
+              <p className="italic">Closed</p>
             </div>
             <div
               id="about-section"
               className="mb-3 flex flex-row justify-between opacity-0 md:mb-6"
             >
               <p>Wednesday - Thursday:</p>
-              <p>3pm - 11pm</p>
+              <p className="italic">3pm - 11pm</p>
             </div>
             <div
               id="about-section"
               className="flex flex-row justify-between opacity-0"
             >
               <p>Friday - Saturday:</p>
-              <p>3pm - 12am</p>
+              <p className="italic">3pm - 12am</p>
             </div>
           </div>
 
@@ -312,12 +319,12 @@ export default function Home() {
                 href="tel:+19166627942"
                 className="flex items-center gap-1 transition-all duration-300 active:text-customGold md:hover:text-customGold"
               >
-                <Phone weight="regular" />
+                <Phone weight="thin" />
                 (916) 662-7942
               </a>
 
               <span className="flex items-center gap-1">
-                <Copyright weight="regular" /> 2024 Legend Has It
+                <Copyright weight="thin" /> 2024 Legend Has It
               </span>
             </div>
             <div className="flex items-end">
@@ -326,7 +333,7 @@ export default function Home() {
                 className="flex items-center gap-1 transition-all duration-300 active:text-customGold md:hover:text-customGold"
               >
                 Owner Login
-                <Key weight="regular" />
+                <Key weight="thin" />
               </LoginLink>
             </div>
           </div>

@@ -111,7 +111,7 @@ export default function Contact() {
   return (
     <div
       ref={containerRef}
-      className="z-10 mx-auto flex w-screen flex-col items-center justify-center overflow-y-auto p-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
+      className="z-10 mx-auto flex w-screen flex-col items-center justify-center overflow-y-auto px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
     >
       <Tabs
         defaultValue="event"
