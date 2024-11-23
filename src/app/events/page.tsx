@@ -257,7 +257,7 @@ export default function Events() {
                           ref={(el) => {
                             upcomingEventRefs.current[idx] = el;
                           }}
-                          className="relative w-full"
+                          className={`mx-auto w-full border-t border-customGold ${idx === pastEvents.length - 1 ? "border-b" : ""}`}
                         >
                           <EventCard
                             key={idx}

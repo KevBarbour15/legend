@@ -164,7 +164,10 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               <motion.p layoutId={`date-${event._id}`}>
                 {formattedDate}
               </motion.p>
-              <motion.p layoutId={`time-${event._id}`}>
+              <motion.p
+                layoutId={`time-${event._id}`}
+                className="hidden md:flex"
+              >
                 {formattedTime}
               </motion.p>
             </div>

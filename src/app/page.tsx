@@ -144,12 +144,12 @@ export default function Home() {
         {
           y: 0,
           opacity: 1,
-          delay: 0.15,
+          delay: 0.25,
           duration: 0.35,
           ease: "sine.inOut",
           scrollTrigger: {
             trigger: section,
-            start: "top bottom",
+            start: "top-=25 bottom",
             toggleActions: "play none none none",
           },
         },

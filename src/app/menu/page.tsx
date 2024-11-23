@@ -156,8 +156,8 @@ const Menu: React.FC = ({}) => {
       {item.city && item.abv && (
         <div className="mt-1 flex w-full justify-between leading-none text-customGold">
           <p className="flex gap-1">
-            <p>{item.city}</p>
-            <p>, CA</p>
+            <p>{item.city},</p>
+            <p>CA</p>
           </p>
           <Divider borderColor={"border-customCream"} />
           <div className="flex gap-1 italic">
