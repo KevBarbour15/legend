@@ -234,9 +234,20 @@ function processItems(
 ): ProcessedItem[] {
   return items.map((item): ProcessedItem => {
     const variation = item.itemData?.variations?.[0];
+    let bottleVariation = null;
+    if (
+      item.itemData?.variations?.[1] &&
+      item.itemData?.variations?.[1].itemVariationData?.name === "Bottle"
+    ) {
+      bottleVariation = item.itemData?.variations?.[1];
+    }
     const customAttributes = variation?.customAttributeValues;
     let abv: string | undefined;
     let city: string | undefined;
+
+    if (item.itemData?.name === "#1 Crush - End of Nowhere") {
+      console.log(bottleVariation);
+    }
 
     if (customAttributes) {
       Object.values(customAttributes).forEach((attr) => {
@@ -260,6 +271,9 @@ function processItems(
       price: variation?.itemVariationData?.priceMoney?.amount
         ? `$${(Number(variation.itemVariationData.priceMoney.amount) / 100).toFixed(2)}`
         : undefined,
+      bottlePrice: bottleVariation?.itemVariationData?.priceMoney?.amount
+        ? `$${(Number(bottleVariation.itemVariationData.priceMoney.amount) / 100).toFixed(2)}`
+        : undefined,
       abv,
       city,
       categoryIds: item.itemData?.categories?.map((cat) => cat.id ?? "") || [],
@@ -278,15 +292,11 @@ function assignItemsToCategories(
   categoryMap: Map<string, CategoryWithItems>,
   childCategoryMap: Map<string, CategoryWithItems>,
 ) {
-  const locationIdSet = new Set([BAR_INVENTORY_LOCATION_ID]);
-  const cannedBottledBeerSet = new Set([CANNED_BOTTLED_BEER_ID]);
   const testItemName = "Kevin's Pale Ale";
 
   items.forEach((item) => {
-    const isInLocation = item.locationIds.some((id) => locationIdSet.has(id));
-    const isCannedBottled = item.categoryIds.some((id) =>
-      cannedBottledBeerSet.has(id),
-    );
+    const isInLocation = item.locationIds.includes(BAR_INVENTORY_LOCATION_ID);
+    const isCannedBottled = item.categoryIds.includes(CANNED_BOTTLED_BEER_ID);
 
     if (!isInLocation || !item.inStock) return;
 

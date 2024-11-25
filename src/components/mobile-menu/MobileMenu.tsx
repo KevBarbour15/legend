@@ -37,9 +37,9 @@ const MobileMenu: React.FC = () => {
           width={200}
           priority={true}
         />
-        <ul className="pt-6 font-bigola text-6xl">
+        <ul className="pt-6 font-bigola text-6xl tracking-tight">
           {links.map((link, idx) => (
-            <li key={idx} className="m-0 p-0 leading-[0.85]">
+            <li key={idx} className="m-0 p-0 leading-[0.75]">
               {link.label === "About" ? (
                 <a
                   href="/"
@@ -62,9 +62,9 @@ const MobileMenu: React.FC = () => {
           ))}
         </ul>
       </div>
-      <div className="fixed bottom-20 left-0 ml-3 w-fit font-bigola">
+      <div className="fixed bottom-20 left-0 ml-3 w-fit">
         <a
-          className="cursor-pointer"
+          className="cursor-pointer font-bigola"
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.google.com/maps/dir//410+L+St,+Sacramento,+CA+95814/@38.5798987,-121.5844553,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x809ad12b9928b091:0x8fd24ebe337fbfe7!2m2!1d-121.5020543!2d38.5799276?entry=ttu&g_ep=EgoyMDI0MDkwNC4wIKXMDSoASAFQAw%3D%3D"
@@ -73,7 +73,7 @@ const MobileMenu: React.FC = () => {
         >
           <div
             id="mobile-menu"
-            className="flex justify-between gap-2 p-0 text-6xl leading-[.85]"
+            className="flex justify-between gap-2 p-0 text-6xl leading-[.7] tracking-tight"
           >
             <span>410</span>
             <span>L</span>
@@ -81,9 +81,9 @@ const MobileMenu: React.FC = () => {
           </div>
           <p
             id="mobile-menu"
-            className="flex justify-between text-3xl italic leading-[0.75]"
+            className="flex justify-between text-3xl italic leading-[0.7] tracking-tight"
           >
-            <span>S</span>
+            <span>s</span>
             <span>a</span>
             <span>c</span>
             <span>r</span>
@@ -96,7 +96,7 @@ const MobileMenu: React.FC = () => {
           </p>
           <div
             id="mobile-menu"
-            className="flex justify-between gap-1 text-5xl leading-none"
+            className="flex justify-between gap-1 text-5xl leading-none tracking-tight"
           >
             <span>CA,</span>
             <span>95814</span>

@@ -78,13 +78,13 @@ const SideMenu: React.FC = () => {
 
   return (
     <div className="side-menu z-10 hidden h-screen flex-col justify-between md:fixed md:flex md:py-6 md:pl-6">
-      <div className="flex h-full flex-col justify-start pl-6 pt-6 font-bigola text-6xl md:p-0">
+      <div className="flex h-full flex-col justify-start pl-6 pt-6 font-bigola text-6xl tracking-tight md:p-0">
         <ul id="menu-text">
           {links.map((link, idx) => (
             <li
               key={idx}
               id="hover"
-              className={`${link.path === "/" ? "about-link" : "menu-link"} m-0 p-0 leading-[.85] ${pathname === link.path && pathname !== "/" ? "text-customGold" : "text-customCream"} `}
+              className={`${link.path === "/" ? "about-link" : "menu-link"} m-0 p-0 leading-[.75] ${pathname === link.path && pathname !== "/" ? "text-customGold" : "text-customCream"} `}
             >
               {link.path === "/" ? (
                 <a onClick={handleAboutClick} className="cursor-pointer">
@@ -120,7 +120,7 @@ const SideMenu: React.FC = () => {
           >
             <div
               id="menu-text"
-              className="flex justify-between text-6xl leading-[.75]"
+              className="flex justify-between text-6xl leading-[.65]"
             >
               <p>410</p>
               <p>L</p>
@@ -128,9 +128,9 @@ const SideMenu: React.FC = () => {
             </div>
             <p
               id="menu-text"
-              className="flex justify-between text-3xl italic leading-none"
+              className="flex justify-between text-3xl italic leading-[.85]"
             >
-              <span>S</span>
+              <span>s</span>
               <span>a</span>
               <span>c</span>
               <span>r</span>

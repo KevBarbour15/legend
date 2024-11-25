@@ -31,6 +31,7 @@ export interface ProcessedItem {
   brand?: string | null;
   description?: string | null;
   price?: string | null;
+  bottlePrice?: string | null;
   city?: string | null;
   abv?: string | null;
   categoryIds: string[];

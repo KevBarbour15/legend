@@ -254,12 +254,12 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                 {tracks.map((track, index) => (
                   <div key={index} className="flex h-full flex-row p-1 md:px-3">
                     <div className="mr-3 flex flex-col justify-between px-1 font-bigola text-customCream drop-shadow-text md:px-0">
-                      <p className="text-xl">{index + 1}.</p>
-                      <p className="text-base">by</p>
+                      <p className="text-2xl leading-none">{index + 1}.</p>
+                      <p className="text-xl leading-none">by</p>
                     </div>
                     <div className="flex w-full flex-col justify-between px-1 font-bigola text-customCream drop-shadow-text md:px-0">
-                      <p className="text-xl">{track.title}</p>
-                      <p className="text-base">{track.artist}</p>
+                      <p className="text-2xl leading-none">{track.title}</p>
+                      <p className="text-xl leading-none">{track.artist}</p>
                     </div>
                     <div className="flex items-center justify-center">
                       {index == currentTrackIndex ? (

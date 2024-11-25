@@ -103,7 +103,7 @@ const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
   return (
     <div className="menu-container" ref={container}>
       <div className="menu-overlay">
-        <X className="menu-close-icon" onClick={toggleMenu} />
+        <X weight="thin" className="menu-close-icon" onClick={toggleMenu} />
         <div className="menu-logo-container">
           <Image
             className="menu-logo-icon"
