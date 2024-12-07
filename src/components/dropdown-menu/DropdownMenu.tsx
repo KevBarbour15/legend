@@ -51,7 +51,7 @@ const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
         0,
       )
       .to(".menu-overlay", {
-        duration: 0.35,
+        duration: 0.15,
         delay: -0.15,
         ease: "power4.inOut",
         clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",

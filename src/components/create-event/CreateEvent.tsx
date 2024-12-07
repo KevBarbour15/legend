@@ -34,7 +34,7 @@ const CreateEvent: React.FC = () => {
     gsap.fromTo(
       "#create-container",
       { opacity: 0 },
-      { opacity: 1, duration: 0.35, delay: 0.15, ease: "sine.inOut" },
+      { opacity: 1, duration: 0.15, delay: 0.15, ease: "sine.inOut" },
     );
   }, []);
 

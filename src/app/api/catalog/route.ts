@@ -245,10 +245,6 @@ function processItems(
     let abv: string | undefined;
     let city: string | undefined;
 
-    if (item.itemData?.name === "#1 Crush - End of Nowhere") {
-      console.log(bottleVariation);
-    }
-
     if (customAttributes) {
       Object.values(customAttributes).forEach((attr) => {
         if (attr.name === "ABV") {

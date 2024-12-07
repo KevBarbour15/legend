@@ -81,7 +81,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
 
             <motion.div
               layoutId={`card-${event._id}`}
-              className="relative flex h-fit max-h-[85svh] w-full flex-col overflow-y-auto rounded-sm border border-customGold bg-customNavy bg-opacity-70 px-3 pt-3 shadow-md backdrop-blur-sm transition-all duration-300 sm:max-h-[90vh] sm:max-w-[475px] md:px-6 md:pt-6"
+              className="relative flex h-fit max-h-[85svh] w-full flex-col overflow-y-auto rounded-sm border border-customGold bg-customNavy bg-opacity-70 px-3 pt-3 shadow-md transition-all duration-300 sm:max-h-[90vh] sm:max-w-[475px] md:px-6 md:pt-6"
             >
               {event.is_photo ? (
                 <motion.div
@@ -163,12 +163,6 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
             <div className="leaeding-none flex flex-row justify-between font-bigola text-lg italic text-customGold md:text-xl">
               <motion.p layoutId={`date-${event._id}`}>
                 {formattedDate}
-              </motion.p>
-              <motion.p
-                layoutId={`time-${event._id}`}
-                className="hidden md:flex"
-              >
-                {formattedTime}
               </motion.p>
             </div>
 

@@ -145,7 +145,7 @@ export default function Home() {
           y: 0,
           opacity: 1,
           delay: 0.25,
-          duration: 0.35,
+          duration: 0.15,
           ease: "sine.inOut",
           scrollTrigger: {
             trigger: section,

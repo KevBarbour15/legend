@@ -1,6 +1,5 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
-import Image from "next/image";
 
 import { getMenu } from "../actions/getMenu.server";
 
@@ -65,22 +64,33 @@ const Menu: React.FC = ({}) => {
 
   const fetchMenu = async () => {
     try {
-      // animate progress bar to give user feedback / realism
-      // due to loading time, no need for timeouts
+      setProgress(generateProgress(34, 66));
       const data = await getMenu();
 
-      setProgress(generateProgress(34, 66));
-      await new Promise((resolve) => setTimeout(resolve, 15));
-
       if (!data) {
-        setProgress(0);
-        setError("Failed to fetch menu data");
-        throw new Error("Failed to fetch menu data");
-      }
-      setProgress(generateProgress(67, 99));
-      await new Promise((resolve) => setTimeout(resolve, 15));
+        setProgress(generateProgress(67, 85));
+        // fetch fallback menu client side if ssr fails
+        try {
+          const response = await fetch("/api/fallback-menu");
+          if (!response.ok) {
+            setProgress(0);
+            throw new Error(`Fallback API returned ${response.status}`);
+          }
+          const fallbackMenu = await response.json();
 
-      setMenu(data);
+          setProgress(generateProgress(86, 99));
+          setMenu(fallbackMenu.menu);
+        } catch (fallbackError) {
+          setProgress(0);
+          setError(
+            "Failed to fetch menu data from both primary and fallback sources",
+          );
+          throw fallbackError;
+        }
+      } else {
+        setProgress(generateProgress(67, 99));
+        setMenu(data);
+      }
     } catch (error) {
       const err =
         error instanceof Error ? error : new Error("Unknown error occurred");
@@ -99,6 +109,9 @@ const Menu: React.FC = ({}) => {
     gsap.set("#menu", {
       opacity: 0,
     });
+    gsap.set("#menu-heading", {
+      opacity: 0,
+    });
     gsap.set(menuItemRefs.current, {
       opacity: 0,
       y: 75,
@@ -108,6 +121,10 @@ const Menu: React.FC = ({}) => {
     tl.current = gsap
       .timeline({})
       .to("#menu", {
+        opacity: 1,
+        duration: 0.15,
+      })
+      .to("#menu-heading", {
         opacity: 1,
         duration: 0.15,
       })
@@ -149,8 +166,8 @@ const Menu: React.FC = ({}) => {
         <p className="text-left leading-none">{item.name}</p>
         {item.bottlePrice ? (
           <div className="flex first-letter:items-end">
-            <p className="flex gap-1 text-right italic leading-none">
-              {item.price} <span className="text-customGold">/</span>
+            <p className="flex gap-1 text-right leading-none">
+              {item.price} <span>/</span>
               {item.bottlePrice}
             </p>
           </div>
@@ -168,8 +185,8 @@ const Menu: React.FC = ({}) => {
       {item.city && item.abv && (
         <div className="mt-1 flex w-full justify-between leading-none text-customGold">
           <p className="flex gap-1">
-            <p>{item.city},</p>
-            <p>CA</p>
+            <span>{item.city},</span>
+            <span>CA</span>
           </p>
           <Divider borderColor={"border-customCream"} />
           <div className="flex gap-1 italic">
@@ -229,7 +246,7 @@ const Menu: React.FC = ({}) => {
       ) : error ? (
         <div className="flex h-[50vh] w-full flex-col items-center justify-center">
           <h2 className="mb-6 text-center font-bigola text-3xl text-customCream md:text-4xl">
-            {error}
+            Failed to load menu. Please refresh the page.
           </h2>
         </div>
       ) : !menu ? (
@@ -240,7 +257,10 @@ const Menu: React.FC = ({}) => {
         </div>
       ) : (
         <>
-          <h3 className="hidden w-full text-pretty border-b border-customGold py-3 text-left font-hypatia text-xl italic text-customCream md:mb-6 md:block md:border-0 md:py-0 md:text-2xl">
+          <h3
+            id="menu-heading"
+            className="hidden w-full text-pretty border-b border-customGold py-3 text-left font-hypatia text-xl italic text-customCream opacity-0 md:mb-6 md:block md:border-0 md:py-0 md:text-2xl"
+          >
             Stay up to date as our selections rotate.
           </h3>
 

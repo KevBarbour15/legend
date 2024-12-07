@@ -71,7 +71,7 @@ export default function Events() {
     const currentEmptyRef =
       activeTab === "upcoming" ? upcomingEmptyMessageRef : pastEmptyMessageRef;
 
-    gsap.fromTo("#event-tabs", { opacity: 0 }, { opacity: 1, duration: 0.35 });
+    gsap.fromTo("#event-tabs", { opacity: 0 }, { opacity: 1, duration: 0.15 });
 
     if (currentRefs.current.length > 0) {
       gsap.set("#events-container", { opacity: 0 });
@@ -105,7 +105,7 @@ export default function Events() {
         { opacity: 0 },
         {
           delay: 0.05,
-          duration: 0.35,
+          duration: 0.15,
           opacity: 1,
         },
       );

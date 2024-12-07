@@ -35,7 +35,7 @@ export default function Contact() {
     gsap.fromTo(
       "#tabs-container",
       { opacity: 0 },
-      { delay: 0.15, opacity: 1, duration: 0.35 },
+      { opacity: 1, duration: 0.05 },
     );
   }, []);
 
