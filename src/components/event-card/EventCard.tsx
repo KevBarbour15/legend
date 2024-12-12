@@ -115,7 +115,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
 
               <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="description" className="border-b-0">
-                  <AccordionTrigger className="md:hover: w-full py-3 text-customCream md:hover:scale-105">
+                  <AccordionTrigger className="w-full cursor-pointer py-3 text-customCream">
                     <motion.p
                       layoutId={`title-${event._id}`}
                       className="text-balance pr-6 text-left font-bigola text-lg capitalize md:text-2xl"
@@ -124,7 +124,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                     </motion.p>
                   </AccordionTrigger>
                   <AccordionContent className="border-customGold">
-                    <motion.div className="flex w-full flex-row justify-between pb-3 font-bigola italic text-customGold md:text-lg md:leading-[1.15]">
+                    <motion.div className="flex w-full flex-row justify-between pb-3 font-bigola text-customGold md:text-lg md:leading-[1.15]">
                       <motion.p layoutId={`date-${event._id}`}>
                         {formattedDate}
                       </motion.p>
@@ -160,7 +160,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       >
         <div className="flex h-full">
           <div className="flex w-full flex-col justify-between pr-3">
-            <div className="leaeding-none flex flex-row justify-between font-bigola text-lg italic text-customGold md:text-xl">
+            <div className="leaeding-none flex flex-row justify-between font-bigola text-lg text-customGold md:text-2xl">
               <motion.p layoutId={`date-${event._id}`}>
                 {formattedDate}
               </motion.p>

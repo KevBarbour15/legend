@@ -218,21 +218,21 @@ export default function Home() {
               className="mb-3 flex flex-row justify-between opacity-0 md:mb-6"
             >
               <p>Sunday - Tuesday:</p>
-              <p className="italic">Closed</p>
+              <p>Closed</p>
             </div>
             <div
               id="about-section"
               className="mb-3 flex flex-row justify-between opacity-0 md:mb-6"
             >
               <p>Wednesday - Thursday:</p>
-              <p className="italic">3pm - 11pm</p>
+              <p>3pm - 11pm</p>
             </div>
             <div
               id="about-section"
               className="flex flex-row justify-between opacity-0"
             >
               <p>Friday - Saturday:</p>
-              <p className="italic">3pm - 12am</p>
+              <p>3pm - 12am</p>
             </div>
           </div>
 

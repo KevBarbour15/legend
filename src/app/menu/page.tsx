@@ -259,9 +259,9 @@ const Menu: React.FC = ({}) => {
         <>
           <h3
             id="menu-heading"
-            className="hidden w-full text-pretty border-b border-customGold py-3 text-left font-hypatia text-xl italic text-customCream opacity-0 md:mb-6 md:block md:border-0 md:py-0 md:text-2xl"
+            className="hidden w-full text-pretty border-b border-customGold pb-6 pt-3 text-center font-bigola text-xl text-customCream opacity-0 md:mb-6 md:block md:border-0 md:py-0 md:text-3xl"
           >
-            Stay up to date as our selections rotate.
+            Stay up to date as our selections rotate!
           </h3>
 
           <Accordion type="single" collapsible className="w-full">
@@ -281,7 +281,7 @@ const Menu: React.FC = ({}) => {
                         key={categoryName}
                       >
                         <AccordionTrigger
-                          className={`cursor-pointer font-bigola text-2xl leading-none transition-all duration-300 md:text-5xl ${
+                          className={`cursor-pointer font-bigola text-4xl leading-none transition-all duration-300 md:text-5xl ${
                             activeCategory === index
                               ? "text-customGold"
                               : "text-customCream"
@@ -298,6 +298,35 @@ const Menu: React.FC = ({}) => {
                         <AccordionContent
                           className={`border-customGold ${categoryName === "Canned / Bottled" ? "pt-0" : ""}`}
                         >
+                          {categoryName === "Wine" && (
+                            <div className="text-pretty px-3 pb-6 text-center">
+                              <p className="font-bigola text-lg text-customCream md:text-2xl">
+                                Wine Down Wednesday
+                              </p>
+                              <p className="font-hypatiaBold text-base text-customGold md:text-lg">
+                                All Day Wednesday: 3-10pm
+                              </p>
+                              <p className="font-hypatia text-base text-customGold md:text-lg">
+                                $2 off glasses and $5 off bottles.
+                              </p>
+                            </div>
+                          )}
+
+                          {categoryName === "Draft" && (
+                            <div className="text-pretty px-3 pb-6 text-center text-customCream">
+                              <p className="font-bigola text-lg text-customCream md:text-2xl">
+                                Happy Hour
+                              </p>
+                              <p className="font-hypatiaBold text-base text-customGold md:text-lg">
+                                {" "}
+                                Wednesday - Friday, 3 - 6pm
+                              </p>
+                              <p className="font-hypatia text-base text-customGold md:text-lg">
+                                $2 off draft beers.
+                              </p>
+                            </div>
+                          )}
+
                           {categoryName === "Canned / Bottled"
                             ? renderCannedBeerCategory(
                                 categoryContent as CategoryWithItems,
