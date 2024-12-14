@@ -168,7 +168,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
 
             <motion.h2
               layoutId={`title-${event._id}`}
-              className="text-balance font-bigola text-3xl capitalize leading-[0.95] text-customCream md:text-5xl lg:text-6xl"
+              className="truncate text-balance font-bigola text-3xl capitalize leading-[0.95] text-customCream md:text-5xl lg:text-6xl"
             >
               <span className="leading-[.85]">{event.title}</span>
             </motion.h2>

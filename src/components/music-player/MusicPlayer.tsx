@@ -189,7 +189,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               />
             </div>
           </Collapse>
-          <div className="z-[11] flex justify-between rounded-sm bg-black bg-opacity-50 px-1 py-2 drop-shadow-recordPlayer md:gap-2 md:py-1">
+          <div className="z-[11] flex justify-between rounded-sm bg-black bg-opacity-75 px-1 py-2 drop-shadow-recordPlayer md:gap-2 md:py-1">
             <IconButton className="p-1 text-customSilver drop-shadow-text transition-all md:hover:text-customGold">
               {mute ? (
                 <SpeakerSlash weight="thin" onClick={handleMute} />
