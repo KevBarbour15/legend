@@ -48,10 +48,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
   useGSAP(() => {
     if (!containerRef.current) return;
 
-    //gsap.set(containerRef.current, { opacity: 0 });
-
     tl.current = gsap.timeline().to(containerRef.current, {
-      delay: 0.15,
       duration: 0.15,
       opacity: 1,
       ease: "sine.inOut",
@@ -189,7 +186,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               />
             </div>
           </Collapse>
-          <div className="z-[11] flex justify-between rounded-sm bg-black bg-opacity-75 px-1 py-2 drop-shadow-recordPlayer md:gap-2 md:py-1">
+          <div className="z-[11] flex justify-between rounded-sm bg-black bg-[radial-gradient(at_25%_2%,#707070_0px,transparent_50%),radial-gradient(at_20%_47%,#333333_0px,transparent_50%)] px-1 py-2 drop-shadow-recordPlayer md:gap-2 md:py-1">
             <IconButton className="p-1 text-customSilver drop-shadow-text transition-all md:hover:text-customGold">
               {mute ? (
                 <SpeakerSlash weight="thin" onClick={handleMute} />
