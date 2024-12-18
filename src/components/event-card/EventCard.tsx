@@ -159,50 +159,40 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
         className="cursor-pointer py-3"
       >
         <div className="flex h-full">
-          <div className="flex w-full flex-col justify-between pr-3">
-            <div className="leaeding-none flex flex-row justify-between font-bigola text-lg text-customNavy md:text-2xl">
-              <motion.p layoutId={`date-${event._id}`}>
-                {formattedDate}
-              </motion.p>
-            </div>
-
-            <motion.h2
-              layoutId={`title-${event._id}`}
-              className="overflow-hidden text-ellipsis text-balance font-bigola text-3xl capitalize leading-none text-customNavy md:text-5xl lg:text-6xl"
-            >
-              {event.title}
-            </motion.h2>
+          <div className="leaeding-none flex flex-row justify-between font-bigola text-lg text-customNavy md:text-2xl">
+            <motion.p layoutId={`date-${event._id}`}>{formattedDate}</motion.p>
           </div>
-          {event.is_photo ? (
-            <motion.div
-              layoutId={`image-${event._id}`}
-              className="flex-shrink-0"
-            >
-              <Image
-                width={275}
-                height={275}
-                src={preloadedMedia.src}
-                alt={event.title}
-                sizes="(max-width: 600px) 115px, (max-width: 1200px) 275px, 275px"
-                className="aspect-square h-[115px] w-[115px] object-cover object-center md:h-[275px] md:w-[275px]"
-              />
-            </motion.div>
-          ) : (
-            <motion.div
-              layoutId={`video-${event._id}`}
-              className="flex-shrink-0"
-            >
-              <video
-                src={preloadedMedia.src}
-                className="aspect-square h-[115px] w-[115px] object-cover object-center md:h-[275px] md:w-[275px]"
-                loop
-                autoPlay
-                muted
-                playsInline
-              />
-            </motion.div>
-          )}
+
+          <motion.h2
+            layoutId={`title-${event._id}`}
+            className="line-clamp-3 overflow-hidden text-ellipsis text-balance font-bigola text-3xl capitalize leading-none text-customNavy md:text-5xl lg:text-6xl"
+          >
+            {event.title}
+          </motion.h2>
         </div>
+        {event.is_photo ? (
+          <motion.div layoutId={`image-${event._id}`} className="flex-shrink-0">
+            <Image
+              width={275}
+              height={275}
+              src={preloadedMedia.src}
+              alt={event.title}
+              sizes="(max-width: 600px) 115px, (max-width: 1200px) 275px, 275px"
+              className="aspect-square h-[115px] w-[115px] object-cover object-center md:h-[275px] md:w-[275px]"
+            />
+          </motion.div>
+        ) : (
+          <motion.div layoutId={`video-${event._id}`} className="flex-shrink-0">
+            <video
+              src={preloadedMedia.src}
+              className="aspect-square h-[115px] w-[115px] object-cover object-center md:h-[275px] md:w-[275px]"
+              loop
+              autoPlay
+              muted
+              playsInline
+            />
+          </motion.div>
+        )}
       </motion.div>
     </>
   );
