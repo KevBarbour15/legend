@@ -16,7 +16,11 @@ const links = [
   { path: "/contact", label: "Contact" },
 ];
 
-const SideMenu: React.FC = () => {
+interface SideMenuProps {
+  color?: string;
+}
+
+const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
@@ -84,7 +88,11 @@ const SideMenu: React.FC = () => {
             <li
               key={idx}
               id="hover"
-              className={`${link.path === "/" ? "about-link" : "menu-link"} m-0 p-0 leading-[.75] ${pathname === link.path && pathname !== "/" ? "text-customGold" : "text-customCream"} `}
+              className={`${link.path === "/" ? "about-link" : "menu-link"} m-0 p-0 leading-[.75] ${
+                pathname === link.path && pathname !== "/"
+                  ? "text-customGold"
+                  : color
+              }`}
             >
               {link.path === "/" ? (
                 <a onClick={handleAboutClick} className="cursor-pointer">
@@ -113,7 +121,7 @@ const SideMenu: React.FC = () => {
             priority={true}
           />
           <a
-            className="cursor-pointer text-customCream"
+            className={`cursor-pointer ${color}`}
             target="_blank"
             rel="noopener noreferrer"
             href="https://www.google.com/maps/dir//410+L+St,+Sacramento,+CA+95814/@38.5798987,-121.5844553,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x809ad12b9928b091:0x8fd24ebe337fbfe7!2m2!1d-121.5020543!2d38.5799276?entry=ttu&g_ep=EgoyMDI0MDkwNC4wIKXMDSoASAFQAw%3D%3D"

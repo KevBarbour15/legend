@@ -10,7 +10,7 @@ const Loading: React.FC<LoadingProps> = ({
 }) => {
   return (
     <div
-      className={`flex h-[50vh] w-full flex-col items-center justify-center ${textColor}`}
+      className={`z-20 flex h-[50vh] w-full flex-col items-center justify-center ${textColor}`}
     >
       <h2 className="mb-6 text-center text-3xl md:text-4xl">{message}</h2>
       <Progress

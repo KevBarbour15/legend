@@ -40,20 +40,24 @@ const MobileHeader: React.FC = () => {
       <Menu menuStatus={menuOpen} toggleMenu={toggleMenu} />
       <div
         ref={containerRef}
-        id="mobile-heading"
         className={`${
           pathname === "/" ? "hidden" : ""
-        } mx-3 flex justify-between border-b border-customGold py-3 text-customCream opacity-0 md:hidden ${pathname === "/dashboard" ? "hidden" : ""}`}
+        } z-[150] flex w-full px-3 text-customNavy md:hidden ${pathname === "/dashboard" ? "hidden" : ""}`}
       >
-        <span className="font-bigola text-2xl capitalize italic">
-          {pageName}
-        </span>
-        <IconButton
-          onClick={toggleMenu}
-          className="bg-transparent p-0 text-customCream"
+        <div
+          id="mobile-heading"
+          className="m-auto flex w-full items-center justify-between border-b border-customGold py-3 opacity-0"
         >
-          <List weight="thin" size={28} />
-        </IconButton>
+          <span className="font-bigola text-2xl capitalize italic">
+            {pageName}
+          </span>
+          <IconButton
+            onClick={toggleMenu}
+            className="bg-transparent p-0 text-customNavy"
+          >
+            <List weight="thin" size={28} />
+          </IconButton>
+        </div>
       </div>
     </>
   );

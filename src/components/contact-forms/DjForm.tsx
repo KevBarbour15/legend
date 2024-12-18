@@ -62,7 +62,7 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex w-full flex-col space-y-3 md:w-[550px]"
       >
-        <p className="text-pretty font-bigola font-hypatia text-lg leading-[1.15] text-customCream">
+        <p className="text-pretty font-hypatia text-lg leading-[1.15] text-customNavy">
           Thank you for your interest to DJ at Legend Has It. Please take a
           minute to fill out the form below so we can get to know you and your
           style. Below, please provide as much detail as possible in regard to
@@ -74,10 +74,10 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           name="name"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel className="font-bigola text-customCream">
+              <FormLabel className="font-bigola text-customNavy">
                 Name
               </FormLabel>
-              <FormControl className="border border-customGold font-hypatia text-customCream">
+              <FormControl className="border border-customNavy font-hypatia text-customNavy">
                 <Input {...field} />
               </FormControl>
               <FormMessage />
@@ -90,10 +90,10 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           name="email"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel className="font-bigola text-customCream">
+              <FormLabel className="font-bigola text-customNavy">
                 Email
               </FormLabel>
-              <FormControl className="border border-customGold font-hypatia text-customCream">
+              <FormControl className="border border-customNavy font-hypatia text-customNavy">
                 <Input type="email" {...field} />
               </FormControl>
               <FormMessage />
@@ -105,10 +105,10 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           name="phone"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel className="font-bigola text-customCream">
+              <FormLabel className="font-bigola text-customNavy">
                 Phone
               </FormLabel>
-              <FormControl className="border border-customGold font-hypatia text-customCream">
+              <FormControl className="border border-customNavy font-hypatia text-customNavy">
                 <Input type="tel" {...field} />
               </FormControl>
               <FormMessage />
@@ -121,10 +121,10 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           name="message"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel className="font-bigola text-customCream">
+              <FormLabel className="font-bigola text-customNavy">
                 Experience, style, etc
               </FormLabel>
-              <FormControl className="border border-customGold font-hypatia text-customCream">
+              <FormControl className="border border-customNavy font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                 <Textarea {...field} />
               </FormControl>
               <FormMessage />
@@ -133,7 +133,7 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
         />
         <Button
           type="submit"
-          className="mx-auto rounded-sm border border-customGold bg-transparent font-bigola text-base text-customCream transition-all duration-300 active:bg-customNavy active:text-customGold sm:w-fit md:hover:bg-customNavy md:hover:text-customGold"
+          className="mx-auto rounded-sm border border-customNavy bg-transparent font-bigola text-base text-customNavy backdrop-blur-sm transition-all duration-300 active:bg-customNavy active:text-customCream sm:w-fit md:hover:bg-customNavy md:hover:text-customCream"
         >
           Submit
         </Button>

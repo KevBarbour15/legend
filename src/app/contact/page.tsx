@@ -2,6 +2,7 @@
 import { useState, useRef } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+import AudioStatic from "@/components/audio-static/AudioStatic";
 import EventForm from "@/components/contact-forms/EventForm";
 import GeneralForm from "@/components/contact-forms/GeneralForm";
 import DjForm from "@/components/contact-forms/DjForm";
@@ -109,57 +110,59 @@ export default function Contact() {
   };
 
   return (
-    <div
-      ref={containerRef}
-      className="z-10 mx-auto flex w-screen flex-col items-center justify-center overflow-y-auto px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
-    >
-      <Tabs
-        defaultValue="event"
-        className="flex w-full flex-col items-center"
-        onValueChange={(value) => setActiveTab(value as FormType)}
-      >
-        <TabsList
-          id="tabs-container"
-          className="my-3 grid w-full grid-cols-3 bg-transparent font-bigola opacity-0 md:mb-6 md:mt-0 md:w-fit"
-        >
-          <TabsTrigger value="event">
-            Event <span className="md:flex">&nbsp;Inquiry</span>
-          </TabsTrigger>
-          <TabsTrigger value="dj">
-            DJ <span className="md:flex">&nbsp;Inquiry</span>
-          </TabsTrigger>
-          <TabsTrigger value="general">
-            General <span className="md:flex">&nbsp;Inquiry</span>
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent
-          value="event"
-          className="flex w-full flex-col items-center font-hypatia"
-        >
-          <EventForm
-            ref={eventFormRef}
-            onSubmit={(values) => handleSubmit("event", values)}
-          />
-        </TabsContent>
-        <TabsContent
-          value="dj"
-          className="flex w-full flex-col items-center font-hypatia"
-        >
-          <DjForm
-            onSubmit={(values) => handleSubmit("dj", values)}
-            ref={djFormRef}
-          />
-        </TabsContent>
-        <TabsContent
-          value="general"
-          className="flex w-full flex-col items-center font-hypatia"
-        >
-          <GeneralForm
-            ref={generalFormRef}
-            onSubmit={(values) => handleSubmit("general", values)}
-          />
-        </TabsContent>
-      </Tabs>
-    </div>
+    <>
+      <AudioStatic />
+      <div ref={containerRef} className="min-h-dvh w-screen">
+        <div className="mx-auto flex flex-col items-center justify-center overflow-y-auto px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
+          <Tabs
+            defaultValue="event"
+            className="flex w-full flex-col items-center "
+            onValueChange={(value) => setActiveTab(value as FormType)}
+          >
+            <TabsList
+              id="tabs-container"
+              className="my-3 grid w-full grid-cols-3 bg-transparent font-bigola opacity-0 md:mb-6 md:mt-0 md:w-fit"
+            >
+              <TabsTrigger value="event">
+                Event <span className="md:flex">&nbsp;Inquiry</span>
+              </TabsTrigger>
+              <TabsTrigger value="dj">
+                DJ <span className="md:flex">&nbsp;Inquiry</span>
+              </TabsTrigger>
+              <TabsTrigger value="general">
+                General <span className="md:flex">&nbsp;Inquiry</span>
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent
+              value="event"
+              className="flex w-full flex-col items-center font-hypatia"
+            >
+              <EventForm
+                ref={eventFormRef}
+                onSubmit={(values) => handleSubmit("event", values)}
+              />
+            </TabsContent>
+            <TabsContent
+              value="dj"
+              className="flex w-full flex-col items-center font-hypatia"
+            >
+              <DjForm
+                onSubmit={(values) => handleSubmit("dj", values)}
+                ref={djFormRef}
+              />
+            </TabsContent>
+            <TabsContent
+              value="general"
+              className="flex w-full flex-col items-center font-hypatia"
+            >
+              <GeneralForm
+                ref={generalFormRef}
+                onSubmit={(values) => handleSubmit("general", values)}
+              />
+            </TabsContent>
+          </Tabs>
+        </div>
+      </div>
+    </>
   );
 }

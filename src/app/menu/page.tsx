@@ -18,6 +18,7 @@ import {
 } from "@phosphor-icons/react";
 
 import { generateProgress } from "@/utils/progress";
+import AudioStatic from "@/components/audio-static/AudioStatic";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -162,7 +163,7 @@ const Menu: React.FC = ({}) => {
       key={item.id}
       className="block text-nowrap px-3 pb-6 font-hypatia text-base capitalize text-customWhite md:text-lg"
     >
-      <div className="flex w-full justify-between font-bigola text-lg text-customCream md:text-2xl">
+      <div className="flex w-full justify-between font-bigola text-lg text-customNavy md:text-2xl">
         <p className="text-left leading-none">{item.name}</p>
         {item.bottlePrice ? (
           <div className="flex first-letter:items-end">
@@ -176,19 +177,19 @@ const Menu: React.FC = ({}) => {
         )}
       </div>
 
-      <div className="mt-1 flex w-full justify-between font-hypatiaSemibold leading-tight text-customGold">
+      <div className="mt-1 flex w-full justify-between font-hypatiaSemibold leading-tight text-customNavy">
         <p>{item.brand}</p>
-        <Divider borderColor={"border-customCream"} />
+        <Divider borderColor={"border-customGold"} />
         <p className="italic">{item.description}</p>
       </div>
 
       {item.city && item.abv && (
-        <div className="mt-1 flex w-full justify-between leading-none text-customGold">
+        <div className="mt-1 flex w-full justify-between leading-none text-customNavy">
           <p className="flex gap-1">
             <span>{item.city},</span>
             <span>CA</span>
           </p>
-          <Divider borderColor={"border-customCream"} />
+          <Divider borderColor={"border-customGold"} />
           <div className="flex gap-1 italic">
             <p>ABV</p>
             <p> {item.abv}</p>
@@ -210,13 +211,13 @@ const Menu: React.FC = ({}) => {
             className={`cursor-pointer font-bigola text-2xl leading-none md:text-4xl ${
               activeChildCategory === childCategory.id
                 ? "text-customGold"
-                : "text-customCream"
+                : "text-customNavy"
             }`}
             icon={<CaretDown weight="thin" />}
             onClick={() => handleChildCategoryClick(childCategory.id)}
           >
             <h2
-              className={`transition-all duration-300 ${activeChildCategory === childCategory.id ? "translate-x-[15px] transform text-customGold" : "text-customCream"}`}
+              className={`transition-all duration-300 ${activeChildCategory === childCategory.id ? "translate-x-[15px] transform text-customGold" : "text-customNavy"}`}
             >
               {childCategory.name}
             </h2>
@@ -230,121 +231,122 @@ const Menu: React.FC = ({}) => {
   );
 
   return (
-    <div
-      ref={containerRef}
-      className="z-10 mx-auto flex w-screen flex-col items-center justify-center overflow-y-auto px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
-    >
-      {loading ? (
-        <div className="font-bigola">
-          <Loading
-            progress={progress}
-            message={"Loading menu..."}
-            textColor="text-customCream"
-            borderColor="border-customGold"
-          />
-        </div>
-      ) : error ? (
-        <div className="flex h-[50vh] w-full flex-col items-center justify-center">
-          <h2 className="mb-6 text-center font-bigola text-3xl text-customCream md:text-4xl">
-            Failed to load menu. Please refresh the page.
-          </h2>
-        </div>
-      ) : !menu ? (
-        <div className="flex h-[50vh] w-full flex-col items-center justify-center">
-          <h2 className="mb-6 text-center font-bigola text-3xl text-customCream md:text-4xl">
-            No menu data found.
-          </h2>
-        </div>
-      ) : (
-        <>
-          <h3
-            id="menu-heading"
-            className="hidden w-full text-pretty border-b border-customGold pb-6 pt-3 text-center font-bigola text-xl text-customCream opacity-0 md:mb-6 md:block md:border-0 md:py-0 md:text-3xl"
-          >
-            Stay up to date as our selections rotate!
-          </h3>
-
-          <Accordion type="single" collapsible className="w-full">
-            <div className="w-full opacity-0" id="menu">
-              {Object.entries(menu).map(
-                ([categoryName, categoryContent], index) => (
-                  <div className="w-full" key={index}>
-                    <div
-                      ref={(el) => {
-                        menuItemRefs.current[index] = el;
-                      }}
-                      className="relative w-full"
-                    >
-                      <AccordionItem
-                        value={categoryName}
-                        className={`${index === 0 ? "md:border-t" : ""} border-b border-customGold`}
-                        key={categoryName}
-                      >
-                        <AccordionTrigger
-                          className={`cursor-pointer font-bigola text-4xl leading-none transition-all duration-300 md:text-5xl ${
-                            activeCategory === index
-                              ? "text-customGold"
-                              : "text-customCream"
-                          }`}
-                          icon={getIcon(categoryName)}
-                          onClick={() => handleCategoryClick(index)}
-                        >
-                          <h2
-                            className={`transition-all duration-300 ${activeCategory === index ? "translate-x-[15px] transform text-customGold" : "text-customCream"}`}
-                          >
-                            {categoryName}
-                          </h2>
-                        </AccordionTrigger>
-                        <AccordionContent
-                          className={`border-customGold ${categoryName === "Canned / Bottled" ? "pt-0" : ""}`}
-                        >
-                          {categoryName === "Wine" && (
-                            <div className="text-pretty px-3 pb-6 text-center">
-                              <p className="font-bigola text-lg text-customCream md:text-2xl">
-                                Wine Down Wednesday
-                              </p>
-                              <p className="font-hypatiaBold text-base text-customGold md:text-lg">
-                                All Day Wednesday: 3-10pm
-                              </p>
-                              <p className="font-hypatia text-base text-customGold md:text-lg">
-                                $2 off glasses and $5 off bottles.
-                              </p>
-                            </div>
-                          )}
-
-                          {categoryName === "Draft" && (
-                            <div className="text-pretty px-3 pb-6 text-center text-customCream">
-                              <p className="font-bigola text-lg text-customCream md:text-2xl">
-                                Happy Hour
-                              </p>
-                              <p className="font-hypatiaBold text-base text-customGold md:text-lg">
-                                {" "}
-                                Wednesday - Friday, 3 - 6pm
-                              </p>
-                              <p className="font-hypatia text-base text-customGold md:text-lg">
-                                $2 off draft beers.
-                              </p>
-                            </div>
-                          )}
-
-                          {categoryName === "Canned / Bottled"
-                            ? renderCannedBeerCategory(
-                                categoryContent as CategoryWithItems,
-                              )
-                            : (categoryContent as ProcessedItem[]).map(
-                                renderMenuItem,
-                              )}
-                        </AccordionContent>
-                      </AccordionItem>
-                    </div>
-                  </div>
-                ),
-              )}
+    <>
+      <AudioStatic />
+      <div ref={containerRef} className="min-h-dvh w-screen">
+        <div className="mx-auto flex flex-col items-center justify-center overflow-y-auto px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
+          {loading ? (
+            <div className="z-20 font-bigola">
+              <Loading
+                progress={progress}
+                message={"Loading menu..."}
+                textColor="text-customNavy"
+                borderColor="border-customNavy"
+              />
             </div>
-          </Accordion>
-        </>
-      )}
-    </div>
+          ) : error ? (
+            <div className="z-20 flex h-[50vh] w-full flex-col items-center justify-center">
+              <h2 className="mb-6 text-center font-bigola text-3xl text-customNavy md:text-4xl">
+                Failed to load menu. Please refresh the page.
+              </h2>
+            </div>
+          ) : !menu ? (
+            <div className="z-20 flex h-[50vh] w-full flex-col items-center justify-center">
+              <h2 className="mb-6 text-center font-bigola text-3xl text-customNavy md:text-4xl">
+                No menu data found.
+              </h2>
+            </div>
+          ) : (
+            <>
+              <Accordion type="single" collapsible className="z-20 w-full">
+                <h3
+                  id="menu-heading"
+                  className="hidden w-full text-pretty border-b border-customGold pb-6 pt-3 text-center font-bigola text-xl text-customNavy opacity-0 md:mb-6 md:block md:border-0 md:py-0 md:text-3xl"
+                >
+                  Stay up to date as our selections rotate!
+                </h3>
+                <div className="w-full opacity-0" id="menu">
+                  {Object.entries(menu).map(
+                    ([categoryName, categoryContent], index) => (
+                      <div className="w-full" key={index}>
+                        <div
+                          ref={(el) => {
+                            menuItemRefs.current[index] = el;
+                          }}
+                          className="relative w-full"
+                        >
+                          <AccordionItem
+                            value={categoryName}
+                            className={`${index === 0 ? "md:border-t" : ""} border-b border-customGold`}
+                            key={categoryName}
+                          >
+                            <AccordionTrigger
+                              className={`cursor-pointer font-bigola text-4xl leading-none transition-all duration-300 md:text-5xl ${
+                                activeCategory === index
+                                  ? "text-customGold"
+                                  : "text-customNavy"
+                              }`}
+                              icon={getIcon(categoryName)}
+                              onClick={() => handleCategoryClick(index)}
+                            >
+                              <h2
+                                className={`transition-all duration-300 ${activeCategory === index ? "translate-x-[15px] transform text-customGold" : "text-customNavy"}`}
+                              >
+                                {categoryName}
+                              </h2>
+                            </AccordionTrigger>
+                            <AccordionContent
+                              className={`border-customGold ${categoryName === "Canned / Bottled" ? "pt-0" : ""}`}
+                            >
+                              {categoryName === "Wine" && (
+                                <div className="text-pretty px-3 pb-6 text-center">
+                                  <p className="font-bigola text-lg text-customNavy md:text-2xl">
+                                    Wine Down Wednesday
+                                  </p>
+                                  <p className="font-hypatiaBold text-base text-customNavy md:text-lg">
+                                    All Day Wednesday: 3-10pm
+                                  </p>
+                                  <p className="font-hypatia text-base text-customNavy md:text-lg">
+                                    $2 off glasses and $5 off bottles.
+                                  </p>
+                                </div>
+                              )}
+
+                              {categoryName === "Draft" && (
+                                <div className="text-pretty px-3 pb-6 text-center text-customNavy">
+                                  <p className="font-bigola text-lg text-customNavy md:text-2xl">
+                                    Happy Hour
+                                  </p>
+                                  <p className="font-hypatiaBold text-base text-customNavy md:text-lg">
+                                    {" "}
+                                    Wednesday - Friday, 3 - 6pm
+                                  </p>
+                                  <p className="font-hypatia text-base text-customNavy md:text-lg">
+                                    $2 off draft beers.
+                                  </p>
+                                </div>
+                              )}
+
+                              {categoryName === "Canned / Bottled"
+                                ? renderCannedBeerCategory(
+                                    categoryContent as CategoryWithItems,
+                                  )
+                                : (categoryContent as ProcessedItem[]).map(
+                                    renderMenuItem,
+                                  )}
+                            </AccordionContent>
+                          </AccordionItem>
+                        </div>
+                      </div>
+                    ),
+                  )}
+                </div>
+              </Accordion>
+            </>
+          )}
+        </div>
+      </div>
+    </>
   );
 };
 

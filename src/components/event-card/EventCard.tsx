@@ -81,19 +81,19 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
 
             <motion.div
               layoutId={`card-${event._id}`}
-              className="relative flex h-fit max-h-[85svh] w-full flex-col overflow-y-auto rounded-sm border border-customGold bg-customNavy bg-opacity-70 px-3 pt-3 shadow-md transition-all duration-300 sm:max-h-[90vh] sm:max-w-[475px] md:px-6 md:pt-6"
+              className="relative flex h-fit max-h-[85svh] w-full flex-col overflow-y-auto border border-customGold bg-customCream px-3 pt-3 shadow-md transition-all duration-300 sm:max-h-[90vh] sm:max-w-[475px] md:px-6 md:pt-6"
             >
               {event.is_photo ? (
                 <motion.div
                   layoutId={`image-${event._id}`}
-                  className="flex-shrink-0 rounded-sm shadow-md"
+                  className="flex-shrink-0"
                 >
                   <Image
                     width={300}
                     height={300}
                     src={preloadedMedia.src}
                     alt={event.title}
-                    className="aspect-square h-auto w-full rounded-sm object-cover object-center md:aspect-auto md:max-h-[475px]"
+                    className="aspect-square h-auto w-full object-cover object-center md:aspect-auto md:max-h-[475px]"
                     sizes="(max-width: 600px) 350px, (max-width: 1200px) 350px"
                   />
                 </motion.div>
@@ -104,7 +104,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                 >
                   <video
                     src={preloadedMedia.src}
-                    className="aspect-square w-full rounded-sm object-cover object-center"
+                    className="aspect-square w-full object-cover object-center"
                     loop
                     autoPlay
                     muted
@@ -115,7 +115,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
 
               <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="description" className="border-b-0">
-                  <AccordionTrigger className="w-full cursor-pointer py-3 text-customCream">
+                  <AccordionTrigger className="w-full cursor-pointer py-3 text-customNavy">
                     <motion.p
                       layoutId={`title-${event._id}`}
                       className="text-balance pr-6 text-left font-bigola text-lg capitalize md:text-2xl"
@@ -124,7 +124,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                     </motion.p>
                   </AccordionTrigger>
                   <AccordionContent className="border-customGold">
-                    <motion.div className="flex w-full flex-row justify-between pb-3 font-bigola text-customGold md:text-lg md:leading-[1.15]">
+                    <motion.div className="flex w-full flex-row justify-between pb-3 font-bigola text-customNavy md:text-lg md:leading-[1.15]">
                       <motion.p layoutId={`date-${event._id}`}>
                         {formattedDate}
                       </motion.p>
@@ -134,7 +134,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                     </motion.div>
                     <motion.p
                       layoutId={`description-${event._id}`}
-                      className="whitespace-pre-wrap pb-3 font-hypatia text-base leading-none text-customCream md:pb-6 md:text-lg md:leading-[1.15]"
+                      className="whitespace-pre-wrap pb-3 font-hypatia text-base leading-none text-customNavy md:pb-6 md:text-lg md:leading-[1.15]"
                     >
                       {event.description}
                     </motion.p>
@@ -160,7 +160,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       >
         <div className="flex h-full">
           <div className="flex w-full flex-col justify-between pr-3">
-            <div className="leaeding-none flex flex-row justify-between font-bigola text-lg text-customGold md:text-2xl">
+            <div className="leaeding-none flex flex-row justify-between font-bigola text-lg text-customNavy md:text-2xl">
               <motion.p layoutId={`date-${event._id}`}>
                 {formattedDate}
               </motion.p>
@@ -168,9 +168,9 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
 
             <motion.h2
               layoutId={`title-${event._id}`}
-              className="truncate text-balance font-bigola text-3xl capitalize leading-[0.95] text-customCream md:text-5xl lg:text-6xl"
+              className="overflow-hidden text-ellipsis text-balance font-bigola text-3xl capitalize leading-none text-customNavy md:text-5xl lg:text-6xl"
             >
-              <span className="leading-[.85]">{event.title}</span>
+              {event.title}
             </motion.h2>
           </div>
           {event.is_photo ? (

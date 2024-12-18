@@ -96,7 +96,9 @@ export default function RootLayout({
           />
           <Toaster />
           <BackgroundOverlay />
+
           <MobileHeader />
+
           {children}
           <MusicPlayer tracks={tracks} />
         </body>

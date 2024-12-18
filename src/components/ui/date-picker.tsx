@@ -26,11 +26,11 @@ export function DatePicker({ value, onChange }: DatePickerProps) {
         <Button
           variant={"outline"}
           className={cn(
-            "w-full justify-start rounded-sm border border-customGold bg-transparent text-left font-hypatia hover:bg-transparent",
+            "w-full justify-start rounded-sm border border-customNavy bg-transparent text-left font-hypatia backdrop-blur-sm hover:bg-transparent",
           )}
         >
-          <CalendarBlank className="mr-3 h-4 w-4 p-0 text-customCream hover:text-customCream" />
-          <div className="text-customCream">
+          <CalendarBlank className="mr-3 h-4 w-4 p-0 text-customNavy hover:text-customGold" />
+          <div className="text-customNavy">
             {value ? format(value, "PPP") : <span>Pick a date</span>}
           </div>
         </Button>

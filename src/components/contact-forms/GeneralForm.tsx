@@ -67,7 +67,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex w-full flex-col space-y-3 opacity-0 md:w-[550px]"
         >
-          <p className="text-pretty font-bigola font-hypatia text-lg leading-[1.15] text-customCream">
+          <p className="text-pretty font-hypatia text-lg leading-[1.15] text-customNavy">
             Thank you for reaching out to Legend Has It. Please take a minute
             and fill out the form below to give us a better understanding of how
             we can help.
@@ -78,10 +78,10 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             name="name"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel className="font-bigola text-customCream">
+                <FormLabel className="font-bigola text-customNavy">
                   Name
                 </FormLabel>
-                <FormControl className="border border-customGold font-hypatia text-customCream">
+                <FormControl className="border border-customNavy font-hypatia text-customNavy">
                   <Input {...field} />
                 </FormControl>
                 <FormMessage />
@@ -94,10 +94,10 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             name="email"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel className="font-bigola text-customCream">
+                <FormLabel className="font-bigola text-customNavy">
                   Email
                 </FormLabel>
-                <FormControl className="border border-customGold font-hypatia text-customCream">
+                <FormControl className="border border-customNavy font-hypatia text-customNavy">
                   <Input type="email" {...field} />
                 </FormControl>
                 <FormMessage />
@@ -109,10 +109,10 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             name="phone"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel className="font-bigola text-customCream">
+                <FormLabel className="font-bigola text-customNavy">
                   Phone
                 </FormLabel>
-                <FormControl className="border border-customGold font-hypatia text-customCream">
+                <FormControl className="border border-customNavy font-hypatia text-customNavy">
                   <Input type="tel" {...field} />
                 </FormControl>
                 <FormMessage />
@@ -125,10 +125,10 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             name="message"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel className="font-bigola text-customCream">
+                <FormLabel className="font-bigola text-customNavy">
                   Message
                 </FormLabel>
-                <FormControl className="border border-customGold font-hypatia text-customCream">
+                <FormControl className="border border-customNavy font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Textarea {...field} />
                 </FormControl>
                 <FormMessage />
@@ -137,7 +137,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
           />
           <Button
             type="submit"
-            className="mx-auto rounded-sm border border-customGold bg-transparent font-bigola text-base text-customCream transition-all duration-300 active:bg-customNavy active:text-customGold sm:w-fit md:hover:bg-customNavy md:hover:text-customGold"
+            className="mx-auto rounded-sm border border-customNavy bg-transparent font-bigola text-base text-customNavy backdrop-blur-sm transition-all duration-300 active:bg-customNavy active:text-customCream sm:w-fit md:hover:bg-customNavy md:hover:text-customCream"
           >
             Submit
           </Button>

@@ -10,8 +10,7 @@ export default async function MenuLayout({
   await connectToMongoDB();
   return (
     <main>
-      <SideMenu />
-      <div className="fixed left-0 top-0 z-[-1] h-full min-h-screen w-screen backdrop-blur-md"></div>
+      <SideMenu color="text-customNavy" />
       {children}
     </main>
   );
