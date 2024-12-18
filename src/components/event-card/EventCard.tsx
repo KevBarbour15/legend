@@ -156,12 +156,15 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       <motion.div
         layoutId={`card-${event._id}`}
         onClick={handleCardClick}
-        className="cursor-pointer py-3"
+        className="flex h-full cursor-pointer justify-between py-3"
       >
-        <div className="flex h-full">
-          <div className="leaeding-none flex flex-row justify-between font-bigola text-lg text-customNavy md:text-2xl">
-            <motion.p layoutId={`date-${event._id}`}>{formattedDate}</motion.p>
-          </div>
+        <div className="flex h-auto w-auto flex-col justify-between  pr-6">
+          <motion.p
+            className="font-bigola text-lg leading-none text-customNavy md:text-2xl"
+            layoutId={`date-${event._id}`}
+          >
+            {formattedDate}
+          </motion.p>
 
           <motion.h2
             layoutId={`title-${event._id}`}
