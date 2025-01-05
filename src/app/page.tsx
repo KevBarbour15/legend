@@ -232,7 +232,8 @@ export default function Home() {
           <div id="about-section" className="opacity-0">
             <ImageCarousel />
           </div>
-          <div className="flex flex-row gap-6">
+
+          <div className="hidden flex-row gap-6 md:flex">
             <div className="basis-1/2">
               <iframe
                 src="https://open.spotify.com/embed/playlist/7pIFUTsTxa3MMROMuXsElO?utm_source=generator&theme=0"
