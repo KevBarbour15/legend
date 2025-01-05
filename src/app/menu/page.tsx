@@ -208,7 +208,7 @@ const Menu: React.FC = ({}) => {
           key={childCategory.id}
         >
           <AccordionTrigger
-            className={`cursor-pointer font-bigola text-2xl leading-none md:text-4xl ${
+            className={`cursor-pointer font-bigola text-xl leading-none md:text-4xl ${
               activeChildCategory === childCategory.id
                 ? "text-customGold"
                 : "text-customNavy"
@@ -281,7 +281,7 @@ const Menu: React.FC = ({}) => {
                             key={categoryName}
                           >
                             <AccordionTrigger
-                              className={`cursor-pointer font-bigola text-4xl leading-none transition-all duration-300 md:text-5xl ${
+                              className={`cursor-pointer font-bigola text-3xl leading-none transition-all duration-300 md:text-4xl ${
                                 activeCategory === index
                                   ? "text-customGold"
                                   : "text-customNavy"

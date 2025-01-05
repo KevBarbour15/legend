@@ -89,13 +89,6 @@ export default function Home() {
 
     tl.current
       .to(
-        "#background-overlay",
-        {
-          scale: 1.5,
-        },
-        0,
-      )
-      .to(
         ".menu-link",
         {
           color: "#244154",
@@ -238,6 +231,28 @@ export default function Home() {
 
           <div id="about-section" className="opacity-0">
             <ImageCarousel />
+          </div>
+          <div className="flex flex-row gap-6">
+            <div className="basis-1/2">
+              <iframe
+                src="https://open.spotify.com/embed/playlist/7pIFUTsTxa3MMROMuXsElO?utm_source=generator&theme=0"
+                width="100%"
+                height="352"
+                allow="encrypted-media"
+                loading="lazy"
+                className="h-[352px] w-full rounded-xl"
+              ></iframe>
+            </div>
+            <div className="basis-1/2">
+              <iframe
+                src="https://embed.tidal.com/playlists/af487a34-0dda-4c35-a02e-44f402c4a141"
+                allow="encrypted-media"
+                className="h-[352px] w-full rounded-xl"
+                loading="lazy"
+                height="352"
+                width="100%"
+              ></iframe>
+            </div>
           </div>
 
           <div

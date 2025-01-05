@@ -6,6 +6,7 @@ export default function middleware(req: NextRequest) {
     { path: "/dashboard", methods: ["GET"] },
     { path: "/api/events", methods: ["POST", "PUT", "DELETE"] },
     { path: "/api/message", methods: ["GET", "DELETE", "PUT"] },
+    { path: "/api/fallback-menu", methods: ["POST", "PUT", "DELETE"] },
   ];
 
   for (const route of protectedRoutes) {

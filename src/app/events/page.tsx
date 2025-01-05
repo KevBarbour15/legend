@@ -119,7 +119,6 @@ export default function Events() {
 
   const fetchEvents = async () => {
     try {
-      // animate progress bar to give user feedback / realism
       setProgress(generateProgress(2, 25));
       await new Promise((resolve) => setTimeout(resolve, 125));
 

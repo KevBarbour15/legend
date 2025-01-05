@@ -104,7 +104,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                 >
                   <video
                     src={preloadedMedia.src}
-                    className="aspect-square w-full object-cover object-center"
+                    className="aspect-square h-auto w-full object-cover object-center md:aspect-auto md:max-h-[475px]"
                     loop
                     autoPlay
                     muted
