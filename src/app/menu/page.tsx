@@ -161,10 +161,10 @@ const Menu: React.FC = ({}) => {
   const renderMenuItem = (item: ProcessedItem) => (
     <div
       key={item.id}
-      className="block text-nowrap px-3 pb-6 font-hypatia text-base capitalize text-customWhite md:text-lg"
+      className="block px-3 pb-6 font-hypatia text-base capitalize text-customWhite md:text-lg"
     >
-      <div className="flex w-full justify-between font-bigola text-lg text-customNavy md:text-2xl">
-        <p className="text-left leading-none">{item.name}</p>
+      <div className="flex w-full justify-between text-nowrap font-bigola text-lg text-customNavy md:text-2xl">
+        <p className="whitespace-nowrap text-left leading-none">{item.name}</p>
         {item.bottlePrice ? (
           <div className="flex first-letter:items-end">
             <p className="flex gap-1 text-right leading-none">
@@ -177,20 +177,20 @@ const Menu: React.FC = ({}) => {
         )}
       </div>
 
-      <div className="mt-1 flex w-full justify-between font-hypatiaSemibold leading-tight text-customNavy">
-        <p>{item.brand}</p>
+      <div className="mt-1 flex w-full items-center justify-between font-hypatiaSemibold leading-tight text-customNavy">
+        <p className="text-nowrap text-left">{item.brand}</p>
         <Divider borderColor={"border-customGold"} />
-        <p className="italic">{item.description}</p>
+        <p className="text-right md:text-nowrap">{item.description}</p>
       </div>
 
       {item.city && item.abv && (
-        <div className="mt-1 flex w-full justify-between leading-none text-customNavy">
+        <div className="mt-1 flex w-full items-center justify-between text-nowrap leading-none text-customNavy">
           <p className="flex gap-1">
             <span>{item.city},</span>
             <span>CA</span>
           </p>
           <Divider borderColor={"border-customGold"} />
-          <div className="flex gap-1 italic">
+          <div className="flex gap-1 text-right">
             <p>ABV</p>
             <p> {item.abv}</p>
           </div>

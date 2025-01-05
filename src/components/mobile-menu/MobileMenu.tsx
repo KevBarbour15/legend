@@ -30,16 +30,16 @@ const MobileMenu: React.FC = () => {
     >
       <div className="fixed flex flex-grow flex-col justify-start pl-3 pt-3">
         <Image
-          className="w-[200px] md:hidden"
+          className="w-[150px] md:hidden"
           src="/images/alt-logo.png"
           alt="Logo"
-          height={200}
-          width={200}
+          height={150}
+          width={150}
           priority={true}
         />
-        <ul className="pt-6 font-bigola text-6xl tracking-tight">
+        <ul className="pt-6 font-bigola text-4xl tracking-tight">
           {links.map((link, idx) => (
-            <li key={idx} className="m-0 p-0 leading-[0.75]">
+            <li key={idx} className="m-0 p-0 leading-[0.85]">
               {link.label === "About" ? (
                 <a
                   href="/"
@@ -73,7 +73,7 @@ const MobileMenu: React.FC = () => {
         >
           <div
             id="mobile-menu"
-            className="flex justify-between gap-2 p-0 text-6xl leading-[.7] tracking-tight"
+            className="flex justify-between gap-2 p-0 text-4xl leading-[.7] tracking-tight"
           >
             <span>410</span>
             <span>L</span>
@@ -81,7 +81,7 @@ const MobileMenu: React.FC = () => {
           </div>
           <p
             id="mobile-menu"
-            className="flex justify-between text-3xl italic leading-[0.7] tracking-tight"
+            className="flex justify-between text-2xl italic leading-[0.7] tracking-tight"
           >
             <span>s</span>
             <span>a</span>
@@ -96,7 +96,7 @@ const MobileMenu: React.FC = () => {
           </p>
           <div
             id="mobile-menu"
-            className="flex justify-between gap-1 text-5xl leading-none tracking-tight"
+            className="flex justify-between gap-1 text-4xl leading-none tracking-tight"
           >
             <span>CA,</span>
             <span>95814</span>

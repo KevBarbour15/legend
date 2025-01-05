@@ -15,6 +15,8 @@ import {
   Copyright,
   Phone,
   Key,
+  TidalLogo,
+  SpotifyLogo,
 } from "@phosphor-icons/react";
 
 import { IconButton } from "@mui/material";
@@ -131,18 +133,18 @@ export default function Home() {
       gsap.fromTo(
         section,
         {
-          y: 25,
+          y: 50,
           opacity: 0,
         },
         {
           y: 0,
           opacity: 1,
-          delay: 0.25,
-          duration: 0.15,
+          delay: 0.15,
+          duration: 0.35,
           ease: "sine.inOut",
           scrollTrigger: {
             trigger: section,
-            start: "top-=25 bottom",
+            start: "top-=50 bottom",
             toggleActions: "play none none none",
           },
         },
@@ -233,7 +235,10 @@ export default function Home() {
             <ImageCarousel />
           </div>
 
-          <div className="hidden flex-row gap-6 md:flex">
+          <div
+            id="about-section"
+            className="hidden flex-row gap-6 opacity-0 md:flex border-b border-customNavy py-6"
+          >
             <div className="basis-1/2">
               <iframe
                 src="https://open.spotify.com/embed/playlist/7pIFUTsTxa3MMROMuXsElO?utm_source=generator&theme=0"
@@ -292,6 +297,28 @@ export default function Home() {
             </div>
 
             <div className="flex w-full basis-1/2 justify-start gap-3 md:justify-end">
+              <a
+                className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+                href="https://open.spotify.com/user/31pcq2fnwyxprxppy4ezl3v3evaq"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow Legend Has It on Spotify"
+                title="Follow us on Spotify"
+              >
+                <SpotifyLogo size={40} weight="fill" />
+              </a>
+
+              <a
+                className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+                href="https://listen.tidal.com/user/199890881"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow Legend Has It on Tidal"
+                title="Follow us on Tidal"
+              >
+                <TidalLogo size={40} weight="fill" />
+              </a>
+
               <a
                 className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
                 href="https://www.instagram.com/legendhasithifi/"
