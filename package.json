@@ -44,6 +44,7 @@
     "embla-carousel-react": "^8.2.1",
     "framer-motion": "^11.11.8",
     "gsap": "npm:@gsap/shockingly@^3.12.5",
+    "ldrs": "^1.0.2",
     "lucide-react": "^0.441.0",
     "mongoose": "^8.5.1",
     "next": "^14.2.4",

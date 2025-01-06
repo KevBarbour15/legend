@@ -78,8 +78,8 @@ export default function Events() {
       gsap.set("#events-container", { opacity: 0 });
       gsap.set(currentRefs.current, {
         opacity: 0,
-        y: 75,
-        clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
+        y: 15,
+        //clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
       });
 
       gsap.to("#events-container", {
@@ -89,7 +89,7 @@ export default function Events() {
 
       gsap.to(currentRefs.current, {
         delay: 0.15,
-        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+        //clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
         y: 0,
         duration: 0.2,
         stagger: 0.075,
@@ -119,7 +119,6 @@ export default function Events() {
 
   const fetchEvents = async () => {
     try {
-      setProgress(generateProgress(2, 25));
       await new Promise((resolve) => setTimeout(resolve, 125));
 
       const response = await fetch("/api/events", {
@@ -129,7 +128,6 @@ export default function Events() {
         },
       });
 
-      setProgress(generateProgress(26, 50));
       await new Promise((resolve) => setTimeout(resolve, 125));
 
       if (!response.ok) {
@@ -143,7 +141,6 @@ export default function Events() {
         throw new Error(`Failed to fetch events: ${response.statusText}`);
       }
 
-      setProgress(generateProgress(51, 75));
       await new Promise((resolve) => setTimeout(resolve, 125));
 
       const data: Event[] = await response.json();
@@ -157,9 +154,7 @@ export default function Events() {
         error instanceof Error ? error : new Error("Unknown error occurred");
       console.error("Error: ", err);
       setError(err.message);
-      setProgress(0);
     } finally {
-      setProgress(100);
       await new Promise((resolve) => setTimeout(resolve, 350));
       setLoading(false);
     }
@@ -192,7 +187,6 @@ export default function Events() {
   );
 
   useEffect(() => {
-    setProgress(1);
     fetchEvents();
   }, []);
 

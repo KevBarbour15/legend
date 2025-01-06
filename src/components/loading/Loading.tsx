@@ -1,22 +1,16 @@
 import { LoadingProps } from "@/data/loading.ts";
 
-import { Progress } from "@/components/ui/progress";
+import { mirage } from "ldrs";
 
-const Loading: React.FC<LoadingProps> = ({
-  progress,
-  message,
-  textColor,
-  borderColor,
-}) => {
+mirage.register();
+
+const Loading: React.FC<LoadingProps> = ({ message, textColor }) => {
   return (
     <div
       className={`z-20 flex h-[50vh] w-full flex-col items-center justify-center ${textColor}`}
     >
       <h2 className="mb-6 text-center text-3xl md:text-4xl">{message}</h2>
-      <Progress
-        value={progress}
-        className={`w-[75vw] max-w-[350px] ${borderColor}`}
-      />
+      <l-mirage size="150" speed="2.5" color="#244154"></l-mirage>
     </div>
   );
 };
