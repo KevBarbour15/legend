@@ -141,99 +141,126 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         className="fixed bottom-0 left-0 right-0 mx-3 mb-3 flex flex-col md:mb-6 md:ml-6 md:mr-0 md:w-fit md:flex-row"
       >
         <div className="w-full md:w-fit">
-          <Collapse
-            in={visible}
-            id="record-player"
-            className="mb-2 hidden opacity-0 md:block"
-          >
-            <div className="relative h-auto w-full">
-              <Image
-                id="now-playing"
-                height={128}
-                width={128}
-                style={{
-                  height: "151px",
-                  width: "151px",
-                }}
-                className="absolute left-[4px] top-[1.05px] z-[3] drop-shadow-record"
-                src="/images/record.png"
-                alt="Record"
-                priority={true}
-                loading="eager"
-              />
-              <Image
-                id="arm"
-                height={128}
-                width={128}
-                style={{
-                  height: "90%",
-                  width: "auto",
-                }}
-                src="/images/arm.png"
-                alt="Record"
-                className="absolute right-[17px] top-[10.5px] z-[3] h-[98.5%] drop-shadow-recordPlayer"
-              />
-              <Image
-                height={128}
-                width={128}
-                style={{
-                  height: "auto",
-                  width: "100%",
-                }}
-                className="rounded-sm drop-shadow-recordPlayer"
-                src="/images/record-player.jpg"
-                alt="Record"
-                priority={true}
-              />
-            </div>
-          </Collapse>
-          <div className="z-[11] flex justify-between rounded-sm bg-black px-1 py-2 drop-shadow-recordPlayer md:gap-2 md:py-1">
-            <IconButton className="p-1 text-customSilver drop-shadow-text transition-all md:hover:text-customGold">
+          <div className="buttons-container z-[11] flex justify-between rounded-sm bg-opacity-10 py-2 backdrop-blur-sm md:gap-2 md:bg-opacity-0 md:py-1 md:backdrop-blur-0">
+            <IconButton className="player-button p-1 text-customCream">
               {mute ? (
-                <SpeakerSlash weight="thin" onClick={handleMute} />
+                <SpeakerSlash
+                  weight="light"
+                  onClick={handleMute}
+                  className="transition-all md:hover:text-customGold"
+                />
               ) : (
-                <SpeakerSimpleHigh weight="thin" onClick={handleMute} />
+                <SpeakerSimpleHigh
+                  weight="light"
+                  onClick={handleMute}
+                  className="transition-all md:hover:text-customGold"
+                />
               )}
             </IconButton>
             <IconButton
               onClick={handlePreviousTrack}
-              className="p-1 text-customSilver drop-shadow-text transition-all md:hover:text-customGold"
+              className="player-button p-1 text-customCream"
             >
-              <SkipBack weight="thin" />
+              <SkipBack
+                weight="light"
+                className="transition-all md:hover:text-customGold"
+              />
             </IconButton>
 
             <IconButton
               onClick={handlePlayPauseRounded}
-              className="p-1 text-customSilver drop-shadow-text transition-all md:hover:text-customGold"
+              className="player-button p-1 text-customCream"
             >
-              {playing ? <Pause weight="thin" /> : <Play weight="thin" />}
+              {playing ? (
+                <Pause
+                  weight="light"
+                  className="transition-all md:hover:text-customGold"
+                />
+              ) : (
+                <Play
+                  weight="light"
+                  className="transition-all md:hover:text-customGold"
+                />
+              )}
             </IconButton>
             <IconButton
               onClick={handleNextTrack}
-              className="p-1 text-customSilver drop-shadow-text transition-all md:hover:text-customGold"
+              className="player-button p-1 text-customCream"
             >
-              <SkipForward weight="thin" />
+              <SkipForward
+                weight="light"
+                className="transition-all md:hover:text-customGold"
+              />
             </IconButton>
             <IconButton
               onClick={togglePlaylist}
-              className="transform p-1 text-customSilver drop-shadow-text transition-all md:hover:rotate-[360deg] md:hover:text-customGold"
+              className="player-button transform p-1 text-customCream"
             >
               {playlistVisible ? (
-                <X weight="thin" />
+                <X
+                  weight="light"
+                  className="transition-all md:hover:text-customGold"
+                />
               ) : (
-                <VinylRecord weight="thin" />
+                <VinylRecord
+                  weight="light"
+                  className="transition-all md:hover:text-customGold"
+                />
               )}
             </IconButton>
+          </div>
+          <div
+            className="relative mt-2 hidden h-auto w-full opacity-0 md:block"
+            id="record-player"
+          >
+            <Image
+              id="now-playing"
+              height={128}
+              width={128}
+              style={{
+                height: "144px",
+                width: "144px",
+              }}
+              className="absolute left-[4px] top-[1.05px] z-[3] drop-shadow-record"
+              src="/images/record.png"
+              alt="Record"
+              priority={true}
+              loading="eager"
+            />
+            <Image
+              id="arm"
+              height={128}
+              width={128}
+              style={{
+                height: "90%",
+                width: "auto",
+              }}
+              src="/images/arm.png"
+              alt="Record"
+              className="absolute right-[17px] top-[10.5px] z-[3] h-[98.5%] drop-shadow-recordPlayer"
+            />
+            <Image
+              height={128}
+              width={128}
+              style={{
+                height: "auto",
+                width: "100%",
+              }}
+              className="rounded-sm drop-shadow-recordPlayer"
+              src="/images/record-player.jpg"
+              alt="Record"
+              priority={true}
+            />
           </div>
         </div>
       </div>
       <div
         id="playlist"
-        className="z-10 mb-[70px] rounded-sm px-3 md:fixed md:bottom-0 md:left-[255px] md:mb-0 md:px-0 md:pb-6"
+        className="z-10 mb-[70px] rounded-sm px-3 md:fixed md:bottom-0 md:left-[255px] md:mb-0 md:px-0 md:pb-6 md:drop-shadow-recordPlayer"
       >
         <Collapse in={playlistVisible}>
           <div
-            className="aspect-square w-full rounded-sm drop-shadow-recordPlayer md:h-[425px] md:w-auto"
+            className="aspect-square w-full rounded-sm md:h-[425px] md:w-auto"
             style={{
               backgroundImage: "url('/images/album-cover.jpg')",
               backgroundPosition: "center",

@@ -45,7 +45,8 @@ import { Input } from "@/components/ui/input";
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
-  const [yPercent, setYPercent] = useState(-50);
+  const [yPercent, setYPercent] = useState<number>(-50);
+  const [parallaxEnd, setParallaxEnd] = useState<string>("top 15%");
   const form = useForm<MailchimpFormData>({
     resolver: zodResolver(mailchimpFormSchema),
     defaultValues: {
@@ -58,8 +59,10 @@ export default function Home() {
     const handleResize = () => {
       if (window.innerWidth < 768) {
         setYPercent(-50);
+        setParallaxEnd("top center");
       } else {
         setYPercent(-25);
+        setParallaxEnd("top 15%");
       }
     };
 
@@ -104,7 +107,7 @@ export default function Home() {
       scrollTrigger: {
         trigger: "#about-image",
         start: "top bottom",
-        end: "top center",
+        end: parallaxEnd,
         scrub: 1,
       },
     });
@@ -113,7 +116,7 @@ export default function Home() {
       scrollTrigger: {
         trigger: "#hidden-bg",
         start: "center center",
-        end: "center top",
+        end: "center 10%",
         scrub: 1,
       },
     });
@@ -130,6 +133,13 @@ export default function Home() {
         ".about-link",
         {
           color: "#bc9952",
+        },
+        0,
+      )
+      .to(
+        ".player-button",
+        {
+          color: "#244154",
         },
         0,
       )
