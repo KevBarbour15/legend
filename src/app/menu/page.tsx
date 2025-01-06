@@ -69,12 +69,10 @@ const Menu: React.FC = ({}) => {
       const data = await getMenu();
 
       if (!data) {
-        setProgress(generateProgress(67, 85));
         // fetch fallback menu client side if ssr fails
         try {
           const response = await fetch("/api/fallback-menu");
           if (!response.ok) {
-            setProgress(0);
             throw new Error(`Fallback API returned ${response.status}`);
           }
           const fallbackMenu = await response.json();
@@ -82,14 +80,12 @@ const Menu: React.FC = ({}) => {
           setProgress(generateProgress(86, 99));
           setMenu(fallbackMenu.menu);
         } catch (fallbackError) {
-          setProgress(0);
           setError(
             "Failed to fetch menu data from both primary and fallback sources",
           );
           throw fallbackError;
         }
       } else {
-        setProgress(generateProgress(67, 99));
         setMenu(data);
       }
     } catch (error) {
@@ -98,7 +94,6 @@ const Menu: React.FC = ({}) => {
       console.error("Error: ", err);
       setError(err.message);
     } finally {
-      setProgress(100);
       await new Promise((resolve) => setTimeout(resolve, 350));
       setLoading(false);
     }
@@ -141,7 +136,6 @@ const Menu: React.FC = ({}) => {
   }, [loading]);
 
   useEffect(() => {
-    setProgress(generateProgress(1, 33));
     fetchMenu();
   }, []);
 
