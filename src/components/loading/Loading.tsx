@@ -1,10 +1,13 @@
+import { useEffect } from "react";
 import { LoadingProps } from "@/data/loading.ts";
 
 import { mirage } from "ldrs";
 
-mirage.register();
-
 const Loading: React.FC<LoadingProps> = ({ message, textColor }) => {
+  // Register the mirage loader once mounted
+  useEffect(() => {
+    mirage.register();
+  }, []);
   return (
     <div
       className={`z-20 flex h-[50vh] w-full flex-col items-center justify-center ${textColor}`}
