@@ -49,9 +49,10 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
     if (!containerRef.current) return;
 
     tl.current = gsap.timeline().to(containerRef.current, {
-      duration: 0.15,
+      delay: 0.5,
+      duration: 0.25,
       opacity: 1,
-      ease: "sine.inOut",
+      ease: "sine.in",
     });
 
     armTl.current = gsap.timeline().to("#arm", {

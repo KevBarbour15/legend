@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 import Image from "next/image";
 
@@ -19,7 +19,6 @@ import {
   SpotifyLogo,
 } from "@phosphor-icons/react";
 
-import { IconButton } from "@mui/material";
 import { Button } from "@/components/ui/button";
 
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
@@ -46,13 +45,28 @@ import { Input } from "@/components/ui/input";
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
-
+  const [yPercent, setYPercent] = useState(-50);
   const form = useForm<MailchimpFormData>({
     resolver: zodResolver(mailchimpFormSchema),
     defaultValues: {
       email: "",
     },
   });
+
+  useEffect(() => {
+    // Set the yPercent based on the window width for better parrallax
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setYPercent(-50);
+      } else {
+        setYPercent(-25);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const onSubmit = async (values: MailchimpFormData) => {
     try {
@@ -79,6 +93,21 @@ export default function Home() {
 
   useGSAP(() => {
     if (!containerRef.current) return;
+
+    gsap.set("#about-image", {
+      yPercent: yPercent,
+    });
+
+    gsap.to("#about-image", {
+      yPercent: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#about-image",
+        start: "top bottom",
+        end: "top center",
+        scrub: 1,
+      },
+    });
 
     tl.current = gsap.timeline({
       scrollTrigger: {
@@ -168,11 +197,9 @@ export default function Home() {
           id="about-content"
           className="relative mx-auto block h-auto p-3 md:py-6 md:pl-[258px] md:pr-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
         >
-          <div
-            id="about-section"
-            className="relative aspect-video opacity-0 md:overflow-hidden"
-          >
+          <div className="relative aspect-video overflow-hidden">
             <Image
+              id="about-image"
               src="/images/about-image.jpg"
               className="object-cover"
               fill
@@ -237,7 +264,7 @@ export default function Home() {
 
           <div
             id="about-section"
-            className="hidden flex-row gap-6 opacity-0 md:flex border-b border-customNavy py-6"
+            className="hidden flex-row gap-6 border-b border-customNavy py-6 opacity-0 md:flex"
           >
             <div className="basis-1/2">
               <iframe

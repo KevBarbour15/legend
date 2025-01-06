@@ -33,6 +33,19 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
     const menuLinks = document.querySelectorAll("#hover");
 
     menuLinks.forEach((menuLink) => {
+      gsap.set(menuLink, { x: "-150%" });
+      gsap.set(menuLink, { opacity: 0 });
+    });
+
+    gsap.to(menuLinks, {
+      duration: 0.5,
+      ease: "sine.out",
+      x: 0,
+      opacity: 1,
+      stagger: 0.1,
+    });
+
+    menuLinks.forEach((menuLink) => {
       menuLink.addEventListener("mouseenter", () => {
         gsap.to(menuLink, {
           duration: 0.15,
@@ -88,7 +101,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
             <li
               key={idx}
               id="hover"
-              className={`${link.path === "/" ? "about-link" : "menu-link"} m-0 p-0 leading-[.75] ${
+              className={`${link.path === "/" ? "about-link" : "menu-link"} m-0 p-0 leading-[.75] opacity-0 ${
                 pathname === link.path && pathname !== "/"
                   ? "text-customGold"
                   : color
@@ -111,7 +124,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
             </li>
           ))}
         </ul>
-        <div className="menu-link mt-12 pr-3 font-bigola" id="hover">
+        <div className="menu-link mt-12 pr-3 font-bigola opacity-0" id="hover">
           <Image
             className="mb-6 w-[150px] md:hidden"
             src="/images/alt-logo.png"
