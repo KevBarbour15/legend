@@ -141,8 +141,8 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         className="fixed bottom-0 left-0 right-0 mx-3 mb-3 flex flex-col md:mb-6 md:ml-6 md:mr-0 md:w-fit md:flex-row"
       >
         <div className="w-full md:w-fit">
-          <div className="buttons-container z-[11] flex justify-between rounded-sm bg-opacity-10 py-2 backdrop-blur-sm md:gap-2 md:bg-opacity-0 md:py-1 md:backdrop-blur-0">
-            <IconButton className="player-button p-1 text-customCream">
+          <div className="buttons-container z-[11] flex justify-between rounded-sm bg-opacity-10 py-2 md:gap-2 md:bg-opacity-0 md:py-1">
+            <IconButton className="player-button p-1 text-customCream backdrop-blur-md md:backdrop-blur-0">
               {mute ? (
                 <SpeakerSlash
                   weight="light"
@@ -159,7 +159,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             </IconButton>
             <IconButton
               onClick={handlePreviousTrack}
-              className="player-button p-1 text-customCream"
+              className="player-button p-1 text-customCream backdrop-blur-md md:backdrop-blur-0"
             >
               <SkipBack
                 weight="light"
@@ -169,7 +169,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
 
             <IconButton
               onClick={handlePlayPauseRounded}
-              className="player-button p-1 text-customCream"
+              className="player-button p-1 text-customCream backdrop-blur-md md:backdrop-blur-0"
             >
               {playing ? (
                 <Pause
@@ -185,7 +185,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             </IconButton>
             <IconButton
               onClick={handleNextTrack}
-              className="player-button p-1 text-customCream"
+              className="player-button p-1 text-customCream backdrop-blur-md md:backdrop-blur-0"
             >
               <SkipForward
                 weight="light"
@@ -194,7 +194,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             </IconButton>
             <IconButton
               onClick={togglePlaylist}
-              className="player-button transform p-1 text-customCream"
+              className="player-button transform p-1 text-customCream backdrop-blur-md md:backdrop-blur-0"
             >
               {playlistVisible ? (
                 <X
