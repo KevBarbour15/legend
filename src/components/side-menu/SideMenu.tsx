@@ -108,7 +108,11 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
               }`}
             >
               {link.path === "/" ? (
-                <a onClick={handleAboutClick} className="cursor-pointer">
+                <a
+                  onClick={handleAboutClick}
+                  className="cursor-pointer"
+                  aria-label={`Navigate to About section`}
+                >
                   {link.label}
                 </a>
               ) : (
