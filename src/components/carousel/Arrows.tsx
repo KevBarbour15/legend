@@ -56,9 +56,10 @@ export const PrevButton: React.FC<IconButtonProps> = (props) => {
   return (
     <IconButton
       {...restProps}
+      aria-label="Previous slide"
       className="mb-6 mt-3 p-0 text-customNavy transition-colors md:mb-0 md:hover:text-customGold"
     >
-      <CaretLeft size={40} weight="thin" />
+      <CaretLeft size={40} weight="thin" aria-hidden="true" />
       {children}
     </IconButton>
   );
@@ -70,9 +71,10 @@ export const NextButton: React.FC<IconButtonProps> = (props) => {
   return (
     <IconButton
       {...restProps}
+      aria-label="Next slide"
       className="mb-6 mt-3 p-0 text-customNavy transition-colors md:mb-0 md:hover:text-customGold"
     >
-      <CaretRight size={40} weight="thin" />
+      <CaretRight size={40} weight="thin" aria-hidden="true" />
       {children}
     </IconButton>
   );

@@ -278,6 +278,7 @@ export default function Home() {
           >
             <div className="basis-1/2">
               <iframe
+                title="Spotify Playlist"
                 src="https://open.spotify.com/embed/playlist/7pIFUTsTxa3MMROMuXsElO?utm_source=generator&theme=0"
                 width="100%"
                 height="352"
@@ -288,6 +289,7 @@ export default function Home() {
             </div>
             <div className="basis-1/2">
               <iframe
+                title="Tidal Playlist"
                 src="https://embed.tidal.com/playlists/af487a34-0dda-4c35-a02e-44f402c4a141"
                 allow="encrypted-media"
                 className="h-[352px] w-full rounded-xl"
