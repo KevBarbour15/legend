@@ -47,6 +47,9 @@ export const metadata: Metadata = {
   title: "Legend Has It",
   description:
     "Sacramento's first hi-fi listening bar, where music meets the art of sound.",
+  keywords:
+    "hi-fi bar Sacramento, listening bar, audiophile bar, beer bar Sacramento, vinyl bar, music venue Sacramento",
+
   openGraph: {
     title: "Legend Has It",
     url: "https://www.legendhasithifi.com/",
@@ -68,6 +71,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Legend Has It",
     images: ["/images/meta-image.jpg"],
+    description:
+      "Sacramento's first hi-fi listening bar, where music meets the art of sound.",
+  },
+  other: {
+    "instagram:site": "@legendhasithifi",
   },
 };
 
@@ -80,7 +88,6 @@ export default function RootLayout({
     <>
       <html lang="en">
         <head>
-          <title>Legend Has It</title>
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1, maximum-scale=1"

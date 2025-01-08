@@ -142,69 +142,85 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       >
         <div className="w-full md:w-fit">
           <div className="buttons-container z-[11] flex justify-between rounded-sm bg-opacity-10 py-2 md:gap-2 md:bg-opacity-0 md:py-1">
-            <IconButton className="player-button p-1 text-customCream backdrop-blur-md md:backdrop-blur-0">
+            <IconButton
+              className="player-button p-1 text-customCream backdrop-blur-md md:backdrop-blur-0"
+              aria-label={mute ? "Unmute" : "Mute"}
+            >
               {mute ? (
                 <SpeakerSlash
                   weight="light"
                   onClick={handleMute}
                   className="transition-all md:hover:text-customGold"
+                  aria-hidden="true"
                 />
               ) : (
                 <SpeakerSimpleHigh
                   weight="light"
                   onClick={handleMute}
                   className="transition-all md:hover:text-customGold"
+                  aria-hidden="true"
                 />
               )}
             </IconButton>
             <IconButton
               onClick={handlePreviousTrack}
               className="player-button p-1 text-customCream backdrop-blur-md md:backdrop-blur-0"
+              aria-label="Previous track"
             >
               <SkipBack
                 weight="light"
                 className="transition-all md:hover:text-customGold"
+                aria-hidden="true"
               />
             </IconButton>
 
             <IconButton
               onClick={handlePlayPauseRounded}
               className="player-button p-1 text-customCream backdrop-blur-md md:backdrop-blur-0"
+              aria-label={playing ? "Pause" : "Play"}
             >
               {playing ? (
                 <Pause
                   weight="light"
                   className="transition-all md:hover:text-customGold"
+                  aria-hidden="true"
                 />
               ) : (
                 <Play
                   weight="light"
                   className="transition-all md:hover:text-customGold"
+                  aria-hidden="true"
                 />
               )}
             </IconButton>
             <IconButton
               onClick={handleNextTrack}
               className="player-button p-1 text-customCream backdrop-blur-md md:backdrop-blur-0"
+              aria-label="Next track"
             >
               <SkipForward
                 weight="light"
                 className="transition-all md:hover:text-customGold"
+                aria-hidden="true"
               />
             </IconButton>
             <IconButton
               onClick={togglePlaylist}
               className="player-button transform p-1 text-customCream backdrop-blur-md md:backdrop-blur-0"
+              aria-label={playlistVisible ? "Close playlist" : "Open playlist"}
+              aria-expanded={playlistVisible}
             >
               {playlistVisible ? (
                 <X
                   weight="light"
                   className="transition-all md:hover:text-customGold"
+                  aria-hidden="true"
                 />
               ) : (
                 <VinylRecord
                   weight="light"
                   className="transition-all md:hover:text-customGold"
+                  aria-hidden="true"
                 />
               )}
             </IconButton>
@@ -293,10 +309,12 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                         <IconButton
                           id="player-button"
                           className="m-0 flex p-1 text-customCream drop-shadow-text md:px-0 md:hover:text-customGold"
+                          aria-label={`Play ${track.title} by ${track.artist}`}
                         >
                           <Play
                             weight="fill"
                             onClick={() => handleTrackChange(index)}
+                            aria-hidden="true"
                           />
                         </IconButton>
                       )}
