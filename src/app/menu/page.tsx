@@ -161,7 +161,7 @@ const Menu: React.FC = ({}) => {
   const renderMenuItem = (item: ProcessedItem) => (
     <div
       key={item.id}
-      className="block px-3 pb-6 font-hypatia text-base capitalize text-customWhite md:text-lg"
+      className="mb-3 block border-b border-dashed border-customGold pb-3 font-hypatia text-base capitalize text-customWhite md:text-lg"
     >
       <div className="flex w-full justify-between text-nowrap font-bigola text-lg text-customNavy md:text-2xl">
         <p className="whitespace-nowrap text-left leading-none">{item.name}</p>
@@ -179,8 +179,10 @@ const Menu: React.FC = ({}) => {
 
       <div className="mt-1 flex w-full items-center justify-between font-hypatiaSemibold leading-tight text-customNavy">
         <p className="text-nowrap text-left">{item.brand}</p>
-        <Divider borderColor={"border-customGold"} />
-        <p className="text-right md:text-nowrap">{item.description}</p>
+
+        <p className="max-w-[50%] text-balance text-right italic md:text-nowrap">
+          {item.description}
+        </p>
       </div>
 
       {item.city && item.abv && (
@@ -189,8 +191,8 @@ const Menu: React.FC = ({}) => {
             <span>{item.city},</span>
             <span>CA</span>
           </p>
-          <Divider borderColor={"border-customGold"} />
-          <div className="flex gap-1 text-right">
+
+          <div className="flex gap-1 text-right italic">
             <p>ABV</p>
             <p> {item.abv}</p>
           </div>
@@ -246,13 +248,13 @@ const Menu: React.FC = ({}) => {
             </div>
           ) : error ? (
             <div className="z-20 flex h-[50vh] w-full flex-col items-center justify-center">
-              <h2 className="mb-6 text-center font-bigola text-3xl text-customNavy md:text-4xl">
+              <h2 className="mb-3 text-center font-bigola text-3xl text-customNavy md:text-4xl">
                 Failed to load menu. Please refresh the page.
               </h2>
             </div>
           ) : !menu ? (
             <div className="z-20 flex h-[50vh] w-full flex-col items-center justify-center">
-              <h2 className="mb-6 text-center font-bigola text-3xl text-customNavy md:text-4xl">
+              <h2 className="mb-3 text-center font-bigola text-3xl text-customNavy md:text-4xl">
                 No menu data found.
               </h2>
             </div>
@@ -299,7 +301,7 @@ const Menu: React.FC = ({}) => {
                               className={`border-customGold ${categoryName === "Canned / Bottled" ? "pt-0" : ""}`}
                             >
                               {categoryName === "Wine" && (
-                                <div className="text-pretty px-3 pb-6 text-center">
+                                <div className="text-pretty pb-6 text-center">
                                   <p className="font-bigola text-lg text-customNavy md:text-2xl">
                                     Wine Down Wednesday
                                   </p>
@@ -313,7 +315,7 @@ const Menu: React.FC = ({}) => {
                               )}
 
                               {categoryName === "Draft" && (
-                                <div className="text-pretty px-3 pb-6 text-center text-customNavy">
+                                <div className="text-pretty pb-6 text-center text-customNavy">
                                   <p className="font-bigola text-lg text-customNavy md:text-2xl">
                                     Happy Hour
                                   </p>
