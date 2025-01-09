@@ -30,8 +30,6 @@ const MobileMenu: React.FC = () => {
 
     const menuLinks = menuRef.current.querySelectorAll(".mobile-link");
 
-    console.log(menuLinks);
-
     menuLinks.forEach((menuLink) => {
       gsap.set(menuLink, {
         x: "-150%",

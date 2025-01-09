@@ -88,7 +88,6 @@ export default function RootLayout({
     <>
       <html lang="en">
         <head>
-           
           <meta
             content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=5"
             name="viewport"
@@ -104,9 +103,7 @@ export default function RootLayout({
           />
           <Toaster />
           <BackgroundOverlay />
-
           <MobileHeader />
-
           {children}
           <MusicPlayer tracks={tracks} />
         </body>

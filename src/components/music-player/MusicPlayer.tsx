@@ -37,13 +37,19 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
   const recordPlayerTl = useRef<gsap.core.Timeline | null>(null);
   const playlistTl = useRef<gsap.core.Timeline | null>(null);
   const armTl = useRef<gsap.core.Timeline | null>(null);
+  const [buttonColor, setButtonColor] = useState<string>("text-customNavy");
   const pathName = usePathname();
 
   useEffect(() => {
     if (window.innerWidth >= 768) {
       setVisible(true);
     }
-  }, []);
+    if (pathName === "/") {
+      setButtonColor("text-customCream");
+    } else {
+      setButtonColor("text-customNavy");
+    }
+  }, [pathName]);
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -143,7 +149,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         <div className="w-full md:w-fit">
           <div className="buttons-container z-[11] flex justify-between rounded-sm bg-opacity-10 py-2 md:gap-2 md:bg-opacity-0 md:py-1">
             <IconButton
-              className="player-button p-1 text-customCream backdrop-blur-md md:backdrop-blur-0"
+              className={`player-button p-1 ${buttonColor} backdrop-blur-md md:backdrop-blur-0`}
               aria-label={mute ? "Unmute" : "Mute"}
             >
               {mute ? (
@@ -164,7 +170,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             </IconButton>
             <IconButton
               onClick={handlePreviousTrack}
-              className="player-button p-1 text-customCream backdrop-blur-md md:backdrop-blur-0"
+              className={`player-button p-1 ${buttonColor} backdrop-blur-md md:backdrop-blur-0`}
               aria-label="Previous track"
             >
               <SkipBack
@@ -176,7 +182,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
 
             <IconButton
               onClick={handlePlayPauseRounded}
-              className="player-button p-1 text-customCream backdrop-blur-md md:backdrop-blur-0"
+              className={`player-button p-1 ${buttonColor} backdrop-blur-md md:backdrop-blur-0`}
               aria-label={playing ? "Pause" : "Play"}
             >
               {playing ? (
@@ -195,7 +201,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             </IconButton>
             <IconButton
               onClick={handleNextTrack}
-              className="player-button p-1 text-customCream backdrop-blur-md md:backdrop-blur-0"
+              className={`player-button p-1 ${buttonColor} backdrop-blur-md md:backdrop-blur-0`}
               aria-label="Next track"
             >
               <SkipForward
@@ -206,7 +212,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             </IconButton>
             <IconButton
               onClick={togglePlaylist}
-              className="player-button transform p-1 text-customCream backdrop-blur-md md:backdrop-blur-0"
+              className={`player-button transform p-1 ${buttonColor} backdrop-blur-md md:backdrop-blur-0`}
               aria-label={playlistVisible ? "Close playlist" : "Open playlist"}
               aria-expanded={playlistVisible}
             >
@@ -231,18 +237,21 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
           >
             <Image
               id="now-playing"
-              height={128}
-              width={128}
+              height={144}
+              width={144}
               style={{
                 height: "144px",
                 width: "144px",
               }}
-              className="absolute left-[4px] top-[1.05px] z-[3] drop-shadow-record"
+              className="absolute left-[4px] top-[1.05px] z-[3]"
               src="/images/record.png"
               alt="Record"
               priority={true}
               loading="eager"
             />
+            <div className="absolute left-[4px] top-[1.05px] z-[3] h-[144px] w-[144px] rounded-full bg-gradient-to-tr from-white/20 to-transparent blur-3xl">
+              &nbsp;
+            </div>
             <Image
               id="arm"
               height={128}

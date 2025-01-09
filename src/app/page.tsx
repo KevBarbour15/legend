@@ -71,6 +71,13 @@ export default function Home() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    // Kill any existing ScrollTrigger instances when component unmounts
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
   const onSubmit = async (values: MailchimpFormData) => {
     try {
       const response = await fetch("/api/subscribe", {
@@ -96,6 +103,9 @@ export default function Home() {
 
   useGSAP(() => {
     if (!containerRef.current) return;
+
+    // Clear any existing ScrollTrigger instances before creating new ones
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 
     gsap.set("#about-image", {
       yPercent: yPercent,
@@ -189,7 +199,7 @@ export default function Home() {
         },
       );
     });
-  }, []);
+  }, [yPercent, parallaxEnd]);
 
   return (
     <>

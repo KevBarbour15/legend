@@ -21,29 +21,38 @@ interface SideMenuProps {
 }
 
 const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
-  const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+  const [shouldShowAnimation, setShouldShowAnimation] = useState<boolean>(true);
+
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
     setIsMounted(true);
+    // Check if this is the first visit in session to animate the menu once per "visit"
+    const hasVisited = sessionStorage.getItem("hasVisited");
+    if (!hasVisited) {
+      sessionStorage.setItem("hasVisited", "true");
+      setShouldShowAnimation(true);
+    } else {
+      setShouldShowAnimation(false);
+    }
   }, []);
 
   useGSAP(() => {
     const menuLinks = document.querySelectorAll("#hover");
 
-    menuLinks.forEach((menuLink) => {
-      gsap.set(menuLink, { x: "-150%" });
-      gsap.set(menuLink, { opacity: 0 });
-    });
-
-    gsap.to(menuLinks, {
-      duration: 0.5,
-      ease: "sine.out",
-      x: 0,
-      opacity: 1,
-      stagger: 0.1,
-    });
+    if (shouldShowAnimation) {
+      gsap.set(menuLinks, { x: "-150%", opacity: 0 });
+      gsap.to(menuLinks, {
+        duration: 0.5,
+        ease: "sine.out",
+        x: 0,
+        opacity: 1,
+        stagger: 0.1,
+      });
+    } else {
+    }
 
     menuLinks.forEach((menuLink) => {
       menuLink.addEventListener("mouseenter", () => {
@@ -71,7 +80,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
         menuLink.removeEventListener("mouseleave", () => {});
       });
     };
-  }, []);
+  }, [shouldShowAnimation]);
 
   const handleAboutClick = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -101,7 +110,9 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
             <li
               key={idx}
               id="hover"
-              className={`${link.path === "/" ? "about-link" : "menu-link"} m-0 p-0 leading-[.75] opacity-0 ${
+              className={`${link.path === "/" ? "about-link" : "menu-link"} m-0 p-0 leading-[.75] ${
+                shouldShowAnimation ? "opacity-0" : "opacity-100"
+              } ${
                 pathname === link.path && pathname !== "/"
                   ? "text-customGold"
                   : color
@@ -128,7 +139,10 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
             </li>
           ))}
         </ul>
-        <div className="menu-link mt-12 pr-3 font-bigola opacity-0" id="hover">
+        <div
+          className={`menu-link mt-12 pr-3 font-bigola ${shouldShowAnimation ? "opacity-0" : "opacity-100"}`}
+          id="hover"
+        >
           <Image
             className="mb-6 w-[150px] md:hidden"
             src="/images/alt-logo.png"
