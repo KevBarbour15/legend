@@ -180,7 +180,7 @@ const Menu: React.FC = ({}) => {
       <div className="mt-1 flex w-full items-center justify-between font-hypatiaSemibold leading-tight text-customNavy">
         <p className="text-nowrap text-left">{item.brand}</p>
 
-        <p className="max-w-[50%] text-balance text-right italic md:text-nowrap">
+        <p className="max-w-[50%] text-balance pr-[2px] text-right italic md:text-nowrap">
           {item.description}
         </p>
       </div>
@@ -192,7 +192,7 @@ const Menu: React.FC = ({}) => {
             <span>CA</span>
           </p>
 
-          <div className="flex gap-1 text-right italic">
+          <div className="flex gap-1 pr-[2px] text-right italic">
             <p>ABV</p>
             <p> {item.abv}</p>
           </div>
