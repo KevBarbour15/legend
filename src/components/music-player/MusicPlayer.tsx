@@ -158,7 +158,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                   onClick={handleMute}
                   className="transition-all md:hover:text-customGold"
                   aria-hidden="true"
-                  size={visible ? 24 : 32}
+                  size={visible ? 24 : 30}
                 />
               ) : (
                 <SpeakerSimpleHigh
@@ -166,7 +166,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                   onClick={handleMute}
                   className="transition-all md:hover:text-customGold"
                   aria-hidden="true"
-                  size={visible ? 24 : 32}
+                  size={visible ? 24 : 30}
                 />
               )}
             </IconButton>
@@ -179,7 +179,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                 weight="light"
                 className="transition-all md:hover:text-customGold"
                 aria-hidden="true"
-                size={visible ? 24 : 32}
+                size={visible ? 24 : 30}
               />
             </IconButton>
 
@@ -193,7 +193,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                   weight="light"
                   className="transition-all md:hover:text-customGold"
                   aria-hidden="true"
-                  size={visible ? 24 : 32}
+                  size={visible ? 24 : 30}
                 />
               ) : (
                 <Play
@@ -212,7 +212,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                 weight="light"
                 className="transition-all md:hover:text-customGold"
                 aria-hidden="true"
-                size={visible ? 24 : 32}
+                size={visible ? 24 : 30}
               />
             </IconButton>
             <IconButton
@@ -226,14 +226,14 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                   weight="light"
                   className="transition-all md:hover:text-customGold"
                   aria-hidden="true"
-                  size={visible ? 24 : 32}
+                  size={visible ? 24 : 30}
                 />
               ) : (
                 <VinylRecord
                   weight="light"
                   className="transition-all md:hover:text-customGold"
                   aria-hidden="true"
-                  size={visible ? 24 : 32}
+                  size={visible ? 24 : 30}
                 />
               )}
             </IconButton>
