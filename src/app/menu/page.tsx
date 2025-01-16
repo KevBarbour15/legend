@@ -49,10 +49,10 @@ const Menu: React.FC = ({}) => {
   const handleCategoryClick = (index: number) => {
     if (activeCategory === index) {
       setActiveCategory(null);
-      setActiveChildCategory(null);
     } else {
       setActiveCategory(index);
     }
+    setActiveChildCategory(null);
   };
 
   const handleChildCategoryClick = (id: string) => {
@@ -180,23 +180,31 @@ const Menu: React.FC = ({}) => {
       <div className="mt-1 flex w-full items-center justify-between font-hypatiaSemibold leading-tight text-customNavy">
         <p className="text-nowrap text-left">{item.brand}</p>
 
-        <p className="max-w-[50%] text-balance pr-[2px] text-right italic md:text-nowrap">
-          {item.description}
-        </p>
-      </div>
-
-      {item.city && item.abv && (
-        <div className="mt-1 flex w-full items-center justify-between text-nowrap leading-none text-customNavy">
+        {item.city && (
           <p className="flex gap-1">
             <span>{item.city},</span>
             <span>CA</span>
           </p>
+        )}
+      </div>
 
-          <div className="flex gap-1 pr-[2px] text-right italic">
+      <div className="mt-1 flex w-full items-center justify-between text-nowrap leading-none text-customNavy">
+        <p className="text-balance pr-[2px] text-left md:text-nowrap">
+          {item.description}
+        </p>
+
+        {item.abv && (
+          <div className="flex gap-1 text-right">
             <p>ABV</p>
             <p> {item.abv}</p>
           </div>
-        </div>
+        )}
+      </div>
+
+      {item.varieties && (
+        <p className="mt-1 text-nowrap italic text-customNavy">
+          {item.varieties}
+        </p>
       )}
     </div>
   );

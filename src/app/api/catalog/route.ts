@@ -234,16 +234,24 @@ function processItems(
 ): ProcessedItem[] {
   return items.map((item): ProcessedItem => {
     const variation = item.itemData?.variations?.[0];
+
     let bottleVariation = null;
+
     if (
       item.itemData?.variations?.[1] &&
       item.itemData?.variations?.[1].itemVariationData?.name === "Bottle"
     ) {
       bottleVariation = item.itemData?.variations?.[1];
     }
-    const customAttributes = variation?.customAttributeValues;
+
+    const customAttributes = {
+      ...item.customAttributeValues,
+      ...variation?.customAttributeValues,
+    };
+
     let abv: string | undefined;
     let city: string | undefined;
+    let varieties: string | undefined;
 
     if (customAttributes) {
       Object.values(customAttributes).forEach((attr) => {
@@ -251,6 +259,8 @@ function processItems(
           abv = attr.stringValue ?? undefined;
         } else if (attr.name === "City") {
           city = attr.stringValue ?? undefined;
+        } else if (attr.name === "Varieties") {
+          varieties = attr.stringValue ?? undefined;
         }
       });
     }
@@ -272,6 +282,7 @@ function processItems(
         : undefined,
       abv,
       city,
+      varieties,
       categoryIds: item.itemData?.categories?.map((cat) => cat.id ?? "") || [],
       locationIds: item.presentAtLocationIds || [],
       inStock: inventoryCount !== undefined ? inventoryCount > 0 : false,
@@ -295,7 +306,6 @@ function assignItemsToCategories(
     const isCannedBottled = item.categoryIds.includes(CANNED_BOTTLED_BEER_ID);
 
     if (!isInLocation || !item.inStock) return;
-
     item.categoryIds.forEach((categoryId) => {
       if (
         childCategoryMap.has(categoryId) &&
