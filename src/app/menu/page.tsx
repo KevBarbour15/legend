@@ -23,7 +23,6 @@ import AudioStatic from "@/components/audio-static/AudioStatic";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-import Divider from "@/components/divider/Divider";
 import Loading from "@/components/loading/Loading";
 
 import {

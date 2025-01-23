@@ -88,13 +88,10 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                   layoutId={`image-${event._id}`}
                   className="flex-shrink-0"
                 >
-                  <Image
-                    width={300}
-                    height={300}
+                  <img
                     src={preloadedMedia.src}
                     alt={event.title}
                     className="aspect-square h-auto w-full object-cover object-center md:aspect-auto md:max-h-[475px]"
-                    sizes="(max-width: 600px) 350px, (max-width: 1200px) 350px"
                   />
                 </motion.div>
               ) : (
@@ -175,12 +172,9 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
         </div>
         {event.is_photo ? (
           <motion.div layoutId={`image-${event._id}`} className="flex-shrink-0">
-            <Image
-              width={275}
-              height={275}
+            <img
               src={preloadedMedia.src}
               alt={event.title}
-              sizes="(max-width: 600px) 115px, (max-width: 1200px) 275px, 275px"
               className="aspect-square h-[115px] w-[115px] object-cover object-center md:h-[275px] md:w-[275px]"
             />
           </motion.div>
