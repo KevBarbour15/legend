@@ -57,16 +57,16 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
     menuLinks.forEach((menuLink) => {
       menuLink.addEventListener("mouseenter", () => {
         gsap.to(menuLink, {
-          duration: 0.15,
+          duration: 0.2,
           ease: "sine.in",
-          x: 15,
+          x: 20,
           fontStyle: "italic",
         });
       });
 
       menuLink.addEventListener("mouseleave", () => {
         gsap.to(menuLink, {
-          duration: 0.15,
+          duration: 0.2,
           ease: "sine.out",
           x: 0,
           fontStyle: "normal",
@@ -167,7 +167,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
             </div>
             <p
               id="menu-text"
-              className="flex justify-between text-3xl italic leading-[.85]"
+              className="flex justify-between text-3xl leading-[.85]"
             >
               <span>s</span>
               <span>a</span>

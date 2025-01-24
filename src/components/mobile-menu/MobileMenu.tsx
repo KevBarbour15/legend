@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 
 import { useGSAP } from "@gsap/react";
@@ -15,6 +15,11 @@ const links = [
 
 const MobileMenu: React.FC = () => {
   const menuRef = useRef<HTMLDivElement>(null);
+  const [windowHeight, setWindowHeight] = useState("100vh");
+
+  useEffect(() => {
+    setWindowHeight(`${window.innerHeight}px`);
+  }, []);
 
   const handleAboutClick = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -49,8 +54,9 @@ const MobileMenu: React.FC = () => {
   return (
     <div
       ref={menuRef}
-      className="flex h-dvh flex-col justify-between text-customCream md:hidden"
+      className="flex flex-col justify-between text-customCream md:hidden"
       id="mobile-menu"
+      style={{ height: windowHeight }}
     >
       <div className="fixed flex flex-grow flex-col justify-start pl-3 pt-3">
         <Image
@@ -108,7 +114,7 @@ const MobileMenu: React.FC = () => {
           </div>
           <p
             id="mobile-menu"
-            className="flex justify-between text-2xl italic leading-[0.7] tracking-tight"
+            className="flex justify-between text-2xl leading-[0.7] tracking-tight"
           >
             <span>s</span>
             <span>a</span>

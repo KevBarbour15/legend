@@ -36,7 +36,7 @@ export default function Contact() {
     gsap.fromTo(
       "#tabs-container",
       { opacity: 0 },
-      { opacity: 1, duration: 0.05 },
+      { opacity: 1, duration: 0.025, delay: 0 },
     );
   }, []);
 
@@ -116,7 +116,7 @@ export default function Contact() {
         <div className="mx-auto flex flex-col items-center justify-center overflow-y-auto px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
           <Tabs
             defaultValue="event"
-            className="flex w-full flex-col items-center "
+            className="flex w-full flex-col items-center"
             onValueChange={(value) => setActiveTab(value as FormType)}
           >
             <TabsList
