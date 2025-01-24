@@ -15,11 +15,6 @@ const links = [
 
 const MobileMenu: React.FC = () => {
   const menuRef = useRef<HTMLDivElement>(null);
-  const [windowHeight, setWindowHeight] = useState("100vh");
-
-  useEffect(() => {
-    setWindowHeight(`${window.innerHeight}px`);
-  }, []);
 
   const handleAboutClick = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -37,7 +32,7 @@ const MobileMenu: React.FC = () => {
 
     menuLinks.forEach((menuLink) => {
       gsap.set(menuLink, {
-        x: "-150%",
+        x: "-25%",
         opacity: 0,
       });
     });
@@ -47,16 +42,15 @@ const MobileMenu: React.FC = () => {
       ease: "sine.out",
       x: 0,
       opacity: 1,
-      stagger: 0.15,
+      stagger: 0.1,
     });
   }, []);
 
   return (
     <div
       ref={menuRef}
-      className="flex flex-col justify-between text-customCream md:hidden"
+      className="flex h-dvh flex-col justify-between text-customCream md:hidden"
       id="mobile-menu"
-      style={{ height: windowHeight }}
     >
       <div className="fixed flex flex-grow flex-col justify-start pl-3 pt-3">
         <Image
@@ -95,9 +89,9 @@ const MobileMenu: React.FC = () => {
           ))}
         </ul>
       </div>
-      <div className="fixed bottom-20 left-0 ml-3 w-fit">
+      <div className="mobile-link fixed bottom-20 left-0 ml-3 w-fit opacity-0">
         <a
-          className="mobile-link cursor-pointer font-bigola opacity-0"
+          className="cursor-pointer font-bigola"
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.google.com/maps/dir//410+L+St,+Sacramento,+CA+95814/@38.5798987,-121.5844553,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x809ad12b9928b091:0x8fd24ebe337fbfe7!2m2!1d-121.5020543!2d38.5799276?entry=ttu&g_ep=EgoyMDI0MDkwNC4wIKXMDSoASAFQAw%3D%3D"
