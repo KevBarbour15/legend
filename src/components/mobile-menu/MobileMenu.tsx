@@ -49,7 +49,7 @@ const MobileMenu: React.FC = () => {
   return (
     <div
       ref={menuRef}
-      className="flex h-dvh flex-col justify-between text-customCream md:hidden"
+      className="flex h-svh flex-col justify-between text-customCream md:hidden"
       id="mobile-menu"
     >
       <div className="fixed flex flex-grow flex-col justify-start pl-3 pt-3">
