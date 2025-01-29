@@ -49,7 +49,7 @@ const MobileMenu: React.FC = () => {
   return (
     <div
       ref={menuRef}
-      className="flex h-svh flex-col justify-between text-customCream md:hidden"
+      className="relative flex h-screen flex-col justify-between text-customCream md:hidden"
       id="mobile-menu"
     >
       <div className="fixed flex flex-grow flex-col justify-start pl-3 pt-3">
@@ -89,7 +89,7 @@ const MobileMenu: React.FC = () => {
           ))}
         </ul>
       </div>
-      <div className="mobile-link fixed bottom-20 left-0 ml-3 w-fit opacity-0">
+      <div className="mobile-link fixed bottom-0 left-0 ml-3 w-fit pb-20 opacity-0">
         <a
           className="cursor-pointer font-bigola"
           target="_blank"
