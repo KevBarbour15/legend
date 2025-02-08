@@ -154,7 +154,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             >
               {mute ? (
                 <SpeakerSlash
-                  weight="light"
+                  weight="regular"
                   onClick={handleMute}
                   className="transition-all md:hover:text-customGold"
                   aria-hidden="true"
@@ -162,7 +162,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                 />
               ) : (
                 <SpeakerSimpleHigh
-                  weight="light"
+                  weight="regular"
                   onClick={handleMute}
                   className="transition-all md:hover:text-customGold"
                   aria-hidden="true"
@@ -176,7 +176,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               aria-label="Previous track"
             >
               <SkipBack
-                weight="light"
+                weight="regular"
                 className="transition-all md:hover:text-customGold"
                 aria-hidden="true"
                 size={visible ? 24 : 30}
@@ -190,14 +190,14 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             >
               {playing ? (
                 <Pause
-                  weight="light"
+                  weight="regular"
                   className="transition-all md:hover:text-customGold"
                   aria-hidden="true"
                   size={visible ? 24 : 30}
                 />
               ) : (
                 <Play
-                  weight="light"
+                  weight="regular"
                   className="transition-all md:hover:text-customGold"
                   aria-hidden="true"
                 />
@@ -209,7 +209,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               aria-label="Next track"
             >
               <SkipForward
-                weight="light"
+                weight="regular"
                 className="transition-all md:hover:text-customGold"
                 aria-hidden="true"
                 size={visible ? 24 : 30}
@@ -223,14 +223,14 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             >
               {playlistVisible ? (
                 <X
-                  weight="light"
+                  weight="regular"
                   className="transition-all md:hover:text-customGold"
                   aria-hidden="true"
                   size={visible ? 24 : 30}
                 />
               ) : (
                 <VinylRecord
-                  weight="light"
+                  weight="regular"
                   className="transition-all md:hover:text-customGold"
                   aria-hidden="true"
                   size={visible ? 24 : 30}

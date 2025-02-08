@@ -23,6 +23,8 @@ import AudioStatic from "@/components/audio-static/AudioStatic";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { SplitText } from "gsap/SplitText";
+gsap.registerPlugin(SplitText);
 
 import Loading from "@/components/loading/Loading";
 
@@ -107,10 +109,17 @@ const Menu: React.FC = ({}) => {
   useGSAP(() => {
     if (loading || !containerRef.current) return;
 
-    gsap.set("#menu", {
-      opacity: 0,
+    const splitText = new SplitText("#menu-heading", {
+      types: "letters",
     });
-    gsap.set("#menu-heading", {
+
+    splitText.chars.forEach((char: any) => {
+      gsap.set(char, {
+        opacity: 0,
+      });
+    });
+
+    gsap.set("#menu", {
       opacity: 0,
     });
     gsap.set(menuItemRefs.current, {
@@ -128,6 +137,12 @@ const Menu: React.FC = ({}) => {
       .to("#menu-heading", {
         opacity: 1,
         duration: 0.15,
+      })
+      .to(splitText.chars, {
+        opacity: 1,
+        y: 0,
+        duration: 0.35,
+        stagger: 0.01,
       })
       .to(menuItemRefs.current, {
         delay: 0.15,
@@ -165,10 +180,10 @@ const Menu: React.FC = ({}) => {
     }
   };
 
-  const renderMenuItem = (item: ProcessedItem) => (
+  const renderMenuItem = (item: ProcessedItem, isLast: boolean) => (
     <div
       key={item.id}
-      className="mb-3 block border-b border-dashed border-customGold pb-3 font-hypatia text-base capitalize text-customWhite md:text-lg"
+      className={`block ${!isLast ? "border-b border-dashed border-customGold" : ""} py-3 font-hypatia text-base capitalize text-customWhite md:text-lg`}
     >
       <div className="flex w-full justify-between text-nowrap font-bigola text-lg text-customNavy md:text-2xl">
         <p className="whitespace-nowrap text-left leading-none">{item.name}</p>
@@ -240,7 +255,9 @@ const Menu: React.FC = ({}) => {
             </h2>
           </AccordionTrigger>
           <AccordionContent className="border-customGold">
-            {childCategory.items.map(renderMenuItem)}
+            {childCategory.items.map((item, idx) =>
+              renderMenuItem(item, idx === childCategory.items.length - 1),
+            )}
           </AccordionContent>
         </AccordionItem>
       ))}
@@ -276,12 +293,12 @@ const Menu: React.FC = ({}) => {
           ) : (
             <>
               <Accordion type="single" collapsible className="z-20 w-full">
-                <h3
+                <h2
                   id="menu-heading"
                   className="hidden w-full text-pretty border-b border-customGold pb-6 pt-3 text-center font-bigola text-xl text-customNavy opacity-0 md:mb-6 md:block md:border-0 md:py-0 md:text-3xl"
                 >
                   Stay up to date as our selections rotate!
-                </h3>
+                </h2>
                 <div className="w-full opacity-0" id="menu">
                   {Object.entries(menu).map(
                     ([categoryName, categoryContent], index) => (
@@ -316,7 +333,7 @@ const Menu: React.FC = ({}) => {
                               className={`border-customGold ${categoryName === "Canned / Bottled" ? "pt-0" : ""}`}
                             >
                               {categoryName === "Wine" && (
-                                <div className="text-pretty pb-6 text-center">
+                                <div className="text-pretty pb-3 text-center">
                                   <p className="font-bigola text-lg text-customNavy md:text-2xl">
                                     Wine Down Wednesday
                                   </p>
@@ -330,7 +347,7 @@ const Menu: React.FC = ({}) => {
                               )}
 
                               {categoryName === "Draft" && (
-                                <div className="text-pretty pb-6 text-center text-customNavy">
+                                <div className="text-pretty pb-3 text-center text-customNavy">
                                   <p className="font-bigola text-lg text-customNavy md:text-2xl">
                                     Happy Hour
                                   </p>
@@ -349,7 +366,14 @@ const Menu: React.FC = ({}) => {
                                     categoryContent as CategoryWithItems,
                                   )
                                 : (categoryContent as ProcessedItem[]).map(
-                                    renderMenuItem,
+                                    (item, idx) =>
+                                      renderMenuItem(
+                                        item,
+                                        idx ===
+                                          (categoryContent as ProcessedItem[])
+                                            .length -
+                                            1,
+                                      ),
                                   )}
                             </AccordionContent>
                           </AccordionItem>
