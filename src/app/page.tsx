@@ -125,8 +125,8 @@ export default function Home() {
     tl.current = gsap.timeline({
       scrollTrigger: {
         trigger: "#hidden-bg",
-        start: "center center",
-        end: "center 10%",
+        start: "bottom 95%",
+        end: "center top",
         scrub: 1,
       },
     });
