@@ -178,14 +178,18 @@ const MessageCard: React.FC<MessageCardProps> = ({
                 <div className="mb-3 flex w-full items-center justify-between capitalize">
                   <UserCircle
                     size={32}
-                    weight="thin"
+                    weight="regular"
                     className="flex-shrink-0"
                   />
                   <Divider borderColor="grey" />
                   <p className="capitalize">{message.name}</p>
                 </div>
                 <div className="mb-3 inline-flex w-full items-center justify-between">
-                  <Mailbox size={32} weight="thin" className="flex-shrink-0" />
+                  <Mailbox
+                    size={32}
+                    weight="regular"
+                    className="flex-shrink-0"
+                  />
                   <Divider borderColor="grey" />
                   <a
                     href={`mailto:${message.email}`}
@@ -195,7 +199,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
                   </a>
                 </div>
                 <div className="mb-3 flex w-full items-center justify-between">
-                  <Phone size={32} weight="thin" className="flex-shrink-0" />
+                  <Phone size={32} weight="regular" className="flex-shrink-0" />
                   <Divider borderColor="grey" />
                   <p>{message.phone}</p>
                 </div>
@@ -208,26 +212,34 @@ const MessageCard: React.FC<MessageCardProps> = ({
                   <div className="mb-3 flex w-full items-center justify-between">
                     <CalendarBlank
                       size={32}
-                      weight="thin"
+                      weight="regular"
                       className="flex-shrink-0"
                     />
                     <Divider borderColor="grey" />
                     <p>{eventDate}</p>
                   </div>
                   <div className="mb-3 flex w-full items-center justify-between">
-                    <Clock size={32} weight="thin" className="flex-shrink-0" />
+                    <Clock
+                      size={32}
+                      weight="regular"
+                      className="flex-shrink-0"
+                    />
                     <Divider borderColor="grey" />
                     <p>{message.eventTime}</p>
                   </div>
                   <div className="mb-3 flex w-full items-center justify-between">
-                    <Users size={32} weight="thin" className="flex-shrink-0" />
+                    <Users
+                      size={32}
+                      weight="regular"
+                      className="flex-shrink-0"
+                    />
                     <Divider borderColor="grey" />
                     <p>{message.guests} guests</p>
                   </div>
                   <div className="mb-3 flex w-full items-center justify-between">
                     <MusicNote
                       size={32}
-                      weight="thin"
+                      weight="regular"
                       className="flex-shrink-0"
                     />
                     <Divider borderColor="grey" />
@@ -239,7 +251,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
                 <div className="flex h-full items-center justify-between pr-3">
                   <ChatCircle
                     size={32}
-                    weight="thin"
+                    weight="regular"
                     className="flex-shrink-0"
                   />
                 </div>

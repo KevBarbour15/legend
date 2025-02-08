@@ -103,7 +103,7 @@ const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
   return (
     <div className="menu-container" ref={container}>
       <div className="menu-overlay">
-        <X weight="thin" className="menu-close-icon" onClick={toggleMenu} />
+        <X weight="regular" className="menu-close-icon" onClick={toggleMenu} />
         <div className="menu-logo-container">
           <Image
             className="menu-logo-icon"
@@ -144,7 +144,7 @@ const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
               aria-label="Follow Legend Has It on Instagram"
               title="Follow us on Instagram"
             >
-              <InstagramLogo size={32} weight="fill" />
+              <InstagramLogo size={32} weight="regular" />
             </IconButton>
 
             <IconButton
@@ -155,7 +155,7 @@ const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
               aria-label="Follow Legend Has It on Facebook"
               title="Follow us on Facebook"
             >
-              <FacebookLogo size={32} weight="fill" />
+              <FacebookLogo size={32} weight="regular" />
             </IconButton>
 
             <IconButton
@@ -166,7 +166,7 @@ const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
               aria-label="Follow Legend Has It on YouTube"
               title="Follow us on YouTube"
             >
-              <YoutubeLogo size={32} weight="fill" />
+              <YoutubeLogo size={32} weight="regular" />
             </IconButton>
           </div>
         </div>

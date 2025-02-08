@@ -43,49 +43,69 @@ const DashHeader: React.FC<DashProps> = ({ setActiveTab, activeTab }) => {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <IconButton className="p-0 text-customWhite transition-all duration-300 md:hover:rotate-[360deg]">
-              <List size={32} weight="thin" />
+              <List size={32} weight="regular" />
             </IconButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="font-funnelDisplay">
             <DropdownMenuItem
               onClick={() => handleMenuItemClick("Create Event")}
             >
-              <CalendarPlus className="mr-3 md:mr-6" size={32} weight="thin" />
+              <CalendarPlus
+                className="mr-3 md:mr-6"
+                size={32}
+                weight="regular"
+              />
               Create Event
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => handleMenuItemClick("Upcoming Events")}
             >
-              <CalendarDots className="mr-3 md:mr-6" size={32} weight="thin" />
+              <CalendarDots
+                className="mr-3 md:mr-6"
+                size={32}
+                weight="regular"
+              />
               Upcoming Events
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => handleMenuItemClick("Past Events")}
             >
-              <CalendarCheck className="mr-3 md:mr-6" size={32} weight="thin" />
+              <CalendarCheck
+                className="mr-3 md:mr-6"
+                size={32}
+                weight="regular"
+              />
               Past Events
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => handleMenuItemClick("Unread Messages")}
             >
-              <Envelope className="mr-3 md:mr-6" size={32} weight="thin" />
+              <Envelope className="mr-3 md:mr-6" size={32} weight="regular" />
               Unread Messages
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => handleMenuItemClick("Read Messages")}
             >
-              <EnvelopeOpen className="mr-3 md:mr-6" size={32} weight="thin" />
+              <EnvelopeOpen
+                className="mr-3 md:mr-6"
+                size={32}
+                weight="regular"
+              />
               Read Messages
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => handleMenuItemClick("Menu Categories")}
             >
-              <BookOpenText className="mr-3 md:mr-6" size={32} weight="thin" />
+              <BookOpenText
+                className="mr-3 md:mr-6"
+                size={32}
+                weight="regular"
+              />
               Menu Categories
             </DropdownMenuItem>
             <LogoutLink postLogoutRedirectURL={postLogoutRedirectURL}>
               <DropdownMenuItem>
-                <SignOut size={32} weight="thin" className="mr-3 md:mr-6" />
+                <SignOut size={32} weight="regular" className="mr-3 md:mr-6" />
                 Logout
               </DropdownMenuItem>
             </LogoutLink>
@@ -97,7 +117,7 @@ const DashHeader: React.FC<DashProps> = ({ setActiveTab, activeTab }) => {
       </div>
       <Link href="/" className="h-full text-black">
         <IconButton className="p-0 text-customWhite transition-all duration-300 md:hover:rotate-[360deg]">
-          <HouseLine size={32} weight="thin" />
+          <HouseLine size={32} weight="regular" />
         </IconButton>
       </Link>
     </div>

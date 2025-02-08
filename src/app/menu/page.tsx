@@ -15,6 +15,7 @@ import {
   Wine,
   CaretDown,
   PintGlass,
+  ArrowBendRightDown,
 } from "@phosphor-icons/react";
 
 import { generateProgress } from "@/utils/progress";
@@ -147,13 +148,20 @@ const Menu: React.FC = ({}) => {
   const getIcon = (categoryName: string) => {
     switch (categoryName.toLowerCase()) {
       case "canned / bottled":
-        return <BeerBottle weight="thin" />;
+        //return <BeerBottle weight="regular" />;
+        return <ArrowBendRightDown size={32} weight="regular" />;
       case "draft":
-        return <BeerStein weight="thin" />;
+        //return <BeerStein weight="regular" />;
+        return <ArrowBendRightDown size={32} weight="regular" />;
       case "wine":
-        return <Wine weight="thin" />;
+        //return <Wine weight="regular" />;
+        return <ArrowBendRightDown size={32} weight="regular" />;
+      case "sake":
+        //return <ArrowDown />;
+        return <ArrowBendRightDown size={32} weight="regular" />;
       default:
-        return <PintGlass weight="thin" />;
+        //return <PintGlass weight="regular" />;
+        return <ArrowBendRightDown size={32} weight="regular" />;
     }
   };
 
@@ -222,7 +230,7 @@ const Menu: React.FC = ({}) => {
                 ? "text-customGold"
                 : "text-customNavy"
             }`}
-            icon={<CaretDown weight="thin" />}
+            icon={<ArrowBendRightDown weight="regular" />}
             onClick={() => handleChildCategoryClick(childCategory.id)}
           >
             <h2

@@ -354,7 +354,7 @@ export default function Home() {
                 aria-label="Follow Legend Has It on Spotify"
                 title="Follow us on Spotify"
               >
-                <SpotifyLogo size={40} weight="fill" />
+                <SpotifyLogo size={40} weight="regular" />
               </a>
 
               <a
@@ -365,7 +365,7 @@ export default function Home() {
                 aria-label="Follow Legend Has It on Tidal"
                 title="Follow us on Tidal"
               >
-                <TidalLogo size={40} weight="fill" />
+                <TidalLogo size={40} weight="regular" />
               </a>
 
               <a
@@ -376,7 +376,7 @@ export default function Home() {
                 aria-label="Follow Legend Has It on Instagram"
                 title="Follow us on Instagram"
               >
-                <InstagramLogo size={40} weight="fill" />
+                <InstagramLogo size={40} weight="regular" />
               </a>
 
               <a
@@ -387,7 +387,7 @@ export default function Home() {
                 aria-label="Follow Legend Has It on Facebook"
                 title="Follow us on Facebook"
               >
-                <FacebookLogo size={40} weight="fill" />
+                <FacebookLogo size={40} weight="regular" />
               </a>
 
               <a
@@ -398,7 +398,7 @@ export default function Home() {
                 aria-label="Follow Legend Has It on YouTube"
                 title="Follow us on YouTube"
               >
-                <YoutubeLogo size={40} weight="fill" />
+                <YoutubeLogo size={40} weight="regular" />
               </a>
             </div>
           </div>
@@ -411,12 +411,12 @@ export default function Home() {
                 href="tel:+19166627942"
                 className="flex items-center gap-1 transition-all duration-300 active:text-customGold md:hover:text-customGold"
               >
-                <Phone weight="thin" />
+                <Phone weight="regular" />
                 (916) 662-7942
               </a>
 
               <span className="flex items-center gap-1">
-                <Copyright weight="thin" /> 2024 Legend Has It
+                <Copyright weight="regular" /> 2024 Legend Has It
               </span>
             </div>
             <div className="flex items-end">
@@ -425,7 +425,7 @@ export default function Home() {
                 className="flex items-center gap-1 transition-all duration-300 active:text-customGold md:hover:text-customGold"
               >
                 Owner Login
-                <Key weight="thin" />
+                <Key weight="regular" />
               </LoginLink>
             </div>
           </div>

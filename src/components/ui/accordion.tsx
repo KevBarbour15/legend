@@ -40,7 +40,7 @@ const AccordionTrigger = React.forwardRef<
         })
       ) : (
         <CaretDown
-          weight="thin"
+          weight="regular"
           className="flex-shrink-0 p-0 transition-transform duration-200"
           style={{ width: "30px", height: "30px" }}
         />

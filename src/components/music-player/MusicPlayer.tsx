@@ -328,7 +328,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                           aria-label={`Play ${track.title} by ${track.artist}`}
                         >
                           <Play
-                            weight="fill"
+                            weight="regular"
                             onClick={() => handleTrackChange(index)}
                             aria-hidden="true"
                           />
