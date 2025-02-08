@@ -42,7 +42,7 @@ const DashHeader: React.FC<DashProps> = ({ setActiveTab, activeTab }) => {
       <div className="flex items-center justify-between">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <IconButton className="p-0 text-customWhite transition-all duration-300 md:hover:rotate-[360deg]">
+            <IconButton className="p-0 text-customWhite">
               <List size={32} weight="regular" />
             </IconButton>
           </DropdownMenuTrigger>
@@ -116,7 +116,7 @@ const DashHeader: React.FC<DashProps> = ({ setActiveTab, activeTab }) => {
         </div>
       </div>
       <Link href="/" className="h-full text-black">
-        <IconButton className="p-0 text-customWhite transition-all duration-300 md:hover:rotate-[360deg]">
+        <IconButton className="p-0 text-customWhite">
           <HouseLine size={32} weight="regular" />
         </IconButton>
       </Link>

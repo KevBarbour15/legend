@@ -109,23 +109,18 @@ const Menu: React.FC = ({}) => {
   useGSAP(() => {
     if (loading || !containerRef.current) return;
 
-    const splitText = new SplitText("#menu-heading", {
-      types: "letters",
-    });
-
-    splitText.chars.forEach((char: any) => {
-      gsap.set(char, {
-        opacity: 0,
-      });
-    });
-
     gsap.set("#menu", {
       opacity: 0,
     });
+
+    gsap.set("#menu-heading", {
+      opacity: 0,
+    });
+
     gsap.set(menuItemRefs.current, {
       opacity: 0,
-      y: 75,
-      clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
+      y: 25,
+      //clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
     });
 
     tl.current = gsap
@@ -136,23 +131,21 @@ const Menu: React.FC = ({}) => {
       })
       .to("#menu-heading", {
         opacity: 1,
-        duration: 0.15,
+        duration: 0.25,
       })
-      .to(splitText.chars, {
-        opacity: 1,
-        y: 0,
-        duration: 0.35,
-        stagger: 0.01,
-      })
-      .to(menuItemRefs.current, {
-        delay: 0.15,
-        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-        y: 0,
-        duration: 0.2,
-        stagger: 0.075,
-        ease: "linear",
-        opacity: 1,
-      });
+      .to(
+        menuItemRefs.current,
+        {
+          delay: 0.15,
+          //clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+          y: 0,
+          duration: 0.3,
+          stagger: 0.075,
+          ease: "linear",
+          opacity: 1,
+        },
+        "<",
+      );
   }, [loading]);
 
   useEffect(() => {

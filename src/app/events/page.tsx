@@ -34,7 +34,12 @@ export default function Events() {
     }
 
     return new Promise((resolve, reject) => {
-      if (event.is_photo) {
+      // Check if the media is a photo or video
+      // check if they have properly marked the media type
+
+      const mediaExtension = event.image_url.split(".").pop();
+
+      if (mediaExtension !== "mp4" && event.is_photo) {
         const img = new Image();
         img.onerror = reject;
         img.src = event.image_url;
@@ -78,8 +83,7 @@ export default function Events() {
       gsap.set("#events-container", { opacity: 0 });
       gsap.set(currentRefs.current, {
         opacity: 0,
-        y: 75,
-        clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
+        y: 15,
       });
 
       gsap.to("#events-container", {
@@ -89,7 +93,6 @@ export default function Events() {
 
       gsap.to(currentRefs.current, {
         delay: 0.15,
-        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
         y: 0,
         duration: 0.2,
         stagger: 0.075,
@@ -242,7 +245,7 @@ export default function Events() {
                   setActiveTab(value as "upcoming" | "past")
                 }
               >
-                <TabsList className="sticky top-0 mb-3 grid w-full grid-cols-2 bg-transparent font-bigola md:mb-6 md:mt-0 md:w-[400px]">
+                <TabsList className="top-0 mb-3 grid w-full grid-cols-2 bg-transparent font-bigola md:mb-6 md:mt-0 md:w-[400px]">
                   <TabsTrigger value="upcoming">Upcoming Events</TabsTrigger>
                   <TabsTrigger value="past">Past Events</TabsTrigger>
                 </TabsList>

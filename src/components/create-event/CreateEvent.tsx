@@ -138,7 +138,8 @@ const CreateEvent: React.FC = () => {
                   <div className="text-pretty pr-3 text-sm md:text-base">
                     <FormLabel>Media Type</FormLabel>
                     <FormDescription className="basis-1/2 text-pretty text-sm italic md:text-base">
-                      Specify whether photo or video for proper display
+                      <span className="text-red-500">Important:</span> Specify
+                      whether media is photo or video for proper display
                       formatting.
                     </FormDescription>
                   </div>
