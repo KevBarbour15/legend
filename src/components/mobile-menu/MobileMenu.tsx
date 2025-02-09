@@ -30,6 +30,14 @@ const MobileMenu: React.FC = () => {
 
     const menuLinks = menuRef.current.querySelectorAll(".mobile-link");
 
+    gsap.to(".home-logo", {
+      scale: 1,
+      opacity: 1,
+      duration: 0.5,
+      ease: "sine.out",
+      //rotateZ: 360,
+    });
+
     menuLinks.forEach((menuLink) => {
       gsap.set(menuLink, {
         x: "-25%",
@@ -54,7 +62,7 @@ const MobileMenu: React.FC = () => {
     >
       <div className="absolute flex flex-grow flex-col justify-start pl-3 pt-3">
         <Image
-          className="w-[150px] md:hidden"
+          className="home-logo w-[150px] scale-50 opacity-0 md:hidden"
           src="/images/alt-logo.png"
           alt="Logo"
           height={150}

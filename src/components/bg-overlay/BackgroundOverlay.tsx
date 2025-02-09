@@ -11,8 +11,9 @@ const BackgroundOverlay: React.FC = () => {
     if (!containerRef.current) return;
     gsap.to("#alt-logo", {
       scale: 1,
-      duration: 0.5,
+      duration: 1,
       ease: "power2.inOut",
+      //rotateZ: 360,
       opacity: 1,
     });
   }, []);
@@ -21,7 +22,7 @@ const BackgroundOverlay: React.FC = () => {
     <div
       ref={containerRef}
       id="background-overlay"
-      className="fixed inset-0 z-[-1] h-svh bg-cover bg-center"
+      className="fixed inset-0 z-[-1] h-dvh bg-cover bg-center"
       style={{
         backgroundImage: "url(/images/background.webp)",
       }}
