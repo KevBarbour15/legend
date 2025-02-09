@@ -175,14 +175,14 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
             <img
               src={preloadedMedia.src}
               alt={event.title}
-              className="aspect-square h-[115px] w-[115px] object-cover object-center md:h-[275px] md:w-[275px]"
+              className="aspect-square h-[125px] w-[125px] object-cover object-center md:h-[225px] md:w-[225px] lg:h-[275px] lg:w-[275px]"
             />
           </motion.div>
         ) : (
           <motion.div layoutId={`video-${event._id}`} className="flex-shrink-0">
             <video
               src={preloadedMedia.src}
-              className="aspect-square h-[115px] w-[115px] object-cover object-center md:h-[275px] md:w-[275px]"
+              className="aspect-square h-[125px] w-[125px] object-cover object-center md:h-[225px] md:w-[225px] lg:h-[275px] lg:w-[275px]"
               loop
               autoPlay
               muted

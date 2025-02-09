@@ -35,7 +35,7 @@ const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
   useGSAP(() => {
     if (!container.current) return;
 
-    gsap.set(".menu-link-item-holder", { y: 75, opacity: 0 });
+    gsap.set(".menu-link-item-holder", { y: 50, opacity: 0 });
     gsap.set(".menu-logo-icon", { opacity: 0 });
     gsap.set(".menu-overlay", { opacity: 0.5 });
     gsap.set(".menu-info-row", { opacity: 0 });
