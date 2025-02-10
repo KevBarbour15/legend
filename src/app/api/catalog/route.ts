@@ -1,7 +1,7 @@
 import { Client, Environment, CatalogObject, InventoryCount } from "square";
 import { NextResponse } from "next/server";
 
-import { saveFallbackMenu } from "@/app/actions/saveFallbackMenu.server";
+import { saveMenu } from "@/app/actions/saveMenu.server";
 import { getFallbackMenu } from "@/app/actions/getFallbackMenu.server";
 import { getCategoriesData } from "@/app/actions/getCategoriesData.server.ts";
 
@@ -73,7 +73,7 @@ export async function GET() {
     const menuStructure = createMenuStructure(categoryMap, childCategoryMap);
     const orderedMenuStructure = orderMenuStructure(menuStructure);
 
-    await saveFallbackMenu(orderedMenuStructure);
+    await saveMenu(orderedMenuStructure);
 
     return NextResponse.json(orderedMenuStructure, {
       headers: {

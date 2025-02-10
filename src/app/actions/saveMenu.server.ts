@@ -1,16 +1,14 @@
-import { SaveFallbackMenuResponse } from "@/data/fallback-menu";
+import { SaveMenuResponse } from "@/data/save-menu";
 import { MenuStructure } from "@/data/menu";
 
 import { connectToMongoDB } from "@/lib/db";
 
-import FallbackMenu from "@/models/FallbackMenu";
+import Menu from "@/models/Menu";
 
-export async function saveFallbackMenu(
-  menu: MenuStructure,
-): Promise<SaveFallbackMenuResponse> {
+export async function saveMenu(menu: MenuStructure): Promise<SaveMenuResponse> {
   await connectToMongoDB();
 
-  const session = await FallbackMenu.startSession();
+  const session = await Menu.startSession();
   session.startTransaction();
 
   try {
@@ -21,7 +19,7 @@ export async function saveFallbackMenu(
       };
     }
 
-    const menus = await FallbackMenu.find().session(session);
+    const menus = await Menu.find().session(session);
 
     if (menus.length >= 2) {
       const oldMenu = menus.find((menu) => !menu.isLatest);
@@ -29,13 +27,13 @@ export async function saveFallbackMenu(
         await oldMenu.deleteOne({ session });
       }
 
-      await FallbackMenu.findOneAndUpdate(
+      await Menu.findOneAndUpdate(
         { isLatest: true },
         { isLatest: false },
       ).session(session);
     }
 
-    const newMenu = new FallbackMenu({
+    const newMenu = new Menu({
       menu,
       isLatest: true,
     });
@@ -43,7 +41,7 @@ export async function saveFallbackMenu(
     await newMenu.save({ session });
 
     await session.commitTransaction();
-
+    console.log("Menu saved successfully");
     return { success: true };
   } catch (error) {
     console.error("Error saving fallback menu:", error);

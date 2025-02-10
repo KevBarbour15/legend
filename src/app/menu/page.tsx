@@ -70,31 +70,23 @@ const Menu: React.FC = ({}) => {
   const fetchMenu = async () => {
     try {
       setProgress(generateProgress(34, 66));
-      const data = await getMenu();
 
-      if (!data) {
-        setProgress(generateProgress(67, 85));
-        // fetch fallback menu client side if ssr fails
-        try {
-          const response = await fetch("/api/fallback-menu");
-          if (!response.ok) {
-            setProgress(0);
-            throw new Error(`Fallback API returned ${response.status}`);
-          }
-          const fallbackMenu = await response.json();
-
-          setProgress(generateProgress(86, 99));
-          setMenu(fallbackMenu.menu);
-        } catch (fallbackError) {
+      try {
+        const response = await fetch("/api/fallback-menu");
+        if (!response.ok) {
           setProgress(0);
-          setError(
-            "Failed to fetch menu data from both primary and fallback sources",
-          );
-          throw fallbackError;
+          throw new Error(`Fallback API returned ${response.status}`);
         }
-      } else {
+        const fallbackMenu = await response.json();
+
         setProgress(generateProgress(67, 99));
-        setMenu(data);
+        setMenu(fallbackMenu.menu);
+      } catch (fallbackError) {
+        setProgress(0);
+        setError(
+          "Failed to fetch menu data from both primary and fallback sources",
+        );
+        throw fallbackError;
       }
     } catch (error) {
       const err =

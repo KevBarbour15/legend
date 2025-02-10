@@ -1,33 +1,47 @@
-"use server";
-import { MenuStructure } from "@/data/menu.ts";
-import { headers } from "next/headers";
+import { GetMenuResponse } from "@/data/save-menu";
 
-export async function getMenu(): Promise<MenuStructure> {
-  const headersList = headers();
-  const host = headersList.get("host") || "localhost:3000";
-  const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
-  const apiUrl = `${protocol}://${host}/api/catalog`;
+import { connectToMongoDB } from "@/lib/db";
+
+import Menu from "@/models/Menu";
+
+export async function getMenu(): Promise<GetMenuResponse> {
+  await connectToMongoDB();
+
+  const session = await Menu.startSession();
+  session.startTransaction();
 
   try {
-    const response = await fetch(apiUrl, {
-      cache: "no-store",
-      headers: {
-        "Cache-Control": "no-cache, no-store, must-revalidate",
-        Pragma: "no-cache",
-        Expires: "0",
-      },
-    });
+    let latestMenu = await Menu.findOne({ isLatest: true }).session(session);
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    if (!latestMenu) {
+      latestMenu = await Menu.findOne().session(session);
+      if (latestMenu) {
+        console.log("No latest menu found. Setting the first menu as latest.");
+
+        latestMenu.isLatest = true;
+        await latestMenu.save({ session });
+      } else {
+        return {
+          success: false,
+          error: "No fallback menu found.",
+        };
+      }
     }
 
-    const menuData: MenuStructure = await response.json();
+    await session.commitTransaction();
 
-    return menuData;
+    return { success: true, menu: latestMenu.menu };
   } catch (error) {
-    console.error("Error fetching menu data:", error);
+    console.error("Error retrieving the menu:", error);
 
-    throw new Error("Failed to fetch menu data");
+    await session.abortTransaction();
+
+    return {
+      success: false,
+      error:
+        error instanceof Error ? error.message : "Failed to retrieve menu.",
+    };
+  } finally {
+    session.endSession();
   }
 }

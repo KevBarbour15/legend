@@ -1,10 +1,10 @@
-import { GetFallbackMenuResponse } from "@/data/fallback-menu";
+import { GetMenuResponse } from "@/data/save-menu";
 
 import { connectToMongoDB } from "@/lib/db";
 
-import FallbackMenu from "@/models/FallbackMenu";
+import FallbackMenu from "@/models/Menu";
 
-export async function getFallbackMenu(): Promise<GetFallbackMenuResponse> {
+export async function getFallbackMenu(): Promise<GetMenuResponse> {
   await connectToMongoDB();
 
   const session = await FallbackMenu.startSession();

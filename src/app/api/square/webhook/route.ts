@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     // Verify the webhook signature here (recommended)
     // Square sends a signature in the header that you should validate
 
-    console.log("Webhook received:", payload);
+  
 
     return NextResponse.json({ message: "Webhook received successfully" });
   } catch (error) {
