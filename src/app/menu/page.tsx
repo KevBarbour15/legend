@@ -9,6 +9,8 @@ import {
   ProcessedItem,
 } from "@/data/menu.ts";
 
+import Footer from "@/components/footer/Footer";
+
 import {
   BeerBottle,
   BeerStein,
@@ -176,7 +178,7 @@ const Menu: React.FC = ({}) => {
   const renderMenuItem = (item: ProcessedItem, isLast: boolean) => (
     <div
       key={item.id}
-      className={`block ${!isLast ? "border-b border-dashed border-customGold" : ""} py-3 font-hypatia text-base capitalize text-customWhite md:text-lg`}
+      className={`block ${!isLast ? "border-b border-dashed border-customGold" : ""} py-3 font-hypatia text-base capitalize md:text-lg`}
     >
       <div className="flex w-full justify-between text-nowrap font-bigola text-lg text-customNavy md:text-2xl">
         <p className="whitespace-nowrap text-left leading-none">{item.name}</p>
@@ -203,10 +205,8 @@ const Menu: React.FC = ({}) => {
         )}
       </div>
 
-      <div className="mt-1 flex w-full items-center justify-between text-nowrap leading-none text-customNavy">
-        <p className="text-balance pr-[2px] text-left md:text-nowrap">
-          {item.description}
-        </p>
+      <div className="mt-1 flex w-full items-center justify-between leading-none text-customNavy">
+        <p className="text-balance pr-[2px] text-left">{item.description}</p>
 
         {item.abv && (
           <div className="flex gap-1 text-right">
@@ -260,10 +260,10 @@ const Menu: React.FC = ({}) => {
   return (
     <>
       <AudioStatic />
-      <div ref={containerRef} className="min-h-dvh w-screen">
-        <div className="mx-auto flex flex-col items-center justify-center overflow-y-auto px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
+      <div ref={containerRef} className="min-h-screen w-screen overflow-hidden">
+        <div className="mx-auto w-full flex-1 px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
           {loading ? (
-            <div className="z-20 font-bigola">
+            <div className="z-[151] font-bigola">
               <Loading
                 progress={progress}
                 message={"Loading menu..."}
@@ -272,20 +272,20 @@ const Menu: React.FC = ({}) => {
               />
             </div>
           ) : error ? (
-            <div className="z-20 flex h-[50vh] w-full flex-col items-center justify-center">
+            <div className="z-[151] flex h-[50vh] w-full flex-col items-center justify-center">
               <h2 className="mb-3 text-center font-bigola text-3xl text-customNavy md:text-4xl">
                 Failed to load menu. Please refresh the page.
               </h2>
             </div>
           ) : !menu ? (
-            <div className="z-20 flex h-[50vh] w-full flex-col items-center justify-center">
+            <div className="z-[151] flex h-[50vh] w-full flex-col items-center justify-center">
               <h2 className="mb-3 text-center font-bigola text-3xl text-customNavy md:text-4xl">
                 No menu data found.
               </h2>
             </div>
           ) : (
             <>
-              <Accordion type="single" collapsible className="z-20 w-full">
+              <Accordion type="single" collapsible className="z-[151] w-full">
                 <h2
                   id="menu-heading"
                   className="hidden w-full text-pretty border-b border-customGold pb-6 pt-3 text-center font-bigola text-xl text-customNavy opacity-0 md:mb-6 md:block md:border-0 md:py-0 md:text-3xl"
@@ -326,7 +326,7 @@ const Menu: React.FC = ({}) => {
                               className={`border-customGold ${categoryName === "Canned / Bottled" ? "pt-0" : ""}`}
                             >
                               {categoryName === "Wine" && (
-                                <div className="text-pretty pb-3 text-center">
+                                <div className="text-pretty py-3 text-center">
                                   <p className="font-bigola text-lg text-customNavy md:text-2xl">
                                     Wine Down Wednesday
                                   </p>
@@ -340,7 +340,7 @@ const Menu: React.FC = ({}) => {
                               )}
 
                               {categoryName === "Draft" && (
-                                <div className="text-pretty pb-3 text-center text-customNavy">
+                                <div className="text-pretty py-3 text-center text-customNavy">
                                   <p className="font-bigola text-lg text-customNavy md:text-2xl">
                                     Happy Hour
                                   </p>

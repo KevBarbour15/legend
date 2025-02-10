@@ -28,18 +28,42 @@ const links = [
 ];
 
 const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
-  const container = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const staticRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
+  const isAnimating = useRef(false);
   const router = useRouter();
 
+  const staticAnimation = (staticBg: HTMLDivElement) => {
+    if (!isAnimating.current) return;
+
+    gsap.to(staticBg, {
+      backgroundPosition:
+        Math.floor(Math.random() * 100) +
+        1 +
+        "% " +
+        Math.floor(Math.random() * 10) +
+        1 +
+        "%",
+      onComplete: () => {
+        staticAnimation(staticBg);
+      },
+      onCompleteParams: [staticBg],
+      ease: "bounce.inOut",
+      duration: 0.0075,
+    });
+  };
+
   useGSAP(() => {
-    if (!container.current) return;
+    if (!containerRef.current || !staticRef.current) return;
 
     gsap.set(".menu-link-item-holder", { y: 50, opacity: 0 });
     gsap.set(".menu-logo-icon", { opacity: 0 });
     gsap.set(".menu-overlay", { opacity: 0.5 });
     gsap.set(".menu-info-row", { opacity: 0 });
     gsap.set(".menu-close-icon", { opacity: 0 });
+
+    staticAnimation(staticRef.current);
 
     tl.current = gsap
       .timeline({ paused: true })
@@ -83,9 +107,18 @@ const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
 
   useEffect(() => {
     if (menuStatus) {
+      isAnimating.current = true;
+      if (staticRef.current) {
+        staticAnimation(staticRef.current);
+      }
       tl.current?.play();
     } else {
       tl.current?.reverse();
+
+      // Wait for the animation to finish before setting isAnimating to false
+      new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+        isAnimating.current = false;
+      });
     }
   }, [menuStatus]);
 
@@ -101,8 +134,9 @@ const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
   };
 
   return (
-    <div className="menu-container" ref={container}>
+    <div className="menu-container" ref={containerRef}>
       <div className="menu-overlay">
+        <div className="menu-static" ref={staticRef}></div>
         <X weight="regular" className="menu-close-icon" onClick={toggleMenu} />
         <div className="menu-logo-container">
           <Image
