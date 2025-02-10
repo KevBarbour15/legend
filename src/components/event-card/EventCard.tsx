@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/hooks/use-outside-click";
@@ -165,7 +164,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
 
           <motion.h2
             layoutId={`title-${event._id}`}
-            className="line-clamp-3 overflow-hidden text-ellipsis text-balance break-words font-bigola text-3xl capitalize leading-none text-customNavy md:text-4xl lg:text-6xl"
+            className="line-clamp-3 overflow-hidden text-ellipsis text-balance break-all font-bigola text-3xl capitalize leading-none text-customNavy md:text-4xl lg:text-6xl"
           >
             {event.title}
           </motion.h2>
