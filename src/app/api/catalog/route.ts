@@ -293,24 +293,25 @@ function processItems(
 // Assigns items to their respective categories based on business rules:
 // 1. Canned/bottled beers go to child categories
 // 2. Other items go to parent categories
-// 3. Special case for "Kevin's Pale Ale" for testing
+// 3. Ignores specific items
 function assignItemsToCategories(
   items: ProcessedItem[],
   categoryMap: Map<string, CategoryWithItems>,
   childCategoryMap: Map<string, CategoryWithItems>,
 ) {
-  const testItemName = "Kevin's Pale Ale";
-
   items.forEach((item) => {
+    // Skip Kevin's Pale Ale
+    if (item.name === "Kevin's Pale Ale") {
+      console.log("Ignoring", item.name);
+      return;
+    }
+
     const isInLocation = item.locationIds.includes(BAR_INVENTORY_LOCATION_ID);
     const isCannedBottled = item.categoryIds.includes(CANNED_BOTTLED_BEER_ID);
 
     if (!isInLocation || !item.inStock) return;
     item.categoryIds.forEach((categoryId) => {
-      if (
-        childCategoryMap.has(categoryId) &&
-        (isCannedBottled || item.name === testItemName)
-      ) {
+      if (childCategoryMap.has(categoryId) && isCannedBottled) {
         childCategoryMap.get(categoryId)?.items.push(item);
       } else if (categoryMap.has(categoryId) && !isCannedBottled) {
         categoryMap.get(categoryId)?.items.push(item);
