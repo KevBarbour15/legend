@@ -46,11 +46,11 @@ const MobileMenu: React.FC = () => {
     });
 
     gsap.to(menuLinks, {
-      duration: 0.5,
-      ease: "sine.out",
+      duration: 0.85,
+      ease: "bounce.out",
       x: 0,
       opacity: 1,
-      stagger: 0.1,
+      stagger: 0.15,
     });
   }, []);
 
@@ -69,7 +69,7 @@ const MobileMenu: React.FC = () => {
           width={150}
           priority={true}
         />
-        <ul className="pt-6 font-bigola text-4xl tracking-tight">
+        <ul className="pt-6 font-bigola text-5xl tracking-tight ">
           {links.map((link, idx) => (
             <li
               key={idx}
@@ -108,7 +108,7 @@ const MobileMenu: React.FC = () => {
         >
           <div
             id="mobile-menu"
-            className="flex justify-between gap-2 p-0 text-4xl leading-[.7] tracking-tight"
+            className="flex justify-between gap-2 p-0 text-5xl leading-[.7] tracking-tight"
           >
             <span>410</span>
             <span>L</span>
