@@ -1,8 +1,7 @@
-import { Client, Environment, CatalogObject, InventoryCount } from "square";
+import { Client, Environment, CatalogObject } from "square";
 import { NextResponse } from "next/server";
 
 import { saveMenu } from "@/app/actions/saveMenu.server";
-import { getFallbackMenu } from "@/app/actions/getFallbackMenu.server";
 import { getCategoriesData } from "@/app/actions/getCategoriesData.server.ts";
 
 import { MenuStructure, CategoryWithItems, ProcessedItem } from "@/data/menu";
@@ -50,7 +49,10 @@ export async function GET() {
       childCategories.length === 0 ||
       !parentName
     ) {
-      return await handleCategoryMismatch();
+      return NextResponse.json(
+        { error: "Internal Server Error", details: "Categories not found." },
+        { status: 500 },
+      );
     }
 
     allCategories = [...parentCategories, ...childCategories];
@@ -58,7 +60,16 @@ export async function GET() {
     const categories = await filterCategories(allObjects);
 
     if (validateCategories(categories) === false) {
-      return await handleCategoryMismatch();
+      console.error(
+        "Categories have changed. Please update the menu structure.",
+      );
+      return NextResponse.json(
+        {
+          error: "Internal Server Error",
+          details: "Categories have changed. Please update the menu structure",
+        },
+        { status: 500 },
+      );
     }
 
     const { categoryMap, childCategoryMap } = createCategoryMaps(categories);
@@ -75,7 +86,8 @@ export async function GET() {
 
     await saveMenu(orderedMenuStructure);
 
-    return NextResponse.json(orderedMenuStructure, {
+    return NextResponse.json({
+      success: true,
       headers: {
         "Cache-Control": "no-store, max-age=0",
         Pragma: "no-cache",
@@ -134,30 +146,6 @@ function validateCategories(categories: CatalogObject[]): boolean {
     .filter((name): name is string => !!name);
 
   return compareCategories(categoryNames, allCategories);
-}
-
-// Fallback handler when category structure doesn't match expectations
-async function handleCategoryMismatch() {
-  console.error("Categories have changed. Please update the menu structure.");
-  const fallbackMenu = await getFallbackMenu();
-
-  if (fallbackMenu.success) {
-    return NextResponse.json(fallbackMenu.menu, {
-      headers: {
-        "Cache-Control": "no-store, max-age=0",
-        Pragma: "no-cache",
-        "X-Response-Time": new Date().toISOString(),
-      },
-    });
-  } else {
-    return NextResponse.json(
-      {
-        error: "Internal Server Error",
-        details: "Failed to retrieve fallback menu.",
-      },
-      { status: 500 },
-    );
-  }
 }
 
 // Creates two maps: one for parent categories and one for child categories
@@ -302,7 +290,7 @@ function assignItemsToCategories(
   items.forEach((item) => {
     // Skip Kevin's Pale Ale
     if (item.name === "Kevin's Pale Ale") {
-      console.log("Ignoring", item.name);
+      //console.log("Ignoring", item.name);
       return;
     }
 

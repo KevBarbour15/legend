@@ -113,15 +113,15 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="description" className="border-b-0">
                   <AccordionTrigger className="w-full cursor-pointer py-3 text-customNavy">
-                    <motion.p
+                    <motion.h2
                       layoutId={`title-${event._id}`}
                       className="text-balance pr-6 text-left font-bigola text-lg capitalize md:text-2xl"
                     >
                       {event.title}
-                    </motion.p>
+                    </motion.h2>
                   </AccordionTrigger>
                   <AccordionContent className="border-customGold">
-                    <motion.div className="flex w-full flex-row justify-between pb-3 font-bigola text-customNavy md:text-lg md:leading-[1.15]">
+                    <motion.div className="flex w-full flex-row justify-between py-3 font-bigola text-customNavy md:text-lg md:leading-[1.15]">
                       <motion.p layoutId={`date-${event._id}`}>
                         {formattedDate}
                       </motion.p>
@@ -155,7 +155,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
         onClick={handleCardClick}
         className="flex h-full cursor-pointer justify-between overflow-hidden py-3"
       >
-        <div className="flex h-auto min-w-0 flex-col justify-between pr-3 md:pr-6">
+        <div className="flex h-auto w-full min-w-0 flex-col justify-between pr-3 md:pr-6">
           <motion.p
             className="font-bigola text-lg leading-none text-customNavy md:text-2xl"
             layoutId={`date-${event._id}`}
@@ -163,12 +163,14 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
             {formattedDate}
           </motion.p>
 
-          <motion.h2
-            layoutId={`title-${event._id}`}
-            className="line-clamp-3 overflow-hidden text-ellipsis text-balance break-words font-bigola text-3xl capitalize leading-none text-customNavy md:text-4xl lg:text-6xl"
-          >
-            {event.title}
-          </motion.h2>
+          <div className="relative">
+            <motion.h2
+              layoutId={`title-${event._id}`}
+              className="line-clamp-2 text-balance font-bigola text-2xl capitalize leading-none text-customNavy md:text-4xl lg:text-6xl"
+            >
+              {event.title}
+            </motion.h2>
+          </div>
         </div>
         {event.is_photo ? (
           <motion.div layoutId={`image-${event._id}`} className="flex-shrink-0">

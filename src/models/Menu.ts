@@ -29,5 +29,6 @@ const MenuSchema: Schema = new Schema(
 
 MenuSchema.index({ isLatest: 1 });
 
-export default mongoose.models.FallbackMenu ||
-  mongoose.model<IMenu>("Menu", MenuSchema);
+const Menu = mongoose.models.Menu || mongoose.model<IMenu>("Menu", MenuSchema);
+
+export default Menu;

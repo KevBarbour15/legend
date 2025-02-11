@@ -1,8 +1,6 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
 
-import { getMenu } from "../actions/getMenu.server";
-
 import {
   MenuStructure,
   CategoryWithItems,
@@ -72,21 +70,19 @@ const Menu: React.FC = ({}) => {
       setProgress(generateProgress(34, 66));
 
       try {
-        const response = await fetch("/api/fallback-menu");
+        const response = await fetch("/api/menu");
         if (!response.ok) {
           setProgress(0);
           throw new Error(`Fallback API returned ${response.status}`);
         }
-        const fallbackMenu = await response.json();
+        const menuData = await response.json();
 
         setProgress(generateProgress(67, 99));
-        setMenu(fallbackMenu.menu);
-      } catch (fallbackError) {
+        setMenu(menuData.menu);
+      } catch (error) {
         setProgress(0);
-        setError(
-          "Failed to fetch menu data from both primary and fallback sources",
-        );
-        throw fallbackError;
+        setError("Failed to fetch menu data.");
+        throw error;
       }
     } catch (error) {
       const err =
@@ -114,7 +110,6 @@ const Menu: React.FC = ({}) => {
     gsap.set(menuItemRefs.current, {
       opacity: 0,
       y: 25,
-      //clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
     });
 
     tl.current = gsap
