@@ -5,9 +5,12 @@ export async function updateMenu() {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_URL}/api/square/catalog`,
       {
-        cache: "default",
+        cache: "no-store",
         headers: {
           "Content-Type": "application/json",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
         },
       },
     );
