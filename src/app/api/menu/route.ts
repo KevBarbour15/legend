@@ -2,6 +2,10 @@ import { NextResponse } from "next/server";
 import { connectToMongoDB } from "@/lib/db";
 import Menu from "@/models/Menu";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const runtime = "edge";
+
 export async function GET() {
   try {
     await connectToMongoDB();
