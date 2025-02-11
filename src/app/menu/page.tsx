@@ -70,9 +70,13 @@ const Menu: React.FC = ({}) => {
       setProgress(generateProgress(34, 66));
 
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_VERCEL_URL ? `${process.env.NEXT_PUBLIC_VERCEL_URL}` : ""}/api/menu`,
-        );
+        const response = await fetch("/api/menu", {
+          cache: "default",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
         if (!response.ok) {
           setProgress(0);
           throw new Error(`Fallback API returned ${response.status}`);
