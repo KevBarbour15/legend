@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/hooks/use-outside-click";
@@ -171,6 +170,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               {event.title}
             </motion.h2>
           </div>
+
         </div>
         {event.is_photo ? (
           <motion.div layoutId={`image-${event._id}`} className="flex-shrink-0">

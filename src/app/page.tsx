@@ -284,7 +284,7 @@ export default function Home() {
 
           <div
             id="about-section"
-            className="hidden flex-row gap-6 border-b border-customNavy py-6 opacity-0 md:flex"
+            className="hidden flex-row gap-6 border-customNavy py-6 opacity-0 md:flex"
           >
             <div className="basis-1/2">
               <iframe
@@ -311,7 +311,7 @@ export default function Home() {
           </div>
 
           <div
-            className="mb-6 flex flex-col-reverse items-center gap-3 opacity-0 md:mt-6 md:flex-row md:gap-0"
+            className="flex flex-col-reverse items-center gap-3 border-t border-customNavy py-3 opacity-0 md:flex-row md:gap-0"
             id="about-section"
           >
             <div className="flex w-full md:basis-1/2">
@@ -403,7 +403,7 @@ export default function Home() {
             </div>
           </div>
           <div
-            className="mb-16 flex w-full justify-between border-t border-customNavy pt-3 font-bigola text-sm text-customNavy opacity-0 md:mb-0"
+            className="mb-16 flex w-full justify-between border-y border-customNavy py-3 font-bigola text-sm text-customNavy opacity-0 md:mb-0"
             id="about-section"
           >
             <div>

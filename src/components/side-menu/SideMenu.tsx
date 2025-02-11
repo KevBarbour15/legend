@@ -45,11 +45,11 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
     if (shouldShowAnimation) {
       gsap.set(menuLinks, { x: "-25%", opacity: 0 });
       gsap.to(menuLinks, {
-        duration: 0.5,
-        ease: "sine.out",
+        duration: 0.85,
+        ease: "bounce.out",
         x: 0,
         opacity: 1,
-        stagger: 0.1,
+        stagger: 0.15,
       });
     } else {
     }
