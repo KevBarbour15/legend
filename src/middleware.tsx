@@ -6,7 +6,7 @@ export default function middleware(req: NextRequest) {
     { path: "/dashboard", methods: ["GET"] },
     { path: "/api/events", methods: ["POST", "PUT", "DELETE"] },
     { path: "/api/message", methods: ["GET", "DELETE", "PUT"] },
-    { path: "/api/fallback-menu", methods: ["POST", "PUT", "DELETE"] },
+    { path: "/api/menu", methods: ["POST", "PUT", "DELETE"] },
   ];
 
   for (const route of protectedRoutes) {
@@ -40,5 +40,5 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard", "/api/message", "/api/events"],
+  matcher: ["/dashboard", "/api/message", "/api/events", "/api/menu"],
 };
