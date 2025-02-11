@@ -27,7 +27,20 @@ export async function GET() {
       }
 
       await session.commitTransaction();
-      return NextResponse.json({ success: true, menu: latestMenu.menu });
+
+      // do not cache menu date is fresh from the db
+      return NextResponse.json(
+        { success: true, menu: latestMenu.menu },
+        {
+          status: 200,
+          headers: {
+            "Cache-Control":
+              "no-store, no-cache, must-revalidate, proxy-revalidate",
+            Pragma: "no-cache",
+            Expires: "0",
+          },
+        },
+      );
     } catch (error) {
       await session.abortTransaction();
 
