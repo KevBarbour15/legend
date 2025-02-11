@@ -70,8 +70,9 @@ const Menu: React.FC = ({}) => {
       setProgress(generateProgress(34, 66));
 
       try {
+        // do not cache menu so it updates live
         const response = await fetch("/api/menu", {
-          cache: "default",
+          cache: "no-store",
           headers: {
             "Content-Type": "application/json",
           },
@@ -79,7 +80,6 @@ const Menu: React.FC = ({}) => {
 
         const menuData = await response.json();
         setProgress(generateProgress(67, 99));
-        
 
         setMenu(menuData.menu);
       } catch (error) {
