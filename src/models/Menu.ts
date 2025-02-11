@@ -1,13 +1,13 @@
 import mongoose, { Document, Schema } from "mongoose";
 import { MenuStructure } from "@/data/menu";
 
-export interface IFallbackMenu extends Document {
+export interface IMenu extends Document {
   menu: MenuStructure;
   version: number;
   isLatest: boolean;
 }
 
-const FallbackMenuSchema: Schema = new Schema(
+const MenuSchema: Schema = new Schema(
   {
     menu: {
       type: Object,
@@ -27,7 +27,8 @@ const FallbackMenuSchema: Schema = new Schema(
   { timestamps: true },
 );
 
-FallbackMenuSchema.index({ isLatest: 1 });
+MenuSchema.index({ isLatest: 1 });
 
-export default mongoose.models.FallbackMenu ||
-  mongoose.model<IFallbackMenu>("FallbackMenu", FallbackMenuSchema);
+const Menu = mongoose.models.Menu || mongoose.model<IMenu>("Menu", MenuSchema);
+
+export default Menu;

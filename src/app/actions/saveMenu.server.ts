@@ -1,16 +1,22 @@
-import { SaveFallbackMenuResponse } from "@/data/fallback-menu";
+import { SaveMenuResponse } from "@/data/save-menu";
 import { MenuStructure } from "@/data/menu";
 
 import { connectToMongoDB } from "@/lib/db";
 
-import FallbackMenu from "@/models/FallbackMenu";
+import Menu from "@/models/Menu";
 
-export async function saveFallbackMenu(
-  menu: MenuStructure,
-): Promise<SaveFallbackMenuResponse> {
+/**
+ * This function saves a new menu to the database.
+ * It also ensures that only one menu is marked as the latest menu.
+ * An old menu is deleted if there are more than 2 menus in the database.
+ * Multiple menus are saved to the database to prevent data loss.
+ */
+
+export async function saveMenu(menu: MenuStructure): Promise<SaveMenuResponse> {
   await connectToMongoDB();
 
-  const session = await FallbackMenu.startSession();
+  // Start a transaction to ensure atomicity
+  const session = await Menu.startSession();
   session.startTransaction();
 
   try {
@@ -21,7 +27,7 @@ export async function saveFallbackMenu(
       };
     }
 
-    const menus = await FallbackMenu.find().session(session);
+    const menus = await Menu.find().session(session);
 
     if (menus.length >= 2) {
       const oldMenu = menus.find((menu) => !menu.isLatest);
@@ -29,13 +35,13 @@ export async function saveFallbackMenu(
         await oldMenu.deleteOne({ session });
       }
 
-      await FallbackMenu.findOneAndUpdate(
+      await Menu.findOneAndUpdate(
         { isLatest: true },
         { isLatest: false },
       ).session(session);
     }
 
-    const newMenu = new FallbackMenu({
+    const newMenu = new Menu({
       menu,
       isLatest: true,
     });

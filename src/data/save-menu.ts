@@ -1,10 +1,10 @@
 import { MenuStructure } from "@/data/menu";
-export interface SaveFallbackMenuResponse {
+export interface SaveMenuResponse {
   success: boolean;
   error?: string;
 }
 
-export interface GetFallbackMenuResponse {
+export interface GetMenuResponse {
   success: boolean;
   error?: string;
   menu?: MenuStructure;
