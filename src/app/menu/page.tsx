@@ -70,11 +70,14 @@ const Menu: React.FC = ({}) => {
       setProgress(generateProgress(34, 66));
 
       try {
-        // do not cache menu so it updates live
-        const response = await fetch("/api/menu", {
+        // Add timestamp to prevent caching
+        const response = await fetch(`/api/menu?t=${Date.now()}`, {
           cache: "no-store",
           headers: {
             "Content-Type": "application/json",
+          },
+          next: {
+            revalidate: 0, // Disable caching at the page level
           },
         });
 
