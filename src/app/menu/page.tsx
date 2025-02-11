@@ -77,13 +77,10 @@ const Menu: React.FC = ({}) => {
           },
         });
 
-        if (!response.ok) {
-          setProgress(0);
-          throw new Error(`Fallback API returned ${response.status}`);
-        }
         const menuData = await response.json();
-
         setProgress(generateProgress(67, 99));
+        
+
         setMenu(menuData.menu);
       } catch (error) {
         setProgress(0);
