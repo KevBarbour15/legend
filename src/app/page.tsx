@@ -58,10 +58,10 @@ export default function Home() {
     // Set the yPercent based on the window width for better parrallax
     const handleResize = () => {
       if (window.innerWidth < 768) {
-        setYPercent(-50);
+        setYPercent(-25);
         setParallaxEnd("top center");
       } else {
-        setYPercent(-25);
+        setYPercent(-15);
         setParallaxEnd("top 15%");
       }
     };
@@ -118,7 +118,7 @@ export default function Home() {
         trigger: "#about-image",
         start: "top bottom",
         end: parallaxEnd,
-        scrub: 1,
+        scrub: true,
       },
     });
 
@@ -127,7 +127,7 @@ export default function Home() {
         trigger: "#hidden-bg",
         start: "bottom 95%",
         end: "center top",
-        scrub: 1,
+        scrub: true,
       },
     });
 
