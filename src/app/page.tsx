@@ -55,14 +55,13 @@ export default function Home() {
   });
 
   useEffect(() => {
-    // Set the yPercent based on the window width for better parrallax
     const handleResize = () => {
       if (window.innerWidth < 768) {
-        setYPercent(-25);
-        setParallaxEnd("top center");
+        setYPercent(-30);
+        setParallaxEnd("top 35%");
       } else {
-        setYPercent(-15);
-        setParallaxEnd("top 15%");
+        setYPercent(-50);
+        setParallaxEnd("top 10%");
       }
     };
 
@@ -72,6 +71,17 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    // Ensure the page is scrolled to the top when the page is loaded and stays there
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+
+      // Add event listener to ensure it stays manual
+      window.addEventListener("load", () => {
+        window.history.scrollRestoration = "manual";
+      });
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
     // Kill any existing ScrollTrigger instances when component unmounts
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -125,8 +135,8 @@ export default function Home() {
     tl.current = gsap.timeline({
       scrollTrigger: {
         trigger: "#hidden-bg",
-        start: "bottom 95%",
-        end: "center top",
+        start: "bottom bottom",
+        end: "75% top",
         scrub: true,
       },
     });
