@@ -219,7 +219,7 @@ export default function Events() {
   return (
     <>
       <AudioStatic />
-      <div ref={containerRef} className="min-h-dvh w-screen">
+      <div ref={containerRef}>
         <div className="mx-auto flex flex-col items-center justify-center overflow-y-auto px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
           {loading ? (
             <div className="font-bigola">

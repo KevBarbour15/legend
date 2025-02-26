@@ -22,7 +22,7 @@ const BackgroundOverlay: React.FC = () => {
     <div
       ref={containerRef}
       id="background-overlay"
-      className="fixed inset-0 z-[-1] h-dvh bg-cover bg-center"
+      className="fixed inset-0 z-[-1] h-screen w-screen overflow-hidden bg-cover bg-center"
       style={{
         backgroundImage: "url(/images/background.webp)",
       }}

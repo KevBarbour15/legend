@@ -45,30 +45,12 @@ import { Input } from "@/components/ui/input";
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
-  const [yPercent, setYPercent] = useState<number>(-50);
-  const [parallaxEnd, setParallaxEnd] = useState<string>("top 15%");
   const form = useForm<MailchimpFormData>({
     resolver: zodResolver(mailchimpFormSchema),
     defaultValues: {
       email: "",
     },
   });
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setYPercent(-30);
-        setParallaxEnd("top 35%");
-      } else {
-        setYPercent(-50);
-        setParallaxEnd("top 10%");
-      }
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useEffect(() => {
     // Ensure the page is scrolled to the top when the page is loaded and stays there
@@ -116,21 +98,6 @@ export default function Home() {
 
     // Clear any existing ScrollTrigger instances before creating new ones
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-
-    gsap.set("#about-image", {
-      yPercent: yPercent,
-    });
-
-    gsap.to("#about-image", {
-      yPercent: 0,
-      ease: "none",
-      scrollTrigger: {
-        trigger: "#about-image",
-        start: "top bottom",
-        end: parallaxEnd,
-        scrub: true,
-      },
-    });
 
     tl.current = gsap.timeline({
       scrollTrigger: {
@@ -209,7 +176,7 @@ export default function Home() {
         },
       );
     });
-  }, [yPercent, parallaxEnd]);
+  }, []);
 
   return (
     <>
@@ -222,14 +189,16 @@ export default function Home() {
         >
           <AudioStatic />
         </div>
-        <div className="top-bg hidden h-dvh w-screen md:block"></div>
+        <div className="top-bg h-dvh w-screen"></div>
         <div
           id="about-content"
           className="relative mx-auto block h-auto p-3 md:py-6 md:pl-[258px] md:pr-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
         >
-          <div className="relative aspect-video overflow-hidden">
+          <div
+            id="about-section"
+            className="relative aspect-video overflow-hidden opacity-0"
+          >
             <Image
-              id="about-image"
               src="/images/about-image.jpg"
               className="object-cover"
               fill

@@ -26,7 +26,7 @@ import {
 import Equalizer from "@/components/equalizer/Equalizer";
 
 const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
-  const [playing, setPlaying] = useState<boolean>(true);
+  const [playing, setPlaying] = useState<boolean>(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
   const [mute, setMute] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
@@ -51,6 +51,25 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
     }
   }, [pathName]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setVisible(true);
+        if (playing && recordTl.current) {
+          recordTl.current.restart();
+        }
+      } else {
+        setVisible(false);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, [playing]);
+
   useGSAP(() => {
     if (!containerRef.current) return;
 
@@ -59,6 +78,11 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       duration: 0.25,
       opacity: 1,
       ease: "sine.in",
+      onComplete: () => {
+        setTimeout(() => {
+          setPlaying(true);
+        }, 150);
+      },
     });
 
     armTl.current = gsap.timeline().to("#arm", {

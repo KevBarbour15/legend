@@ -35,7 +35,6 @@ const MobileMenu: React.FC = () => {
       opacity: 1,
       duration: 0.5,
       ease: "sine.out",
-      //rotateZ: 360,
     });
 
     menuLinks.forEach((menuLink) => {
@@ -46,8 +45,8 @@ const MobileMenu: React.FC = () => {
     });
 
     gsap.to(menuLinks, {
-      duration: 0.85,
-      ease: "bounce.out",
+      duration: 0.5,
+      ease: "sine.out",
       x: 0,
       opacity: 1,
       stagger: 0.15,
@@ -57,7 +56,7 @@ const MobileMenu: React.FC = () => {
   return (
     <div
       ref={menuRef}
-      className="relative flex h-svh flex-col justify-between text-customCream md:hidden"
+      className="fixed inset-0 flex h-svh flex-col justify-between text-customCream md:hidden"
       id="mobile-menu"
     >
       <div className="absolute flex flex-grow flex-col justify-start pl-3 pt-3">
@@ -69,7 +68,7 @@ const MobileMenu: React.FC = () => {
           width={150}
           priority={true}
         />
-        <ul className="pt-6 font-bigola text-5xl tracking-tight ">
+        <ul className="pt-6 font-bigola text-5xl tracking-tight">
           {links.map((link, idx) => (
             <li
               key={idx}
