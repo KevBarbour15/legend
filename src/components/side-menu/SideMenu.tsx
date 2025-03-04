@@ -51,7 +51,6 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
         opacity: 1,
         stagger: 0.15,
       });
-    } else {
     }
 
     menuLinks.forEach((menuLink) => {

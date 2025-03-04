@@ -126,10 +126,6 @@ const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
     e.preventDefault();
 
     toggleMenu();
-    tl.current?.reverse();
-    if (path === "/") {
-      await new Promise((resolve) => setTimeout(resolve, 450));
-    }
     router.push(path);
   };
 
@@ -143,8 +139,8 @@ const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
             className="menu-logo-icon"
             src="/images/alt-logo.png"
             alt="Legend Has It logo"
-            width={150}
-            height={150}
+            width={200}
+            height={200}
             priority={true}
             onClick={toggleMenu}
           />

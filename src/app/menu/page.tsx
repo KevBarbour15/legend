@@ -145,7 +145,9 @@ const Menu: React.FC = ({}) => {
 
   useEffect(() => {
     setProgress(generateProgress(1, 33));
-    fetchMenu();
+    setTimeout(() => {
+      fetchMenu();
+    }, 1500);
   }, []);
 
   const getIcon = (categoryName: string) => {
@@ -253,7 +255,7 @@ const Menu: React.FC = ({}) => {
   return (
     <>
       <AudioStatic />
-      <div ref={containerRef} className="min-h-screen w-screen overflow-hidden">
+      <div ref={containerRef} className="">
         <div className="mx-auto w-full flex-1 px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
           {loading ? (
             <div className="z-[151] font-bigola">

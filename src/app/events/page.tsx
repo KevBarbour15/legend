@@ -77,40 +77,35 @@ export default function Events() {
     const currentEmptyRef =
       activeTab === "upcoming" ? upcomingEmptyMessageRef : pastEmptyMessageRef;
 
-    gsap.fromTo("#event-tabs", { opacity: 0 }, { opacity: 1, duration: 0.15 });
+    const tl = gsap.timeline();
+
+    // Initial animation for tabs if not already visible
+    const eventTabs = document.querySelector("#event-tabs") as HTMLElement;
+    if (eventTabs && !eventTabs.style.opacity) {
+      tl.fromTo("#event-tabs", { opacity: 0 }, { opacity: 1, duration: 0.15 });
+    }
 
     if (currentRefs.current.length > 0) {
-      gsap.set("#events-container", { opacity: 0 });
-      gsap.set(currentRefs.current, {
-        opacity: 0,
-        y: 15,
-      });
-
-      gsap.to("#events-container", {
-        opacity: 1,
-        duration: 0.15,
-      });
-
-      gsap.to(currentRefs.current, {
-        delay: 0.15,
-        y: 0,
-        duration: 0.2,
-        stagger: 0.075,
-        ease: "linear",
-        opacity: 1,
-      });
+      tl.set("#events-container", { opacity: 1 })
+        .set(currentRefs.current, {
+          opacity: 0,
+          y: 15,
+        })
+        .to(currentRefs.current, {
+          y: 0,
+          duration: 0.3,
+          stagger: 0.05,
+          ease: "power2.out",
+          opacity: 1,
+        });
     } else if (currentEmptyRef.current) {
-      gsap.set("#events-container", { opacity: 0 });
-      gsap.to("#events-container", {
-        opacity: 1,
-      });
-      gsap.fromTo(
+      tl.set("#events-container", { opacity: 1 }).fromTo(
         currentEmptyRef.current,
         { opacity: 0 },
         {
-          delay: 0.05,
-          duration: 0.15,
+          duration: 0.2,
           opacity: 1,
+          ease: "power2.out",
         },
       );
     }
