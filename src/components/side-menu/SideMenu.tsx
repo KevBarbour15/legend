@@ -46,7 +46,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
       gsap.set(menuLinks, { x: "-25%", opacity: 0 });
       gsap.to(menuLinks, {
         duration: 0.5,
-        ease: "sine.out",
+        ease: "back.out(1.7)",
         x: 0,
         opacity: 1,
         stagger: 0.15,

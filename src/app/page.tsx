@@ -144,7 +144,6 @@ export default function Home() {
         },
         0,
       )
-
       .to(
         "#hidden-bg",
         {

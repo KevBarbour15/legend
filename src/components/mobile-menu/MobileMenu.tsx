@@ -39,14 +39,14 @@ const MobileMenu: React.FC = () => {
 
     menuLinks.forEach((menuLink) => {
       gsap.set(menuLink, {
-        x: "-25%",
+        x: "-35%",
         opacity: 0,
       });
     });
 
     gsap.to(menuLinks, {
       duration: 0.5,
-      ease: "sine.out",
+      ease: "back.out(1.7)",
       x: 0,
       opacity: 1,
       stagger: 0.15,
