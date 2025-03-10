@@ -8,6 +8,7 @@ export interface Event {
   image_url: string;
   is_photo: boolean;
   is_public: boolean;
+  upcoming: boolean;
 }
 
 export interface EventCardProps {

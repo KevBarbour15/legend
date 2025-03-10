@@ -8,6 +8,7 @@ export interface IEvent extends Document {
   notes: string;
   image_url: string;
   is_photo: boolean;
+  upcoming: boolean;
 }
 
 const EventSchema: Schema = new Schema({
@@ -36,6 +37,11 @@ const EventSchema: Schema = new Schema({
     required: true,
   },
   is_photo: {
+    type: Boolean,
+    required: true,
+    default: true,
+  },
+  upcoming: {
     type: Boolean,
     required: true,
     default: true,

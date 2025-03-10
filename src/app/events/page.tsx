@@ -126,6 +126,15 @@ export default function Events() {
         },
       });
 
+      const newResponse = await fetch("/api/cron/update-event-status", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      console.log("New Response: ", newResponse);
+
       setProgress(generateProgress(26, 50));
       await new Promise((resolve) => setTimeout(resolve, 100));
 
@@ -164,19 +173,8 @@ export default function Events() {
 
   const filterEvents = useMemo(() => {
     return (type: "upcoming" | "past") => {
-      const now = new Date();
-      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
       return events.filter((event) => {
-        const [year, month, day] = event.date.split("-").map(Number);
-        const eventDate = new Date(year, month - 1, day);
-        eventDate.setHours(0, 0, 0, 0);
-
-        if (type === "upcoming") {
-          return eventDate >= today;
-        } else {
-          return eventDate < today;
-        }
+        return type === "upcoming" ? event.upcoming : !event.upcoming;
       });
     };
   }, [events]);
