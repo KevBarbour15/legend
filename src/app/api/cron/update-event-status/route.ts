@@ -16,6 +16,7 @@ export async function GET(req: Request) {
       { $set: { upcoming: false } },
     );
 
+    console.log("Events updated: ", result.modifiedCount);
     return NextResponse.json(
       {
         message: "Events status updated",

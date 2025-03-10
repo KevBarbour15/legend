@@ -126,15 +126,6 @@ export default function Events() {
         },
       });
 
-      const newResponse = await fetch("/api/cron/update-event-status", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      console.log("New Response: ", newResponse);
-
       setProgress(generateProgress(26, 50));
       await new Promise((resolve) => setTimeout(resolve, 100));
 
