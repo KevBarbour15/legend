@@ -15,6 +15,13 @@ export interface EventCardProps {
   preloadedMedia: PreloadedMedia;
 }
 
+export interface EditEventModalProps {
+  event: Event;
+  fetchEvents: () => void;
+  closeEditModal: () => void;
+  openEditModal: boolean;
+}
+
 export interface DashEventCardProps {
   event: Event;
   fetchEvents: () => void;
@@ -29,4 +36,3 @@ export interface DeleteEventDialogProps {
   closeDeleteModal: () => void;
   event: Event;
 }
-

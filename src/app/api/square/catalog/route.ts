@@ -6,10 +6,9 @@ import { getCategoriesData } from "@/app/actions/getCategoriesData.server.ts";
 
 import { MenuStructure, CategoryWithItems, ProcessedItem } from "@/data/menu";
 
-import {
-  CANNED_BOTTLED_BEER_ID,
-  BAR_INVENTORY_LOCATION_ID,
-} from "@/config/menu";
+const CANNED_BOTTLED_BEER_ID = process.env.CANNED_BOTTLED_BEER_ID as string;
+const BAR_INVENTORY_LOCATION_ID = process.env
+  .BAR_INVENTORY_LOCATION_ID as string;
 
 import { getItemBrand, getItemName } from "@/utils/getItemInfo";
 import { compareCategories } from "@/utils/compareCategories";
@@ -29,6 +28,8 @@ let parentName: string | null = null;
 export async function GET() {
   try {
     await connectToMongoDB();
+    console.log(CANNED_BOTTLED_BEER_ID);
+    console.log(BAR_INVENTORY_LOCATION_ID);
 
     // Initialize Square client
     const client = new Client({

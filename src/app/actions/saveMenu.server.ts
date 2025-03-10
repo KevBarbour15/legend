@@ -52,7 +52,7 @@ export async function saveMenu(menu: MenuStructure): Promise<SaveMenuResponse> {
 
     return { success: true };
   } catch (error) {
-    console.error("Error saving fallback menu:", error);
+    console.error("Error saving menu:", error);
 
     await session.abortTransaction();
 

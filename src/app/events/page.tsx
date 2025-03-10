@@ -36,7 +36,6 @@ export default function Events() {
     return new Promise((resolve, reject) => {
       // Check if the media is a photo or video
       // check if they have properly marked the media type
-
       const mediaExtension = event.image_url.split(".").pop();
 
       if (mediaExtension !== "mp4" && event.is_photo) {
@@ -118,7 +117,7 @@ export default function Events() {
   const fetchEvents = async () => {
     try {
       setProgress(generateProgress(2, 25));
-      await new Promise((resolve) => setTimeout(resolve, 125));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       const response = await fetch("/api/events", {
         cache: "default",
@@ -128,7 +127,7 @@ export default function Events() {
       });
 
       setProgress(generateProgress(26, 50));
-      await new Promise((resolve) => setTimeout(resolve, 125));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -142,14 +141,14 @@ export default function Events() {
       }
 
       setProgress(generateProgress(51, 75));
-      await new Promise((resolve) => setTimeout(resolve, 125));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       const data: Event[] = await response.json();
       setEvents(data);
       await Promise.all(data.map(preloadMedia));
 
       setProgress(generateProgress(75, 99));
-      await new Promise((resolve) => setTimeout(resolve, 125));
+      await new Promise((resolve) => setTimeout(resolve, 100));
     } catch (error) {
       const err =
         error instanceof Error ? error : new Error("Unknown error occurred");
@@ -158,7 +157,7 @@ export default function Events() {
       setProgress(0);
     } finally {
       setProgress(100);
-      await new Promise((resolve) => setTimeout(resolve, 350));
+      await new Promise((resolve) => setTimeout(resolve, 300));
       setLoading(false);
     }
   };

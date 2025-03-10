@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+
 import { Button } from "@/components/ui/button";
+
 import {
   Dialog,
   DialogContent,
@@ -8,32 +10,12 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 
-import { IconButton } from "@mui/material";
-import { X } from "@phosphor-icons/react";
-
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 
-interface Event {
-  _id: string;
-  title: string;
-  date: string;
-  time: string;
-  description: string;
-  notes: string;
-  image_url: string;
-  is_photo: boolean;
-  is_public: boolean;
-}
-
-interface EditEventModalProps {
-  event: Event;
-  fetchEvents: () => void;
-  closeEditModal: () => void;
-  openEditModal: boolean;
-}
+import { Event, EditEventModalProps } from "@/data/events";
 
 const EditEventModal: React.FC<EditEventModalProps> = ({
   event,
