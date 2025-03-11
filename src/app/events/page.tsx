@@ -3,8 +3,8 @@ import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Event, PreloadedMedia } from "@/data/events";
 
 import AudioStatic from "@/components/audio-static/AudioStatic";
-import EventCard from "@/components/event-card/EventCard";
 import Loading from "@/components/loading/Loading";
+import EventList from "@/components/event-list/EventList";
 
 import { generateProgress } from "@/utils/progress";
 
@@ -12,61 +12,27 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { preloadMedia } from "@/utils/preloadMedia";
 
 export default function Events() {
-  const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"upcoming" | "past">("upcoming");
   const containerRef = useRef<HTMLDivElement>(null);
+  const [upcomingEvents, setUpcomingEvents] = useState<Event[]>([]);
+  const [pastEvents, setPastEvents] = useState<Event[]>([]);
   const upcomingEventRefs = useRef<(HTMLDivElement | null)[]>([]);
   const pastEventRefs = useRef<(HTMLDivElement | null)[]>([]);
   const upcomingEmptyMessageRef = useRef<HTMLDivElement>(null);
   const pastEmptyMessageRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState<number>(0);
-  const [preloadedMedia, setPreloadedMedia] = useState<
+  const [mediaLoaded, setMediaLoaded] = useState<boolean>(false);
+  const [upcomingPreloadedMedia, setUpcomingPreloadedMedia] = useState<
     Map<string, PreloadedMedia>
   >(new Map());
-
-  const preloadMedia = async (event: Event) => {
-    if (preloadedMedia.has(event._id)) {
-      return;
-    }
-
-    return new Promise((resolve, reject) => {
-      // Check if the media is a photo or video
-      // check if they have properly marked the media type
-      const mediaExtension = event.image_url.split(".").pop();
-
-      if (mediaExtension !== "mp4" && event.is_photo) {
-        const img = new Image();
-        img.onerror = reject;
-        img.src = event.image_url;
-        img.onload = () => {
-          setPreloadedMedia((prev) => {
-            const newMap = new Map(prev);
-
-            newMap.set(event._id, img);
-            return newMap;
-          });
-          resolve(img);
-        };
-      } else {
-        const video = document.createElement("video");
-        video.onerror = reject;
-        video.src = event.image_url;
-        video.onloadeddata = () => {
-          setPreloadedMedia((prev) => {
-            const newMap = new Map(prev);
-            newMap.set(event._id, video);
-            return newMap;
-          });
-          resolve(video);
-        };
-        video.load();
-      }
-    });
-  };
+  const [pastPreloadedMedia, setPastPreloadedMedia] = useState<
+    Map<string, PreloadedMedia>
+  >(new Map());
 
   const animateEvents = useCallback(() => {
     if (loading || !containerRef.current) return;
@@ -76,7 +42,7 @@ export default function Events() {
     const currentEmptyRef =
       activeTab === "upcoming" ? upcomingEmptyMessageRef : pastEmptyMessageRef;
 
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({ delay: 0.25 });
 
     // Initial animation for tabs if not already visible
     const eventTabs = document.querySelector("#event-tabs") as HTMLElement;
@@ -84,31 +50,19 @@ export default function Events() {
       tl.fromTo("#event-tabs", { opacity: 0 }, { opacity: 1, duration: 0.15 });
     }
 
-    if (currentRefs.current.length > 0) {
-      tl.set("#events-container", { opacity: 1 })
-        .set(currentRefs.current, {
-          opacity: 0,
-          y: 15,
-        })
-        .to(currentRefs.current, {
-          y: 0,
-          duration: 0.3,
-          stagger: 0.05,
-          ease: "power2.out",
-          opacity: 1,
-        });
-    } else if (currentEmptyRef.current) {
-      tl.set("#events-container", { opacity: 1 }).fromTo(
-        currentEmptyRef.current,
-        { opacity: 0 },
-        {
-          duration: 0.2,
-          opacity: 1,
-          ease: "power2.out",
-        },
-      );
+    if (currentRefs.current.length > 0 && mediaLoaded) {
+      tl.set(currentRefs.current, {
+        opacity: 0,
+        y: 25,
+      }).to(currentRefs.current, {
+        y: 0,
+        duration: 0.4,
+        stagger: 0.075,
+        ease: "back.out(2.7)",
+        opacity: 1,
+      });
     }
-  }, [loading, activeTab]);
+  }, [loading, activeTab, mediaLoaded]);
 
   useGSAP(() => {
     animateEvents();
@@ -143,12 +97,29 @@ export default function Events() {
       setProgress(generateProgress(51, 75));
       await new Promise((resolve) => setTimeout(resolve, 100));
 
-      const data: Event[] = await response.json();
-      setEvents(data);
-      await Promise.all(data.map(preloadMedia));
+      const data: { upcoming: Event[]; past: Event[] } = await response.json();
+      setUpcomingEvents(data.upcoming);
+      setPastEvents(data.past);
+
+      await Promise.all(
+        data.upcoming.map((event) =>
+          preloadMedia(
+            event,
+            upcomingPreloadedMedia,
+            setUpcomingPreloadedMedia,
+          ),
+        ),
+      );
+      await Promise.all(
+        data.past.map((event) =>
+          preloadMedia(event, pastPreloadedMedia, setPastPreloadedMedia),
+        ),
+      );
+
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      setMediaLoaded(true);
 
       setProgress(generateProgress(75, 99));
-      await new Promise((resolve) => setTimeout(resolve, 100));
     } catch (error) {
       const err =
         error instanceof Error ? error : new Error("Unknown error occurred");
@@ -162,42 +133,9 @@ export default function Events() {
     }
   };
 
-  const filterEvents = useMemo(() => {
-    return (type: "upcoming" | "past") => {
-      return events.filter((event) => {
-        return type === "upcoming" ? event.upcoming : !event.upcoming;
-      });
-    };
-  }, [events]);
-
-  const upcomingEvents = filterEvents("upcoming").sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
-  );
-  const pastEvents = filterEvents("past").sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-  );
-
   useEffect(() => {
-    setProgress(1);
     fetchEvents();
   }, []);
-
-  const EmptyMessage = ({
-    message,
-    refProp,
-  }: {
-    message: string;
-    refProp: React.RefObject<HTMLDivElement>;
-  }) => (
-    <div
-      ref={refProp}
-      className="flex h-[50vh] w-full flex-col items-center justify-center"
-    >
-      <h2 className="my-3 text-center font-bigola text-3xl text-customNavy md:text-4xl">
-        {message}
-      </h2>
-    </div>
-  );
 
   return (
     <>
@@ -233,72 +171,24 @@ export default function Events() {
                   <TabsTrigger value="past">Past Events</TabsTrigger>
                 </TabsList>
 
-                <div id="events-container" className="w-full opacity-0">
+                <div id="events-container" className="w-full">
                   <TabsContent value="upcoming" className="w-full">
-                    {upcomingEvents.length > 0 ? (
-                      <div className="mb-6">
-                        {upcomingEvents.map((event, idx) => (
-                          <div className="w-full" key={event._id}>
-                            <div
-                              ref={(el) => {
-                                upcomingEventRefs.current[idx] = el;
-                              }}
-                              className={`mx-auto w-full border-t border-customGold ${idx === upcomingEvents.length - 1 ? "border-b" : ""}`}
-                            >
-                              <EventCard
-                                key={idx}
-                                event={event}
-                                preloadedMedia={
-                                  preloadedMedia.get(
-                                    event._id,
-                                  ) as PreloadedMedia
-                                }
-                              />
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="flex w-full flex-col items-center justify-center text-center">
-                        <EmptyMessage
-                          message="Stay tuned for upcoming events!"
-                          refProp={upcomingEmptyMessageRef}
-                        />
-                      </div>
-                    )}
+                    <EventList
+                      events={upcomingEvents}
+                      preloadedMedia={upcomingPreloadedMedia}
+                      eventRefs={upcomingEventRefs}
+                      emptyMessageRef={upcomingEmptyMessageRef}
+                      upcoming={true}
+                    />
                   </TabsContent>
                   <TabsContent value="past" className="w-full">
-                    {pastEvents.length > 0 ? (
-                      <div className="mb-6">
-                        {pastEvents.map((event, idx) => (
-                          <div key={event._id} className="w-full">
-                            <div
-                              ref={(el) => {
-                                pastEventRefs.current[idx] = el;
-                              }}
-                              className={`mx-auto w-full border-t border-customGold ${idx === pastEvents.length - 1 ? "border-b" : ""}`}
-                            >
-                              <EventCard
-                                key={idx}
-                                event={event}
-                                preloadedMedia={
-                                  preloadedMedia.get(
-                                    event._id,
-                                  ) as PreloadedMedia
-                                }
-                              />
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="flex w-full flex-col items-center justify-center text-center">
-                        <EmptyMessage
-                          message="No past events to display."
-                          refProp={pastEmptyMessageRef}
-                        />
-                      </div>
-                    )}
+                    <EventList
+                      events={pastEvents}
+                      preloadedMedia={pastPreloadedMedia}
+                      eventRefs={pastEventRefs}
+                      emptyMessageRef={pastEmptyMessageRef}
+                      upcoming={false}
+                    />
                   </TabsContent>
                 </div>
               </Tabs>

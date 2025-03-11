@@ -7,16 +7,7 @@ import {
   ProcessedItem,
 } from "@/data/menu.ts";
 
-import Footer from "@/components/footer/Footer";
-
-import {
-  BeerBottle,
-  BeerStein,
-  Wine,
-  CaretDown,
-  PintGlass,
-  ArrowBendRightDown,
-} from "@phosphor-icons/react";
+import { ArrowBendRightDown } from "@phosphor-icons/react";
 
 import { generateProgress } from "@/utils/progress";
 import AudioStatic from "@/components/audio-static/AudioStatic";
@@ -38,7 +29,6 @@ import {
 const Menu: React.FC = ({}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [menu, setMenu] = useState<MenuStructure | null>(null);
-  const tl = useRef<gsap.core.Timeline | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const menuItemRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -105,42 +95,44 @@ const Menu: React.FC = ({}) => {
   useGSAP(() => {
     if (loading || !containerRef.current) return;
 
-    gsap.set("#menu", {
-      opacity: 0,
-    });
+    const tl = gsap.timeline({ delay: 0.25 });
+    const splitText = new SplitText("#menu-heading", { type: "chars" });
 
-    gsap.set("#menu-heading", {
+    tl.set("#menu", {
       opacity: 0,
-    });
-
-    gsap.set(menuItemRefs.current, {
-      opacity: 0,
-      y: 25,
-    });
-
-    tl.current = gsap
-      .timeline({})
+    })
+      .set("#menu-heading", {
+        opacity: 1,
+      })
+      .set(splitText.chars, {
+        opacity: 0,
+        //scale: 0.75,
+        y: -40,
+      })
+      .set(menuItemRefs.current, {
+        opacity: 0,
+        y: 25,
+      })
       .to("#menu", {
         opacity: 1,
         duration: 0.15,
       })
-      .to("#menu-heading", {
+      .to(menuItemRefs.current, {
+        delay: 0.05,
+        y: 0,
+        duration: 0.3,
+        stagger: 0.075,
+        ease: "back.out(2.7)",
         opacity: 1,
-        duration: 0.25,
       })
-      .to(
-        menuItemRefs.current,
-        {
-          delay: 0.15,
-          //clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-          y: 0,
-          duration: 0.3,
-          stagger: 0.075,
-          ease: "linear",
-          opacity: 1,
-        },
-        "<",
-      );
+      .to(splitText.chars, {
+        opacity: 1,
+        duration: 0.2,
+        ease: "back.out(2.7)",
+        stagger: { amount: 0.1, from: "center" },
+        y: 0,
+        scale: 1,
+      });
   }, [loading]);
 
   useEffect(() => {
@@ -281,12 +273,6 @@ const Menu: React.FC = ({}) => {
           ) : (
             <>
               <Accordion type="single" collapsible className="z-[151] w-full">
-                <h2
-                  id="menu-heading"
-                  className="hidden w-full text-pretty border-b border-customGold pb-6 pt-3 text-center font-bigola text-xl text-customNavy opacity-0 md:mb-6 md:block md:border-0 md:py-0 md:text-3xl"
-                >
-                  Stay up to date as our selections rotate!
-                </h2>
                 <div className="w-full opacity-0" id="menu">
                   {Object.entries(menu).map(
                     ([categoryName, categoryContent], index) => (
@@ -370,6 +356,12 @@ const Menu: React.FC = ({}) => {
                     ),
                   )}
                 </div>
+                <h2
+                  id="menu-heading"
+                  className="w-full overflow-hidden text-pretty border-b border-customGold py-3 text-center font-bigola text-xl text-customNavy opacity-0 md:block md:border-0 md:py-6 md:text-3xl"
+                >
+                  Stay up to date as our selections rotate!
+                </h2>
               </Accordion>
             </>
           )}
