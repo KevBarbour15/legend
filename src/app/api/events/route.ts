@@ -6,9 +6,21 @@ import { connectToMongoDB } from "@/lib/db";
 export async function GET(req: NextRequest) {
   await connectToMongoDB();
   try {
-    const events = await Event.find();
+    const upcomingEvents = await Event.find({ upcoming: true })
+      .limit(100)
+      .sort({ date: 1 });
 
-    return NextResponse.json(events, { status: 200 });
+    const pastEvents = await Event.find({ upcoming: false })
+      .limit(100)
+      .sort({ date: -1 });
+
+    return NextResponse.json(
+      {
+        upcoming: upcomingEvents,
+        past: pastEvents,
+      },
+      { status: 200 },
+    );
   } catch (error) {
     console.log("Error: ", error);
     return NextResponse.json(
@@ -48,6 +60,7 @@ export async function POST(req: NextRequest) {
       description,
       image_url,
       is_photo,
+      upcoming: true,
     });
 
     await event.save();

@@ -6,8 +6,8 @@ import CreateEvent from "@/components/create-event/CreateEvent";
 
 import UnreadMessagesList from "@/components/messages/UnreadMessages";
 import ReadMessagesList from "@/components/messages/ReadMessages";
-import UpcomingEventsList from "@/components/events/UpcomingEvents";
-import PastEventsList from "@/components/events/PastEvents";
+import UpcomingEventsList from "@/components/dash-events/UpcomingEvents";
+import PastEventsList from "@/components/dash-events/PastEvents";
 import MenuCategories from "@/components/menu-categories/MenuCategories";
 
 const DefaultComponent: React.FC = () => <div>No component selected</div>;

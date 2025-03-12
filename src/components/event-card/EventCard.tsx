@@ -170,7 +170,6 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               {event.title}
             </motion.h2>
           </div>
-
         </div>
         {event.is_photo ? (
           <motion.div layoutId={`image-${event._id}`} className="flex-shrink-0">
