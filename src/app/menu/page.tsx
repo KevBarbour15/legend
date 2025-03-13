@@ -127,9 +127,9 @@ const Menu: React.FC = ({}) => {
       })
       .to(splitText.chars, {
         opacity: 1,
-        duration: 0.2,
-        ease: "back.out(2.7)",
-        stagger: { amount: 0.1, from: "center" },
+        duration: 0.5,
+        ease: "bounce.out(2.7)",
+        stagger: { amount: 0.1, from: "random" },
         y: 0,
         scale: 1,
       });
@@ -358,7 +358,7 @@ const Menu: React.FC = ({}) => {
                 </div>
                 <h2
                   id="menu-heading"
-                  className="w-full overflow-hidden text-pretty border-b border-customGold py-3 text-center font-bigola text-xl text-customNavy opacity-0 md:block md:border-0 md:py-6 md:text-3xl"
+                  className="w-full overflow-hidden text-pretty py-6 text-center font-bigola text-xl text-customNavy opacity-0 md:text-3xl"
                 >
                   Stay up to date as our selections rotate!
                 </h2>
