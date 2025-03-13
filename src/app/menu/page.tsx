@@ -106,8 +106,6 @@ const Menu: React.FC = ({}) => {
       })
       .set(splitText.chars, {
         opacity: 0,
-        //scale: 0.75,
-        y: -40,
       })
       .set(menuItemRefs.current, {
         opacity: 0,
@@ -122,16 +120,18 @@ const Menu: React.FC = ({}) => {
         y: 0,
         duration: 0.3,
         stagger: 0.075,
-        ease: "back.out(2.7)",
+        ease: "back.out(2.5)",
         opacity: 1,
       })
       .to(splitText.chars, {
+        delay: 0.25,
+        scaleY: 1,
+        scaleX: 1,
         opacity: 1,
-        duration: 0.2,
-        ease: "back.out(2.7)",
-        stagger: { amount: 0.1, from: "center" },
+        duration: 0.4,
+        ease: "back.out(2.5)",
+        stagger: { amount: 0.2, from: "random" },
         y: 0,
-        scale: 1,
       });
   }, [loading]);
 
@@ -358,7 +358,7 @@ const Menu: React.FC = ({}) => {
                 </div>
                 <h2
                   id="menu-heading"
-                  className="w-full overflow-hidden text-pretty border-b border-customGold py-3 text-center font-bigola text-xl text-customNavy opacity-0 md:block md:border-0 md:py-6 md:text-3xl"
+                  className="w-full overflow-hidden text-pretty py-6 text-center font-bigola text-xl text-customNavy opacity-0 md:text-3xl"
                 >
                   Stay up to date as our selections rotate!
                 </h2>
