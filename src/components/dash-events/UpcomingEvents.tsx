@@ -30,21 +30,6 @@ const UpcomingEventsList: React.FC = () => {
     );
   }, [loading]);
 
-  const sortedEvents = useMemo(() => {
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
-    return events
-      .filter((event) => {
-        const [year, month, day] = event.date.split("-").map(Number);
-        const eventDate = new Date(year, month - 1, day);
-        eventDate.setHours(0, 0, 0, 0);
-
-        return eventDate >= today;
-      })
-      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-  }, [events]);
-
   const updateProgress = (start: number, end: number, delay = 0) => {
     setTimeout(() => setProgress(generateProgress(start, end)), delay);
   };
@@ -61,9 +46,9 @@ const UpcomingEventsList: React.FC = () => {
         throw new Error(`Failed to fetch events: ${response.statusText}`);
       }
 
-      const data: Event[] = await response.json();
+      const data: { upcoming: Event[]; past: Event[] } = await response.json();
       updateProgress(67, 99, 750);
-      setEvents(data);
+      setEvents(data.upcoming);
     } catch (error) {
       const err =
         error instanceof Error ? error : new Error("Unknown error occurred");
@@ -94,7 +79,7 @@ const UpcomingEventsList: React.FC = () => {
         <div className="flex h-[50vh] w-full flex-col items-center justify-center">
           <h2 className="mb-6 text-3xl md:text-4xl">{error.message}</h2>
         </div>
-      ) : !loading && sortedEvents.length === 0 ? (
+      ) : !loading && events.length === 0 ? (
         <div className="flex h-[50vh] w-full flex-col items-center justify-center">
           <h2 className="mb-6 text-3xl md:text-4xl">No events found.</h2>
         </div>
@@ -105,7 +90,7 @@ const UpcomingEventsList: React.FC = () => {
             collapsible
             className="w-full border-b border-black"
           >
-            {sortedEvents.map((event, index) => (
+            {events.map((event, index) => (
               <div key={event._id}>
                 <DashEventCard
                   event={event}
