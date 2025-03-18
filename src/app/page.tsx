@@ -260,32 +260,16 @@ export default function Home() {
             <ImageCarousel />
           </div>
 
-          <div
-            id="about-section"
-            className="hidden flex-row gap-6 border-customNavy py-6 opacity-0 md:flex"
-          >
-            <div className="basis-1/2">
-              <iframe
-                title="Spotify Playlist"
-                src="https://open.spotify.com/embed/playlist/7pIFUTsTxa3MMROMuXsElO?utm_source=generator&theme=0"
-                width="100%"
-                height="352"
-                allow="encrypted-media"
-                loading="lazy"
-                className="h-[352px] w-full rounded-xl"
-              ></iframe>
-            </div>
-            <div className="basis-1/2">
-              <iframe
-                title="Tidal Playlist"
-                src="https://embed.tidal.com/playlists/af487a34-0dda-4c35-a02e-44f402c4a141"
-                allow="encrypted-media"
-                className="h-[352px] w-full rounded-xl"
-                loading="lazy"
-                height="352"
-                width="100%"
-              ></iframe>
-            </div>
+          <div id="about-section" className="pb-6 pt-3 opacity-0">
+            <iframe
+              title="Spotify Playlist"
+              src="https://open.spotify.com/embed/playlist/7pIFUTsTxa3MMROMuXsElO?utm_source=generator&theme=0"
+              width="100%"
+              height="352"
+              allow="encrypted-media"
+              loading="lazy"
+              className="h-[352px] w-full rounded-xl"
+            ></iframe>
           </div>
 
           <div

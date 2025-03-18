@@ -110,6 +110,7 @@ export default function Events() {
           ),
         ),
       );
+      
       await Promise.all(
         data.past.map((event) =>
           preloadMedia(event, pastPreloadedMedia, setPastPreloadedMedia),

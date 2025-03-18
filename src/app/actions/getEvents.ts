@@ -16,7 +16,7 @@ export async function getEvents(
 ): Promise<EventResponse> {
   try {
     await connectToMongoDB();
-    const limit = 10;
+    const limit = 100;
 
     // First, get total count of events of the requested type
     const totalCount = await Event.countDocuments({
