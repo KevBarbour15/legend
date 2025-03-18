@@ -22,9 +22,9 @@ import { IconButton } from "@mui/material";
 
 const links = [
   { path: "/", label: "About" },
-  { path: "/contact", label: "Contact" },
   { path: "/menu", label: "Menu" },
   { path: "/events", label: "Events" },
+  { path: "/contact", label: "Contact" },
 ];
 
 const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {

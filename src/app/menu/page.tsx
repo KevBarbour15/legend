@@ -105,9 +105,9 @@ const Menu: React.FC = ({}) => {
         opacity: 1,
       })
       .set(splitText.chars, {
-        opacity: 0,
-        //scale: 0.75,
-        y: -40,
+        //opacity: 0,
+        scaleY: 0,
+        scaleX: 0,
       })
       .set(menuItemRefs.current, {
         opacity: 0,
@@ -122,16 +122,17 @@ const Menu: React.FC = ({}) => {
         y: 0,
         duration: 0.3,
         stagger: 0.075,
-        ease: "back.out(2.7)",
+        ease: "back.out(2.5)",
         opacity: 1,
       })
       .to(splitText.chars, {
+        delay: 0.15,
+        scaleY: 1,
+        scaleX: 1,
         opacity: 1,
-        duration: 0.5,
-        ease: "bounce.out(2.7)",
-        stagger: { amount: 0.1, from: "random" },
-        y: 0,
-        scale: 1,
+        duration: 0.4,
+        ease: "bounce.out(4)",
+        stagger: { amount: 0.2, from: "random" },
       });
   }, [loading]);
 

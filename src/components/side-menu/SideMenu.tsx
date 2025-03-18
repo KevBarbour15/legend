@@ -41,10 +41,11 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
 
   useGSAP(() => {
     const menuLinks = document.querySelectorAll("#hover");
-
+    let tl = gsap.timeline();
     if (shouldShowAnimation) {
-      gsap.set(menuLinks, { x: "-25%", opacity: 0 });
-      gsap.to(menuLinks, {
+      tl.set(menuLinks, { x: "-25%", opacity: 0 });
+      tl.to(menuLinks, {
+        delay: 0.15,
         duration: 0.5,
         ease: "back.out(1.7)",
         x: 0,

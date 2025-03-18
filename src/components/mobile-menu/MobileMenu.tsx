@@ -35,6 +35,7 @@ const MobileMenu: React.FC = () => {
       opacity: 1,
       duration: 0.5,
       ease: "sine.out",
+      delay: 0.15,
     });
 
     menuLinks.forEach((menuLink) => {
@@ -45,6 +46,7 @@ const MobileMenu: React.FC = () => {
     });
 
     gsap.to(menuLinks, {
+      delay: 0.15,
       duration: 0.5,
       ease: "back.out(1.7)",
       x: 0,
