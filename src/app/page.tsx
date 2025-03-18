@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 import Image from "next/image";
 
@@ -15,7 +15,6 @@ import {
   Copyright,
   Phone,
   Key,
-  TidalLogo,
   SpotifyLogo,
 } from "@phosphor-icons/react";
 
@@ -317,17 +316,6 @@ export default function Home() {
                 title="Follow us on Spotify"
               >
                 <SpotifyLogo size={40} weight="regular" />
-              </a>
-
-              <a
-                className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
-                href="https://listen.tidal.com/user/199890881"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Follow Legend Has It on Tidal"
-                title="Follow us on Tidal"
-              >
-                <TidalLogo size={40} weight="regular" />
               </a>
 
               <a
