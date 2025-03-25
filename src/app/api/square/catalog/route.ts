@@ -225,12 +225,13 @@ function processItems(
     const variation = item.itemData?.variations?.[0];
 
     let bottleVariation = null;
-
+    let bottleIsSellable = null;
     if (
       item.itemData?.variations?.[1] &&
       item.itemData?.variations?.[1].itemVariationData?.name === "Bottle"
     ) {
       bottleVariation = item.itemData?.variations?.[1];
+      bottleIsSellable = bottleVariation?.itemVariationData?.sellable ?? false;
     }
 
     const customAttributes = {
@@ -269,7 +270,7 @@ function processItems(
       bottlePrice: bottleVariation?.itemVariationData?.priceMoney?.amount
         ? `$${(Number(bottleVariation.itemVariationData.priceMoney.amount) / 100).toFixed(2)}`
         : undefined,
-      abv,
+      bottleIsSellable: bottleIsSellable,
       city,
       varieties,
       categoryIds: item.itemData?.categories?.map((cat) => cat.id ?? "") || [],

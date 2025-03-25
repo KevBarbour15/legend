@@ -173,8 +173,15 @@ const Menu: React.FC = ({}) => {
         {item.bottlePrice ? (
           <div className="flex first-letter:items-end">
             <p className="flex gap-1 text-right leading-none">
-              {item.price} <span>/</span>
-              {item.bottlePrice}
+              {item.price}{" "}
+              <span>
+                {item.bottleIsSellable && (
+                  <>
+                    <span>/</span>
+                    {item.bottlePrice}
+                  </>
+                )}
+              </span>
             </p>
           </div>
         ) : (
