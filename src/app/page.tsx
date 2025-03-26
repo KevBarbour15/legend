@@ -230,13 +230,13 @@ export default function Home() {
           </div>
           <div className="block py-6 font-bigola text-xl text-customNavy md:mb-0 md:text-3xl">
             <h2 id="about-section" className="mb-3 opacity-0 md:mb-6">
-              Hours
+              Regular Hours
             </h2>
             <div
               id="about-section"
               className="mb-3 flex flex-row justify-between opacity-0 md:mb-6"
             >
-              <p>Sunday - Tuesday:</p>
+              <p>Monday - Tuesday:</p>
               <p>Closed</p>
             </div>
             <div
@@ -248,11 +248,23 @@ export default function Home() {
             </div>
             <div
               id="about-section"
-              className="flex flex-row justify-between opacity-0"
+              className="mb-3 flex flex-row justify-between opacity-0 md:mb-6"
             >
               <p>Friday - Saturday:</p>
               <p>3pm - 12am</p>
             </div>
+            <div
+              id="about-section"
+              className="mb-3 flex flex-row justify-between opacity-0 md:mb-6"
+            >
+              <p>Sunday:</p>
+              <p>12pm - 5pm</p>
+            </div>
+            <p className="font-hypatia text-base italic text-customNavy">
+              We occasionally open outside of these hours for game days and
+              special events. For the most up-to-date info, please check our
+              Instagram or Google profile.
+            </p>
           </div>
 
           <div id="about-section" className="opacity-0">
