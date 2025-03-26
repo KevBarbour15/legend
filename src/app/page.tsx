@@ -8,15 +8,10 @@ import SideMenu from "@/components/side-menu/SideMenu";
 import MobileMenu from "@/components/mobile-menu/MobileMenu";
 import AudioStatic from "@/components/audio-static/AudioStatic";
 
-import {
-  InstagramLogo,
-  FacebookLogo,
-  YoutubeLogo,
-  Copyright,
-  Phone,
-  Key,
-  SpotifyLogo,
-} from "@phosphor-icons/react";
+import { Copyright, Phone, Key } from "@phosphor-icons/react";
+
+import { FaYelp, FaYoutube, FaFacebook, FaSpotify } from "react-icons/fa";
+import { AiFillInstagram } from "react-icons/ai";
 
 import { Button } from "@/components/ui/button";
 
@@ -228,7 +223,7 @@ export default function Home() {
               through sound.
             </p>
           </div>
-          <div className="block py-6 font-bigola text-xl text-customNavy md:mb-0 md:text-3xl">
+          <div className="mt-3 block py-6 font-bigola text-xl text-customNavy md:mb-0 md:text-3xl">
             <h2 id="about-section" className="mb-3 opacity-0 md:mb-6">
               Regular Hours
             </h2>
@@ -260,10 +255,10 @@ export default function Home() {
               <p>Sunday:</p>
               <p>12pm - 5pm</p>
             </div>
-            <p className="font-hypatia text-base italic text-customNavy">
-              We occasionally open outside of these hours for game days and
+            <p className="mb-3 font-hypatia text-sm italic text-customNavy">
+              * We occasionally open outside of these hours for game days and
               special events. For the most up-to-date info, please check our
-              Instagram or Google profile.
+              social media pages.
             </p>
           </div>
 
@@ -327,7 +322,7 @@ export default function Home() {
                 aria-label="Follow Legend Has It on Spotify"
                 title="Follow us on Spotify"
               >
-                <SpotifyLogo size={40} weight="regular" />
+                <FaSpotify size={40} />
               </a>
 
               <a
@@ -338,7 +333,7 @@ export default function Home() {
                 aria-label="Follow Legend Has It on Instagram"
                 title="Follow us on Instagram"
               >
-                <InstagramLogo size={40} weight="regular" />
+                <AiFillInstagram size={40} />
               </a>
 
               <a
@@ -349,7 +344,7 @@ export default function Home() {
                 aria-label="Follow Legend Has It on Facebook"
                 title="Follow us on Facebook"
               >
-                <FacebookLogo size={40} weight="regular" />
+                <FaFacebook size={40} />
               </a>
 
               <a
@@ -360,7 +355,17 @@ export default function Home() {
                 aria-label="Follow Legend Has It on YouTube"
                 title="Follow us on YouTube"
               >
-                <YoutubeLogo size={40} weight="regular" />
+                <FaYoutube size={40} />
+              </a>
+              <a
+                className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+                href="https://www.yelp.com/biz/legend-has-it-sacramento"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow Legend Has It on Yelp"
+                title="Follow us on Yelp"
+              >
+                <FaYelp size={40} />
               </a>
             </div>
           </div>
