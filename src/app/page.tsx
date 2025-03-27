@@ -158,12 +158,12 @@ export default function Home() {
         {
           y: 0,
           opacity: 1,
-          delay: 0.15,
-          duration: 0.35,
-          ease: "sine.inOut",
+          delay: 0.2,
+          duration: 0.5,
+          ease: "back.out(1.7)",
           scrollTrigger: {
             trigger: section,
-            start: "top-=50 bottom",
+            start: "top bottom",
             toggleActions: "play none none none",
           },
         },
@@ -189,11 +189,11 @@ export default function Home() {
         >
           <div
             id="about-section"
-            className="relative aspect-video overflow-hidden opacity-0"
+            className="aspect-video w-full overflow-hidden opacity-0"
           >
             <Image
               src="/images/about-image.jpg"
-              className="object-cover"
+              className="object-cover object-center"
               fill
               alt="Grand Opening"
               priority={true}
@@ -255,7 +255,10 @@ export default function Home() {
               <p>Sunday:</p>
               <p>12pm - 5pm</p>
             </div>
-            <p className="mb-3 font-hypatia text-sm italic text-customNavy">
+            <p
+              id="about-section"
+              className="mb-3 font-hypatia text-sm italic text-customNavy opacity-0"
+            >
               * We occasionally open outside of these hours for game days and
               special events. For the most up-to-date info, please check our
               social media pages.
@@ -266,7 +269,10 @@ export default function Home() {
             <ImageCarousel />
           </div>
 
-          <div id="about-section" className="pb-6 pt-3 opacity-0">
+          <div
+            id="about-section"
+            className="hidden pb-6 pt-3 opacity-0 md:block"
+          >
             <iframe
               title="Spotify Playlist"
               src="https://open.spotify.com/embed/playlist/7pIFUTsTxa3MMROMuXsElO?utm_source=generator&theme=0"
@@ -293,7 +299,7 @@ export default function Home() {
                     name="email"
                     render={({ field }) => (
                       <FormItem className="grow">
-                        <FormControl className="border border-customNavy font-hypatia text-customNavy backdrop-blur-sm">
+                        <FormControl className="truncate border border-customNavy font-hypatia text-customNavy backdrop-blur-sm">
                           <Input
                             {...field}
                             placeholder="Enter email to receive exclusive updates..."
