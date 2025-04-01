@@ -28,8 +28,6 @@ let parentName: string | null = null;
 export async function GET() {
   try {
     await connectToMongoDB();
-    console.log(CANNED_BOTTLED_BEER_ID);
-    console.log(BAR_INVENTORY_LOCATION_ID);
 
     // Initialize Square client
     const client = new Client({
@@ -272,6 +270,7 @@ function processItems(
         : undefined,
       bottleIsSellable: bottleIsSellable,
       city,
+      abv,
       varieties,
       categoryIds: item.itemData?.categories?.map((cat) => cat.id ?? "") || [],
       locationIds: item.presentAtLocationIds || [],
@@ -292,7 +291,7 @@ function assignItemsToCategories(
   items.forEach((item) => {
     // Skip Kevin's Pale Ale
     if (item.name === "Kevin's Pale Ale") {
-      //console.log("Ignoring", item.name);
+      //console.log(item.abv);
       return;
     }
 
