@@ -201,7 +201,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="font-hypatia text-lg text-customNavy md:text-xl">
+          <div className="font-hypatia text-xl text-customNavy">
             <p
               id="about-section"
               className="my-6 text-pretty leading-[1.15] opacity-0"
@@ -215,12 +215,15 @@ export default function Home() {
               id="about-section"
               className="text-pretty leading-[1.15] opacity-0"
             >
-              Our carefully curated sound systems and eclectic vinyl collection
-              create an intimate atmosphere, perfect for discovering new tunes
-              or revisiting classics. Enjoy from our local craft beer menu
-              designed to complement your auditory journey. At Legend Has It,
-              music legends come to life, and every visit tells a new story
-              through sound.
+              We curate a space where the ordinary becomes extraordinary. We
+              don’t just play sound; we make you feel it. Every beat, every
+              conversation, every moment crafted to build something deeper,
+              something unforgettable. It’s not about passing the time; it’s
+              about engaging with the energy of the room, the people, and the
+              music. We foster transformation in the quiet moments and
+              connection in the noise. Here, the world slows down, and every
+              interaction lingers, leaving you with something that stays with
+              you long after the night ends.
             </p>
           </div>
           <div className="mt-3 block py-6 font-bigola text-xl text-customNavy md:mb-0 md:text-3xl">
