@@ -11,6 +11,7 @@ import AudioStatic from "@/components/audio-static/AudioStatic";
 import { Copyright, Phone, Key } from "@phosphor-icons/react";
 
 import { FaYelp, FaYoutube, FaFacebook, FaSpotify } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { AiFillInstagram } from "react-icons/ai";
 
 import { Button } from "@/components/ui/button";
@@ -227,7 +228,10 @@ export default function Home() {
             </p>
           </div>
           <div className="mt-3 block py-6 font-bigola text-xl text-customNavy md:mb-0 md:text-3xl">
-            <h2 id="about-section" className="mb-3 opacity-0 md:mb-6">
+            <h2
+              id="about-section"
+              className="mb-3 text-2xl opacity-0 md:mb-6 md:text-4xl"
+            >
               Regular Hours
             </h2>
             <div
@@ -260,7 +264,7 @@ export default function Home() {
             </div>
             <p
               id="about-section"
-              className="mb-3 font-hypatia text-sm italic text-customNavy opacity-0"
+              className="mb-3 font-hypatia text-base italic text-customNavy opacity-0"
             >
               * We occasionally open outside of these hours for game days and
               special events. For the most up-to-date info, please check our
@@ -331,7 +335,7 @@ export default function Home() {
                 aria-label="Follow Legend Has It on Spotify"
                 title="Follow us on Spotify"
               >
-                <FaSpotify size={40} />
+                <FaSpotify size={32} />
               </a>
 
               <a
@@ -342,7 +346,7 @@ export default function Home() {
                 aria-label="Follow Legend Has It on Instagram"
                 title="Follow us on Instagram"
               >
-                <AiFillInstagram size={40} />
+                <AiFillInstagram size={32} />
               </a>
 
               <a
@@ -353,7 +357,7 @@ export default function Home() {
                 aria-label="Follow Legend Has It on Facebook"
                 title="Follow us on Facebook"
               >
-                <FaFacebook size={40} />
+                <FaFacebook size={32} />
               </a>
 
               <a
@@ -364,7 +368,7 @@ export default function Home() {
                 aria-label="Follow Legend Has It on YouTube"
                 title="Follow us on YouTube"
               >
-                <FaYoutube size={40} />
+                <FaYoutube size={32} />
               </a>
               <a
                 className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
@@ -374,7 +378,17 @@ export default function Home() {
                 aria-label="Follow Legend Has It on Yelp"
                 title="Follow us on Yelp"
               >
-                <FaYelp size={40} />
+                <FaYelp size={32} />
+              </a>
+              <a
+                className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+                href="https://x.com/legendhasithifi"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow Legend Has It on X"
+                title="Follow us on X"
+              >
+                <FaXTwitter size={32} />
               </a>
             </div>
           </div>

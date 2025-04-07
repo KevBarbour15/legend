@@ -11,14 +11,11 @@ import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-import {
-  X,
-  InstagramLogo,
-  FacebookLogo,
-  YoutubeLogo,
-} from "@phosphor-icons/react";
+import { X } from "@phosphor-icons/react";
 
-import { IconButton } from "@mui/material";
+import { FaYelp, FaYoutube, FaFacebook, FaSpotify } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { AiFillInstagram } from "react-icons/ai";
 
 const links = [
   { path: "/", label: "About" },
@@ -166,38 +163,63 @@ const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
         </div>
         <div className="menu-info-container">
           <div className="menu-info-row opacity-0">
-            <IconButton
-              className="text-5xl text-customCream"
+            <a
+              href="https://open.spotify.com/user/31pcq2fnwyxprxppy4ezl3v3evaq"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow Legend Has It on Spotify"
+              title="Follow us on Spotify"
+            >
+              <FaSpotify />
+            </a>
+
+            <a
               href="https://www.instagram.com/legendhasithifi/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Follow Legend Has It on Instagram"
               title="Follow us on Instagram"
             >
-              <InstagramLogo size={32} weight="regular" />
-            </IconButton>
+              <AiFillInstagram />
+            </a>
 
-            <IconButton
-              className="text-5xl text-customCream"
+            <a
               href="https://www.facebook.com/legendhasithifi"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Follow Legend Has It on Facebook"
               title="Follow us on Facebook"
             >
-              <FacebookLogo size={32} weight="regular" />
-            </IconButton>
+              <FaFacebook />
+            </a>
 
-            <IconButton
-              className="text-5xl text-customCream"
+            <a
               href="https://www.youtube.com/@legendhasithifi"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Follow Legend Has It on YouTube"
               title="Follow us on YouTube"
             >
-              <YoutubeLogo size={32} weight="regular" />
-            </IconButton>
+              <FaYoutube />
+            </a>
+            <a
+              href="https://www.yelp.com/biz/legend-has-it-sacramento"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow Legend Has It on Yelp"
+              title="Follow us on Yelp"
+            >
+              <FaYelp />
+            </a>
+            <a
+              href="https://x.com/legendhasithifi"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow Legend Has It on X"
+              title="Follow us on X"
+            >
+              <FaXTwitter />
+            </a>
           </div>
         </div>
       </div>
