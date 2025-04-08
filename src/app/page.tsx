@@ -228,10 +228,7 @@ export default function Home() {
             </p>
           </div>
           <div className="mt-3 block py-6 font-bigola text-xl text-customNavy md:mb-0 md:text-3xl">
-            <h2
-              id="about-section"
-              className="mb-3 text-2xl opacity-0 md:mb-6 md:text-4xl"
-            >
+            <h2 id="about-section" className="mb-3 text-2xl opacity-0 md:mb-6">
               Regular Hours
             </h2>
             <div
