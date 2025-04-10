@@ -9,6 +9,7 @@ export const useOutsideClick = (
       if (!ref.current || ref.current.contains(event.target)) {
         return;
       }
+      document.body.style.overflow = "auto";
       callback(event);
     };
 
