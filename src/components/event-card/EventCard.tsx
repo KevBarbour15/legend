@@ -19,7 +19,7 @@ import {
 
 const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
   const [isActive, setIsActive] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const formattedTime = formatTime(event.time);
   const formattedDate = new Date(event.date).toLocaleDateString("en-US", {
     timeZone: "UTC",
@@ -27,14 +27,14 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsActive(false);
+      if (e.key === "Escape") {
+        document.body.style.overflow = "auto";
+        setIsActive(false);
+      }
     };
 
     if (isActive) {
-      document.body.style.overflow = "hidden";
       window.addEventListener("keydown", handleKeyDown);
-    } else {
-      document.body.style.overflow = "auto";
     }
 
     return () => {
@@ -42,17 +42,23 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
     };
   }, [isActive]);
 
-  useOutsideClick(ref, () => setIsActive(false));
+  useOutsideClick(containerRef, () => setIsActive(false));
 
   const handleCardClick = () => {
+    document.body.style.overflow = "hidden";
     setIsActive(true);
+  };
+
+  const handleCloseCard = () => {
+    document.body.style.overflow = "auto";
+    setIsActive(false);
   };
 
   const renderPortal = () => {
     return createPortal(
       <AnimatePresence>
         {isActive && (
-          <div className="fixed inset-0 z-[200] grid place-items-center bg-black bg-opacity-75 px-6 backdrop-blur-sm">
+          <div className="fixed inset-0 z-[200] grid place-items-center bg-black bg-opacity-65 px-6 backdrop-blur-sm">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { duration: 0.15 } }}
@@ -69,19 +75,20 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               <IconButton
                 aria-label="Close Modal"
                 className="p-0"
-                onClick={() => setIsActive(false)}
+                onClick={handleCloseCard}
               >
                 <X
                   size={30}
                   weight="bold"
-                  className="rounded-full text-customGold transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+                  className="rounded-full text-customWhite transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
                 />
               </IconButton>
             </motion.div>
 
             <motion.div
+              ref={containerRef}
               layoutId={`card-${event._id}`}
-              className="relative flex h-fit max-h-[85svh] w-full flex-col overflow-y-auto rounded-md border-2 border-customGold bg-customNavy bg-opacity-35 px-3 pt-3 shadow-md backdrop-blur-sm transition-all duration-300 sm:max-h-[90vh] sm:max-w-[475px] md:px-6 md:pt-6"
+              className={`relative flex h-fit max-h-[85svh] w-full flex-col overflow-y-auto rounded-md border-2 ${isActive ? "border-customGold" : "border-transparent"} bg-customNavy bg-opacity-45 px-3 pt-3 shadow-md backdrop-blur-sm transition-all duration-300 sm:max-h-[90vh] sm:max-w-[475px] md:px-6 md:pt-6`}
             >
               {event.is_photo ? (
                 <motion.div
@@ -112,7 +119,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
 
               <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="description" className="border-b-2-0">
-                  <AccordionTrigger className="w-full cursor-pointer py-3 text-customCream">
+                  <AccordionTrigger className="w-full cursor-pointer py-3 text-customWhite">
                     <motion.h2
                       layoutId={`title-${event._id}`}
                       className="text-balance pr-6 text-left font-bigola text-lg capitalize md:text-2xl"
@@ -121,7 +128,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                     </motion.h2>
                   </AccordionTrigger>
                   <AccordionContent className="border-customGold">
-                    <motion.div className="flex w-full flex-row justify-between py-3 font-bigola text-customCream md:text-lg md:leading-[1.15]">
+                    <motion.div className="flex w-full flex-row justify-between py-3 font-bigola text-customWhite md:text-lg md:leading-[1.15]">
                       <motion.p layoutId={`date-${event._id}`}>
                         {formattedDate}
                       </motion.p>
@@ -131,7 +138,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                     </motion.div>
                     <motion.p
                       layoutId={`description-${event._id}`}
-                      className="whitespace-pre-wrap pb-3 font-hypatia text-base leading-none text-customCream md:pb-6 md:text-lg md:leading-[1.15]"
+                      className="whitespace-pre-wrap pb-3 font-hypatia text-base leading-none text-customWhite md:pb-6 md:text-lg md:leading-[1.15]"
                     >
                       {event.description}
                     </motion.p>

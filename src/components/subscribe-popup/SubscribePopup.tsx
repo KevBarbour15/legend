@@ -7,6 +7,7 @@ import { useGSAP } from "@gsap/react";
 import { X } from "@phosphor-icons/react";
 import { IconButton } from "@mui/material";
 
+import { useOutsideClick } from "@/hooks/use-outside-click";
 import MailchimpForm from "@/components/mailchimp-form/MailchimpForm";
 
 interface PopupConfig {
@@ -16,10 +17,7 @@ interface PopupConfig {
   inputStyling?: string;
 }
 
-const SubscribePopup = ({
-  showDelay = 5000,
-  showInterval = 7,
-}: PopupConfig) => {
+const SubscribePopup = ({ showDelay = 0, showInterval = 0 }: PopupConfig) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [shouldShow, setShouldShow] = useState<boolean>(false);
@@ -48,6 +46,8 @@ const SubscribePopup = ({
     return daysSinceLastShown >= showInterval;
   };
 
+  useOutsideClick(containerRef, () => setShouldShow(false));
+
   useEffect(() => {
     const shouldShowPopup = getLocalStorage();
 
@@ -62,7 +62,7 @@ const SubscribePopup = ({
 
   useGSAP(() => {
     if (!overlayRef.current || !containerRef.current) return;
-    console.log("setting up tl");
+
     tl.current = gsap.timeline({ paused: true });
 
     tl.current
@@ -91,12 +91,12 @@ const SubscribePopup = ({
     };
 
     if (shouldShow) {
-      document.body.classList.add("overflow-hidden");
+      document.body.style.overflow = "hidden";
       window.addEventListener("keydown", handleKeyDown);
       tl.current?.play();
     } else {
-      document.body.classList.remove("overflow-hidden");
       tl.current?.reverse();
+      document.body.style.overflow = "auto";
 
       localStorage.setItem(
         "subscribe-popup-data",
@@ -126,20 +126,20 @@ const SubscribePopup = ({
         <X
           size={30}
           weight="bold"
-          className="text-customGold transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customCream"
+          className="text-customCream transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customCream"
         />
       </IconButton>
       <div
         style={{ display: "none" }}
         ref={containerRef}
-        className="flex h-fit max-h-[85dvh] flex-col gap-3 rounded-md border-2 border-customGold bg-customWhite bg-opacity-75 p-3 opacity-0 sm:max-h-[90vh] sm:max-w-[450px] sm:p-6"
+        className="flex h-fit max-h-[85dvh] flex-col gap-3 rounded-md border-2 border-customNavy bg-customWhite bg-opacity-75 p-3 opacity-0 sm:max-h-[90vh] sm:max-w-[450px] sm:p-6"
       >
         <Image
           src="/images/meta-image.jpg"
           alt="Subscribe Image"
           width={500}
           height={500}
-          className="h-auto w-full rounded-md border-2 border-customGold"
+          className="h-auto w-full overflow-hidden rounded-md border-2 border-customNavy"
         />
         <h2 className="text-balance text-center font-bigola text-2xl font-bold text-customNavy sm:text-4xl">
           Get exclusive updates on new beer/wine & events!

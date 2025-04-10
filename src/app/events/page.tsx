@@ -110,7 +110,7 @@ export default function Events() {
           ),
         ),
       );
-      
+
       await Promise.all(
         data.past.map((event) =>
           preloadMedia(event, pastPreloadedMedia, setPastPreloadedMedia),
@@ -162,7 +162,7 @@ export default function Events() {
             <div id="event-tabs" className="w-full pt-3 opacity-0 md:pt-0">
               <Tabs
                 defaultValue="upcoming"
-                className="relative flex w-full flex-col items-center"
+                className="relative flex w-full flex-col items-center border-0"
                 onValueChange={(value) =>
                   setActiveTab(value as "upcoming" | "past")
                 }
