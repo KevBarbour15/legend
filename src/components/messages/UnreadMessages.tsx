@@ -100,7 +100,7 @@ const UnreadMessagesList: React.FC = () => {
           <Accordion
             type="single"
             collapsible
-            className="w-full border-b border-black"
+            className="w-full border-b-2 border-black"
           >
             {unreadMessages.map((message, index) => (
               <div key={index}>

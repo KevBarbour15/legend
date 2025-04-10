@@ -88,7 +88,7 @@ const PastEventsList: React.FC = () => {
           <Accordion
             type="single"
             collapsible
-            className="w-full border-b border-black"
+            className="w-full border-b-2 border-black"
           >
             {events.map((event, index) => (
               <div key={event._id}>

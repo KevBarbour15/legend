@@ -242,7 +242,7 @@ export default function Home() {
           </div>
 
           <div
-            className="flex flex-col-reverse items-center gap-3 border-t border-customNavy py-3 opacity-0 md:flex-row md:gap-0"
+            className="flex flex-col-reverse items-center gap-3 border-t-2 border-customNavy py-3 opacity-0 md:flex-row md:gap-0"
             id="about-section"
           >
             <div className="flex w-full md:basis-1/2">
@@ -316,7 +316,7 @@ export default function Home() {
             </div>
           </div>
           <div
-            className="mb-16 flex w-full justify-between border-y border-customNavy py-3 font-bigola text-sm text-customNavy opacity-0 md:mb-0"
+            className="mb-16 flex w-full justify-between border-b-2 border-customNavy pb-3 font-bigola text-sm text-customNavy opacity-0 md:mb-0"
             id="about-section"
           >
             <div>

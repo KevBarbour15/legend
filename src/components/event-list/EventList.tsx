@@ -28,7 +28,7 @@ export default function EventList({
                 eventRefs.current[idx] = el;
               }
             }}
-            className={`mx-auto w-full border-t border-customGold opacity-0 ${idx === events.length - 1 ? "border-b" : ""}`}
+            className={`mx-auto w-full border-t-2 border-customGold opacity-0 ${idx === events.length - 1 ? "border-b-2" : ""}`}
           >
             <EventCard
               key={idx}

@@ -81,7 +81,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
                 <FormLabel className="font-bigola text-customNavy">
                   Name
                 </FormLabel>
-                <FormControl className="border border-customNavy font-hypatia text-customNavy">
+                <FormControl className="border-2 border-customNavy font-hypatia text-customNavy">
                   <Input {...field} />
                 </FormControl>
                 <FormMessage />
@@ -97,7 +97,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
                 <FormLabel className="font-bigola text-customNavy">
                   Email
                 </FormLabel>
-                <FormControl className="border border-customNavy font-hypatia text-customNavy">
+                <FormControl className="border-2 border-customNavy font-hypatia text-customNavy">
                   <Input type="email" {...field} />
                 </FormControl>
                 <FormMessage />
@@ -112,7 +112,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
                 <FormLabel className="font-bigola text-customNavy">
                   Phone
                 </FormLabel>
-                <FormControl className="border border-customNavy font-hypatia text-customNavy">
+                <FormControl className="border-2 border-customNavy font-hypatia text-customNavy">
                   <Input type="tel" {...field} />
                 </FormControl>
                 <FormMessage />
@@ -128,7 +128,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
                 <FormLabel className="font-bigola text-customNavy">
                   Message
                 </FormLabel>
-                <FormControl className="border border-customNavy font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl className="border-2 border-customNavy font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Textarea {...field} />
                 </FormControl>
                 <FormMessage />
@@ -137,7 +137,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
           />
           <Button
             type="submit"
-            className="mx-auto rounded-sm border border-customNavy bg-transparent font-bigola text-base text-customNavy backdrop-blur-sm transition-all duration-300 active:bg-customNavy active:text-customCream sm:w-fit md:hover:bg-customNavy md:hover:text-customCream"
+            className="mx-auto rounded-sm border-2 border-customNavy bg-transparent font-bigola text-base text-customNavy backdrop-blur-sm transition-all duration-300 active:bg-customNavy active:text-customCream sm:w-fit md:hover:bg-customNavy md:hover:text-customCream"
           >
             Submit
           </Button>

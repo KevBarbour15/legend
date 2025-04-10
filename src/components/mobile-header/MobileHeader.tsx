@@ -46,7 +46,7 @@ const MobileHeader: React.FC = () => {
       >
         <div
           id="mobile-heading"
-          className="m-auto flex w-full items-center justify-between border-b border-customGold py-3 opacity-0"
+          className="m-auto flex w-full items-center justify-between border-b-2 border-customGold py-3 opacity-0"
         >
           <span className="font-bigola text-xl capitalize">{pageName}</span>
           <IconButton

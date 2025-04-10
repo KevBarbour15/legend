@@ -26,7 +26,7 @@ export function DatePicker({ value, onChange }: DatePickerProps) {
         <Button
           variant={"outline"}
           className={cn(
-            "w-full justify-start rounded-sm border border-customNavy bg-transparent text-left font-hypatia text-base backdrop-blur-sm hover:bg-transparent",
+            "w-full justify-start rounded-sm border-2 border-customNavy bg-transparent text-left font-hypatia text-base backdrop-blur-sm hover:bg-transparent",
           )}
         >
           <CalendarBlank className="mr-3 h-4 w-4 p-0 text-customNavy hover:text-customGold" />

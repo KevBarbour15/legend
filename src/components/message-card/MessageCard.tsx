@@ -151,7 +151,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
     <>
       <AccordionItem
         value={`Message #${index}`}
-        className="border-t border-black"
+        className="border-t-2 border-black"
       >
         <AccordionTrigger>
           <div className="flex w-full justify-between text-nowrap pr-3 text-base font-semibold capitalize md:pr-6 md:text-xl">
@@ -171,7 +171,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
         <AccordionContent className="border-black py-3">
           <Card className="p-3 md:p-6">
             <CardContent className="text-base md:text-lg">
-              <div className="text-nowrap border-b border-black">
+              <div className="text-nowrap border-b-2 border-black">
                 <h2 className="mb-3 text-center text-2xl font-semibold">
                   {inquiryType}
                 </h2>
@@ -205,7 +205,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
                 </div>
               </div>
               {message.formType === "event" && (
-                <div className="text-nowrap border-b border-black py-3 capitalize">
+                <div className="text-nowrap border-b-2 border-black py-3 capitalize">
                   <h3 className="mb-3 text-center text-xl font-semibold">
                     {eventType}
                   </h3>
@@ -247,7 +247,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
                   </div>
                 </div>
               )}
-              <div className="flex w-full items-center border-b border-black py-3">
+              <div className="flex w-full items-center border-b-2 border-black py-3">
                 <div className="flex h-full items-center justify-between pr-3">
                   <ChatCircle
                     size={32}

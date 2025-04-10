@@ -82,7 +82,7 @@ const Footer = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem className="grow">
-                    <FormControl className="border border-customNavy font-hypatia text-customNavy backdrop-blur-sm">
+                    <FormControl className="border-2 border-customNavy font-hypatia text-customNavy backdrop-blur-sm">
                       <Input
                         {...field}
                         placeholder="Enter email to receive exclusive updates..."
@@ -94,7 +94,7 @@ const Footer = () => {
               />
               <Button
                 type="submit"
-                className="rounded-sm border border-customNavy bg-transparent font-bigola text-customNavy backdrop-blur-sm transition-all duration-300 ease-in-out hover:bg-customNavy hover:text-customCream active:bg-customNavy active:text-customCream"
+                className="rounded-sm border-2 border-customNavy bg-transparent font-bigola text-customNavy backdrop-blur-sm transition-all duration-300 ease-in-out hover:bg-customNavy hover:text-customCream active:bg-customNavy active:text-customCream"
               >
                 Subscribe
               </Button>
@@ -160,7 +160,7 @@ const Footer = () => {
         </div>
       </div>
       <div
-        className="mb-16 flex w-full justify-between border-t border-customNavy pt-3 font-bigola text-sm text-customNavy md:mb-0"
+        className="mb-16 flex w-full justify-between border-t-2 border-customNavy pt-3 font-bigola text-sm text-customNavy md:mb-0"
         id="about-section"
       >
         <div>

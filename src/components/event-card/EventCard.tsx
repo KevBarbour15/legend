@@ -110,7 +110,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               )}
 
               <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="description" className="border-b-0">
+                <AccordionItem value="description" className="border-b-2-0">
                   <AccordionTrigger className="w-full cursor-pointer py-3 text-customNavy">
                     <motion.h2
                       layoutId={`title-${event._id}`}

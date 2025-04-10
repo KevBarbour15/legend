@@ -166,7 +166,7 @@ const Menu: React.FC = ({}) => {
   const renderMenuItem = (item: ProcessedItem, isLast: boolean) => (
     <div
       key={item.id}
-      className={`block ${!isLast ? "border-b border-dashed border-customGold" : ""} py-3 font-hypatia text-base capitalize md:text-lg`}
+      className={`block ${!isLast ? "border-b-2 border-dashed border-customGold" : ""} py-3 font-hypatia text-base capitalize md:text-lg`}
     >
       <div className="flex w-full justify-between text-nowrap font-bigola text-lg text-customNavy md:text-2xl">
         <p className="whitespace-nowrap text-left leading-none">{item.name}</p>
@@ -224,7 +224,7 @@ const Menu: React.FC = ({}) => {
       {category.childCategories.map((childCategory, index) => (
         <AccordionItem
           value={childCategory.id}
-          className={`${index !== category.childCategories.length - 1 ? "border-b border-customGold" : ""}`}
+          className={`${index !== category.childCategories.length - 1 ? "border-b-2 border-customGold" : ""}`}
           key={childCategory.id}
         >
           <AccordionTrigger
@@ -293,7 +293,7 @@ const Menu: React.FC = ({}) => {
                         >
                           <AccordionItem
                             value={categoryName}
-                            className={`${index === 0 ? "md:border-t" : ""} border-b border-customGold`}
+                            className={`${index === 0 ? "md:border-t-2" : ""} border-b-2 border-customGold`}
                             key={categoryName}
                           >
                             <AccordionTrigger

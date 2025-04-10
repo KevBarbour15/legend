@@ -48,7 +48,7 @@ const DashEventCard: React.FC<DashEventCardProps> = ({
     <>
       <AccordionItem
         value={`Event #${index}`}
-        className="border-t border-black"
+        className="border-t-2 border-black"
       >
         <AccordionTrigger>
           <div className="flex min-w-0 flex-1 items-center justify-between pr-3 text-base capitalize md:pr-6 md:text-xl">
@@ -69,7 +69,7 @@ const DashEventCard: React.FC<DashEventCardProps> = ({
               <h2 className="mx-auto w-full text-wrap text-center text-2xl font-semibold capitalize">
                 {event.title}
               </h2>
-              <div className="flex w-full items-center justify-between border-b border-black py-3">
+              <div className="flex w-full items-center justify-between border-b-2 border-black py-3">
                 <Clock
                   className="flex-shrink-0"
                   style={{ color: "black", width: "28px", height: "28px" }}
@@ -79,7 +79,7 @@ const DashEventCard: React.FC<DashEventCardProps> = ({
                   {formatTime(event.time)}
                 </p>
               </div>
-              <div className="flex w-full border-b border-black py-3">
+              <div className="flex w-full border-b-2 border-black py-3">
                 <div className="flex h-full pr-3">
                   <Info
                     className="flex-shrink-0"
@@ -109,12 +109,12 @@ const DashEventCard: React.FC<DashEventCardProps> = ({
                 <img
                   src={event.image_url}
                   alt="event"
-                  className="h-auto w-full border border-black object-cover object-center"
+                  className="h-auto w-full border-2 border-black object-cover object-center"
                 />
               ) : (
                 <video
                   src={event.image_url}
-                  className="aspect-square h-auto w-full border border-black object-cover object-center"
+                  className="aspect-square h-auto w-full border-2 border-black object-cover object-center"
                   loop
                   autoPlay
                   muted
