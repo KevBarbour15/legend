@@ -155,7 +155,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="font-hypatia text-xl text-customNavy">
+          <div className="font-hypatia text-lg text-customNavy md:text-xl">
             <p
               id="about-section"
               className="my-6 text-pretty leading-[1.15] opacity-0"
@@ -181,7 +181,7 @@ export default function Home() {
             </p>
           </div>
           <div className="mt-3 block py-6 font-bigola text-xl text-customNavy md:mb-0 md:text-3xl">
-            <h2 id="about-section" className="mb-3 text-2xl opacity-0 md:mb-6">
+            <h2 id="about-section" className="mb-3 opacity-0 md:mb-6">
               Regular Hours
             </h2>
             <div
