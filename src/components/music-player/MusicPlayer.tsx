@@ -280,7 +280,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               priority={true}
               loading="eager"
             />
-            <div className="absolute left-[4px] top-[1.05px] z-[3] h-[144px] w-[144px] rounded-full bg-gradient-to-tr from-white/20 to-transparent blur-3xl">
+            <div className="absolute left-[4px] top-[1.05px] z-[3] h-[144px] w-[144px] rounded-full bg-gradient-to-tr from-customWhite/20 to-transparent blur-3xl">
               &nbsp;
             </div>
             <Image

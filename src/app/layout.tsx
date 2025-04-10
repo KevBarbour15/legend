@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import BackgroundOverlay from "@/components/bg-overlay/BackgroundOverlay";
 import MusicPlayer from "@/components/music-player/MusicPlayer";
 import MobileHeader from "@/components/mobile-header/MobileHeader";
+import SubscribePopup from "@/components/subscribe-popup/SubscribePopup";
 import "./globals.css";
 
 import { Toaster } from "@/components/ui/toaster";
@@ -124,6 +125,7 @@ export default function RootLayout({
           />
         </head>
         <body className={inter.className} suppressHydrationWarning={true}>
+          {/*}
           <Script
             id="mcjs"
             strategy="beforeInteractive"
@@ -131,6 +133,8 @@ export default function RootLayout({
               __html: `!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/783ca62931283b3104dae7fdb/5f76e1f7d9803b38a26cab6bc.js");`,
             }}
           />
+          */}
+          <SubscribePopup />
           <Toaster />
           <BackgroundOverlay />
           <MobileHeader />

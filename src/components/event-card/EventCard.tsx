@@ -73,14 +73,14 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               >
                 <X
                   size={24}
-                  className="text-customCream transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+                  className="text-customWhite transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
                 />
               </IconButton>
             </motion.div>
 
             <motion.div
               layoutId={`card-${event._id}`}
-              className="relative flex h-fit max-h-[85svh] w-full flex-col overflow-y-auto border border-customGold bg-customCream px-3 pt-3 shadow-md transition-all duration-300 sm:max-h-[90vh] sm:max-w-[475px] md:px-6 md:pt-6"
+              className="relative flex h-fit max-h-[85svh] w-full flex-col overflow-y-auto border-2 border-customGold bg-customWhite px-3 pt-3 shadow-md transition-all duration-300 sm:max-h-[90vh] sm:max-w-[475px] md:px-6 md:pt-6"
             >
               {event.is_photo ? (
                 <motion.div

@@ -14,79 +14,32 @@ import { FaYelp, FaYoutube, FaFacebook, FaSpotify } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { AiFillInstagram } from "react-icons/ai";
 
-import { Button } from "@/components/ui/button";
-
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import MailchimpForm from "@/components/mailchimp-form/MailchimpForm";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { mailchimpFormSchema, MailchimpFormData } from "@/data/forms";
-
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-
-import { Input } from "@/components/ui/input";
-
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
-  const form = useForm<MailchimpFormData>({
-    resolver: zodResolver(mailchimpFormSchema),
-    defaultValues: {
-      email: "",
-    },
-  });
 
   useEffect(() => {
-    // Ensure the page is scrolled to the top when the page is loaded and stays there
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
 
-      // Add event listener to ensure it stays manual
       window.addEventListener("load", () => {
         window.history.scrollRestoration = "manual";
       });
     }
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
 
-    // Kill any existing ScrollTrigger instances when component unmounts
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
-
-  const onSubmit = async (values: MailchimpFormData) => {
-    try {
-      const response = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: values.email,
-        }),
-      });
-
-      if (response.ok) {
-        form.reset();
-      } else {
-        const errorData = await response.json();
-        console.error("Failed to subscribe to Mailchimp:", errorData.error);
-      }
-    } catch (error) {
-      console.error("Error subscribing to Mailchimp:", error);
-    }
-  };
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -293,34 +246,7 @@ export default function Home() {
             id="about-section"
           >
             <div className="flex w-full md:basis-1/2">
-              <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="flex h-full grow flex-row gap-3 font-hypatia"
-                >
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem className="grow">
-                        <FormControl className="truncate border border-customNavy font-hypatia text-customNavy backdrop-blur-sm">
-                          <Input
-                            {...field}
-                            placeholder="Enter email to receive exclusive updates..."
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <Button
-                    type="submit"
-                    className="rounded-sm border border-customNavy bg-transparent font-bigola text-customNavy backdrop-blur-sm transition-all duration-300 ease-in-out hover:bg-customNavy hover:text-customCream active:bg-customNavy active:text-customCream"
-                  >
-                    Subscribe
-                  </Button>
-                </form>
-              </Form>
+              <MailchimpForm setShouldShow={() => {}} />
             </div>
 
             <div className="flex w-full basis-1/2 justify-start gap-3 md:justify-end">
