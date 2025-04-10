@@ -12,6 +12,8 @@ import MailchimpForm from "@/components/mailchimp-form/MailchimpForm";
 interface PopupConfig {
   showDelay?: number;
   showInterval?: number;
+  buttonStyling?: string;
+  inputStyling?: string;
 }
 
 const SubscribePopup = ({
@@ -114,7 +116,7 @@ const SubscribePopup = ({
     <div
       style={{ display: "none" }}
       ref={overlayRef}
-      className="fixed inset-0 z-[1000] h-full w-full items-center justify-center bg-black bg-opacity-85 p-3 opacity-0"
+      className="fixed inset-0 z-[1000] h-full w-full items-center justify-center bg-black bg-opacity-75 p-3 px-6 opacity-0 backdrop-blur-sm"
     >
       <IconButton
         aria-label="Close Modal"
@@ -122,23 +124,24 @@ const SubscribePopup = ({
         onClick={() => setShouldShow(false)}
       >
         <X
-          size={24}
-          className="text-customWhite transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+          size={30}
+          weight="bold"
+          className="text-customGold transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customCream"
         />
       </IconButton>
       <div
         style={{ display: "none" }}
         ref={containerRef}
-        className="flex h-fit max-h-[85dvh] flex-col gap-3 border-2 border-customGold bg-customWhite p-3 opacity-0 sm:max-h-[90vh] sm:max-w-[425px] sm:p-6"
+        className="flex h-fit max-h-[85dvh] flex-col gap-3 rounded-md border-2 border-customGold bg-customWhite bg-opacity-75 p-3 opacity-0 sm:max-h-[90vh] sm:max-w-[450px] sm:p-6"
       >
         <Image
           src="/images/meta-image.jpg"
           alt="Subscribe Image"
           width={500}
           height={500}
-          className="h-auto w-full"
+          className="h-auto w-full rounded-md border-2 border-customGold"
         />
-        <h2 className="text-balance text-center font-bigola text-2xl font-bold text-customNavy sm:text-3xl">
+        <h2 className="text-balance text-center font-bigola text-2xl font-bold text-customNavy sm:text-4xl">
           Get exclusive updates on new beer/wine & events!
         </h2>
         <MailchimpForm setShouldShow={setShouldShow} />

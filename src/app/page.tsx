@@ -143,7 +143,7 @@ export default function Home() {
         >
           <div
             id="about-section"
-            className="aspect-video w-full overflow-hidden opacity-0"
+            className="aspect-video w-full overflow-hidden rounded-md border-2 border-customNavy opacity-0"
           >
             <Image
               src="/images/about-image.jpg"
@@ -237,12 +237,12 @@ export default function Home() {
               height="352"
               allow="encrypted-media"
               loading="lazy"
-              className="h-[352px] w-full rounded-xl"
+              className="h-[352px] w-full"
             ></iframe>
           </div>
 
           <div
-            className="flex flex-col-reverse items-center gap-3 border-t-2 border-customNavy py-3 opacity-0 md:flex-row md:gap-0"
+            className="flex flex-col-reverse items-center gap-3 border-t-2 border-customGold py-3 opacity-0 md:flex-row md:gap-0"
             id="about-section"
           >
             <div className="flex w-full md:basis-1/2">
@@ -316,7 +316,7 @@ export default function Home() {
             </div>
           </div>
           <div
-            className="mb-16 flex w-full justify-between border-b-2 border-customNavy pb-3 font-bigola text-sm text-customNavy opacity-0 md:mb-0"
+            className="mb-16 flex w-full justify-between border-b-2 border-customGold pb-3 font-bigola text-sm text-customNavy opacity-0 md:mb-0"
             id="about-section"
           >
             <div>

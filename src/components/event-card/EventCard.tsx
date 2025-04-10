@@ -52,7 +52,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
     return createPortal(
       <AnimatePresence>
         {isActive && (
-          <div className="fixed inset-0 z-[200] grid place-items-center bg-black bg-opacity-85 px-6">
+          <div className="fixed inset-0 z-[200] grid place-items-center bg-black bg-opacity-75 px-6 backdrop-blur-sm">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { duration: 0.15 } }}
@@ -72,20 +72,21 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                 onClick={() => setIsActive(false)}
               >
                 <X
-                  size={24}
-                  className="text-customWhite transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+                  size={30}
+                  weight="bold"
+                  className="rounded-full text-customGold transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
                 />
               </IconButton>
             </motion.div>
 
             <motion.div
               layoutId={`card-${event._id}`}
-              className="relative flex h-fit max-h-[85svh] w-full flex-col overflow-y-auto border-2 border-customGold bg-customWhite px-3 pt-3 shadow-md transition-all duration-300 sm:max-h-[90vh] sm:max-w-[475px] md:px-6 md:pt-6"
+              className="relative flex h-fit max-h-[85svh] w-full flex-col overflow-y-auto rounded-md border-2 border-customGold bg-customNavy bg-opacity-35 px-3 pt-3 shadow-md backdrop-blur-sm transition-all duration-300 sm:max-h-[90vh] sm:max-w-[475px] md:px-6 md:pt-6"
             >
               {event.is_photo ? (
                 <motion.div
                   layoutId={`image-${event._id}`}
-                  className="flex-shrink-0"
+                  className="flex-shrink-0 overflow-hidden rounded-md border-2 border-customGold"
                 >
                   <img
                     src={preloadedMedia.src}
@@ -111,7 +112,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
 
               <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="description" className="border-b-2-0">
-                  <AccordionTrigger className="w-full cursor-pointer py-3 text-customNavy">
+                  <AccordionTrigger className="w-full cursor-pointer py-3 text-customCream">
                     <motion.h2
                       layoutId={`title-${event._id}`}
                       className="text-balance pr-6 text-left font-bigola text-lg capitalize md:text-2xl"
@@ -120,7 +121,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                     </motion.h2>
                   </AccordionTrigger>
                   <AccordionContent className="border-customGold">
-                    <motion.div className="flex w-full flex-row justify-between py-3 font-bigola text-customNavy md:text-lg md:leading-[1.15]">
+                    <motion.div className="flex w-full flex-row justify-between py-3 font-bigola text-customCream md:text-lg md:leading-[1.15]">
                       <motion.p layoutId={`date-${event._id}`}>
                         {formattedDate}
                       </motion.p>
@@ -130,7 +131,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                     </motion.div>
                     <motion.p
                       layoutId={`description-${event._id}`}
-                      className="whitespace-pre-wrap pb-3 font-hypatia text-base leading-none text-customNavy md:pb-6 md:text-lg md:leading-[1.15]"
+                      className="whitespace-pre-wrap pb-3 font-hypatia text-base leading-none text-customCream md:pb-6 md:text-lg md:leading-[1.15]"
                     >
                       {event.description}
                     </motion.p>
@@ -172,7 +173,10 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
           </div>
         </div>
         {event.is_photo ? (
-          <motion.div layoutId={`image-${event._id}`} className="flex-shrink-0">
+          <motion.div
+            layoutId={`image-${event._id}`}
+            className="flex-shrink-0 overflow-hidden rounded-md border-2 border-customNavy"
+          >
             <img
               src={preloadedMedia.src}
               alt={event.title}
@@ -180,7 +184,10 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
             />
           </motion.div>
         ) : (
-          <motion.div layoutId={`video-${event._id}`} className="flex-shrink-0">
+          <motion.div
+            layoutId={`video-${event._id}`}
+            className="flex-shrink-0 border-2 border-customNavy"
+          >
             <video
               src={preloadedMedia.src}
               className="aspect-square h-[125px] w-[125px] object-cover object-center md:h-[225px] md:w-[225px] lg:h-[275px] lg:w-[275px]"
