@@ -17,7 +17,7 @@ interface PopupConfig {
   inputStyling?: string;
 }
 
-const SubscribePopup = ({ showDelay = 5000, showInterval = 7 }: PopupConfig) => {
+const SubscribePopup = ({ showDelay = 0, showInterval = 0 }: PopupConfig) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [shouldShow, setShouldShow] = useState<boolean>(false);
@@ -141,7 +141,7 @@ const SubscribePopup = ({ showDelay = 5000, showInterval = 7 }: PopupConfig) => 
           height={500}
           className="h-auto w-full overflow-hidden rounded-md border-2 border-customNavy"
         />
-        <h2 className="text-balance text-center font-bigola text-2xl font-bold text-customNavy sm:text-4xl">
+        <h2 className="text-pretty text-center font-bigola text-3xl font-bold text-customNavy md:text-4xl">
           Get exclusive updates on new beer/wine & events!
         </h2>
         <MailchimpForm setShouldShow={setShouldShow} />
