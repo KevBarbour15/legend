@@ -129,7 +129,7 @@ const SubscribePopup = ({
         <X
           size={30}
           weight="bold"
-          className="text-customCream transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customCream"
+          className="text-customCream drop-shadow-text transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customCream"
         />
       </IconButton>
       <div
