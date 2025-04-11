@@ -263,7 +263,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             </IconButton>
           </div>
           <div
-            className="relative mt-2 hidden h-auto w-full opacity-0 md:block"
+            className="relative mt-2 hidden h-auto w-full opacity-0 drop-shadow-text md:block"
             id="record-player"
           >
             <Image
