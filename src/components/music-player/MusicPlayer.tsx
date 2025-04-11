@@ -323,7 +323,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               backgroundSize: "cover",
             }}
           >
-            <div className="h-full w-full rounded-md border-2 border-customNavy">
+            <div className="h-full w-full rounded-md">
               <Image
                 className="h-auto w-24 p-3 drop-shadow-text md:w-28"
                 src="/images/alt-logo.png"
