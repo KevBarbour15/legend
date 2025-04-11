@@ -312,18 +312,18 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       </div>
       <div
         id="playlist"
-        className="z-10 mb-[70px] rounded-sm px-3 md:fixed md:bottom-0 md:left-[255px] md:mb-0 md:px-0 md:pb-6 md:drop-shadow-recordPlayer"
+        className="z-10 mb-[70px] px-3 drop-shadow-recordPlayer md:fixed md:bottom-0 md:left-[255px] md:mb-0 md:px-0 md:pb-6"
       >
         <Collapse in={playlistVisible}>
           <div
-            className="aspect-square w-full rounded-sm md:h-[425px] md:w-auto"
+            className="aspect-square w-full rounded-md md:h-[425px] md:w-auto"
             style={{
               backgroundImage: "url('/images/album-cover.jpg')",
               backgroundPosition: "center",
               backgroundSize: "cover",
             }}
           >
-            <div className="h-full w-full rounded-sm">
+            <div className="h-full w-full rounded-md border-2 border-customNavy">
               <Image
                 className="h-auto w-24 p-3 drop-shadow-text md:w-28"
                 src="/images/alt-logo.png"
