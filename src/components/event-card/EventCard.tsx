@@ -80,7 +80,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                 <X
                   size={30}
                   weight="bold"
-                  className="rounded-full text-customWhite transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+                  className="rounded-full text-customWhite drop-shadow-text transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
                 />
               </IconButton>
             </motion.div>
@@ -88,7 +88,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
             <motion.div
               ref={containerRef}
               layoutId={`card-${event._id}`}
-              className={`relative flex h-fit max-h-[85svh] w-full flex-col overflow-y-auto rounded-md border-2 ${isActive ? "border-customGold" : "border-transparent"} bg-customNavy bg-opacity-45 px-3 pt-3 shadow-md backdrop-blur-sm transition-all duration-300 sm:max-h-[90vh] sm:max-w-[475px] md:px-6 md:pt-6`}
+              className={`relative flex h-fit max-h-[85svh] w-full flex-col overflow-y-auto rounded-md border-2 ${isActive ? "border-customGold" : "border-transparent"} bg-customNavy bg-opacity-45 px-3 pt-3 drop-shadow-text backdrop-blur-sm transition-all duration-300 sm:max-h-[90vh] sm:max-w-[475px] md:px-6 md:pt-6`}
             >
               {event.is_photo ? (
                 <motion.div

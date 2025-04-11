@@ -135,7 +135,7 @@ const SubscribePopup = ({
       <div
         style={{ display: "none" }}
         ref={containerRef}
-        className="flex h-fit max-h-[85dvh] flex-col gap-3 rounded-md border-2 border-customNavy bg-customWhite bg-opacity-75 p-3 opacity-0 sm:max-h-[90vh] sm:max-w-[450px] sm:p-6"
+        className="flex h-fit max-h-[85dvh] flex-col gap-3 rounded-md border-2 border-customNavy bg-customWhite bg-opacity-75 p-3 opacity-0 drop-shadow-text sm:max-h-[90vh] sm:max-w-[450px] sm:p-6"
       >
         <Image
           src="/images/meta-image.jpg"
