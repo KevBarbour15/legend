@@ -104,7 +104,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               ) : (
                 <motion.div
                   layoutId={`video-${event._id}`}
-                  className="flex-shrink-0"
+                  className="flex-shrink-0 overflow-hidden rounded-md border-2 border-customGold"
                 >
                   <video
                     src={preloadedMedia.src}
@@ -193,7 +193,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
         ) : (
           <motion.div
             layoutId={`video-${event._id}`}
-            className="flex-shrink-0 border-2 border-customNavy"
+            className="flex-shrink-0 overflow-hidden rounded-md border-2 border-customNavy"
           >
             <video
               src={preloadedMedia.src}

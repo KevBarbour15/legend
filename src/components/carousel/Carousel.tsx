@@ -36,14 +36,16 @@ const Carousel: React.FC = () => {
               <div
                 className={`embla__slide__inner h-[250px] w-auto overflow-hidden rounded-md border-y-2 border-customNavy md:h-[500px] ${index === 0 ? "border-r-2" : ""} ${index === slides.length - 1 ? "border-l-2" : ""} ${index !== 0 && index !== slides.length - 1 ? "border-x-2" : ""}`}
               >
-                <img
+                <Image
                   src={src}
                   alt="carousel"
-                  className="h-[250px] md:h-[500px]"
+                  className="h-[250px] w-auto md:h-[500px]"
                   style={{
                     height: "100%",
                     width: "auto",
                   }}
+                  width={1000}
+                  height={1000}
                   loading="lazy"
                 />
               </div>

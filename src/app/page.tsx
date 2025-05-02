@@ -27,6 +27,19 @@ export default function Home() {
   const tl = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
+    /*
+    const updateEventStatus = async () => {
+      try {
+        const response = await fetch("/api/cron/update-event-status");
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    updateEventStatus();
+*/
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
 
@@ -35,10 +48,6 @@ export default function Home() {
       });
     }
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
   }, []);
 
   useGSAP(() => {
