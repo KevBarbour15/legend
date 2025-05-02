@@ -46,7 +46,7 @@ const Carousel: React.FC = () => {
                   }}
                   width={1000}
                   height={1000}
-                  loading="lazy"
+                  loading="eager"
                 />
               </div>
             </div>
