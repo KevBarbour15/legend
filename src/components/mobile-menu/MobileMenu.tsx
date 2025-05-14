@@ -63,7 +63,7 @@ const MobileMenu: React.FC = () => {
     >
       <div className="absolute flex flex-grow flex-col justify-start pl-3 pt-3">
         <Image
-          className="home-logo w-[150px] scale-50 opacity-0 drop-shadow-text md:hidden"
+          className="home-logo drop-shadow-card w-[150px] scale-50 opacity-0 md:hidden"
           src="/images/alt-logo.png"
           alt="Logo"
           height={150}
@@ -108,8 +108,8 @@ const MobileMenu: React.FC = () => {
           title="Google Maps"
         >
           <div
-            id="mobile-menu"
-            className="flex justify-between gap-2 p-0 text-5xl leading-[.7] tracking-tight"
+            id="mobile-menu "
+            className="flex justify-between gap-2 p-0 text-5xl leading-[.7] tracking-tight drop-shadow-text"
           >
             <span>410</span>
             <span>L</span>

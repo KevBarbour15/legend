@@ -159,7 +159,7 @@ export default function Events() {
               </h2>
             </div>
           ) : (
-            <div id="event-tabs" className="w-full pt-3 opacity-0 md:pt-0">
+            <div id="event-tabs" className="w-full pt-6 opacity-0 md:pt-0">
               <Tabs
                 defaultValue="upcoming"
                 className="relative flex w-full flex-col items-center border-0"
