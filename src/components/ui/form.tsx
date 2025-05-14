@@ -116,7 +116,7 @@ const FormControl = React.forwardRef<
 
   return (
     <Slot
-      className="rounded-sm"
+      className="rounded-none"
       ref={ref}
       id={formItemId}
       aria-describedby={

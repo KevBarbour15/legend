@@ -65,12 +65,13 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
           ref={formRef}
           id="general-form"
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex w-full flex-col space-y-3 opacity-0 md:w-[550px]"
+          className="flex w-full flex-col space-y-3 opacity-0 md:w-[550px] lg:w-[650px]"
         >
-          <p className="text-pretty font-hypatia text-lg leading-[1.15] text-customNavy">
-            Thank you for reaching out to Legend Has It. Please take a minute
-            and fill out the form below to give us a better understanding of how
-            we can help.
+          <p className="text-pretty text-center font-hypatia text-lg leading-[1.15] text-customNavy drop-shadow-text">
+            Thank you for reaching out to{" "}
+            <span className="font-bigola">Legend Has It</span>. Please take a
+            minute and fill out the form below to give us a better understanding
+            of how we can help.
           </p>
 
           <FormField
@@ -78,10 +79,10 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             name="name"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel className="font-bigola text-customNavy">
+                <FormLabel className="font-bigola text-customNavy drop-shadow-text">
                   Name
                 </FormLabel>
-                <FormControl className="border-2 border-customNavy font-hypatia text-customNavy">
+                <FormControl className="drop-shadow-card border border-customNavy bg-customCream font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input {...field} />
                 </FormControl>
                 <FormMessage />
@@ -94,10 +95,10 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             name="email"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel className="font-bigola text-customNavy">
+                <FormLabel className="font-bigola text-customNavy drop-shadow-text">
                   Email
                 </FormLabel>
-                <FormControl className="border-2 border-customNavy font-hypatia text-customNavy">
+                <FormControl className="drop-shadow-card border border-customNavy bg-customCream font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input type="email" {...field} />
                 </FormControl>
                 <FormMessage />
@@ -109,10 +110,10 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             name="phone"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel className="font-bigola text-customNavy">
+                <FormLabel className="font-bigola text-customNavy drop-shadow-text">
                   Phone
                 </FormLabel>
-                <FormControl className="border-2 border-customNavy font-hypatia text-customNavy">
+                <FormControl className="drop-shadow-card border border-customNavy bg-customCream font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input type="tel" {...field} />
                 </FormControl>
                 <FormMessage />
@@ -125,10 +126,10 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             name="message"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel className="font-bigola text-customNavy">
+                <FormLabel className="font-bigola text-customNavy drop-shadow-text">
                   Message
                 </FormLabel>
-                <FormControl className="border-2 border-customNavy font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl className="drop-shadow-card border border-customNavy bg-customCream font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Textarea {...field} />
                 </FormControl>
                 <FormMessage />
@@ -137,7 +138,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
           />
           <Button
             type="submit"
-            className="mx-auto rounded-sm border-2 border-customNavy bg-transparent font-bigola text-base text-customNavy backdrop-blur-sm transition-all duration-300 active:bg-customNavy active:text-customCream sm:w-fit md:hover:bg-customNavy md:hover:text-customCream"
+            className="drop-shadow-card mx-auto rounded-none border border-customNavy bg-customCream font-bigola text-customNavy backdrop-blur-sm transition-all duration-300 active:bg-customNavy active:text-customCream sm:w-fit md:hover:bg-customNavy md:hover:text-customCream"
           >
             Submit
           </Button>

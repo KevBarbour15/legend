@@ -171,7 +171,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         className="fixed bottom-0 left-0 right-0 mx-3 mb-3 flex flex-col md:mb-6 md:ml-6 md:mr-0 md:w-fit md:flex-row"
       >
         <div className="w-full md:w-fit">
-          <div className="buttons-container z-[11] flex justify-between rounded-sm bg-opacity-10 py-2 md:gap-2 md:bg-opacity-0 md:py-1">
+          <div className="buttons-container z-[11] flex justify-between rounded-none bg-opacity-5 py-2 md:gap-2 md:bg-opacity-0 md:py-1">
             <IconButton
               className={`player-button p-1 ${buttonColor} backdrop-blur-md md:backdrop-blur-0`}
               aria-label={mute ? "Unmute" : "Mute"}
@@ -180,7 +180,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                 <SpeakerSlash
                   weight="regular"
                   onClick={handleMute}
-                  className="transition-all md:hover:text-customGold"
+                  className="drop-shadow-text transition-all md:hover:text-customGold"
                   aria-hidden="true"
                   size={visible ? 24 : 30}
                 />
@@ -188,7 +188,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                 <SpeakerSimpleHigh
                   weight="regular"
                   onClick={handleMute}
-                  className="transition-all md:hover:text-customGold"
+                  className="drop-shadow-text transition-all md:hover:text-customGold"
                   aria-hidden="true"
                   size={visible ? 24 : 30}
                 />
@@ -201,7 +201,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             >
               <SkipBack
                 weight="regular"
-                className="transition-all md:hover:text-customGold"
+                className="drop-shadow-text transition-all md:hover:text-customGold"
                 aria-hidden="true"
                 size={visible ? 24 : 30}
               />
@@ -215,14 +215,14 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               {playing ? (
                 <Pause
                   weight="regular"
-                  className="transition-all md:hover:text-customGold"
+                  className="drop-shadow-text transition-all md:hover:text-customGold"
                   aria-hidden="true"
                   size={visible ? 24 : 30}
                 />
               ) : (
                 <Play
                   weight="regular"
-                  className="transition-all md:hover:text-customGold"
+                  className="drop-shadow-text transition-all md:hover:text-customGold"
                   aria-hidden="true"
                 />
               )}
@@ -234,7 +234,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             >
               <SkipForward
                 weight="regular"
-                className="transition-all md:hover:text-customGold"
+                className="drop-shadow-text transition-all md:hover:text-customGold"
                 aria-hidden="true"
                 size={visible ? 24 : 30}
               />
@@ -248,14 +248,14 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               {playlistVisible ? (
                 <X
                   weight="regular"
-                  className="transition-all md:hover:text-customGold"
+                  className="drop-shadow-text transition-all md:hover:text-customGold"
                   aria-hidden="true"
                   size={visible ? 24 : 30}
                 />
               ) : (
                 <VinylRecord
                   weight="regular"
-                  className="transition-all md:hover:text-customGold"
+                  className="drop-shadow-text transition-all md:hover:text-customGold"
                   aria-hidden="true"
                   size={visible ? 24 : 30}
                 />
@@ -302,7 +302,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                 height: "auto",
                 width: "100%",
               }}
-              className="rounded-sm drop-shadow-recordPlayer"
+              className="rounded-none drop-shadow-recordPlayer"
               src="/images/record-player.jpg"
               alt="Record"
               priority={true}

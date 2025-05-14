@@ -12,10 +12,12 @@ const Loading: React.FC<LoadingProps> = ({
     <div
       className={`z-20 flex h-[50vh] w-full flex-col items-center justify-center ${textColor}`}
     >
-      <h2 className="mb-3 text-center text-3xl md:text-4xl">{message}</h2>
+      <h2 className="mb-3 text-center text-3xl drop-shadow-text md:text-4xl">
+        {message}
+      </h2>
       <Progress
         value={progress}
-        className={`w-[75vw] max-w-[350px] ${borderColor}`}
+        className={`drop-shadow-card w-[75vw] max-w-[350px] border ${borderColor}`}
       />
     </div>
   );

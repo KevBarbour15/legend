@@ -17,6 +17,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+import Image from "next/image";
+
 const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
   const [isActive, setIsActive] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -58,7 +60,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
     return createPortal(
       <AnimatePresence>
         {isActive && (
-          <div className="fixed inset-0 z-[200] grid place-items-center bg-black bg-opacity-65 px-6 backdrop-blur-sm">
+          <div className="drop-shadow-card fixed inset-0 z-[200] grid place-items-center bg-black/15 px-6 backdrop-blur-sm">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { duration: 0.15 } }}
@@ -72,15 +74,11 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               exit={{ opacity: 0, transition: { duration: 0.15 } }}
               className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full md:right-6 md:top-6"
             >
-              <IconButton
-                aria-label="Close Modal"
-                className="p-0"
-                onClick={handleCloseCard}
-              >
+              <IconButton aria-label="Close Modal" onClick={handleCloseCard}>
                 <X
                   size={30}
                   weight="bold"
-                  className="rounded-full text-customWhite drop-shadow-text transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+                  className="rounded-full text-customCream drop-shadow-text transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
                 />
               </IconButton>
             </motion.div>
@@ -88,23 +86,27 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
             <motion.div
               ref={containerRef}
               layoutId={`card-${event._id}`}
-              className={`relative flex h-fit max-h-[85svh] w-full flex-col overflow-y-auto rounded-md border-2 ${isActive ? "border-customGold" : "border-transparent"} bg-customNavy bg-opacity-45 px-3 pt-3 drop-shadow-text backdrop-blur-sm transition-all duration-300 sm:max-h-[90vh] sm:max-w-[475px] md:px-6 md:pt-6`}
+              className={`relative flex h-fit max-h-[85dvh] w-full flex-col overflow-y-auto border px-3 pt-3 text-customNavy shadow-2xl ${isActive ? "border-customNavy" : "border-transparent"} bg-customCream backdrop-blur-sm transition-all duration-300 sm:max-h-[90vh] sm:max-w-[475px]`}
             >
               {event.is_photo ? (
                 <motion.div
                   layoutId={`image-${event._id}`}
-                  className="flex-shrink-0 overflow-hidden rounded-md border-2 border-customGold"
+                  className="flex-shrink-0 overflow-hidden border border-customNavy"
                 >
-                  <img
+                  <Image
                     src={preloadedMedia.src}
                     alt={event.title}
+                    width={475}
+                    height={475}
+                    unoptimized
+                    priority
                     className="aspect-square h-auto w-full object-cover object-center md:aspect-auto md:max-h-[475px]"
                   />
                 </motion.div>
               ) : (
                 <motion.div
                   layoutId={`video-${event._id}`}
-                  className="flex-shrink-0 overflow-hidden rounded-md border-2 border-customGold"
+                  className="flex-shrink-0 overflow-hidden border border-customNavy"
                 >
                   <video
                     src={preloadedMedia.src}
@@ -118,17 +120,17 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               )}
 
               <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="description" className="border-b-2-0">
-                  <AccordionTrigger className="w-full cursor-pointer py-3 text-customWhite">
-                    <motion.h2
+                <AccordionItem value="description">
+                  <AccordionTrigger className="w-full cursor-pointer pt-3">
+                    <motion.h1
                       layoutId={`title-${event._id}`}
-                      className="text-balance pr-6 text-left font-bigola text-lg capitalize md:text-2xl"
+                      className="text-balance pr-6 text-left font-bigola text-2xl capitalize"
                     >
                       {event.title}
-                    </motion.h2>
+                    </motion.h1>
                   </AccordionTrigger>
                   <AccordionContent className="border-customGold">
-                    <motion.div className="flex w-full flex-row justify-between py-3 font-bigola text-customWhite md:text-lg md:leading-[1.15]">
+                    <motion.div className="flex w-full flex-row justify-between py-3 font-bigola text-lg md:leading-[1.15]">
                       <motion.p layoutId={`date-${event._id}`}>
                         {formattedDate}
                       </motion.p>
@@ -138,7 +140,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                     </motion.div>
                     <motion.p
                       layoutId={`description-${event._id}`}
-                      className="whitespace-pre-wrap pb-3 font-hypatia text-base leading-none text-customWhite md:pb-6 md:text-lg md:leading-[1.15]"
+                      className="whitespace-pre-wrap pb-6 font-hypatia text-base leading-none md:text-lg md:leading-[1.15]"
                     >
                       {event.description}
                     </motion.p>
@@ -160,40 +162,44 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       <motion.div
         layoutId={`card-${event._id}`}
         onClick={handleCardClick}
-        className="flex h-full cursor-pointer justify-between overflow-hidden py-3"
+        className="drop-shadow-card flex h-full cursor-pointer justify-between rounded-none border border-customNavy bg-customCream p-3"
       >
-        <div className="flex h-auto w-full min-w-0 flex-col justify-between pr-3 md:pr-6">
-          <motion.p
-            className="font-bigola text-lg leading-none text-customNavy md:text-2xl"
+        <div className="flex h-auto w-full min-w-0 flex-col justify-between pr-3 text-customNavy lg:pr-6">
+          <motion.h2
+            className="font-bigola text-lg leading-none md:text-2xl"
             layoutId={`date-${event._id}`}
           >
             {formattedDate}
-          </motion.p>
+          </motion.h2>
 
           <div className="relative">
-            <motion.h2
+            <motion.h1
               layoutId={`title-${event._id}`}
-              className="line-clamp-2 text-balance font-bigola text-2xl capitalize leading-none text-customNavy md:text-4xl lg:text-6xl"
+              className="font-bigola text-2xl capitalize leading-none md:text-4xl lg:text-6xl"
             >
               {event.title}
-            </motion.h2>
+            </motion.h1>
           </div>
         </div>
         {event.is_photo ? (
           <motion.div
             layoutId={`image-${event._id}`}
-            className="flex-shrink-0 overflow-hidden rounded-md border-2 border-customNavy"
+            className="flex-shrink-0 overflow-hidden rounded-none border border-customNavy"
           >
-            <img
+            <Image
               src={preloadedMedia.src}
               alt={event.title}
+              width={275}
+              height={275}
+              unoptimized
+              priority
               className="aspect-square h-[125px] w-[125px] object-cover object-center md:h-[225px] md:w-[225px] lg:h-[275px] lg:w-[275px]"
             />
           </motion.div>
         ) : (
           <motion.div
             layoutId={`video-${event._id}`}
-            className="flex-shrink-0 overflow-hidden rounded-md border-2 border-customNavy"
+            className="flex-shrink-0 overflow-hidden rounded-none border border-customNavy"
           >
             <video
               src={preloadedMedia.src}

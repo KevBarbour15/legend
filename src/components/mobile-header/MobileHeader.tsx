@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Menu from "@/components/dropdown-menu/DropdownMenu";
 
 import { List } from "@phosphor-icons/react";
-
+import Image from "next/image";
 import { IconButton } from "@mui/material";
 
 import gsap from "gsap";
@@ -42,16 +42,24 @@ const MobileHeader: React.FC = () => {
         ref={containerRef}
         className={`${
           pathname === "/" ? "hidden" : ""
-        } z-[150] flex w-full px-3 text-customNavy md:hidden ${pathname === "/dashboard" ? "hidden" : ""}`}
+        } drop-shadow-card fixed z-[150] flex h-16 w-full rounded-b-md bg-customNavy px-3 text-customCream md:hidden ${pathname === "/dashboard" ? "hidden" : ""}`}
       >
         <div
           id="mobile-heading"
-          className="m-auto flex w-full items-center justify-between border-b-2 border-customGold py-3 opacity-0"
+          className="m-auto flex w-full items-center justify-between opacity-0"
         >
-          <span className="font-bigola text-xl capitalize">{pageName}</span>
+          <div className="h-16 py-3">
+            <Image
+              src="/images/alt-logo.png"
+              alt="Legend Has It"
+              className="h-full w-auto"
+              width={100}
+              height={100}
+            />
+          </div>
           <IconButton
             onClick={toggleMenu}
-            className="bg-transparent p-0 text-customNavy"
+            className="bg-transparent p-0 text-customCream"
           >
             <List weight="regular" size={28} />
           </IconButton>

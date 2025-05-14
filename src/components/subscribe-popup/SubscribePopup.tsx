@@ -78,13 +78,14 @@ const SubscribePopup = ({
       })
       .set(containerRef.current, {
         display: "flex",
-        y: 25,
+        y: 50,
       })
       .to(containerRef.current, {
         delay: 0.15,
         opacity: 1,
-        duration: 0.25,
+        duration: 0.3,
         y: 0,
+        ease: "back.out(1.7)",
       });
   }, []);
 
@@ -119,7 +120,7 @@ const SubscribePopup = ({
     <div
       style={{ display: "none" }}
       ref={overlayRef}
-      className="fixed inset-0 z-[1000] h-full w-full items-center justify-center bg-black bg-opacity-75 p-3 px-6 opacity-0 backdrop-blur-sm"
+      className="fixed inset-0 z-[1000] h-full w-full items-center justify-center bg-black/15 p-3 px-6 opacity-0 backdrop-blur-sm"
     >
       <IconButton
         aria-label="Close Modal"
@@ -129,20 +130,20 @@ const SubscribePopup = ({
         <X
           size={30}
           weight="bold"
-          className="text-customCream drop-shadow-text transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customCream"
+          className="drop-shadow-card text-customGold transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customNavy"
         />
       </IconButton>
       <div
         style={{ display: "none" }}
         ref={containerRef}
-        className="flex h-fit max-h-[85dvh] flex-col gap-3 rounded-md border-2 border-customNavy bg-customWhite bg-opacity-75 p-3 opacity-0 drop-shadow-text sm:max-h-[90vh] sm:max-w-[450px] sm:p-6"
+        className="drop-shadow-card flex h-fit max-h-[85dvh] flex-col gap-3 border border-customNavy bg-customCream p-3 opacity-0 sm:max-h-[90vh] sm:max-w-[450px] sm:p-6"
       >
         <Image
           src="/images/meta-image.jpg"
           alt="Subscribe Image"
           width={500}
           height={500}
-          className="h-auto w-full overflow-hidden rounded-md border-2 border-customNavy"
+          className="h-auto w-full overflow-hidden border border-customNavy"
         />
         <h2 className="text-pretty text-center font-bigola text-3xl font-bold text-customNavy md:text-4xl">
           Get exclusive updates on new beer/wine & events!

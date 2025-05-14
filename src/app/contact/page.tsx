@@ -11,6 +11,8 @@ import { useToast } from "@/hooks/use-toast";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { SplitText } from "gsap/SplitText";
+gsap.registerPlugin(SplitText);
 
 import {
   FormData,
@@ -32,11 +34,27 @@ export default function Contact() {
 
   useGSAP(() => {
     if (!containerRef.current) return;
+    const splitText = new SplitText("#heading", { type: "words" });
+
+    const tl = gsap.timeline();
+    tl.set(splitText.words, { opacity: 0, x: -25 })
+      .set("#heading", { opacity: 1 })
+      .to(
+        splitText.words,
+        {
+          duration: 0.35,
+          ease: "back.out(1.7)",
+          x: 0,
+          opacity: 1,
+          stagger: 0.025,
+        },
+        0.15,
+      );
 
     gsap.fromTo(
       "#tabs-container",
       { opacity: 0 },
-      { opacity: 1, duration: 0.025, delay: 0 },
+      { opacity: 1, duration: 0.025, delay: 0.1 },
     );
   }, []);
 
@@ -112,8 +130,14 @@ export default function Contact() {
   return (
     <>
       <AudioStatic />
-      <div ref={containerRef} className="min-h-dvh w-screen">
-        <div className="mx-auto flex flex-col items-center justify-center overflow-y-auto px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
+      <div ref={containerRef} className="min-h-dvh w-screen pt-16 md:pt-0">
+        <div className="mx-auto flex flex-col items-center justify-center overflow-y-auto px-3 pb-20 md:px-0 md:pb-10 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
+          <h1
+            id="heading"
+            className="mt-6 w-full pb-3 font-bigola text-5xl text-customNavy opacity-0 drop-shadow-text sm:text-6xl md:mt-0 md:text-center md:text-7xl"
+          >
+            Sound Off - Say Hello!
+          </h1>
           <Tabs
             defaultValue="event"
             className="flex w-full flex-col items-center"
@@ -121,7 +145,7 @@ export default function Contact() {
           >
             <TabsList
               id="tabs-container"
-              className="my-3 grid w-full grid-cols-3 bg-transparent font-bigola opacity-0 md:mb-6 md:mt-0 md:w-fit"
+              className="mb-6 grid w-full grid-cols-3 border-b-2 border-customGold py-3 font-bigola opacity-0 md:mb-10 md:mt-0 md:w-fit"
             >
               <TabsTrigger value="event">
                 Event <span className="md:flex">&nbsp;Inquiry</span>

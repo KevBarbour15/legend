@@ -130,10 +130,14 @@ const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
     <div className="menu-container" ref={containerRef}>
       <div className="menu-overlay">
         <div className="menu-static" ref={staticRef}></div>
-        <X weight="regular" className="menu-close-icon" onClick={toggleMenu} />
+        <X
+          weight="regular"
+          className="menu-close-icon drop-shadow-card"
+          onClick={toggleMenu}
+        />
         <div className="menu-logo-container">
           <Image
-            className="menu-logo-icon"
+            className="menu-logo-icon drop-shadow-card"
             src="/images/alt-logo.png"
             alt="Legend Has It logo"
             width={200}
@@ -146,7 +150,7 @@ const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
           <div className="menu-links">
             {links.map((link, idx) => (
               <div className="menu-link-item" key={idx}>
-                <div className="menu-link-item-holder">
+                <div className="menu-link-item-holder drop-shadow-card">
                   <a
                     href={link.path}
                     className="menu-link"
@@ -162,9 +166,9 @@ const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
           </div>
         </div>
         <div className="menu-info-container">
-          <div className="menu-info-row opacity-0">
+          <div className="menu-info-row drop-shadow-card opacity-0">
             <a
-              href="https://open.spotify.com/user/31pcq2fnwyxprxppy4ezl3v3evaq"
+              href="https://open.spotify.com/user/31pcq2fnwyxprxppy4ezl3v3evaq "
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Follow Legend Has It on Spotify"

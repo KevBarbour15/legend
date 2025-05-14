@@ -7,15 +7,7 @@ import ImageCarousel from "@/components/carousel/Carousel";
 import SideMenu from "@/components/side-menu/SideMenu";
 import MobileMenu from "@/components/mobile-menu/MobileMenu";
 import AudioStatic from "@/components/audio-static/AudioStatic";
-
-import { Copyright, Phone, Key } from "@phosphor-icons/react";
-
-import { FaYelp, FaYoutube, FaFacebook, FaSpotify } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
-import { AiFillInstagram } from "react-icons/ai";
-
-import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import MailchimpForm from "@/components/mailchimp-form/MailchimpForm";
+import Footer from "@/components/footer/Footer";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -148,26 +140,27 @@ export default function Home() {
         <div className="top-bg h-dvh w-screen"></div>
         <div
           id="about-content"
-          className="relative mx-auto block h-auto p-3 md:py-6 md:pl-[258px] md:pr-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
+          className="relative mx-auto block h-auto md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
         >
           <div
             id="about-section"
-            className="aspect-video w-full overflow-hidden rounded-md border-2 border-customNavy opacity-0"
+            className="aspect-video w-full px-3 opacity-0 md:px-0"
           >
             <Image
               src="/images/about-image.jpg"
-              className="object-cover object-center"
-              fill
+              className="drop-shadow-card h-full w-full border border-customNavy object-cover object-center"
+              height={1500}
+              width={1500}
               alt="Grand Opening"
               priority={true}
               loading="eager"
             />
           </div>
 
-          <div className="font-hypatia text-lg text-customNavy md:text-xl">
+          <div className="px-3 font-hypatia text-lg text-customNavy md:px-0 md:text-xl">
             <p
               id="about-section"
-              className="my-6 text-pretty leading-[1.15] opacity-0"
+              className="my-6 text-pretty leading-[1.15] opacity-0 drop-shadow-text"
             >
               Welcome to Legend Has It, Sacramento's first hi-fi listening bar,
               where music meets the art of sound. We offer an immersive
@@ -176,12 +169,12 @@ export default function Home() {
             </p>
             <p
               id="about-section"
-              className="text-pretty leading-[1.15] opacity-0"
+              className="text-pretty leading-[1.15] opacity-0 drop-shadow-text"
             >
               We curate a space where the ordinary becomes extraordinary. We
-              don’t just play sound; we make you feel it. Every beat, every
+              don't just play sound; we make you feel it. Every beat, every
               conversation, every moment crafted to build something deeper,
-              something unforgettable. It’s not about passing the time; it’s
+              something unforgettable. It's not about passing the time; it's
               about engaging with the energy of the room, the people, and the
               music. We foster transformation in the quiet moments and
               connection in the noise. Here, the world slows down, and every
@@ -189,7 +182,7 @@ export default function Home() {
               you long after the night ends.
             </p>
           </div>
-          <div className="mt-3 block py-6 font-bigola text-xl text-customNavy md:mb-0 md:text-3xl">
+          <div className="mt-3 block px-3 py-6 font-bigola text-xl text-customNavy drop-shadow-text md:mb-0 md:px-0 md:text-3xl">
             <h2 id="about-section" className="mb-3 opacity-0 md:mb-6">
               Regular Hours
             </h2>
@@ -231,13 +224,13 @@ export default function Home() {
             </p>
           </div>
 
-          <div id="about-section" className="opacity-0">
+          <div id="about-section" className="overflow-hidden opacity-0">
             <ImageCarousel />
           </div>
 
           <div
             id="about-section"
-            className="hidden pb-6 pt-3 opacity-0 md:block"
+            className="drop-shadow-card mb-12 mt-3 hidden opacity-0 md:block"
           >
             <iframe
               title="Spotify Playlist"
@@ -249,108 +242,7 @@ export default function Home() {
               className="h-[352px] w-full"
             ></iframe>
           </div>
-
-          <div
-            className="flex flex-col-reverse items-center gap-3 border-t-2 border-customGold py-3 opacity-0 md:flex-row md:gap-0"
-            id="about-section"
-          >
-            <div className="flex w-full md:basis-1/2">
-              <MailchimpForm setShouldShow={() => {}} />
-            </div>
-
-            <div className="flex w-full basis-1/2 justify-start gap-3 md:justify-end">
-              <a
-                className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
-                href="https://open.spotify.com/user/31pcq2fnwyxprxppy4ezl3v3evaq"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Follow Legend Has It on Spotify"
-                title="Follow us on Spotify"
-              >
-                <FaSpotify size={32} />
-              </a>
-
-              <a
-                className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
-                href="https://www.instagram.com/legendhasithifi/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Follow Legend Has It on Instagram"
-                title="Follow us on Instagram"
-              >
-                <AiFillInstagram size={32} />
-              </a>
-
-              <a
-                className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
-                href="https://www.facebook.com/legendhasithifi"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Follow Legend Has It on Facebook"
-                title="Follow us on Facebook"
-              >
-                <FaFacebook size={32} />
-              </a>
-
-              <a
-                className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
-                href="https://www.youtube.com/@legendhasithifi"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Follow Legend Has It on YouTube"
-                title="Follow us on YouTube"
-              >
-                <FaYoutube size={32} />
-              </a>
-              <a
-                className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
-                href="https://www.yelp.com/biz/legend-has-it-sacramento"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Follow Legend Has It on Yelp"
-                title="Follow us on Yelp"
-              >
-                <FaYelp size={32} />
-              </a>
-              <a
-                className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
-                href="https://x.com/legendhasithifi"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Follow Legend Has It on X"
-                title="Follow us on X"
-              >
-                <FaXTwitter size={32} />
-              </a>
-            </div>
-          </div>
-          <div
-            className="mb-16 flex w-full justify-between border-b-2 border-customGold pb-3 font-bigola text-sm text-customNavy opacity-0 md:mb-0"
-            id="about-section"
-          >
-            <div>
-              <a
-                href="tel:+19166627942"
-                className="flex items-center gap-1 transition-all duration-300 active:text-customGold md:hover:text-customGold"
-              >
-                <Phone weight="regular" />
-                (916) 662-7942
-              </a>
-
-              <span className="flex items-center gap-1">
-                <Copyright weight="regular" /> 2024 Legend Has It
-              </span>
-            </div>
-            <div className="flex items-end">
-              <LoginLink
-                postLoginRedirectURL="/dashboard"
-                className="flex items-center gap-1 transition-all duration-300 active:text-customGold md:hover:text-customGold"
-              >
-                Owner Login
-                <Key weight="regular" />
-              </LoginLink>
-            </div>
-          </div>
+          <Footer />
         </div>
       </div>
     </>

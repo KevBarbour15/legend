@@ -22,7 +22,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border-2 border-stone-200 bg-transparent px-3 py-2 text-base shadow-sm ring-offset-customWhite focus:outline-none focus:ring-1 focus:ring-stone-950 disabled:cursor-not-allowed disabled:opacity-50 data-[placeholder]:text-stone-500 dark:border-stone-800 dark:ring-offset-stone-950 dark:focus:ring-stone-300 dark:data-[placeholder]:text-stone-400 [&>span]:line-clamp-1",
+      "flex h-9 w-full items-center justify-between whitespace-nowrap border px-3 py-2 text-base transition-all duration-300 data-[placeholder]:text-stone-500 dark:data-[placeholder]:text-stone-400 lg:hover:rounded-2xl [&>span]:line-clamp-1",
       className,
     )}
     {...props}
@@ -121,7 +121,7 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-stone-100 focus:text-stone-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-stone-800 dark:focus:text-stone-50",
+      "relative flex w-full cursor-default select-none items-center rounded-none py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-stone-100 focus:text-stone-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-stone-800 dark:focus:text-stone-50",
       className,
     )}
     {...props}

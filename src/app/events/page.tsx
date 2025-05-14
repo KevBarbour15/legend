@@ -141,7 +141,7 @@ export default function Events() {
   return (
     <>
       <AudioStatic />
-      <div ref={containerRef}>
+      <div ref={containerRef} className="pt-16 md:pt-0">
         <div className="mx-auto flex flex-col items-center justify-center overflow-y-auto px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
           {loading ? (
             <div className="font-bigola">
@@ -167,7 +167,7 @@ export default function Events() {
                   setActiveTab(value as "upcoming" | "past")
                 }
               >
-                <TabsList className="top-0 mb-3 grid w-full grid-cols-2 bg-transparent font-bigola md:mb-6 md:mt-0 md:w-[400px]">
+                <TabsList className="top-0 mb-6 grid w-full grid-cols-2 bg-transparent font-bigola md:mt-0 md:w-[400px]">
                   <TabsTrigger value="upcoming">Upcoming Events</TabsTrigger>
                   <TabsTrigger value="past">Past Events</TabsTrigger>
                 </TabsList>

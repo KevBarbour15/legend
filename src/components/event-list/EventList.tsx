@@ -19,7 +19,7 @@ export default function EventList({
     : "No past events found.";
 
   return events.length > 0 ? (
-    <div className="mb-6">
+    <div className="flex flex-col gap-6">
       {events.map((event, idx) => (
         <div className="w-full" key={event._id}>
           <div
@@ -28,7 +28,7 @@ export default function EventList({
                 eventRefs.current[idx] = el;
               }
             }}
-            className={`mx-auto w-full border-t-2 border-customGold opacity-0 ${idx === events.length - 1 ? "border-b-2" : ""}`}
+            className={`mx-auto w-full opacity-0`}
           >
             <EventCard
               key={idx}

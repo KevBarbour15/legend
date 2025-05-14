@@ -1,38 +1,17 @@
 "use client";
 
-import {
-  InstagramLogo,
-  FacebookLogo,
-  YoutubeLogo,
-  Copyright,
-  Phone,
-  Key,
-  TidalLogo,
-  SpotifyLogo,
-} from "@phosphor-icons/react";
+import { Copyright, Phone, Key } from "@phosphor-icons/react";
 
-import { Button } from "@/components/ui/button";
+import { FaYelp, FaYoutube, FaFacebook, FaSpotify } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { AiFillInstagram } from "react-icons/ai";
 
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
-
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
+import MailchimpForm from "@/components/mailchimp-form/MailchimpForm";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { mailchimpFormSchema, MailchimpFormData } from "@/data/forms";
-
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-
-import { Input } from "@/components/ui/input";
 
 const Footer = () => {
   const form = useForm<MailchimpFormData>({
@@ -42,67 +21,14 @@ const Footer = () => {
     },
   });
 
-  const onSubmit = async (values: MailchimpFormData) => {
-    try {
-      const response = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: values.email,
-        }),
-      });
-
-      if (response.ok) {
-        form.reset();
-      } else {
-        const errorData = await response.json();
-        console.error("Failed to subscribe to Mailchimp:", errorData.error);
-      }
-    } catch (error) {
-      console.error("Error subscribing to Mailchimp:", error);
-    }
-  };
-
   return (
-    <footer className="mx-auto w-full py-6 md:pl-[258px] md:pr-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
-      <div
-        className="flex flex-col-reverse items-center gap-3 pb-3 md:flex-row md:gap-0"
-        id="about-section"
-      >
+    <footer className="drop-shadow-card rounded-t-lg border-x border-t border-customNavy bg-customCream p-3 pt-6 md:p-6">
+      <div className="flex flex-col-reverse items-center gap-6 lg:flex-row lg:gap-0">
         <div className="flex w-full md:basis-1/2">
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="flex h-full grow flex-row gap-3 font-hypatia"
-            >
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem className="grow">
-                    <FormControl className="border-2 border-customNavy font-hypatia text-customNavy backdrop-blur-sm">
-                      <Input
-                        {...field}
-                        placeholder="Enter email to receive exclusive updates..."
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button
-                type="submit"
-                className="rounded-sm border-2 border-customNavy bg-transparent font-bigola text-customNavy backdrop-blur-sm transition-all duration-300 ease-in-out hover:bg-customNavy hover:text-customCream active:bg-customNavy active:text-customCream"
-              >
-                Subscribe
-              </Button>
-            </form>
-          </Form>
+          <MailchimpForm setShouldShow={() => {}} />
         </div>
 
-        <div className="flex w-full basis-1/2 justify-start gap-3 md:justify-end">
+        <div className="flex w-full basis-1/2 justify-start gap-6 md:justify-end">
           <a
             className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
             href="https://open.spotify.com/user/31pcq2fnwyxprxppy4ezl3v3evaq"
@@ -111,18 +37,7 @@ const Footer = () => {
             aria-label="Follow Legend Has It on Spotify"
             title="Follow us on Spotify"
           >
-            <SpotifyLogo size={40} weight="regular" />
-          </a>
-
-          <a
-            className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
-            href="https://listen.tidal.com/user/199890881"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Follow Legend Has It on Tidal"
-            title="Follow us on Tidal"
-          >
-            <TidalLogo size={40} weight="regular" />
+            <FaSpotify size={32} />
           </a>
 
           <a
@@ -133,7 +48,7 @@ const Footer = () => {
             aria-label="Follow Legend Has It on Instagram"
             title="Follow us on Instagram"
           >
-            <InstagramLogo size={40} weight="regular" />
+            <AiFillInstagram size={32} />
           </a>
 
           <a
@@ -144,7 +59,7 @@ const Footer = () => {
             aria-label="Follow Legend Has It on Facebook"
             title="Follow us on Facebook"
           >
-            <FacebookLogo size={40} weight="regular" />
+            <FaFacebook size={32} />
           </a>
 
           <a
@@ -155,14 +70,31 @@ const Footer = () => {
             aria-label="Follow Legend Has It on YouTube"
             title="Follow us on YouTube"
           >
-            <YoutubeLogo size={40} weight="regular" />
+            <FaYoutube size={32} />
+          </a>
+          <a
+            className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+            href="https://www.yelp.com/biz/legend-has-it-sacramento"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Follow Legend Has It on Yelp"
+            title="Follow us on Yelp"
+          >
+            <FaYelp size={32} />
+          </a>
+          <a
+            className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+            href="https://x.com/legendhasithifi"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Follow Legend Has It on X"
+            title="Follow us on X"
+          >
+            <FaXTwitter size={32} />
           </a>
         </div>
       </div>
-      <div
-        className="mb-16 flex w-full justify-between border-t-2 border-customNavy pt-3 font-bigola text-sm text-customNavy md:mb-0"
-        id="about-section"
-      >
+      <div className="mb-16 mt-6 flex w-full justify-between font-bigola text-sm text-customNavy md:mb-0">
         <div>
           <a
             href="tel:+19166627942"

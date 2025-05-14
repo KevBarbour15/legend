@@ -96,7 +96,7 @@ const Menu: React.FC = ({}) => {
     if (loading || !containerRef.current) return;
 
     const tl = gsap.timeline({ delay: 0.25 });
-    const splitText = new SplitText("#menu-heading", { type: "chars" });
+    const heading = new SplitText("#menu-heading", { type: "words" });
 
     tl.set("#menu", {
       opacity: 0,
@@ -104,35 +104,41 @@ const Menu: React.FC = ({}) => {
       .set("#menu-heading", {
         opacity: 1,
       })
-      .set(splitText.chars, {
-        //opacity: 0,
-        scaleY: 0,
-        scaleX: 0,
+
+      .set(heading.words, {
+        opacity: 0,
+        x: -25,
       })
       .set(menuItemRefs.current, {
         opacity: 0,
         y: 25,
       })
+      .to(heading.words, {
+        x: 0,
+        duration: 0.3,
+        ease: "back.out(1.7)",
+        opacity: 1,
+        stagger: 0.025,
+      })
+      .to(
+        "#menu-subheading",
+        {
+          duration: 0.3,
+          opacity: 1,
+        },
+        "<",
+      )
       .to("#menu", {
         opacity: 1,
-        duration: 0.15,
+        duration: 0.025,
       })
       .to(menuItemRefs.current, {
-        delay: 0.05,
+        delay: 0.025,
         y: 0,
         duration: 0.3,
         stagger: 0.075,
         ease: "back.out(2.5)",
         opacity: 1,
-      })
-      .to(splitText.chars, {
-        delay: 0.15,
-        scaleY: 1,
-        scaleX: 1,
-        opacity: 1,
-        duration: 0.4,
-        ease: "bounce.out(4)",
-        stagger: { amount: 0.2, from: "random" },
       });
   }, [loading]);
 
@@ -147,19 +153,49 @@ const Menu: React.FC = ({}) => {
     switch (categoryName.toLowerCase()) {
       case "canned / bottled":
         //return <BeerBottle weight="regular" />;
-        return <ArrowBendRightDown size={32} weight="regular" />;
+        return (
+          <ArrowBendRightDown
+            size={32}
+            weight="regular"
+            className="drop-shadow-text"
+          />
+        );
       case "draft":
         //return <BeerStein weight="regular" />;
-        return <ArrowBendRightDown size={32} weight="regular" />;
+        return (
+          <ArrowBendRightDown
+            size={32}
+            weight="regular"
+            className="drop-shadow-text"
+          />
+        );
       case "wine":
         //return <Wine weight="regular" />;
-        return <ArrowBendRightDown size={32} weight="regular" />;
+        return (
+          <ArrowBendRightDown
+            size={32}
+            weight="regular"
+            className="drop-shadow-text"
+          />
+        );
       case "sake":
         //return <ArrowDown />;
-        return <ArrowBendRightDown size={32} weight="regular" />;
+        return (
+          <ArrowBendRightDown
+            size={32}
+            weight="regular"
+            className="drop-shadow-text"
+          />
+        );
       default:
         //return <PintGlass weight="regular" />;
-        return <ArrowBendRightDown size={32} weight="regular" />;
+        return (
+          <ArrowBendRightDown
+            size={32}
+            weight="regular"
+            className="drop-shadow-text"
+          />
+        );
     }
   };
 
@@ -169,10 +205,12 @@ const Menu: React.FC = ({}) => {
       className={`block ${!isLast ? "border-b-2 border-dashed border-customGold" : ""} py-3 font-hypatia text-base capitalize md:text-lg`}
     >
       <div className="flex w-full justify-between text-nowrap font-bigola text-lg text-customNavy md:text-2xl">
-        <p className="whitespace-nowrap text-left leading-none">{item.name}</p>
+        <p className="whitespace-nowrap text-left leading-none drop-shadow-text">
+          {item.name}
+        </p>
         {item.bottlePrice ? (
           <div className="flex first-letter:items-end">
-            <p className="flex gap-1 text-right leading-none">
+            <p className="flex gap-1 text-right leading-none drop-shadow-text">
               {item.price}{" "}
               <span>
                 {item.bottleIsSellable && (
@@ -185,15 +223,17 @@ const Menu: React.FC = ({}) => {
             </p>
           </div>
         ) : (
-          <p className="text-right leading-none">{item.price}</p>
+          <p className="text-right leading-none drop-shadow-text">
+            {item.price}
+          </p>
         )}
       </div>
 
       <div className="mt-1 flex w-full items-center justify-between font-hypatiaSemibold leading-tight text-customNavy">
-        <p className="text-nowrap text-left">{item.brand}</p>
+        <p className="text-nowrap text-left drop-shadow-text">{item.brand}</p>
 
         {item.city && (
-          <p className="flex gap-1">
+          <p className="flex gap-1 drop-shadow-text">
             <span>{item.city},</span>
             <span>CA</span>
           </p>
@@ -201,10 +241,12 @@ const Menu: React.FC = ({}) => {
       </div>
 
       <div className="mt-1 flex w-full items-center justify-between leading-none text-customNavy">
-        <p className="text-balance pr-[2px] text-left">{item.description}</p>
+        <p className="text-balance pr-[2px] text-left drop-shadow-text">
+          {item.description}
+        </p>
 
         {item.abv && (
-          <div className="flex gap-1 text-right">
+          <div className="flex gap-1 text-right drop-shadow-text">
             <p>ABV</p>
             <p> {item.abv}</p>
           </div>
@@ -212,7 +254,7 @@ const Menu: React.FC = ({}) => {
       </div>
 
       {item.varieties && (
-        <p className="mt-1 text-nowrap italic text-customNavy">
+        <p className="mt-1 text-nowrap italic text-customNavy drop-shadow-text">
           {item.varieties}
         </p>
       )}
@@ -228,7 +270,7 @@ const Menu: React.FC = ({}) => {
           key={childCategory.id}
         >
           <AccordionTrigger
-            className={`cursor-pointer font-bigola text-xl leading-none md:text-4xl ${
+            className={`cursor-pointer font-bigola text-xl leading-none drop-shadow-text md:text-4xl ${
               activeChildCategory === childCategory.id
                 ? "text-customGold"
                 : "text-customNavy"
@@ -237,7 +279,7 @@ const Menu: React.FC = ({}) => {
             onClick={() => handleChildCategoryClick(childCategory.id)}
           >
             <h2
-              className={`transition-all duration-300 ${activeChildCategory === childCategory.id ? "translate-x-[15px] transform text-customGold" : "text-customNavy"}`}
+              className={`drop-shadow-text transition-all duration-300 ${activeChildCategory === childCategory.id ? "translate-x-[15px] transform text-customGold" : "text-customNavy"}`}
             >
               {childCategory.name}
             </h2>
@@ -255,7 +297,7 @@ const Menu: React.FC = ({}) => {
   return (
     <>
       <AudioStatic />
-      <div ref={containerRef} className="">
+      <div ref={containerRef} className="pt-16 md:pt-0">
         <div className="mx-auto w-full flex-1 px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
           {loading ? (
             <div className="z-[151] font-bigola">
@@ -268,18 +310,30 @@ const Menu: React.FC = ({}) => {
             </div>
           ) : error ? (
             <div className="z-[151] flex h-[50vh] w-full flex-col items-center justify-center">
-              <h2 className="mb-3 text-center font-bigola text-3xl text-customNavy md:text-4xl">
+              <h2 className="mb-3 text-center font-bigola text-3xl text-customNavy drop-shadow-text md:text-4xl">
                 Failed to load menu. Please refresh the page.
               </h2>
             </div>
           ) : !menu ? (
             <div className="z-[151] flex h-[50vh] w-full flex-col items-center justify-center">
-              <h2 className="mb-3 text-center font-bigola text-3xl text-customNavy md:text-4xl">
+              <h2 className="mb-3 text-center font-bigola text-3xl text-customNavy drop-shadow-text md:text-4xl">
                 No menu data found.
               </h2>
             </div>
           ) : (
-            <>
+            <div>
+              <h1
+                id="menu-heading"
+                className="mt-6 w-full pb-3 font-bigola text-6xl text-customNavy opacity-0 drop-shadow-text md:mt-0 md:px-0 md:text-center md:text-7xl"
+              >
+                Drink Menu
+              </h1>
+              <h2
+                id="menu-subheading"
+                className="mb-6 w-full text-pretty font-bigola text-2xl text-customNavy opacity-0 drop-shadow-text md:text-center md:text-3xl"
+              >
+                Stay up to date as our selections rotate!
+              </h2>
               <Accordion type="single" collapsible className="z-[151] w-full">
                 <div className="w-full opacity-0" id="menu">
                   {Object.entries(menu).map(
@@ -306,7 +360,7 @@ const Menu: React.FC = ({}) => {
                               onClick={() => handleCategoryClick(index)}
                             >
                               <h2
-                                className={`transition-all duration-300 ${activeCategory === index ? "translate-x-[15px] transform text-customGold" : "text-customNavy"}`}
+                                className={`drop-shadow-text transition-all duration-300 ${activeCategory === index ? "translate-x-[15px] transform text-customGold" : "text-customNavy"}`}
                               >
                                 {categoryName}
                               </h2>
@@ -315,7 +369,7 @@ const Menu: React.FC = ({}) => {
                               className={`border-customGold ${categoryName === "Canned / Bottled" ? "pt-0" : ""}`}
                             >
                               {categoryName === "Wine" && (
-                                <div className="text-pretty py-3 text-center">
+                                <div className="text-pretty py-3 text-center drop-shadow-text">
                                   <p className="font-bigola text-lg text-customNavy md:text-2xl">
                                     Wine Down Wednesday
                                   </p>
@@ -329,7 +383,7 @@ const Menu: React.FC = ({}) => {
                               )}
 
                               {categoryName === "Draft" && (
-                                <div className="text-pretty py-3 text-center text-customNavy">
+                                <div className="text-pretty py-3 text-center text-customNavy drop-shadow-text">
                                   <p className="font-bigola text-lg text-customNavy md:text-2xl">
                                     Happy Hour
                                   </p>
@@ -364,14 +418,8 @@ const Menu: React.FC = ({}) => {
                     ),
                   )}
                 </div>
-                <h2
-                  id="menu-heading"
-                  className="w-full overflow-hidden text-pretty py-6 text-center font-bigola text-xl text-customNavy opacity-0 md:text-3xl"
-                >
-                  Stay up to date as our selections rotate!
-                </h2>
               </Accordion>
-            </>
+            </div>
           )}
         </div>
       </div>

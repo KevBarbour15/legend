@@ -25,17 +25,12 @@ const Carousel: React.FC = () => {
   } = usePrevNextButtons(emblaApi);
 
   return (
-    <section className="embla pb-3">
-      <div
-        className="embla__viewport overflow-hidden rounded-md border-x-2 border-customNavy"
-        ref={emblaRef}
-      >
+    <section className="embla px-3 pb-3 md:px-0">
+      <div className="embla__viewport border-x-2" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((src, index) => (
-            <div className="embla__slide" key={index}>
-              <div
-                className={`embla__slide__inner h-[250px] w-auto overflow-hidden rounded-md border-y-2 border-customNavy md:h-[500px] ${index === 0 ? "border-r-2" : ""} ${index === slides.length - 1 ? "border-l-2" : ""} ${index !== 0 && index !== slides.length - 1 ? "border-x-2" : ""}`}
-              >
+            <div className="embla__slide drop-shadow-card" key={index}>
+              <div className="embla__slide__inner h-[250px] w-auto border border-customNavy md:h-[300px] lg:h-[500px]">
                 <Image
                   src={src}
                   alt="carousel"
