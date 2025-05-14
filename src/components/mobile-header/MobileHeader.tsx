@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Menu from "@/components/dropdown-menu/DropdownMenu";
 
@@ -49,13 +50,15 @@ const MobileHeader: React.FC = () => {
           className="m-auto flex w-full items-center justify-between opacity-0"
         >
           <div className="h-16 py-3">
-            <Image
-              src="/images/alt-logo.png"
-              alt="Legend Has It"
-              className="h-full w-auto"
-              width={100}
-              height={100}
-            />
+            <Link href="/">
+              <Image
+                src="/images/alt-logo.png"
+                alt="Legend Has It"
+                className="h-full w-auto"
+                width={100}
+                height={100}
+              />
+            </Link>
           </div>
           <IconButton
             onClick={toggleMenu}
