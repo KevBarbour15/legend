@@ -54,7 +54,7 @@ export default function Contact() {
     gsap.fromTo(
       "#tabs-container",
       { opacity: 0 },
-      { opacity: 1, duration: 0.025, delay: 0.1 },
+      { opacity: 1, duration: 0.015 },
     );
   }, []);
 
@@ -134,7 +134,7 @@ export default function Contact() {
         <div className="mx-auto flex flex-col items-center justify-center overflow-y-auto px-3 pb-20 md:px-0 md:pb-10 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
           <h1
             id="heading"
-            className="mt-6 w-full pb-3 font-bigola text-5xl text-customNavy opacity-0 drop-shadow-text sm:text-6xl md:mt-0 md:text-center md:text-7xl"
+            className="mt-6 w-full text-pretty font-bigola text-6xl text-customNavy opacity-0 drop-shadow-text md:mt-0 md:text-center md:text-7xl"
           >
             Sound Off - Say Hello!
           </h1>
@@ -145,7 +145,7 @@ export default function Contact() {
           >
             <TabsList
               id="tabs-container"
-              className="mb-6 grid w-full grid-cols-3 border-b-2 border-customGold py-3 font-bigola opacity-0 md:mb-10 md:mt-0 md:w-fit"
+              className="mb-4 mt-6 grid w-full grid-cols-3 font-bigola opacity-0 lg:w-[650px]"
             >
               <TabsTrigger value="event">
                 Event <span className="md:flex">&nbsp;Inquiry</span>

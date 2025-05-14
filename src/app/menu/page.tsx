@@ -324,13 +324,13 @@ const Menu: React.FC = ({}) => {
             <div>
               <h1
                 id="menu-heading"
-                className="mt-6 w-full pb-3 font-bigola text-6xl text-customNavy opacity-0 drop-shadow-text md:mt-0 md:px-0 md:text-center md:text-7xl"
+                className="mt-6 w-full font-bigola text-6xl text-customNavy opacity-0 drop-shadow-text md:mt-0 md:px-0 md:text-center md:text-7xl"
               >
                 Drink Menu
               </h1>
               <h2
                 id="menu-subheading"
-                className="mb-6 w-full text-pretty font-bigola text-2xl text-customNavy opacity-0 drop-shadow-text md:text-center md:text-3xl"
+                className="my-3 w-full font-hypatia text-2xl leading-[1.15] text-customNavy opacity-0 drop-shadow-text md:text-center lg:text-3xl"
               >
                 Stay up to date as our selections rotate!
               </h2>
@@ -347,7 +347,7 @@ const Menu: React.FC = ({}) => {
                         >
                           <AccordionItem
                             value={categoryName}
-                            className={`${index === 0 ? "md:border-t-2" : ""} border-b-2 border-customGold`}
+                            className={`${index === 0 ? "border-t-2" : ""} border-b-2 border-customGold`}
                             key={categoryName}
                           >
                             <AccordionTrigger

@@ -80,7 +80,7 @@ const MailchimpForm = ({
           />
           <Button
             type="submit"
-            className="border border-customNavy font-bigola text-customNavy transition-all duration-300 ease-in-out md:hover:bg-customNavy md:hover:text-customCream md:active:bg-customNavy md:active:text-customCream"
+            className="border border-customNavy bg-customNavy font-bigola text-customCream transition-all duration-300 ease-in-out md:hover:bg-customCream md:hover:text-customNavy md:active:bg-customGold"
           >
             Subscribe
           </Button>

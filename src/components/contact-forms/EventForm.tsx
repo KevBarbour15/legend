@@ -89,9 +89,9 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
           ref={formRef}
           id="event-form"
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex w-full flex-col space-y-3 opacity-0 md:w-[550px] lg:w-[650px]"
+          className="mx-auto flex w-full flex-col space-y-3 border-t-2 border-customGold pt-4 opacity-0 lg:w-[650px]"
         >
-          <p className="text-pretty font-hypatia text-lg leading-[1.15] text-customNavy drop-shadow-text md:text-center">
+          <p className="mb-6 text-pretty font-hypatia text-xl leading-[1.15] text-customNavy drop-shadow-text md:text-center">
             Thank you for inquiring about hosting your special event at{" "}
             <span className="font-bigola">Legend Has It</span>. We appreciate
             your interest and look forward to helping you create a memorable
@@ -107,7 +107,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customNavy drop-shadow-text">
-                  Name
+                  Name:
                 </FormLabel>
                 <FormControl className="drop-shadow-card border border-customNavy bg-customCream font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input {...field} />
@@ -123,7 +123,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customNavy drop-shadow-text">
-                  Email
+                  Email:
                 </FormLabel>
                 <FormControl className="drop-shadow-card border border-customNavy bg-customCream font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input type="email" {...field} />
@@ -138,7 +138,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customNavy drop-shadow-text">
-                  Phone
+                  Phone:
                 </FormLabel>
                 <FormControl className="drop-shadow-card border border-customNavy bg-customCream font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input type="tel" {...field} />
@@ -153,7 +153,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customNavy drop-shadow-text">
-                  Date of event
+                  Date of event:
                 </FormLabel>
                 <FormControl className="drop-shadow-card border border-customNavy bg-customCream font-bigola text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <DatePicker
@@ -171,7 +171,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customNavy drop-shadow-text">
-                  Time of interest: (1-4 pm, 3-10 pm, etc.)
+                  Time of interest (1-4 pm, 3-10 pm, etc.):
                 </FormLabel>
                 <FormControl className="drop-shadow-card border border-customNavy bg-customCream font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input {...field} />
@@ -186,7 +186,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customNavy">
-                  Type of event
+                  Type of event:
                 </FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl className="drop-shadow-card border border-customNavy bg-customCream font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
@@ -221,7 +221,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customNavy drop-shadow-text">
-                  Number of guests
+                  Number of guests:
                 </FormLabel>
                 <Select
                   onValueChange={(value) => field.onChange(Number(value))}
@@ -254,7 +254,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel className="font-bigola text-customNavy drop-shadow-text">
-                  Music options
+                  Music options:
                 </FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl className="drop-shadow-card border border-customNavy bg-customCream font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
@@ -313,7 +313,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
           />
           <Button
             type="submit"
-            className="drop-shadow-card mx-auto rounded-none border border-customNavy bg-customCream font-bigola text-customNavy backdrop-blur-sm transition-all duration-300 active:bg-customNavy active:text-customCream sm:w-fit md:hover:bg-customNavy md:hover:text-customCream"
+            className="drop-shadow-card mx-auto w-fit border border-customNavy bg-customNavy px-10 py-4 font-bigola text-2xl text-customCream transition-all duration-300 ease-in-out md:hover:bg-customCream md:hover:text-customNavy md:active:bg-customGold"
           >
             Submit
           </Button>

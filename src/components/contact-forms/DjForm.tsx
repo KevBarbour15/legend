@@ -60,16 +60,15 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
         ref={formRef}
         id="dj-form"
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex w-full flex-col space-y-3 opacity-0 md:w-[550px] lg:w-[650px]"
+        className="mx-auto flex w-full flex-col space-y-3 border-t-2 border-customGold pt-4 opacity-0 lg:w-[650px]"
       >
-        <p className="text-pretty font-hypatia text-lg leading-[1.15] text-customNavy drop-shadow-text">
+        <p className="mb-6 text-pretty font-hypatia text-xl leading-[1.15] text-customNavy drop-shadow-text md:text-center">
           Thank you for your interest to DJ at{" "}
           <span className="font-bigola">Legend Has It</span>. Please take a
           minute to fill out the form below so we can get to know you and your
           style. Below, please provide as much detail as possible in regard to
           your music style/genre(s), past experience, etc.
         </p>
-
         <FormField
           control={form.control}
           name="name"
@@ -134,7 +133,7 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
         />
         <Button
           type="submit"
-          className="drop-shadow-card mx-auto rounded-none border border-customNavy bg-customCream font-bigola text-customNavy backdrop-blur-sm transition-all duration-300 active:bg-customNavy active:text-customCream sm:w-fit md:hover:bg-customNavy md:hover:text-customCream"
+          className="drop-shadow-card mx-auto w-fit border border-customNavy bg-customNavy px-10 py-4 font-bigola text-2xl text-customCream transition-all duration-300 ease-in-out md:hover:bg-customCream md:hover:text-customNavy md:active:bg-customGold"
         >
           Submit
         </Button>

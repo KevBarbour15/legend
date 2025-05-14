@@ -162,10 +162,11 @@ export default function Home() {
               id="about-section"
               className="my-6 text-pretty leading-[1.15] opacity-0 drop-shadow-text"
             >
-              Welcome to Legend Has It, Sacramento's first hi-fi listening bar,
-              where music meets the art of sound. We offer an immersive
-              experience for audiophiles and music lovers, celebrating the
-              warmth of vinyl records and the richness of high-fidelity sound.
+              Welcome to <span className="font-bigola">Legend Has It</span>,
+              Sacramento's first hi-fi listening bar, where music meets the art
+              of sound. We offer an immersive experience for audiophiles and
+              music lovers, celebrating the warmth of vinyl records and the
+              richness of high-fidelity sound.
             </p>
             <p
               id="about-section"
