@@ -22,7 +22,7 @@ const Footer = () => {
   });
 
   return (
-    <footer className="drop-shadow-card rounded-t-xl border-x border-t border-customNavy bg-customNavy/50 p-3 pt-6 md:p-6">
+    <footer className="rounded-t-xl border-x border-t border-customNavy bg-customCream/25 p-3 pt-6 drop-shadow-card md:p-6">
       <div className="flex flex-col-reverse items-center gap-6 lg:flex-row lg:gap-0">
         <div className="flex w-full md:basis-1/2">
           <MailchimpForm setShouldShow={() => {}} />
@@ -30,7 +30,7 @@ const Footer = () => {
 
         <div className="flex w-full basis-1/2 justify-start gap-6 md:justify-end">
           <a
-            className="p-0 text-customCream transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+            className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
             href="https://open.spotify.com/user/31pcq2fnwyxprxppy4ezl3v3evaq"
             target="_blank"
             rel="noopener noreferrer"
@@ -41,7 +41,7 @@ const Footer = () => {
           </a>
 
           <a
-            className="p-0 text-customCream transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+            className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
             href="https://www.instagram.com/legendhasithifi/"
             target="_blank"
             rel="noopener noreferrer"
@@ -52,7 +52,7 @@ const Footer = () => {
           </a>
 
           <a
-            className="p-0 text-customCream transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+            className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
             href="https://www.facebook.com/legendhasithifi"
             target="_blank"
             rel="noopener noreferrer"
@@ -63,7 +63,7 @@ const Footer = () => {
           </a>
 
           <a
-            className="p-0 text-customCream transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+            className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
             href="https://www.youtube.com/@legendhasithifi"
             target="_blank"
             rel="noopener noreferrer"
@@ -73,7 +73,7 @@ const Footer = () => {
             <FaYoutube size={32} />
           </a>
           <a
-            className="p-0 text-customCream transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+            className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
             href="https://www.yelp.com/biz/legend-has-it-sacramento"
             target="_blank"
             rel="noopener noreferrer"
@@ -83,7 +83,7 @@ const Footer = () => {
             <FaYelp size={32} />
           </a>
           <a
-            className="p-0 text-customCream transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+            className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
             href="https://x.com/legendhasithifi"
             target="_blank"
             rel="noopener noreferrer"
@@ -94,7 +94,7 @@ const Footer = () => {
           </a>
         </div>
       </div>
-      <div className="mb-16 mt-6 flex w-full justify-between font-bigola text-sm text-customCream md:mb-0">
+      <div className="mb-16 mt-6 flex w-full justify-between font-bigola text-sm text-customNavy md:mb-0">
         <div>
           <a
             href="tel:+19166627942"
