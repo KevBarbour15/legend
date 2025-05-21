@@ -32,7 +32,7 @@ const AudioStatic = () => {
 
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-[-1] bg-customCream"
+      className="pointer-events-none fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-customCream via-[#e5e5e5] to-customCream"
       ref={containerRef}
     >
       <div

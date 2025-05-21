@@ -298,7 +298,7 @@ const Menu: React.FC = ({}) => {
     <>
       <AudioStatic />
       <div ref={containerRef} className="pt-16 md:pt-0">
-        <div className="mx-auto w-full flex-1 px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
+        <div className="mx-auto w-full flex-1 px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6">
           {loading ? (
             <div className="z-[151] font-bigola">
               <Loading
@@ -322,15 +322,9 @@ const Menu: React.FC = ({}) => {
             </div>
           ) : (
             <div>
-              <h1
-                id="menu-heading"
-                className="mt-6 w-full font-bigola text-6xl text-customNavy opacity-0 drop-shadow-text md:mt-0 md:px-0 md:text-center md:text-7xl"
-              >
-                Drink Menu
-              </h1>
               <h2
-                id="menu-subheading"
-                className="my-3 w-full font-hypatia text-2xl leading-[1.15] text-customNavy opacity-0 drop-shadow-text md:text-center lg:text-3xl"
+                id="menu-heading"
+                className="my-3 w-full font-hypatia text-3xl leading-[1.15] text-customNavy opacity-0 drop-shadow-text"
               >
                 Stay up to date as our selections rotate!
               </h2>

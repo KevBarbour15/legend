@@ -131,7 +131,7 @@ export default function Contact() {
     <>
       <AudioStatic />
       <div ref={containerRef} className="min-h-dvh w-screen pt-16 md:pt-0">
-        <div className="mx-auto flex flex-col items-center justify-center overflow-y-auto px-3 pb-20 md:px-0 md:pb-10 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
+        <div className="mx-auto flex flex-col overflow-y-auto px-3 pb-20 md:px-0 md:pb-10 md:pl-[258px] md:pr-6 md:pt-6">
           <h1
             id="heading"
             className="mt-6 w-full text-pretty font-bigola text-6xl text-customNavy opacity-0 drop-shadow-text md:mt-0 md:text-center md:text-7xl"
