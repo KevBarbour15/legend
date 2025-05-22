@@ -29,7 +29,7 @@ export default function Home() {
       }
     };
 
-    updateEventStatus();
+    //updateEventStatus();
 
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
