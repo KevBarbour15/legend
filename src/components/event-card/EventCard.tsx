@@ -60,7 +60,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
     return createPortal(
       <AnimatePresence>
         {isActive && (
-          <div className="fixed inset-0 z-[200] grid place-items-center bg-black/5 px-6 drop-shadow-card backdrop-blur-sm">
+          <div className="fixed inset-0 z-[200] grid place-items-center bg-black/50 px-6 drop-shadow-card">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { duration: 0.15 } }}
@@ -78,7 +78,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                 <X
                   size={30}
                   weight="regular"
-                  className="rounded-full text-customNavy drop-shadow-text transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+                  className="rounded-full text-[#f5f5f5] drop-shadow-text transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
                 />
               </IconButton>
             </motion.div>
@@ -86,12 +86,12 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
             <motion.div
               ref={containerRef}
               layoutId={`card-${event._id}`}
-              className={`relative flex h-fit max-h-[85dvh] w-full flex-col overflow-y-auto rounded-lg border-2 px-3 pt-3 text-customNavy shadow-2xl ${isActive ? "border-customNavy" : "border-transparent"} bg-[#f5f5f5] backdrop-blur-sm transition-all duration-300 sm:max-h-[90vh] sm:max-w-[475px]`}
+              className={`relative flex h-fit max-h-[85dvh] w-full flex-col overflow-y-auto rounded-md border px-3 pt-3 text-customNavy shadow-2xl ${isActive ? "border-customNavy" : "border-transparent"} bg-[#f5f5f5] transition-all duration-300 sm:max-h-[90vh] sm:max-w-[475px]`}
             >
               {event.is_photo ? (
                 <motion.div
                   layoutId={`image-${event._id}`}
-                  className="flex-shrink-0 overflow-hidden rounded-lg border-2 border-customNavy"
+                  className="flex-shrink-0 overflow-hidden rounded-md border border-customNavy"
                 >
                   <Image
                     src={preloadedMedia.src}
@@ -162,7 +162,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       <motion.div
         layoutId={`card-${event._id}`}
         onClick={handleCardClick}
-        className="flex h-full cursor-pointer justify-between rounded-lg border border-customNavy p-3 drop-shadow-card backdrop-blur-[2px]"
+        className="flex h-full cursor-pointer justify-between rounded-md border border-customNavy bg-[#f5f5f5] p-3 drop-shadow-card"
       >
         <div className="flex h-auto w-full min-w-0 flex-col justify-between pr-3 text-customNavy lg:pr-6">
           <motion.h2
@@ -184,7 +184,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
         {event.is_photo ? (
           <motion.div
             layoutId={`image-${event._id}`}
-            className="flex-shrink-0 overflow-hidden rounded-none border border-customNavy"
+            className="flex-shrink-0 overflow-hidden rounded-md border border-customNavy"
           >
             <Image
               src={preloadedMedia.src}
@@ -199,7 +199,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
         ) : (
           <motion.div
             layoutId={`video-${event._id}`}
-            className="flex-shrink-0 overflow-hidden rounded-none border border-customNavy"
+            className="flex-shrink-0 overflow-hidden rounded-md border border-customNavy"
           >
             <video
               src={preloadedMedia.src}

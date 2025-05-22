@@ -19,7 +19,6 @@ export default function Home() {
   const tl = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
-    /*
     const updateEventStatus = async () => {
       try {
         const response = await fetch("/api/cron/update-event-status");
@@ -31,7 +30,7 @@ export default function Home() {
     };
 
     updateEventStatus();
-*/
+
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
 
@@ -148,7 +147,7 @@ export default function Home() {
           >
             <Image
               src="/images/about-image.jpg"
-              className="drop-shadow-card h-full w-full border border-customNavy object-cover object-center"
+              className="h-full w-full rounded-md border border-customNavy object-cover object-center drop-shadow-card"
               height={1500}
               width={1500}
               alt="Grand Opening"
@@ -231,7 +230,7 @@ export default function Home() {
 
           <div
             id="about-section"
-            className="drop-shadow-card mb-12 mt-3 hidden opacity-0 md:block"
+            className="mb-12 mt-3 hidden opacity-0 drop-shadow-card md:block"
           >
             <iframe
               title="Spotify Playlist"

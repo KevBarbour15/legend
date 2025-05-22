@@ -29,8 +29,11 @@ const Carousel: React.FC = () => {
       <div className="embla__viewport border-x-2" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((src, index) => (
-            <div className="embla__slide drop-shadow-card" key={index}>
-              <div className="embla__slide__inner h-[250px] w-auto border border-customNavy md:h-[300px] lg:h-[500px]">
+            <div
+              className="embla__slide"
+              key={index}
+            >
+              <div className="embla__slide__inner h-[250px] w-auto overflow-hidden rounded-md border border-customNavy drop-shadow-card md:h-[300px] lg:h-[500px]">
                 <Image
                   src={src}
                   alt="carousel"

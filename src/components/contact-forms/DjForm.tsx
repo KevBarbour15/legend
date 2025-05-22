@@ -75,9 +75,9 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           render={({ field }) => (
             <FormItem className="w-full">
               <FormLabel className="font-bigola text-customNavy drop-shadow-text">
-                Name
+                Name:
               </FormLabel>
-              <FormControl className="drop-shadow-card border border-customNavy bg-customCream font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+              <FormControl className="rounded-md border border-customNavy bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                 <Input {...field} />
               </FormControl>
               <FormMessage />
@@ -91,9 +91,9 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           render={({ field }) => (
             <FormItem className="w-full">
               <FormLabel className="font-bigola text-customNavy drop-shadow-text">
-                Email
+                Email:
               </FormLabel>
-              <FormControl className="drop-shadow-card border border-customNavy bg-customCream font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+              <FormControl className="rounded-md border border-customNavy bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                 <Input type="email" {...field} />
               </FormControl>
               <FormMessage />
@@ -106,9 +106,9 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           render={({ field }) => (
             <FormItem className="w-full">
               <FormLabel className="font-bigola text-customNavy drop-shadow-text">
-                Phone
+                Phone:
               </FormLabel>
-              <FormControl className="drop-shadow-card border border-customNavy bg-customCream font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+              <FormControl className="rounded-md border border-customNavy bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                 <Input type="tel" {...field} />
               </FormControl>
               <FormMessage />
@@ -122,9 +122,9 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           render={({ field }) => (
             <FormItem className="w-full">
               <FormLabel className="font-bigola text-customNavy drop-shadow-text">
-                Experience, style, etc
+                Experience, style, etc:
               </FormLabel>
-              <FormControl className="drop-shadow-card border border-customNavy bg-customCream font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+              <FormControl className="rounded-md border border-customNavy bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                 <Textarea {...field} />
               </FormControl>
               <FormMessage />
@@ -133,7 +133,7 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
         />
         <Button
           type="submit"
-          className="drop-shadow-card mx-auto w-fit border border-customNavy bg-customNavy px-10 py-4 font-bigola text-2xl text-customCream transition-all duration-300 ease-in-out md:hover:bg-customCream md:hover:text-customNavy md:active:bg-customGold"
+          className="mx-auto w-fit rounded-lg border border-customNavy bg-customNavy font-bigola text-2xl text-[#f5f5f5] drop-shadow-card transition-all duration-300 ease-in-out md:hover:bg-[#f5f5f5] md:hover:text-customNavy md:active:bg-customGold"
         >
           Submit
         </Button>

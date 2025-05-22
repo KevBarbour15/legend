@@ -9,20 +9,9 @@ import { AiFillInstagram } from "react-icons/ai";
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import MailchimpForm from "@/components/mailchimp-form/MailchimpForm";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { mailchimpFormSchema, MailchimpFormData } from "@/data/forms";
-
 const Footer = () => {
-  const form = useForm<MailchimpFormData>({
-    resolver: zodResolver(mailchimpFormSchema),
-    defaultValues: {
-      email: "",
-    },
-  });
-
   return (
-    <footer className="rounded-t-xl border-x border-t border-customNavy bg-customCream/25 p-3 pt-6 drop-shadow-card md:p-6">
+    <footer className="rounded-t-md border-x border-t border-customNavy bg-[#f5f5f5] p-3 pt-6 drop-shadow-card md:p-6">
       <div className="flex flex-col-reverse items-center gap-6 lg:flex-row lg:gap-0">
         <div className="flex w-full md:basis-1/2">
           <MailchimpForm setShouldShow={() => {}} />
