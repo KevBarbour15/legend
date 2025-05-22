@@ -19,7 +19,7 @@ interface PopupConfig {
 
 const SubscribePopup = ({
   showDelay = 5000,
-  showInterval = 7,
+  showInterval = 3,
 }: PopupConfig) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -120,7 +120,7 @@ const SubscribePopup = ({
     <div
       style={{ display: "none" }}
       ref={overlayRef}
-      className="fixed inset-0 z-[1000] h-full w-full items-center justify-center bg-black/15 p-3 px-6 opacity-0 backdrop-blur-sm"
+      className="fixed inset-0 z-[1000] h-full w-full items-center justify-center bg-black/50 p-3 px-6 opacity-0"
     >
       <IconButton
         aria-label="Close Modal"
@@ -130,20 +130,20 @@ const SubscribePopup = ({
         <X
           size={30}
           weight="bold"
-          className="drop-shadow-card text-customGold transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customNavy"
+          className="text-[#f5f5f5] drop-shadow-card transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
         />
       </IconButton>
       <div
         style={{ display: "none" }}
         ref={containerRef}
-        className="drop-shadow-card flex h-fit max-h-[85dvh] flex-col gap-3 border border-customNavy bg-customCream p-3 opacity-0 sm:max-h-[90vh] sm:max-w-[450px] sm:p-6"
+        className="flex h-fit max-h-[85dvh] flex-col gap-3 rounded-md border border-customNavy bg-[#f5f5f5] p-3 opacity-0 drop-shadow-card sm:max-h-[90vh] sm:max-w-[450px] sm:p-6"
       >
         <Image
           src="/images/meta-image.jpg"
           alt="Subscribe Image"
           width={500}
           height={500}
-          className="h-auto w-full overflow-hidden border border-customNavy"
+          className="h-auto w-full overflow-hidden rounded-md border border-customNavy"
         />
         <h2 className="text-pretty text-center font-bigola text-3xl font-bold text-customNavy md:text-4xl">
           Get exclusive updates on new beer/wine & events!
