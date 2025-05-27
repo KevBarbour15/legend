@@ -73,6 +73,18 @@ export default function Events() {
       setProgress(generateProgress(2, 25));
       await new Promise((resolve) => setTimeout(resolve, 100));
 
+      const updateEventStatus = async () => {
+        try {
+          const response = await fetch("/api/cron/update-event-status");
+          const data = await response.json();
+          console.log(data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      updateEventStatus();
+
       const response = await fetch("/api/events", {
         cache: "default",
         headers: {
