@@ -100,7 +100,7 @@ export default function Home() {
         0,
       );
 
-    const sectionRefs = document.querySelectorAll("#about-section");
+    const sectionRefs = document.querySelectorAll(".about-section");
     sectionRefs.forEach((section) => {
       if (!section) return;
       gsap.fromTo(
@@ -141,10 +141,7 @@ export default function Home() {
           id="about-content"
           className="relative mx-auto block h-auto md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
         >
-          <div
-            id="about-section"
-            className="aspect-video w-full px-3 opacity-0 md:px-0"
-          >
+          <div className="about-section aspect-video w-full px-3 opacity-0 md:px-0">
             <Image
               src="/images/about-image.jpg"
               className="h-full w-full rounded-md border border-customNavy object-cover object-center drop-shadow-card"
@@ -157,20 +154,14 @@ export default function Home() {
           </div>
 
           <div className="px-3 font-hypatia text-lg text-customNavy md:px-0 md:text-xl">
-            <p
-              id="about-section"
-              className="my-6 text-pretty leading-[1.15] opacity-0 drop-shadow-text"
-            >
+            <p className="about-section my-6 text-pretty leading-[1.15] opacity-0 drop-shadow-text">
               Welcome to <span className="font-bigola">Legend Has It</span>,
               Sacramento's first hi-fi listening bar, where music meets the art
               of sound. We offer an immersive experience for audiophiles and
               music lovers, celebrating the warmth of vinyl records and the
               richness of high-fidelity sound.
             </p>
-            <p
-              id="about-section"
-              className="text-pretty leading-[1.15] opacity-0 drop-shadow-text"
-            >
+            <p className="about-section text-pretty leading-[1.15] opacity-0 drop-shadow-text">
               We curate a space where the ordinary becomes extraordinary. We
               don't just play sound; we make you feel it. Every beat, every
               conversation, every moment crafted to build something deeper,
@@ -183,55 +174,37 @@ export default function Home() {
             </p>
           </div>
           <div className="mt-3 block px-3 py-6 font-bigola text-xl text-customNavy drop-shadow-text md:mb-0 md:px-0 md:text-3xl">
-            <h2 id="about-section" className="mb-3 opacity-0 md:mb-6">
+            <h2 className="about-section mb-3 opacity-0 md:mb-6">
               Regular Hours
             </h2>
-            <div
-              id="about-section"
-              className="mb-3 flex flex-row justify-between opacity-0 md:mb-6"
-            >
+            <div className="about-section mb-3 flex flex-row justify-between opacity-0 md:mb-6">
               <p>Monday - Tuesday:</p>
               <p>Closed</p>
             </div>
-            <div
-              id="about-section"
-              className="mb-3 flex flex-row justify-between opacity-0 md:mb-6"
-            >
+            <div className="about-section mb-3 flex flex-row justify-between opacity-0 md:mb-6">
               <p>Wednesday - Thursday:</p>
               <p>3pm - 11pm</p>
             </div>
-            <div
-              id="about-section"
-              className="mb-3 flex flex-row justify-between opacity-0 md:mb-6"
-            >
+            <div className="about-section mb-3 flex flex-row justify-between opacity-0 md:mb-6">
               <p>Friday - Saturday:</p>
               <p>3pm - 12am</p>
             </div>
-            <div
-              id="about-section"
-              className="mb-3 flex flex-row justify-between opacity-0 md:mb-6"
-            >
+            <div className="about-section mb-3 flex flex-row justify-between opacity-0 md:mb-6">
               <p>Sunday:</p>
               <p>12pm - 5pm</p>
             </div>
-            <p
-              id="about-section"
-              className="mb-3 font-hypatia text-base italic text-customNavy opacity-0"
-            >
+            <p className="about-section mb-3 font-hypatia text-base italic text-customNavy opacity-0">
               * We occasionally open outside of these hours for game days and
               special events. For the most up-to-date info, please check our
               social media pages.
             </p>
           </div>
 
-          <div id="about-section" className="overflow-hidden opacity-0">
+          <div className="about-section overflow-hidden opacity-0">
             <ImageCarousel />
           </div>
 
-          <div
-            id="about-section"
-            className="mb-12 mt-3 hidden opacity-0 drop-shadow-card md:block"
-          >
+          <div className="about-section mb-12 mt-3 hidden opacity-0 drop-shadow-card md:block">
             <iframe
               title="Spotify Playlist"
               src="https://open.spotify.com/embed/playlist/7pIFUTsTxa3MMROMuXsElO?utm_source=generator&theme=0"

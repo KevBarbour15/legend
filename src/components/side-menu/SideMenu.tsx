@@ -45,9 +45,9 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
     if (shouldShowAnimation) {
       tl.set(menuLinks, { x: "-25%", opacity: 0 });
       tl.to(menuLinks, {
-        delay: 0.15,
-        duration: 0.5,
-        ease: "back.out(1.7)",
+        delay: 0.5,
+        duration: 0.65,
+        ease: "back.out(2)",
         x: 0,
         opacity: 1,
         stagger: 0.15,
