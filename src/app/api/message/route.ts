@@ -4,7 +4,7 @@ import { connectToMongoDB } from "@/lib/db";
 
 import { musicTypes, eventTypes } from "@/data/forms";
 
-import { sendNotificationEmail } from "@/app/actions/sendNotificationEmail.server";
+import { POST as sendMessage } from "@/app/actions/sendMessage";
 
 // GET request handler ************************************************************************************************
 export async function GET(req: NextRequest) {
@@ -78,43 +78,24 @@ export async function POST(req: NextRequest) {
     const response = await newMessage.save();
 
     if (response._id) {
-      const subject: string = `New ${formType} inquiry from ${name}.`;
-
-      // format the email text
-      let text: string = "";
-      if (formType === "event") {
-        text = `You have received a ${formType} inquiry from ${name}.
-
-Email: ${email}
-
-Phone: ${phone}
-
-Message: ${message} 
-
-Event Date: ${eventDate}
-
-Event Time: ${eventTime}
-
-Event Type: ${eventTypeDescription}
-
-Music Type: ${musicDescription}
-
-Number of Guests: ${guests}`;
-      } else {
-        text = `You have received a ${formType} inquiry from ${name}.
-
-Email: ${email}
-
-Phone: ${phone}
-
-Message: ${message}`;
-      }
-
       try {
-        await sendNotificationEmail({
-          subject: subject,
-          text: text,
-        });
+        await sendMessage(
+          new Request("http://localhost", {
+            method: "POST",
+            body: JSON.stringify({
+              formType,
+              name,
+              email,
+              phone,
+              message,
+              eventDate,
+              eventTime,
+              eventTypeDescription,
+              musicDescription,
+              guests,
+            }),
+          }),
+        );
       } catch (error) {
         console.log("Error sending email: ", error);
       }
