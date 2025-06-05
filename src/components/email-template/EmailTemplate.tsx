@@ -30,10 +30,16 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
     </h1>
     <div className="space-y-2">
       <div className="flex items-center gap-2">
-        <strong>Email:</strong> {email}
+        <strong>Email:</strong>{" "}
+        <a href={`mailto:${email}`} className="text-blue-600 hover:underline">
+          {email}
+        </a>
       </div>
       <div className="flex items-center gap-2">
-        <strong>Phone:</strong> {phone}
+        <strong>Phone:</strong>{" "}
+        <a href={`tel:${phone}`} className="text-blue-600 hover:underline">
+          {phone}
+        </a>
       </div>
       {message && (
         <div className="flex flex-col gap-1">
