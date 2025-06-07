@@ -191,7 +191,7 @@ export default function Home() {
             </div>
             <div className="about-section mb-3 flex flex-row justify-between opacity-0 md:mb-6">
               <p>Sunday:</p>
-              <p>12pm - 5pm</p>
+              <p>3pm - 8pm</p>
             </div>
             <p className="about-section mb-3 font-hypatia text-base italic text-customNavy opacity-0">
               * We occasionally open outside of these hours for game days and
