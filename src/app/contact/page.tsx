@@ -140,13 +140,11 @@ export default function Contact() {
           </h1>
           <Tabs
             defaultValue="event"
-            className="flex w-full flex-col items-center"
+            className="flex w-full flex-col items-center opacity-0"
             onValueChange={(value) => setActiveTab(value as FormType)}
+            id="tabs-container"
           >
-            <TabsList
-              id="tabs-container"
-              className="mb-4 mt-6 grid w-full grid-cols-3 font-bigola opacity-0 lg:w-[650px]"
-            >
+            <TabsList className="mb-4 mt-6 grid w-full grid-cols-3 font-bigola lg:w-[650px]">
               <TabsTrigger value="event">
                 Event <span className="md:flex">&nbsp;Inquiry</span>
               </TabsTrigger>

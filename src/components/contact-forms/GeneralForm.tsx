@@ -79,13 +79,21 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             name="name"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel className="font-bigola text-customNavy drop-shadow-text">
+                <FormLabel
+                  htmlFor="general-name"
+                  className="font-bigola text-customNavy drop-shadow-text"
+                >
                   Name:
                 </FormLabel>
                 <FormControl className="rounded-md border border-customNavy bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
-                  <Input {...field} />
+                  <Input
+                    id="general-name"
+                    aria-label="Your full name"
+                    aria-describedby="general-name-description"
+                    {...field}
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage id="general-name-description" />
               </FormItem>
             )}
           />
@@ -95,13 +103,22 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             name="email"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel className="font-bigola text-customNavy drop-shadow-text">
+                <FormLabel
+                  htmlFor="general-email"
+                  className="font-bigola text-customNavy drop-shadow-text"
+                >
                   Email:
                 </FormLabel>
                 <FormControl className="rounded-md border border-customNavy bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
-                  <Input type="email" {...field} />
+                  <Input
+                    id="general-email"
+                    type="email"
+                    aria-label="Your email address"
+                    aria-describedby="general-email-description"
+                    {...field}
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage id="general-email-description" />
               </FormItem>
             )}
           />
@@ -110,13 +127,22 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             name="phone"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel className="font-bigola text-customNavy drop-shadow-text">
+                <FormLabel
+                  htmlFor="general-phone"
+                  className="font-bigola text-customNavy drop-shadow-text"
+                >
                   Phone:
                 </FormLabel>
                 <FormControl className="rounded-md border border-customNavy bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
-                  <Input type="tel" {...field} />
+                  <Input
+                    id="general-phone"
+                    type="tel"
+                    aria-label="Your phone number"
+                    aria-describedby="general-phone-description"
+                    {...field}
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage id="general-phone-description" />
               </FormItem>
             )}
           />
@@ -126,13 +152,21 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             name="message"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel className="font-bigola text-customNavy drop-shadow-text">
+                <FormLabel
+                  htmlFor="general-message"
+                  className="font-bigola text-customNavy drop-shadow-text"
+                >
                   Message:
                 </FormLabel>
                 <FormControl className="rounded-md border border-customNavy bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
-                  <Textarea {...field} />
+                  <Textarea
+                    id="general-message"
+                    aria-label="Your message"
+                    aria-describedby="general-message-description"
+                    {...field}
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage id="general-message-description" />
               </FormItem>
             )}
           />
