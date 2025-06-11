@@ -37,7 +37,7 @@ const AudioStatic = () => {
     >
       <div
         ref={staticRef}
-        className="absolute left-1/2 top-1/2 z-[-1] h-full w-full -translate-x-1/2 -translate-y-1/2 opacity-15 mix-blend-plus-lighter"
+        className="absolute left-1/2 top-1/2 z-[-1] h-full w-full -translate-x-1/2 -translate-y-1/2 opacity-5 mix-blend-plus-lighter"
         style={{
           backgroundImage: `url(https://static.tumblr.com/rxfwyqf/20Zlzzth8/noise.png)`,
         }}
