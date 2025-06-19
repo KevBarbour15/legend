@@ -1,7 +1,7 @@
 {
   "crons": [
     {
-      "path": "/api/cron/update-event-status",
+      "path": "pages/api/cron/update-event-status",
       "schedule": "0 0 * * *"
     }
   ]

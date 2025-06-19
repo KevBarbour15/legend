@@ -83,7 +83,7 @@ export default function Events() {
         }
       };
 
-      updateEventStatus();
+      //updateEventStatus();
 
       const response = await fetch("/api/events", {
         cache: "default",
