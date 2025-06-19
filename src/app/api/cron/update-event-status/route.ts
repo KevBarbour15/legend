@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import Event from "@/models/Event";
 import { connectToMongoDB } from "@/lib/db";
 
+export const revalidate = 0;
 export async function GET(req: Request) {
   console.log("Cron job started at:", new Date().toISOString());
   try {
