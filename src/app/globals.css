@@ -152,6 +152,11 @@ body.menu-open {
   .text-balance {
     text-wrap: balance;
   }
+  .shadow-top {
+    box-shadow:
+      0 -6px 16px -4px rgba(36, 65, 84, 0.15),
+      0 -1.5px 4px -1.5px rgba(36, 65, 84, 0.08);
+  }
 }
 
 @layer base {

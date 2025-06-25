@@ -68,7 +68,7 @@ const MailchimpForm = ({
             name="email"
             render={({ field }) => (
               <FormItem className="grow">
-                <FormControl className="truncate rounded-md border border-customNavy bg-[#f5f5f5] font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl className="truncate rounded-md border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input
                     {...field}
                     placeholder="Enter email to receive exclusive updates..."
@@ -80,7 +80,7 @@ const MailchimpForm = ({
           />
           <Button
             type="submit"
-            className="rounded-md border border-customNavy bg-customNavy font-bigola text-[#f5f5f5] transition-all duration-300 ease-in-out md:hover:bg-[#f5f5f5] md:hover:text-customNavy md:active:bg-customGold"
+            className="rounded-md border border-transparent bg-customNavy font-bigola text-[#f5f5f5] transition-all duration-300 ease-in-out md:hover:border-customNavy/20 md:hover:bg-[#f5f5f5] md:hover:text-customNavy md:active:bg-customGold"
           >
             Subscribe
           </Button>

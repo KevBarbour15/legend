@@ -145,13 +145,13 @@ export default function Contact() {
             id="tabs-container"
           >
             <TabsList className="mb-4 mt-6 grid w-full grid-cols-3 font-bigola lg:w-[650px]">
-              <TabsTrigger value="event">
+              <TabsTrigger value="event" className="border-customNavy/20">
                 Event <span className="md:flex">&nbsp;Inquiry</span>
               </TabsTrigger>
-              <TabsTrigger value="dj">
+              <TabsTrigger value="dj" className="border-customNavy/20">
                 DJ <span className="md:flex">&nbsp;Inquiry</span>
               </TabsTrigger>
-              <TabsTrigger value="general">
+              <TabsTrigger value="general" className="border-customNavy/20">
                 General <span className="md:flex">&nbsp;Inquiry</span>
               </TabsTrigger>
             </TabsList>

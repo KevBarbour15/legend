@@ -86,12 +86,12 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
             <motion.div
               ref={containerRef}
               layoutId={`card-${event._id}`}
-              className={`relative flex h-fit max-h-[85dvh] w-full flex-col overflow-y-auto rounded-md border px-3 pt-3 text-customNavy shadow-2xl ${isActive ? "border-customNavy" : "border-transparent"} bg-[#f5f5f5] transition-all duration-300 sm:max-h-[90vh] sm:max-w-[475px]`}
+              className={`relative flex h-fit max-h-[90dvh] w-full flex-col overflow-y-auto rounded-md border border-customNavy/20 text-customNavy shadow-2xl ${isActive ? "border-customNavy" : "border-transparent"} bg-[#f5f5f5] transition-all duration-300 sm:max-h-[95vh] sm:max-w-[450px]`}
             >
               {event.is_photo ? (
                 <motion.div
                   layoutId={`image-${event._id}`}
-                  className="flex-shrink-0 overflow-hidden rounded-md border border-customNavy"
+                  className="flex-shrink-0 overflow-hidden border-b border-customNavy/20"
                 >
                   <Image
                     src={preloadedMedia.src}
@@ -100,17 +100,17 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                     height={475}
                     unoptimized
                     priority
-                    className="aspect-square h-auto w-full object-cover object-center md:aspect-auto md:max-h-[475px]"
+                    className="h-auto w-full object-cover object-center md:aspect-auto"
                   />
                 </motion.div>
               ) : (
                 <motion.div
                   layoutId={`video-${event._id}`}
-                  className="flex-shrink-0 overflow-hidden border border-customNavy"
+                  className="flex-shrink-0 overflow-hidden border-b-2 border-customNavy"
                 >
                   <video
                     src={preloadedMedia.src}
-                    className="aspect-square h-auto w-full object-cover object-center md:aspect-auto md:max-h-[475px]"
+                    className="h-auto w-full object-cover object-center md:aspect-auto"
                     loop
                     autoPlay
                     muted
@@ -121,7 +121,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
 
               <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="description">
-                  <AccordionTrigger className="w-full cursor-pointer pt-3">
+                  <AccordionTrigger className="w-full cursor-pointer p-3 md:p-6">
                     <motion.h1
                       layoutId={`title-${event._id}`}
                       className="text-balance pr-6 text-left font-bigola text-2xl capitalize"
@@ -129,8 +129,8 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                       {event.title}
                     </motion.h1>
                   </AccordionTrigger>
-                  <AccordionContent className="border-t border-customGold/50">
-                    <motion.div className="flex w-full flex-row justify-between py-3 font-bigola text-lg md:leading-[1.15]">
+                  <AccordionContent className="border-t border-customGold/50 p-3 md:p-6">
+                    <motion.div className="flex w-full flex-row justify-between py-3 font-bigola text-lg md:pb-6 md:leading-[1.15]">
                       <motion.p layoutId={`date-${event._id}`}>
                         {formattedDate}
                       </motion.p>
@@ -140,7 +140,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                     </motion.div>
                     <motion.p
                       layoutId={`description-${event._id}`}
-                      className="whitespace-pre-wrap pb-6 font-hypatia text-base leading-none md:text-lg md:leading-[1.15]"
+                      className="whitespace-pre-wrap pb-3 font-hypatia text-base leading-none md:text-lg md:leading-[1.15] lg:text-xl"
                     >
                       {event.description}
                     </motion.p>
@@ -162,9 +162,9 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       <motion.div
         layoutId={`card-${event._id}`}
         onClick={handleCardClick}
-        className="flex h-full cursor-pointer justify-between rounded-md border border-customNavy bg-[#f5f5f5] p-3 drop-shadow-card"
+        className="flex h-full cursor-pointer justify-between overflow-hidden rounded-md border border-customNavy/20 bg-[#f5f5f5]/25 shadow-lg backdrop-blur-[1px]"
       >
-        <div className="flex h-auto w-full min-w-0 flex-col justify-between pr-3 text-customNavy lg:pr-6">
+        <div className="flex h-auto w-full min-w-0 flex-col justify-between p-3 text-customNavy">
           <motion.h2
             className="font-bigola text-lg leading-none md:text-2xl"
             layoutId={`date-${event._id}`}
@@ -184,7 +184,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
         {event.is_photo ? (
           <motion.div
             layoutId={`image-${event._id}`}
-            className="flex-shrink-0 overflow-hidden rounded-md border border-customNavy"
+            className="flex-shrink-0 overflow-hidden"
           >
             <Image
               src={preloadedMedia.src}
@@ -193,13 +193,13 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               height={275}
               unoptimized
               priority
-              className="aspect-square h-[125px] w-[125px] object-cover object-center md:h-[225px] md:w-[225px] lg:h-[275px] lg:w-[275px]"
+              className="h-auto w-[125px] object-cover object-center md:w-[225px] lg:w-[275px]"
             />
           </motion.div>
         ) : (
           <motion.div
             layoutId={`video-${event._id}`}
-            className="flex-shrink-0 overflow-hidden rounded-md border border-customNavy"
+            className="flex-shrink-0 overflow-hidden"
           >
             <video
               src={preloadedMedia.src}

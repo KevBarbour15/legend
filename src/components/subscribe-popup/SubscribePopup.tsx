@@ -136,19 +136,21 @@ const SubscribePopup = ({
       <div
         style={{ display: "none" }}
         ref={containerRef}
-        className="flex h-fit max-h-[85dvh] flex-col gap-3 rounded-md border border-customNavy bg-[#f5f5f5] p-3 opacity-0 drop-shadow-card sm:max-h-[90vh] sm:max-w-[450px] sm:p-6"
+        className="o flex h-fit max-h-[85dvh] flex-col gap-3 overflow-hidden rounded-md border border-customNavy/20 bg-[#f5f5f5] opacity-0 drop-shadow-card sm:max-h-[90vh] sm:max-w-[450px]"
       >
         <Image
           src="/images/meta-image.jpg"
           alt="Subscribe Image"
           width={500}
           height={500}
-          className="h-auto w-full overflow-hidden rounded-md border border-customNavy"
+          className="h-auto w-full border-b border-customNavy/20"
         />
-        <h2 className="text-pretty text-center font-bigola text-3xl font-bold text-customNavy md:text-4xl">
-          Get exclusive updates on new beer/wine & events!
-        </h2>
-        <MailchimpForm setShouldShow={setShouldShow} />
+        <div className="flex flex-col gap-3 p-3 sm:gap-3 sm:p-6">
+          <h2 className="text-pretty text-center font-bigola text-3xl font-bold text-customNavy md:text-4xl">
+            Get exclusive updates on new beer/wine & events!
+          </h2>
+          <MailchimpForm setShouldShow={setShouldShow} />
+        </div>
       </div>
     </div>
   );

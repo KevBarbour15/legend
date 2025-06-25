@@ -11,7 +11,7 @@ import MailchimpForm from "@/components/mailchimp-form/MailchimpForm";
 
 const Footer = () => {
   return (
-    <footer className="rounded-t-md border-x border-t border-customNavy bg-[#f5f5f5] p-3 pt-6 drop-shadow-card md:p-6">
+    <footer className="shadow-top rounded-t-md border-x border-t border-customNavy/20 bg-[#f5f5f5]/25 p-3 pt-6 backdrop-blur-[1px] md:p-6">
       <div className="flex flex-col-reverse items-center gap-6 lg:flex-row lg:gap-0">
         <div className="flex w-full md:basis-1/2">
           <MailchimpForm setShouldShow={() => {}} />

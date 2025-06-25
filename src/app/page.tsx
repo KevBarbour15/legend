@@ -144,7 +144,7 @@ export default function Home() {
           <div className="about-section aspect-video w-full px-3 opacity-0 md:px-0">
             <Image
               src="/images/about-image.jpg"
-              className="h-full w-full rounded-md border border-customNavy object-cover object-center drop-shadow-card"
+              className="h-full w-full border border-customNavy/20 object-cover object-center drop-shadow-card"
               height={1500}
               width={1500}
               alt="Grand Opening"

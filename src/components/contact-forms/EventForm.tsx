@@ -112,7 +112,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
                 >
                   Name:
                 </FormLabel>
-                <FormControl className="rounded-md border border-customNavy bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl className="rounded-md border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input
                     id="event-name"
                     aria-label="Your full name"
@@ -136,7 +136,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
                 >
                   Email:
                 </FormLabel>
-                <FormControl className="rounded-md border border-customNavy bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl className="rounded-md border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input
                     id="event-email"
                     type="email"
@@ -160,7 +160,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
                 >
                   Phone:
                 </FormLabel>
-                <FormControl className="rounded-md border border-customNavy bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl className="rounded-md border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input
                     id="event-phone"
                     type="tel"
@@ -184,7 +184,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
                 >
                   Date of event:
                 </FormLabel>
-                <FormControl className="rounded-md border border-customNavy bg-[#f5f5f5] font-bigola text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl className="rounded-md border border-customNavy/20 bg-[#f5f5f5] font-bigola text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <DatePicker
                     aria-label="Select event date"
                     aria-describedby="event-date-description"
@@ -207,7 +207,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
                 >
                   Time of interest (1-4 pm, 3-10 pm, etc.):
                 </FormLabel>
-                <FormControl className="rounded-md border border-customNavy bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl className="rounded-md border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input
                     id="event-time"
                     aria-label="Preferred event time"
@@ -231,7 +231,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
                   Type of event:
                 </FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl className="rounded-md border border-customNavy bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                  <FormControl className="rounded-md border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                     <SelectTrigger
                       id="event-type"
                       aria-label="Select event type"
@@ -276,7 +276,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
                   onValueChange={(value) => field.onChange(Number(value))}
                   value={field.value?.toString()}
                 >
-                  <FormControl className="rounded-md border border-customNavy bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                  <FormControl className="rounded-md border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                     <SelectTrigger
                       id="event-guests"
                       aria-label="Select number of guests"
@@ -313,7 +313,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
                   Music options:
                 </FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl className="rounded-md border border-customNavy bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                  <FormControl className="rounded-md border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                     <SelectTrigger
                       id="event-music"
                       aria-label="Select music option"
@@ -367,7 +367,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
                 >
                   What else should we know?
                 </FormLabel>
-                <FormControl className="rounded-md border border-customNavy bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl className="rounded-md border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Textarea
                     id="event-message"
                     aria-label="Additional information"
@@ -381,7 +381,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
           />
           <Button
             type="submit"
-            className="mx-auto w-fit rounded-lg border border-customNavy bg-customNavy font-bigola text-2xl text-[#f5f5f5] drop-shadow-card transition-all duration-300 ease-in-out md:hover:bg-[#f5f5f5] md:hover:text-customNavy md:active:bg-customGold"
+            className="mx-auto w-fit rounded-lg border border-customNavy/20 bg-customNavy font-bigola text-2xl text-[#f5f5f5] drop-shadow-card transition-all duration-300 ease-in-out md:hover:bg-[#f5f5f5] md:hover:text-customNavy md:active:bg-customGold"
           >
             Submit
           </Button>

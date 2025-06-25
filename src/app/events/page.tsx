@@ -180,8 +180,15 @@ export default function Events() {
                 }
               >
                 <TabsList className="top-0 mb-6 grid w-full grid-cols-2 bg-transparent font-bigola md:mt-0 md:w-[400px]">
-                  <TabsTrigger value="upcoming">Upcoming Events</TabsTrigger>
-                  <TabsTrigger value="past">Past Events</TabsTrigger>
+                  <TabsTrigger
+                    value="upcoming"
+                    className="border-customNavy/20"
+                  >
+                    Upcoming Events
+                  </TabsTrigger>
+                  <TabsTrigger value="past" className="border-customNavy/20">
+                    Past Events
+                  </TabsTrigger>
                 </TabsList>
 
                 <div id="events-container" className="w-full">

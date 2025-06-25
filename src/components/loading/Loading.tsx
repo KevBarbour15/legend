@@ -17,7 +17,7 @@ const Loading: React.FC<LoadingProps> = ({
       </h2>
       <Progress
         value={progress}
-        className={`drop-shadow-card w-[75vw] max-w-[350px] border ${borderColor}`}
+        className={`w-[75vw] max-w-[350px] border border-customNavy/20 drop-shadow-card`}
       />
     </div>
   );
