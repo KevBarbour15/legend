@@ -59,7 +59,7 @@ export const metadata: Metadata = {
       "Sacramento's first hi-fi listening bar, where music meets the art of sound.",
     images: [
       {
-        url: "/images/meta-image.jpg",
+        url: "/images/meta-image.webp",
         width: 1200,
         height: 630,
         alt: "Legend Has It",
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Legend Has It",
-    images: ["/images/meta-image.jpg"],
+    images: ["/images/meta-image.webp"],
     description:
       "Sacramento's first hi-fi listening bar, where music meets the art of sound.",
   },

@@ -162,7 +162,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       <motion.div
         layoutId={`card-${event._id}`}
         onClick={handleCardClick}
-        className="flex h-full cursor-pointer justify-between overflow-hidden rounded-md border border-customNavy/20 bg-[#f5f5f5]/25 shadow-lg backdrop-blur-[1px]"
+        className="flex h-full cursor-pointer justify-between overflow-hidden rounded-md border border-customNavy/20 bg-[#f5f5f5]/25 shadow-sm backdrop-blur-[1px] md:shadow-md"
       >
         <div className="flex h-auto w-full min-w-0 flex-col justify-between p-3 text-customNavy">
           <motion.h2
