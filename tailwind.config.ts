@@ -110,6 +110,12 @@ const config: Config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
+  safelist: [
+    'drop-shadow-record',
+    'drop-shadow-recordPlayer',
+    'drop-shadow-text',
+    'drop-shadow-card',
+  ],
 };
 
 export default config;
