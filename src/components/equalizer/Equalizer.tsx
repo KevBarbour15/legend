@@ -53,7 +53,7 @@ const Equalizer: React.FC<EqualizerProps> = ({ playing }) => {
           ref={(el) => {
             barRefs.current[index] = el;
           }}
-          className="w-[2.25px] rounded-full bg-customCream drop-shadow-text"
+          className="text-shadow-custom w-[2.25px] rounded-full bg-customCream"
           style={{ minHeight: "2px" }}
         />
       ))}

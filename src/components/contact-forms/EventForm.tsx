@@ -91,7 +91,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
           onSubmit={form.handleSubmit(onSubmit)}
           className="mx-auto flex w-full flex-col space-y-3 border-t-2 border-customGold pt-4 opacity-0 lg:w-[650px]"
         >
-          <p className="mb-6 text-pretty font-hypatia text-xl leading-[1.15] text-customNavy drop-shadow-text md:text-center">
+          <p className="text-shadow-custom mb-6 text-pretty font-hypatia text-xl leading-[1.15] text-customNavy md:text-center">
             Thank you for inquiring about hosting your special event at{" "}
             <span className="font-bigola">Legend Has It</span>. We appreciate
             your interest and look forward to helping you create a memorable
@@ -108,7 +108,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
               <FormItem className="w-full">
                 <FormLabel
                   htmlFor="event-name"
-                  className="font-bigola text-customNavy drop-shadow-text"
+                  className="text-shadow-custom font-bigola text-customNavy"
                 >
                   Name:
                 </FormLabel>
@@ -132,7 +132,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
               <FormItem className="w-full">
                 <FormLabel
                   htmlFor="event-email"
-                  className="font-bigola text-customNavy drop-shadow-text"
+                  className="text-shadow-custom font-bigola text-customNavy"
                 >
                   Email:
                 </FormLabel>
@@ -156,7 +156,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
               <FormItem className="w-full">
                 <FormLabel
                   htmlFor="event-phone"
-                  className="font-bigola text-customNavy drop-shadow-text"
+                  className="text-shadow-custom font-bigola text-customNavy"
                 >
                   Phone:
                 </FormLabel>
@@ -180,11 +180,11 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
               <FormItem className="w-full">
                 <FormLabel
                   htmlFor="event-date"
-                  className="font-bigola text-customNavy drop-shadow-text"
+                  className="text-shadow-custom font-bigola text-customNavy"
                 >
                   Date of event:
                 </FormLabel>
-                <FormControl className="rounded-md border border-customNavy/20 bg-[#f5f5f5] font-bigola text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl className="rounded-md border border-neutral-400/20 bg-neutral-300/15 font-bigola text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <DatePicker
                     aria-label="Select event date"
                     aria-describedby="event-date-description"
@@ -203,7 +203,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
               <FormItem className="w-full">
                 <FormLabel
                   htmlFor="event-time"
-                  className="font-bigola text-customNavy drop-shadow-text"
+                  className="text-shadow-custom font-bigola text-customNavy"
                 >
                   Time of interest (1-4 pm, 3-10 pm, etc.):
                 </FormLabel>
@@ -268,7 +268,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
               <FormItem className="w-full">
                 <FormLabel
                   htmlFor="event-guests"
-                  className="font-bigola text-customNavy drop-shadow-text"
+                  className="text-shadow-custom font-bigola text-customNavy"
                 >
                   Number of guests:
                 </FormLabel>
@@ -308,7 +308,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
               <FormItem className="w-full">
                 <FormLabel
                   htmlFor="event-music"
-                  className="font-bigola text-customNavy drop-shadow-text"
+                  className="text-shadow-custom font-bigola text-customNavy"
                 >
                   Music options:
                 </FormLabel>
@@ -363,7 +363,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
               <FormItem className="w-full">
                 <FormLabel
                   htmlFor="event-message"
-                  className="font-bigola text-customNavy drop-shadow-text"
+                  className="text-shadow-custom font-bigola text-customNavy"
                 >
                   What else should we know?
                 </FormLabel>

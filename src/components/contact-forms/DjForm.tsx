@@ -62,7 +62,7 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="mx-auto flex w-full flex-col space-y-3 border-t-2 border-customGold pt-4 opacity-0 lg:w-[650px]"
       >
-        <p className="mb-6 text-pretty font-hypatia text-xl leading-[1.15] text-customNavy drop-shadow-text md:text-center">
+        <p className="text-shadow-custom mb-6 text-pretty font-hypatia text-xl leading-[1.15] text-customNavy md:text-center">
           Thank you for your interest to DJ at{" "}
           <span className="font-bigola">Legend Has It</span>. Please take a
           minute to fill out the form below so we can get to know you and your
@@ -76,7 +76,7 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
             <FormItem className="w-full">
               <FormLabel
                 htmlFor="dj-name"
-                className="font-bigola text-customNavy drop-shadow-text"
+                className="text-shadow-custom font-bigola text-customNavy"
               >
                 Name:
               </FormLabel>
@@ -100,7 +100,7 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
             <FormItem className="w-full">
               <FormLabel
                 htmlFor="dj-email"
-                className="font-bigola text-customNavy drop-shadow-text"
+                className="text-shadow-custom font-bigola text-customNavy"
               >
                 Email:
               </FormLabel>
@@ -124,7 +124,7 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
             <FormItem className="w-full">
               <FormLabel
                 htmlFor="dj-phone"
-                className="font-bigola text-customNavy drop-shadow-text"
+                className="text-shadow-custom font-bigola text-customNavy"
               >
                 Phone:
               </FormLabel>
@@ -149,7 +149,7 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
             <FormItem className="w-full">
               <FormLabel
                 htmlFor="dj-message"
-                className="font-bigola text-customNavy drop-shadow-text"
+                className="text-shadow-custom font-bigola text-customNavy"
               >
                 Experience, style, etc:
               </FormLabel>

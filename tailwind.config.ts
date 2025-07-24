@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import animate from "tailwindcss-animate";
 
 const config: Config = {
   darkMode: ["class"],
@@ -7,16 +8,6 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  compilerOptions: {
-    baseUrl: ".",
-    paths: {
-      "@components/*": ["./components/*"],
-      "@utils/*": ["./utils/*"],
-      "@styles/*": ["./styles/*"],
-      "@models/*": ["./models/*"],
-      "@lib/*": ["./lib/*"],
-    },
-  },
   theme: {
     container: {
       center: true,
@@ -59,7 +50,7 @@ const config: Config = {
       dropShadow: {
         record: "0.75px 0.75px 0.75px rgba(0, 0, 0, 0.45)",
         recordPlayer: "1.75px 2.75px 4.5px rgba(0, 0, 0, 0.85)",
-        text: ".35px 0.5px 0.75px rgba(0, 0, 0, 0.35)",
+        text: ".35px 0.5px 0.75px rgba(0, 0, 0, 0.35)", // ✅ Kept exactly as you had it
         card: ".35px 0.5px 0.75px rgba(0, 0, 0, 0.35)",
       },
       screens: {
@@ -76,29 +67,21 @@ const config: Config = {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
         "gradient-x": {
           "0%, 100%": {
-            "background-size": "200% 200%",
-            "background-position": "left center",
+            backgroundSize: "200% 200%",
+            backgroundPosition: "left center",
           },
           "50%": {
-            "background-size": "200% 200%",
-            "background-position": "right center",
+            backgroundSize: "200% 200%",
+            backgroundPosition: "right center",
           },
         },
       },
@@ -109,12 +92,25 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    animate,
+    // ✅ Add actual text-shadow utility manually
+    function ({ addUtilities }: { addUtilities: (utilities: any) => void }) {
+      addUtilities({
+        ".text-shadow-custom": {
+          textShadow: ".35px 0.5px 0.75px rgba(0,0,0,0.35)",
+          WebkitFontSmoothing: "antialiased",
+          MozOsxFontSmoothing: "grayscale",
+        },
+      });
+    },
+  ],
   safelist: [
-    'drop-shadow-record',
-    'drop-shadow-recordPlayer',
-    'drop-shadow-text',
-    'drop-shadow-card',
+    "drop-shadow-record",
+    "drop-shadow-recordPlayer",
+    "drop-shadow-text",
+    "drop-shadow-card",
+    "text-shadow-custom", // ✅ New class
   ],
 };
 

@@ -78,7 +78,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                 <X
                   size={30}
                   weight="regular"
-                  className="rounded-full text-[#f5f5f5] drop-shadow-text transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+                  className="text-shadow-custom rounded-full text-[#f5f5f5] transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
                 />
               </IconButton>
             </motion.div>
@@ -162,7 +162,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       <motion.div
         layoutId={`card-${event._id}`}
         onClick={handleCardClick}
-        className="flex h-full cursor-pointer justify-between overflow-hidden rounded-md border border-customNavy/20 bg-[#f5f5f5]/25 shadow-sm backdrop-blur-[1px] md:shadow-md"
+        className="flex h-full cursor-pointer justify-between overflow-hidden rounded-md border border-neutral-400/20 bg-neutral-300/15 shadow-sm backdrop-blur-[1px] md:shadow-md"
       >
         <div className="flex h-auto w-full min-w-0 flex-col justify-between p-3 text-customNavy">
           <motion.h2

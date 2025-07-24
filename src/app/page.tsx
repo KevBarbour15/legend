@@ -154,14 +154,14 @@ export default function Home() {
           </div>
 
           <div className="px-3 font-hypatia text-lg text-customNavy md:px-0 md:text-xl">
-            <p className="about-section my-6 text-pretty leading-[1.15] opacity-0 drop-shadow-text">
+            <p className="about-section text-shadow-custom my-6 text-pretty leading-[1.15] opacity-0">
               Welcome to <span className="font-bigola">Legend Has It</span>,
               Sacramento's first hi-fi listening bar, where music meets the art
               of sound. We offer an immersive experience for audiophiles and
               music lovers, celebrating the warmth of vinyl records and the
               richness of high-fidelity sound.
             </p>
-            <p className="about-section text-pretty leading-[1.15] opacity-0 drop-shadow-text">
+            <p className="about-section text-shadow-custom text-pretty leading-[1.15] opacity-0">
               We curate a space where the ordinary becomes extraordinary. We
               don't just play sound; we make you feel it. Every beat, every
               conversation, every moment crafted to build something deeper,
@@ -173,7 +173,7 @@ export default function Home() {
               you long after the night ends.
             </p>
           </div>
-          <div className="mt-3 block px-3 py-6 font-bigola text-xl text-customNavy drop-shadow-text md:mb-0 md:px-0 md:text-3xl">
+          <div className="text-shadow-custom mt-3 block px-3 py-6 font-bigola text-xl text-customNavy md:mb-0 md:px-0 md:text-3xl">
             <h2 className="about-section mb-3 opacity-0 md:mb-6">
               Regular Hours
             </h2>

@@ -67,7 +67,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
           onSubmit={form.handleSubmit(onSubmit)}
           className="mx-auto flex w-full flex-col space-y-3 border-t-2 border-customGold pt-4 opacity-0 lg:w-[650px]"
         >
-          <p className="mb-6 text-pretty font-hypatia text-xl leading-[1.15] text-customNavy drop-shadow-text md:text-center">
+          <p className="text-shadow-custom mb-6 text-pretty font-hypatia text-xl leading-[1.15] text-customNavy md:text-center">
             Thank you for reaching out to{" "}
             <span className="font-bigola">Legend Has It</span>. Please take a
             minute and fill out the form below to give us a better understanding
@@ -81,7 +81,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
               <FormItem className="w-full">
                 <FormLabel
                   htmlFor="general-name"
-                  className="font-bigola text-customNavy drop-shadow-text"
+                  className="text-shadow-custom font-bigola text-customNavy"
                 >
                   Name:
                 </FormLabel>
@@ -105,7 +105,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
               <FormItem className="w-full">
                 <FormLabel
                   htmlFor="general-email"
-                  className="font-bigola text-customNavy drop-shadow-text"
+                  className="text-shadow-custom font-bigola text-customNavy"
                 >
                   Email:
                 </FormLabel>
@@ -129,7 +129,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
               <FormItem className="w-full">
                 <FormLabel
                   htmlFor="general-phone"
-                  className="font-bigola text-customNavy drop-shadow-text"
+                  className="text-shadow-custom font-bigola text-customNavy"
                 >
                   Phone:
                 </FormLabel>
@@ -154,7 +154,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
               <FormItem className="w-full">
                 <FormLabel
                   htmlFor="general-message"
-                  className="font-bigola text-customNavy drop-shadow-text"
+                  className="text-shadow-custom font-bigola text-customNavy"
                 >
                   Message:
                 </FormLabel>

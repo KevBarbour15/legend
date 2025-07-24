@@ -172,15 +172,15 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       >
         <div className="w-full md:w-fit">
           <div className="buttons-container z-[11] flex justify-between rounded-none bg-opacity-5 py-2 md:gap-2 md:bg-opacity-0 md:py-1">
-            <IconButton
-              className={`player-button p-1 ${buttonColor} backdrop-blur-md md:backdrop-blur-0`}
+            <button
+              className={`player-button p-1 ${buttonColor} rounded-full border border-neutral-400/20 bg-neutral-300/15 p-1 shadow-sm backdrop-blur-[1px] md:shadow-md`}
               aria-label={mute ? "Unmute" : "Mute"}
             >
               {mute ? (
                 <SpeakerSlash
                   weight="regular"
                   onClick={handleMute}
-                  className="drop-shadow-text transition-all md:hover:text-customGold"
+                  className="text-shadow-custom transition-all md:hover:text-customGold"
                   aria-hidden="true"
                   size={visible ? 24 : 30}
                 />
@@ -188,93 +188,93 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                 <SpeakerSimpleHigh
                   weight="regular"
                   onClick={handleMute}
-                  className="drop-shadow-text transition-all md:hover:text-customGold"
+                  className="text-shadow-custom transition-all md:hover:text-customGold"
                   aria-hidden="true"
                   size={visible ? 24 : 30}
                 />
               )}
-            </IconButton>
-            <IconButton
+            </button>
+            <button
               onClick={handlePreviousTrack}
-              className={`player-button p-1 ${buttonColor} backdrop-blur-md md:backdrop-blur-0`}
+              className={`player-button p-1 ${buttonColor} rounded-full border border-neutral-400/20 bg-neutral-300/15 p-1 shadow-sm backdrop-blur-[1px] md:shadow-md`}
               aria-label="Previous track"
             >
               <SkipBack
                 weight="regular"
-                className="drop-shadow-text transition-all md:hover:text-customGold"
+                className="text-shadow-custom transition-all md:hover:text-customGold"
                 aria-hidden="true"
                 size={visible ? 24 : 30}
               />
-            </IconButton>
+            </button>
 
-            <IconButton
+            <button
               onClick={handlePlayPauseRounded}
-              className={`player-button p-1 ${buttonColor} backdrop-blur-md md:backdrop-blur-0`}
+              className={`player-button p-1 ${buttonColor} rounded-full border border-neutral-400/20 bg-neutral-300/15 p-1 shadow-sm backdrop-blur-[1px] md:shadow-md`}
               aria-label={playing ? "Pause" : "Play"}
             >
               {playing ? (
                 <Pause
                   weight="regular"
-                  className="drop-shadow-text transition-all md:hover:text-customGold"
+                  className="text-shadow-custom transition-all md:hover:text-customGold"
                   aria-hidden="true"
                   size={visible ? 24 : 30}
                 />
               ) : (
                 <Play
                   weight="regular"
-                  className="drop-shadow-text transition-all md:hover:text-customGold"
+                  className="text-shadow-custom transition-all md:hover:text-customGold"
                   aria-hidden="true"
                 />
               )}
-            </IconButton>
-            <IconButton
+            </button>
+            <button
               onClick={handleNextTrack}
-              className={`player-button p-1 ${buttonColor} backdrop-blur-md md:backdrop-blur-0`}
+              className={`player-button p-1 ${buttonColor} rounded-full border border-neutral-400/20 bg-neutral-300/15 p-1 shadow-sm backdrop-blur-[1px] md:shadow-md`}
               aria-label="Next track"
             >
               <SkipForward
                 weight="regular"
-                className="drop-shadow-text transition-all md:hover:text-customGold"
+                className="text-shadow-custom transition-all md:hover:text-customGold"
                 aria-hidden="true"
                 size={visible ? 24 : 30}
               />
-            </IconButton>
-            <IconButton
+            </button>
+            <button
               onClick={togglePlaylist}
-              className={`player-button transform p-1 ${buttonColor} backdrop-blur-md md:backdrop-blur-0`}
+              className={`player-button transform p-1 ${buttonColor} rounded-full border border-neutral-400/20 bg-neutral-300/15 p-1 shadow-sm backdrop-blur-[1px] md:shadow-md`}
               aria-label={playlistVisible ? "Close playlist" : "Open playlist"}
               aria-expanded={playlistVisible}
             >
               {playlistVisible ? (
                 <X
                   weight="regular"
-                  className="drop-shadow-text transition-all md:hover:text-customGold"
+                  className="text-shadow-custom transition-all md:hover:text-customGold"
                   aria-hidden="true"
                   size={visible ? 24 : 30}
                 />
               ) : (
                 <VinylRecord
                   weight="regular"
-                  className="drop-shadow-text transition-all md:hover:text-customGold"
+                  className="text-shadow-custom transition-all md:hover:text-customGold"
                   aria-hidden="true"
                   size={visible ? 24 : 30}
                 />
               )}
-            </IconButton>
+            </button>
           </div>
           <div
-            className="relative mt-2 hidden h-auto w-full opacity-0 drop-shadow-text md:block"
+            className="text-shadow-custom relative mt-2 hidden h-auto w-full opacity-0 md:block"
             id="record-player"
           >
             <Image
               id="now-playing"
-              height={144}
-              width={144}
+              height={152}
+              width={152}
               style={{
-                height: "144px",
-                width: "144px",
+                height: "152px",
+                width: "152px",
               }}
-              className="absolute left-[4px] top-[1.05px] z-[3]"
+              className="absolute left-[4px] top-[1.75px] z-[3]"
               src="/images/record.png"
               alt="Record"
               priority={true}
@@ -325,7 +325,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
           >
             <div className="h-full w-full rounded-md">
               <Image
-                className="h-auto w-24 p-3 drop-shadow-text md:w-28"
+                className="text-shadow-custom h-auto w-24 p-3 md:w-28"
                 src="/images/alt-logo.png"
                 alt="Alt Logo"
                 height={96}
@@ -334,11 +334,11 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               <div className="h-fit">
                 {tracks.map((track, index) => (
                   <div key={index} className="flex h-full flex-row p-1 md:px-3">
-                    <div className="mr-3 flex flex-col justify-between px-1 font-bigola text-customCream drop-shadow-text md:px-0">
+                    <div className="text-shadow-custom mr-3 flex flex-col justify-between px-1 font-bigola text-customCream md:px-0">
                       <p className="text-2xl leading-none">{index + 1}.</p>
                       <p className="text-xl leading-none">by</p>
                     </div>
-                    <div className="flex w-full flex-col justify-between px-1 font-bigola text-customCream drop-shadow-text md:px-0">
+                    <div className="text-shadow-custom flex w-full flex-col justify-between px-1 font-bigola text-customCream md:px-0">
                       <p className="text-2xl leading-none">{track.title}</p>
                       <p className="text-xl leading-none">{track.artist}</p>
                     </div>
@@ -348,7 +348,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                       ) : (
                         <IconButton
                           id="player-button"
-                          className="m-0 flex p-1 text-customCream drop-shadow-text md:px-0 md:hover:text-customGold"
+                          className="text-shadow-custom m-0 flex p-1 text-customCream md:px-0 md:hover:text-customGold"
                           aria-label={`Play ${track.title} by ${track.artist}`}
                         >
                           <Play
