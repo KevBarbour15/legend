@@ -207,7 +207,7 @@ export default function Home() {
           <div className="about-section mb-12 mt-3 hidden opacity-0 drop-shadow-card md:block">
             <iframe
               title="Spotify Playlist"
-              src="https://open.spotify.com/embed/playlist/7pIFUTsTxa3MMROMuXsElO?utm_source=generator&theme=0"
+              src="https://open.spotify.com/embed/playlist/4qgu3fFLeZiCIyx3GBRik1?utm_source=generator"
               width="100%"
               height="352"
               allow="encrypted-media"
