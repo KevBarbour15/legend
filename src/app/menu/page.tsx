@@ -262,7 +262,7 @@ const Menu: React.FC = ({}) => {
   );
 
   const renderCannedBeerCategory = (category: CategoryWithItems) => (
-    <Accordion type="single" collapsible className="w-full pl-3">
+    <Accordion type="single" collapsible className="w-full pl-4">
       {category.childCategories.map((childCategory, index) => (
         <AccordionItem
           value={childCategory.id}
@@ -270,7 +270,7 @@ const Menu: React.FC = ({}) => {
           key={childCategory.id}
         >
           <AccordionTrigger
-            className={`text-shadow-custom cursor-pointer font-bigola text-xl leading-none md:text-4xl ${
+            className={`cursor-pointer font-bigola text-xl leading-none drop-shadow-text md:text-4xl ${
               activeChildCategory === childCategory.id
                 ? "text-customGold"
                 : "text-customNavy"
@@ -345,7 +345,7 @@ const Menu: React.FC = ({}) => {
                             key={categoryName}
                           >
                             <AccordionTrigger
-                              className={`cursor-pointer font-bigola text-3xl leading-none transition-all duration-300 md:text-4xl ${
+                              className={`cursor-pointer font-bigola text-3xl leading-none drop-shadow-text transition-all duration-300 md:text-4xl ${
                                 activeCategory === index
                                   ? "text-customGold"
                                   : "text-customNavy"
@@ -354,7 +354,7 @@ const Menu: React.FC = ({}) => {
                               onClick={() => handleCategoryClick(index)}
                             >
                               <h2
-                                className={`text-shadow-custom transition-all duration-300 ${activeCategory === index ? "translate-x-[15px] transform text-customGold" : "text-customNavy"}`}
+                                className={`text-shadow-custom transition-all duration-300 ${activeCategory === index ? "translate-x-[16px] transform text-customGold" : "text-customNavy"}`}
                               >
                                 {categoryName}
                               </h2>

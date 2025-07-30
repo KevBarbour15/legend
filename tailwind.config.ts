@@ -50,7 +50,7 @@ const config: Config = {
       dropShadow: {
         record: "0.75px 0.75px 0.75px rgba(0, 0, 0, 0.45)",
         recordPlayer: "1.75px 2.75px 4.5px rgba(0, 0, 0, 0.85)",
-        text: ".35px 0.5px 0.75px rgba(0, 0, 0, 0.35)", // ✅ Kept exactly as you had it
+        text: ".35px 0.5px 0.75px rgba(0, 0, 0, 0.35)",
         card: ".35px 0.5px 0.75px rgba(0, 0, 0, 0.35)",
       },
       screens: {

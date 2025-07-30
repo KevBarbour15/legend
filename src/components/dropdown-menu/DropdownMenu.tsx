@@ -22,6 +22,7 @@ const links = [
   { path: "/menu", label: "Menu" },
   { path: "/events", label: "Events" },
   { path: "/contact", label: "Contact" },
+  { path: "/shop", label: "Shop" },
 ];
 
 const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
@@ -166,7 +167,7 @@ const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
           </div>
         </div>
         <div className="menu-info-container">
-          <div className="menu-info-row drop-shadow-card opacity-0">
+          <div className="menu-info-row opacity-0 drop-shadow-card">
             <a
               href="https://open.spotify.com/user/31pcq2fnwyxprxppy4ezl3v3evaq "
               target="_blank"
