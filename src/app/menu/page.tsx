@@ -67,7 +67,7 @@ const Menu: React.FC = ({}) => {
             "Content-Type": "application/json",
           },
           next: {
-            revalidate: 0, // Disable caching at the page level
+            revalidate: 0,
           },
         });
 
@@ -104,42 +104,40 @@ const Menu: React.FC = ({}) => {
       .set("#menu-heading", {
         opacity: 1,
       })
-
       .set(heading.words, {
-        opacity: 0,
-        x: -25,
+        y: 50,
       })
       .set(menuItemRefs.current, {
         opacity: 0,
-        y: 25,
+        y: 30,
       })
       .to(heading.words, {
-        x: 0,
-        duration: 0.3,
+        y: 0,
+        duration: 0.5,
         ease: "back.out(1.7)",
-        opacity: 1,
-        stagger: 0.025,
+
+        stagger: 0.075,
       })
       .to(
-        "#menu-subheading",
+        "#menu",
         {
-          duration: 0.3,
           opacity: 1,
+          duration: 0.025,
         },
         "<",
       )
-      .to("#menu", {
-        opacity: 1,
-        duration: 0.025,
-      })
-      .to(menuItemRefs.current, {
-        delay: 0.025,
-        y: 0,
-        duration: 0.3,
-        stagger: 0.075,
-        ease: "back.out(2.5)",
-        opacity: 1,
-      });
+      .to(
+        menuItemRefs.current,
+        {
+          delay: 0.025,
+          y: 0,
+          duration: 0.3,
+          stagger: 0.075,
+          ease: "back.out(2.5)",
+          opacity: 1,
+        },
+        "<",
+      );
   }, [loading]);
 
   useEffect(() => {
@@ -322,12 +320,14 @@ const Menu: React.FC = ({}) => {
             </div>
           ) : (
             <div>
-              <h2
-                id="menu-heading"
-                className="text-shadow-custom my-3 w-full font-hypatia text-3xl leading-[1.15] text-customNavy opacity-0"
-              >
-                Stay up to date as our selections rotate!
-              </h2>
+              <div className="overflow-hidden py-3">
+                <h2
+                  id="menu-heading"
+                  className="text-shadow-custom w-full font-hypatia text-3xl leading-[1.15] text-customNavy opacity-0"
+                >
+                  Stay up to date as our selections rotate!
+                </h2>
+              </div>
               <Accordion type="single" collapsible className="z-[151] w-full">
                 <div className="w-full opacity-0" id="menu">
                   {Object.entries(menu).map(
