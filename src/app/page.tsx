@@ -28,8 +28,9 @@ export default function Home() {
         console.error(error);
       }
     };
-
-    updateEventStatus();
+    
+    // don't currently need this
+    //updateEventStatus();
 
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
@@ -136,7 +137,7 @@ export default function Home() {
         >
           <AudioStatic />
         </div>
-        <div className="top-bg h-dvh w-screen"></div>
+        <div className="top-bg h-full min-h-svh w-screen"></div>
         <div
           id="about-content"
           className="relative mx-auto block h-auto md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
