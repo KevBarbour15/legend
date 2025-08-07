@@ -63,7 +63,7 @@ const ToastAction = React.forwardRef<
   <ToastPrimitives.Action
     ref={ref}
     className={cn(
-      "inline-flex h-8 shrink-0 items-center justify-center rounded-none border-2 border-stone-200 bg-transparent px-3 text-sm font-medium transition-colors hover:bg-stone-100 focus:outline-none focus:ring-1 focus:ring-stone-950 disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-stone-100/40 group-[.destructive]:hover:border-red-500/30 group-[.destructive]:hover:bg-red-500 group-[.destructive]:hover:text-stone-50 group-[.destructive]:focus:ring-red-500 dark:border-stone-800 dark:hover:bg-stone-800 dark:focus:ring-stone-300 dark:group-[.destructive]:border-stone-800/40 dark:group-[.destructive]:hover:border-red-900/30 dark:group-[.destructive]:hover:bg-red-900 dark:group-[.destructive]:hover:text-stone-50 dark:group-[.destructive]:focus:ring-red-900",
+      "inline-flex h-8 shrink-0 items-center justify-center rounded-sm border-2 border-stone-200 bg-transparent px-3 text-sm font-medium transition-colors hover:bg-stone-100 focus:outline-none focus:ring-1 focus:ring-stone-950 disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-stone-100/40 group-[.destructive]:hover:border-red-500/30 group-[.destructive]:hover:bg-red-500 group-[.destructive]:hover:text-stone-50 group-[.destructive]:focus:ring-red-500 dark:border-stone-800 dark:hover:bg-stone-800 dark:focus:ring-stone-300 dark:group-[.destructive]:border-stone-800/40 dark:group-[.destructive]:hover:border-red-900/30 dark:group-[.destructive]:hover:bg-red-900 dark:group-[.destructive]:hover:text-stone-50 dark:group-[.destructive]:focus:ring-red-900",
       className,
     )}
     {...props}
@@ -78,7 +78,7 @@ const ToastClose = React.forwardRef<
   <ToastPrimitives.Close
     ref={ref}
     className={cn(
-      "absolute right-1 top-1 rounded-none p-1 text-stone-950/50 opacity-0 transition-opacity hover:text-stone-950 focus:opacity-100 focus:outline-none focus:ring-1 group-hover:opacity-100 group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600 dark:text-stone-50/50 dark:hover:text-stone-50",
+      "absolute right-1 top-1 rounded-sm p-1 text-stone-950/50 opacity-0 transition-opacity hover:text-stone-950 focus:opacity-100 focus:outline-none focus:ring-1 group-hover:opacity-100 group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600 dark:text-stone-50/50 dark:hover:text-stone-50",
       className,
     )}
     toast-close=""

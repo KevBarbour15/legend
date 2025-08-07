@@ -14,6 +14,8 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
+import { useCart } from "@/hooks/useCart";
+
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
@@ -147,21 +149,21 @@ export default function Home() {
               className="h-full w-full border border-customNavy/20 object-cover object-center drop-shadow-card"
               height={1500}
               width={1500}
-              alt="Grand Opening"
+              alt="Legend Has It"
               priority={true}
               loading="eager"
             />
           </div>
 
           <div className="px-3 font-hypatia text-lg text-customNavy md:px-0 md:text-xl">
-            <p className="about-section text-shadow-custom my-6 text-pretty leading-[1.15] opacity-0">
+            <p className="about-section my-6 text-pretty leading-[1.15] opacity-0 text-shadow-custom">
               Welcome to <span className="font-bigola">Legend Has It</span>,
               Sacramento's first hi-fi listening bar, where music meets the art
               of sound. We offer an immersive experience for audiophiles and
               music lovers, celebrating the warmth of vinyl records and the
               richness of high-fidelity sound.
             </p>
-            <p className="about-section text-shadow-custom text-pretty leading-[1.15] opacity-0">
+            <p className="about-section text-pretty leading-[1.15] opacity-0 text-shadow-custom">
               We curate a space where the ordinary becomes extraordinary. We
               don't just play sound; we make you feel it. Every beat, every
               conversation, every moment crafted to build something deeper,
@@ -173,7 +175,7 @@ export default function Home() {
               you long after the night ends.
             </p>
           </div>
-          <div className="text-shadow-custom mt-3 block px-3 py-6 font-bigola text-xl text-customNavy md:mb-0 md:px-0 md:text-3xl">
+          <div className="mt-3 block px-3 py-6 font-bigola text-xl text-customNavy text-shadow-custom md:mb-0 md:px-0 md:text-3xl">
             <h2 className="about-section mb-3 opacity-0 md:mb-6">
               Regular Hours
             </h2>

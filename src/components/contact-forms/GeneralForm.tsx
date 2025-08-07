@@ -85,7 +85,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
                 >
                   Name:
                 </FormLabel>
-                <FormControl className="rounded-md border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl className="rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input
                     id="general-name"
                     aria-label="Your full name"
@@ -109,7 +109,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
                 >
                   Email:
                 </FormLabel>
-                <FormControl className="rounded-md border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl className="rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input
                     id="general-email"
                     type="email"
@@ -133,7 +133,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
                 >
                   Phone:
                 </FormLabel>
-                <FormControl className="rounded-md border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl className="rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input
                     id="general-phone"
                     type="tel"
@@ -158,7 +158,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
                 >
                   Message:
                 </FormLabel>
-                <FormControl className="rounded-md border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl className="rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Textarea
                     id="general-message"
                     aria-label="Your message"

@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import SideMenu from "@/components/side-menu/SideMenu";
 import { connectToMongoDB } from "@/lib/db";
 
-export default async function ShopLayout({
+export default async function ProductLayout({
   children,
 }: {
   children: ReactNode;

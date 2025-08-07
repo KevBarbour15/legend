@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Menu from "@/components/dropdown-menu/DropdownMenu";
 
-import { List } from "@phosphor-icons/react";
+import { List, ShoppingCart } from "@phosphor-icons/react";
 import Image from "next/image";
 import { IconButton } from "@mui/material";
 
@@ -60,6 +60,15 @@ const MobileHeader: React.FC = () => {
               />
             </Link>
           </div>
+          <IconButton
+            component={Link}
+            href="/cart"
+            className="bg-transparent p-0 text-customCream"
+            aria-label="Cart"
+            style={{ marginRight: 8 }}
+          >
+            <ShoppingCart weight="regular" size={28} />
+          </IconButton>
           <IconButton
             onClick={toggleMenu}
             className="bg-transparent p-0 text-customCream"

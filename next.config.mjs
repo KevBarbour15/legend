@@ -14,6 +14,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "i.stack.imgur.com",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.shopify.com",
+      },
     ],
     formats: ["image/webp"],
   },

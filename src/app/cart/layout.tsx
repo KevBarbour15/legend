@@ -1,8 +1,7 @@
 import { ReactNode } from "react";
-import SideMenu from "@/components/side-menu/SideMenu";
 import { connectToMongoDB } from "@/lib/db";
-
-export default async function ShopLayout({
+import SideMenu from "@/components/side-menu/SideMenu";
+export default async function CartLayout({
   children,
 }: {
   children: ReactNode;

@@ -171,7 +171,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         className="fixed bottom-0 left-0 right-0 mx-3 mb-3 flex flex-col md:mb-6 md:ml-6 md:mr-0 md:w-fit md:flex-row"
       >
         <div className="w-full md:w-fit">
-          <div className="buttons-container z-[11] flex justify-between rounded-none bg-opacity-5 py-2 md:gap-2 md:bg-opacity-0 md:py-1">
+          <div className="buttons-container z-[11] flex justify-between rounded-sm bg-opacity-5 py-2 md:gap-2 md:bg-opacity-0 md:py-1">
             <button
               className={`player-button p-1 ${buttonColor} rounded-full border border-neutral-400/20 bg-neutral-300/15 p-1 shadow-sm backdrop-blur-[1px] md:shadow-md`}
               aria-label={mute ? "Unmute" : "Mute"}
@@ -302,7 +302,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                 height: "auto",
                 width: "100%",
               }}
-              className="rounded-none drop-shadow-recordPlayer"
+              className="rounded-sm drop-shadow-recordPlayer"
               src="/images/record-player.jpg"
               alt="Record"
               priority={true}
@@ -316,14 +316,14 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       >
         <Collapse in={playlistVisible}>
           <div
-            className="aspect-square w-full rounded-md md:h-[425px] md:w-auto"
+            className="aspect-square w-full rounded-sm md:h-[425px] md:w-auto"
             style={{
               backgroundImage: "url('/images/album-cover.jpg')",
               backgroundPosition: "center",
               backgroundSize: "cover",
             }}
           >
-            <div className="h-full w-full rounded-md">
+            <div className="h-full w-full rounded-sm">
               <Image
                 className="text-shadow-custom h-auto w-24 p-3 md:w-28"
                 src="/images/alt-logo.png"

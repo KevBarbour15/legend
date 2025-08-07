@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import animate from "tailwindcss-animate";
+import typography from "@tailwindcss/typography";
 
 const config: Config = {
   darkMode: ["class"],
@@ -46,6 +47,27 @@ const config: Config = {
         customCream: "#dfcfc0",
         customGold: "#bc9952",
         customSilver: "#C0C0C0",
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            "--tw-prose-body": "#244154",
+            "--tw-prose-headings": "#244154",
+            "--tw-prose-links": "#bc9952",
+            "--tw-prose-bold": "#244154",
+            "--tw-prose-counters": "#244154",
+            "--tw-prose-bullets": "#244154",
+            "--tw-prose-hr": "#244154",
+            "--tw-prose-quotes": "#244154",
+            "--tw-prose-quote-borders": "#244154",
+            "--tw-prose-captions": "#244154",
+            "--tw-prose-code": "#244154",
+            "--tw-prose-pre-code": "#244154",
+            "--tw-prose-pre-bg": "#f4f4f4",
+            "--tw-prose-th-borders": "#244154",
+            "--tw-prose-td-borders": "#244154",
+          },
+        },
       },
       dropShadow: {
         record: "0.75px 0.75px 0.75px rgba(0, 0, 0, 0.45)",
@@ -94,7 +116,7 @@ const config: Config = {
   },
   plugins: [
     animate,
-    // ✅ Add actual text-shadow utility manually
+    typography,
     function ({ addUtilities }: { addUtilities: (utilities: any) => void }) {
       addUtilities({
         ".text-shadow-custom": {
@@ -110,7 +132,7 @@ const config: Config = {
     "drop-shadow-recordPlayer",
     "drop-shadow-text",
     "drop-shadow-card",
-    "text-shadow-custom", // ✅ New class
+    "text-shadow-custom",
   ],
 };
 

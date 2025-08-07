@@ -23,6 +23,7 @@ const links = [
   { path: "/events", label: "Events" },
   { path: "/contact", label: "Contact" },
   { path: "/shop", label: "Shop" },
+  { path: "/cart", label: "Cart" },
 ];
 
 const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
