@@ -41,7 +41,7 @@ export default function ProductCard({ product }: ProductContentProps) {
             </p>
 
             <div className="flex items-center gap-3">
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-3">
                 {variants.map((variant) => {
                   const isSelected = selectedVariantId === variant.id;
                   const isSoldOut = !variant.availableForSale;
@@ -57,7 +57,7 @@ export default function ProductCard({ product }: ProductContentProps) {
                         e.preventDefault();
                         setSelectedVariantId(variant.id);
                       }}
-                      className={`relative aspect-square h-10 rounded-sm border border-customGold font-bigola text-xs transition-colors ${isSelected ? "bg-customGold text-customWhite" : "bg-customWhite/50 text-customNavy"} ${isSoldOut ? "cursor-not-allowed opacity-50" : "hover:bg-customNavy hover:text-white"} `}
+                      className={`relative aspect-square h-8 rounded-sm border border-customGold font-bigola text-xs transition-colors ${isSelected ? "bg-customGold text-customWhite" : "bg-customWhite/50 text-customNavy"} ${isSoldOut ? "cursor-not-allowed opacity-50" : "hover:bg-customNavy hover:text-white"} `}
                     >
                       {sizeLabel}
                       {isSoldOut && (
@@ -86,6 +86,9 @@ export default function ProductCard({ product }: ProductContentProps) {
                       title: product.title,
                       price: parseFloat(selectedVariant.price.amount),
                       image: mainImage,
+                      quantityAvailable: selectedVariant.quantityAvailable,
+                      variantTitle: selectedVariant.title,
+                      selectedOptions: selectedVariant.selectedOptions,
                     },
                     1,
                   );

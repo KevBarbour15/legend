@@ -1,12 +1,12 @@
 "use client";
 import Image from "next/image";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ProductContentProps } from "@/data/products";
 import { useCart } from "@/hooks/useCart";
 import AudioStatic from "@/components/audio-static/AudioStatic";
 import AddToCartDialog from "@/components/add-to-cart-dialog/AddToCartDialog";
 import Link from "next/link";
-import { CaretLeft, CaretRight } from "@phosphor-icons/react";
+import { CaretLeft, CaretRight, Minus, Plus } from "@phosphor-icons/react";
 
 const ProductContent = ({ product }: ProductContentProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -16,10 +16,37 @@ const ProductContent = ({ product }: ProductContentProps) => {
   const [selectedVariantId, setSelectedVariantId] = useState(
     variants.find((v) => v.availableForSale)?.id || variants[0]?.id,
   );
+  const [quantity, setQuantity] = useState(1);
   const selectedVariant =
     variants.find((v) => v.id === selectedVariantId) || variants[0];
-  const { addToCart } = useCart();
+  const { addToCart, items } = useCart();
   const [open, setOpen] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  // Handle hydration to prevent server/client mismatch
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  // Get the actual available quantity for the selected variant, accounting for cart
+  const cartQuantity = isHydrated
+    ? items.find((item) => item.variantId === selectedVariantId)?.quantity || 0
+    : 0;
+  const availableQuantity = Math.max(
+    0,
+    (selectedVariant?.quantityAvailable || 0) - cartQuantity,
+  );
+
+  const handleQuantityChange = (newQuantity: number) => {
+    if (newQuantity >= 1 && newQuantity <= availableQuantity) {
+      setQuantity(newQuantity);
+    }
+  };
+
+  const handleVariantChange = (variantId: string) => {
+    setSelectedVariantId(variantId);
+    setQuantity(1); // Reset quantity when variant changes
+  };
 
   return (
     <>
@@ -79,7 +106,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
                           key={variant.id}
                           type="button"
                           disabled={isSoldOut}
-                          onClick={() => setSelectedVariantId(variant.id)}
+                          onClick={() => handleVariantChange(variant.id)}
                           className={`relative aspect-square h-10 rounded-sm border border-customGold font-bigola text-xs transition-colors ${isSelected ? "bg-customGold text-customWhite" : "bg-customWhite/50 text-customNavy"} ${isSoldOut ? "cursor-not-allowed opacity-50" : "hover:bg-customNavy hover:text-white"}`}
                         >
                           {sizeLabel}
@@ -100,23 +127,58 @@ const ProductContent = ({ product }: ProductContentProps) => {
                 </span>
               )}
               {selectedVariant && selectedVariant.availableForSale && (
-                <button
-                  className="mt-4 w-full rounded-sm bg-customNavy px-4 py-2 font-bigola text-white drop-shadow-card transition-colors hover:bg-customGold hover:text-customNavy md:w-fit"
-                  onClick={() => {
-                    addToCart(
-                      {
-                        variantId: selectedVariant.id,
-                        title: product.title,
-                        price: parseFloat(selectedVariant.price.amount),
-                        image: mainImage,
-                      },
-                      1,
-                    );
-                    setOpen(true);
-                  }}
-                >
-                  Add to Cart
-                </button>
+                <>
+                  <div className="mt-4 flex items-center gap-3">
+                    <span className="font-hypatia text-sm text-customNavy">
+                      Quantity:
+                    </span>
+                    <div className="flex items-center rounded-sm border border-customGold">
+                      <button
+                        type="button"
+                        onClick={() => handleQuantityChange(quantity - 1)}
+                        disabled={quantity <= 1}
+                        className="p-2 transition-colors hover:bg-customGold hover:text-customWhite disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        <Minus className="h-4 w-4" />
+                      </button>
+                      <span className="min-w-[3rem] px-4 py-2 text-center font-bigola text-customNavy">
+                        {quantity}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => handleQuantityChange(quantity + 1)}
+                        disabled={quantity >= availableQuantity}
+                        className="p-2 transition-colors hover:bg-customGold hover:text-customWhite disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        <Plus className="h-4 w-4" />
+                      </button>
+                    </div>
+                    <span className="text-xs text-customNavy/70">
+                      {availableQuantity} available
+                      {cartQuantity > 0 && ` (${cartQuantity} in cart)`}
+                    </span>
+                  </div>
+                  <button
+                    className="mt-4 w-full rounded-sm bg-customNavy px-4 py-2 font-bigola text-white drop-shadow-card transition-colors hover:bg-customGold hover:text-customNavy md:w-fit"
+                    onClick={() => {
+                      addToCart(
+                        {
+                          variantId: selectedVariant.id,
+                          title: product.title,
+                          price: parseFloat(selectedVariant.price.amount),
+                          image: mainImage,
+                          quantityAvailable: selectedVariant.quantityAvailable,
+                          variantTitle: selectedVariant.title,
+                          selectedOptions: selectedVariant.selectedOptions,
+                        },
+                        quantity,
+                      );
+                      setOpen(true);
+                    }}
+                  >
+                    Add to Cart
+                  </button>
+                </>
               )}
             </div>
           </div>

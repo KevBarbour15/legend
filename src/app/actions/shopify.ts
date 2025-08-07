@@ -38,6 +38,7 @@ export async function getAllProductsWithVariants() {
               title
               sku
               availableForSale
+              quantityAvailable
               price {
                 amount
                 currencyCode
@@ -78,6 +79,7 @@ export async function getProductByHandle(handle: string) {
             title
             sku
             availableForSale
+            quantityAvailable
             price {
               amount
               currencyCode

@@ -11,6 +11,7 @@ export interface ProductContentProps {
         id: string;
         title: string;
         availableForSale: boolean;
+        quantityAvailable: number;
         price: { amount: string; currencyCode: string };
         selectedOptions: { name: string; value: string }[];
       }[];

@@ -14,6 +14,9 @@ type CartItem = {
   image?: string;
   price: number;
   quantity: number;
+  quantityAvailable?: number; // Store the available quantity when item is added
+  variantTitle?: string; // Store the variant title (e.g., "Small", "Medium", "Large")
+  selectedOptions?: { name: string; value: string }[]; // Store variant options
 };
 
 // Cart context type
