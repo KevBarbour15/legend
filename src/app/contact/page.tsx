@@ -134,7 +134,7 @@ export default function Contact() {
         <div className="mx-auto flex flex-col overflow-y-auto px-3 pb-20 md:px-0 md:pb-10 md:pl-[258px] md:pr-6 md:pt-6">
           <h1
             id="heading"
-            className="text-shadow-custom mt-6 w-full text-pretty font-bigola text-6xl text-customNavy opacity-0 md:mt-0 md:text-center md:text-7xl"
+            className="mt-6 w-full text-pretty font-bigola text-6xl text-customNavy opacity-0 text-shadow-custom md:mt-0 md:text-center md:text-7xl"
           >
             Sound Off - Say Hello!
           </h1>

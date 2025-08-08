@@ -91,7 +91,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
           onSubmit={form.handleSubmit(onSubmit)}
           className="mx-auto flex w-full flex-col space-y-3 border-t-2 border-customGold pt-4 opacity-0 lg:w-[650px]"
         >
-          <p className="text-shadow-custom mb-6 text-pretty font-hypatia text-xl leading-[1.15] text-customNavy md:text-center">
+          <p className="mb-6 text-pretty font-hypatia text-xl leading-[1.15] text-customNavy text-shadow-custom md:text-center">
             Thank you for inquiring about hosting your special event at{" "}
             <span className="font-bigola">Legend Has It</span>. We appreciate
             your interest and look forward to helping you create a memorable
@@ -106,13 +106,12 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             name="name"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel
-                  htmlFor="event-name"
-                  className="text-shadow-custom font-bigola text-customNavy"
-                >
-                  Name:
+                <FormLabel htmlFor="event-name">
+                  <span className="font-bigola text-customNavy text-shadow-custom">
+                    Name:
+                  </span>
                 </FormLabel>
-                <FormControl className="rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl className="box-shadow-text rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input
                     id="event-name"
                     aria-label="Your full name"
@@ -130,11 +129,10 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             name="email"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel
-                  htmlFor="event-email"
-                  className="text-shadow-custom font-bigola text-customNavy"
-                >
-                  Email:
+                <FormLabel htmlFor="event-email">
+                  <span className="font-bigola text-customNavy text-shadow-custom">
+                    Email:
+                  </span>
                 </FormLabel>
                 <FormControl className="rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input
@@ -154,13 +152,12 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             name="phone"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel
-                  htmlFor="event-phone"
-                  className="text-shadow-custom font-bigola text-customNavy"
-                >
-                  Phone:
+                <FormLabel htmlFor="event-phone">
+                  <span className="font-bigola text-customNavy text-shadow-custom">
+                    Phone:
+                  </span>
                 </FormLabel>
-                <FormControl className="rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl className="box-shadow-text rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input
                     id="event-phone"
                     type="tel"
@@ -178,13 +175,12 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             name="eventDate"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel
-                  htmlFor="event-date"
-                  className="text-shadow-custom font-bigola text-customNavy"
-                >
-                  Date of event:
+                <FormLabel htmlFor="event-date">
+                  <span className="font-bigola text-customNavy text-shadow-custom">
+                    Date of event:
+                  </span>
                 </FormLabel>
-                <FormControl className="rounded-sm border border-neutral-400/20 bg-neutral-300/15 font-bigola text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl>
                   <DatePicker
                     aria-label="Select event date"
                     aria-describedby="event-date-description"
@@ -201,13 +197,12 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             name="eventTime"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel
-                  htmlFor="event-time"
-                  className="text-shadow-custom font-bigola text-customNavy"
-                >
-                  Time of interest (1-4 pm, 3-10 pm, etc.):
+                <FormLabel htmlFor="event-time">
+                  <span className="font-bigola text-customNavy text-shadow-custom">
+                    Time of interest (1-4 pm, 3-10 pm, etc.):
+                  </span>
                 </FormLabel>
-                <FormControl className="rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl className="box-shadow-text rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input
                     id="event-time"
                     aria-label="Preferred event time"
@@ -224,14 +219,13 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             name="eventType"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel
-                  htmlFor="event-type"
-                  className="font-bigola text-customNavy"
-                >
-                  Type of event:
+                <FormLabel htmlFor="event-type">
+                  <span className="font-bigola text-customNavy text-shadow-custom">
+                    Type of event:
+                  </span>
                 </FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl className="rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                  <FormControl className="box-shadow-text rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                     <SelectTrigger
                       id="event-type"
                       aria-label="Select event type"
@@ -266,17 +260,16 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             name="guests"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel
-                  htmlFor="event-guests"
-                  className="text-shadow-custom font-bigola text-customNavy"
-                >
-                  Number of guests:
+                <FormLabel htmlFor="event-guests">
+                  <span className="font-bigola text-customNavy text-shadow-custom">
+                    Number of guests:
+                  </span>
                 </FormLabel>
                 <Select
                   onValueChange={(value) => field.onChange(Number(value))}
                   value={field.value?.toString()}
                 >
-                  <FormControl className="rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                  <FormControl className="box-shadow-text rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                     <SelectTrigger
                       id="event-guests"
                       aria-label="Select number of guests"
@@ -306,14 +299,13 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             name="musicType"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel
-                  htmlFor="event-music"
-                  className="text-shadow-custom font-bigola text-customNavy"
-                >
-                  Music options:
+                <FormLabel htmlFor="event-music">
+                  <span className="font-bigola text-customNavy text-shadow-custom">
+                    Music options:
+                  </span>
                 </FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl className="rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                  <FormControl className="box-shadow-text rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                     <SelectTrigger
                       id="event-music"
                       aria-label="Select music option"
@@ -361,13 +353,12 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             name="message"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel
-                  htmlFor="event-message"
-                  className="text-shadow-custom font-bigola text-customNavy"
-                >
-                  What else should we know?
+                <FormLabel htmlFor="event-message">
+                  <span className="font-bigola text-customNavy text-shadow-custom">
+                    What else should we know?
+                  </span>
                 </FormLabel>
-                <FormControl className="rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl className="box-shadow-text rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Textarea
                     id="event-message"
                     aria-label="Additional information"
@@ -381,7 +372,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
           />
           <Button
             type="submit"
-            className="mx-auto w-fit rounded-lg border border-customNavy/20 bg-customNavy font-bigola text-2xl text-[#f5f5f5] drop-shadow-card transition-all duration-300 ease-in-out md:hover:bg-[#f5f5f5] md:hover:text-customNavy md:active:bg-customGold"
+            className="box-shadow-text mx-auto w-fit rounded-sm border border-customNavy/20 bg-customNavy font-bigola text-2xl text-[#f5f5f5] transition-all duration-300 ease-in-out md:hover:bg-[#f5f5f5] md:hover:text-customNavy md:active:bg-customGold"
           >
             Submit
           </Button>

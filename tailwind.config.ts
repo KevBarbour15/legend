@@ -124,6 +124,9 @@ const config: Config = {
           WebkitFontSmoothing: "antialiased",
           MozOsxFontSmoothing: "grayscale",
         },
+        ".box-shadow-text": {
+          boxShadow: ".35px 0.5px 0.75px rgba(0, 0, 0, 0.35)",
+        },
       });
     },
   ],
@@ -133,6 +136,7 @@ const config: Config = {
     "drop-shadow-text",
     "drop-shadow-card",
     "text-shadow-custom",
+    "box-shadow-text",
   ],
 };
 
