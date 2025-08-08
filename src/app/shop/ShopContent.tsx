@@ -13,9 +13,9 @@ export default function ShopContent({ products }: { products: any[] }) {
   return (
     <>
       <AudioStatic />
-      <div ref={containerRef} className="min-h-svh pt-16 md:pt-0">
-        <div className="mx-auto flex w-full flex-col items-center justify-center overflow-y-auto px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
-          <div className="mb-6 flex w-full items-center justify-between border-b-2 border-customGold pb-4 font-hypatia text-lg text-customNavy">
+      <div ref={containerRef} className="h-full pt-16 md:pt-0">
+        <div className="mx-auto h-full overflow-y-auto px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
+          <div className="mb-6 flex items-center justify-between border-b-2 border-customGold pb-4 font-hypatia text-lg text-customNavy">
             <h2 className="font-bigola text-2xl text-shadow-custom">
               Legend Has It Shop
             </h2>

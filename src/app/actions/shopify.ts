@@ -15,6 +15,42 @@ const client = new GraphQLClient(
   },
 );
 
+export async function createCartAndGetCheckoutUrl(
+  items: Array<{ merchandiseId: string; quantity: number }>,
+) {
+  unstable_noStore();
+  const mutation = `
+    mutation CreateCart($input: CartInput!) {
+      cartCreate(input: $input) {
+        cart {
+          id
+          checkoutUrl
+        }
+        userErrors {
+          field
+          message
+        }
+      }
+    }
+  `;
+
+  const variables = {
+    input: {
+      lines: items.map((item) => ({
+        merchandiseId: item.merchandiseId,
+        quantity: item.quantity,
+      })),
+    },
+  } as any;
+
+  const data = await client.request(mutation, variables);
+  const errors = data?.cartCreate?.userErrors;
+  if (errors && errors.length) {
+    throw new Error(errors.map((e: any) => e.message).join(", "));
+  }
+  return data?.cartCreate?.cart?.checkoutUrl as string | undefined;
+}
+
 export async function getAllProductsWithVariants() {
   unstable_noStore();
   const query = `

@@ -12,9 +12,5 @@ export default async function ProductPage({
   const product = await getProductByHandle(params.handle);
   if (!product) return notFound();
 
-  return (
-    <div className="flex min-h-screen">
-      <ProductContent product={product} />
-    </div>
-  );
+  return <ProductContent product={product} />;
 }

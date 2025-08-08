@@ -63,7 +63,7 @@ const MobileHeader: React.FC = () => {
           <IconButton
             component={Link}
             href="/cart"
-            className="bg-transparent p-0 text-customCream"
+            className="hidden bg-transparent p-0 text-customCream"
             aria-label="Cart"
             style={{ marginRight: 8 }}
           >

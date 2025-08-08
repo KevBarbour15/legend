@@ -22,8 +22,8 @@ const links = [
   { path: "/menu", label: "Menu" },
   { path: "/events", label: "Events" },
   { path: "/contact", label: "Contact" },
-  { path: "/shop", label: "Shop" },
-  { path: "/cart", label: "Cart" },
+  // { path: "/shop", label: "Shop" },
+  // { path: "/cart", label: "Cart" },
 ];
 
 const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {

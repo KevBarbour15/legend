@@ -6,16 +6,26 @@ import { useEffect, useRef, useState } from "react";
 import AudioStatic from "@/components/audio-static/AudioStatic";
 import { Minus, Plus } from "@phosphor-icons/react";
 
-function getShopifyCheckoutUrl(items: any) {
+async function requestCheckoutUrl(items: any[]) {
   if (!items.length) return "#";
-  // Format: /cart/{variantId}:{quantity},{variantId}:{quantity}
-  const cartString = items
-    .map(
-      (item: any) =>
-        `${item.variantId.replace("gid://shopify/ProductVariant/", "")}:${item.quantity}`,
-    )
-    .join(",");
-  return `https://legendhasithifi.myshopify.com/cart/${cartString}`;
+  try {
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        lines: items.map((item) => ({
+          merchandiseId: item.variantId,
+          quantity: item.quantity,
+        })),
+      }),
+    });
+    if (!res.ok) throw new Error("Failed to create checkout");
+    const data = await res.json();
+    return data.checkoutUrl as string;
+  } catch (e) {
+    console.error(e);
+    return "#";
+  }
 }
 
 export default function CartPage() {
@@ -28,7 +38,19 @@ export default function CartPage() {
     setIsHydrated(true);
   }, []);
 
-  const checkoutUrl = getShopifyCheckoutUrl(items);
+  const [checkoutUrl, setCheckoutUrl] = useState<string>("#");
+
+  useEffect(() => {
+    let isCancelled = false;
+    async function run() {
+      const url = await requestCheckoutUrl(items);
+      if (!isCancelled) setCheckoutUrl(url);
+    }
+    run();
+    return () => {
+      isCancelled = true;
+    };
+  }, [items]);
 
   // Handle quantity changes with validation
   const handleQuantityChange = (variantId: string, newQuantity: number) => {
@@ -55,19 +77,14 @@ export default function CartPage() {
     }
   };
 
-  // Calculate if any items exceed their cart-adjusted limits
   const hasOutOfStock = items.some((item) => {
     if (!isHydrated) return false; // Don't check during SSR
 
-    // Find other items with the same variantId to calculate total in cart
     const totalInCart = items
       .filter((cartItem) => cartItem.variantId === item.variantId)
       .reduce((sum, cartItem) => sum + cartItem.quantity, 0);
 
-    // For now, we'll assume items are available if they're in the cart
-    // In a real implementation, you'd want to store the original available quantity
-    // when items are added to cart, or fetch it once per session
-    return false; // Simplified for now - items in cart are assumed available
+    return false;
   });
 
   return (
@@ -215,14 +232,10 @@ export default function CartPage() {
                     .toFixed(2)}
                 </span>
               </div>
-              <a
-                href={hasOutOfStock ? undefined : checkoutUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={hasOutOfStock ? undefined : checkoutUrl}>
                 <button
                   className="w-full rounded bg-customNavy px-4 py-3 text-xl font-bold text-white transition-colors hover:bg-customGold hover:text-customNavy"
-                  disabled={hasOutOfStock}
+                  disabled={hasOutOfStock || checkoutUrl === "#"}
                 >
                   Checkout
                 </button>

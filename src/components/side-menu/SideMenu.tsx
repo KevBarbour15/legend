@@ -14,7 +14,7 @@ const links = [
   { path: "/menu", label: "Menu" },
   { path: "/events", label: "Events" },
   { path: "/contact", label: "Contact" },
-  { path: "/shop", label: "Shop" },
+  // { path: "/shop", label: "Shop" },
 ];
 
 interface SideMenuProps {
