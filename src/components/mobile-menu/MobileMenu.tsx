@@ -11,6 +11,7 @@ const links = [
   { path: "/menu", label: "Menu" },
   { path: "/events", label: "Events" },
   { path: "/contact", label: "Contact" },
+  // { path: "/shop", label: "Shop" },
 ];
 
 const MobileMenu: React.FC = () => {
@@ -63,7 +64,7 @@ const MobileMenu: React.FC = () => {
     >
       <div className="absolute flex flex-grow flex-col justify-start pl-3 pt-3">
         <Image
-          className="home-logo drop-shadow-card w-[150px] scale-50 opacity-0 md:hidden"
+          className="home-logo w-[150px] scale-50 opacity-0 drop-shadow-card md:hidden"
           src="/images/alt-logo.png"
           alt="Logo"
           height={150}
@@ -74,7 +75,7 @@ const MobileMenu: React.FC = () => {
           {links.map((link, idx) => (
             <li
               key={idx}
-              className="mobile-link m-0 p-0 leading-[0.85] opacity-0 drop-shadow-text"
+              className="mobile-link m-0 p-0 leading-[0.85] opacity-0 text-shadow-custom"
             >
               {link.label === "About" ? (
                 <a
@@ -100,7 +101,7 @@ const MobileMenu: React.FC = () => {
       </div>
       <div className="mobile-link absolute bottom-0 left-0 ml-3 w-fit pb-20 opacity-0">
         <a
-          className="cursor-pointer font-bigola drop-shadow-text"
+          className="cursor-pointer font-bigola text-shadow-custom"
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.google.com/maps/dir//410+L+St,+Sacramento,+CA+95814/@38.5798987,-121.5844553,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x809ad12b9928b091:0x8fd24ebe337fbfe7!2m2!1d-121.5020543!2d38.5799276?entry=ttu&g_ep=EgoyMDI0MDkwNC4wIKXMDSoASAFQAw%3D%3D"
@@ -109,7 +110,7 @@ const MobileMenu: React.FC = () => {
         >
           <div
             id="mobile-menu "
-            className="flex justify-between gap-2 p-0 text-5xl leading-[.7] tracking-tight drop-shadow-text"
+            className="flex justify-between gap-2 p-0 text-5xl leading-[.7] tracking-tight text-shadow-custom"
           >
             <span>410</span>
             <span>L</span>

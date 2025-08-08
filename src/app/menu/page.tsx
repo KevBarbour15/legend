@@ -67,7 +67,7 @@ const Menu: React.FC = ({}) => {
             "Content-Type": "application/json",
           },
           next: {
-            revalidate: 0, // Disable caching at the page level
+            revalidate: 0,
           },
         });
 
@@ -104,42 +104,40 @@ const Menu: React.FC = ({}) => {
       .set("#menu-heading", {
         opacity: 1,
       })
-
       .set(heading.words, {
-        opacity: 0,
-        x: -25,
+        y: 50,
       })
       .set(menuItemRefs.current, {
         opacity: 0,
-        y: 25,
+        y: 30,
       })
       .to(heading.words, {
-        x: 0,
-        duration: 0.3,
+        y: 0,
+        duration: 0.5,
         ease: "back.out(1.7)",
-        opacity: 1,
-        stagger: 0.025,
+
+        stagger: 0.075,
       })
       .to(
-        "#menu-subheading",
+        "#menu",
         {
-          duration: 0.3,
           opacity: 1,
+          duration: 0.025,
         },
         "<",
       )
-      .to("#menu", {
-        opacity: 1,
-        duration: 0.025,
-      })
-      .to(menuItemRefs.current, {
-        delay: 0.025,
-        y: 0,
-        duration: 0.3,
-        stagger: 0.075,
-        ease: "back.out(2.5)",
-        opacity: 1,
-      });
+      .to(
+        menuItemRefs.current,
+        {
+          delay: 0.025,
+          y: 0,
+          duration: 0.3,
+          stagger: 0.075,
+          ease: "back.out(2.5)",
+          opacity: 1,
+        },
+        "<",
+      );
   }, [loading]);
 
   useEffect(() => {
@@ -157,7 +155,7 @@ const Menu: React.FC = ({}) => {
           <ArrowBendRightDown
             size={32}
             weight="regular"
-            className="drop-shadow-text"
+            className="text-shadow-custom"
           />
         );
       case "draft":
@@ -166,7 +164,7 @@ const Menu: React.FC = ({}) => {
           <ArrowBendRightDown
             size={32}
             weight="regular"
-            className="drop-shadow-text"
+            className="text-shadow-custom"
           />
         );
       case "wine":
@@ -175,7 +173,7 @@ const Menu: React.FC = ({}) => {
           <ArrowBendRightDown
             size={32}
             weight="regular"
-            className="drop-shadow-text"
+            className="text-shadow-custom"
           />
         );
       case "sake":
@@ -184,7 +182,7 @@ const Menu: React.FC = ({}) => {
           <ArrowBendRightDown
             size={32}
             weight="regular"
-            className="drop-shadow-text"
+            className="text-shadow-custom"
           />
         );
       default:
@@ -193,7 +191,7 @@ const Menu: React.FC = ({}) => {
           <ArrowBendRightDown
             size={32}
             weight="regular"
-            className="drop-shadow-text"
+            className="text-shadow-custom"
           />
         );
     }
@@ -205,12 +203,12 @@ const Menu: React.FC = ({}) => {
       className={`block ${!isLast ? "border-b-2 border-dashed border-customGold" : ""} py-3 font-hypatia text-base capitalize md:text-lg`}
     >
       <div className="flex w-full justify-between text-nowrap font-bigola text-lg text-customNavy md:text-2xl">
-        <p className="whitespace-nowrap text-left leading-none drop-shadow-text">
+        <p className="text-shadow-custom whitespace-nowrap text-left leading-none">
           {item.name}
         </p>
         {item.bottlePrice ? (
           <div className="flex first-letter:items-end">
-            <p className="flex gap-1 text-right leading-none drop-shadow-text">
+            <p className="text-shadow-custom flex gap-1 text-right leading-none">
               {item.price}{" "}
               <span>
                 {item.bottleIsSellable && (
@@ -223,17 +221,17 @@ const Menu: React.FC = ({}) => {
             </p>
           </div>
         ) : (
-          <p className="text-right leading-none drop-shadow-text">
+          <p className="text-shadow-custom text-right leading-none">
             {item.price}
           </p>
         )}
       </div>
 
       <div className="mt-1 flex w-full items-center justify-between font-hypatiaSemibold leading-tight text-customNavy">
-        <p className="text-nowrap text-left drop-shadow-text">{item.brand}</p>
+        <p className="text-shadow-custom text-nowrap text-left">{item.brand}</p>
 
         {item.city && (
-          <p className="flex gap-1 drop-shadow-text">
+          <p className="text-shadow-custom flex gap-1">
             <span>{item.city},</span>
             <span>CA</span>
           </p>
@@ -241,12 +239,12 @@ const Menu: React.FC = ({}) => {
       </div>
 
       <div className="mt-1 flex w-full items-center justify-between leading-none text-customNavy">
-        <p className="text-balance pr-[2px] text-left drop-shadow-text">
+        <p className="text-shadow-custom text-balance pr-[2px] text-left">
           {item.description}
         </p>
 
         {item.abv && (
-          <div className="flex gap-1 text-right drop-shadow-text">
+          <div className="text-shadow-custom flex gap-1 text-right">
             <p>ABV</p>
             <p> {item.abv}</p>
           </div>
@@ -254,7 +252,7 @@ const Menu: React.FC = ({}) => {
       </div>
 
       {item.varieties && (
-        <p className="mt-1 text-nowrap italic text-customNavy drop-shadow-text">
+        <p className="text-shadow-custom mt-1 text-nowrap italic text-customNavy">
           {item.varieties}
         </p>
       )}
@@ -262,7 +260,7 @@ const Menu: React.FC = ({}) => {
   );
 
   const renderCannedBeerCategory = (category: CategoryWithItems) => (
-    <Accordion type="single" collapsible className="w-full pl-3">
+    <Accordion type="single" collapsible className="w-full pl-4">
       {category.childCategories.map((childCategory, index) => (
         <AccordionItem
           value={childCategory.id}
@@ -279,7 +277,7 @@ const Menu: React.FC = ({}) => {
             onClick={() => handleChildCategoryClick(childCategory.id)}
           >
             <h2
-              className={`drop-shadow-text transition-all duration-300 ${activeChildCategory === childCategory.id ? "translate-x-[15px] transform text-customGold" : "text-customNavy"}`}
+              className={`text-shadow-custom transition-all duration-300 ${activeChildCategory === childCategory.id ? "translate-x-[15px] transform text-customGold" : "text-customNavy"}`}
             >
               {childCategory.name}
             </h2>
@@ -310,24 +308,26 @@ const Menu: React.FC = ({}) => {
             </div>
           ) : error ? (
             <div className="z-[151] flex h-[50vh] w-full flex-col items-center justify-center">
-              <h2 className="mb-3 text-center font-bigola text-3xl text-customNavy drop-shadow-text md:text-4xl">
+              <h2 className="text-shadow-custom mb-3 text-center font-bigola text-3xl text-customNavy md:text-4xl">
                 Failed to load menu. Please refresh the page.
               </h2>
             </div>
           ) : !menu ? (
             <div className="z-[151] flex h-[50vh] w-full flex-col items-center justify-center">
-              <h2 className="mb-3 text-center font-bigola text-3xl text-customNavy drop-shadow-text md:text-4xl">
+              <h2 className="text-shadow-custom mb-3 text-center font-bigola text-3xl text-customNavy md:text-4xl">
                 No menu data found.
               </h2>
             </div>
           ) : (
             <div>
-              <h2
-                id="menu-heading"
-                className="my-3 w-full font-hypatia text-3xl leading-[1.15] text-customNavy opacity-0 drop-shadow-text"
-              >
-                Stay up to date as our selections rotate!
-              </h2>
+              <div className="overflow-hidden py-3">
+                <h2
+                  id="menu-heading"
+                  className="text-shadow-custom w-full font-hypatia text-3xl leading-[1.15] text-customNavy opacity-0"
+                >
+                  Stay up to date as our selections rotate!
+                </h2>
+              </div>
               <Accordion type="single" collapsible className="z-[151] w-full">
                 <div className="w-full opacity-0" id="menu">
                   {Object.entries(menu).map(
@@ -345,7 +345,7 @@ const Menu: React.FC = ({}) => {
                             key={categoryName}
                           >
                             <AccordionTrigger
-                              className={`cursor-pointer font-bigola text-3xl leading-none transition-all duration-300 md:text-4xl ${
+                              className={`cursor-pointer font-bigola text-3xl leading-none drop-shadow-text transition-all duration-300 md:text-4xl ${
                                 activeCategory === index
                                   ? "text-customGold"
                                   : "text-customNavy"
@@ -354,7 +354,7 @@ const Menu: React.FC = ({}) => {
                               onClick={() => handleCategoryClick(index)}
                             >
                               <h2
-                                className={`drop-shadow-text transition-all duration-300 ${activeCategory === index ? "translate-x-[15px] transform text-customGold" : "text-customNavy"}`}
+                                className={`text-shadow-custom transition-all duration-300 ${activeCategory === index ? "translate-x-[16px] transform text-customGold" : "text-customNavy"}`}
                               >
                                 {categoryName}
                               </h2>
@@ -363,7 +363,7 @@ const Menu: React.FC = ({}) => {
                               className={`border-customGold ${categoryName === "Canned / Bottled" ? "pt-0" : ""}`}
                             >
                               {categoryName === "Wine" && (
-                                <div className="text-pretty py-3 text-center drop-shadow-text">
+                                <div className="text-shadow-custom text-pretty py-3 text-center">
                                   <p className="font-bigola text-lg text-customNavy md:text-2xl">
                                     Wine Down Wednesday
                                   </p>
@@ -377,7 +377,7 @@ const Menu: React.FC = ({}) => {
                               )}
 
                               {categoryName === "Draft" && (
-                                <div className="text-pretty py-3 text-center text-customNavy drop-shadow-text">
+                                <div className="text-shadow-custom text-pretty py-3 text-center text-customNavy">
                                   <p className="font-bigola text-lg text-customNavy md:text-2xl">
                                     Happy Hour
                                   </p>

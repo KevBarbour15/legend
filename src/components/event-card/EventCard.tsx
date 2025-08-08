@@ -78,7 +78,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                 <X
                   size={30}
                   weight="regular"
-                  className="rounded-full text-[#f5f5f5] drop-shadow-text transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+                  className="rounded-full text-[#f5f5f5] transition-all duration-300 text-shadow-custom md:hover:rotate-[360deg] md:hover:text-customGold"
                 />
               </IconButton>
             </motion.div>
@@ -86,7 +86,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
             <motion.div
               ref={containerRef}
               layoutId={`card-${event._id}`}
-              className={`relative flex h-fit max-h-[90dvh] w-full flex-col overflow-y-auto rounded-md border border-customNavy/20 text-customNavy shadow-2xl ${isActive ? "border-customNavy" : "border-transparent"} bg-[#f5f5f5] transition-all duration-300 sm:max-h-[95vh] sm:max-w-[450px]`}
+              className={`relative flex h-fit max-h-[90dvh] w-full flex-col overflow-y-auto rounded-sm border border-customNavy/20 text-customNavy shadow-2xl ${isActive ? "border-customNavy" : "border-transparent"} bg-[#f5f5f5] transition-all duration-300 sm:max-h-[95vh] sm:max-w-[450px]`}
             >
               {event.is_photo ? (
                 <motion.div
@@ -162,7 +162,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       <motion.div
         layoutId={`card-${event._id}`}
         onClick={handleCardClick}
-        className="flex h-full cursor-pointer justify-between overflow-hidden rounded-md border border-customNavy/20 bg-[#f5f5f5]/25 shadow-sm backdrop-blur-[1px] md:shadow-md"
+        className="flex h-full cursor-pointer justify-between overflow-hidden rounded-sm border border-neutral-400/20 bg-neutral-300/15 shadow-sm backdrop-blur-[1px] md:shadow-md"
       >
         <div className="flex h-auto w-full min-w-0 flex-col justify-between p-3 text-customNavy">
           <motion.h2

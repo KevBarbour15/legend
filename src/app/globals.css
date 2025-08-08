@@ -2,6 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom prose styles to override Shopify inline styles */
+.prose {
+  color: #244154 !important;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  font-family: "Bigola Display", sans-serif !important;
+  color: #244154 !important;
+  font-weight: normal !important;
+}
+
+.prose p {
+  font-family: "Hypatia Sans Pro", sans-serif !important;
+  color: #244154 !important;
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+  margin-bottom: 1rem !important;
+}
+
+.prose strong,
+.prose b {
+  font-family: "Hypatia Sans Pro Semibold", sans-serif !important;
+  color: #244154 !important;
+  font-weight: normal !important;
+}
+
+.prose ul,
+.prose ol {
+  font-family: "Hypatia Sans Pro", sans-serif !important;
+  color: #244154 !important;
+}
+
+.prose li {
+  font-family: "Hypatia Sans Pro", sans-serif !important;
+  color: #244154 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.prose a {
+  color: #bc9952 !important;
+  text-decoration: none !important;
+}
+
+.prose a:hover {
+  text-decoration: underline !important;
+}
+
 :root {
   --custom-white: #f4f4f4;
   --custom-navy: #244154;

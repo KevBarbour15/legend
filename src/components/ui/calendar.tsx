@@ -18,7 +18,7 @@ function Calendar({
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      className={cn("rounded-none p-3 font-bigola text-customNavy", className)}
+      className={cn("rounded-sm p-3 font-bigola text-customNavy", className)}
       classNames={{
         months: "flex flex-col sm:flex-row space-y-3 sm:space-x-3 sm:space-y-0",
         month: "space-y-3",
@@ -34,13 +34,13 @@ function Calendar({
         table: "w-full border-collapse space-y-1",
         head_row: "flex",
         head_cell:
-          "text-stone-500 rounded-none w-8 font-normal text-lg dark:text-stone-400",
+          "text-stone-500 rounded-sm w-8 font-normal text-lg dark:text-stone-400",
         row: "flex w-full mt-1",
         cell: cn(
           "relative p-0 text-center text-base focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-stone-100 [&:has([aria-selected].day-outside)]:bg-stone-100/50 [&:has([aria-selected].day-range-end)]:rounded-r-md dark:[&:has([aria-selected])]:bg-stone-800 dark:[&:has([aria-selected].day-outside)]:bg-stone-800/50",
           props.mode === "range"
             ? "[&:has(>.day-range-end)]:rounded-r-md [&:has(>.day-range-start)]:rounded-l-md first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md"
-            : "[&:has([aria-selected])]:rounded-none",
+            : "[&:has([aria-selected])]:rounded-sm",
         ),
         day: cn(
           buttonVariants({ variant: "ghost" }),

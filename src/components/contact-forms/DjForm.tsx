@@ -62,7 +62,7 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="mx-auto flex w-full flex-col space-y-3 border-t-2 border-customGold pt-4 opacity-0 lg:w-[650px]"
       >
-        <p className="mb-6 text-pretty font-hypatia text-xl leading-[1.15] text-customNavy drop-shadow-text md:text-center">
+        <p className="mb-6 text-pretty font-hypatia text-xl leading-[1.15] text-customNavy text-shadow-custom md:text-center">
           Thank you for your interest to DJ at{" "}
           <span className="font-bigola">Legend Has It</span>. Please take a
           minute to fill out the form below so we can get to know you and your
@@ -74,13 +74,12 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           name="name"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel
-                htmlFor="dj-name"
-                className="font-bigola text-customNavy drop-shadow-text"
-              >
-                Name:
+              <FormLabel htmlFor="dj-name">
+                <span className="font-bigola text-customNavy text-shadow-custom">
+                  Name:
+                </span>
               </FormLabel>
-              <FormControl className="rounded-md border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+              <FormControl className="box-shadow-text rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                 <Input
                   id="dj-name"
                   aria-label="Your full name"
@@ -98,13 +97,12 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           name="email"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel
-                htmlFor="dj-email"
-                className="font-bigola text-customNavy drop-shadow-text"
-              >
-                Email:
+              <FormLabel htmlFor="dj-email">
+                <span className="font-bigola text-customNavy text-shadow-custom">
+                  Email:
+                </span>
               </FormLabel>
-              <FormControl className="rounded-md border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+              <FormControl className="box-shadow-text rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                 <Input
                   id="dj-email"
                   type="email"
@@ -122,13 +120,12 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           name="phone"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel
-                htmlFor="dj-phone"
-                className="font-bigola text-customNavy drop-shadow-text"
-              >
-                Phone:
+              <FormLabel htmlFor="dj-phone">
+                <span className="font-bigola text-customNavy text-shadow-custom">
+                  Phone:
+                </span>
               </FormLabel>
-              <FormControl className="rounded-md border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+              <FormControl className="box-shadow-text rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                 <Input
                   id="dj-phone"
                   type="tel"
@@ -147,13 +144,12 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           name="message"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel
-                htmlFor="dj-message"
-                className="font-bigola text-customNavy drop-shadow-text"
-              >
-                Experience, style, etc:
+              <FormLabel htmlFor="dj-message">
+                <span className="font-bigola text-customNavy text-shadow-custom">
+                  Experience, style, etc:
+                </span>
               </FormLabel>
-              <FormControl className="rounded-md border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+              <FormControl className="box-shadow-text rounded-sm border border-customNavy/20 bg-[#f5f5f5] font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                 <Textarea
                   id="dj-message"
                   aria-label="Your DJ experience and music style"
@@ -167,7 +163,7 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
         />
         <Button
           type="submit"
-          className="mx-auto w-fit rounded-lg border border-customNavy/20 bg-customNavy font-bigola text-2xl text-[#f5f5f5] drop-shadow-card transition-all duration-300 ease-in-out md:hover:bg-[#f5f5f5] md:hover:text-customNavy md:active:bg-customGold"
+          className="box-shadow-text mx-auto w-fit rounded-sm border border-customNavy/20 bg-customNavy font-bigola text-2xl text-[#f5f5f5] transition-all duration-300 ease-in-out md:hover:bg-[#f5f5f5] md:hover:text-customNavy md:active:bg-customGold"
         >
           Submit
         </Button>

@@ -11,7 +11,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <input
         type={type}
         className={cn(
-          "flex h-10 w-full rounded-md border-black px-3 py-1 text-base transition-all duration-300 lg:hover:rounded-2xl",
+          "flex h-10 w-full rounded-sm border-black px-3 py-1 text-base transition-all duration-300 lg:hover:rounded-2xl",
           className,
         )}
         ref={ref}

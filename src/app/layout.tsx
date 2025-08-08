@@ -4,6 +4,7 @@ import BackgroundOverlay from "@/components/bg-overlay/BackgroundOverlay";
 import MusicPlayer from "@/components/music-player/MusicPlayer";
 import MobileHeader from "@/components/mobile-header/MobileHeader";
 import SubscribePopup from "@/components/subscribe-popup/SubscribePopup";
+import CartProviderClient from "@/components/CartProviderClient";
 
 import "./globals.css";
 
@@ -125,12 +126,14 @@ export default function RootLayout({
           />
         </head>
         <body className={inter.className} suppressHydrationWarning={true}>
-          <MobileHeader />
-          <SubscribePopup />
-          <Toaster />
-          <BackgroundOverlay />
-          {children}
-          <MusicPlayer tracks={tracks} />
+          <CartProviderClient>
+            <MobileHeader />
+            <SubscribePopup />
+            <Toaster />
+            <BackgroundOverlay />
+            {children}
+            <MusicPlayer tracks={tracks} />
+          </CartProviderClient>
         </body>
       </html>
     </>
