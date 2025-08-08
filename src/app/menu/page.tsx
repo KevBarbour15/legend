@@ -106,7 +106,9 @@ const Menu: React.FC = ({}) => {
       })
       .set(heading.words, {
         y: 50,
+        opacity: 0,
       })
+
       .set(menuItemRefs.current, {
         opacity: 0,
         y: 30,
@@ -115,7 +117,7 @@ const Menu: React.FC = ({}) => {
         y: 0,
         duration: 0.5,
         ease: "back.out(1.7)",
-
+        opacity: 1,
         stagger: 0.075,
       })
       .to(
@@ -203,12 +205,12 @@ const Menu: React.FC = ({}) => {
       className={`block ${!isLast ? "border-b-2 border-dashed border-customGold" : ""} py-3 font-hypatia text-base capitalize md:text-lg`}
     >
       <div className="flex w-full justify-between text-nowrap font-bigola text-lg text-customNavy md:text-2xl">
-        <p className="text-shadow-custom whitespace-nowrap text-left leading-none">
+        <p className="whitespace-nowrap text-left leading-none text-shadow-custom">
           {item.name}
         </p>
         {item.bottlePrice ? (
           <div className="flex first-letter:items-end">
-            <p className="text-shadow-custom flex gap-1 text-right leading-none">
+            <p className="flex gap-1 text-right leading-none text-shadow-custom">
               {item.price}{" "}
               <span>
                 {item.bottleIsSellable && (
@@ -221,17 +223,17 @@ const Menu: React.FC = ({}) => {
             </p>
           </div>
         ) : (
-          <p className="text-shadow-custom text-right leading-none">
+          <p className="text-right leading-none text-shadow-custom">
             {item.price}
           </p>
         )}
       </div>
 
       <div className="mt-1 flex w-full items-center justify-between font-hypatiaSemibold leading-tight text-customNavy">
-        <p className="text-shadow-custom text-nowrap text-left">{item.brand}</p>
+        <p className="text-nowrap text-left text-shadow-custom">{item.brand}</p>
 
         {item.city && (
-          <p className="text-shadow-custom flex gap-1">
+          <p className="flex gap-1 text-shadow-custom">
             <span>{item.city},</span>
             <span>CA</span>
           </p>
@@ -239,12 +241,12 @@ const Menu: React.FC = ({}) => {
       </div>
 
       <div className="mt-1 flex w-full items-center justify-between leading-none text-customNavy">
-        <p className="text-shadow-custom text-balance pr-[2px] text-left">
+        <p className="text-balance pr-[2px] text-left text-shadow-custom">
           {item.description}
         </p>
 
         {item.abv && (
-          <div className="text-shadow-custom flex gap-1 text-right">
+          <div className="flex gap-1 text-right text-shadow-custom">
             <p>ABV</p>
             <p> {item.abv}</p>
           </div>
@@ -252,7 +254,7 @@ const Menu: React.FC = ({}) => {
       </div>
 
       {item.varieties && (
-        <p className="text-shadow-custom mt-1 text-nowrap italic text-customNavy">
+        <p className="mt-1 text-nowrap italic text-customNavy text-shadow-custom">
           {item.varieties}
         </p>
       )}
@@ -277,7 +279,7 @@ const Menu: React.FC = ({}) => {
             onClick={() => handleChildCategoryClick(childCategory.id)}
           >
             <h2
-              className={`text-shadow-custom transition-all duration-300 ${activeChildCategory === childCategory.id ? "translate-x-[15px] transform text-customGold" : "text-customNavy"}`}
+              className={`transition-all duration-300 text-shadow-custom ${activeChildCategory === childCategory.id ? "translate-x-[15px] transform text-customGold" : "text-customNavy"}`}
             >
               {childCategory.name}
             </h2>
@@ -308,13 +310,13 @@ const Menu: React.FC = ({}) => {
             </div>
           ) : error ? (
             <div className="z-[151] flex h-[50vh] w-full flex-col items-center justify-center">
-              <h2 className="text-shadow-custom mb-3 text-center font-bigola text-3xl text-customNavy md:text-4xl">
+              <h2 className="mb-3 text-center font-bigola text-3xl text-customNavy text-shadow-custom md:text-4xl">
                 Failed to load menu. Please refresh the page.
               </h2>
             </div>
           ) : !menu ? (
             <div className="z-[151] flex h-[50vh] w-full flex-col items-center justify-center">
-              <h2 className="text-shadow-custom mb-3 text-center font-bigola text-3xl text-customNavy md:text-4xl">
+              <h2 className="mb-3 text-center font-bigola text-3xl text-customNavy text-shadow-custom md:text-4xl">
                 No menu data found.
               </h2>
             </div>
@@ -323,7 +325,7 @@ const Menu: React.FC = ({}) => {
               <div className="overflow-hidden py-3">
                 <h2
                   id="menu-heading"
-                  className="text-shadow-custom w-full font-hypatia text-3xl leading-[1.15] text-customNavy opacity-0"
+                  className="w-full font-hypatia text-3xl leading-[1.15] text-customNavy opacity-0 text-shadow-custom"
                 >
                   Stay up to date as our selections rotate!
                 </h2>
@@ -354,7 +356,7 @@ const Menu: React.FC = ({}) => {
                               onClick={() => handleCategoryClick(index)}
                             >
                               <h2
-                                className={`text-shadow-custom transition-all duration-300 ${activeCategory === index ? "translate-x-[16px] transform text-customGold" : "text-customNavy"}`}
+                                className={`transition-all duration-300 text-shadow-custom ${activeCategory === index ? "translate-x-[16px] transform text-customGold" : "text-customNavy"}`}
                               >
                                 {categoryName}
                               </h2>
@@ -363,7 +365,7 @@ const Menu: React.FC = ({}) => {
                               className={`border-customGold ${categoryName === "Canned / Bottled" ? "pt-0" : ""}`}
                             >
                               {categoryName === "Wine" && (
-                                <div className="text-shadow-custom text-pretty py-3 text-center">
+                                <div className="text-pretty py-3 text-center text-shadow-custom">
                                   <p className="font-bigola text-lg text-customNavy md:text-2xl">
                                     Wine Down Wednesday
                                   </p>
@@ -377,7 +379,7 @@ const Menu: React.FC = ({}) => {
                               )}
 
                               {categoryName === "Draft" && (
-                                <div className="text-shadow-custom text-pretty py-3 text-center text-customNavy">
+                                <div className="text-pretty py-3 text-center text-customNavy text-shadow-custom">
                                   <p className="font-bigola text-lg text-customNavy md:text-2xl">
                                     Happy Hour
                                   </p>

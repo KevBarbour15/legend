@@ -6,24 +6,44 @@ import ProductCard from "./ProductCard";
 import Link from "next/link";
 import { CaretLeft, CaretRight } from "@phosphor-icons/react";
 import { usePathname } from "next/navigation";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "@/lib/gsap";
 
 export default function ShopContent({ products }: { products: any[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!containerRef.current) return;
+
+    const tl = gsap.timeline({});
+
+    tl.set(headerRef.current, { opacity: 0, y: 16 })
+      .set(gridRef.current, { opacity: 0, y: 16 })
+      .to(headerRef.current, { y: 0, autoAlpha: 1 })
+      .to(gridRef.current, { y: 0, autoAlpha: 1, stagger: 0.06 });
+  }, []);
 
   return (
     <>
       <AudioStatic />
       <div ref={containerRef} className="h-full pt-16 md:pt-0">
         <div className="mx-auto h-full overflow-y-auto px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
-          <div className="mb-6 flex items-center justify-between border-b-2 border-customGold pb-4 font-hypatia text-lg text-customNavy">
-            <h2 className="font-bigola text-2xl text-shadow-custom">
-              Legend Has It Shop
-            </h2>
-            <Link href="/cart" className="flex items-center gap-2">
-              Cart <CaretRight className="h-4 w-4" />
+          <div
+            ref={headerRef}
+            className="mb-6 flex items-center justify-between border-b-2 border-customGold pb-4 pt-4 font-hypatia text-lg text-customNavy opacity-0 md:pt-0"
+          >
+            <h2 className="font-bigola text-2xl text-shadow-custom">Shop</h2>
+            <Link href="/cart" className="hidden items-center gap-2 md:flex">
+              <p className="text-shadow-custom">Cart</p>
+              <CaretRight className="h-4 w-4 drop-shadow-text" />
             </Link>
           </div>
-          <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-8 xl:grid-cols-3">
+          <div
+            ref={gridRef}
+            className="grid w-full grid-cols-1 gap-4 opacity-0 sm:grid-cols-2 lg:gap-8 xl:grid-cols-3"
+          >
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
