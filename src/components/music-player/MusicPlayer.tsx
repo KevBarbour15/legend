@@ -180,7 +180,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                 <SpeakerSlash
                   weight="regular"
                   onClick={handleMute}
-                  className="text-shadow-custom transition-all md:hover:text-customGold"
+                  className="transition-all text-shadow-custom md:hover:text-customGold"
                   aria-hidden="true"
                   size={visible ? 24 : 30}
                 />
@@ -188,7 +188,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                 <SpeakerSimpleHigh
                   weight="regular"
                   onClick={handleMute}
-                  className="text-shadow-custom transition-all md:hover:text-customGold"
+                  className="transition-all text-shadow-custom md:hover:text-customGold"
                   aria-hidden="true"
                   size={visible ? 24 : 30}
                 />
@@ -201,7 +201,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             >
               <SkipBack
                 weight="regular"
-                className="text-shadow-custom transition-all md:hover:text-customGold"
+                className="transition-all text-shadow-custom md:hover:text-customGold"
                 aria-hidden="true"
                 size={visible ? 24 : 30}
               />
@@ -215,15 +215,16 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               {playing ? (
                 <Pause
                   weight="regular"
-                  className="text-shadow-custom transition-all md:hover:text-customGold"
+                  className="transition-all text-shadow-custom md:hover:text-customGold"
                   aria-hidden="true"
                   size={visible ? 24 : 30}
                 />
               ) : (
                 <Play
                   weight="regular"
-                  className="text-shadow-custom transition-all md:hover:text-customGold"
+                  className="transition-all text-shadow-custom md:hover:text-customGold"
                   aria-hidden="true"
+                  size={visible ? 24 : 30}
                 />
               )}
             </button>
@@ -234,7 +235,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             >
               <SkipForward
                 weight="regular"
-                className="text-shadow-custom transition-all md:hover:text-customGold"
+                className="transition-all text-shadow-custom md:hover:text-customGold"
                 aria-hidden="true"
                 size={visible ? 24 : 30}
               />
@@ -248,14 +249,14 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               {playlistVisible ? (
                 <X
                   weight="regular"
-                  className="text-shadow-custom transition-all md:hover:text-customGold"
+                  className="transition-all text-shadow-custom md:hover:text-customGold"
                   aria-hidden="true"
                   size={visible ? 24 : 30}
                 />
               ) : (
                 <VinylRecord
                   weight="regular"
-                  className="text-shadow-custom transition-all md:hover:text-customGold"
+                  className="transition-all text-shadow-custom md:hover:text-customGold"
                   aria-hidden="true"
                   size={visible ? 24 : 30}
                 />
@@ -263,7 +264,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             </button>
           </div>
           <div
-            className="text-shadow-custom relative mt-2 hidden h-auto w-full opacity-0 md:block"
+            className="relative mt-2 hidden h-auto w-full opacity-0 text-shadow-custom md:block"
             id="record-player"
           >
             <Image
@@ -325,7 +326,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
           >
             <div className="h-full w-full rounded-sm">
               <Image
-                className="text-shadow-custom h-auto w-24 p-3 md:w-28"
+                className="h-auto w-24 p-3 text-shadow-custom md:w-28"
                 src="/images/alt-logo.png"
                 alt="Alt Logo"
                 height={96}
@@ -334,11 +335,11 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
               <div className="h-fit">
                 {tracks.map((track, index) => (
                   <div key={index} className="flex h-full flex-row p-1 md:px-3">
-                    <div className="text-shadow-custom mr-3 flex flex-col justify-between px-1 font-bigola text-customCream md:px-0">
+                    <div className="mr-3 flex flex-col justify-between px-1 font-bigola text-customCream text-shadow-custom md:px-0">
                       <p className="text-2xl leading-none">{index + 1}.</p>
                       <p className="text-xl leading-none">by</p>
                     </div>
-                    <div className="text-shadow-custom flex w-full flex-col justify-between px-1 font-bigola text-customCream md:px-0">
+                    <div className="flex w-full flex-col justify-between px-1 font-bigola text-customCream text-shadow-custom md:px-0">
                       <p className="text-2xl leading-none">{track.title}</p>
                       <p className="text-xl leading-none">{track.artist}</p>
                     </div>
@@ -348,7 +349,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                       ) : (
                         <IconButton
                           id="player-button"
-                          className="text-shadow-custom m-0 flex p-1 text-customCream md:px-0 md:hover:text-customGold"
+                          className="m-0 flex p-1 text-customCream text-shadow-custom md:px-0 md:hover:text-customGold"
                           aria-label={`Play ${track.title} by ${track.artist}`}
                         >
                           <Play
