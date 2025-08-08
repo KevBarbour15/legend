@@ -30,8 +30,9 @@ export default function Home() {
         console.error(error);
       }
     };
-
-    updateEventStatus();
+    
+    // don't currently need this
+    //updateEventStatus();
 
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
@@ -138,7 +139,7 @@ export default function Home() {
         >
           <AudioStatic />
         </div>
-        <div className="top-bg h-dvh w-screen"></div>
+        <div className="top-bg h-full min-h-svh w-screen"></div>
         <div
           id="about-content"
           className="relative mx-auto block h-auto md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
@@ -209,7 +210,7 @@ export default function Home() {
           <div className="about-section mb-12 mt-3 hidden opacity-0 drop-shadow-card md:block">
             <iframe
               title="Spotify Playlist"
-              src="https://open.spotify.com/embed/playlist/7pIFUTsTxa3MMROMuXsElO?utm_source=generator&theme=0"
+              src="https://open.spotify.com/embed/playlist/4qgu3fFLeZiCIyx3GBRik1?utm_source=generator"
               width="100%"
               height="352"
               allow="encrypted-media"
