@@ -4,6 +4,69 @@ import { unstable_noStore } from "next/cache";
 // Disable caching for Shopify API calls
 export const revalidate = 0;
 
+// Types for GraphQL responses
+type ShopifyMoney = {
+  amount: string;
+  currencyCode: string;
+};
+
+type UserError = {
+  field?: string[] | null;
+  message: string;
+};
+
+type CreateCartResponse = {
+  cartCreate?: {
+    cart?: {
+      id: string;
+      checkoutUrl: string;
+    } | null;
+    userErrors?: UserError[];
+  } | null;
+};
+
+type ProductImage = {
+  url: string;
+  altText: string | null;
+};
+
+type SelectedOption = {
+  name: string;
+  value: string;
+};
+
+type ProductVariant = {
+  id: string;
+  title: string;
+  sku?: string | null;
+  availableForSale: boolean;
+  quantityAvailable: number | null;
+  price: ShopifyMoney;
+  selectedOptions: SelectedOption[];
+};
+
+type Product = {
+  id: string;
+  title: string;
+  description: string;
+  descriptionHtml: string;
+  handle: string;
+  images: { nodes: ProductImage[] };
+  variants: { nodes: ProductVariant[] };
+};
+
+type GetProductByHandleResponse = {
+  productByHandle: Product | null;
+};
+
+type GetVariantsInventoryResponse = {
+  nodes: Array<{
+    id: string;
+    availableForSale: boolean;
+    quantityAvailable?: number | null;
+  } | null>;
+};
+
 const client = new GraphQLClient(
   "https://legendhasithifi.myshopify.com/api/2025-07/graphql.json",
   {
@@ -43,7 +106,7 @@ export async function createCartAndGetCheckoutUrl(
     },
   } as any;
 
-  const data = await client.request(mutation, variables);
+  const data = await client.request<CreateCartResponse>(mutation, variables);
   const errors = data?.cartCreate?.userErrors;
   if (errors && errors.length) {
     throw new Error(errors.map((e: any) => e.message).join(", "));
@@ -103,6 +166,7 @@ export async function getProductByHandle(handle: string) {
         title
         description
         descriptionHtml
+        handle
         images(first: 5) {
           nodes {
             url
@@ -130,7 +194,10 @@ export async function getProductByHandle(handle: string) {
     }
   `;
   const variables = { handle };
-  const data = await client.request(query, variables);
+  const data = await client.request<GetProductByHandleResponse>(
+    query,
+    variables,
+  );
   return data?.productByHandle || null;
 }
 
@@ -148,6 +215,9 @@ export async function getVariantsInventory(variantIds: string[]) {
     }
   `;
   const variables = { ids: variantIds };
-  const data = await client.request(query, variables);
+  const data = await client.request<GetVariantsInventoryResponse>(
+    query,
+    variables,
+  );
   return data?.nodes || [];
 }
