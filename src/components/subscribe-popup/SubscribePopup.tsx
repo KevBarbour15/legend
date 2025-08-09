@@ -5,7 +5,6 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import { X } from "@phosphor-icons/react";
-import { IconButton } from "@mui/material";
 
 import { useOutsideClick } from "@/hooks/use-outside-click";
 import MailchimpForm from "@/components/mailchimp-form/MailchimpForm";
@@ -17,10 +16,7 @@ interface PopupConfig {
   inputStyling?: string;
 }
 
-const SubscribePopup = ({
-  showDelay = 5000,
-  showInterval = 3,
-}: PopupConfig) => {
+const SubscribePopup = ({ showDelay = 0, showInterval = 0 }: PopupConfig) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [shouldShow, setShouldShow] = useState<boolean>(false);
@@ -120,11 +116,12 @@ const SubscribePopup = ({
     <div
       style={{ display: "none" }}
       ref={overlayRef}
-      className="fixed inset-0 z-[1000] h-full w-full items-center justify-center bg-black/50 p-3 px-6 opacity-0"
+      className="fixed inset-0 z-[1000] h-full w-full items-center justify-center p-3 px-6 opacity-0 backdrop-blur-md"
     >
-      <IconButton
+      <button
+        type="button"
         aria-label="Close Modal"
-        className="absolute right-3 top-3 md:right-6 md:top-6"
+        className="fixed right-3 top-3 z-[1001] rounded p-1 md:right-6 md:top-6"
         onClick={() => setShouldShow(false)}
       >
         <X
@@ -132,11 +129,11 @@ const SubscribePopup = ({
           weight="bold"
           className="text-customWhite drop-shadow-card transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
         />
-      </IconButton>
+      </button>
       <div
         style={{ display: "none" }}
         ref={containerRef}
-        className="o flex h-fit max-h-[85dvh] flex-col gap-3 overflow-hidden rounded-sm border border-customNavy/20 bg-customWhite opacity-0 drop-shadow-card sm:max-h-[90vh] sm:max-w-[450px]"
+        className="flex h-fit max-h-[85dvh] flex-col overflow-hidden rounded-sm border border-customNavy/20 bg-customWhite opacity-0 drop-shadow-card sm:max-h-[90vh] sm:max-w-[450px]"
       >
         <Image
           src="/images/meta-image.webp"
@@ -145,8 +142,8 @@ const SubscribePopup = ({
           height={500}
           className="h-auto w-full border-b border-customNavy/20"
         />
-        <div className="flex flex-col gap-3 p-3 sm:gap-3 sm:p-6">
-          <h2 className="text-pretty text-center font-bigola text-3xl font-bold text-customNavy md:text-4xl">
+        <div className="flex flex-col gap-3 p-3 sm:gap-3 sm:p-4">
+          <h2 className="text-pretty font-bigola text-2xl font-bold text-customNavy md:text-4xl">
             Get exclusive updates on new beer/wine & events!
           </h2>
           <MailchimpForm setShouldShow={setShouldShow} />

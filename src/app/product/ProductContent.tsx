@@ -170,10 +170,6 @@ const ProductContent = ({ product }: ProductContentProps) => {
                         <Plus className="" />
                       </button>
                     </div>
-                    <span className="text-xs text-customNavy/70">
-                      {availableQuantity} available
-                      {cartQuantity > 0 && ` (${cartQuantity} in cart)`}
-                    </span>
                   </div>
                   <Button
                     className="box-shadow-card mb-6 mt-4 w-fit rounded-sm border border-customNavy/20 bg-customNavy font-bigola text-customWhite transition-all duration-300 ease-in-out md:hover:bg-customWhite md:hover:text-customNavy md:active:bg-customGold"
