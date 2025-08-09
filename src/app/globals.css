@@ -158,9 +158,15 @@
   font-display: swap;
 }
 
+html,
+body {
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-top: env(safe-area-inset-top);
+}
+
 body {
   color: var(--custom-white);
-  background: black;
+  background: var(--custom-navy);
 }
 
 input,
