@@ -16,7 +16,10 @@ interface PopupConfig {
   inputStyling?: string;
 }
 
-const SubscribePopup = ({ showDelay = 0, showInterval = 0 }: PopupConfig) => {
+const SubscribePopup = ({
+  showDelay = 5000,
+  showInterval = 3,
+}: PopupConfig) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [shouldShow, setShouldShow] = useState<boolean>(false);
