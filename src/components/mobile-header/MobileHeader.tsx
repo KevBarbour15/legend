@@ -1,5 +1,5 @@
 "use client";
-
+import { useGSAP } from "@gsap/react";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -7,10 +7,8 @@ import Menu from "@/components/dropdown-menu/DropdownMenu";
 
 import { List, ShoppingCart } from "@phosphor-icons/react";
 import Image from "next/image";
-import { IconButton } from "@mui/material";
 
 import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 
 const MobileHeader: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -60,21 +58,22 @@ const MobileHeader: React.FC = () => {
               />
             </Link>
           </div>
-          <IconButton
-            component={Link}
-            href="/cart"
-            className="hidden bg-transparent p-0 text-customCream"
-            aria-label="Cart"
-            style={{ marginRight: 8 }}
-          >
-            <ShoppingCart weight="regular" size={28} />
-          </IconButton>
-          <IconButton
-            onClick={toggleMenu}
-            className="bg-transparent p-0 text-customCream"
-          >
-            <List weight="regular" size={28} />
-          </IconButton>
+          <div className="flex items-center gap-4">
+            <Link href="/cart" className="hidden">
+              <ShoppingCart
+                weight="regular"
+                className="text-customCream"
+                size={28}
+              />
+            </Link>
+            <button
+              onClick={toggleMenu}
+              className="bg-transparent p-0"
+              aria-label="Menu"
+            >
+              <List weight="regular" className="text-customCream" size={28} />
+            </button>
+          </div>
         </div>
       </div>
     </>

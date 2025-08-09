@@ -130,13 +130,13 @@ const SubscribePopup = ({
         <X
           size={30}
           weight="bold"
-          className="text-[#f5f5f5] drop-shadow-card transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+          className="text-customWhite drop-shadow-card transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
         />
       </IconButton>
       <div
         style={{ display: "none" }}
         ref={containerRef}
-        className="o flex h-fit max-h-[85dvh] flex-col gap-3 overflow-hidden rounded-sm border border-customNavy/20 bg-[#f5f5f5] opacity-0 drop-shadow-card sm:max-h-[90vh] sm:max-w-[450px]"
+        className="o flex h-fit max-h-[85dvh] flex-col gap-3 overflow-hidden rounded-sm border border-customNavy/20 bg-customWhite opacity-0 drop-shadow-card sm:max-h-[90vh] sm:max-w-[450px]"
       >
         <Image
           src="/images/meta-image.webp"
