@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Copyright, Phone, Key } from "@phosphor-icons/react";
 
 import { FaYelp, FaYoutube, FaFacebook, FaSpotify } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaXTwitter, FaPatreon } from "react-icons/fa6";
 import { AiFillInstagram } from "react-icons/ai";
 
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
@@ -80,6 +80,16 @@ const Footer = () => {
             title="Follow us on X"
           >
             <FaXTwitter size={32} />
+          </a>
+          <a
+            className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+            href="https://www.patreon.com/legendhasit"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Support Legend Has It on Patreon"
+            title="Support us on Patreon"
+          >
+            <FaPatreon size={32} />
           </a>
         </div>
       </div>

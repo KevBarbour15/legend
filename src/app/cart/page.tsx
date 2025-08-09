@@ -104,7 +104,14 @@ export default function CartPage() {
           {!isHydrated ? (
             <div className="text-center text-gray-500">Loading cart...</div>
           ) : items.length === 0 ? (
-            <div className="text-center text-gray-500">Your cart is empty.</div>
+            <div className="flex h-full flex-col items-center justify-center gap-4">
+              <div className="text-center text-gray-500">
+                Your cart is empty.
+              </div>
+              <Link href="/shop" className="text-customNavy">
+                Continue Shopping
+              </Link>
+            </div>
           ) : (
             <>
               <ul className="mb-6 divide-y divide-customNavy/50">

@@ -12,9 +12,8 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import { X } from "@phosphor-icons/react";
-
 import { FaYelp, FaYoutube, FaFacebook, FaSpotify } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaXTwitter, FaPatreon } from "react-icons/fa6";
 import { AiFillInstagram } from "react-icons/ai";
 
 const links = [
@@ -225,6 +224,15 @@ const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
               title="Follow us on X"
             >
               <FaXTwitter />
+            </a>
+            <a
+              href="https://www.patreon.com/legendhasit"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Support Legend Has It on Patreon"
+              title="Support us on Patreon"
+            >
+              <FaPatreon />
             </a>
           </div>
         </div>
