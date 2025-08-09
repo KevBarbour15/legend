@@ -30,7 +30,7 @@ export default function Home() {
         console.error(error);
       }
     };
-    
+
     // don't currently need this
     //updateEventStatus();
 
@@ -196,7 +196,7 @@ export default function Home() {
               <p>Sunday:</p>
               <p>3pm - 8pm</p>
             </div>
-            <p className="about-section mb-3 font-hypatia text-base italic text-customNavy opacity-0">
+            <p className="about-section mb-3 text-pretty font-hypatia text-base italic text-customNavy opacity-0">
               * We occasionally open outside of these hours for game days and
               special events. For the most up-to-date info, please check our
               social media pages.

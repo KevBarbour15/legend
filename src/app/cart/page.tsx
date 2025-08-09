@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import AudioStatic from "@/components/audio-static/AudioStatic";
 import { Minus, Plus } from "@phosphor-icons/react";
+import { Button } from "@/components/ui/button";
 
 async function requestCheckoutUrl(items: any[]) {
   if (!items.length) return "#";
@@ -96,25 +97,30 @@ export default function CartPage() {
             Your Cart
           </h1>
           {hasOutOfStock && (
-            <div className="mb-4 rounded bg-red-100 p-3 text-red-700">
+            <div className="mb-4 mt-3 rounded bg-red-100 text-center font-hypatia text-red-700">
               Some items in your cart are out of stock or have insufficient
               quantity. Please update your cart before checking out.
             </div>
           )}
           {!isHydrated ? (
-            <div className="text-center text-gray-500">Loading cart...</div>
+            <div className="mt-6 text-center font-hypatia text-xl text-customNavy">
+              Loading cart...
+            </div>
           ) : items.length === 0 ? (
-            <div className="flex h-full flex-col items-center justify-center gap-4">
-              <div className="text-center text-gray-500">
+            <div className="flex h-full flex-col items-center justify-center gap-4 p-6">
+              <div className="text-center font-hypatia text-xl text-customNavy">
                 Your cart is empty.
               </div>
-              <Link href="/shop" className="text-customNavy">
+              <Link
+                href="/shop"
+                className="font-bigola text-xl text-customNavy underline underline-offset-2 transition-all duration-300 ease-in-out md:hover:text-customGold"
+              >
                 Continue Shopping
               </Link>
             </div>
           ) : (
             <>
-              <ul className="mb-6 divide-y divide-customNavy/50">
+              <ul className="divide-y divide-customNavy/50">
                 {items.map((item) => {
                   return (
                     <li
@@ -154,7 +160,7 @@ export default function CartPage() {
                             </div>
                           </div>
                         </div>
-                        <div className="mt-2 flex items-center gap-2">
+                        <div className="flex flex-col items-end gap-2">
                           <div className="flex items-center rounded-sm border border-customGold">
                             <button
                               type="button"
@@ -165,11 +171,11 @@ export default function CartPage() {
                                 )
                               }
                               disabled={item.quantity <= 1}
-                              className="p-2 transition-colors hover:bg-customGold hover:text-customWhite disabled:cursor-not-allowed disabled:opacity-50"
+                              className="border-r border-customGold p-2 transition-colors hover:bg-customGold hover:text-customWhite disabled:cursor-not-allowed disabled:opacity-50"
                             >
-                              <Minus className="h-4 w-4" />
+                              <Minus className="" />
                             </button>
-                            <span className="min-w-[3rem] px-4 py-2 text-center font-bigola text-customNavy">
+                            <span className="h-6 min-w-[3rem] px-4 text-center font-bigola text-customNavy">
                               {item.quantity}
                             </span>
                             <button
@@ -200,14 +206,14 @@ export default function CartPage() {
                                     })()
                                   : false
                               }
-                              className="p-2 transition-colors hover:bg-customGold hover:text-customWhite disabled:cursor-not-allowed disabled:opacity-50"
+                              className="border-l border-customGold p-2 transition-colors hover:bg-customGold hover:text-customWhite disabled:cursor-not-allowed disabled:opacity-50"
                             >
-                              <Plus className="h-4 w-4" />
+                              <Plus />
                             </button>
                           </div>
                           <button
                             onClick={() => removeFromCart(item.variantId)}
-                            className="ml-4 text-red-500 hover:underline"
+                            className="ml-4 font-hypatia text-sm text-red-500 transition-all hover:underline"
                           >
                             Remove
                           </button>
@@ -217,11 +223,11 @@ export default function CartPage() {
                   );
                 })}
               </ul>
-              <div className="mb-6 flex items-center justify-between">
-                <div className="flex gap-4">
+              <div className="mb-6 flex flex-col items-end gap-3 border-t-2 border-customGold pt-6">
+                <div className="flex flex-col items-end gap-2">
                   <button
                     onClick={clearCart}
-                    className="text-sm text-red-600 hover:underline"
+                    className="font-hypatia text-sm text-red-600 transition-all hover:underline"
                   >
                     Clear Cart
                   </button>
@@ -232,21 +238,25 @@ export default function CartPage() {
                     </div>
                   )}
                 </div>
-                <span className="text-lg font-bold">
-                  Total: $
+                <p className="font-bigola text-lg font-bold">
+                  Subtotal: $
                   {items
                     .reduce((sum, item) => sum + item.price * item.quantity, 0)
                     .toFixed(2)}
-                </span>
+                </p>
+                <p className="font-hypatia text-sm text-customNavy">
+                  Taxes and shipping calculated at checkout.
+                </p>
+
+                <a href={hasOutOfStock ? undefined : checkoutUrl}>
+                  <Button
+                    className="mx-auto w-fit rounded-sm border border-customNavy/20 bg-customNavy font-bigola text-customWhite transition-all duration-300 ease-in-out box-shadow-text md:hover:bg-customWhite md:hover:text-customNavy md:active:bg-customGold"
+                    disabled={hasOutOfStock || checkoutUrl === "#"}
+                  >
+                    Checkout with Shopify
+                  </Button>
+                </a>
               </div>
-              <a href={hasOutOfStock ? undefined : checkoutUrl}>
-                <button
-                  className="w-full rounded bg-customNavy px-4 py-3 text-xl font-bold text-white transition-colors hover:bg-customGold hover:text-customNavy"
-                  disabled={hasOutOfStock || checkoutUrl === "#"}
-                >
-                  Checkout
-                </button>
-              </a>
             </>
           )}
         </div>

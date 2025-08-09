@@ -2,9 +2,6 @@
 
 import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { Cross2Icon } from "@radix-ui/react-icons";
-
-import { IconButton } from "@mui/material";
 import { X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -48,9 +45,13 @@ const DialogContent = React.forwardRef<
     >
       {children}
       <DialogPrimitive.Close asChild>
-        <IconButton className="absolute right-3 top-3 transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-black">
+        <button
+          type="button"
+          aria-label="Close"
+          className="absolute right-3 top-3 z-50 rounded p-1 text-stone-500 transition-transform duration-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-stone-300 md:hover:rotate-[360deg]"
+        >
           <X size={20} />
-        </IconButton>
+        </button>
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>
   </DialogPortal>
