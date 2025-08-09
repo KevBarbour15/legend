@@ -9,7 +9,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -65,9 +64,9 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
           ref={formRef}
           id="general-form"
           onSubmit={form.handleSubmit(onSubmit)}
-          className="mx-auto flex w-full flex-col space-y-3 border-t-2 border-customGold pt-4 opacity-0 lg:w-[650px]"
+          className="mx-auto flex w-full flex-col space-y-3 opacity-0 lg:w-[650px]"
         >
-          <p className="mb-6 text-pretty font-hypatia text-xl leading-[1.15] text-customNavy text-shadow-custom md:text-center">
+          <p className="mb-6 text-pretty font-hypatia text-xl leading-[1.15] text-customNavy text-shadow-custom">
             Thank you for reaching out to{" "}
             <span className="font-bigola">Legend Has It</span>. Please take a
             minute and fill out the form below to give us a better understanding
@@ -79,14 +78,10 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             name="name"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel htmlFor="general-name">
-                  <span className="font-bigola text-customNavy text-shadow-custom">
-                    Name:
-                  </span>
-                </FormLabel>
                 <FormControl className="rounded-sm border border-customNavy/20 bg-customWhite font-hypatia text-customNavy box-shadow-text focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input
                     id="general-name"
+                    placeholder="Name"
                     aria-label="Your full name"
                     aria-describedby="general-name-description"
                     {...field}
@@ -102,15 +97,11 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             name="email"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel htmlFor="general-email">
-                  <span className="font-bigola text-customNavy text-shadow-custom">
-                    Email:
-                  </span>
-                </FormLabel>
                 <FormControl className="rounded-sm border border-customNavy/20 bg-customWhite font-hypatia text-customNavy box-shadow-text focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input
                     id="general-email"
                     type="email"
+                    placeholder="Email"
                     aria-label="Your email address"
                     aria-describedby="general-email-description"
                     {...field}
@@ -125,15 +116,11 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             name="phone"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel htmlFor="general-phone">
-                  <span className="font-bigola text-customNavy text-shadow-custom">
-                    Phone:
-                  </span>
-                </FormLabel>
                 <FormControl className="rounded-sm border border-customNavy/20 bg-customWhite font-hypatia text-customNavy box-shadow-text focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input
                     id="general-phone"
                     type="tel"
+                    placeholder="Phone"
                     aria-label="Your phone number"
                     aria-describedby="general-phone-description"
                     {...field}
@@ -149,14 +136,10 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
             name="message"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel htmlFor="general-message">
-                  <span className="font-bigola text-customNavy text-shadow-custom">
-                    Message:
-                  </span>
-                </FormLabel>
                 <FormControl className="rounded-sm border border-customNavy/20 bg-customWhite font-hypatia text-customNavy box-shadow-text focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Textarea
                     id="general-message"
+                    placeholder="Message"
                     aria-label="Your message"
                     aria-describedby="general-message-description"
                     {...field}
@@ -168,7 +151,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
           />
           <Button
             type="submit"
-            className="mx-auto w-fit rounded-sm border border-customNavy/20 bg-customNavy font-bigola text-2xl text-customWhite transition-all duration-300 ease-in-out box-shadow-text md:hover:bg-customWhite md:hover:text-customNavy md:active:bg-customGold"
+            className="mx-auto w-fit rounded-sm border border-customNavy/20 bg-customNavy font-bigola text-customWhite transition-all duration-300 ease-in-out box-shadow-text md:hover:bg-customWhite md:hover:text-customNavy md:active:bg-customGold"
           >
             Submit
           </Button>

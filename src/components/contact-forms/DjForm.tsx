@@ -9,7 +9,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -60,9 +59,9 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
         ref={formRef}
         id="dj-form"
         onSubmit={form.handleSubmit(onSubmit)}
-        className="mx-auto flex w-full flex-col space-y-3 border-t-2 border-customGold pt-4 opacity-0 lg:w-[650px]"
+        className="mx-auto flex w-full flex-col space-y-3 opacity-0 lg:w-[650px]"
       >
-        <p className="mb-6 text-pretty font-hypatia text-xl leading-[1.15] text-customNavy text-shadow-custom md:text-center">
+        <p className="mb-6 text-pretty font-hypatia text-xl leading-[1.15] text-customNavy text-shadow-custom">
           Thank you for your interest to DJ at{" "}
           <span className="font-bigola">Legend Has It</span>. Please take a
           minute to fill out the form below so we can get to know you and your
@@ -74,14 +73,10 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           name="name"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel htmlFor="dj-name">
-                <span className="font-bigola text-customNavy text-shadow-custom">
-                  Name:
-                </span>
-              </FormLabel>
               <FormControl className="rounded-sm border border-customNavy/20 bg-customWhite font-hypatia text-customNavy box-shadow-text focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                 <Input
                   id="dj-name"
+                  placeholder="Name"
                   aria-label="Your full name"
                   aria-describedby="dj-name-description"
                   {...field}
@@ -97,15 +92,11 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           name="email"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel htmlFor="dj-email">
-                <span className="font-bigola text-customNavy text-shadow-custom">
-                  Email:
-                </span>
-              </FormLabel>
               <FormControl className="rounded-sm border border-customNavy/20 bg-customWhite font-hypatia text-customNavy box-shadow-text focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                 <Input
                   id="dj-email"
                   type="email"
+                  placeholder="Email"
                   aria-label="Your email address"
                   aria-describedby="dj-email-description"
                   {...field}
@@ -120,15 +111,11 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           name="phone"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel htmlFor="dj-phone">
-                <span className="font-bigola text-customNavy text-shadow-custom">
-                  Phone:
-                </span>
-              </FormLabel>
               <FormControl className="rounded-sm border border-customNavy/20 bg-customWhite font-hypatia text-customNavy box-shadow-text focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                 <Input
                   id="dj-phone"
                   type="tel"
+                  placeholder="Phone"
                   aria-label="Your phone number"
                   aria-describedby="dj-phone-description"
                   {...field}
@@ -144,14 +131,10 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
           name="message"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel htmlFor="dj-message">
-                <span className="font-bigola text-customNavy text-shadow-custom">
-                  Experience, style, etc:
-                </span>
-              </FormLabel>
               <FormControl className="rounded-sm border border-customNavy/20 bg-customWhite font-hypatia text-customNavy box-shadow-text focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                 <Textarea
                   id="dj-message"
+                  placeholder="Experience, style, etc"
                   aria-label="Your DJ experience and music style"
                   aria-describedby="dj-message-description"
                   {...field}
@@ -163,7 +146,7 @@ const DjForm = forwardRef<DjFormRef, DjFormProps>(({ onSubmit }, ref) => {
         />
         <Button
           type="submit"
-          className="mx-auto w-fit rounded-sm border border-customNavy/20 bg-customNavy font-bigola text-2xl text-customWhite transition-all duration-300 ease-in-out box-shadow-text md:hover:bg-customWhite md:hover:text-customNavy md:active:bg-customGold"
+          className="mx-auto w-fit rounded-sm border border-customNavy/20 bg-customNavy font-bigola text-customWhite transition-all duration-300 ease-in-out box-shadow-text md:hover:bg-customWhite md:hover:text-customNavy md:active:bg-customGold"
         >
           Submit
         </Button>

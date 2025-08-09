@@ -96,29 +96,44 @@ const Menu: React.FC = ({}) => {
     if (loading || !containerRef.current) return;
 
     const tl = gsap.timeline({ delay: 0.25 });
-    const heading = new SplitText("#menu-heading", { type: "words" });
+    const heading = new SplitText("#menu-heading", { type: "chars" });
+    const subheading = new SplitText("#menu-subheading", { type: "words" });
 
     tl.set("#menu", {
       opacity: 0,
     })
+
       .set("#menu-heading", {
         opacity: 1,
       })
-      .set(heading.words, {
-        y: 50,
+      .set("#menu-subheading", {
+        opacity: 1,
+      })
+      .set(heading.chars, {
+        opacity: 0,
+        y: -25,
+      })
+      .set(subheading.words, {
+        x: -25,
         opacity: 0,
       })
-
       .set(menuItemRefs.current, {
         opacity: 0,
         y: 30,
       })
-      .to(heading.words, {
-        y: 0,
-        duration: 0.5,
+      .to(heading.chars, {
+        duration: 0.35,
         ease: "back.out(1.7)",
+        y: 0,
         opacity: 1,
-        stagger: 0.075,
+        stagger: 0.015,
+      })
+      .to(subheading.words, {
+        duration: 0.35,
+        ease: "back.out(1.7)",
+        x: 0,
+        opacity: 1,
+        stagger: 0.025,
       })
       .to(
         "#menu",
@@ -322,13 +337,19 @@ const Menu: React.FC = ({}) => {
             </div>
           ) : (
             <div>
-              <div className="overflow-hidden py-3">
+              <div className="overflow-hidden">
                 <h2
                   id="menu-heading"
-                  className="w-full font-hypatia text-3xl leading-[1.15] text-customNavy opacity-0 text-shadow-custom"
+                  className="mb-2 mt-3 font-bigola text-4xl italic text-customGold opacity-0 text-shadow-custom md:hidden"
+                >
+                  Menu
+                </h2>
+                <h3
+                  id="menu-subheading"
+                  className="mb-6 w-full font-hypatia text-lg leading-[1.15] text-customNavy opacity-0 text-shadow-custom md:text-center md:font-bigola md:text-3xl"
                 >
                   Stay up to date as our selections rotate!
-                </h2>
+                </h3>
               </div>
               <Accordion type="single" collapsible className="z-[151] w-full">
                 <div className="w-full opacity-0" id="menu">

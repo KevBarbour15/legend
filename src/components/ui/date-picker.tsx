@@ -17,9 +17,10 @@ import {
 interface DatePickerProps {
   value?: Date;
   onChange: (date: Date | undefined) => void;
+  placeholder?: string;
 }
 
-export function DatePicker({ value, onChange }: DatePickerProps) {
+export function DatePicker({ value, onChange, placeholder }: DatePickerProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -31,7 +32,11 @@ export function DatePicker({ value, onChange }: DatePickerProps) {
         >
           <CalendarBlank className="mr-3 h-4 w-4 p-0 text-customNavy hover:text-customGold" />
           <div className="text-customNavy">
-            {value ? format(value, "PPP") : <span>Pick a date</span>}
+            {value ? (
+              format(value, "PPP")
+            ) : (
+              <span>{placeholder ?? "Pick a date"}</span>
+            )}
           </div>
         </Button>
       </PopoverTrigger>

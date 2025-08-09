@@ -34,28 +34,31 @@ export default function Contact() {
 
   useGSAP(() => {
     if (!containerRef.current) return;
-    const splitText = new SplitText("#heading", { type: "words" });
+
+    const heading = new SplitText("#menu-heading", { type: "chars" });
+    const subheading = new SplitText("#menu-subheading", { type: "words" });
 
     const tl = gsap.timeline();
-    tl.set(splitText.words, { opacity: 0, x: -25 })
-      .set("#heading", { opacity: 1 })
-      .to(
-        splitText.words,
-        {
-          duration: 0.35,
-          ease: "back.out(1.7)",
-          x: 0,
-          opacity: 1,
-          stagger: 0.025,
-        },
-        0.15,
-      );
-
-    gsap.fromTo(
-      "#tabs-container",
-      { opacity: 0 },
-      { opacity: 1, duration: 0.015 },
-    );
+    tl.set("#tabs-container", { opacity: 0 })
+      .set("#menu-heading", { opacity: 1 })
+      .set("#menu-subheading", { opacity: 1 })
+      .set(heading.chars, { opacity: 0, y: -25 })
+      .set(subheading.words, { x: -25, opacity: 0 })
+      .to(heading.chars, {
+        duration: 0.35,
+        ease: "back.out(1.7)",
+        y: 0,
+        opacity: 1,
+        stagger: 0.015,
+      })
+      .to(subheading.words, {
+        duration: 0.35,
+        ease: "back.out(1.7)",
+        x: 0,
+        opacity: 1,
+        stagger: 0.025,
+      })
+      .to("#tabs-container", { opacity: 1, duration: 0.015 }, "<");
   }, []);
 
   const handleSubmit = async (formType: FormType, values: FormData) => {
@@ -132,26 +135,37 @@ export default function Contact() {
       <AudioStatic />
       <div ref={containerRef} className="min-h-dvh w-screen pt-16 md:pt-0">
         <div className="mx-auto flex flex-col overflow-y-auto px-3 pb-20 md:px-0 md:pb-10 md:pl-[258px] md:pr-6 md:pt-6">
-          <h1
-            id="heading"
-            className="mt-6 w-full text-pretty font-bigola text-6xl text-customNavy opacity-0 text-shadow-custom md:mt-0 md:text-center md:text-7xl"
-          >
-            Sound Off - Say Hello!
-          </h1>
+          <div className="overflow-hidden">
+            <h2
+              id="menu-heading"
+              className="mb-2 mt-3 font-bigola text-4xl italic text-customGold opacity-0 text-shadow-custom md:hidden"
+            >
+              Contact
+            </h2>
+            <h3
+              id="menu-subheading"
+              className="mb-6 w-full font-hypatia text-lg leading-[1.15] text-customNavy opacity-0 text-shadow-custom md:text-center md:font-bigola md:text-3xl"
+            >
+              Sound Off - Say Hello!
+            </h3>
+          </div>
           <Tabs
             defaultValue="event"
             className="flex w-full flex-col items-center opacity-0"
             onValueChange={(value) => setActiveTab(value as FormType)}
             id="tabs-container"
           >
-            <TabsList className="mb-4 mt-6 grid w-full grid-cols-3 font-bigola lg:w-[650px]">
-              <TabsTrigger value="event" className="border-customNavy/20">
+            <TabsList className="mb-4 grid w-full grid-cols-3 border-t-2 border-customGold font-bigola lg:w-[650px]">
+              <TabsTrigger value="event" className="mt-3 border-customNavy/20">
                 Event <span className="md:flex">&nbsp;Inquiry</span>
               </TabsTrigger>
-              <TabsTrigger value="dj" className="border-customNavy/20">
+              <TabsTrigger value="dj" className="mt-3 border-customNavy/20">
                 DJ <span className="md:flex">&nbsp;Inquiry</span>
               </TabsTrigger>
-              <TabsTrigger value="general" className="border-customNavy/20">
+              <TabsTrigger
+                value="general"
+                className="mt-3 border-customNavy/20"
+              >
                 General <span className="md:flex">&nbsp;Inquiry</span>
               </TabsTrigger>
             </TabsList>
