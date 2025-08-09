@@ -60,7 +60,7 @@ export default function ProductCard({ product }: ProductContentProps) {
                         e.preventDefault();
                         setSelectedVariantId(variant.id);
                       }}
-                      className={`relative rounded-sm border border-customGold font-bigola text-xs transition-all duration-300 ease-in-out box-shadow-text ${isSelected ? "bg-customGold text-customWhite" : "bg-customWhite text-customNavy"} ${isSoldOut ? "cursor-not-allowed opacity-50" : "hover:bg-customNavy hover:text-white"} `}
+                      className={`relative min-w-10 rounded-sm border border-customGold px-3 py-1 font-bigola text-xs transition-all duration-300 ease-in-out box-shadow-text ${isSelected ? "bg-customGold text-customWhite" : "bg-customWhite text-customNavy"} ${isSoldOut ? "cursor-not-allowed opacity-50" : "hover:bg-customNavy hover:text-white"} `}
                     >
                       {sizeLabel}
                       {isSoldOut && (

@@ -41,7 +41,7 @@ const MobileHeader: React.FC = () => {
         ref={containerRef}
         className={`${
           pathname === "/" ? "hidden" : ""
-        } fixed z-[150] flex h-16 w-full rounded-b-xl bg-customNavy px-3 text-customCream drop-shadow-card md:hidden ${pathname === "/dashboard" ? "hidden" : ""}`}
+        } fixed z-[150] flex h-16 w-full rounded-b-sm bg-customNavy px-3 text-customCream shadow-md md:hidden ${pathname === "/dashboard" ? "hidden" : ""}`}
       >
         <div
           id="mobile-heading"

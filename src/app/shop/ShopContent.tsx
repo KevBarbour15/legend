@@ -32,9 +32,11 @@ export default function ShopContent({ products }: { products: any[] }) {
         <div className="mx-auto h-full overflow-y-auto px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
           <div
             ref={headerRef}
-            className="mb-6 flex items-center justify-between border-b-2 border-customGold pb-4 pt-4 font-hypatia text-lg text-customNavy opacity-0 md:pt-0"
+            className="mb-3 flex items-center justify-between border-b-2 border-customGold pb-4 pt-4 font-hypatia text-lg text-customNavy opacity-0 md:mb-6 md:pt-0"
           >
-            <h2 className="font-bigola text-2xl text-shadow-custom">Shop</h2>
+            <h2 className="font-bigola text-3xl italic text-customGold text-shadow-custom">
+              Shop
+            </h2>
             <Link href="/cart" className="hidden items-center gap-2 md:flex">
               <p className="text-shadow-custom">Cart</p>
               <CaretRight className="h-4 w-4 drop-shadow-text" />

@@ -7,6 +7,13 @@ import AudioStatic from "@/components/audio-static/AudioStatic";
 import AddToCartDialog from "@/components/add-to-cart-dialog/AddToCartDialog";
 import Link from "next/link";
 import { CaretLeft, CaretRight, Minus, Plus } from "@phosphor-icons/react";
+import { Button } from "@/components/ui/button";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
 
 const ProductContent = ({ product }: ProductContentProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -52,20 +59,20 @@ const ProductContent = ({ product }: ProductContentProps) => {
     <>
       <AudioStatic />
       <div ref={containerRef} className="h-full pt-16 md:pt-0">
-        <div className="mx-auto h-full overflow-y-auto px-3 pb-20 md:pb-6 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
-          <div className="mb-6 flex items-center justify-between border-b-2 border-customGold pb-4 font-hypatia text-lg text-customNavy">
+        <div className="mx-auto h-full overflow-y-auto px-3 pb-20 md:pb-10 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
+          <div className="hidden items-center justify-between border-b-2 border-customGold py-3 font-bigola text-lg text-customNavy text-shadow-custom md:mb-10 md:flex">
             <Link href="/shop" className="flex items-center gap-2">
-              <CaretLeft className="h-4 w-4" />
+              <CaretLeft className="h-5 w-5 drop-shadow-text" />
               Shop
             </Link>
 
             <Link href="/cart" className="flex items-center gap-2">
-              Cart <CaretRight className="h-4 w-4" />
+              Cart <CaretRight className="h-5 w-5 drop-shadow-text" />
             </Link>
           </div>
-          <div className="flex h-full flex-col gap-6 pt-3 md:flex-row md:pt-0">
+          <div className="flex h-full flex-col gap-3 pt-3 md:flex-row md:gap-6 md:pt-0">
             {mainImage && (
-              <div className="relative aspect-square w-full drop-shadow-card md:w-1/2">
+              <div className="box-shadow-card relative aspect-square w-full md:w-1/2">
                 <Image
                   src={mainImage}
                   alt={product.images.nodes[0]?.altText || product.title}
@@ -73,25 +80,38 @@ const ProductContent = ({ product }: ProductContentProps) => {
                   width={600}
                   height={600}
                   priority
+                  loading="eager"
                 />
               </div>
             )}
-            <div className="flex flex-col gap-3 text-customNavy md:w-1/2">
+            <div className="flex flex-col gap-1 text-customNavy md:w-1/2">
               <h1 className="font-bigola text-2xl text-shadow-custom">
                 {product.title}
               </h1>
-              <span className="font-bigola text-lg text-shadow-custom">
+              <span className="font-hypatia text-lg text-shadow-custom">
                 ${parseFloat(selectedVariant.price.amount).toFixed(2)}
               </span>
 
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: product.descriptionHtml,
-                }}
-                className="prose max-w-none font-hypatia text-base text-shadow-custom"
-              />
+              <Accordion
+                type="single"
+                collapsible
+                className="border-b-2 border-customGold"
+              >
+                <AccordionItem value="description">
+                  <AccordionTrigger className="font-bigola text-lg text-shadow-custom">
+                    Details
+                  </AccordionTrigger>
+                  <AccordionContent className="prose max-w-none border-customGold font-hypatia text-base text-shadow-custom">
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: product.descriptionHtml,
+                      }}
+                    />
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
 
-              <div className="mt-3 flex items-center gap-4">
+              <div className="mt-3 flex items-center gap-4 md:mt-20">
                 {variants.length > 1 && (
                   <div className="flex gap-2">
                     {variants.map((variant) => {
@@ -102,12 +122,12 @@ const ProductContent = ({ product }: ProductContentProps) => {
                           (opt) => opt.name === "Size",
                         )?.value || variant.title;
                       return (
-                        <button
+                        <Button
                           key={variant.id}
                           type="button"
                           disabled={isSoldOut}
                           onClick={() => handleVariantChange(variant.id)}
-                          className={`relative aspect-square h-10 rounded-sm border border-customGold font-bigola text-xs transition-colors ${isSelected ? "bg-customGold text-customWhite" : "bg-customWhite/50 text-customNavy"} ${isSoldOut ? "cursor-not-allowed opacity-50" : "hover:bg-customNavy hover:text-white"}`}
+                          className={`box-shadow-card relative min-w-10 rounded-sm border border-customGold px-3 py-1 font-bigola text-xs transition-all duration-300 ease-in-out ${isSelected ? "bg-customGold text-customWhite" : "text-customNavy backdrop-blur-[1px]"} ${isSoldOut ? "cursor-not-allowed opacity-50" : "hover:bg-customNavy hover:text-white"}`}
                         >
                           {sizeLabel}
                           {isSoldOut && (
@@ -115,42 +135,39 @@ const ProductContent = ({ product }: ProductContentProps) => {
                               <div className="text-3xl text-red-500">X</div>
                             </div>
                           )}
-                        </button>
+                        </Button>
                       );
                     })}
                   </div>
                 )}
               </div>
               {selectedVariant && !selectedVariant.availableForSale && (
-                <span className="text-sm text-red-500">
+                <span className="font-hypatia text-sm text-red-500">
                   Selected variant is sold out
                 </span>
               )}
               {selectedVariant && selectedVariant.availableForSale && (
                 <>
                   <div className="mt-4 flex items-center gap-3">
-                    <span className="font-hypatia text-sm text-customNavy">
-                      Quantity:
-                    </span>
-                    <div className="flex items-center rounded-sm border border-customGold">
+                    <div className="box-shadow-card flex items-center rounded-sm border border-customGold backdrop-blur-[1px]">
                       <button
                         type="button"
                         onClick={() => handleQuantityChange(quantity - 1)}
                         disabled={quantity <= 1}
-                        className="p-2 transition-colors hover:bg-customGold hover:text-customWhite disabled:cursor-not-allowed disabled:opacity-50"
+                        className="border-r border-customGold p-2 transition-colors hover:bg-customGold hover:text-customWhite disabled:cursor-not-allowed disabled:opacity-50"
                       >
-                        <Minus className="h-4 w-4" />
+                        <Minus />
                       </button>
-                      <span className="min-w-[3rem] px-4 py-2 text-center font-bigola text-customNavy">
+                      <span className="h-6 min-w-[3rem] px-4 text-center font-bigola text-customNavy">
                         {quantity}
                       </span>
                       <button
                         type="button"
                         onClick={() => handleQuantityChange(quantity + 1)}
                         disabled={quantity >= availableQuantity}
-                        className="p-2 transition-colors hover:bg-customGold hover:text-customWhite disabled:cursor-not-allowed disabled:opacity-50"
+                        className="border-l border-customGold p-2 transition-colors hover:bg-customGold hover:text-customWhite disabled:cursor-not-allowed disabled:opacity-50"
                       >
-                        <Plus className="h-4 w-4" />
+                        <Plus className="" />
                       </button>
                     </div>
                     <span className="text-xs text-customNavy/70">
@@ -158,8 +175,8 @@ const ProductContent = ({ product }: ProductContentProps) => {
                       {cartQuantity > 0 && ` (${cartQuantity} in cart)`}
                     </span>
                   </div>
-                  <button
-                    className="mt-4 w-full rounded-sm bg-customNavy px-4 py-2 font-bigola text-white drop-shadow-card transition-colors hover:bg-customGold hover:text-customNavy md:w-fit"
+                  <Button
+                    className="box-shadow-card mb-6 mt-4 w-fit rounded-sm border border-customNavy/20 bg-customNavy font-bigola text-customWhite transition-all duration-300 ease-in-out md:hover:bg-customWhite md:hover:text-customNavy md:active:bg-customGold"
                     onClick={() => {
                       addToCart(
                         {
@@ -177,7 +194,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
                     }}
                   >
                     Add to Cart
-                  </button>
+                  </Button>
                 </>
               )}
             </div>
