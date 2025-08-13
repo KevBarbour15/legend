@@ -59,7 +59,7 @@ const MobileHeader: React.FC = () => {
             </Link>
           </div>
           <div className="flex items-center gap-4">
-            <Link href="/cart" className="hidden">
+            <Link href="/cart" className="md:hidden">
               <ShoppingCart
                 weight="regular"
                 className="text-customCream"

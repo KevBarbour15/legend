@@ -5,7 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ProductContentProps } from "@/data/products";
 import { useCart } from "@/hooks/useCart";
-import AddToCartDialog from "@/components/add-to-cart-dialog/AddToCartDialog";
+import AddToCartModal from "@/components/add-to-cart-modal/AddToCartModal";
 import { Button } from "@/components/ui/button";
 
 export default function ProductCard({ product }: ProductContentProps) {
@@ -22,7 +22,7 @@ export default function ProductCard({ product }: ProductContentProps) {
   return (
     <>
       <Link href={`/product/${product?.handle}`} className="block h-full">
-        <div className="h-ful l box-shadow-card flex w-full flex-col overflow-hidden rounded-sm border border-customNavy/20 bg-neutral-300/10 text-customNavy shadow-sm backdrop-blur-[2px]">
+        <div className="h-ful l flex w-full flex-col overflow-hidden rounded-sm border border-customNavy/20 bg-neutral-300/10 text-customNavy shadow-sm backdrop-blur-[2px] box-shadow-card">
           {mainImage && (
             <div className="relative aspect-square w-full overflow-hidden">
               <Image
@@ -105,7 +105,7 @@ export default function ProductCard({ product }: ProductContentProps) {
         </div>
       </Link>
 
-      <AddToCartDialog
+      <AddToCartModal
         open={open}
         onOpenChange={setOpen}
         productTitle={product.title}

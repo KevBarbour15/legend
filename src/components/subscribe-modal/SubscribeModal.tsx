@@ -16,7 +16,7 @@ interface PopupConfig {
   inputStyling?: string;
 }
 
-const SubscribePopup = ({
+const SubscribeModal = ({
   showDelay = 5000,
   showInterval = 3,
 }: PopupConfig) => {
@@ -156,4 +156,4 @@ const SubscribePopup = ({
   );
 };
 
-export default SubscribePopup;
+export default SubscribeModal;

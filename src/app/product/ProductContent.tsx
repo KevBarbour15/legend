@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { ProductContentProps } from "@/data/products";
 import { useCart } from "@/hooks/useCart";
 import AudioStatic from "@/components/audio-static/AudioStatic";
-import AddToCartDialog from "@/components/add-to-cart-dialog/AddToCartDialog";
+import AddToCartModal from "@/components/add-to-cart-modal/AddToCartModal";
 import Link from "next/link";
 import { CaretLeft, CaretRight, Minus, Plus } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
@@ -263,7 +263,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
         </div>
       </div>
 
-      <AddToCartDialog
+      <AddToCartModal
         open={open}
         onOpenChange={setOpen}
         productTitle={product.title}

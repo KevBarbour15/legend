@@ -103,11 +103,11 @@ export default function CartPage() {
             </div>
           )}
           {!isHydrated ? (
-            <div className="mt-6 text-center font-hypatia text-xl text-customNavy">
+            <div className="pt-10 text-center font-hypatia text-xl text-customNavy">
               Loading cart...
             </div>
           ) : items.length === 0 ? (
-            <div className="flex h-full flex-col items-center justify-center gap-4 p-6">
+            <div className="flex h-full flex-col items-center justify-center gap-10 pt-10">
               <div className="text-center font-hypatia text-xl text-customNavy">
                 Your cart is empty.
               </div>

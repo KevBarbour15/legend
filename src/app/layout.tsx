@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import BackgroundOverlay from "@/components/bg-overlay/BackgroundOverlay";
 import MusicPlayer from "@/components/music-player/MusicPlayer";
 import MobileHeader from "@/components/mobile-header/MobileHeader";
-import SubscribePopup from "@/components/subscribe-popup/SubscribePopup";
+import SubscribeModal from "@/components/subscribe-modal/SubscribeModal";
 import CartProviderClient from "@/components/CartProviderClient";
 
 import "./globals.css";
@@ -128,7 +128,7 @@ export default function RootLayout({
         <body className={inter.className} suppressHydrationWarning={true}>
           <CartProviderClient>
             <MobileHeader />
-            <SubscribePopup />
+            <SubscribeModal />
             <Toaster />
             <BackgroundOverlay />
             {children}
