@@ -37,7 +37,10 @@ export default function ShopContent({ products }: { products: any[] }) {
             <h2 className="font-bigola text-3xl italic text-customGold text-shadow-custom">
               Shop
             </h2>
-            <Link href="/cart" className="hidden items-center gap-2 md:flex">
+            <Link
+              href="/cart"
+              className="hidden items-center justify-center gap-2 transition-all duration-300 ease-in-out md:flex lg:hover:text-customGold"
+            >
               <p className="text-shadow-custom">Cart</p>
               <CaretRight className="h-4 w-4 drop-shadow-text" />
             </Link>

@@ -61,18 +61,24 @@ const ProductContent = ({ product }: ProductContentProps) => {
       <div ref={containerRef} className="h-full pt-16 md:pt-0">
         <div className="mx-auto h-full overflow-y-auto px-3 pb-20 md:pb-10 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
           <div className="hidden items-center justify-between border-b-2 border-customGold py-3 font-bigola text-lg text-customNavy text-shadow-custom md:mb-10 md:flex">
-            <Link href="/shop" className="flex items-center gap-2">
+            <Link
+              href="/shop"
+              className="flex items-center gap-2 transition-all duration-300 ease-in-out lg:hover:text-customGold"
+            >
               <CaretLeft className="h-5 w-5 drop-shadow-text" />
               Shop
             </Link>
 
-            <Link href="/cart" className="flex items-center gap-2">
+            <Link
+              href="/cart"
+              className="flex items-center gap-2 transition-all duration-300 ease-in-out lg:hover:text-customGold"
+            >
               Cart <CaretRight className="h-5 w-5 drop-shadow-text" />
             </Link>
           </div>
           <div className="flex h-full flex-col gap-3 pt-3 md:flex-row md:gap-6 md:pt-0">
             {mainImage && (
-              <div className="box-shadow-card relative aspect-square w-full md:w-1/2">
+              <div className="relative aspect-square w-full box-shadow-card md:w-1/2">
                 <Image
                   src={mainImage}
                   alt={product.images.nodes[0]?.altText || product.title}
@@ -92,24 +98,12 @@ const ProductContent = ({ product }: ProductContentProps) => {
                 ${parseFloat(selectedVariant.price.amount).toFixed(2)}
               </span>
 
-              <Accordion
-                type="single"
-                collapsible
-                className="border-b-2 border-customGold"
-              >
-                <AccordionItem value="description">
-                  <AccordionTrigger className="font-bigola text-lg text-shadow-custom">
-                    Details
-                  </AccordionTrigger>
-                  <AccordionContent className="prose max-w-none border-customGold font-hypatia text-base text-shadow-custom">
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: product.descriptionHtml,
-                      }}
-                    />
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+              <div
+                className="prose mt-3 max-w-none border-t-2 border-customGold pt-4 font-hypatia text-base text-shadow-custom lg:mt-6 lg:pt-6"
+                dangerouslySetInnerHTML={{
+                  __html: product.descriptionHtml,
+                }}
+              />
 
               <div className="mt-3 flex items-center gap-4 md:mt-20">
                 {variants.length > 1 && (
@@ -127,7 +121,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
                           type="button"
                           disabled={isSoldOut}
                           onClick={() => handleVariantChange(variant.id)}
-                          className={`box-shadow-card relative min-w-10 rounded-sm border border-customGold px-3 py-1 font-bigola text-xs transition-all duration-300 ease-in-out ${isSelected ? "bg-customGold text-customWhite" : "text-customNavy backdrop-blur-[1px]"} ${isSoldOut ? "cursor-not-allowed opacity-50" : "hover:bg-customNavy hover:text-white"}`}
+                          className={`relative min-w-10 rounded-sm border border-customGold px-3 py-1 font-bigola text-xs transition-all duration-300 ease-in-out box-shadow-card ${isSelected ? "bg-customGold text-customWhite" : "text-customNavy backdrop-blur-[1px]"} ${isSoldOut ? "cursor-not-allowed opacity-50" : "hover:bg-customNavy hover:text-white"}`}
                         >
                           {sizeLabel}
                           {isSoldOut && (
@@ -149,7 +143,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
               {selectedVariant && selectedVariant.availableForSale && (
                 <>
                   <div className="mt-4 flex items-center gap-3">
-                    <div className="box-shadow-card flex items-center rounded-sm border border-customGold backdrop-blur-[1px]">
+                    <div className="flex items-center rounded-sm border border-customGold backdrop-blur-[1px] box-shadow-card">
                       <button
                         type="button"
                         onClick={() => handleQuantityChange(quantity - 1)}
@@ -172,7 +166,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
                     </div>
                   </div>
                   <Button
-                    className="box-shadow-card mb-6 mt-4 w-fit rounded-sm border border-customNavy/20 bg-customNavy font-bigola text-customWhite transition-all duration-300 ease-in-out md:hover:bg-customWhite md:hover:text-customNavy md:active:bg-customGold"
+                    className="mb-6 mt-4 w-fit rounded-sm border border-customNavy/20 bg-customNavy font-bigola text-customWhite transition-all duration-300 ease-in-out box-shadow-card md:hover:bg-customWhite md:hover:text-customNavy md:active:bg-customGold"
                     onClick={() => {
                       addToCart(
                         {
