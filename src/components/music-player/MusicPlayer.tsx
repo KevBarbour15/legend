@@ -40,6 +40,10 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
   const [buttonColor, setButtonColor] = useState<string>("text-customNavy");
   const pathName = usePathname();
 
+  // Track the current rotation state
+  const currentRotation = useRef<number>(0);
+  const isAnimating = useRef<boolean>(false);
+
   useEffect(() => {
     if (window.innerWidth >= 768) {
       setVisible(true);
@@ -56,7 +60,8 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       if (window.innerWidth >= 768) {
         setVisible(true);
         if (playing && recordTl.current) {
-          recordTl.current.restart();
+          // Resume animation from current rotation
+          resumeRecordAnimation();
         }
       } else {
         setVisible(false);
@@ -69,6 +74,13 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
 
     return () => window.removeEventListener("resize", handleResize);
   }, [playing]);
+
+  // Function to resume record animation from current rotation
+  const resumeRecordAnimation = () => {
+    if (recordTl.current) {
+      recordTl.current.play();
+    }
+  };
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -93,11 +105,23 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
       x: 12,
     });
 
+    // Initialize record animation with continuous rotation
+    // Start it immediately since we want it to spin from the beginning
     recordTl.current = gsap.timeline().to("#now-playing", {
       duration: 1.8,
-      rotation: 360,
+      rotation: "+=360",
       ease: "linear",
       repeat: -1,
+      onUpdate: function () {
+        // Update current rotation state
+        const target = this.targets()[0];
+        if (target) {
+          currentRotation.current = gsap.getProperty(
+            target,
+            "rotation",
+          ) as number;
+        }
+      },
     });
 
     gsap.set("#playlist", { opacity: 0 });
@@ -147,10 +171,21 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
 
   useGSAP(() => {
     if (visible && playing) {
-      recordTl.current?.play();
+      // Resume animation from current rotation
+      resumeRecordAnimation();
       armTl.current?.play();
     } else {
-      recordTl.current?.pause();
+      // Pause animation and store current rotation
+      if (recordTl.current) {
+        const target = document.getElementById("now-playing");
+        if (target) {
+          currentRotation.current = gsap.getProperty(
+            target,
+            "rotation",
+          ) as number;
+        }
+        recordTl.current.pause();
+      }
       armTl.current?.reverse();
     }
 
@@ -345,17 +380,20 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
                     </div>
                     <div className="flex items-center justify-center">
                       {index == currentTrackIndex ? (
-                        <Equalizer playing={playing} />
+                        <div className="flex w-8 items-center justify-center">
+                          <Equalizer playing={playing} />
+                        </div>
                       ) : (
                         <IconButton
                           id="player-button"
-                          className="m-0 flex p-1 text-customCream text-shadow-custom md:px-0 md:hover:text-customGold"
+                          className="m-0 flex p-1"
                           aria-label={`Play ${track.title} by ${track.artist}`}
                         >
                           <Play
                             weight="regular"
                             onClick={() => handleTrackChange(index)}
                             aria-hidden="true"
+                            className="text-customCream transition-all duration-300 text-shadow-custom md:hover:text-customGold"
                           />
                         </IconButton>
                       )}
