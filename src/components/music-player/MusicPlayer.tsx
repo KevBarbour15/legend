@@ -9,6 +9,7 @@ import gsap from "gsap";
 
 import { useGSAP } from "@gsap/react";
 import ReactHowler from "react-howler";
+import { Howl } from "howler";
 
 import { IconButton, Collapse } from "@mui/material";
 
@@ -29,9 +30,13 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
   const [playing, setPlaying] = useState<boolean>(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
   const [mute, setMute] = useState<boolean>(true);
+  const [volume, setVolume] = useState<number>(1.0);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const [visible, setVisible] = useState<boolean>(false);
   const [playlistVisible, setPlaylistVisible] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const howlerRef = useRef<Howl | null>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
   const recordTl = useRef<gsap.core.Timeline | null>(null);
   const recordPlayerTl = useRef<gsap.core.Timeline | null>(null);
@@ -146,11 +151,28 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
   };
 
   const handlePlayPauseRounded = () => {
+    if (howlerRef.current) {
+      if (playing) {
+        howlerRef.current.pause();
+      } else {
+        howlerRef.current.play();
+      }
+    }
     setPlaying(!playing);
   };
 
   const handleMute = () => {
+    if (howlerRef.current) {
+      howlerRef.current.mute(!mute);
+    }
     setMute(!mute);
+  };
+
+  const handleVolumeChange = (newVolume: number) => {
+    if (howlerRef.current) {
+      howlerRef.current.volume(newVolume);
+    }
+    setVolume(newVolume);
   };
 
   const handlePreviousTrack = () => {
@@ -167,6 +189,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
 
   const handleTrackChange = (index: number) => {
     setCurrentTrackIndex(index);
+    setPlaying(false); // Reset playing state for new track
   };
 
   useGSAP(() => {
@@ -405,12 +428,53 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
           </div>
         </Collapse>
       </div>
+
+      {/* Error display */}
+      {error && (
+        <div className="fixed bottom-20 left-4 z-[160] rounded bg-red-500 p-2 text-sm text-white">
+          {error}
+        </div>
+      )}
+
+      {/* Loading indicator */}
+      {loading && (
+        <div className="fixed bottom-20 left-4 z-[160] rounded bg-blue-500 p-2 text-sm text-white">
+          Loading audio...
+        </div>
+      )}
+
       <ReactHowler
+        ref={howlerRef}
         src={tracks[currentTrackIndex].url}
         playing={playing}
         mute={mute}
-        volume={1.0}
+        volume={volume}
         loop={true}
+        onLoad={() => {
+          setLoading(false);
+          setError(null);
+        }}
+        onLoadError={(id: number, error: string) => {
+          setLoading(false);
+          setError(`Failed to load audio: ${error}`);
+          console.error("Audio loading error:", error);
+        }}
+        onPlay={() => {
+          setPlaying(true);
+          setError(null);
+        }}
+        onPause={() => {
+          setPlaying(false);
+        }}
+        onEnd={() => {
+          // Auto-advance to next track when current one ends
+          handleNextTrack();
+        }}
+        onStop={() => {
+          setPlaying(false);
+        }}
+        html5={true} // Better mobile support
+        preload={true} // Preload audio for better performance
       />
     </div>
   );

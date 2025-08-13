@@ -18,27 +18,27 @@ const tracks: {
   artist: string;
 }[] = [
   {
-    url: "./audio/love-yes.mp3",
+    url: "/audio/love-yes.mp3",
     title: "Love Yes",
     artist: "HP Vince",
   },
   {
-    url: "./audio/everlasting.mp3",
+    url: "/audio/everlasting.mp3",
     title: "Everlasting",
     artist: "Dr. Packer",
   },
   {
-    url: "./audio/do-for-love.mp3",
+    url: "/audio/do-for-love.mp3",
     title: "Do For Love",
     artist: "Get Down Edits",
   },
   {
-    url: "./audio/lover-in-u.mp3",
+    url: "/audio/lover-in-u.mp3",
     title: "Lover In U",
     artist: "Fig Edits",
   },
   {
-    url: "./audio/get-down-baby.mp3",
+    url: "/audio/get-down-baby.mp3",
     title: "Get Down Baby",
     artist: "Deep & Disco",
   },

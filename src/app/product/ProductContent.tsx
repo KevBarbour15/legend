@@ -8,17 +8,18 @@ import AddToCartDialog from "@/components/add-to-cart-dialog/AddToCartDialog";
 import Link from "next/link";
 import { CaretLeft, CaretRight, Minus, Plus } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "@/components/ui/accordion";
+import { useGSAP, gsap } from "@/lib/gsap";
+
+import ProductImageSwiper from "@/components/product-image-swiper";
 
 const ProductContent = ({ product }: ProductContentProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const navigationRef = useRef<HTMLDivElement>(null);
+  const imageSectionRef = useRef<HTMLDivElement>(null);
+  const contentSectionRef = useRef<HTMLDivElement>(null);
+  const variantsRef = useRef<HTMLDivElement>(null);
+  const actionsRef = useRef<HTMLDivElement>(null);
 
-  const mainImage = product.images.nodes[0]?.url;
   const variants = product.variants.nodes;
   const [selectedVariantId, setSelectedVariantId] = useState(
     variants.find((v) => v.availableForSale)?.id || variants[0]?.id,
@@ -35,7 +36,75 @@ const ProductContent = ({ product }: ProductContentProps) => {
     setIsHydrated(true);
   }, []);
 
-  // Get the actual available quantity for the selected variant, accounting for cart
+  useGSAP(
+    () => {
+      gsap.set(
+        [
+          navigationRef.current,
+          imageSectionRef.current,
+          contentSectionRef.current,
+          variantsRef.current,
+          actionsRef.current,
+        ],
+        {
+          opacity: 0,
+          y: 30,
+        },
+      );
+
+      // Staggered entrance animation
+      gsap
+        .timeline()
+        .to(navigationRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        })
+        .to(
+          imageSectionRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "-=0.4",
+        )
+        .to(
+          contentSectionRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "-=0.4",
+        )
+        .to(
+          variantsRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          "-=0.2",
+        )
+        .to(
+          actionsRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          "-=0.2",
+        );
+    },
+    { scope: containerRef },
+  );
+
   const cartQuantity = isHydrated
     ? items.find((item) => item.variantId === selectedVariantId)?.quantity || 0
     : 0;
@@ -60,7 +129,10 @@ const ProductContent = ({ product }: ProductContentProps) => {
       <AudioStatic />
       <div ref={containerRef} className="h-full pt-16 md:pt-0">
         <div className="mx-auto h-full overflow-y-auto px-3 pb-20 md:pb-10 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
-          <div className="hidden items-center justify-between border-b-2 border-customGold py-3 font-bigola text-lg text-customNavy text-shadow-custom md:mb-10 md:flex">
+          <div
+            ref={navigationRef}
+            className="hidden items-center justify-between border-b-2 border-customGold py-3 font-bigola text-lg text-customNavy text-shadow-custom md:mb-10 md:flex"
+          >
             <Link
               href="/shop"
               className="flex items-center gap-2 transition-all duration-300 ease-in-out lg:hover:text-customGold"
@@ -77,20 +149,16 @@ const ProductContent = ({ product }: ProductContentProps) => {
             </Link>
           </div>
           <div className="flex h-full flex-col gap-3 pt-3 md:flex-row md:gap-6 md:pt-0">
-            {mainImage && (
-              <div className="relative aspect-square w-full box-shadow-card md:w-1/2">
-                <Image
-                  src={mainImage}
-                  alt={product.images.nodes[0]?.altText || product.title}
-                  className="h-full w-full border border-customNavy/20 object-cover"
-                  width={600}
-                  height={600}
-                  priority
-                  loading="eager"
-                />
-              </div>
-            )}
-            <div className="flex flex-col gap-1 text-customNavy md:w-1/2">
+            <div ref={imageSectionRef} className="w-full md:w-1/2">
+              <ProductImageSwiper
+                images={product.images.nodes}
+                productTitle={product.title}
+              />
+            </div>
+            <div
+              ref={contentSectionRef}
+              className="flex flex-col gap-1 text-customNavy md:w-1/2"
+            >
               <h1 className="font-bigola text-2xl text-shadow-custom">
                 {product.title}
               </h1>
@@ -105,7 +173,10 @@ const ProductContent = ({ product }: ProductContentProps) => {
                 }}
               />
 
-              <div className="mt-3 flex items-center gap-4 md:mt-20">
+              <div
+                ref={variantsRef}
+                className="mt-3 flex items-center gap-4 md:mt-20"
+              >
                 {variants.length > 1 && (
                   <div className="flex gap-2">
                     {variants.map((variant) => {
@@ -141,7 +212,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
                 </span>
               )}
               {selectedVariant && selectedVariant.availableForSale && (
-                <>
+                <div ref={actionsRef}>
                   <div className="mt-4 flex items-center gap-3">
                     <div className="flex items-center rounded-sm border border-customGold backdrop-blur-[1px] box-shadow-card">
                       <button
@@ -173,7 +244,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
                           variantId: selectedVariant.id,
                           title: product.title,
                           price: parseFloat(selectedVariant.price.amount),
-                          image: mainImage,
+                          image: product.images.nodes[0]?.url,
                           quantityAvailable: selectedVariant.quantityAvailable,
                           variantTitle: selectedVariant.title,
                           selectedOptions: selectedVariant.selectedOptions,
@@ -185,7 +256,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
                   >
                     Add to Cart
                   </Button>
-                </>
+                </div>
               )}
             </div>
           </div>
