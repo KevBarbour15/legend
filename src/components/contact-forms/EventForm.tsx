@@ -124,7 +124,7 @@ const EventForm = forwardRef<EventFormRef, EventFormProps>(
             name="email"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormControl className="rounded-sm border border-customNavy/20 bg-customWhite font-hypatia text-customNavy drop-shadow-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
+                <FormControl className="rounded-sm border border-customNavy/20 bg-customWhite font-hypatia text-customNavy box-shadow-text focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
                   <Input
                     id="event-email"
                     type="email"
