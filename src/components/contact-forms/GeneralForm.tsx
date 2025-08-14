@@ -151,7 +151,7 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
           />
           <Button
             type="submit"
-            className="mx-auto w-fit rounded-sm border border-customNavy/20 bg-customNavy font-bigola text-customWhite transition-all duration-300 ease-in-out box-shadow-text md:hover:bg-customWhite md:hover:text-customNavy md:active:bg-customGold"
+            className="mx-auto w-full rounded-sm border border-customNavy/20 bg-customNavy font-bigola text-customWhite transition-all duration-300 ease-in-out box-shadow-text sm:w-fit md:hover:bg-customWhite md:hover:text-customNavy md:active:bg-customGold"
           >
             Submit
           </Button>

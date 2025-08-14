@@ -237,7 +237,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
                     </div>
                   </div>
                   <Button
-                    className="mb-6 mt-4 w-fit rounded-sm border border-customNavy/20 bg-customNavy font-bigola text-customWhite transition-all duration-300 ease-in-out box-shadow-card md:hover:bg-customWhite md:hover:text-customNavy md:active:bg-customGold"
+                    className="mb-6 mt-4 w-full rounded-sm border border-customNavy/20 bg-customNavy font-bigola text-customWhite transition-all duration-300 ease-in-out box-shadow-card sm:w-fit md:hover:bg-customWhite md:hover:text-customNavy md:active:bg-customGold"
                     onClick={() => {
                       addToCart(
                         {
