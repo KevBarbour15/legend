@@ -22,7 +22,7 @@ export default function ProductCard({ product }: ProductContentProps) {
   return (
     <>
       <Link href={`/product/${product?.handle}`} className="block h-full">
-        <div className="h-ful l flex w-full flex-col overflow-hidden rounded-sm border border-customNavy/20 bg-neutral-300/10 text-customNavy backdrop-blur-[2px] box-shadow-card">
+        <div className="h-ful l flex w-full flex-col overflow-hidden rounded-sm border border-neutral-400/20 bg-customWhite/25 text-customNavy backdrop-blur-[2px] box-shadow-card">
           {mainImage && (
             <div className="relative aspect-square w-full overflow-hidden">
               <Image
