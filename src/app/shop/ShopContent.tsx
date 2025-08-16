@@ -4,8 +4,7 @@ import AudioStatic from "@/components/audio-static/AudioStatic";
 import { useRef } from "react";
 import ProductCard from "./ProductCard";
 import Link from "next/link";
-import { CaretLeft, CaretRight } from "@phosphor-icons/react";
-import { usePathname } from "next/navigation";
+import { CaretRight } from "@phosphor-icons/react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
 
@@ -17,12 +16,27 @@ export default function ShopContent({ products }: { products: any[] }) {
   useGSAP(() => {
     if (!containerRef.current) return;
 
-    const tl = gsap.timeline({});
+    const tl = gsap.timeline();
 
-    tl.set(headerRef.current, { opacity: 0, y: 16 })
-      .set(gridRef.current, { opacity: 0, y: 16 })
-      .to(headerRef.current, { y: 0, autoAlpha: 1 })
-      .to(gridRef.current, { y: 0, autoAlpha: 1, stagger: 0.06 });
+    tl.set(headerRef.current, {
+      opacity: 0,
+      y: 25,
+      duration: 0.25,
+    })
+      .set(gridRef.current, { opacity: 0, y: 25, duration: 0.25 })
+      .to(headerRef.current, {
+        y: 0,
+        opacity: 1,
+        duration: 0.5,
+        ease: "back.out(1.7)",
+      })
+      .to(gridRef.current, {
+        y: 0,
+        opacity: 1,
+        stagger: 0.05,
+        duration: 0.5,
+        ease: "back.out(1.7)",
+      });
   }, []);
 
   return (

@@ -52,54 +52,53 @@ const ProductContent = ({ product }: ProductContentProps) => {
         },
       );
 
-      // Staggered entrance animation
       gsap
         .timeline()
         .to(navigationRef.current, {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          ease: "power2.out",
+          duration: 0.5,
+          ease: "back.out(1.7)",
         })
         .to(
           imageSectionRef.current,
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
-            ease: "power2.out",
+            duration: 0.5,
+            ease: "back.out(1.7)",
           },
-          "-=0.4",
+          "-=0.25",
         )
         .to(
           contentSectionRef.current,
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
-            ease: "power2.out",
+            duration: 0.5,
+            ease: "back.out(1.7)",
           },
-          "-=0.4",
+          "-=0.25",
         )
         .to(
           variantsRef.current,
           {
             opacity: 1,
             y: 0,
-            duration: 0.6,
-            ease: "power2.out",
+            duration: 0.4,
+            ease: "back.out(1.7)",
           },
-          "-=0.2",
+          "-=0.125",
         )
         .to(
           actionsRef.current,
           {
             opacity: 1,
             y: 0,
-            duration: 0.6,
-            ease: "power2.out",
+            duration: 0.4,
+            ease: "back.out(1.7)",
           },
-          "-=0.2",
+          "-=0.125",
         );
     },
     { scope: containerRef },
@@ -131,7 +130,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
         <div className="mx-auto h-full overflow-y-auto px-3 pb-20 md:pb-10 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
           <div
             ref={navigationRef}
-            className="hidden items-center justify-between border-b-2 border-customGold py-3 font-bigola text-lg text-customNavy text-shadow-custom md:mb-10 md:flex"
+            className="hidden items-center justify-between border-b-2 border-customGold py-3 font-bigola text-lg text-customNavy opacity-0 text-shadow-custom md:mb-10 md:flex"
           >
             <Link
               href="/shop"
@@ -149,7 +148,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
             </Link>
           </div>
           <div className="flex h-full flex-col gap-3 pt-3 md:flex-row md:gap-6 md:pt-0">
-            <div ref={imageSectionRef} className="w-full md:w-1/2">
+            <div ref={imageSectionRef} className="w-full opacity-0 md:w-1/2">
               <ProductImageSwiper
                 images={product.images.nodes}
                 productTitle={product.title}
@@ -157,7 +156,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
             </div>
             <div
               ref={contentSectionRef}
-              className="flex flex-col gap-1 text-customNavy md:w-1/2"
+              className="flex flex-col gap-1 text-customNavy opacity-0 md:w-1/2"
             >
               <h1 className="font-bigola text-2xl text-shadow-custom">
                 {product.title}
@@ -175,7 +174,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
 
               <div
                 ref={variantsRef}
-                className="mt-3 flex items-center gap-4 md:mt-20"
+                className="mt-3 flex items-center gap-4 opacity-0 md:mt-20"
               >
                 {variants.length > 1 && (
                   <div className="flex gap-2">
@@ -212,7 +211,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
                 </span>
               )}
               {selectedVariant && selectedVariant.availableForSale && (
-                <div ref={actionsRef}>
+                <div ref={actionsRef} className="opacity-0">
                   <div className="mt-4 flex items-center gap-3">
                     <div className="flex items-center rounded-sm border border-customGold backdrop-blur-[1px] box-shadow-card">
                       <button
