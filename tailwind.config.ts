@@ -125,10 +125,10 @@ const config: Config = {
           MozOsxFontSmoothing: "grayscale",
         },
         ".box-shadow-text": {
-          boxShadow: ".35px 0.5px 0.75px rgba(0, 0, 0, 0.35)",
+          boxShadow: ".5px 0.75px 0.75px rgba(0, 0, 0, 0.35)",
         },
         ".box-shadow-card": {
-          boxShadow: "0.35px 0.5px 0.75px rgba(0, 0, 0, 0.35)",
+          boxShadow: "1.35px 1.5px 1.75px rgba(0, 0, 0, 0.35)",
         },
       });
     },

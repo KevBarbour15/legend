@@ -142,7 +142,7 @@ export default function Home() {
         <div className="top-bg h-full min-h-screen w-screen"></div>
         <div
           id="about-content"
-          className="relative mx-auto block h-auto md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
+          className="relative mx-auto block h-auto md:pl-[240px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
         >
           <div className="about-section aspect-video w-full px-3 opacity-0 md:px-0">
             <Image

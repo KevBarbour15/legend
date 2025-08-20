@@ -14,6 +14,7 @@ const links = [
   { path: "/menu", label: "Menu" },
   { path: "/events", label: "Events" },
   { path: "/contact", label: "Contact" },
+  { path: "/radio", label: "Radio" },
   { path: "/shop", label: "Shop" },
 ];
 
@@ -105,13 +106,13 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
 
   return (
     <div className="side-menu z-10 hidden h-screen flex-col justify-between md:fixed md:flex md:py-6 md:pl-6">
-      <div className="flex h-full flex-col justify-start pl-6 pt-6 font-bigola text-6xl tracking-tight md:p-0">
+      <div className="flex h-full flex-col justify-start pl-6 pt-6 font-bigola text-5xl tracking-tight md:p-0">
         <ul id="menu-text">
           {links.map((link, idx) => (
             <li
               key={idx}
               id="hover"
-              className={`${link.path === "/" ? "about-link" : "menu-link"} m-0 p-0 leading-[.75] text-shadow-custom ${
+              className={`${link.path === "/" ? "about-link" : "menu-link"} leading-[.75] text-shadow-custom ${
                 shouldShowAnimation ? "opacity-0" : "opacity-100"
               } ${
                 pathname === link.path && pathname !== "/"
@@ -141,11 +142,11 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
           ))}
         </ul>
         <div
-          className={`menu-link mt-12 pr-3 font-bigola ${shouldShowAnimation ? "opacity-0" : "opacity-100"}`}
+          className={`menu-link mt-20 pr-3 font-bigola ${shouldShowAnimation ? "opacity-0" : "opacity-100"}`}
           id="hover"
         >
           <Image
-            className="mb-6 w-[150px] md:hidden"
+            className="mb-6 w-[150px] drop-shadow-text md:hidden"
             src="/images/alt-logo.png"
             alt="Alternative Logo"
             height={150}
@@ -160,7 +161,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
           >
             <div
               id="menu-text"
-              className="flex justify-between text-6xl leading-[.65] text-shadow-custom"
+              className="flex justify-between text-5xl leading-[.65] text-shadow-custom"
             >
               <p>410</p>
               <p>L</p>
@@ -168,7 +169,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
             </div>
             <p
               id="menu-text"
-              className="flex justify-between text-3xl leading-[.85] text-shadow-custom"
+              className="flex justify-between text-2xl italic leading-[.85] text-shadow-custom"
             >
               <span>s</span>
               <span>a</span>
@@ -183,7 +184,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
             </p>
             <div
               id="menu-text"
-              className="flex justify-between text-5xl leading-[.85] text-shadow-custom"
+              className="flex justify-between text-4xl leading-[.85] text-shadow-custom"
             >
               <p>CA,</p>
               <p>95814</p>

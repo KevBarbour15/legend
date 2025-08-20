@@ -313,7 +313,7 @@ const Menu: React.FC = ({}) => {
     <>
       <AudioStatic />
       <div ref={containerRef} className="pb-10 pt-16 md:pt-0">
-        <div className="relative mx-auto block h-auto md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
+        <div className="mx-auto block h-auto md:pl-[240px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
           {loading ? (
             <div className="z-[151] font-bigola">
               <Loading

@@ -127,7 +127,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
     <>
       <AudioStatic />
       <div ref={containerRef} className="h-full pt-16 md:pt-0">
-        <div className="mx-auto h-full overflow-y-auto px-3 pb-20 md:pb-10 md:pl-[258px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
+        <div className="mx-auto h-full overflow-y-auto px-3 pb-20 md:pb-10 md:pl-[240px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
           <div
             ref={navigationRef}
             className="hidden items-center justify-between border-b-2 border-customGold py-3 font-bigola text-lg text-customNavy opacity-0 text-shadow-custom md:mb-10 md:flex"

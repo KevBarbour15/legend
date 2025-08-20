@@ -92,7 +92,7 @@ export default function CartPage() {
     <>
       <AudioStatic />
       <div ref={containerRef} className="min-h-svh pt-16 md:pt-0">
-        <div className="mx-auto flex flex-col overflow-y-auto px-3 pb-20 pt-4 text-customNavy md:px-0 md:pb-10 md:pl-[258px] md:pr-6 md:pt-6">
+        <div className="mx-auto flex flex-col overflow-y-auto px-3 pb-20 pt-4 text-customNavy md:px-0 md:pb-10 md:pl-[240px] md:pr-6 md:pt-6">
           <h1 className="border-b-2 border-customGold pb-4 font-bigola text-3xl font-bold">
             Cart
           </h1>
