@@ -78,7 +78,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                 <X
                   size={30}
                   weight="regular"
-                  className="rounded-full text-customWhite transition-all duration-300 text-shadow-custom md:hover:rotate-[360deg] md:hover:text-customGold"
+                  className="rounded-full text-customWhite transition-all duration-300 text-shadow-custom md:hover:text-customGold"
                 />
               </IconButton>
             </motion.div>

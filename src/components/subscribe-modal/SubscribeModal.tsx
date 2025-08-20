@@ -130,7 +130,7 @@ const SubscribeModal = ({
         <X
           size={30}
           weight="bold"
-          className="text-customWhite drop-shadow-card transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+          className="text-customWhite drop-shadow-card transition-all duration-300 md:hover:text-customGold"
         />
       </button>
       <div

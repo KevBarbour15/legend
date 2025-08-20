@@ -20,7 +20,7 @@ const Footer = () => {
 
           <div className="flex w-full basis-1/2 justify-between md:justify-end md:gap-6">
             <a
-              className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+              className="p-0 text-customNavy transition-all duration-300 md:hover:text-customGold"
               href="https://open.spotify.com/user/31pcq2fnwyxprxppy4ezl3v3evaq"
               target="_blank"
               rel="noopener noreferrer"
@@ -31,7 +31,7 @@ const Footer = () => {
             </a>
 
             <a
-              className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+              className="p-0 text-customNavy transition-all duration-300 md:hover:text-customGold"
               href="https://www.instagram.com/legendhasithifi/"
               target="_blank"
               rel="noopener noreferrer"
@@ -42,7 +42,7 @@ const Footer = () => {
             </a>
 
             <a
-              className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+              className="p-0 text-customNavy transition-all duration-300 md:hover:text-customGold"
               href="https://www.facebook.com/legendhasithifi"
               target="_blank"
               rel="noopener noreferrer"
@@ -53,7 +53,7 @@ const Footer = () => {
             </a>
 
             <a
-              className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+              className="p-0 text-customNavy transition-all duration-300 md:hover:text-customGold"
               href="https://www.youtube.com/@legendhasithifi"
               target="_blank"
               rel="noopener noreferrer"
@@ -63,7 +63,7 @@ const Footer = () => {
               <FaYoutube size={32} />
             </a>
             <a
-              className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+              className="p-0 text-customNavy transition-all duration-300 md:hover:text-customGold"
               href="https://www.yelp.com/biz/legend-has-it-sacramento"
               target="_blank"
               rel="noopener noreferrer"
@@ -73,7 +73,7 @@ const Footer = () => {
               <FaYelp size={32} />
             </a>
             <a
-              className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+              className="p-0 text-customNavy transition-all duration-300 md:hover:text-customGold"
               href="https://x.com/legendhasithifi"
               target="_blank"
               rel="noopener noreferrer"
@@ -83,7 +83,7 @@ const Footer = () => {
               <FaXTwitter size={32} />
             </a>
             <a
-              className="p-0 text-customNavy transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+              className="p-0 text-customNavy transition-all duration-300 md:hover:text-customGold"
               href="https://www.patreon.com/legendhasit"
               target="_blank"
               rel="noopener noreferrer"

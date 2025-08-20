@@ -46,7 +46,7 @@ const AddToCartModal = ({
           viewBox="0 0 256 256"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="text-customWhite transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-customGold"
+          className="text-customWhite transition-all duration-300 md:hover:text-customGold"
         >
           <path
             d="M200 56L56 200M56 56L200 200"

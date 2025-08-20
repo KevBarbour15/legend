@@ -48,7 +48,7 @@ const DialogContent = React.forwardRef<
         <button
           type="button"
           aria-label="Close"
-          className="absolute right-3 top-3 z-50 rounded p-1 text-stone-500 transition-transform duration-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-stone-300 md:hover:rotate-[360deg]"
+          className="absolute right-3 top-3 z-50 rounded p-1 text-stone-500 transition-transform duration-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-stone-300"
         >
           <X size={20} />
         </button>

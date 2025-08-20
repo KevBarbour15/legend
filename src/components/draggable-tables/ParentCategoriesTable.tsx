@@ -55,7 +55,7 @@ const ParentCategoryTable: React.FC<ParentTableProps> = ({
                         <TableCell className="justify-end text-right">
                           <IconButton
                             onClick={() => removeCategory(category, "parent")}
-                            className="text-black transition-all duration-300 md:hover:rotate-[360deg] md:hover:text-red-500"
+                            className="text-black transition-all duration-300 md:hover:text-red-500"
                           >
                             <X size={18} />
                           </IconButton>
