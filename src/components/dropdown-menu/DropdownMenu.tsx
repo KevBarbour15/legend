@@ -57,7 +57,7 @@ const Menu: React.FC<DropdownMenuProps> = ({ menuStatus, toggleMenu }) => {
       .to(".menu-link-item-holder", {
         y: 0,
         duration: 0.2,
-        stagger: 0.075,
+        stagger: 0.05,
         delay: -0.15,
         ease: "linear",
         opacity: 1,

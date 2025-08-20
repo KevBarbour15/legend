@@ -49,10 +49,10 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
       tl.to(menuLinks, {
         delay: 0.5,
         duration: 0.65,
-        ease: "back.out(2)",
+        ease: "back.out(2.7)",
         x: 0,
         opacity: 1,
-        stagger: 0.15,
+        stagger: 0.1,
       });
     }
 

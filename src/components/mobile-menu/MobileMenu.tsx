@@ -50,10 +50,10 @@ const MobileMenu: React.FC = () => {
     gsap.to(menuLinks, {
       delay: 0.15,
       duration: 0.5,
-      ease: "back.out(1.7)",
+      ease: "back.out(2.7)",
       x: 0,
       opacity: 1,
-      stagger: 0.15,
+      stagger: 0.1,
     });
   }, []);
 
