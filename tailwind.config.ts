@@ -70,10 +70,10 @@ const config: Config = {
         },
       },
       dropShadow: {
-        record: "0.75px 0.75px 0.75px rgba(0, 0, 0, 0.45)",
-        recordPlayer: "1.75px 2.75px 4.5px rgba(0, 0, 0, 0.85)",
-        text: ".35px 0.5px 0.75px rgba(0, 0, 0, 0.35)",
-        card: ".35px 0.5px 0.75px rgba(0, 0, 0, 0.35)",
+        record: "0.75px 0.75px 0.75px rgba(0, 0, 0, 0.4)",
+        recordPlayer: "1.75px 2.75px 4.5px rgba(0, 0, 0, 0.5)",
+        text: ".35px 0.5px 0.75px rgba(0, 0, 0, 0.4)",
+        card: ".35px 0.5px 0.75px rgba(0, 0, 0, 0.4)",
       },
       screens: {
         sm: "640px",
@@ -120,15 +120,15 @@ const config: Config = {
     function ({ addUtilities }: { addUtilities: (utilities: any) => void }) {
       addUtilities({
         ".text-shadow-custom": {
-          textShadow: ".35px 0.5px 0.75px rgba(0,0,0,0.35)",
+          textShadow: ".35px 0.5px 0.75px rgba(0,0,0,0.4)",
           WebkitFontSmoothing: "antialiased",
           MozOsxFontSmoothing: "grayscale",
         },
         ".box-shadow-text": {
-          boxShadow: ".5px 0.75px 0.75px rgba(0, 0, 0, 0.35)",
+          boxShadow: ".5px 0.75px 0.75px rgba(0, 0, 0, 0.4)",
         },
         ".box-shadow-card": {
-          boxShadow: "1.35px 1.5px 1.75px rgba(0, 0, 0, 0.35)",
+          boxShadow: "0.75px 1px 1.15px rgba(0, 0, 0, 0.4)",
         },
       });
     },

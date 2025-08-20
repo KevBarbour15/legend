@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { connectToMongoDB } from "@/lib/db";
 import SideMenu from "@/components/side-menu/SideMenu";
+import Footer from "@/components/footer/Footer";
 
 export default async function EventsLayout({
   children,
@@ -12,6 +13,7 @@ export default async function EventsLayout({
     <main>
       <SideMenu color="text-customNavy" />
       {children}
+      <Footer />
     </main>
   );
 }

@@ -312,8 +312,8 @@ const Menu: React.FC = ({}) => {
   return (
     <>
       <AudioStatic />
-      <div ref={containerRef} className="pb-10 pt-16 md:pt-0">
-        <div className="mx-auto block h-auto md:pl-[240px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
+      <div ref={containerRef} className="min-h-screen pt-16 md:pt-0">
+        <div className="mx-auto block h-auto pb-12 md:pl-[240px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
           {loading ? (
             <div className="z-[151] font-bigola">
               <Loading
@@ -368,7 +368,7 @@ const Menu: React.FC = ({}) => {
                             key={categoryName}
                           >
                             <AccordionTrigger
-                              className={`cursor-pointer font-bigola text-3xl leading-none drop-shadow-text transition-all duration-300 md:text-4xl ${
+                              className={`cursor-pointer font-bigola text-3xl leading-none drop-shadow-text transition-all duration-300 md:py-4 md:text-4xl ${
                                 activeCategory === index
                                   ? "text-customGold"
                                   : "text-customNavy"

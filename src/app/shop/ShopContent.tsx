@@ -43,7 +43,7 @@ export default function ShopContent({ products }: { products: any[] }) {
     <>
       <AudioStatic />
       <div ref={containerRef} className="min-h-screen pt-16 md:pt-0">
-        <div className="mx-auto h-full pb-20 md:pb-6 md:pl-[240px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
+        <div className="mx-auto h-full pb-12 md:pb-6 md:pl-[240px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
           <div
             ref={headerRef}
             className="mb-3 flex items-center justify-between border-b-2 border-customGold pb-4 pt-4 font-hypatia text-lg text-customNavy opacity-0 md:mb-6 md:pt-0"

@@ -156,15 +156,15 @@ export default function Home() {
             />
           </div>
 
-          <div className="px-3 font-hypatia text-lg text-customNavy md:px-0 md:text-xl">
-            <p className="about-section my-6 text-pretty leading-[1.15] opacity-0 text-shadow-custom">
+          <div className="text-pretty px-3 font-hypatia text-lg leading-[1.15] text-customNavy md:px-0 md:text-xl">
+            <p className="about-section my-6 opacity-0 text-shadow-custom">
               Welcome to <span className="font-bigola">Legend Has It</span>,
               Sacramento's first hi-fi listening bar, where music meets the art
               of sound. We offer an immersive experience for audiophiles and
               music lovers, celebrating the warmth of vinyl records and the
               richness of high-fidelity sound.
             </p>
-            <p className="about-section text-pretty leading-[1.15] opacity-0 text-shadow-custom">
+            <p className="about-section ] opacity-0 text-shadow-custom">
               We curate a space where the ordinary becomes extraordinary. We
               don't just play sound; we make you feel it. Every beat, every
               conversation, every moment crafted to build something deeper,
@@ -218,9 +218,9 @@ export default function Home() {
               className="h-[352px] w-full"
             ></iframe>
           </div>
-          <Footer />
         </div>
       </div>
+      <Footer />
     </>
   );
 }
