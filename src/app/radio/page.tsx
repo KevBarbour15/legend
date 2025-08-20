@@ -3,8 +3,9 @@ import AudioStatic from "@/components/audio-static/AudioStatic";
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import Footer from "@/components/footer/Footer";
+
 import { FaPatreon } from "react-icons/fa6";
+import { Button } from "@/components/ui/button";
 
 const Radio = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -78,19 +79,8 @@ const Radio = () => {
             ref={contentRef}
             className="my-12 flex flex-col text-pretty font-hypatia text-lg leading-[1.5] text-customNavy opacity-0 drop-shadow-text"
           >
-            <p className="mb-3 flex gap-1">
-              Consider becoming a paid subscriber to our
-              <a
-                className="ml-1 flex items-center gap-1 font-bigola duration-300 ease-in-out md:hover:text-customGold"
-                href="https://www.patreon.com/legendhasit"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Support Legend Has It on Patreon"
-                title="Support us on Patreon"
-              >
-                Patreon <FaPatreon size={16} />
-              </a>
-              .
+            <p className="mb-3">
+              Consider becoming a paid subscriber to our Patreon.
             </p>
 
             <p className="mb-8">
@@ -101,7 +91,7 @@ const Radio = () => {
               art.
             </p>
             <p className="mb-3">Your contribution helps fund:</p>
-            <ul className="list-disc text-balance pl-4">
+            <ul className="mb-10 list-disc text-balance pl-4">
               <li>Fair pay for DJs and performers</li>
               <li>Equipment upkeep and live recordings</li>
               <li>Content creation that showcases our scene to the world</li>
@@ -109,6 +99,18 @@ const Radio = () => {
                 A safe, inclusive space for people to gather, vibe, and grow
               </li>
             </ul>
+            <a
+              href="https://www.patreon.com/legendhasit"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Support Legend Has It on Patreon"
+              title="Support us on Patreon"
+            >
+              <Button className="flex w-full items-center gap-3 rounded-sm border border-customNavy/20 bg-customNavy font-bigola text-customWhite transition-all duration-300 ease-in-out box-shadow-text sm:w-fit md:hover:bg-customWhite md:hover:text-customNavy md:active:bg-customGold">
+                Support the Scene
+                <FaPatreon size={16} />
+              </Button>
+            </a>
           </div>
         </div>
       </div>
