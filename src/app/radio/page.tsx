@@ -78,18 +78,19 @@ const Radio = () => {
             ref={contentRef}
             className="my-12 flex flex-col text-pretty font-hypatia text-lg leading-[1.5] text-customNavy opacity-0 drop-shadow-text"
           >
-            <a
-              className="mb-10 inline-block p-0 text-customNavy duration-300 ease-in-out md:hover:text-customGold"
-              href="https://www.patreon.com/legendhasit"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Support Legend Has It on Patreon"
-              title="Support us on Patreon"
-            >
-              <FaPatreon size={64} />
-            </a>
-            <p className="mb-3">
-              Consider becoming a paid subscriber to our Patreon.
+            <p className="mb-3 flex gap-1">
+              Consider becoming a paid subscriber to our
+              <a
+                className="ml-1 flex items-center gap-1 font-bigola duration-300 ease-in-out md:hover:text-customGold"
+                href="https://www.patreon.com/legendhasit"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Support Legend Has It on Patreon"
+                title="Support us on Patreon"
+              >
+                Patreon <FaPatreon size={16} />
+              </a>
+              .
             </p>
 
             <p className="mb-8">
