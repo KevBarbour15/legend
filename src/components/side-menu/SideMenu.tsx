@@ -112,7 +112,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
             <li
               key={idx}
               id="hover"
-              className={`${link.path === "/" ? "about-link" : "menu-link"} leading-[.75] text-shadow-custom ${
+              className={`${link.path === "/" ? "about-link" : "menu-link"} leading-[.85] text-shadow-custom ${
                 shouldShowAnimation ? "opacity-0" : "opacity-100"
               } ${
                 pathname === link.path && pathname !== "/"
@@ -161,7 +161,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
           >
             <div
               id="menu-text"
-              className="flex justify-between text-5xl leading-[.65] text-shadow-custom"
+              className="flex justify-between text-5xl leading-[.75] text-shadow-custom"
             >
               <p>410</p>
               <p>L</p>
@@ -169,7 +169,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
             </div>
             <p
               id="menu-text"
-              className="flex justify-between text-2xl italic leading-[.85] text-shadow-custom"
+              className="flex justify-between text-2xl italic leading-[.9] text-shadow-custom"
             >
               <span>s</span>
               <span>a</span>
@@ -184,7 +184,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
             </p>
             <div
               id="menu-text"
-              className="flex justify-between text-4xl leading-[.85] text-shadow-custom"
+              className="flex justify-between text-4xl leading-[.9] text-shadow-custom"
             >
               <p>CA,</p>
               <p>95814</p>
