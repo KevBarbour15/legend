@@ -2,6 +2,8 @@ import Menu from "@/models/Menu";
 import { connectToMongoDB } from "@/lib/db";
 import { MenuStructure } from "@/data/menu";
 
+export const dynamic = "force-dynamic";
+
 export async function getMenu(): Promise<MenuStructure | null> {
   try {
     await connectToMongoDB();
