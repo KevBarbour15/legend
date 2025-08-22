@@ -20,15 +20,15 @@ export default function ShopContent({ products }: { products: any[] }) {
 
     tl.set(headerRef.current, {
       opacity: 0,
-      y: 25,
+      y: -25,
       duration: 0.25,
     })
-      .set(gridRef.current, { opacity: 0, y: 25, duration: 0.25 })
+      .set(gridRef.current, { opacity: 0, y: 25 })
       .to(headerRef.current, {
         y: 0,
         opacity: 1,
         duration: 0.5,
-        ease: "back.out(1.7)",
+        ease: "back.out(2.7)",
       })
       .to(gridRef.current, {
         y: 0,

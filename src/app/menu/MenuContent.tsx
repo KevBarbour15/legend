@@ -57,12 +57,10 @@ const MenuContent: React.FC<MenuContentProps> = ({ menu }) => {
 
     const tl = gsap.timeline({ delay: 0.25 });
     const heading = new SplitText("#menu-heading", { type: "chars" });
-    const subheading = new SplitText("#menu-subheading", { type: "words" });
 
     tl.set("#menu", {
       opacity: 0,
     })
-
       .set("#menu-heading", {
         opacity: 1,
       })
@@ -73,8 +71,8 @@ const MenuContent: React.FC<MenuContentProps> = ({ menu }) => {
         opacity: 0,
         y: -25,
       })
-      .set(subheading.words, {
-        x: -25,
+      .set("#menu-subheading", {
+        y: -25,
         opacity: 0,
       })
       .set(menuItemRefs.current, {
@@ -88,12 +86,11 @@ const MenuContent: React.FC<MenuContentProps> = ({ menu }) => {
         opacity: 1,
         stagger: 0.015,
       })
-      .to(subheading.words, {
-        duration: 0.35,
-        ease: "back.out(1.7)",
-        x: 0,
+      .to("#menu-subheading", {
+        y: 0,
         opacity: 1,
-        stagger: 0.025,
+        duration: 0.5,
+        ease: "back.out(2.7)",
       })
       .to(
         "#menu",

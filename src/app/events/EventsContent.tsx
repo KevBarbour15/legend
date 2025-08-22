@@ -25,6 +25,7 @@ export default function EventsContent({
   const [upcomingEvents, setUpcomingEvents] = useState<Event[]>(
     initialUpcomingEvents,
   );
+  const tabsRef = useRef<HTMLDivElement>(null);
   const [pastEvents, setPastEvents] = useState<Event[]>(initialPastEvents);
   const upcomingEventRefs = useRef<(HTMLDivElement | null)[]>([]);
   const pastEventRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -46,25 +47,30 @@ export default function EventsContent({
     const currentEmptyRef =
       activeTab === "upcoming" ? upcomingEmptyMessageRef : pastEmptyMessageRef;
 
-    const tl = gsap.timeline({ delay: 0.25 });
+    const tl = gsap.timeline({});
 
     // Initial animation for tabs if not already visible
     const eventTabs = document.querySelector("#event-tabs") as HTMLElement;
-    if (eventTabs && !eventTabs.style.opacity) {
-      tl.fromTo("#event-tabs", { opacity: 0 }, { opacity: 1, duration: 0.15 });
-    }
 
     if (currentRefs.current.length > 0 && mediaLoaded) {
       tl.set(currentRefs.current, {
         opacity: 0,
         y: 25,
-      }).to(currentRefs.current, {
-        y: 0,
-        duration: 0.4,
-        stagger: 0.075,
-        ease: "back.out(2.7)",
-        opacity: 1,
-      });
+      })
+        .set(tabsRef.current, { opacity: 0, y: -25 })
+        .to(tabsRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          ease: "back.out(2.7)",
+        })
+        .to(currentRefs.current, {
+          y: 0,
+          duration: 0.4,
+          stagger: 0.075,
+          ease: "back.out(2.7)",
+          opacity: 1,
+        });
     }
   }, [activeTab, mediaLoaded]);
 
@@ -107,7 +113,7 @@ export default function EventsContent({
       <AudioStatic />
       <div ref={containerRef} className="min-h-screen pt-16 md:pt-0">
         <div className="mx-auto flex flex-col items-center justify-center overflow-y-auto px-3 pb-12 md:pb-6 md:pl-[240px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
-          <div id="event-tabs" className="w-full pt-6 opacity-0 md:pt-0">
+          <div className="w-full pt-6 md:pt-0">
             <Tabs
               defaultValue="upcoming"
               className="relative flex w-full flex-col items-center border-0"
@@ -115,7 +121,10 @@ export default function EventsContent({
                 setActiveTab(value as "upcoming" | "past")
               }
             >
-              <TabsList className="top-0 mb-6 grid w-full grid-cols-2 bg-transparent font-bigola md:mt-0 md:w-[400px]">
+              <TabsList
+                ref={tabsRef}
+                className="top-0 mb-6 grid w-full grid-cols-2 bg-transparent font-bigola opacity-0 md:mt-0 md:w-[400px]"
+              >
                 <TabsTrigger value="upcoming" className="border-customNavy/20">
                   Upcoming Events
                 </TabsTrigger>
