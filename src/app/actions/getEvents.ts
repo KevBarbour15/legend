@@ -10,6 +10,33 @@ interface EventResponse {
   error?: string;
 }
 
+interface AllEventsResponse {
+  upcoming: EventType[];
+  past: EventType[];
+}
+
+export async function getAllEvents(): Promise<AllEventsResponse> {
+  try {
+    await connectToMongoDB();
+    
+    const upcomingEvents = await Event.find({ upcoming: true })
+      .limit(100)
+      .sort({ date: 1 });
+
+    const pastEvents = await Event.find({ upcoming: false })
+      .limit(100)
+      .sort({ date: -1 });
+
+    return {
+      upcoming: upcomingEvents,
+      past: pastEvents,
+    };
+  } catch (error) {
+    console.error("Error fetching all events:", error);
+    throw new Error("Failed to fetch events");
+  }
+}
+
 export async function getEvents(
   eventType: "upcoming" | "past",
   lastIndex: number,

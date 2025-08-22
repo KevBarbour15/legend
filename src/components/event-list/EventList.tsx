@@ -33,7 +33,7 @@ export default function EventList({
             <EventCard
               key={idx}
               event={event}
-              preloadedMedia={preloadedMedia.get(event._id) as PreloadedMedia}
+              preloadedMedia={preloadedMedia.get(event._id) || undefined}
             />
           </div>
         </div>

@@ -13,7 +13,7 @@ export interface Event {
 
 export interface EventCardProps {
   event: Event;
-  preloadedMedia: PreloadedMedia;
+  preloadedMedia?: PreloadedMedia;
 }
 
 export interface EditEventModalProps {
