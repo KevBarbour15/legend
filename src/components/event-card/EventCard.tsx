@@ -94,7 +94,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                   className="flex-shrink-0 overflow-hidden border-b border-customNavy/20"
                 >
                   <Image
-                    src={preloadedMedia.src}
+                    src={preloadedMedia?.src || event.image_url}
                     alt={event.title}
                     width={475}
                     height={475}
@@ -109,7 +109,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                   className="flex-shrink-0 overflow-hidden border-b-2 border-customNavy"
                 >
                   <video
-                    src={preloadedMedia.src}
+                    src={preloadedMedia?.src || event.image_url}
                     className="h-auto w-full object-cover object-center md:aspect-auto"
                     loop
                     autoPlay
@@ -187,7 +187,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
             className="flex-shrink-0 overflow-hidden"
           >
             <Image
-              src={preloadedMedia.src}
+              src={preloadedMedia?.src || event.image_url}
               alt={event.title}
               width={275}
               height={275}
@@ -202,7 +202,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
             className="flex-shrink-0 overflow-hidden"
           >
             <video
-              src={preloadedMedia.src}
+              src={preloadedMedia?.src || event.image_url}
               className="aspect-square h-[125px] w-[125px] object-cover object-center md:h-[225px] md:w-[225px] lg:h-[275px] lg:w-[275px]"
               loop
               autoPlay
