@@ -24,41 +24,27 @@ interface SideMenuProps {
 
 const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
-  const [shouldShowAnimation, setShouldShowAnimation] = useState<boolean>(true);
   const hasAnimatedRef = useRef<boolean>(false);
-  const animationCompletedRef = useRef<boolean>(false);
 
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
     setIsMounted(true);
-    // Check if this is the first visit in session to animate the menu once per "visit"
-    const hasVisited = sessionStorage.getItem("hasVisited");
-    if (!hasVisited) {
-      console.log("setting hasVisited to true");
-      sessionStorage.setItem("hasVisited", "true");
-      setShouldShowAnimation(true);
-    } else {
-      console.log("hasVisited is true");
-      setShouldShowAnimation(false);
-      // Mark animation as completed for subsequent page visits
-      animationCompletedRef.current = true;
-    }
   }, []);
 
   useGSAP(() => {
     const menuLinks = document.querySelectorAll("#hover");
 
-    // Only run the animation once per session, even if shouldShowAnimation is true
-    if (
-      shouldShowAnimation &&
-      !hasAnimatedRef.current &&
-      !animationCompletedRef.current
-    ) {
-      hasAnimatedRef.current = true;
-      animationCompletedRef.current = true;
+    // Check if animation has already run this session
+    const hasAnimated = sessionStorage.getItem("sideMenuAnimated");
 
+    if (!hasAnimated && !hasAnimatedRef.current) {
+      // Mark as animated immediately to prevent multiple runs
+      hasAnimatedRef.current = true;
+      sessionStorage.setItem("sideMenuAnimated", "true");
+
+      // Run the entrance animation
       let tl = gsap.timeline();
       tl.set(menuLinks, { x: "-25%", opacity: 0 });
       tl.to(menuLinks, {
@@ -69,17 +55,18 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
         opacity: 1,
         stagger: 0.1,
       });
-    } else if (animationCompletedRef.current) {
-      // If animation was already completed, ensure links are visible
+    } else {
+      // If already animated, ensure links are visible
       gsap.set(menuLinks, { x: 0, opacity: 1 });
     }
 
+    // Set up hover animations (these run every time)
     menuLinks.forEach((menuLink) => {
       menuLink.addEventListener("mouseenter", () => {
         gsap.to(menuLink, {
           duration: 0.2,
           ease: "sine.in",
-          x: 20,
+          x: 15,
           fontStyle: "italic",
         });
       });
@@ -100,7 +87,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
         menuLink.removeEventListener("mouseleave", () => {});
       });
     };
-  }, []); // Remove shouldShowAnimation dependency to prevent re-running on page changes
+  }, []); // Empty dependency array ensures this only runs once when component mounts
 
   const handleAboutClick = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -123,7 +110,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
   };
 
   return (
-    <div className="side-menu z-10 hidden h-screen flex-col justify-between md:fixed md:flex md:py-6 md:pl-6">
+    <div className="side-menu z-10 hidden h-screen flex-col justify-between md:fixed md:flex md:pl-6 md:pt-6">
       <div className="flex h-full flex-col justify-start pl-6 pt-6 font-bigola text-5xl tracking-tight md:p-0">
         <ul id="menu-text">
           {links.map((link, idx) => (
@@ -131,10 +118,6 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
               key={idx}
               id="hover"
               className={`${link.path === "/" ? "about-link" : "menu-link"} leading-[.85] text-shadow-custom ${
-                shouldShowAnimation && !animationCompletedRef.current
-                  ? "opacity-0"
-                  : "opacity-100"
-              } ${
                 pathname === link.path && pathname !== "/"
                   ? "text-customGold"
                   : color
@@ -161,10 +144,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
             </li>
           ))}
         </ul>
-        <div
-          className={`menu-link mt-20 pr-3 font-bigola ${shouldShowAnimation && !animationCompletedRef.current ? "opacity-0" : "opacity-100"}`}
-          id="hover"
-        >
+        <div className="menu-link mt-20 pr-3 font-bigola" id="hover">
           <Image
             className="mb-6 w-[150px] drop-shadow-text md:hidden"
             src="/images/alt-logo.png"
