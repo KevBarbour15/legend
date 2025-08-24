@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
 import Image from "next/image";
@@ -25,6 +25,7 @@ interface SideMenuProps {
 const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [shouldShowAnimation, setShouldShowAnimation] = useState<boolean>(true);
+  const hasAnimatedRef = useRef<boolean>(false);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -34,17 +35,22 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
     // Check if this is the first visit in session to animate the menu once per "visit"
     const hasVisited = sessionStorage.getItem("hasVisited");
     if (!hasVisited) {
+      console.log("setting hasVisited to true");
       sessionStorage.setItem("hasVisited", "true");
       setShouldShowAnimation(true);
     } else {
+      console.log("hasVisited is true");
       setShouldShowAnimation(false);
     }
   }, []);
 
   useGSAP(() => {
     const menuLinks = document.querySelectorAll("#hover");
-    let tl = gsap.timeline();
-    if (shouldShowAnimation) {
+
+    // Only run the animation once per session, even if shouldShowAnimation is true
+    if (shouldShowAnimation && !hasAnimatedRef.current) {
+      hasAnimatedRef.current = true;
+      let tl = gsap.timeline();
       tl.set(menuLinks, { x: "-25%", opacity: 0 });
       tl.to(menuLinks, {
         delay: 0.5,
