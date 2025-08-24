@@ -26,6 +26,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [shouldShowAnimation, setShouldShowAnimation] = useState<boolean>(true);
   const hasAnimatedRef = useRef<boolean>(false);
+  const animationCompletedRef = useRef<boolean>(false);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -41,6 +42,8 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
     } else {
       console.log("hasVisited is true");
       setShouldShowAnimation(false);
+      // Mark animation as completed for subsequent page visits
+      animationCompletedRef.current = true;
     }
   }, []);
 
@@ -48,8 +51,14 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
     const menuLinks = document.querySelectorAll("#hover");
 
     // Only run the animation once per session, even if shouldShowAnimation is true
-    if (shouldShowAnimation && !hasAnimatedRef.current) {
+    if (
+      shouldShowAnimation &&
+      !hasAnimatedRef.current &&
+      !animationCompletedRef.current
+    ) {
       hasAnimatedRef.current = true;
+      animationCompletedRef.current = true;
+
       let tl = gsap.timeline();
       tl.set(menuLinks, { x: "-25%", opacity: 0 });
       tl.to(menuLinks, {
@@ -60,6 +69,9 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
         opacity: 1,
         stagger: 0.1,
       });
+    } else if (animationCompletedRef.current) {
+      // If animation was already completed, ensure links are visible
+      gsap.set(menuLinks, { x: 0, opacity: 1 });
     }
 
     menuLinks.forEach((menuLink) => {
@@ -88,7 +100,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
         menuLink.removeEventListener("mouseleave", () => {});
       });
     };
-  }, [shouldShowAnimation]);
+  }, []); // Remove shouldShowAnimation dependency to prevent re-running on page changes
 
   const handleAboutClick = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -119,7 +131,9 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
               key={idx}
               id="hover"
               className={`${link.path === "/" ? "about-link" : "menu-link"} leading-[.85] text-shadow-custom ${
-                shouldShowAnimation ? "opacity-0" : "opacity-100"
+                shouldShowAnimation && !animationCompletedRef.current
+                  ? "opacity-0"
+                  : "opacity-100"
               } ${
                 pathname === link.path && pathname !== "/"
                   ? "text-customGold"
@@ -148,7 +162,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
           ))}
         </ul>
         <div
-          className={`menu-link mt-20 pr-3 font-bigola ${shouldShowAnimation ? "opacity-0" : "opacity-100"}`}
+          className={`menu-link mt-20 pr-3 font-bigola ${shouldShowAnimation && !animationCompletedRef.current ? "opacity-0" : "opacity-100"}`}
           id="hover"
         >
           <Image

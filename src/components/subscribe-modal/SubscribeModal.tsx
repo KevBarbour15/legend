@@ -119,7 +119,7 @@ const SubscribeModal = ({
     <div
       style={{ display: "none" }}
       ref={overlayRef}
-      className="fixed inset-0 z-[1000] h-full w-full items-center justify-center p-3 px-6 opacity-0 backdrop-blur-md"
+      className="fixed inset-0 z-[1000] h-full w-full items-center justify-center p-3 px-6 opacity-0 backdrop-blur-sm"
     >
       <button
         type="button"
@@ -130,13 +130,13 @@ const SubscribeModal = ({
         <X
           size={30}
           weight="bold"
-          className="text-customWhite drop-shadow-card transition-all duration-300 md:hover:text-customGold"
+          className="text-customGold drop-shadow-text transition-all duration-300 md:hover:text-customWhite"
         />
       </button>
       <div
         style={{ display: "none" }}
         ref={containerRef}
-        className="flex h-fit max-h-[85dvh] flex-col overflow-hidden rounded-sm border border-customNavy/20 bg-customWhite opacity-0 drop-shadow-card sm:max-h-[90vh] sm:max-w-[450px]"
+        className="flex h-fit max-h-[85dvh] flex-col overflow-hidden rounded-sm border border-customNavy/20 bg-customWhite opacity-0 shadow-lg sm:max-h-[90vh] sm:max-w-[450px]"
       >
         <Image
           src="/images/meta-image.webp"

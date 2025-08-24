@@ -69,10 +69,7 @@ const MailchimpForm = ({
             render={({ field }) => (
               <FormItem className="grow">
                 <FormControl className="truncate rounded-sm border border-customNavy/20 bg-customWhite font-hypatia text-customNavy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-customGold">
-                  <Input
-                    {...field}
-                    placeholder="Enter email to receive exclusive updates..."
-                  />
+                  <Input {...field} placeholder="Email address" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
