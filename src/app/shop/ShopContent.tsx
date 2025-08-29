@@ -46,9 +46,9 @@ export default function ShopContent({ products }: { products: any[] }) {
         <div className="mx-auto h-full pb-12 md:pb-6 md:pl-[240px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
           <div
             ref={headerRef}
-            className="mb-3 flex items-center justify-between border-b-2 border-customGold pb-4 pt-4 font-hypatia text-lg text-customNavy opacity-0 md:mb-6 md:pt-0"
+            className="mb-3 flex items-center justify-between border-b-2 border-customGold px-3 pb-4 pt-4 font-hypatia text-lg text-customNavy opacity-0 md:mb-6 md:px-0 md:pt-0"
           >
-            <h2 className="font-bigola text-3xl italic text-customGold text-shadow-custom">
+            <h2 className="font-bigola text-3xl text-customGold text-shadow-custom">
               Shop
             </h2>
             <Link
@@ -61,7 +61,7 @@ export default function ShopContent({ products }: { products: any[] }) {
           </div>
           <div
             ref={gridRef}
-            className="grid w-full grid-cols-1 gap-4 opacity-0 sm:grid-cols-2 lg:gap-8 xl:grid-cols-3"
+            className="grid w-full grid-cols-1 gap-4 px-3 opacity-0 sm:grid-cols-2 md:px-0 lg:gap-8 xl:grid-cols-3"
           >
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />

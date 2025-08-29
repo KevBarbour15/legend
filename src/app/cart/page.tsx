@@ -91,11 +91,16 @@ export default function CartPage() {
   return (
     <>
       <AudioStatic />
-      <div ref={containerRef} className="min-h-svh pt-16 md:pt-0">
-        <div className="mx-auto flex flex-col overflow-y-auto px-3 pb-20 pt-4 text-customNavy md:px-0 md:pb-10 md:pl-[240px] md:pr-6 md:pt-6">
-          <h1 className="border-b-2 border-customGold pb-4 font-bigola text-3xl font-bold">
-            Cart
-          </h1>
+      <div
+        ref={containerRef}
+        className="min-h-svh pt-16 text-customNavy md:pt-0"
+      >
+        <div className="mx-auto h-full pb-12 md:pb-6 md:pl-[240px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
+          <div className="mb-3 flex items-center justify-between border-b-2 border-customGold px-3 pb-4 pt-4 font-hypatia text-lg text-customNavy md:mb-6 md:px-0 md:pt-0">
+            <h2 className="font-bigola text-3xl text-customGold text-shadow-custom">
+              Cart
+            </h2>
+          </div>
           {hasOutOfStock && (
             <div className="mb-4 mt-3 rounded bg-red-100 text-center font-hypatia text-red-700">
               Some items in your cart are out of stock or have insufficient
@@ -120,7 +125,7 @@ export default function CartPage() {
             </div>
           ) : (
             <>
-              <ul className="divide-y divide-customNavy/50">
+              <ul className="divide-y divide-customNavy/50 px-3 md:px-0">
                 {items.map((item) => {
                   return (
                     <li
@@ -223,7 +228,7 @@ export default function CartPage() {
                   );
                 })}
               </ul>
-              <div className="mb-6 flex flex-col items-end gap-3 border-t-2 border-customGold pt-6">
+              <div className="mb-6 flex flex-col items-end gap-3 border-t-2 border-customGold px-3 pt-6 md:px-0">
                 <div className="flex flex-col items-end gap-2">
                   <button
                     onClick={clearCart}
@@ -231,14 +236,8 @@ export default function CartPage() {
                   >
                     Clear Cart
                   </button>
-                  {/* Temporary debug info */}
-                  {process.env.NODE_ENV === "development" && (
-                    <div className="text-xs text-gray-400">
-                      {items.length} items
-                    </div>
-                  )}
                 </div>
-                <p className="font-bigola text-lg font-bold">
+                <p className="font-bigola text-lg text-customNavy">
                   Subtotal: $
                   {items
                     .reduce((sum, item) => sum + item.price * item.quantity, 0)

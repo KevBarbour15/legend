@@ -101,6 +101,11 @@ export default function ProductCard({ product }: ProductContentProps) {
                 Add to Cart
               </Button>
             )}
+            <Link href={`/product/${product?.handle}`}>
+              <Button className="mx-auto mt-4 w-full rounded-sm border border-customNavy/20 bg-customNavy font-bigola text-customWhite transition-all duration-300 ease-in-out box-shadow-text md:hover:bg-customWhite md:hover:text-customNavy md:active:bg-customGold">
+                View Product
+              </Button>
+            </Link>
           </div>
         </div>
       </Link>
