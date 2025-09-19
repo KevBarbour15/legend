@@ -28,7 +28,7 @@ export default function EventList({
                 eventRefs.current[idx] = el;
               }
             }}
-            className={`mx-auto w-full opacity-0`}
+            className={`mx-auto w-full`}
           >
             <EventCard
               key={idx}

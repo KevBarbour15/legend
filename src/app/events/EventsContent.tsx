@@ -49,28 +49,26 @@ export default function EventsContent({
 
     const tl = gsap.timeline({});
 
-    // Initial animation for tabs if not already visible
-    const eventTabs = document.querySelector("#event-tabs") as HTMLElement;
+    // Always animate tabs to be visible
+    tl.set(tabsRef.current, { opacity: 0, y: -25 }).to(tabsRef.current, {
+      y: 0,
+      opacity: 1,
+      duration: 0.5,
+      ease: "back.out(2.7)",
+    });
 
+    // Only animate events if they exist and media is loaded
     if (currentRefs.current.length > 0 && mediaLoaded) {
       tl.set(currentRefs.current, {
         opacity: 0,
         y: 25,
-      })
-        .set(tabsRef.current, { opacity: 0, y: -25 })
-        .to(tabsRef.current, {
-          y: 0,
-          opacity: 1,
-          duration: 0.5,
-          ease: "back.out(2.7)",
-        })
-        .to(currentRefs.current, {
-          y: 0,
-          duration: 0.4,
-          stagger: 0.075,
-          ease: "back.out(2.7)",
-          opacity: 1,
-        });
+      }).to(currentRefs.current, {
+        y: 0,
+        duration: 0.4,
+        stagger: 0.075,
+        ease: "back.out(2.7)",
+        opacity: 1,
+      });
     }
   }, [activeTab, mediaLoaded]);
 
