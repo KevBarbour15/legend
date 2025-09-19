@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
   await connectToMongoDB();
 
   try {
-    const messages = await Message.find();
+    const messages = await Message.find().lean().exec();
 
     return NextResponse.json(messages, { status: 200 });
   } catch (error) {

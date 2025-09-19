@@ -4,6 +4,7 @@ import { Event, PreloadedMedia } from "@/data/events";
 
 import AudioStatic from "@/components/audio-static/AudioStatic";
 import EventList from "@/components/event-list/EventList";
+import CalendarView from "@/components/calendar-view/CalendarView";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -20,7 +21,9 @@ export default function EventsContent({
   initialUpcomingEvents,
   initialPastEvents,
 }: EventsContentProps) {
-  const [activeTab, setActiveTab] = useState<"upcoming" | "past">("upcoming");
+  const [activeTab, setActiveTab] = useState<"upcoming" | "past" | "calendar">(
+    "upcoming",
+  );
   const containerRef = useRef<HTMLDivElement>(null);
   const [upcomingEvents, setUpcomingEvents] = useState<Event[]>(
     initialUpcomingEvents,
@@ -41,6 +44,21 @@ export default function EventsContent({
 
   const animateEvents = useCallback(() => {
     if (!containerRef.current) return;
+
+    // Only animate for upcoming and past tabs, not calendar
+    if (activeTab === "calendar") {
+      // Just animate the tabs for calendar view
+      if (tabsRef.current) {
+        gsap.set(tabsRef.current, { opacity: 0, y: -25 });
+        gsap.to(tabsRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          ease: "back.out(2.7)",
+        });
+      }
+      return;
+    }
 
     const currentRefs =
       activeTab === "upcoming" ? upcomingEventRefs : pastEventRefs;
@@ -123,13 +141,16 @@ export default function EventsContent({
             >
               <TabsList
                 ref={tabsRef}
-                className="top-0 mb-6 grid w-full grid-cols-2 bg-transparent font-bigola opacity-0 md:mt-0 md:w-[400px]"
+                className="top-0 mb-6 grid w-full grid-cols-3 bg-transparent font-bigola opacity-0 md:mt-0 md:w-[600px]"
               >
                 <TabsTrigger value="upcoming" className="border-customNavy/20">
                   Upcoming Events
                 </TabsTrigger>
                 <TabsTrigger value="past" className="border-customNavy/20">
                   Past Events
+                </TabsTrigger>
+                <TabsTrigger value="calendar" className="border-customNavy/20">
+                  Calendar View
                 </TabsTrigger>
               </TabsList>
 
@@ -150,6 +171,17 @@ export default function EventsContent({
                     eventRefs={pastEventRefs}
                     emptyMessageRef={pastEmptyMessageRef}
                     upcoming={false}
+                  />
+                </TabsContent>
+                <TabsContent value="calendar" className="w-full">
+                  <CalendarView
+                    events={[...upcomingEvents, ...pastEvents]}
+                    preloadedMedia={
+                      new Map([
+                        ...upcomingPreloadedMedia,
+                        ...pastPreloadedMedia,
+                      ])
+                    }
                   />
                 </TabsContent>
               </div>

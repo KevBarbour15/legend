@@ -21,6 +21,7 @@ import Image from "next/image";
 
 const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
   const [isActive, setIsActive] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const formattedTime = formatTime(event.time);
   const formattedDate = new Date(event.date).toLocaleDateString("en-US", {
@@ -28,9 +29,15 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
   });
 
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        document.body.style.overflow = "auto";
+        if (typeof document !== "undefined") {
+          document.body.style.overflow = "auto";
+        }
         setIsActive(false);
       }
     };
@@ -47,16 +54,24 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
   useOutsideClick(containerRef, () => setIsActive(false));
 
   const handleCardClick = () => {
-    document.body.style.overflow = "hidden";
+    if (typeof document !== "undefined") {
+      document.body.style.overflow = "hidden";
+    }
     setIsActive(true);
   };
 
   const handleCloseCard = () => {
-    document.body.style.overflow = "auto";
+    if (typeof document !== "undefined") {
+      document.body.style.overflow = "auto";
+    }
     setIsActive(false);
   };
 
   const renderPortal = () => {
+    if (!isMounted || typeof document === "undefined") {
+      return null;
+    }
+
     return createPortal(
       <AnimatePresence>
         {isActive && (
@@ -100,17 +115,17 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                     height={475}
                     unoptimized
                     priority
-                    className="h-auto w-full object-cover object-center md:aspect-auto"
+                    className="h-auto w-full object-cover object-center"
                   />
                 </motion.div>
               ) : (
                 <motion.div
                   layoutId={`video-${event._id}`}
-                  className="flex-shrink-0 overflow-hidden border-b-2 border-customNavy"
+                  className="flex-shrink-0 overflow-hidden border-b border-customNavy/20"
                 >
                   <video
                     src={preloadedMedia?.src || event.image_url}
-                    className="h-auto w-full object-cover object-center md:aspect-auto"
+                    className="h-auto w-full object-cover object-center"
                     loop
                     autoPlay
                     muted
@@ -119,34 +134,45 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                 </motion.div>
               )}
 
-              <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="description">
-                  <AccordionTrigger className="w-full cursor-pointer p-3 md:p-6">
-                    <motion.h1
-                      layoutId={`title-${event._id}`}
-                      className="text-balance pr-6 text-left font-bigola text-2xl capitalize"
-                    >
-                      {event.title}
-                    </motion.h1>
-                  </AccordionTrigger>
-                  <AccordionContent className="border-t border-customGold/50 p-3 md:p-6">
-                    <motion.div className="flex w-full flex-row justify-between py-3 font-bigola text-lg md:pb-6 md:leading-[1.15]">
-                      <motion.p layoutId={`date-${event._id}`}>
-                        {formattedDate}
+              <div className="flex flex-col p-3 md:p-6">
+                <div className="flex w-full flex-row justify-between py-3 font-bigola text-lg md:pb-6 md:leading-[1.15]">
+                  <motion.p layoutId={`date-${event._id}`}>
+                    {formattedDate}
+                  </motion.p>
+                  <motion.p layoutId={`time-${event._id}`}>
+                    {formattedTime}
+                  </motion.p>
+                </div>
+
+                <Accordion type="single" collapsible className="w-full">
+                  <AccordionItem value="description">
+                    <AccordionTrigger className="w-full cursor-pointer p-3 md:p-6">
+                      <motion.h1
+                        layoutId={`title-${event._id}`}
+                        className="text-balance pr-6 text-left font-bigola text-2xl capitalize"
+                      >
+                        {event.title}
+                      </motion.h1>
+                    </AccordionTrigger>
+                    <AccordionContent className="border-t border-customGold/50 p-3 md:p-6">
+                      <motion.div className="flex w-full flex-row justify-between py-3 font-bigola text-lg md:pb-6 md:leading-[1.15]">
+                        <motion.p layoutId={`date-${event._id}`}>
+                          {formattedDate}
+                        </motion.p>
+                        <motion.p layoutId={`time-${event._id}`}>
+                          {formattedTime}
+                        </motion.p>
+                      </motion.div>
+                      <motion.p
+                        layoutId={`description-${event._id}`}
+                        className="whitespace-pre-wrap pb-3 font-hypatia text-base leading-none md:text-lg md:leading-[1.15] lg:text-xl"
+                      >
+                        {event.description}
                       </motion.p>
-                      <motion.p layoutId={`time-${event._id}`}>
-                        {formattedTime}
-                      </motion.p>
-                    </motion.div>
-                    <motion.p
-                      layoutId={`description-${event._id}`}
-                      className="whitespace-pre-wrap pb-3 font-hypatia text-base leading-none md:text-lg md:leading-[1.15] lg:text-xl"
-                    >
-                      {event.description}
-                    </motion.p>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </div>
             </motion.div>
           </div>
         )}

@@ -21,15 +21,19 @@ export async function getAllEvents(): Promise<AllEventsResponse> {
     
     const upcomingEvents = await Event.find({ upcoming: true })
       .limit(100)
-      .sort({ date: 1 });
+      .sort({ date: 1 })
+      .lean()
+      .exec();
 
     const pastEvents = await Event.find({ upcoming: false })
       .limit(100)
-      .sort({ date: -1 });
+      .sort({ date: -1 })
+      .lean()
+      .exec();
 
     return {
-      upcoming: upcomingEvents,
-      past: pastEvents,
+      upcoming: upcomingEvents as EventType[],
+      past: pastEvents as EventType[],
     };
   } catch (error) {
     console.error("Error fetching all events:", error);
@@ -70,7 +74,7 @@ export async function getEvents(
       return { error: "No events found" };
     }
 
-    return { events };
+    return { events: events as EventType[] };
   } catch (error) {
     console.error(`Error fetching ${eventType} events:`, error);
     return {
