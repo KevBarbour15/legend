@@ -190,7 +190,7 @@ export default function Home() {
             </div>
             <div className="about-section mb-3 flex flex-row justify-between opacity-0 md:mb-6">
               <p>Friday - Saturday:</p>
-              <p>3pm - 12am</p>
+              <p>3pm - 2am</p>
             </div>
             <div className="about-section mb-3 flex flex-row justify-between opacity-0 md:mb-6">
               <p>Sunday:</p>
