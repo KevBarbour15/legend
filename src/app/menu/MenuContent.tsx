@@ -310,28 +310,26 @@ const MenuContent: React.FC<MenuContentProps> = ({ menu }) => {
                           >
                             {categoryName === "Wine" && (
                               <div className="text-pretty py-3 text-center text-shadow-custom">
-                                <p className="font-bigola text-lg text-customNavy md:text-2xl">
-                                  Wine Down Wednesday
+                                <p className="font-bigola text-xl text-customNavy md:text-3xl">
+                                  Celebrating something?
                                 </p>
-                                <p className="font-hypatiaBold text-base text-customNavy md:text-lg">
-                                  All Day Wednesday: 3-10pm
-                                </p>
-                                <p className="font-hypatia text-base text-customNavy md:text-lg">
-                                  $2 off glasses and $5 off bottles.
+                                <p className="font-hypatia text-lg italic text-customNavy md:text-2xl">
+                                  Pop a bottle of Philippe Fontaine Brut
+                                  Tradition Champagne — $95
                                 </p>
                               </div>
                             )}
 
                             {categoryName === "Draft" && (
                               <div className="py-3 text-center text-customNavy text-shadow-custom">
-                                <p className="font-bigola text-lg text-customNavy md:text-2xl">
+                                <p className="font-bigola text-xl text-customNavy md:text-3xl">
                                   Happy Hour
                                 </p>
-                                <p className="font-hypatiaBold text-base text-customNavy md:text-lg">
+                                <p className="font-hypatiaBold text-lg text-customNavy md:text-2xl">
                                   {" "}
                                   Wednesday - Friday, 3 - 6pm
                                 </p>
-                                <p className="font-hypatia text-base text-customNavy md:text-lg">
+                                <p className="font-hypatia text-lg italic text-customNavy md:text-2xl">
                                   $2 off draft beers.
                                 </p>
                               </div>
