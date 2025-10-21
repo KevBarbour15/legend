@@ -323,11 +323,11 @@ function createMenuStructure(
   });
 
   childCategoryMap.forEach((category) => {
-    category.items.sort((a, b) =>
-      (a.brand?.toLowerCase() ?? "").localeCompare(
-        b.brand?.toLowerCase() ?? "",
-      ),
-    );
+    category.items.sort((a, b) => {
+      const priceA = a.price ? parseFloat(a.price.replace("$", "")) : Infinity;
+      const priceB = b.price ? parseFloat(b.price.replace("$", "")) : Infinity;
+      return priceA - priceB;
+    });
   });
 
   categoryMap.forEach((category) => {
@@ -346,11 +346,15 @@ function createMenuStructure(
           ),
         };
       } else if (parentCategories.includes(category.name)) {
-        menuStructure[category.name] = category.items.sort((a, b) =>
-          (a.brand?.toLowerCase() ?? "").localeCompare(
-            b.brand?.toLowerCase() ?? "",
-          ),
-        );
+        menuStructure[category.name] = category.items.sort((a, b) => {
+          const priceA = a.price
+            ? parseFloat(a.price.replace("$", ""))
+            : Infinity;
+          const priceB = b.price
+            ? parseFloat(b.price.replace("$", ""))
+            : Infinity;
+          return priceA - priceB;
+        });
       }
     }
   });
