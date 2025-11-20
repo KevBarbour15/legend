@@ -50,7 +50,7 @@ export default function EventsContent({
     const tl = gsap.timeline({});
 
     // Always animate tabs to be visible
-    tl.set(tabsRef.current, { opacity: 0, y: -25 }).to(tabsRef.current, {
+    tl.set(tabsRef.current, { opacity: 0, y: -5 }).to(tabsRef.current, {
       y: 0,
       opacity: 1,
       duration: 0.5,

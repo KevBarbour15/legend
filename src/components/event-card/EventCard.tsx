@@ -1,13 +1,15 @@
-import { useState, useRef, useEffect } from "react";
+"use client";
 
+import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { createPortal } from "react-dom";
+
 import { useOutsideClick } from "@/hooks/use-outside-click";
 
 import { X } from "@phosphor-icons/react";
 import { IconButton } from "@mui/material";
 
 import { EventCardProps } from "@/data/events";
-import { createPortal } from "react-dom";
 import { formatTime } from "@/utils/time";
 
 import {
@@ -21,46 +23,65 @@ import Image from "next/image";
 
 const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
   const [isActive, setIsActive] = useState(false);
+  const [mounted, setMounted] = useState(false); 
   const containerRef = useRef<HTMLDivElement>(null);
+
   const formattedTime = formatTime(event.time);
   const formattedDate = new Date(event.date).toLocaleDateString("en-US", {
     timeZone: "UTC",
   });
 
+  // Mark component as mounted (client-side) so it's safe to use document/window
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        document.body.style.overflow = "auto";
+        if (typeof document !== "undefined") {
+          document.body.style.overflow = "auto";
+        }
         setIsActive(false);
       }
     };
 
-    if (isActive) {
+    if (isActive && typeof window !== "undefined") {
       window.addEventListener("keydown", handleKeyDown);
     }
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("keydown", handleKeyDown);
+      }
     };
   }, [isActive]);
 
   useOutsideClick(containerRef, () => setIsActive(false));
 
   const handleCardClick = () => {
-    document.body.style.overflow = "hidden";
+    if (typeof document !== "undefined") {
+      document.body.style.overflow = "hidden";
+    }
     setIsActive(true);
   };
 
   const handleCloseCard = () => {
-    document.body.style.overflow = "auto";
+    if (typeof document !== "undefined") {
+      document.body.style.overflow = "auto";
+    }
     setIsActive(false);
   };
 
   const renderPortal = () => {
+    // ⛔️ Don't try to touch document during SSR
+    if (!mounted || typeof document === "undefined") return null;
+
     return createPortal(
       <AnimatePresence>
         {isActive && (
           <div className="fixed inset-0 z-[200] grid place-items-center bg-black/50 px-6 drop-shadow-card">
+            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { duration: 0.15 } }}
@@ -68,6 +89,8 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               className="fixed inset-0"
               onClick={() => setIsActive(false)}
             />
+
+            {/* Close button */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { duration: 0.15 } }}
@@ -83,10 +106,13 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               </IconButton>
             </motion.div>
 
+            {/* Modal content */}
             <motion.div
               ref={containerRef}
               layoutId={`card-${event._id}`}
-              className={`relative flex h-fit max-h-[90dvh] w-full flex-col overflow-y-auto rounded-sm border border-customNavy/20 text-customNavy shadow-2xl ${isActive ? "border-customNavy" : "border-transparent"} bg-customWhite transition-all duration-300 sm:max-h-[95vh] sm:max-w-[450px]`}
+              className={`relative flex h-fit max-h-[90dvh] w-full flex-col overflow-y-auto rounded-sm border border-customNavy/20 bg-customWhite text-customNavy shadow-2xl transition-all duration-300 sm:max-h-[95vh] sm:max-w-[450px] ${
+                isActive ? "border-customNavy" : "border-transparent"
+              }`}
             >
               {event.is_photo ? (
                 <motion.div
@@ -181,6 +207,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
             </motion.h1>
           </div>
         </div>
+
         {event.is_photo ? (
           <motion.div
             layoutId={`image-${event._id}`}

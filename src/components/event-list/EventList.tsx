@@ -1,3 +1,4 @@
+"use client";
 import { Event, PreloadedMedia } from "@/data/events";
 import EventCard from "@/components/event-card/EventCard";
 
