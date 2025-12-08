@@ -15,8 +15,8 @@ const VideoCard: React.FC<VideoCardProps> = ({
   url,
 }) => {
   return (
-    <div className="rounded-sm border border-neutral-400/20 bg-customWhite/25 p-4 text-customNavy backdrop-blur-[2px] box-shadow-card">
-      <div className="mb-3 flex flex-col space-y-3 text-pretty font-hypatia drop-shadow-text">
+    <div className="flex h-full flex-col justify-between gap-6 rounded-sm border border-neutral-400/20 bg-customWhite/25 p-4 text-customNavy backdrop-blur-[2px] box-shadow-card">
+      <div className="flex flex-col space-y-3 text-pretty font-hypatia drop-shadow-text">
         <h2 className="font-bigola text-2xl">{title}</h2>
         <p className="text-lg">{heading}</p>
         <p className="text-lg">{description}</p>

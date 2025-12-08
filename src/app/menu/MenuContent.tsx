@@ -223,34 +223,39 @@ const MenuContent: React.FC<MenuContentProps> = ({ menu }) => {
 
   const renderCannedBeerCategory = (category: CategoryWithItems) => (
     <Accordion type="single" collapsible className="w-full pl-4">
-      {category.childCategories.map((childCategory, index) => (
-        <AccordionItem
-          value={childCategory.id}
-          className={`${index !== category.childCategories.length - 1 ? "border-b-2 border-customGold" : ""}`}
-          key={childCategory.id}
-        >
-          <AccordionTrigger
-            className={`cursor-pointer font-bigola text-xl leading-none drop-shadow-text md:text-4xl ${
-              activeChildCategory === childCategory.id
-                ? "text-customGold"
-                : "text-customNavy"
-            }`}
-            icon={<ArrowBendRightDown weight="regular" />}
-            onClick={() => handleChildCategoryClick(childCategory.id)}
+      {category.childCategories
+        .filter(
+          (childCategory) =>
+            childCategory.items && childCategory.items.length > 0,
+        )
+        .map((childCategory, index, visibleChildren) => (
+          <AccordionItem
+            value={childCategory.id}
+            className={`${index !== visibleChildren.length - 1 ? "border-b-2 border-customGold" : ""}`}
+            key={childCategory.id}
           >
-            <h2
-              className={`transition-all duration-300 text-shadow-custom ${activeChildCategory === childCategory.id ? "translate-x-[15px] transform text-customGold" : "text-customNavy"}`}
+            <AccordionTrigger
+              className={`cursor-pointer font-bigola text-xl leading-none drop-shadow-text md:text-4xl ${
+                activeChildCategory === childCategory.id
+                  ? "text-customGold"
+                  : "text-customNavy"
+              }`}
+              icon={<ArrowBendRightDown weight="regular" />}
+              onClick={() => handleChildCategoryClick(childCategory.id)}
             >
-              {childCategory.name}
-            </h2>
-          </AccordionTrigger>
-          <AccordionContent className="border-customGold">
-            {childCategory.items.map((item, idx) =>
-              renderMenuItem(item, idx === childCategory.items.length - 1),
-            )}
-          </AccordionContent>
-        </AccordionItem>
-      ))}
+              <h2
+                className={`transition-all duration-300 text-shadow-custom ${activeChildCategory === childCategory.id ? "translate-x-[15px] transform text-customGold" : "text-customNavy"}`}
+              >
+                {childCategory.name}
+              </h2>
+            </AccordionTrigger>
+            <AccordionContent className="border-customGold">
+              {childCategory.items.map((item, idx) =>
+                renderMenuItem(item, idx === childCategory.items.length - 1),
+              )}
+            </AccordionContent>
+          </AccordionItem>
+        ))}
     </Accordion>
   );
 
@@ -276,8 +281,23 @@ const MenuContent: React.FC<MenuContentProps> = ({ menu }) => {
             </div>
             <Accordion type="single" collapsible className="z-[151] w-full">
               <div className="w-full opacity-0" id="menu">
-                {Object.entries(menu).map(
-                  ([categoryName, categoryContent], index) => (
+                {Object.entries(menu)
+                  .filter(([_, categoryContent]) => {
+                    if (Array.isArray(categoryContent)) {
+                      return categoryContent.length > 0;
+                    }
+                    const hasDirectItems =
+                      (categoryContent.items &&
+                        categoryContent.items.length > 0) ||
+                      false;
+                    const hasChildItems =
+                      categoryContent.childCategories &&
+                      categoryContent.childCategories.some(
+                        (child) => child.items && child.items.length > 0,
+                      );
+                    return hasDirectItems || !!hasChildItems;
+                  })
+                  .map(([categoryName, categoryContent], index) => (
                     <div className="w-full" key={index}>
                       <div
                         ref={(el) => {
@@ -353,8 +373,7 @@ const MenuContent: React.FC<MenuContentProps> = ({ menu }) => {
                         </AccordionItem>
                       </div>
                     </div>
-                  ),
-                )}
+                  ))}
               </div>
             </Accordion>
           </div>

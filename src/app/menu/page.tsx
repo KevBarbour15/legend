@@ -13,5 +13,9 @@ export default async function Menu() {
     return notFound();
   }
 
-  return <MenuContent menu={menu} />;
+  return (
+    <div className="px-3 md:px-0">
+      <MenuContent menu={menu} />
+    </div>
+  );
 }

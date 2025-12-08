@@ -39,7 +39,7 @@ const videos = [
 
 const Radio = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-
+  const supportRef = useRef<HTMLDivElement>(null);
   useGSAP(
     () => {
       if (!containerRef.current) return;
@@ -63,6 +63,23 @@ const Radio = () => {
           },
         );
       });
+
+      gsap.fromTo(
+        supportRef.current,
+        { opacity: 0, y: 25 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.75,
+          ease: "power3.out",
+          overwrite: "auto",
+          scrollTrigger: {
+            trigger: supportRef.current,
+            start: "top 85%",
+            once: true,
+          },
+        },
+      );
     },
     { scope: containerRef },
   );
@@ -72,14 +89,20 @@ const Radio = () => {
       <AudioStatic />
       <div className="pt-16 md:pt-0" ref={containerRef}>
         <div className="mx-auto px-3 pt-3 md:pl-[240px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
-          <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2">
             {videos.map((video) => (
-              <div key={video.title} className="js-video-card w-full opacity-0">
+              <div
+                key={video.title}
+                className="js-video-card h-full w-full opacity-0"
+              >
                 <VideoCard key={video.title} {...video} />
               </div>
             ))}
           </div>
-          <div className="my-12 flex flex-col text-pretty font-hypatia text-lg leading-[1.5] text-customNavy drop-shadow-text">
+          <div
+            ref={supportRef}
+            className="my-12 flex flex-col text-pretty font-hypatia text-lg leading-[1.5] text-customNavy opacity-0 drop-shadow-text"
+          >
             <p className="mb-3">
               Consider becoming a paid subscriber to our Patreon.
             </p>
