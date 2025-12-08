@@ -52,7 +52,7 @@ const Radio = () => {
           {
             opacity: 1,
             y: 0,
-            duration: 0.6,
+            duration: 0.75,
             ease: "power3.out",
             overwrite: "auto",
             scrollTrigger: {
