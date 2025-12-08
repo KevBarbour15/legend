@@ -5,6 +5,7 @@ import { connectToMongoDB } from "@/lib/db";
 import { musicTypes, eventTypes } from "@/data/forms";
 
 import { POST as sendMessage } from "@/app/actions/sendMessage";
+import { appendMessageToSheet } from "@/app/actions/appendToSheets";
 
 // GET request handler ************************************************************************************************
 export async function GET(req: NextRequest) {
@@ -100,6 +101,21 @@ export async function POST(req: NextRequest) {
         console.log("Error sending email: ", error);
       }
     }
+
+    await appendMessageToSheet({
+      formType,
+      name,
+      email,
+      phone,
+      message,
+      eventDate,
+      eventTime,
+      eventType,
+      eventTypeDescription,
+      musicType,
+      musicDescription,
+      guests,
+    });
 
     return NextResponse.json(
       { message: "Message successfully sent." },

@@ -175,34 +175,44 @@ const MessageCard: React.FC<MessageCardProps> = ({
                 <h2 className="mb-3 text-center text-2xl font-semibold">
                   {inquiryType}
                 </h2>
-                <div className="mb-3 flex w-full items-center justify-between capitalize">
-                  <UserCircle
-                    size={32}
-                    weight="regular"
-                    className="flex-shrink-0"
-                  />
-                  <Divider borderColor="grey" />
-                  <p className="capitalize">{message.name}</p>
-                </div>
-                <div className="mb-3 inline-flex w-full items-center justify-between">
-                  <Mailbox
-                    size={32}
-                    weight="regular"
-                    className="flex-shrink-0"
-                  />
-                  <Divider borderColor="grey" />
-                  <a
-                    href={`mailto:${message.email}`}
-                    className="cursor-pointer transition-all hover:underline"
-                  >
-                    {message.email}
-                  </a>
-                </div>
-                <div className="mb-3 flex w-full items-center justify-between">
-                  <Phone size={32} weight="regular" className="flex-shrink-0" />
-                  <Divider borderColor="grey" />
-                  <p>{message.phone}</p>
-                </div>
+                {message.name && (
+                  <div className="mb-3 flex w-full items-center justify-between capitalize">
+                    <UserCircle
+                      size={32}
+                      weight="regular"
+                      className="flex-shrink-0"
+                    />
+                    <Divider borderColor="grey" />
+                    <p className="capitalize">{message.name}</p>
+                  </div>
+                )}
+                {message.email && (
+                  <div className="mb-3 inline-flex w-full items-center justify-between">
+                    <Mailbox
+                      size={32}
+                      weight="regular"
+                      className="flex-shrink-0"
+                    />
+                    <Divider borderColor="grey" />
+                    <a
+                      href={`mailto:${message.email}`}
+                      className="cursor-pointer transition-all hover:underline"
+                    >
+                      {message.email}
+                    </a>
+                  </div>
+                )}
+                {message.phone && (
+                  <div className="mb-3 flex w-full items-center justify-between">
+                    <Phone
+                      size={32}
+                      weight="regular"
+                      className="flex-shrink-0"
+                    />
+                    <Divider borderColor="grey" />
+                    <p>{message.phone}</p>
+                  </div>
+                )}
               </div>
               {message.formType === "event" && (
                 <div className="text-nowrap border-b-2 border-black py-3 capitalize">
@@ -218,33 +228,39 @@ const MessageCard: React.FC<MessageCardProps> = ({
                     <Divider borderColor="grey" />
                     <p>{eventDate}</p>
                   </div>
-                  <div className="mb-3 flex w-full items-center justify-between">
-                    <Clock
-                      size={32}
-                      weight="regular"
-                      className="flex-shrink-0"
-                    />
-                    <Divider borderColor="grey" />
-                    <p>{message.eventTime}</p>
-                  </div>
-                  <div className="mb-3 flex w-full items-center justify-between">
-                    <Users
-                      size={32}
-                      weight="regular"
-                      className="flex-shrink-0"
-                    />
-                    <Divider borderColor="grey" />
-                    <p>{message.guests} guests</p>
-                  </div>
-                  <div className="mb-3 flex w-full items-center justify-between">
-                    <MusicNote
-                      size={32}
-                      weight="regular"
-                      className="flex-shrink-0"
-                    />
-                    <Divider borderColor="grey" />
-                    <p>{musicType}</p>
-                  </div>
+                  {message.eventTime && (
+                    <div className="mb-3 flex w-full items-center justify-between">
+                      <Clock
+                        size={32}
+                        weight="regular"
+                        className="flex-shrink-0"
+                      />
+                      <Divider borderColor="grey" />
+                      <p>{message.eventTime}</p>
+                    </div>
+                  )}
+                  {message.guests && (
+                    <div className="mb-3 flex w-full items-center justify-between">
+                      <Users
+                        size={32}
+                        weight="regular"
+                        className="flex-shrink-0"
+                      />
+                      <Divider borderColor="grey" />
+                      <p>{message.guests} guests</p>
+                    </div>
+                  )}
+                  {musicType && (
+                    <div className="mb-3 flex w-full items-center justify-between">
+                      <MusicNote
+                        size={32}
+                        weight="regular"
+                        className="flex-shrink-0"
+                      />
+                      <Divider borderColor="grey" />
+                      <p>{musicType}</p>
+                    </div>
+                  )}
                 </div>
               )}
               <div className="flex w-full items-center border-b-2 border-black py-3">
@@ -255,7 +271,11 @@ const MessageCard: React.FC<MessageCardProps> = ({
                     className="flex-shrink-0"
                   />
                 </div>
-                <p className="text-left">"{message.message.trim()}"</p>
+                <div className="w-full">
+                  <p className="text-pretty text-center">
+                    "{message.message.trim()}"
+                  </p>
+                </div>
               </div>
 
               <div className="flex justify-between">
@@ -273,7 +293,10 @@ const MessageCard: React.FC<MessageCardProps> = ({
                   </div>
                 </div>
                 <div className="flex flex-col justify-end text-black">
-                  <Button onClick={() => openDeleteModal(message)}>
+                  <Button
+                    variant="destructive"
+                    onClick={() => openDeleteModal(message)}
+                  >
                     Delete
                   </Button>
                 </div>
