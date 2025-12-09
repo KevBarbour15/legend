@@ -61,7 +61,7 @@ export default function ShopContent({ products }: { products: any[] }) {
           </div>
           <div
             ref={gridRef}
-            className="grid w-full grid-cols-1 gap-4 px-3 opacity-0 sm:grid-cols-2 md:px-0 lg:gap-8 xl:grid-cols-3"
+            className="grid w-full grid-cols-1 gap-4 px-3 opacity-0 sm:grid-cols-2 md:px-0 lg:gap-8 2xl:grid-cols-3"
           >
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
