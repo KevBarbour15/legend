@@ -7,11 +7,11 @@ export const dynamic = "force-dynamic";
 export default async function Events() {
   try {
     const { upcoming, past } = await getAllEvents();
-    
+
     return (
-      <EventsContent 
-        initialUpcomingEvents={upcoming} 
-        initialPastEvents={past} 
+      <EventsContent
+        initialUpcomingEvents={upcoming}
+        initialPastEvents={past}
       />
     );
   } catch (error) {

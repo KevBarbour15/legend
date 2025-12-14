@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/hooks/use-outside-click";
@@ -28,17 +28,27 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
     timeZone: "UTC",
   });
 
+  const handleCloseCard = useCallback(() => {
+    setIsActive(false);
+  }, []);
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
+  // Keep body scroll lock in sync with modal state
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    document.body.style.overflow = isActive ? "hidden" : "auto";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isActive]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        if (typeof document !== "undefined") {
-          document.body.style.overflow = "auto";
-        }
-        setIsActive(false);
+        handleCloseCard();
       }
     };
 
@@ -49,22 +59,12 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isActive]);
+  }, [isActive, handleCloseCard]);
 
-  useOutsideClick(containerRef, () => setIsActive(false));
+  useOutsideClick(containerRef, handleCloseCard);
 
   const handleCardClick = () => {
-    if (typeof document !== "undefined") {
-      document.body.style.overflow = "hidden";
-    }
     setIsActive(true);
-  };
-
-  const handleCloseCard = () => {
-    if (typeof document !== "undefined") {
-      document.body.style.overflow = "auto";
-    }
-    setIsActive(false);
   };
 
   const renderPortal = () => {
@@ -73,23 +73,35 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
     }
 
     return createPortal(
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {isActive && (
-          <div className="fixed inset-0 z-[200] grid place-items-center bg-black/50 px-6 drop-shadow-card">
+          <div
+            className="fixed inset-0 z-[200] grid place-items-center bg-black/25 px-6 drop-shadow-card backdrop-blur-sm"
+            onClick={(e) => e.stopPropagation()}
+          >
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: { duration: 0.15 } }}
-              exit={{ opacity: 0, transition: { duration: 0.15 } }}
+              animate={{ opacity: 1, transition: { duration: 0.25 } }}
+              exit={{ opacity: 0, transition: { duration: 0.25 } }}
               className="fixed inset-0"
-              onClick={() => setIsActive(false)}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleCloseCard();
+              }}
             />
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: { duration: 0.15 } }}
-              exit={{ opacity: 0, transition: { duration: 0.15 } }}
+              animate={{ opacity: 1, transition: { duration: 0.25 } }}
+              exit={{ opacity: 0, transition: { duration: 0.25 } }}
               className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full md:right-6 md:top-6"
             >
-              <IconButton aria-label="Close Modal" onClick={handleCloseCard}>
+              <IconButton
+                aria-label="Close Modal"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCloseCard();
+                }}
+              >
                 <X
                   size={30}
                   weight="regular"
@@ -100,12 +112,27 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
 
             <motion.div
               ref={containerRef}
-              layoutId={`card-${event._id}`}
+              onClick={(e) => e.stopPropagation()}
+              initial={{ opacity: 0, scale: 0.75 }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                transition: { duration: 0.25, ease: "easeInOut" },
+              }}
+              exit={{
+                opacity: 0,
+                scale: 0.98,
+                y: 8,
+                transition: { duration: 0.25, ease: "easeInOut" },
+              }}
               className={`relative flex h-fit max-h-[90dvh] w-full flex-col overflow-y-auto rounded-sm border border-customNavy/20 text-customNavy shadow-2xl ${isActive ? "border-customNavy" : "border-transparent"} bg-customWhite transition-all duration-300 sm:max-h-[95vh] sm:max-w-[450px]`}
             >
               {event.is_photo ? (
                 <motion.div
-                  layoutId={`image-${event._id}`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1, transition: { duration: 0.2 } }}
+                  exit={{ opacity: 0, transition: { duration: 0.12 } }}
                   className="flex-shrink-0 overflow-hidden border-b border-customNavy/20"
                 >
                   <Image
@@ -120,7 +147,9 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                 </motion.div>
               ) : (
                 <motion.div
-                  layoutId={`video-${event._id}`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1, transition: { duration: 0.2 } }}
+                  exit={{ opacity: 0, transition: { duration: 0.12 } }}
                   className="flex-shrink-0 overflow-hidden border-b border-customNavy/20"
                 >
                   <video
@@ -134,41 +163,23 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                 </motion.div>
               )}
 
-              <div className="flex flex-col p-3 md:p-6">
-                <div className="flex w-full flex-row justify-between py-3 font-bigola text-lg md:pb-6 md:leading-[1.15]">
-                  <motion.p layoutId={`date-${event._id}`}>
-                    {formattedDate}
-                  </motion.p>
-                  <motion.p layoutId={`time-${event._id}`}>
-                    {formattedTime}
-                  </motion.p>
+              <div className="flex flex-col">
+                <div className="flex w-full flex-row justify-between px-3 py-4 font-bigola text-lg md:leading-[1.15]">
+                  <p>{formattedDate}</p>
+                  <p>{formattedTime}</p>
                 </div>
 
                 <Accordion type="single" collapsible className="w-full">
                   <AccordionItem value="description">
-                    <AccordionTrigger className="w-full cursor-pointer p-3 md:p-6">
-                      <motion.h1
-                        layoutId={`title-${event._id}`}
-                        className="text-balance pr-6 text-left font-bigola text-2xl capitalize"
-                      >
+                    <AccordionTrigger className="w-full cursor-pointer p-3">
+                      <h1 className="text-balance pr-6 text-left font-bigola text-2xl capitalize">
                         {event.title}
-                      </motion.h1>
+                      </h1>
                     </AccordionTrigger>
-                    <AccordionContent className="border-t border-customGold/50 p-3 md:p-6">
-                      <motion.div className="flex w-full flex-row justify-between py-3 font-bigola text-lg md:pb-6 md:leading-[1.15]">
-                        <motion.p layoutId={`date-${event._id}`}>
-                          {formattedDate}
-                        </motion.p>
-                        <motion.p layoutId={`time-${event._id}`}>
-                          {formattedTime}
-                        </motion.p>
-                      </motion.div>
-                      <motion.p
-                        layoutId={`description-${event._id}`}
-                        className="whitespace-pre-wrap pb-3 font-hypatia text-base leading-none md:text-lg md:leading-[1.15] lg:text-xl"
-                      >
+                    <AccordionContent className="border-t border-customGold/50 p-3">
+                      <p className="whitespace-pre-wrap pb-3 font-hypatia text-base leading-none md:text-lg md:leading-[1.15] lg:text-xl">
                         {event.description}
-                      </motion.p>
+                      </p>
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
@@ -185,57 +196,30 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
     <>
       {renderPortal()}
 
-      <motion.div
-        layoutId={`card-${event._id}`}
-        onClick={handleCardClick}
-        className="flex h-full cursor-pointer justify-between overflow-hidden rounded-sm border border-neutral-400/20 bg-customWhite/25 backdrop-blur-[2px] box-shadow-card"
-      >
-        <div className="flex h-auto w-full min-w-0 flex-col justify-between p-3 text-customNavy text-shadow-custom">
-          <motion.h2
-            className="font-bigola text-lg leading-none md:text-2xl"
-            layoutId={`date-${event._id}`}
-          >
-            {formattedDate}
-          </motion.h2>
-
-          <div className="relative">
-            <motion.h1
-              layoutId={`title-${event._id}`}
-              className="font-bigola text-2xl capitalize leading-none md:text-4xl lg:text-6xl"
-            >
-              {event.title}
-            </motion.h1>
-          </div>
-        </div>
+      <motion.div onClick={handleCardClick} className="h-full w-full">
         {event.is_photo ? (
-          <motion.div
-            layoutId={`image-${event._id}`}
-            className="flex-shrink-0 overflow-hidden"
-          >
+          <div className="relative h-full w-full overflow-hidden">
             <Image
-              src={preloadedMedia?.src || event.image_url}
+              src={event.image_url}
               alt={event.title}
-              width={275}
-              height={275}
+              fill
+              sizes="100vw"
               unoptimized
-              priority
-              className="h-auto w-[125px] object-cover object-center md:w-[225px] lg:w-[275px]"
+              loading="lazy"
+              className="object-cover object-center"
             />
-          </motion.div>
+          </div>
         ) : (
-          <motion.div
-            layoutId={`video-${event._id}`}
-            className="flex-shrink-0 overflow-hidden"
-          >
+          <div className="h-full w-full overflow-hidden">
             <video
-              src={preloadedMedia?.src || event.image_url}
-              className="aspect-square h-[125px] w-[125px] object-cover object-center md:h-[225px] md:w-[225px] lg:h-[275px] lg:w-[275px]"
+              src={event.image_url}
+              className="h-full w-full object-cover object-center"
               loop
               autoPlay
               muted
               playsInline
             />
-          </motion.div>
+          </div>
         )}
       </motion.div>
     </>
