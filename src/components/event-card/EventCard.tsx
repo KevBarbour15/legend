@@ -158,13 +158,13 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       if (!el) return;
 
       const onEnter = () =>
-        gsap.to(el, { scale: 1.02, duration: 0.2, ease: "power2.out" });
+        gsap.to(el, { scale: 1.05, duration: 0.2, ease: "ease.inOut" });
       const onLeave = () =>
-        gsap.to(el, { scale: 1, duration: 0.2, ease: "power2.out" });
+        gsap.to(el, { scale: 1, duration: 0.2, ease: "ease.inOut" });
       const onDown = () =>
-        gsap.to(el, { scale: 0.985, duration: 0.1, ease: "power2.out" });
+        gsap.to(el, { scale: 0.985, duration: 0.1, ease: "ease.inOut" });
       const onUp = () =>
-        gsap.to(el, { scale: 1.02, duration: 0.15, ease: "power2.out" });
+        gsap.to(el, { scale: 1.02, duration: 0.15, ease: "ease.inOut" });
 
       el.addEventListener("mouseenter", onEnter);
       el.addEventListener("mouseleave", onLeave);
@@ -190,20 +190,18 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       <>
         {isRendered && (
           <div
-            className="fixed inset-0 z-[200] grid place-items-center px-6 drop-shadow-card"
+            className="fixed inset-0 z-[200] grid place-items-center px-6 drop-shadow-card backdrop-blur-[2px]"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Backdrop */}
             <div
               ref={backdropRef}
-              className="fixed inset-0 bg-black/25 opacity-0 backdrop-blur-sm"
+              className="fixed inset-0 bg-black/25 opacity-0"
               onClick={(e) => {
                 e.stopPropagation();
                 handleCloseCard();
               }}
             />
 
-            {/* Close button */}
             <div
               ref={closeButtonRef}
               className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full opacity-0 md:right-6 md:top-6"
@@ -214,6 +212,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                   e.stopPropagation();
                   handleCloseCard();
                 }}
+                className="cursor-pointer"
               >
                 <X
                   size={30}
@@ -223,7 +222,6 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               </IconButton>
             </div>
 
-            {/* Modal content */}
             <div
               ref={containerRef}
               onClick={(e) => e.stopPropagation()}
@@ -237,8 +235,9 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                   <Image
                     src={preloadedMedia?.src || event.image_url}
                     alt={event.title}
-                    width={700}
                     height={700}
+                    width={700}
+                    sizes="100%"
                     unoptimized
                     priority
                     className="h-auto w-full object-cover object-center"
@@ -296,15 +295,15 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       <div
         ref={cardRef}
         onClick={handleCardClick}
-        className="h-full w-full will-change-transform"
+        className="h-full w-full transition-all will-change-transform"
       >
         {event.is_photo ? (
           <div className="relative h-full w-full overflow-hidden">
             <Image
               src={event.image_url}
               alt={event.title}
-              fill
-              sizes="100%"
+              width={1000}
+              height={1000}
               unoptimized
               loading="lazy"
               className="object-cover object-center"
@@ -319,8 +318,8 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               autoPlay
               muted
               playsInline
-              width={700}
-              height={700}
+              width={1000}
+              height={1000}
             />
           </div>
         )}
