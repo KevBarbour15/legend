@@ -103,9 +103,9 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
         tl.to(backdropEl, {
           opacity: 1,
           duration: 0.3,
-          ease: "ease.inOut",
+          ease: "power1.inOut",
         });
-        tl.to(closeEl, { opacity: 1, duration: 0.25, ease: "ease.inOut" }, 0);
+        tl.to(closeEl, { opacity: 1, duration: 0.25, ease: "power1.inOut" }, 0);
         tl.to(
           modalEl,
           {
@@ -158,13 +158,13 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       if (!el) return;
 
       const onEnter = () =>
-        gsap.to(el, { scale: 1.05, duration: 0.2, ease: "ease.inOut" });
+        gsap.to(el, { scale: 1.05, duration: 0.2, ease: "power1.inOut" });
       const onLeave = () =>
-        gsap.to(el, { scale: 1, duration: 0.2, ease: "ease.inOut" });
+        gsap.to(el, { scale: 1, duration: 0.2, ease: "power1.inOut" });
       const onDown = () =>
-        gsap.to(el, { scale: 0.985, duration: 0.1, ease: "ease.inOut" });
+        gsap.to(el, { scale: 0.985, duration: 0.1, ease: "power1.inOut" });
       const onUp = () =>
-        gsap.to(el, { scale: 1.02, duration: 0.15, ease: "ease.inOut" });
+        gsap.to(el, { scale: 1.02, duration: 0.15, ease: "power1.inOut" });
 
       el.addEventListener("mouseenter", onEnter);
       el.addEventListener("mouseleave", onLeave);
@@ -302,8 +302,8 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
             <Image
               src={event.image_url}
               alt={event.title}
-              width={1000}
-              height={1000}
+              fill
+              sizes="100vw"
               unoptimized
               loading="lazy"
               className="object-cover object-center"

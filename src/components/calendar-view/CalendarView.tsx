@@ -2,19 +2,15 @@
 
 import React, { useState, useCallback } from "react";
 import { Calendar } from "@/components/ui/calendar";
-import { Event, PreloadedMedia } from "@/data/events";
+import { Event } from "@/data/events";
 import { DayContentProps } from "react-day-picker";
 import { format } from "date-fns";
 import EventCard from "@/components/event-card/EventCard";
 interface CalendarViewProps {
   events: Event[];
-  preloadedMedia?: Map<string, PreloadedMedia>;
 }
 
-export default function CalendarView({
-  events,
-  preloadedMedia,
-}: CalendarViewProps) {
+export default function CalendarView({ events }: CalendarViewProps) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [activeMonth, setActiveMonth] = useState<Date>(
     () => new Date(new Date().getFullYear(), new Date().getMonth(), 1),
@@ -58,10 +54,7 @@ export default function CalendarView({
                   key={event._id}
                   className={`h-full min-h-0 w-full flex-1 basis-0 ${dayEvents.length > 1 && index !== dayEvents.length - 1 ? "border-b border-neutral-400/20" : ""}`}
                 >
-                  <EventCard
-                    event={event}
-                    preloadedMedia={preloadedMedia?.get(event._id)}
-                  />
+                  <EventCard event={event} />
                 </div>
               ))}
             </div>
@@ -69,7 +62,7 @@ export default function CalendarView({
         </div>
       );
     },
-    [getEventsForDate, preloadedMedia],
+    [getEventsForDate],
   );
 
   return (

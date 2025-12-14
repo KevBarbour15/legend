@@ -1,6 +1,6 @@
 "use client";
-import { useState, useRef, useMemo } from "react";
-import { Event, PreloadedMedia } from "@/data/events";
+import { useState, useRef } from "react";
+import { Event } from "@/data/events";
 
 import AudioStatic from "@/components/audio-static/AudioStatic";
 import CalendarView from "@/components/calendar-view/CalendarView";
@@ -18,40 +18,22 @@ export default function EventsContent({
   initialPastEvents,
 }: EventsContentProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const preloadedIdsRef = useRef<Set<string>>(new Set());
   const [upcomingEvents, setUpcomingEvents] = useState<Event[]>(
     initialUpcomingEvents,
   );
   const [pastEvents, setPastEvents] = useState<Event[]>(initialPastEvents);
-  const [upcomingPreloadedMedia, setUpcomingPreloadedMedia] = useState<
-    Map<string, PreloadedMedia>
-  >(new Map());
-  const [pastPreloadedMedia, setPastPreloadedMedia] = useState<
-    Map<string, PreloadedMedia>
-  >(new Map());
-
-  const mergedPreloadedMedia = useMemo(() => {
-    const merged = new Map<string, PreloadedMedia>();
-    upcomingPreloadedMedia.forEach((value, key) => merged.set(key, value));
-    pastPreloadedMedia.forEach((value, key) => merged.set(key, value));
-    return merged;
-  }, [upcomingPreloadedMedia, pastPreloadedMedia]);
 
   const preloadEventMedia = async () => {
     try {
       await Promise.all(
         upcomingEvents.map((event) =>
-          preloadMedia(
-            event,
-            upcomingPreloadedMedia,
-            setUpcomingPreloadedMedia,
-          ),
+          preloadMedia(event, preloadedIdsRef.current),
         ),
       );
 
       await Promise.all(
-        pastEvents.map((event) =>
-          preloadMedia(event, pastPreloadedMedia, setPastPreloadedMedia),
-        ),
+        pastEvents.map((event) => preloadMedia(event, preloadedIdsRef.current)),
       );
     } catch (error) {
       console.error("Error preloading media:", error);
@@ -80,10 +62,7 @@ export default function EventsContent({
       <AudioStatic />
       <div ref={containerRef} className="min-h-screen pt-16 opacity-0 md:pt-0">
         <div className="mx-auto h-full min-h-[75vh] px-3 pb-12 md:pb-6 md:pl-[240px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
-          <CalendarView
-            events={[...upcomingEvents, ...pastEvents]}
-            preloadedMedia={mergedPreloadedMedia}
-          />
+          <CalendarView events={[...upcomingEvents, ...pastEvents]} />
         </div>
       </div>
     </>
