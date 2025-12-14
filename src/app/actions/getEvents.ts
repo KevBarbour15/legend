@@ -15,10 +15,28 @@ interface AllEventsResponse {
   past: EventType[];
 }
 
+function serializeEvent(doc: any): EventType {
+  return {
+    _id: doc?._id?.toString?.() ?? String(doc?._id),
+    title: String(doc?.title ?? ""),
+    date:
+      doc?.date instanceof Date
+        ? doc.date.toISOString()
+        : String(doc?.date ?? ""),
+    time: String(doc?.time ?? ""),
+    description: String(doc?.description ?? ""),
+    notes: String(doc?.notes ?? ""),
+    image_url: String(doc?.image_url ?? ""),
+    is_photo: Boolean(doc?.is_photo),
+    is_public: Boolean(doc?.is_public),
+    upcoming: Boolean(doc?.upcoming),
+  };
+}
+
 export async function getAllEvents(): Promise<AllEventsResponse> {
   try {
     await connectToMongoDB();
-    
+
     const upcomingEvents = await Event.find({ upcoming: true })
       .limit(100)
       .sort({ date: 1 })
@@ -32,8 +50,8 @@ export async function getAllEvents(): Promise<AllEventsResponse> {
       .exec();
 
     return {
-      upcoming: upcomingEvents as EventType[],
-      past: pastEvents as EventType[],
+      upcoming: upcomingEvents.map(serializeEvent),
+      past: pastEvents.map(serializeEvent),
     };
   } catch (error) {
     console.error("Error fetching all events:", error);
@@ -74,7 +92,7 @@ export async function getEvents(
       return { error: "No events found" };
     }
 
-    return { events: events as EventType[] };
+    return { events: events.map(serializeEvent) };
   } catch (error) {
     console.error(`Error fetching ${eventType} events:`, error);
     return {

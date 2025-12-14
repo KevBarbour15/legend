@@ -4,7 +4,7 @@ import { Event, PreloadedMedia } from "@/data/events";
 
 import AudioStatic from "@/components/audio-static/AudioStatic";
 import CalendarView from "@/components/calendar-view/CalendarView";
-
+import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { preloadMedia } from "@/utils/preloadMedia";
 
@@ -58,15 +58,27 @@ export default function EventsContent({
     }
   };
 
-  // Preload media when component mounts
   useGSAP(() => {
     preloadEventMedia();
+    if (!containerRef.current) return;
+
+    gsap.fromTo(
+      containerRef.current,
+      { opacity: 0, y: 25 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        delay: 0.25,
+        ease: "bounce.out(1.7)",
+      },
+    );
   }, []);
 
   return (
     <>
       <AudioStatic />
-      <div ref={containerRef} className="min-h-screen pt-16 md:pt-0">
+      <div ref={containerRef} className="min-h-screen pt-16 opacity-0 md:pt-0">
         <div className="mx-auto h-full min-h-[75vh] px-3 pb-12 md:pb-6 md:pl-[240px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
           <CalendarView
             events={[...upcomingEvents, ...pastEvents]}
