@@ -1,14 +1,11 @@
 "use client";
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useMemo } from "react";
 import { Event, PreloadedMedia } from "@/data/events";
 
 import AudioStatic from "@/components/audio-static/AudioStatic";
-import EventList from "@/components/event-list/EventList";
+import CalendarView from "@/components/calendar-view/CalendarView";
 
-import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { preloadMedia } from "@/utils/preloadMedia";
 
 interface EventsContentProps {
@@ -20,18 +17,11 @@ export default function EventsContent({
   initialUpcomingEvents,
   initialPastEvents,
 }: EventsContentProps) {
-  const [activeTab, setActiveTab] = useState<"upcoming" | "past">("upcoming");
   const containerRef = useRef<HTMLDivElement>(null);
   const [upcomingEvents, setUpcomingEvents] = useState<Event[]>(
     initialUpcomingEvents,
   );
-  const tabsRef = useRef<HTMLDivElement>(null);
   const [pastEvents, setPastEvents] = useState<Event[]>(initialPastEvents);
-  const upcomingEventRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const pastEventRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const upcomingEmptyMessageRef = useRef<HTMLDivElement>(null);
-  const pastEmptyMessageRef = useRef<HTMLDivElement>(null);
-  const [mediaLoaded, setMediaLoaded] = useState<boolean>(false);
   const [upcomingPreloadedMedia, setUpcomingPreloadedMedia] = useState<
     Map<string, PreloadedMedia>
   >(new Map());
@@ -39,42 +29,12 @@ export default function EventsContent({
     Map<string, PreloadedMedia>
   >(new Map());
 
-  const animateEvents = useCallback(() => {
-    if (!containerRef.current) return;
-
-    const currentRefs =
-      activeTab === "upcoming" ? upcomingEventRefs : pastEventRefs;
-    const currentEmptyRef =
-      activeTab === "upcoming" ? upcomingEmptyMessageRef : pastEmptyMessageRef;
-
-    const tl = gsap.timeline({});
-
-    // Always animate tabs to be visible
-    tl.set(tabsRef.current, { opacity: 0, y: -5 }).to(tabsRef.current, {
-      y: 0,
-      opacity: 1,
-      duration: 0.5,
-      ease: "back.out(2.7)",
-    });
-
-    // Only animate events if they exist and media is loaded
-    if (currentRefs.current.length > 0 && mediaLoaded) {
-      tl.set(currentRefs.current, {
-        opacity: 0,
-        y: 25,
-      }).to(currentRefs.current, {
-        y: 0,
-        duration: 0.4,
-        stagger: 0.075,
-        ease: "back.out(2.7)",
-        opacity: 1,
-      });
-    }
-  }, [activeTab, mediaLoaded]);
-
-  useGSAP(() => {
-    animateEvents();
-  }, [animateEvents, activeTab]);
+  const mergedPreloadedMedia = useMemo(() => {
+    const merged = new Map<string, PreloadedMedia>();
+    upcomingPreloadedMedia.forEach((value, key) => merged.set(key, value));
+    pastPreloadedMedia.forEach((value, key) => merged.set(key, value));
+    return merged;
+  }, [upcomingPreloadedMedia, pastPreloadedMedia]);
 
   const preloadEventMedia = async () => {
     try {
@@ -93,9 +53,6 @@ export default function EventsContent({
           preloadMedia(event, pastPreloadedMedia, setPastPreloadedMedia),
         ),
       );
-
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      setMediaLoaded(true);
     } catch (error) {
       console.error("Error preloading media:", error);
     }
@@ -110,49 +67,11 @@ export default function EventsContent({
     <>
       <AudioStatic />
       <div ref={containerRef} className="min-h-screen pt-16 md:pt-0">
-        <div className="mx-auto flex flex-col items-center justify-center overflow-y-auto px-3 pb-12 md:pb-6 md:pl-[240px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
-          <div className="w-full pt-6 md:pt-0">
-            <Tabs
-              defaultValue="upcoming"
-              className="relative flex w-full flex-col items-center border-0"
-              onValueChange={(value) =>
-                setActiveTab(value as "upcoming" | "past")
-              }
-            >
-              <TabsList
-                ref={tabsRef}
-                className="top-0 mb-6 grid w-full grid-cols-2 bg-transparent font-bigola opacity-0 md:mt-0 md:w-[400px]"
-              >
-                <TabsTrigger value="upcoming" className="border-customNavy/20">
-                  Upcoming Events
-                </TabsTrigger>
-                <TabsTrigger value="past" className="border-customNavy/20">
-                  Past Events
-                </TabsTrigger>
-              </TabsList>
-
-              <div id="events-container" className="w-full">
-                <TabsContent value="upcoming" className="w-full">
-                  <EventList
-                    events={upcomingEvents}
-                    preloadedMedia={upcomingPreloadedMedia}
-                    eventRefs={upcomingEventRefs}
-                    emptyMessageRef={upcomingEmptyMessageRef}
-                    upcoming={true}
-                  />
-                </TabsContent>
-                <TabsContent value="past" className="w-full">
-                  <EventList
-                    events={pastEvents}
-                    preloadedMedia={pastPreloadedMedia}
-                    eventRefs={pastEventRefs}
-                    emptyMessageRef={pastEmptyMessageRef}
-                    upcoming={false}
-                  />
-                </TabsContent>
-              </div>
-            </Tabs>
-          </div>
+        <div className="mx-auto h-full min-h-[75vh] px-3 pb-12 md:pb-6 md:pl-[240px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
+          <CalendarView
+            events={[...upcomingEvents, ...pastEvents]}
+            preloadedMedia={mergedPreloadedMedia}
+          />
         </div>
       </div>
     </>

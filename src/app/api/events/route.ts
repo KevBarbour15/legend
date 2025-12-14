@@ -8,11 +8,15 @@ export async function GET(req: NextRequest) {
   try {
     const upcomingEvents = await Event.find({ upcoming: true })
       .limit(100)
-      .sort({ date: 1 });
+      .sort({ date: 1 })
+      .lean()
+      .exec();
 
     const pastEvents = await Event.find({ upcoming: false })
       .limit(100)
-      .sort({ date: -1 });
+      .sort({ date: -1 })
+      .lean()
+      .exec();
 
     return NextResponse.json(
       {
