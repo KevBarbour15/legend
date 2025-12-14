@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 
-import { AnimatePresence, motion } from "framer-motion";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { createPortal } from "react-dom";
 
 import { useOutsideClick } from "@/hooks/use-outside-click";
@@ -22,8 +23,13 @@ import Image from "next/image";
 
 const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
   const [isActive, setIsActive] = useState(false);
+  const [isRendered, setIsRendered] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const backdropRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLDivElement>(null);
+  const mediaRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   const formattedTime = formatTime(event.time);
   const formattedDate = new Date(event.date).toLocaleDateString("en-US", {
@@ -38,14 +44,13 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
     setIsMounted(true);
   }, []);
 
-  // Keep body scroll lock in sync with modal state
   useEffect(() => {
     if (typeof document === "undefined") return;
-    document.body.style.overflow = isActive ? "hidden" : "auto";
+    document.body.style.overflow = isRendered ? "hidden" : "auto";
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [isActive]);
+  }, [isRendered]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -54,7 +59,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       }
     };
 
-    if (isActive && typeof window !== "undefined") {
+    if (isRendered && typeof window !== "undefined") {
       window.addEventListener("keydown", handleKeyDown);
     }
 
@@ -63,13 +68,118 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
         window.removeEventListener("keydown", handleKeyDown);
       }
     };
-  }, [isActive, handleCloseCard]);
+  }, [isRendered, handleCloseCard]);
 
   useOutsideClick(containerRef, handleCloseCard);
 
   const handleCardClick = () => {
+    setIsRendered(true);
     setIsActive(true);
   };
+
+  // Modal open/close animations
+  useGSAP(
+    () => {
+      if (!isRendered) return;
+
+      const backdropEl = backdropRef.current;
+      const modalEl = containerRef.current;
+      const closeEl = closeButtonRef.current;
+      const mediaEl = mediaRef.current;
+
+      if (!backdropEl || !modalEl || !closeEl) return;
+
+      gsap.killTweensOf(
+        [backdropEl, modalEl, closeEl, mediaEl].filter(Boolean),
+      );
+
+      if (isActive) {
+        gsap.set(backdropEl, { opacity: 0 });
+        gsap.set(closeEl, { opacity: 0 });
+        gsap.set(modalEl, { opacity: 0, scale: 1, y: 25 });
+        if (mediaEl) gsap.set(mediaEl, { opacity: 0 });
+
+        const tl = gsap.timeline();
+        tl.to(backdropEl, {
+          opacity: 1,
+          duration: 0.3,
+          ease: "ease.inOut",
+        });
+        tl.to(closeEl, { opacity: 1, duration: 0.25, ease: "ease.inOut" }, 0);
+        tl.to(
+          modalEl,
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.3,
+            ease: "power2.inOut",
+          },
+          0,
+        );
+        if (mediaEl) {
+          tl.to(
+            mediaEl,
+            { opacity: 1, duration: 0.2, ease: "power1.out" },
+            0.05,
+          );
+        }
+      } else {
+        gsap
+          .timeline({
+            onComplete: () => setIsRendered(false),
+          })
+          .to(
+            modalEl,
+            {
+              opacity: 0,
+              scale: 0.98,
+              y: 8,
+              duration: 0.25,
+              ease: "power2.inOut",
+            },
+            0,
+          )
+          .to(closeEl, { opacity: 0, duration: 0.25, ease: "power1.out" }, 0)
+          .to(
+            backdropEl,
+            { opacity: 0, duration: 0.25, ease: "power1.out" },
+            0,
+          );
+      }
+    },
+    { dependencies: [isActive, isRendered] },
+  );
+
+  // Subtle hover / press affordance on the grid card
+  useGSAP(
+    () => {
+      const el = cardRef.current;
+      if (!el) return;
+
+      const onEnter = () =>
+        gsap.to(el, { scale: 1.02, duration: 0.2, ease: "power2.out" });
+      const onLeave = () =>
+        gsap.to(el, { scale: 1, duration: 0.2, ease: "power2.out" });
+      const onDown = () =>
+        gsap.to(el, { scale: 0.985, duration: 0.1, ease: "power2.out" });
+      const onUp = () =>
+        gsap.to(el, { scale: 1.02, duration: 0.15, ease: "power2.out" });
+
+      el.addEventListener("mouseenter", onEnter);
+      el.addEventListener("mouseleave", onLeave);
+      el.addEventListener("mousedown", onDown);
+      el.addEventListener("mouseup", onUp);
+
+      return () => {
+        el.removeEventListener("mouseenter", onEnter);
+        el.removeEventListener("mouseleave", onLeave);
+        el.removeEventListener("mousedown", onDown);
+        el.removeEventListener("mouseup", onUp);
+      };
+    },
+    { dependencies: [] },
+  );
 
   const renderPortal = () => {
     if (!isMounted || typeof document === "undefined") {
@@ -77,17 +187,16 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
     }
 
     return createPortal(
-      <AnimatePresence mode="wait">
-        {isActive && (
+      <>
+        {isRendered && (
           <div
-            className="fixed inset-0 z-[200] grid place-items-center bg-black/25 px-6 drop-shadow-card backdrop-blur-sm"
+            className="fixed inset-0 z-[200] grid place-items-center px-6 drop-shadow-card"
             onClick={(e) => e.stopPropagation()}
           >
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: { duration: 0.25 } }}
-              exit={{ opacity: 0, transition: { duration: 0.25 } }}
-              className="fixed inset-0"
+            {/* Backdrop */}
+            <div
+              ref={backdropRef}
+              className="fixed inset-0 bg-black/25 opacity-0 backdrop-blur-sm"
               onClick={(e) => {
                 e.stopPropagation();
                 handleCloseCard();
@@ -95,11 +204,9 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
             />
 
             {/* Close button */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: { duration: 0.25 } }}
-              exit={{ opacity: 0, transition: { duration: 0.25 } }}
-              className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full md:right-6 md:top-6"
+            <div
+              ref={closeButtonRef}
+              className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full opacity-0 md:right-6 md:top-6"
             >
               <IconButton
                 aria-label="Close Modal"
@@ -114,50 +221,33 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                   className="rounded-full text-customWhite transition-all duration-300 text-shadow-custom md:hover:text-customGold"
                 />
               </IconButton>
-            </motion.div>
+            </div>
 
             {/* Modal content */}
-            <motion.div
+            <div
               ref={containerRef}
               onClick={(e) => e.stopPropagation()}
-              initial={{ opacity: 0, scale: 0.75 }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                y: 0,
-                transition: { duration: 0.25, ease: "easeInOut" },
-              }}
-              exit={{
-                opacity: 0,
-                scale: 0.98,
-                y: 8,
-                transition: { duration: 0.25, ease: "easeInOut" },
-              }}
-              className={`relative flex h-fit max-h-[90dvh] w-full flex-col overflow-y-auto rounded-sm border border-customNavy/20 text-customNavy shadow-2xl ${isActive ? "border-customNavy" : "border-transparent"} bg-customWhite transition-all duration-300 sm:max-h-[95vh] sm:max-w-[450px]`}
+              className={`relative flex h-fit max-h-[90dvh] w-full flex-col overflow-y-auto rounded-sm border border-customNavy/20 text-customNavy opacity-0 shadow-2xl ${isActive ? "border-customNavy" : "border-transparent"} bg-customWhite transition-all duration-300 sm:max-h-[95vh] sm:max-w-[450px]`}
             >
               {event.is_photo ? (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1, transition: { duration: 0.2 } }}
-                  exit={{ opacity: 0, transition: { duration: 0.12 } }}
-                  className="flex-shrink-0 overflow-hidden border-b border-customNavy/20"
+                <div
+                  ref={mediaRef}
+                  className="flex-shrink-0 overflow-hidden border-b border-customNavy/20 opacity-0"
                 >
                   <Image
                     src={preloadedMedia?.src || event.image_url}
                     alt={event.title}
-                    width={475}
-                    height={475}
+                    width={700}
+                    height={700}
                     unoptimized
                     priority
                     className="h-auto w-full object-cover object-center"
                   />
-                </motion.div>
+                </div>
               ) : (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1, transition: { duration: 0.2 } }}
-                  exit={{ opacity: 0, transition: { duration: 0.12 } }}
-                  className="flex-shrink-0 overflow-hidden border-b border-customNavy/20"
+                <div
+                  ref={mediaRef}
+                  className="flex-shrink-0 overflow-hidden border-b border-customNavy/20 opacity-0"
                 >
                   <video
                     src={preloadedMedia?.src || event.image_url}
@@ -167,7 +257,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                     muted
                     playsInline
                   />
-                </motion.div>
+                </div>
               )}
 
               <div className="flex flex-col">
@@ -191,10 +281,10 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                   </AccordionItem>
                 </Accordion>
               </div>
-            </motion.div>
+            </div>
           </div>
         )}
-      </AnimatePresence>,
+      </>,
       document.body,
     );
   };
@@ -203,21 +293,25 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
     <>
       {renderPortal()}
 
-      <motion.div onClick={handleCardClick} className="h-full w-full">
+      <div
+        ref={cardRef}
+        onClick={handleCardClick}
+        className="h-full w-full will-change-transform"
+      >
         {event.is_photo ? (
           <div className="relative h-full w-full overflow-hidden">
             <Image
               src={event.image_url}
               alt={event.title}
               fill
-              sizes="100vw"
+              sizes="100%"
               unoptimized
               loading="lazy"
               className="object-cover object-center"
             />
           </div>
         ) : (
-          <div className="h-full w-full overflow-hidden">
+          <div className="relative h-full w-full overflow-hidden">
             <video
               src={event.image_url}
               className="h-full w-full object-cover object-center"
@@ -225,10 +319,12 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               autoPlay
               muted
               playsInline
+              width={700}
+              height={700}
             />
           </div>
         )}
-      </motion.div>
+      </div>
     </>
   );
 };
