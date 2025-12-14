@@ -1,3 +1,4 @@
+"use client";
 import { Event, PreloadedMedia } from "@/data/events";
 import EventCard from "@/components/event-card/EventCard";
 
@@ -28,7 +29,7 @@ export default function EventList({
                 eventRefs.current[idx] = el;
               }
             }}
-            className={`mx-auto w-full opacity-0`}
+            className={`mx-auto w-full`}
           >
             <EventCard
               key={idx}

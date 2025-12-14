@@ -43,7 +43,7 @@ const DashHeader: React.FC<DashProps> = ({ setActiveTab, activeTab }) => {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <IconButton className="p-0 text-customWhite">
-              <List size={32} weight="regular" />
+              <List size={32} weight="regular" className="text-customWhite" />
             </IconButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="font-funnelDisplay">
@@ -117,7 +117,7 @@ const DashHeader: React.FC<DashProps> = ({ setActiveTab, activeTab }) => {
       </div>
       <Link href="/" className="h-full text-black">
         <IconButton className="p-0 text-customWhite">
-          <HouseLine size={32} weight="regular" />
+          <HouseLine size={32} weight="regular" className="text-customWhite" />
         </IconButton>
       </Link>
     </div>

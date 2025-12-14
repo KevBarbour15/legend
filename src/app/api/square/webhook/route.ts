@@ -4,7 +4,7 @@ import { updateMenu } from "@/app/actions/updateMenu.server";
 export async function POST(request: NextRequest) {
   try {
     const payload = await request.json();
-    console.log("Received Square webhook event:", payload.type);
+    console.log("Received Square webhook event:", payload);
 
     const response = await updateMenu();
 

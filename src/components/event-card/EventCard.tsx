@@ -1,13 +1,15 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 
+import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { createPortal } from "react-dom";
+
 import { useOutsideClick } from "@/hooks/use-outside-click";
 
 import { X } from "@phosphor-icons/react";
 import { IconButton } from "@mui/material";
 
 import { EventCardProps } from "@/data/events";
-import { createPortal } from "react-dom";
 import { formatTime } from "@/utils/time";
 
 import {
@@ -23,6 +25,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
   const [isActive, setIsActive] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
   const formattedTime = formatTime(event.time);
   const formattedDate = new Date(event.date).toLocaleDateString("en-US", {
     timeZone: "UTC",
@@ -52,12 +55,14 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       }
     };
 
-    if (isActive) {
+    if (isActive && typeof window !== "undefined") {
       window.addEventListener("keydown", handleKeyDown);
     }
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("keydown", handleKeyDown);
+      }
     };
   }, [isActive, handleCloseCard]);
 
@@ -89,6 +94,8 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                 handleCloseCard();
               }}
             />
+
+            {/* Close button */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { duration: 0.25 } }}
@@ -110,6 +117,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               </IconButton>
             </motion.div>
 
+            {/* Modal content */}
             <motion.div
               ref={containerRef}
               onClick={(e) => e.stopPropagation()}

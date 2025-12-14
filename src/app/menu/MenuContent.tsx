@@ -223,34 +223,39 @@ const MenuContent: React.FC<MenuContentProps> = ({ menu }) => {
 
   const renderCannedBeerCategory = (category: CategoryWithItems) => (
     <Accordion type="single" collapsible className="w-full pl-4">
-      {category.childCategories.map((childCategory, index) => (
-        <AccordionItem
-          value={childCategory.id}
-          className={`${index !== category.childCategories.length - 1 ? "border-b-2 border-customGold" : ""}`}
-          key={childCategory.id}
-        >
-          <AccordionTrigger
-            className={`cursor-pointer font-bigola text-xl leading-none drop-shadow-text md:text-4xl ${
-              activeChildCategory === childCategory.id
-                ? "text-customGold"
-                : "text-customNavy"
-            }`}
-            icon={<ArrowBendRightDown weight="regular" />}
-            onClick={() => handleChildCategoryClick(childCategory.id)}
+      {category.childCategories
+        .filter(
+          (childCategory) =>
+            childCategory.items && childCategory.items.length > 0,
+        )
+        .map((childCategory, index, visibleChildren) => (
+          <AccordionItem
+            value={childCategory.id}
+            className={`${index !== visibleChildren.length - 1 ? "border-b-2 border-customGold" : ""}`}
+            key={childCategory.id}
           >
-            <h2
-              className={`transition-all duration-300 text-shadow-custom ${activeChildCategory === childCategory.id ? "translate-x-[15px] transform text-customGold" : "text-customNavy"}`}
+            <AccordionTrigger
+              className={`cursor-pointer font-bigola text-xl leading-none drop-shadow-text md:text-4xl ${
+                activeChildCategory === childCategory.id
+                  ? "text-customGold"
+                  : "text-customNavy"
+              }`}
+              icon={<ArrowBendRightDown weight="regular" />}
+              onClick={() => handleChildCategoryClick(childCategory.id)}
             >
-              {childCategory.name}
-            </h2>
-          </AccordionTrigger>
-          <AccordionContent className="border-customGold">
-            {childCategory.items.map((item, idx) =>
-              renderMenuItem(item, idx === childCategory.items.length - 1),
-            )}
-          </AccordionContent>
-        </AccordionItem>
-      ))}
+              <h2
+                className={`transition-all duration-300 text-shadow-custom ${activeChildCategory === childCategory.id ? "translate-x-[15px] transform text-customGold" : "text-customNavy"}`}
+              >
+                {childCategory.name}
+              </h2>
+            </AccordionTrigger>
+            <AccordionContent className="border-customGold">
+              {childCategory.items.map((item, idx) =>
+                renderMenuItem(item, idx === childCategory.items.length - 1),
+              )}
+            </AccordionContent>
+          </AccordionItem>
+        ))}
     </Accordion>
   );
 
@@ -276,8 +281,23 @@ const MenuContent: React.FC<MenuContentProps> = ({ menu }) => {
             </div>
             <Accordion type="single" collapsible className="z-[151] w-full">
               <div className="w-full opacity-0" id="menu">
-                {Object.entries(menu).map(
-                  ([categoryName, categoryContent], index) => (
+                {Object.entries(menu)
+                  .filter(([_, categoryContent]) => {
+                    if (Array.isArray(categoryContent)) {
+                      return categoryContent.length > 0;
+                    }
+                    const hasDirectItems =
+                      (categoryContent.items &&
+                        categoryContent.items.length > 0) ||
+                      false;
+                    const hasChildItems =
+                      categoryContent.childCategories &&
+                      categoryContent.childCategories.some(
+                        (child) => child.items && child.items.length > 0,
+                      );
+                    return hasDirectItems || !!hasChildItems;
+                  })
+                  .map(([categoryName, categoryContent], index) => (
                     <div className="w-full" key={index}>
                       <div
                         ref={(el) => {
@@ -310,28 +330,26 @@ const MenuContent: React.FC<MenuContentProps> = ({ menu }) => {
                           >
                             {categoryName === "Wine" && (
                               <div className="text-pretty py-3 text-center text-shadow-custom">
-                                <p className="font-bigola text-lg text-customNavy md:text-2xl">
-                                  Wine Down Wednesday
+                                <p className="font-bigola text-xl text-customNavy md:text-3xl">
+                                  Celebrating something?
                                 </p>
-                                <p className="font-hypatiaBold text-base text-customNavy md:text-lg">
-                                  All Day Wednesday: 3-10pm
-                                </p>
-                                <p className="font-hypatia text-base text-customNavy md:text-lg">
-                                  $2 off glasses and $5 off bottles.
+                                <p className="font-hypatia text-lg italic text-customNavy md:text-2xl">
+                                  Pop a bottle of Philippe Fontaine Brut
+                                  Tradition Champagne — $95
                                 </p>
                               </div>
                             )}
 
                             {categoryName === "Draft" && (
                               <div className="py-3 text-center text-customNavy text-shadow-custom">
-                                <p className="font-bigola text-lg text-customNavy md:text-2xl">
+                                <p className="font-bigola text-xl text-customNavy md:text-3xl">
                                   Happy Hour
                                 </p>
-                                <p className="font-hypatiaBold text-base text-customNavy md:text-lg">
+                                <p className="font-hypatiaBold text-lg text-customNavy md:text-2xl">
                                   {" "}
                                   Wednesday - Friday, 3 - 6pm
                                 </p>
-                                <p className="font-hypatia text-base text-customNavy md:text-lg">
+                                <p className="font-hypatia text-lg italic text-customNavy md:text-2xl">
                                   $2 off draft beers.
                                 </p>
                               </div>
@@ -355,8 +373,7 @@ const MenuContent: React.FC<MenuContentProps> = ({ menu }) => {
                         </AccordionItem>
                       </div>
                     </div>
-                  ),
-                )}
+                  ))}
               </div>
             </Accordion>
           </div>
