@@ -69,10 +69,10 @@ const MenuContent: React.FC<MenuContentProps> = ({ menu }) => {
       })
       .set(heading.chars, {
         opacity: 0,
-        y: -25,
+        y: -10,
       })
       .set("#menu-subheading", {
-        y: -25,
+        y: -10,
         opacity: 0,
       })
       .set(menuItemRefs.current, {
@@ -268,13 +268,13 @@ const MenuContent: React.FC<MenuContentProps> = ({ menu }) => {
             <div className="overflow-hidden">
               <h2
                 id="menu-heading"
-                className="mb-2 mt-3 font-bigola text-4xl italic text-customGold opacity-0 text-shadow-custom md:hidden"
+                className="mb-2 mt-4 font-bigola text-4xl text-customGold opacity-0 text-shadow-custom md:hidden"
               >
                 Menu
               </h2>
               <h3
                 id="menu-subheading"
-                className="mb-6 w-full font-hypatia text-lg leading-[1.15] text-customNavy opacity-0 text-shadow-custom md:text-center md:font-bigola md:text-3xl"
+                className="mb-4 w-full font-hypatia text-lg leading-[1.15] text-customNavy opacity-0 text-shadow-custom md:text-center md:font-bigola md:text-3xl"
               >
                 Stay up to date as our selections rotate!
               </h3>

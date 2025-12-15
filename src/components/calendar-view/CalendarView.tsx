@@ -77,7 +77,7 @@ export default function CalendarView({ events }: CalendarViewProps) {
         }}
         month={activeMonth}
         onMonthChange={(date) => date && setActiveMonth(date)}
-        className="border-0 border-neutral-400/20 p-0"
+        className="mt-2 border-0 border-neutral-400/20 p-0 md:mt-0"
         classNames={{
           months: "h-full",
           month: "flex h-full flex-col gap-4",
