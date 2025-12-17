@@ -11,6 +11,7 @@ import { IconButton } from "@mui/material";
 
 import { EventCardProps } from "@/data/events";
 import { formatTime } from "@/utils/time";
+import { parseEventDate } from "@/utils/date";
 
 import {
   Accordion,
@@ -32,9 +33,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
   const formattedTime = formatTime(event.time);
-  const formattedDate = new Date(event.date).toLocaleDateString("en-US", {
-    timeZone: "UTC",
-  });
+  const formattedDate = parseEventDate(event.date).toLocaleDateString("en-US");
 
   const handleCloseCard = useCallback(() => {
     setIsActive(false);
@@ -151,7 +150,6 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
     { dependencies: [isActive, isRendered] },
   );
 
-  // Subtle hover / press affordance on the grid card
   useGSAP(
     () => {
       const el = cardRef.current;

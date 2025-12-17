@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { DashEventCardProps, Event } from "@/data/events";
 
 import { formatTime } from "@/utils/time";
+import { parseEventDate } from "@/utils/date";
 
 import EditEventModal from "../edit-event-modal/EditEventModal";
 import DeleteEventModal from "../delete-event-modal/DeleteEventModal";
@@ -57,9 +58,7 @@ const DashEventCard: React.FC<DashEventCardProps> = ({
             </p>
 
             <p className="flex-shrink-0">
-              {new Date(event.date).toLocaleDateString("en-US", {
-                timeZone: "UTC",
-              })}
+              {parseEventDate(event.date).toLocaleDateString("en-US")}
             </p>
           </div>
         </AccordionTrigger>

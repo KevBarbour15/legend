@@ -6,6 +6,7 @@ import { Event } from "@/data/events";
 import { DayContentProps } from "react-day-picker";
 import { format } from "date-fns";
 import EventCard from "@/components/event-card/EventCard";
+import { parseEventDate } from "@/utils/date";
 interface CalendarViewProps {
   events: Event[];
 }
@@ -20,7 +21,7 @@ export default function CalendarView({ events }: CalendarViewProps) {
     (date: Date): Event[] => {
       const dateKey = format(date, "yyyy-MM-dd");
       return events.filter((event) => {
-        const eventDate = new Date(event.date);
+        const eventDate = parseEventDate(event.date);
         return format(eventDate, "yyyy-MM-dd") === dateKey;
       });
     },
