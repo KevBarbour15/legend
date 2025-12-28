@@ -14,8 +14,6 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
-import { useCart } from "@/hooks/useCart";
-
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
@@ -47,7 +45,6 @@ export default function Home() {
   useGSAP(() => {
     if (!containerRef.current) return;
 
-    // Clear any existing ScrollTrigger instances before creating new ones
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 
     tl.current = gsap.timeline({
@@ -109,14 +106,14 @@ export default function Home() {
       gsap.fromTo(
         section,
         {
-          y: 50,
           opacity: 0,
+          x: 25,
         },
         {
-          y: 0,
           opacity: 1,
+          x: 0,
           delay: 0.2,
-          duration: 0.5,
+          duration: 0.65,
           ease: "back.out(1.7)",
           scrollTrigger: {
             trigger: section,
@@ -139,7 +136,7 @@ export default function Home() {
         >
           <AudioStatic />
         </div>
-        <div className="top-bg h-[105vh] w-screen"></div>
+        <div className="top-bg h-[105vh] w-screen md:h-screen"></div>
         <div
           id="about-content"
           className="relative mx-auto block h-auto md:pl-[240px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
