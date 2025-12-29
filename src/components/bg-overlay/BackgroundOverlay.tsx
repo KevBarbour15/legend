@@ -13,7 +13,6 @@ const BackgroundOverlay: React.FC = () => {
       scale: 1,
       duration: 1,
       ease: "power2.inOut",
-      //rotateZ: 360,
       opacity: 1,
     });
   }, []);
