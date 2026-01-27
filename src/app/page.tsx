@@ -51,7 +51,7 @@ export default function Home() {
       scrollTrigger: {
         trigger: "#hidden-bg",
         start: "bottom bottom",
-        end: "75% top",
+        end: "bottom-=10 40%",
         scrub: true,
       },
     });

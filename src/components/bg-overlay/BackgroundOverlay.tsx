@@ -21,11 +21,16 @@ const BackgroundOverlay: React.FC = () => {
     <div
       ref={containerRef}
       id="background-overlay"
-      className="fixed inset-0 z-[-1] h-[115svh] w-screen overflow-hidden bg-cover bg-center md:h-screen"
-      style={{
-        backgroundImage: "url(/images/background.webp)",
-      }}
+      className="fixed inset-0 z-[-1] h-screen w-screen overflow-hidden bg-cover bg-center"
     >
+      <video
+        src="/images/Epik.mp4"
+        className="absolute inset-0 h-full w-full object-cover object-center brightness-[0.65] lg:brightness-90"
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
       <Image
         src="/images/alt-logo.png"
         id="alt-logo"
