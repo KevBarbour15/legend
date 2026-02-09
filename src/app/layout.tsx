@@ -124,6 +124,12 @@ export default function RootLayout({
             content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=5"
             name="viewport"
           />
+          <link
+            rel="preload"
+            href="/images/Epik-2.mp4"
+            as="video"
+            type="video/mp4"
+          />
         </head>
         <body className={inter.className} suppressHydrationWarning={true}>
           <CartProviderClient>
