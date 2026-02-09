@@ -46,13 +46,13 @@ export default function EventsContent({
 
     gsap.fromTo(
       containerRef.current,
-      { opacity: 0, y: 25 },
+      { opacity: 0, x: 10 },
       {
         opacity: 1,
-        y: 0,
-        duration: 0.5,
+        x: 0,
+        duration: 0.3,
         delay: 0.25,
-        ease: "bounce.out(1.7)",
+        ease: "linear",
       },
     );
   }, []);

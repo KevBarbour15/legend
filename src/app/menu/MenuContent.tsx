@@ -69,28 +69,24 @@ const MenuContent: React.FC<MenuContentProps> = ({ menu }) => {
       })
       .set(heading.chars, {
         opacity: 0,
-        y: -10,
       })
       .set("#menu-subheading", {
-        y: -10,
         opacity: 0,
       })
       .set(menuItemRefs.current, {
         opacity: 0,
-        y: 30,
+        x: 15,
       })
       .to(heading.chars, {
         duration: 0.35,
-        ease: "back.out(1.7)",
-        y: 0,
+        ease: "linear",
         opacity: 1,
         stagger: 0.015,
       })
       .to("#menu-subheading", {
-        y: 0,
         opacity: 1,
         duration: 0.5,
-        ease: "back.out(2.7)",
+        ease: "linear",
       })
       .to(
         "#menu",
@@ -103,12 +99,12 @@ const MenuContent: React.FC<MenuContentProps> = ({ menu }) => {
       .to(
         menuItemRefs.current,
         {
-          delay: 0.025,
-          y: 0,
-          duration: 0.3,
-          stagger: 0.075,
-          ease: "back.out(2.5)",
+          delay: 0.1,
+          duration: 0.25,
+          stagger: 0.05,
+          ease: "linear",
           opacity: 1,
+          x: 0,
         },
         "<",
       );

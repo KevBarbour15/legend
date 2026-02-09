@@ -19,7 +19,7 @@ const AudioStatic = () => {
         staticAnimation(staticBg);
       },
       onCompleteParams: [staticBg],
-      ease: "bounce.inOut",
+      ease: "none",
       duration: 0.0075,
     });
   };
