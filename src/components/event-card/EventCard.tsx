@@ -223,7 +223,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
             <div
               ref={containerRef}
               onClick={(e) => e.stopPropagation()}
-              className={`relative flex h-fit max-h-[90dvh] w-full flex-col overflow-y-auto rounded-sm border border-customNavy/20 text-customNavy opacity-0 shadow-2xl ${isActive ? "border-customNavy" : "border-transparent"} bg-customWhite transition-all duration-300 sm:max-h-[95vh] sm:max-w-[450px]`}
+              className={`relative flex h-fit max-h-[95dvh] w-full flex-col overflow-y-auto rounded-sm border border-customNavy/20 text-customNavy opacity-0 shadow-2xl ${isActive ? "border-customNavy" : "border-transparent"} bg-customWhite transition-all duration-300 sm:max-h-[95vh] sm:max-w-[450px]`}
             >
               {event.is_photo ? (
                 <div

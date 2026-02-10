@@ -484,6 +484,19 @@ body.menu-open {
   }
 }
 
+@keyframes spin-vinyl {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.vinyl-spin:hover svg {
+  animation: spin-vinyl 1s linear infinite;
+}
+
 @media screen and (max-width: 768px) {
   input,
   textarea,

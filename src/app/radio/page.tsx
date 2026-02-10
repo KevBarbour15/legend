@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import VideoCard from "@/components/video-card/VideoCard";
 
 import { FaPatreon } from "react-icons/fa6";
+import { VinylRecord } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -89,23 +90,17 @@ const Radio = () => {
       <AudioStatic />
       <div className="pt-16 md:pt-0" ref={containerRef}>
         <div className="mx-auto px-3 pt-3 md:pl-[240px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]">
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2">
-            {videos.map((video) => (
-              <div
-                key={video.title}
-                className="js-video-card h-full w-full opacity-0"
-              >
-                <VideoCard key={video.title} {...video} />
-              </div>
-            ))}
-          </div>
           <div
             ref={supportRef}
-            className="my-12 flex flex-col text-pretty font-hypatia text-lg leading-[1.5] text-customNavy opacity-0 drop-shadow-text"
+            className="mb-12 flex flex-col text-pretty font-hypatia text-lg leading-[1.5] text-customNavy opacity-0 drop-shadow-text"
           >
-            <p className="mb-3">
-              Consider becoming a paid subscriber to our Patreon.
-            </p>
+            <h1 className="mb-4 font-bigola text-4xl text-customGold lg:mb-8 lg:text-5xl">
+              Join Our Patreon
+            </h1>
+            <h2 className="mb-4">
+              Consider becoming a paid subscriber to our Patreon to support the
+              scene.
+            </h2>
             <p className="mb-8">
               Our city's music scene is more than just entertainment; it's
               culture, connection, and community. By subscribing to one of our
@@ -113,14 +108,24 @@ const Radio = () => {
               and creatives who keep Sacramento's soul alive through music and
               art.
             </p>
-            <p className="mb-3">Your contribution helps fund:</p>
-            <ul className="mb-10 list-disc text-balance pl-4">
-              <li>Fair pay for DJs and performers</li>
-              <li>Equipment upkeep and live recordings</li>
-              <li>Content creation that showcases our scene to the world</li>
-              <li>
-                A safe, inclusive space for people to gather, vibe, and grow
-              </li>
+            <p className="mb-3 font-bigola text-2xl">
+              Your contribution helps fund:
+            </p>
+            <ul className="mb-10 flex flex-col gap-2 text-balance">
+              {[
+                "Fair pay for DJs and performers",
+                "Equipment upkeep and live recordings",
+                "Content creation that showcases our scene to the world",
+                "A safe, inclusive space for people to gather, vibe, and grow",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <VinylRecord
+                    className="mt-[3px] shrink-0 text-customGold"
+                    size={20}
+                  />
+                  {item}
+                </li>
+              ))}
             </ul>
             <a
               href="https://www.patreon.com/legendhasit"
@@ -134,6 +139,16 @@ const Radio = () => {
                 <FaPatreon size={16} />
               </Button>
             </a>
+          </div>
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2">
+            {videos.map((video) => (
+              <div
+                key={video.title}
+                className="js-video-card h-full w-full opacity-0"
+              >
+                <VideoCard key={video.title} {...video} />
+              </div>
+            ))}
           </div>
         </div>
       </div>
