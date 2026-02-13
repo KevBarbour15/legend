@@ -21,28 +21,29 @@ export default function ProductCard({ product }: ProductContentProps) {
 
   return (
     <>
-      <Link href={`/product/${product?.handle}`}>
-        <div className="flex flex-col overflow-hidden rounded-sm border border-neutral-400/20 bg-customWhite/25 text-customNavy backdrop-blur-[2px] box-shadow-card">
-          {mainImage && (
-            <div className="relative aspect-square w-full overflow-hidden">
-              <Image
-                src={mainImage}
-                alt={product.images.nodes[0]?.altText || product.title}
-                className="h-full w-full object-cover"
-                width={700}
-                height={700}
-                priority
-              />
-            </div>
-          )}
-          <div className="p-3 font-bigola text-customNavy">
+      <div className="flex flex-col overflow-hidden rounded-sm border border-neutral-400/20 bg-customWhite/25 text-customNavy backdrop-blur-[2px] box-shadow-card">
+        {mainImage && (
+          <div className="relative aspect-square w-full overflow-hidden">
+            <Image
+              src={mainImage}
+              alt={product.images.nodes[0]?.altText || product.title}
+              className="h-full w-full object-cover"
+              width={700}
+              height={700}
+              priority
+            />
+          </div>
+        )}
+        <div className="flex flex-1 flex-col justify-between p-3 font-bigola text-customNavy">
+          <div className="mb-3 flex h-fit justify-between gap-3 lg:mb-6">
             <h3 className="mb-3 font-bigola text-2xl text-customNavy text-shadow-custom">
               {product.title}
             </h3>
             <p className="mb-3 font-hypatia text-lg text-customNavy text-shadow-custom">
               ${parseFloat(selectedVariant.price.amount).toFixed(2)}
             </p>
-
+          </div>
+          <div className="h-fit">
             <div className="flex items-center gap-3">
               <div className="flex flex-wrap gap-2">
                 {variants.map((variant) => {
@@ -56,11 +57,10 @@ export default function ProductCard({ product }: ProductContentProps) {
                       key={variant.id}
                       type="button"
                       disabled={isSoldOut}
-                      onClick={(e) => {
-                        e.preventDefault();
+                      onClick={() => {
                         setSelectedVariantId(variant.id);
                       }}
-                      className={`relative min-w-10 rounded-sm border border-customGold px-3 py-1 font-bigola text-xs transition-all duration-300 ease-in-out box-shadow-text ${isSelected ? "bg-customGold text-customWhite" : "bg-customWhite text-customNavy"} ${isSoldOut ? "cursor-not-allowed opacity-50" : "hover:bg-customNavy hover:text-white"} `}
+                      className={`relative min-w-10 rounded-sm border border-customNavy px-3 py-1 font-bigola text-xs transition-all duration-300 ease-in-out box-shadow-text ${isSelected ? "bg-customGold text-customWhite" : "bg-customWhite text-customNavy"} ${isSoldOut ? "cursor-not-allowed opacity-50" : "hover:bg-customNavy hover:text-white"} `}
                     >
                       {sizeLabel}
                       {isSoldOut && (
@@ -81,8 +81,7 @@ export default function ProductCard({ product }: ProductContentProps) {
             {selectedVariant && selectedVariant.availableForSale && (
               <Button
                 className="mx-auto mt-4 w-full rounded-sm border border-customNavy/20 bg-customNavy font-bigola text-customWhite transition-all duration-300 ease-in-out box-shadow-text md:hover:bg-customWhite md:hover:text-customNavy md:active:bg-customGold"
-                onClick={(e) => {
-                  e.preventDefault();
+                onClick={() => {
                   addToCart(
                     {
                       variantId: selectedVariant.id,
@@ -108,7 +107,7 @@ export default function ProductCard({ product }: ProductContentProps) {
             </Link>
           </div>
         </div>
-      </Link>
+      </div>
 
       <AddToCartModal
         open={open}

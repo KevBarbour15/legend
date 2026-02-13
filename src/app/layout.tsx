@@ -5,6 +5,7 @@ import MusicPlayer from "@/components/music-player/MusicPlayer";
 import MobileHeader from "@/components/mobile-header/MobileHeader";
 import SubscribeModal from "@/components/subscribe-modal/SubscribeModal";
 import CartProviderClient from "@/components/CartProviderClient";
+import DesktopCartIcon from "@/components/desktop-cart-icon/DesktopCartIcon";
 
 import "./globals.css";
 
@@ -134,6 +135,7 @@ export default function RootLayout({
         <body className={inter.className} suppressHydrationWarning={true}>
           <CartProviderClient>
             <MobileHeader />
+            <DesktopCartIcon />
             <SubscribeModal />
             <Toaster />
             <BackgroundOverlay />

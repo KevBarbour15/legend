@@ -120,7 +120,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
 
   const handleVariantChange = (variantId: string) => {
     setSelectedVariantId(variantId);
-    setQuantity(1); // Reset quantity when variant changes
+    setQuantity(1);
   };
 
   return (
@@ -191,7 +191,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
                           type="button"
                           disabled={isSoldOut}
                           onClick={() => handleVariantChange(variant.id)}
-                          className={`relative min-w-10 rounded-sm border border-customGold px-3 py-1 font-bigola text-xs transition-all duration-300 ease-in-out box-shadow-card ${isSelected ? "bg-customGold text-customWhite" : "text-customNavy backdrop-blur-[1px]"} ${isSoldOut ? "cursor-not-allowed opacity-50" : "hover:bg-customNavy hover:text-white"}`}
+                          className={`relative min-w-10 rounded-sm border border-customNavy px-3 py-1 font-bigola text-xs transition-all duration-300 ease-in-out box-shadow-card ${isSelected ? "bg-customGold text-customWhite" : "text-customNavy backdrop-blur-[1px]"} ${isSoldOut ? "cursor-not-allowed opacity-50" : "hover:bg-customNavy hover:text-white"}`}
                         >
                           {sizeLabel}
                           {isSoldOut && (

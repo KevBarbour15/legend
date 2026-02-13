@@ -118,7 +118,7 @@ export async function getAllProductsWithVariants() {
   unstable_noStore();
   const query = `
     query GetProductsWithVariants($first: Int!) {
-      products(first: $first) {
+      products(first: $first, sortKey: CREATED_AT, reverse: true) {
         nodes {
           id
           title
