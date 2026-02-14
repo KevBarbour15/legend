@@ -22,15 +22,15 @@ function Calendar({
       classNames={{
         months: "flex flex-col sm:flex-row space-y-3 sm:space-x-3 sm:space-y-0",
         month: "space-y-3",
-        caption: "flex justify-center pt-1 relative items-center",
-        caption_label: "font-medium text-lg",
-        nav: "space-x-1 flex items-center",
+        caption: "flex justify-center pt-1 relative items-center md:justify-start md:gap-3",
+        caption_label: "font-medium text-lg md:order-1",
+        nav: "space-x-1 flex items-center md:contents",
         nav_button: cn(
           buttonVariants({ variant: "outline" }),
           "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100",
         ),
-        nav_button_previous: "absolute left-1",
-        nav_button_next: "absolute right-1",
+        nav_button_previous: "absolute left-1 md:static md:order-0",
+        nav_button_next: "absolute right-1 md:static md:order-2",
         table: "w-full border-collapse space-y-1",
         head_row: "flex",
         head_cell:

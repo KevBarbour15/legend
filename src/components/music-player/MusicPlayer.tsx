@@ -231,7 +231,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
         <div className="w-full md:w-fit">
           <div className="buttons-container z-[11] flex justify-between rounded-sm bg-opacity-5 py-2 md:gap-0.5 md:bg-opacity-0 md:py-1">
             <button
-              className={`player-button p-1 ${buttonColor} rounded-full border border-neutral-400/20 bg-neutral-300/15 shadow-sm backdrop-blur-[1px] md:shadow-md`}
+              className={`player-button p-1 ${buttonColor} rounded-full border border-neutral-400/20 bg-neutral-300/15 shadow-sm backdrop-blur-sm md:shadow-md`}
               aria-label={mute ? "Unmute" : "Mute"}
             >
               {mute ? (
@@ -254,7 +254,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             </button>
             <button
               onClick={handlePreviousTrack}
-              className={`player-button p-1 ${buttonColor} rounded-full border border-neutral-400/20 bg-neutral-300/15 p-1 shadow-sm backdrop-blur-[1px] md:shadow-md`}
+              className={`player-button p-1 ${buttonColor} rounded-full border border-neutral-400/20 bg-neutral-300/15 p-1 shadow-sm backdrop-blur-sm md:shadow-md`}
               aria-label="Previous track"
             >
               <SkipBack
@@ -267,7 +267,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
 
             <button
               onClick={handlePlayPauseRounded}
-              className={`player-button p-1 ${buttonColor} rounded-full border border-neutral-400/20 bg-neutral-300/15 p-1 shadow-sm backdrop-blur-[1px] md:shadow-md`}
+              className={`player-button p-1 ${buttonColor} rounded-full border border-neutral-400/20 bg-neutral-300/15 p-1 shadow-sm backdrop-blur-sm md:shadow-md`}
               aria-label={playing ? "Pause" : "Play"}
             >
               {playing ? (
@@ -288,7 +288,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             </button>
             <button
               onClick={handleNextTrack}
-              className={`player-button p-1 ${buttonColor} rounded-full border border-neutral-400/20 bg-neutral-300/15 p-1 shadow-sm backdrop-blur-[1px] md:shadow-md`}
+              className={`player-button p-1 ${buttonColor} rounded-full border border-neutral-400/20 bg-neutral-300/15 p-1 shadow-sm backdrop-blur-sm md:shadow-md`}
               aria-label="Next track"
             >
               <SkipForward
@@ -300,7 +300,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ tracks }) => {
             </button>
             <button
               onClick={togglePlaylist}
-              className={`player-button transform p-1 ${buttonColor} rounded-full border border-neutral-400/20 bg-neutral-300/15 p-1 shadow-sm backdrop-blur-[1px] md:shadow-md`}
+              className={`player-button transform p-1 ${buttonColor} rounded-full border border-neutral-400/20 bg-neutral-300/15 p-1 shadow-sm backdrop-blur-sm md:shadow-md`}
               aria-label={playlistVisible ? "Close playlist" : "Open playlist"}
               aria-expanded={playlistVisible}
             >

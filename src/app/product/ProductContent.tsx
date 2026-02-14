@@ -191,7 +191,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
                           type="button"
                           disabled={isSoldOut}
                           onClick={() => handleVariantChange(variant.id)}
-                          className={`relative min-w-10 rounded-sm border border-customNavy px-3 py-1 font-bigola text-xs transition-all duration-300 ease-in-out box-shadow-card ${isSelected ? "bg-customGold text-customWhite" : "text-customNavy backdrop-blur-[1px]"} ${isSoldOut ? "cursor-not-allowed opacity-50" : "hover:bg-customNavy hover:text-white"}`}
+                          className={`relative min-w-10 rounded-sm border border-customNavy px-3 py-1 font-bigola text-xs transition-all duration-300 ease-in-out box-shadow-card ${isSelected ? "bg-customGold text-customWhite" : "text-customNavy backdrop-blur-sm"} ${isSoldOut ? "cursor-not-allowed opacity-50" : "hover:bg-customNavy hover:text-white"}`}
                         >
                           {sizeLabel}
                           {isSoldOut && (
@@ -213,7 +213,7 @@ const ProductContent = ({ product }: ProductContentProps) => {
               {selectedVariant && selectedVariant.availableForSale && (
                 <div ref={actionsRef} className="opacity-0">
                   <div className="mt-4 flex items-center gap-3">
-                    <div className="flex items-center rounded-sm border border-customGold backdrop-blur-[1px] box-shadow-card">
+                    <div className="flex items-center rounded-sm border border-customGold backdrop-blur-sm box-shadow-card">
                       <button
                         type="button"
                         onClick={() => handleQuantityChange(quantity - 1)}

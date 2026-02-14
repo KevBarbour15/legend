@@ -83,7 +83,7 @@ export default function CalendarView({ events }: CalendarViewProps) {
           months: "h-full",
           month: "flex h-full flex-col gap-4",
           table:
-            "min-h-[60vh] md:min-h-[75vh] h-full w-auto border-l border-t bg-neutral-300/15 backdrop-blur-[1px] box-shadow-card",
+            "min-h-[60vh] md:min-h-[75vh] h-full w-auto border-l border-t bg-neutral-300/15 backdrop-blur-sm box-shadow-card",
           head_row: "grid grid-cols-7 border-b",
           row: "mt-0 grid grid-cols-7 h-[16.6667%]",
           head_cell:
@@ -92,7 +92,7 @@ export default function CalendarView({ events }: CalendarViewProps) {
           day: "flex h-full w-full items-center",
           caption_label: "text-3xl text-shadow-custom text-customNavy",
           nav_button:
-            "p-2 rounded-full border border bg-neutral-300/15 backdrop-blur-[1px] box-shadow-card lg:hover:bg-customGold lg:hover:border-customNavy transition-all duration-300",
+            "p-2 rounded-full border border bg-neutral-300/15 backdrop-blur-sm box-shadow-card lg:hover:bg-customGold lg:hover:border-customNavy transition-all duration-300",
         }}
         components={{
           DayContent: renderDayContent,
