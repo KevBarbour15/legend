@@ -8,10 +8,8 @@ import { useGSAP } from "@gsap/react";
 
 import { generateProgress } from "@/utils/progress";
 
-import DashEventCard from "@/components/dash-event-card/DashEventCard";
+import EventsTable from "@/components/dash-events/EventsTable";
 import Loading from "@/components/loading/Loading";
-
-import { Accordion } from "@/components/ui/accordion";
 
 const UpcomingEventsList: React.FC = () => {
   const [events, setEvents] = useState<Event[]>([]);
@@ -84,22 +82,8 @@ const UpcomingEventsList: React.FC = () => {
           <h2 className="mb-6 text-3xl md:text-4xl">No events found.</h2>
         </div>
       ) : (
-        <div>
-          <Accordion
-            type="single"
-            collapsible
-            className="w-full border-b-2 border-black"
-          >
-            {events.map((event, index) => (
-              <div key={event._id}>
-                <DashEventCard
-                  event={event}
-                  index={index}
-                  fetchEvents={fetchEvents}
-                />
-              </div>
-            ))}
-          </Accordion>
+        <div className="rounded-md border border-stone-200 bg-white">
+          <EventsTable events={events} fetchEvents={fetchEvents} />
         </div>
       )}
     </div>

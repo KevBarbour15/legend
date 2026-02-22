@@ -8,10 +8,8 @@ import { useGSAP } from "@gsap/react";
 
 import { generateProgress } from "@/utils/progress";
 
-import MessageCard from "@/components/message-card/MessageCard";
+import MessagesTable from "@/components/messages/MessagesTable";
 import Loading from "@/components/loading/Loading";
-
-import { Accordion } from "@/components/ui/accordion";
 
 const ReadMessagesList: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -99,22 +97,11 @@ const ReadMessagesList: React.FC = () => {
           <h2 className="mb-6 text-3xl md:text-4xl">No messages found.</h2>
         </div>
       ) : (
-        <div>
-          <Accordion
-            type="single"
-            collapsible
-            className="w-full border-b-2 border-black"
-          >
-            {readMessages.map((message, index) => (
-              <div key={index}>
-                <MessageCard
-                  message={message}
-                  index={index}
-                  fetchMessages={fetchMessages}
-                />
-              </div>
-            ))}
-          </Accordion>
+        <div className="rounded-md border border-stone-200 bg-white">
+          <MessagesTable
+            messages={readMessages}
+            fetchMessages={fetchMessages}
+          />
         </div>
       )}
     </div>

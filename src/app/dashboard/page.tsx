@@ -1,17 +1,24 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
 
-import DashHeader from "@/components/dash-header/DashHeader";
+import { useState, useCallback } from "react";
+import Link from "next/link";
+import DashboardSidebar, {
+  DashboardSidebarTrigger,
+} from "@/components/dashboard-sidebar/DashboardSidebar";
 import CreateEvent from "@/components/create-event/CreateEvent";
-
 import UnreadMessagesList from "@/components/messages/UnreadMessages";
 import ReadMessagesList from "@/components/messages/ReadMessages";
 import UpcomingEventsList from "@/components/dash-events/UpcomingEvents";
 import PastEventsList from "@/components/dash-events/PastEvents";
 import MenuCategories from "@/components/menu-categories/MenuCategories";
 import JobApplicationsList from "@/components/job-applications/JobApplicationsList";
+import { HouseLine } from "@phosphor-icons/react";
 
-const DefaultComponent: React.FC = () => <div>No component selected</div>;
+const DefaultComponent: React.FC = () => (
+  <div className="flex min-h-[50vh] items-center justify-center text-stone-500">
+    Select a section from the sidebar
+  </div>
+);
 
 CreateEvent.displayName = "CreateEvent";
 UpcomingEventsList.displayName = "UpcomingEventsList";
@@ -23,13 +30,10 @@ DefaultComponent.displayName = "DefaultComponent";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState<string>("Create Event");
-  const [headerHeight, setHeaderHeight] = useState<number>(0);
-  const headerRef = useRef<HTMLDivElement>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  useEffect(() => {
-    if (headerRef.current) {
-      setHeaderHeight(headerRef.current.offsetHeight);
-    }
+  const handleNav = useCallback(() => {
+    setSidebarOpen(false);
   }, []);
 
   let CurrentComponent: React.ComponentType<any>;
@@ -60,16 +64,39 @@ export default function Dashboard() {
   }
 
   return (
-    <div
-      className="h-auto min-h-screen w-full bg-customWhite font-funnelDisplay"
-      style={{ paddingTop: `${headerHeight}px` }}
-    >
-      <header ref={headerRef} className="fixed top-0 z-50 w-full bg-black py-3">
-        <DashHeader setActiveTab={setActiveTab} activeTab={activeTab} />
-      </header>
+    <div className="flex min-h-screen bg-stone-100 font-funnelDisplay">
+      <DashboardSidebar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        onNavigate={handleNav}
+        mobileOpen={sidebarOpen}
+        onMobileClose={() => setSidebarOpen(false)}
+      />
 
-      <div className="container overflow-y-scroll py-3">
-        <CurrentComponent />
+      <div className="flex min-h-screen flex-1 flex-col lg:pl-[260px]">
+        {/* Top bar */}
+        <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-stone-200 bg-white px-4 shadow-sm">
+          <DashboardSidebarTrigger onClick={() => setSidebarOpen(true)} />
+          <div className="flex flex-1 items-center justify-between gap-4">
+            <h1 className="truncate font-funnelDisplay text-lg font-semibold text-stone-800">
+              {activeTab}
+            </h1>
+            <Link
+              href="/"
+              className="hidden items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium text-stone-600 hover:bg-stone-100 hover:text-stone-900 sm:flex"
+            >
+              <HouseLine size={18} weight="regular" />
+              Back to site
+            </Link>
+          </div>
+        </header>
+
+        {/* Main content */}
+        <main className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8">
+          <div className="mx-auto max-w-4xl">
+            <CurrentComponent />
+          </div>
+        </main>
       </div>
     </div>
   );

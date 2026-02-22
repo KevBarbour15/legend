@@ -5,8 +5,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { generateProgress } from "@/utils/progress";
 import Loading from "@/components/loading/Loading";
-import { Accordion } from "@/components/ui/accordion";
-import JobApplicationCard from "./JobApplicationCard";
+import JobApplicationsTable from "./JobApplicationsTable";
 import type { JobApplicationListItem } from "@/data/jobApplication";
 
 const JobApplicationsList: React.FC = () => {
@@ -78,19 +77,9 @@ const JobApplicationsList: React.FC = () => {
           <h2 className="mb-6 text-3xl md:text-4xl">No applications yet.</h2>
         </div>
       ) : (
-        <Accordion
-          type="single"
-          collapsible
-          className="w-full border-b-2 border-black"
-        >
-          {applications.map((application, index) => (
-            <JobApplicationCard
-              key={application._id}
-              application={application}
-              index={index}
-            />
-          ))}
-        </Accordion>
+        <div className="rounded-md border border-stone-200 bg-white">
+          <JobApplicationsTable applications={applications} />
+        </div>
       )}
     </div>
   );
