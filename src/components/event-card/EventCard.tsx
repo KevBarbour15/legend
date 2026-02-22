@@ -258,7 +258,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               )}
 
               <div className="flex flex-col">
-                <div className="flex w-full flex-row justify-between px-3 py-4 font-bigola text-lg md:leading-[1.15]">
+                <div className="flex w-full flex-row justify-between px-3 py-4 font-bigola text-lg md:leading-[1.25]">
                   <p>{formattedDate}</p>
                   <p>{formattedTime}</p>
                 </div>
@@ -271,7 +271,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                       </h1>
                     </AccordionTrigger>
                     <AccordionContent className="border-t border-customGold/50 p-3">
-                      <p className="whitespace-pre-wrap pb-3 font-hypatia text-base leading-none md:text-lg md:leading-[1.15] lg:text-xl">
+                      <p className="whitespace-pre-wrap pb-3 font-hypatia text-base leading-none md:text-lg md:leading-[1.25] lg:text-xl">
                         {event.description}
                       </p>
                     </AccordionContent>

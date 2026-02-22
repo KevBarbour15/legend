@@ -270,7 +270,7 @@ const MenuContent: React.FC<MenuContentProps> = ({ menu }) => {
               </h2>
               <h3
                 id="menu-subheading"
-                className="mb-4 w-full font-hypatia text-lg leading-[1.15] text-customNavy opacity-0 text-shadow-custom md:text-center md:font-bigola md:text-3xl"
+                className="mb-4 w-full font-hypatia text-lg leading-[1.25] text-customNavy opacity-0 text-shadow-custom md:text-center md:font-bigola md:text-3xl"
               >
                 Stay up to date as our selections rotate!
               </h3>

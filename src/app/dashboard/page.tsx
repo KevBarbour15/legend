@@ -9,6 +9,7 @@ import ReadMessagesList from "@/components/messages/ReadMessages";
 import UpcomingEventsList from "@/components/dash-events/UpcomingEvents";
 import PastEventsList from "@/components/dash-events/PastEvents";
 import MenuCategories from "@/components/menu-categories/MenuCategories";
+import JobApplicationsList from "@/components/job-applications/JobApplicationsList";
 
 const DefaultComponent: React.FC = () => <div>No component selected</div>;
 
@@ -17,6 +18,7 @@ UpcomingEventsList.displayName = "UpcomingEventsList";
 PastEventsList.displayName = "PastEventsList";
 UnreadMessagesList.displayName = "MessagesList";
 MenuCategories.displayName = "MenuCategories";
+JobApplicationsList.displayName = "JobApplicationsList";
 DefaultComponent.displayName = "DefaultComponent";
 
 export default function Dashboard() {
@@ -49,6 +51,9 @@ export default function Dashboard() {
       break;
     case "Menu Categories":
       CurrentComponent = MenuCategories;
+      break;
+    case "Job Applications":
+      CurrentComponent = JobApplicationsList;
       break;
     default:
       CurrentComponent = DefaultComponent;

@@ -144,7 +144,7 @@ export default function Contact() {
             </h2>
             <h3
               id="menu-subheading"
-              className="mb-4 w-full font-hypatia text-lg leading-[1.15] text-customNavy opacity-0 text-shadow-custom md:mb-6 md:text-center md:font-bigola md:text-3xl"
+              className="mb-4 w-full font-hypatia text-lg leading-[1.25] text-customNavy opacity-0 text-shadow-custom md:mb-6 md:text-center md:font-bigola md:text-3xl"
             >
               Sound Off - Say Hello!
             </h3>
@@ -155,7 +155,7 @@ export default function Contact() {
             onValueChange={(value) => setActiveTab(value as FormType)}
             id="tabs-container"
           >
-            <TabsList className="mb-6 grid w-full grid-cols-3 border-t-2 border-customGold font-bigola lg:w-[650px]">
+            <TabsList className="mb-6 grid w-full grid-cols-3 border-t-2 border-customGold font-bigola lg:w-[720px]">
               <TabsTrigger value="event" className="mt-3 border-customNavy/20">
                 Event <span className="md:flex">&nbsp;Inquiry</span>
               </TabsTrigger>

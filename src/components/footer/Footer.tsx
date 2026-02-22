@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import Link from "next/link";
 import { Copyright, Phone, Key } from "@phosphor-icons/react";
 
 import { FaYelp, FaYoutube, FaFacebook, FaSpotify } from "react-icons/fa";
@@ -94,6 +94,53 @@ const Footer = () => {
             </a>
           </div>
         </div>
+        <nav
+          className="text-md mb-4 mt-6 flex flex-wrap justify-center gap-x-6 gap-y-3 font-bigola text-customNavy md:justify-start"
+          aria-label="Footer navigation"
+        >
+          <Link
+            href="/"
+            className="transition-all duration-300 active:text-customGold md:hover:text-customGold"
+          >
+            Home
+          </Link>
+          <Link
+            href="/menu"
+            className="transition-all duration-300 active:text-customGold md:hover:text-customGold"
+          >
+            Menu
+          </Link>
+          <Link
+            href="/shop"
+            className="transition-all duration-300 active:text-customGold md:hover:text-customGold"
+          >
+            Shop
+          </Link>
+          <Link
+            href="/events"
+            className="transition-all duration-300 active:text-customGold md:hover:text-customGold"
+          >
+            Events
+          </Link>
+          <Link
+            href="/radio"
+            className="transition-all duration-300 active:text-customGold md:hover:text-customGold"
+          >
+            Radio
+          </Link>
+          <Link
+            href="/contact"
+            className="transition-all duration-300 active:text-customGold md:hover:text-customGold"
+          >
+            Contact
+          </Link>
+          <Link
+            href="/jobs"
+            className="transition-all duration-300 active:text-customGold md:hover:text-customGold"
+          >
+            Join The Team
+          </Link>
+        </nav>
         <div className="mb-16 mt-6 flex w-full justify-between font-bigola text-sm text-customNavy md:mb-0">
           <div>
             <a

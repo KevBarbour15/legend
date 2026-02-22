@@ -153,7 +153,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="text-pretty px-3 font-hypatia text-lg leading-[1.15] text-customNavy md:px-0 md:text-xl">
+          <div className="text-pretty px-3 font-hypatia text-lg leading-[1.25] text-customNavy md:px-0 md:text-xl">
             <p className="about-section my-6 opacity-0 text-shadow-custom">
               Welcome to <span className="font-bigola">Legend Has It</span>,
               Sacramento's first hi-fi listening bar, where music meets the art

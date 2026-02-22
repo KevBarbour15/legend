@@ -23,6 +23,7 @@ import {
   CalendarDots,
   CalendarCheck,
   List,
+  Briefcase,
 } from "@phosphor-icons/react";
 
 interface DashProps {
@@ -102,6 +103,16 @@ const DashHeader: React.FC<DashProps> = ({ setActiveTab, activeTab }) => {
                 weight="regular"
               />
               Menu Categories
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => handleMenuItemClick("Job Applications")}
+            >
+              <Briefcase
+                className="mr-3 md:mr-6"
+                size={32}
+                weight="regular"
+              />
+              Job Applications
             </DropdownMenuItem>
             <LogoutLink postLogoutRedirectURL={postLogoutRedirectURL}>
               <DropdownMenuItem>

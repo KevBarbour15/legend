@@ -64,9 +64,9 @@ const GeneralForm = forwardRef<GeneralFormRef, GeneralFormProps>(
           ref={formRef}
           id="general-form"
           onSubmit={form.handleSubmit(onSubmit)}
-          className="mx-auto flex w-full flex-col space-y-3 opacity-0 lg:w-[650px]"
+          className="mx-auto flex w-full flex-col space-y-3 opacity-0 lg:w-[720px]"
         >
-          <p className="mb-6 text-pretty font-hypatia text-xl leading-[1.15] text-customNavy text-shadow-custom">
+          <p className="mb-6 text-pretty font-hypatia text-xl leading-[1.25] text-customNavy text-shadow-custom">
             Thank you for reaching out to{" "}
             <span className="font-bigola">Legend Has It</span>. Please take a
             minute and fill out the form below to give us a better understanding
