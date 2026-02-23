@@ -112,7 +112,11 @@ export default function MessageDetailContent({
             />
           )}
           {message.phone && (
-            <DetailField label="Phone" value={message.phone} />
+            <DetailField
+              label="Phone"
+              value={message.phone}
+              href={`tel:${message.phone}`}
+            />
           )}
         </DetailSection>
 

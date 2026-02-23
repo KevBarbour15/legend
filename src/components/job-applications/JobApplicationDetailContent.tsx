@@ -109,7 +109,11 @@ export default function JobApplicationDetailContent({
           value={application.email}
           href={`mailto:${application.email}`}
         />
-        <DetailField label="Phone" value={application.phone} />
+        <DetailField
+          label="Phone"
+          value={application.phone}
+          href={application.phone ? `tel:${application.phone}` : undefined}
+        />
         <DetailField
           label="Start"
           value={getHowSoonLabel(application.howSoonStart)}
