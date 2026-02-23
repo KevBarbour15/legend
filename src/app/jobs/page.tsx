@@ -110,11 +110,11 @@ const Jobs = () => {
               id="jobs-heading"
               className="mb-2 mt-3 font-bigola text-4xl text-customGold opacity-0 text-shadow-custom md:hidden"
             >
-              Jobs
+              Join The Team
             </h2>
             <h3
               id="jobs-subheading"
-              className="mb-4 w-full font-hypatia text-lg leading-[1.25] text-customNavy opacity-0 text-shadow-custom md:mb-6 md:text-center md:font-bigola md:text-3xl"
+              className="mb-4 hidden w-full font-hypatia text-lg leading-[1.25] text-customNavy opacity-0 text-shadow-custom md:mb-6 md:block md:text-center md:font-bigola md:text-3xl"
             >
               Join the team at Legend Has It
             </h3>
