@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   DetailCard,
   DetailSection,
@@ -7,6 +8,8 @@ import {
   DetailBody,
 } from "@/components/dashboard-detail/DetailCard";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 import {
   howSoonStartOptions,
   type JobApplicationListItem,
@@ -14,6 +17,10 @@ import {
 
 interface JobApplicationDetailContentProps {
   application: JobApplicationListItem;
+  onApplicationUpdate?: (
+    id: string,
+    patch: { viewed?: boolean; contacted?: boolean }
+  ) => void;
 }
 
 export function getHowSoonLabel(value: string): string {
@@ -23,12 +30,78 @@ export function getHowSoonLabel(value: string): string {
 
 export default function JobApplicationDetailContent({
   application,
+  onApplicationUpdate,
 }: JobApplicationDetailContentProps) {
   const name = `${application.firstName} ${application.lastName}`.trim();
   const resumeUrl = `/api/job-application/${application._id}/resume`;
+  const [viewed, setViewed] = useState(application.viewed ?? false);
+  const [contacted, setContacted] = useState(application.contacted ?? false);
+
+  const handleViewedChange = async (checked: boolean) => {
+    try {
+      const res = await fetch(`/api/job-application/${application._id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ viewed: checked }),
+      });
+      if (res.ok) {
+        setViewed(checked);
+        onApplicationUpdate?.(application._id, { viewed: checked });
+      }
+    } catch {
+      // revert on error
+      setViewed(!checked);
+    }
+  };
+
+  const handleContactedChange = async (checked: boolean) => {
+    try {
+      const res = await fetch(`/api/job-application/${application._id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contacted: checked }),
+      });
+      if (res.ok) {
+        setContacted(checked);
+        onApplicationUpdate?.(application._id, { contacted: checked });
+      }
+    } catch {
+      setContacted(!checked);
+    }
+  };
 
   return (
     <DetailCard>
+      <DetailSection title="Status">
+        <div className="flex flex-wrap items-center gap-6 py-2 sm:py-1.5">
+          <div className="flex items-center gap-2">
+            <Switch
+              id={`viewed-${application._id}`}
+              checked={viewed}
+              onCheckedChange={handleViewedChange}
+            />
+            <Label
+              htmlFor={`viewed-${application._id}`}
+              className="text-sm font-medium text-stone-700"
+            >
+              Viewed
+            </Label>
+          </div>
+          <div className="flex items-center gap-2">
+            <Switch
+              id={`contacted-${application._id}`}
+              checked={contacted}
+              onCheckedChange={handleContactedChange}
+            />
+            <Label
+              htmlFor={`contacted-${application._id}`}
+              className="text-sm font-medium text-stone-700"
+            >
+              Contacted
+            </Label>
+          </div>
+        </div>
+      </DetailSection>
       <DetailSection title="Contact">
         <DetailField label="Name" value={name || "—"} />
         <DetailField
@@ -44,11 +117,7 @@ export default function JobApplicationDetailContent({
         <div className="flex flex-col gap-0.5 py-2 sm:flex-row sm:items-center sm:gap-3 sm:py-1.5">
           <span className="min-w-[100px] text-sm text-stone-500">Resume</span>
           <Button variant="outline" size="sm" asChild>
-            <a
-              href={resumeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={resumeUrl} target="_blank" rel="noopener noreferrer">
               View resume
             </a>
           </Button>

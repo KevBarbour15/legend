@@ -10,6 +10,9 @@ import { generateProgress } from "@/utils/progress";
 
 import MessagesTable from "@/components/messages/MessagesTable";
 import Loading from "@/components/loading/Loading";
+import DashboardEmptyState from "@/components/dashboard-detail/DashboardEmptyState";
+import DashboardErrorState from "@/components/dashboard-detail/DashboardErrorState";
+import { Envelope } from "@phosphor-icons/react";
 
 const UnreadMessagesList: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -86,13 +89,16 @@ const UnreadMessagesList: React.FC = () => {
           borderColor="border-black"
         />
       ) : error ? (
-        <div className="flex h-[50vh] w-full flex-col items-center justify-center">
-          <h2 className="mb-6 text-3xl md:text-4xl">{error.message}</h2>
-        </div>
-      ) : !loading && unreadMessages.length === 0 ? (
-        <div className="flex h-[50vh] w-full flex-col items-center justify-center">
-          <h2 className="mb-6 text-3xl md:text-4xl">No messages found.</h2>
-        </div>
+        <DashboardErrorState
+          message={error.message}
+          onRetry={fetchMessages}
+        />
+      ) : unreadMessages.length === 0 ? (
+        <DashboardEmptyState
+          message="No unread messages"
+          description="New contact form submissions will appear here."
+          icon={<Envelope weight="duotone" />}
+        />
       ) : (
         <div className="rounded-md border border-stone-200 bg-white">
           <MessagesTable

@@ -10,6 +10,9 @@ import { generateProgress } from "@/utils/progress";
 
 import EventsTable from "@/components/dash-events/EventsTable";
 import Loading from "@/components/loading/Loading";
+import DashboardEmptyState from "@/components/dashboard-detail/DashboardEmptyState";
+import DashboardErrorState from "@/components/dashboard-detail/DashboardErrorState";
+import { CalendarCheck } from "@phosphor-icons/react";
 
 const PastEventsList: React.FC = () => {
   const [events, setEvents] = useState<Event[]>([]);
@@ -74,13 +77,16 @@ const PastEventsList: React.FC = () => {
           borderColor="border-black"
         />
       ) : error ? (
-        <div className="flex h-[50vh] w-full flex-col items-center justify-center">
-          <h2 className="mb-6 text-3xl md:text-4xl">{error.message}</h2>
-        </div>
-      ) : !loading && events.length === 0 ? (
-        <div className="flex h-[50vh] w-full flex-col items-center justify-center">
-          <h2 className="mb-6 text-3xl md:text-4xl">No events found.</h2>
-        </div>
+        <DashboardErrorState
+          message={error.message}
+          onRetry={fetchEvents}
+        />
+      ) : events.length === 0 ? (
+        <DashboardEmptyState
+          message="No past events"
+          description="Past events will appear here."
+          icon={<CalendarCheck weight="duotone" />}
+        />
       ) : (
         <div className="rounded-md border border-stone-200 bg-white">
           <EventsTable events={events} fetchEvents={fetchEvents} />

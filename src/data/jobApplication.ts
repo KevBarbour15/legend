@@ -55,6 +55,8 @@ export type JobApplicationListItem = {
   howSoonStart: string;
   anythingElse?: string;
   submittedAt: string;
+  viewed: boolean;
+  contacted: boolean;
 };
 
 export type JobApplicationFormProps = {

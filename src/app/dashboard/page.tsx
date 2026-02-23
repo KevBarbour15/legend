@@ -12,12 +12,15 @@ import UpcomingEventsList from "@/components/dash-events/UpcomingEvents";
 import PastEventsList from "@/components/dash-events/PastEvents";
 import MenuCategories from "@/components/menu-categories/MenuCategories";
 import JobApplicationsList from "@/components/job-applications/JobApplicationsList";
-import { HouseLine } from "@phosphor-icons/react";
+import DashboardEmptyState from "@/components/dashboard-detail/DashboardEmptyState";
+import { HouseLine, List } from "@phosphor-icons/react";
 
 const DefaultComponent: React.FC = () => (
-  <div className="flex min-h-[50vh] items-center justify-center text-stone-500">
-    Select a section from the sidebar
-  </div>
+  <DashboardEmptyState
+    message="Select a section from the sidebar"
+    description="Use the menu to open Events, Messages, Menu Categories, or Job Applications."
+    icon={<List weight="duotone" />}
+  />
 );
 
 CreateEvent.displayName = "CreateEvent";
@@ -64,7 +67,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex min-h-screen bg-stone-100 font-funnelDisplay">
+    <div className="flex min-h-screen bg-stone-100">
       <DashboardSidebar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -78,7 +81,7 @@ export default function Dashboard() {
         <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-stone-200 bg-white px-4 shadow-sm">
           <DashboardSidebarTrigger onClick={() => setSidebarOpen(true)} />
           <div className="flex flex-1 items-center justify-between gap-4">
-            <h1 className="truncate font-funnelDisplay text-lg font-semibold text-stone-800">
+            <h1 className="truncate text-lg font-semibold text-stone-800">
               {activeTab}
             </h1>
             <Link

@@ -33,7 +33,7 @@ export default function MessagesTable({
   return (
     <Table>
       <TableHeader>
-        <TableRow className="border-stone-200 hover:bg-transparent">
+        <TableRow className="sticky top-0 z-10 border-stone-200 bg-white hover:bg-transparent">
           <TableHead className="w-8"></TableHead>
           <TableHead className="font-semibold text-stone-700">Name</TableHead>
           <TableHead className="font-semibold text-stone-700">Type</TableHead>

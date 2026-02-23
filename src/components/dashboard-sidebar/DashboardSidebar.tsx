@@ -93,7 +93,7 @@ export default function DashboardSidebar({
         )}
       >
         <div className="flex h-14 items-center justify-between border-b border-stone-200 px-4 lg:justify-start">
-          <span className="font-funnelDisplay text-lg font-semibold text-stone-800">
+          <span className="text-lg font-semibold text-stone-800">
             Dashboard
           </span>
           <button

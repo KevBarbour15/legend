@@ -19,10 +19,15 @@ import { cn } from "@/lib/utils";
 
 interface JobApplicationsTableProps {
   applications: JobApplicationListItem[];
+  onApplicationUpdate?: (
+    id: string,
+    patch: { viewed?: boolean; contacted?: boolean }
+  ) => void;
 }
 
 export default function JobApplicationsTable({
   applications,
+  onApplicationUpdate,
 }: JobApplicationsTableProps) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
@@ -33,7 +38,7 @@ export default function JobApplicationsTable({
   return (
     <Table>
       <TableHeader>
-        <TableRow className="border-stone-200 hover:bg-transparent">
+        <TableRow className="sticky top-0 z-10 border-stone-200 bg-white hover:bg-transparent">
           <TableHead className="w-8"></TableHead>
           <TableHead className="font-semibold text-stone-700">Name</TableHead>
           <TableHead className="font-semibold text-stone-700">Date</TableHead>
@@ -75,7 +80,10 @@ export default function JobApplicationsTable({
               {isExpanded && (
                 <TableRow key={`${application._id}-detail`} className="bg-stone-50">
                   <TableCell colSpan={4} className="p-4">
-                    <JobApplicationDetailContent application={application} />
+                    <JobApplicationDetailContent
+                      application={application}
+                      onApplicationUpdate={onApplicationUpdate}
+                    />
                   </TableCell>
                 </TableRow>
               )}

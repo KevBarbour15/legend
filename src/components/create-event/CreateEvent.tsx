@@ -18,7 +18,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -85,7 +84,7 @@ const CreateEvent: React.FC = () => {
       id="create-container"
       className="text-black opacity-0"
     >
-      <Card className="p-3 md:p-6">
+      <div className="rounded-lg border border-stone-200 bg-white p-4 shadow-sm md:p-6">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
             <FormField
@@ -199,7 +198,7 @@ const CreateEvent: React.FC = () => {
             </Button>
           </form>
         </Form>
-      </Card>
+      </div>
     </div>
   );
 };

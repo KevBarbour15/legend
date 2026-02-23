@@ -34,7 +34,7 @@ export default function EventsTable({
   return (
     <Table>
       <TableHeader>
-        <TableRow className="border-stone-200 hover:bg-transparent">
+        <TableRow className="sticky top-0 z-10 border-stone-200 bg-white hover:bg-transparent">
           <TableHead className="w-8"></TableHead>
           <TableHead className="font-semibold text-stone-700">Title</TableHead>
           <TableHead className="font-semibold text-stone-700">Date</TableHead>

@@ -19,6 +19,8 @@ export interface IJobApplication extends Document {
   resume: Buffer;
   resumeContentType: string;
   submittedAt: Date;
+  viewed: boolean;
+  contacted: boolean;
 }
 
 const JobApplicationSchema: Schema = new Schema({
@@ -40,6 +42,8 @@ const JobApplicationSchema: Schema = new Schema({
   resume: { type: Buffer, required: true },
   resumeContentType: { type: String, default: "application/pdf" },
   submittedAt: { type: Date, default: Date.now },
+  viewed: { type: Boolean, default: false },
+  contacted: { type: Boolean, default: false },
 });
 
 export default mongoose.models.JobApplication ||

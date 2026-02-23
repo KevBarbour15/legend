@@ -1,12 +1,15 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { generateProgress } from "@/utils/progress";
 import Loading from "@/components/loading/Loading";
 import JobApplicationsTable from "./JobApplicationsTable";
+import DashboardEmptyState from "@/components/dashboard-detail/DashboardEmptyState";
+import DashboardErrorState from "@/components/dashboard-detail/DashboardErrorState";
 import type { JobApplicationListItem } from "@/data/jobApplication";
+import { Briefcase, Eye, EyeSlash } from "@phosphor-icons/react";
 
 const JobApplicationsList: React.FC = () => {
   const [applications, setApplications] = useState<JobApplicationListItem[]>(
@@ -16,6 +19,26 @@ const JobApplicationsList: React.FC = () => {
   const [error, setError] = useState<Error | null>(null);
   const [progress, setProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const notViewed = useMemo(
+    () => applications.filter((a) => !(a.viewed ?? false)),
+    [applications]
+  );
+  const viewed = useMemo(
+    () => applications.filter((a) => a.viewed ?? false),
+    [applications]
+  );
+
+  const handleApplicationUpdate = (
+    id: string,
+    patch: { viewed?: boolean; contacted?: boolean }
+  ) => {
+    setApplications((prev) =>
+      prev.map((app) =>
+        app._id === id ? { ...app, ...patch } : app
+      )
+    );
+  };
 
   useGSAP(() => {
     if (!containerRef.current || loading) return;
@@ -69,16 +92,54 @@ const JobApplicationsList: React.FC = () => {
           borderColor="border-black"
         />
       ) : error ? (
-        <div className="flex h-[50vh] w-full flex-col items-center justify-center">
-          <h2 className="mb-6 text-3xl md:text-4xl">{error.message}</h2>
-        </div>
+        <DashboardErrorState
+          message={error.message}
+          onRetry={fetchApplications}
+        />
       ) : applications.length === 0 ? (
-        <div className="flex h-[50vh] w-full flex-col items-center justify-center">
-          <h2 className="mb-6 text-3xl md:text-4xl">No applications yet.</h2>
-        </div>
+        <DashboardEmptyState
+          message="No applications yet"
+          description="Job applications from your site will appear here."
+          icon={<Briefcase weight="duotone" />}
+        />
       ) : (
-        <div className="rounded-md border border-stone-200 bg-white">
-          <JobApplicationsTable applications={applications} />
+        <div className="space-y-8">
+          <section>
+            <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-stone-500">
+              <EyeSlash weight="duotone" size={18} />
+              Not viewed ({notViewed.length})
+            </h2>
+            {notViewed.length === 0 ? (
+              <p className="rounded-md border border-stone-200 bg-stone-50 px-4 py-6 text-center text-sm text-stone-500">
+                All applications have been marked as viewed.
+              </p>
+            ) : (
+              <div className="rounded-md border border-stone-200 bg-white">
+                <JobApplicationsTable
+                  applications={notViewed}
+                  onApplicationUpdate={handleApplicationUpdate}
+                />
+              </div>
+            )}
+          </section>
+          <section>
+            <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-stone-500">
+              <Eye weight="duotone" size={18} />
+              Viewed ({viewed.length})
+            </h2>
+            {viewed.length === 0 ? (
+              <p className="rounded-md border border-stone-200 bg-stone-50 px-4 py-6 text-center text-sm text-stone-500">
+                No applications marked as viewed yet.
+              </p>
+            ) : (
+              <div className="rounded-md border border-stone-200 bg-white">
+                <JobApplicationsTable
+                  applications={viewed}
+                  onApplicationUpdate={handleApplicationUpdate}
+                />
+              </div>
+            )}
+          </section>
         </div>
       )}
     </div>

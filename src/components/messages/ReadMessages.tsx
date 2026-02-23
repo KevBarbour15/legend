@@ -10,6 +10,9 @@ import { generateProgress } from "@/utils/progress";
 
 import MessagesTable from "@/components/messages/MessagesTable";
 import Loading from "@/components/loading/Loading";
+import DashboardEmptyState from "@/components/dashboard-detail/DashboardEmptyState";
+import DashboardErrorState from "@/components/dashboard-detail/DashboardErrorState";
+import { EnvelopeOpen } from "@phosphor-icons/react";
 
 const ReadMessagesList: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -89,13 +92,16 @@ const ReadMessagesList: React.FC = () => {
           borderColor="border-black"
         />
       ) : error ? (
-        <div className="flex h-[50vh] w-full flex-col items-center justify-center">
-          <h2 className="mb-6 text-3xl md:text-4xl">{error.message}</h2>
-        </div>
-      ) : !loading && readMessages.length === 0 ? (
-        <div className="flex h-[50vh] w-full flex-col items-center justify-center">
-          <h2 className="mb-6 text-3xl md:text-4xl">No messages found.</h2>
-        </div>
+        <DashboardErrorState
+          message={error.message}
+          onRetry={fetchMessages}
+        />
+      ) : readMessages.length === 0 ? (
+        <DashboardEmptyState
+          message="No read messages"
+          description="Messages you've marked as read will appear here."
+          icon={<EnvelopeOpen weight="duotone" />}
+        />
       ) : (
         <div className="rounded-md border border-stone-200 bg-white">
           <MessagesTable

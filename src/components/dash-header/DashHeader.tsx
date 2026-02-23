@@ -47,7 +47,7 @@ const DashHeader: React.FC<DashProps> = ({ setActiveTab, activeTab }) => {
               <List size={32} weight="regular" className="text-customWhite" />
             </IconButton>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" className="font-funnelDisplay">
+          <DropdownMenuContent align="start">
             <DropdownMenuItem
               onClick={() => handleMenuItemClick("Create Event")}
             >
@@ -122,7 +122,7 @@ const DashHeader: React.FC<DashProps> = ({ setActiveTab, activeTab }) => {
             </LogoutLink>
           </DropdownMenuContent>
         </DropdownMenu>
-        <div className="ml-3 font-funnelDisplay text-base font-bold md:ml-6 md:text-xl">
+        <div className="ml-3 text-base font-bold md:ml-6 md:text-xl">
           {activeTab}
         </div>
       </div>

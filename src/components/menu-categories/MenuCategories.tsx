@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,6 +23,8 @@ import { Input } from "@/components/ui/input";
 
 import ParentCategoriesTable from "@/components/draggable-tables/ParentCategoriesTable";
 import ChildCategoriesTable from "@/components/draggable-tables/ChildCategoriesTable";
+import Loading from "@/components/loading/Loading";
+import { generateProgress } from "@/utils/progress";
 
 import { parentFormSchema, childFormSchema } from "@/data/menu-categories";
 
@@ -53,16 +55,21 @@ const MenuCategories: React.FC = () => {
   const [parentName, setParentName] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [progress, setProgress] = useState<number>(0);
+
+  const updateProgress = useCallback((start: number, end: number, delay = 0) => {
+    setTimeout(() => setProgress(generateProgress(start, end)), delay);
+  }, []);
 
   useGSAP(() => {
     if (!containerRef.current) return;
-
+    if (loading) return;
     gsap.fromTo(
       "#menu-categories-container",
       { opacity: 0 },
       { opacity: 1, duration: 0.15, delay: 0.15, ease: "sine.inOut" },
     );
-  }, []);
+  }, [loading]);
 
   // Form initialization using react-hook-form with zod validation
   const parentForm = useForm<z.infer<typeof parentFormSchema>>({
@@ -173,19 +180,20 @@ const MenuCategories: React.FC = () => {
   };
 
   // Fetches both parent and child categories from the API
-  const fetchCategoriesData = async () => {
+  const fetchCategoriesData = useCallback(async () => {
     try {
+      updateProgress(34, 66);
       const response = await fetch("/api/menu-categories", {
         method: "GET",
       });
 
       const data = await response.json();
-      console.log(data);
 
       const parentCategories = data.parentCategories || [];
       const childCategories = data.childCategories || [];
       const parentName = data.parentName || null;
 
+      updateProgress(67, 99, 750);
       setParentCategories(parentCategories);
       setChildCategories(childCategories);
       setParentName(parentName);
@@ -193,10 +201,12 @@ const MenuCategories: React.FC = () => {
     } catch (error) {
       console.error("Error: ", error);
       setError("Network error occurred. Please refresh the page.");
+      setProgress(0);
     } finally {
-      setLoading(false);
+      updateProgress(100, 100);
+      setTimeout(() => setLoading(false), 750);
     }
-  };
+  }, [updateProgress]);
 
   // Handles reordering of parent categories via drag and drop
   const onDragParentEnd = async (result: DropResult) => {
@@ -294,8 +304,22 @@ const MenuCategories: React.FC = () => {
 
   // Load initial data on component mount
   useEffect(() => {
+    setProgress(generateProgress(1, 33));
     fetchCategoriesData();
-  }, []);
+  }, [fetchCategoriesData]);
+
+  if (loading) {
+    return (
+      <div ref={containerRef} id="menu-categories-container" className="block text-black">
+        <Loading
+          progress={progress}
+          message="Loading menu categories..."
+          textColor="black"
+          borderColor="border-black"
+        />
+      </div>
+    );
+  }
 
   return (
     <div
@@ -331,24 +355,12 @@ const MenuCategories: React.FC = () => {
               </form>
             </Form>
           </div>
-          <div className="relative basis-1/2">
-            <div
-              className={`absolute inset-0 transition-all duration-100 ease-in-out ${loading ? "opacity-100" : "pointer-events-none opacity-0"} flex items-center justify-center text-xl font-medium`}
-            >
-              <p>Loading...</p>
-            </div>
-
-            <div
-              className={`min-h-32 transition-all duration-300 ease-in-out ${loading ? "opacity-0" : "opacity-100"} `}
-            >
-              {!loading && (
-                <ParentCategoriesTable
-                  categories={parentCategories}
-                  removeCategory={removeCategory}
-                  onDragParentEnd={onDragParentEnd}
-                />
-              )}
-            </div>
+          <div className="relative min-h-32 basis-1/2">
+            <ParentCategoriesTable
+              categories={parentCategories}
+              removeCategory={removeCategory}
+              onDragParentEnd={onDragParentEnd}
+            />
           </div>
         </div>
       </Card>
@@ -422,24 +434,12 @@ const MenuCategories: React.FC = () => {
             </p>
           </div>
 
-          <div className="relative basis-1/2">
-            <div
-              className={`absolute inset-0 transition-all duration-100 ease-in-out ${loading ? "opacity-100" : "pointer-events-none opacity-0"} flex items-center justify-center text-xl font-medium`}
-            >
-              <p>Loading...</p>
-            </div>
-
-            <div
-              className={`min-h-32 transition-all duration-300 ease-in-out ${loading ? "opacity-0" : "opacity-100"} `}
-            >
-              {!loading && (
-                <ChildCategoriesTable
-                  categories={childCategories}
-                  removeCategory={removeCategory}
-                  onDragChildEnd={onDragChildEnd}
-                />
-              )}
-            </div>
+          <div className="relative min-h-32 basis-1/2">
+            <ChildCategoriesTable
+              categories={childCategories}
+              removeCategory={removeCategory}
+              onDragChildEnd={onDragChildEnd}
+            />
           </div>
         </div>
       </Card>

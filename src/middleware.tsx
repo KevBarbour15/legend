@@ -7,7 +7,7 @@ export default function middleware(req: NextRequest) {
     { path: "/api/events", methods: ["POST", "PUT", "DELETE"] },
     { path: "/api/message", methods: ["GET", "DELETE", "PUT"] },
     { path: "/api/menu", methods: ["POST", "PUT", "DELETE"] },
-    { path: "/api/job-application", methods: ["GET"] },
+    { path: "/api/job-application", methods: ["GET", "PATCH"] },
   ];
 
   for (const route of protectedRoutes) {

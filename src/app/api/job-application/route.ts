@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectToMongoDB } from "@/lib/db";
 import JobApplication from "@/models/JobApplication";
+import { appendJobApplicationToSheet } from "@/app/actions/appendToSheets";
 
 export async function GET() {
   await connectToMongoDB();
@@ -82,6 +83,34 @@ export async function POST(req: NextRequest) {
     });
 
     await application.save();
+
+    try {
+      await appendJobApplicationToSheet({
+        firstName,
+        lastName,
+        email,
+        phone,
+        hearAbout,
+        whyApply,
+        musicGenres,
+        threeAlbums,
+        barExperience,
+        craftBeerWine,
+        busyRush,
+        difficultFeedback,
+        availability,
+        howSoonStart,
+        anythingElse,
+      });
+    } catch (sheetsError) {
+      const msg =
+        sheetsError instanceof Error ? sheetsError.message : String(sheetsError);
+      console.error(
+        "[job-application] Google Sheet append failed:",
+        msg,
+        sheetsError
+      );
+    }
 
     return NextResponse.json(
       { message: "Application submitted successfully." },
