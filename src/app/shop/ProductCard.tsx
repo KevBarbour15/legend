@@ -21,7 +21,7 @@ export default function ProductCard({ product }: ProductContentProps) {
 
   return (
     <>
-      <div className="flex flex-col overflow-hidden rounded-sm border border-neutral-400/20 bg-customWhite/25 text-customNavy backdrop-blur-[2px] box-shadow-card">
+      <div className="flex flex-col overflow-hidden rounded-sm border border-neutral-400/20 bg-customWhite/25 text-customNavy backdrop-blur-sm box-shadow-card">
         {mainImage && (
           <div className="relative aspect-square w-full overflow-hidden">
             <Image

@@ -6,7 +6,7 @@ import { createPortal } from "react-dom";
 
 import { useOutsideClick } from "@/hooks/use-outside-click";
 
-import { ArrowLeft, X } from "@phosphor-icons/react";
+import { ArrowLeft, Play, X } from "@phosphor-icons/react";
 import { IconButton } from "@mui/material";
 
 import { EventCardProps } from "@/data/events";
@@ -15,11 +15,18 @@ import { parseEventDate } from "@/utils/date";
 
 import Image from "next/image";
 
-const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
+const EventCard: React.FC<EventCardProps> = ({
+  event,
+  preloadedMedia,
+  deferInlineMedia = false,
+}) => {
   const [isActive, setIsActive] = useState(false);
   const [isRendered, setIsRendered] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+  const [inlineVideoUnlocked, setInlineVideoUnlocked] = useState(
+    () => !deferInlineMedia || event.is_photo,
+  );
   const containerRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLDivElement>(null);
@@ -38,6 +45,31 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (!deferInlineMedia || event.is_photo) {
+      setInlineVideoUnlocked(true);
+      return;
+    }
+
+    setInlineVideoUnlocked(false);
+    const el = cardRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      setInlineVideoUnlocked(true);
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setInlineVideoUnlocked(true);
+        }
+      },
+      { rootMargin: "120px", threshold: 0.08 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [deferInlineMedia, event.is_photo, event._id]);
 
   useEffect(() => {
     if (!isRendered) setShowDetails(false);
@@ -84,7 +116,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
     setIsActive(true);
   };
 
-  // Modal open/close animations
+  // Modal open/close animations (avoid CSS transitions on the same node — they fight GSAP)
   useGSAP(
     () => {
       if (!isRendered) return;
@@ -92,61 +124,87 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       const backdropEl = backdropRef.current;
       const modalEl = containerRef.current;
       const closeEl = closeButtonRef.current;
+      const mediaEl = mediaRef.current;
 
       if (!backdropEl || !modalEl || !closeEl) return;
 
-      gsap.killTweensOf([backdropEl, modalEl, closeEl]);
+      gsap.killTweensOf(
+        [backdropEl, modalEl, closeEl, mediaEl].filter(Boolean),
+      );
 
       if (isActive) {
-        gsap.set(backdropEl, { opacity: 0 });
-        gsap.set(closeEl, { opacity: 0 });
-        gsap.set(modalEl, { opacity: 0, scale: 1, y: 25 });
+        gsap.set(backdropEl, { opacity: 0, force3D: true });
+        gsap.set(closeEl, { opacity: 0, force3D: true });
+        gsap.set(modalEl, {
+          opacity: 0,
+          y: 18,
+          scale: 0.97,
+          force3D: true,
+        });
+        if (mediaEl && !showDetails) {
+          gsap.set(mediaEl, { opacity: 0, force3D: true });
+        }
 
-        const tl = gsap.timeline();
+        const tl = gsap.timeline({ defaults: { overwrite: "auto" } });
         tl.to(backdropEl, {
           opacity: 1,
-          duration: 0.3,
-          ease: "power1.inOut",
+          duration: 0.4,
+          ease: "power2.out",
         });
-        tl.to(closeEl, { opacity: 1, duration: 0.25, ease: "power1.inOut" }, 0);
         tl.to(
           modalEl,
           {
             opacity: 1,
-            scale: 1,
             y: 0,
-            duration: 0.3,
-            ease: "power2.inOut",
+            scale: 1,
+            duration: 0.5,
+            ease: "power3.out",
+            force3D: true,
           },
-          0,
+          0.02,
         );
+        tl.to(
+          closeEl,
+          { opacity: 1, duration: 0.35, ease: "power2.out" },
+          0.12,
+        );
+        if (mediaEl && !showDetails) {
+          tl.to(
+            mediaEl,
+            { opacity: 1, duration: 0.42, ease: "power2.out", force3D: true },
+            0.1,
+          );
+        }
       } else {
         gsap
           .timeline({
+            defaults: { overwrite: "auto" },
             onComplete: () => setIsRendered(false),
           })
           .to(
             modalEl,
             {
               opacity: 0,
-              scale: 0.98,
-              y: 8,
-              duration: 0.25,
-              ease: "power2.inOut",
+              scale: 0.985,
+              y: 10,
+              duration: 0.28,
+              ease: "power2.in",
+              force3D: true,
             },
             0,
           )
-          .to(closeEl, { opacity: 0, duration: 0.25, ease: "power1.out" }, 0)
+          .to(closeEl, { opacity: 0, duration: 0.22, ease: "power2.in" }, 0)
           .to(
             backdropEl,
-            { opacity: 0, duration: 0.25, ease: "power1.out" },
-            0,
+            { opacity: 0, duration: 0.32, ease: "power2.inOut" },
+            0.04,
           );
       }
     },
     { dependencies: [isActive, isRendered] },
   );
 
+  // Media fade when toggling details while the modal stays open (open entrance is in the timeline above)
   useGSAP(
     () => {
       if (!isRendered || !isActive) return;
@@ -155,11 +213,12 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       gsap.killTweensOf(mediaEl);
       gsap.to(mediaEl, {
         opacity: showDetails ? 0 : 1,
-        duration: 0.4,
+        duration: 0.42,
         ease: "power2.inOut",
+        force3D: true,
       });
     },
-    { dependencies: [isRendered, isActive, showDetails] },
+    { dependencies: [showDetails] },
   );
 
   useGSAP(
@@ -200,7 +259,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
       <>
         {isRendered && (
           <div
-            className="fixed inset-0 z-[200] grid place-items-center px-6 drop-shadow-card backdrop-blur-[2px]"
+            className="fixed inset-0 z-[200] grid place-items-center px-6 drop-shadow-card backdrop-blur-sm"
             onClick={(e) => e.stopPropagation()}
           >
             <div
@@ -235,7 +294,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
             <div
               ref={containerRef}
               onClick={(e) => e.stopPropagation()}
-              className={`relative w-full max-w-[450px] overflow-hidden rounded-sm border border-customNavy/20 text-customNavy opacity-0 shadow-2xl ${isActive ? "border-customNavy" : "border-transparent"} bg-customWhite transition-all duration-300`}
+              className={`relative w-full max-w-[450px] overflow-hidden rounded-sm border border-customNavy/20 text-customNavy opacity-0 shadow-2xl ${isActive ? "border-customNavy" : "border-transparent"} bg-customWhite`}
             >
               <div className="absolute inset-0 z-0 flex flex-col overflow-y-auto px-3 pb-4 pt-3">
                 {showDetails && (
@@ -250,7 +309,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                       className="inline-flex cursor-pointer items-center gap-2 py-1 pl-0 pr-3 font-bigola text-sm text-customNavy transition-colors hover:text-customGold md:text-base"
                     >
                       <ArrowLeft size={20} weight="regular" aria-hidden />
-                      View image
+                      Back
                     </button>
                   </div>
                 )}
@@ -258,7 +317,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                   <p>{formattedDate}</p>
                   <p>{formattedTime}</p>
                 </div>
-                <h1 className="text-balance pb-2 font-bigola text-2xl capitalize leading-tight">
+                <h1 className="text-balance pb-2 font-bigola text-4xl capitalize leading-tight">
                   {event.title}
                 </h1>
                 <p className="whitespace-pre-wrap font-hypatia text-base leading-snug md:text-lg md:leading-relaxed lg:text-xl">
@@ -294,7 +353,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
                     />
                   )}
                 </div>
-                <div className="flex-shrink-0 border-t border-customNavy/20 bg-customWhite/95 p-3 backdrop-blur-[2px]">
+                <div className="flex-shrink-0 border-t border-customNavy/20 bg-customWhite/95 p-3 backdrop-blur-sm">
                   <button
                     type="button"
                     aria-label="View event details"
@@ -337,7 +396,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               className="object-cover object-center"
             />
           </div>
-        ) : (
+        ) : inlineVideoUnlocked ? (
           <div className="relative h-full w-full overflow-hidden">
             <video
               src={event.image_url}
@@ -346,8 +405,18 @@ const EventCard: React.FC<EventCardProps> = ({ event, preloadedMedia }) => {
               autoPlay
               muted
               playsInline
+              preload="metadata"
               width={1000}
               height={1000}
+            />
+          </div>
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-customNavy/15">
+            <Play
+              className="text-customNavy/40"
+              weight="fill"
+              size={28}
+              aria-hidden
             />
           </div>
         )}

@@ -1,8 +1,12 @@
 import { Event, PreloadedMedia } from "@/data/events";
 
-export const preloadMedia = async (event: Event, loadedIds: Set<string>) => {
+/** Resolves with the loaded element, or undefined if this event was already preloaded. */
+export const preloadMedia = async (
+  event: Event,
+  loadedIds: Set<string>,
+): Promise<PreloadedMedia | undefined> => {
   if (loadedIds.has(event._id)) {
-    return;
+    return undefined;
   }
 
   return new Promise((resolve, reject) => {

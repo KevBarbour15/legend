@@ -14,6 +14,8 @@ export interface Event {
 export interface EventCardProps {
   event: Event;
   preloadedMedia?: PreloadedMedia;
+  /** Wait until the card is near the viewport before loading inline video (reduces calendar jank). */
+  deferInlineMedia?: boolean;
 }
 
 export interface EditEventModalProps {

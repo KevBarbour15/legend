@@ -2,20 +2,26 @@
 
 import React, { useState, useCallback } from "react";
 import { Calendar } from "@/components/ui/calendar";
-import { Event } from "@/data/events";
+import { Event, PreloadedMedia } from "@/data/events";
 import { DayContentProps } from "react-day-picker";
 import { format } from "date-fns";
 import EventCard from "@/components/event-card/EventCard";
 import { parseEventDate } from "@/utils/date";
+
 interface CalendarViewProps {
   events: Event[];
+  calendarMonth: Date;
+  onCalendarMonthChange: (month: Date) => void;
+  preloadedMedia: Map<string, PreloadedMedia>;
 }
 
-export default function CalendarView({ events }: CalendarViewProps) {
+export default function CalendarView({
+  events,
+  calendarMonth,
+  onCalendarMonthChange,
+  preloadedMedia,
+}: CalendarViewProps) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [activeMonth, setActiveMonth] = useState<Date>(
-    () => new Date(new Date().getFullYear(), new Date().getMonth(), 1),
-  );
 
   const getEventsForDate = useCallback(
     (date: Date): Event[] => {
@@ -55,7 +61,11 @@ export default function CalendarView({ events }: CalendarViewProps) {
                   key={event._id}
                   className={`h-full min-h-0 w-full flex-1 basis-0 ${dayEvents.length > 1 && index !== dayEvents.length - 1 ? "border-b border-neutral-400/20" : ""}`}
                 >
-                  <EventCard event={event} />
+                  <EventCard
+                    event={event}
+                    preloadedMedia={preloadedMedia.get(event._id)}
+                    deferInlineMedia
+                  />
                 </div>
               ))}
             </div>
@@ -63,7 +73,7 @@ export default function CalendarView({ events }: CalendarViewProps) {
         </div>
       );
     },
-    [getEventsForDate],
+    [getEventsForDate, preloadedMedia],
   );
 
   return (
@@ -76,8 +86,8 @@ export default function CalendarView({ events }: CalendarViewProps) {
             setSelectedDate(date);
           }
         }}
-        month={activeMonth}
-        onMonthChange={(date) => date && setActiveMonth(date)}
+        month={calendarMonth}
+        onMonthChange={(date) => date && onCalendarMonthChange(date)}
         className="mt-2 border-0 border-neutral-400/20 p-0 md:mt-0"
         classNames={{
           months: "h-full",
