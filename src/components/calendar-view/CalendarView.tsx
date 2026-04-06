@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef, useMemo } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { Event, PreloadedMedia } from "@/data/events";
 import { DayContentProps } from "react-day-picker";
@@ -39,41 +39,56 @@ export default function CalendarView({
     [getEventsForDate],
   );
 
-  const renderDayContent = useCallback(
-    (props: DayContentProps) => {
-      const dayEvents = getEventsForDate(props.date);
-      const hasEvents = dayEvents.length > 0;
+  const getEventsForDateRef = useRef(getEventsForDate);
+  getEventsForDateRef.current = getEventsForDate;
 
-      return (
-        <div className="relative flex h-full w-full overflow-hidden">
-          <span
-            className={`absolute right-1.5 top-1.5 z-30 text-2xl text-shadow-custom ${
-              hasEvents ? "text-customWhite" : "text-customNavy"
-            }`}
-          >
-            {props.date.getDate()}
-          </span>
+  const preloadedMediaRef = useRef(preloadedMedia);
+  preloadedMediaRef.current = preloadedMedia;
 
-          {hasEvents && (
-            <div className="relative flex h-full w-full flex-col">
-              {dayEvents.map((event, index) => (
-                <div
-                  key={event._id}
-                  className={`h-full min-h-0 w-full flex-1 basis-0 ${dayEvents.length > 1 && index !== dayEvents.length - 1 ? "border-b border-neutral-400/20" : ""}`}
-                >
-                  <EventCard
-                    event={event}
-                    preloadedMedia={preloadedMedia.get(event._id)}
-                    deferInlineMedia
-                  />
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      );
-    },
-    [getEventsForDate, preloadedMedia],
+  // Stable component reference so react-day-picker never unmounts/remounts day cells.
+  // Reads from refs to always pick up the latest data without changing identity.
+  const StableDayContent = useMemo(
+    () =>
+      function DayContent(props: DayContentProps) {
+        const dayEvents = getEventsForDateRef.current(props.date);
+        const hasEvents = dayEvents.length > 0;
+
+        return (
+          <div className="relative flex h-full w-full overflow-hidden">
+            <span
+              className={`absolute right-1.5 top-1.5 z-30 text-2xl text-shadow-custom ${
+                hasEvents ? "text-customWhite" : "text-customNavy"
+              }`}
+            >
+              {props.date.getDate()}
+            </span>
+
+            {hasEvents && (
+              <div className="relative flex h-full w-full flex-col">
+                {dayEvents.map((event, index) => (
+                  <div
+                    key={event._id}
+                    className={`h-full min-h-0 w-full flex-1 basis-0 ${dayEvents.length > 1 && index !== dayEvents.length - 1 ? "border-b border-neutral-400/20" : ""}`}
+                  >
+                    <EventCard
+                      event={event}
+                      preloadedMedia={preloadedMediaRef.current.get(event._id)}
+                      deferInlineMedia
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
+
+  const calendarComponents = useMemo(
+    () => ({ DayContent: StableDayContent }),
+    [StableDayContent],
   );
 
   return (
@@ -104,9 +119,7 @@ export default function CalendarView({
           nav_button:
             "p-2 rounded-full border border bg-neutral-300/15 backdrop-blur-sm box-shadow-card lg:hover:bg-customGold lg:hover:border-customNavy transition-all duration-300",
         }}
-        components={{
-          DayContent: renderDayContent,
-        }}
+        components={calendarComponents}
         modifiers={{ hasEvents: hasEventsMatcher }}
       />
     </div>

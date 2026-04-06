@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, memo } from "react";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -15,11 +15,11 @@ import { parseEventDate } from "@/utils/date";
 
 import Image from "next/image";
 
-const EventCard: React.FC<EventCardProps> = ({
+const EventCard: React.FC<EventCardProps> = memo(function EventCard({
   event,
   preloadedMedia,
   deferInlineMedia = false,
-}) => {
+}) {
   const [isActive, setIsActive] = useState(false);
   const [isRendered, setIsRendered] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
@@ -423,6 +423,6 @@ const EventCard: React.FC<EventCardProps> = ({
       </div>
     </>
   );
-};
+});
 
 export default EventCard;

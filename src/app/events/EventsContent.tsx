@@ -46,17 +46,23 @@ export default function EventsContent({
 
   const preloadEventsForMonth = useCallback(async (month: Date) => {
     const targets = allEvents.filter((e) => eventFallsInMonth(e, month));
+    const loaded: Array<[string, PreloadedMedia]> = [];
     for (let i = 0; i < targets.length; i += PRELOAD_CONCURRENCY) {
       const batch = targets.slice(i, i + PRELOAD_CONCURRENCY);
       const results = await Promise.all(
         batch.map((event) => preloadMedia(event, loadedIdsRef.current)),
       );
+      batch.forEach((event, idx) => {
+        const el = results[idx];
+        if (el) loaded.push([event._id, el]);
+      });
+    }
+    if (loaded.length > 0) {
       setPreloadedMedia((prev) => {
         const next = new Map(prev);
-        batch.forEach((event, idx) => {
-          const el = results[idx];
-          if (el) next.set(event._id, el);
-        });
+        for (const [id, el] of loaded) {
+          next.set(id, el);
+        }
         return next;
       });
     }
