@@ -6,8 +6,12 @@ import * as z from "zod";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import {
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 
-import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -22,10 +26,25 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 import { formSchema } from "@/data/create-event";
+import { ensureFirebaseStorageAuth, storage } from "@/lib/firebase";
+
+const MAX_FILE_SIZE = 100 * 1024 * 1024;
+
+type UploadResponse = {
+  url: string;
+  is_photo: boolean;
+};
+
+const getTodayInputValue = () => new Date().toISOString().split("T")[0];
 
 const CreateEvent: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [mediaError, setMediaError] = useState<string | null>(null);
+  const [uploadProgress, setUploadProgress] = useState<number | null>(null);
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -43,36 +62,137 @@ const CreateEvent: React.FC = () => {
       title: "",
       date: "",
       time: "",
-      image_url: "",
+      tickets_url: "",
       description: "",
-      is_photo: true,
     },
   });
 
   useEffect(() => {
-    const today = new Date();
-    const formattedDate = today.toISOString().split("T")[0];
-    form.setValue("date", formattedDate);
+    form.setValue("date", getTodayInputValue());
   }, [form]);
 
+  useEffect(() => {
+    return () => {
+      if (previewUrl) URL.revokeObjectURL(previewUrl);
+    };
+  }, [previewUrl]);
+
+  const resetMedia = () => {
+    setSelectedFile(null);
+    setMediaError(null);
+    setUploadProgress(null);
+
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl);
+    }
+
+    setPreviewUrl(null);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
+  const handleMediaChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] ?? null;
+
+    if (!file) {
+      resetMedia();
+      return;
+    }
+
+    if (!file.type.startsWith("image/") && !file.type.startsWith("video/")) {
+      resetMedia();
+      setMediaError("Please upload a photo or video file.");
+      return;
+    }
+
+    if (file.size > MAX_FILE_SIZE) {
+      resetMedia();
+      setMediaError("Please upload a file that is 100 MB or smaller.");
+      return;
+    }
+
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl);
+    }
+
+    setSelectedFile(file);
+    setPreviewUrl(URL.createObjectURL(file));
+    setMediaError(null);
+  };
+
+  const uploadMedia = (file: File): Promise<UploadResponse> => {
+    const extension = file.name.split(".").pop()?.toLowerCase();
+    const fileName = `${Date.now()}-${crypto.randomUUID()}${extension ? `.${extension}` : ""}`;
+    const mediaRef = ref(storage, `events/${fileName}`);
+    const uploadTask = uploadBytesResumable(mediaRef, file, {
+      contentType: file.type,
+      cacheControl: "public, max-age=31536000",
+    });
+
+    return new Promise((resolve, reject) => {
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setUploadProgress(Math.round(progress));
+        },
+        (error) => reject(error),
+        async () => {
+          const url = await getDownloadURL(uploadTask.snapshot.ref);
+          resolve({
+            url,
+            is_photo: file.type.startsWith("image/"),
+          });
+        },
+      );
+    });
+  };
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    if (!selectedFile) {
+      setMediaError("Please upload a photo or video for this event.");
+      return;
+    }
+
     setIsSubmitting(true);
+    setMediaError(null);
+    setUploadProgress(0);
+
     try {
+      await ensureFirebaseStorageAuth();
+      const uploadedMedia = await uploadMedia(selectedFile);
       const response = await fetch("/api/events", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          ...values,
+          tickets_url: values.tickets_url || undefined,
+          image_url: uploadedMedia.url,
+          is_photo: uploadedMedia.is_photo,
+        }),
       });
 
       if (response.ok) {
         form.reset();
+        form.setValue("date", getTodayInputValue());
+        resetMedia();
+        setUploadProgress(null);
       } else {
-        const errorData = await response.json();
+        const errorData = await response.json().catch(() => null);
+        throw new Error(errorData?.error ?? "Failed to create event.");
       }
     } catch (error) {
       console.error("Error: ", error);
+      setMediaError(
+        error instanceof Error
+          ? error.message
+          : "Failed to create event. Please try again.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -129,48 +249,69 @@ const CreateEvent: React.FC = () => {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="is_photo"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="text-pretty pr-3 text-sm md:text-base">
-                    <FormLabel>Media Type</FormLabel>
-                    <FormDescription className="basis-1/2 text-pretty text-sm italic md:text-base">
-                      <span className="text-red-500">Important:</span> Specify
-                      whether media is photo or video for proper display
-                      formatting.
-                    </FormDescription>
-                  </div>
-                  <FormControl>
-                    <div className="flex items-center gap-3">
-                      <p>Video</p>
-                      <Switch
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                      <p>Photo</p>
-                    </div>
-                  </FormControl>
-                </FormItem>
+            <FormItem>
+              <FormLabel>Event Photo or Video</FormLabel>
+              <FormDescription className="text-pretty text-sm italic md:text-base">
+                Upload a photo or video. The event will automatically use the
+                correct display format based on the file type.
+              </FormDescription>
+              <FormControl>
+                <Input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*,video/*"
+                  onChange={handleMediaChange}
+                />
+              </FormControl>
+              {selectedFile && (
+                <p className="text-sm text-stone-600">
+                  Selected {selectedFile.type.startsWith("image/") ? "photo" : "video"}:{" "}
+                  {selectedFile.name}
+                </p>
               )}
-            />
+              {previewUrl && selectedFile?.type.startsWith("image/") && (
+                // eslint-disable-next-line @next/next/no-img-element -- object URLs cannot be optimized by next/image
+                <img
+                  src={previewUrl}
+                  alt="Selected event media preview"
+                  className="max-h-64 rounded-md border border-stone-200 object-contain"
+                />
+              )}
+              {previewUrl && selectedFile?.type.startsWith("video/") && (
+                <video
+                  src={previewUrl}
+                  className="max-h-64 rounded-md border border-stone-200 object-contain"
+                  controls
+                  muted
+                  playsInline
+                />
+              )}
+              {mediaError && (
+                <p className="text-sm font-medium text-red-500">{mediaError}</p>
+              )}
+              {uploadProgress !== null && (
+                <p className="text-sm text-stone-600">
+                  Uploading media: {uploadProgress}%
+                </p>
+              )}
+            </FormItem>
+
             <FormField
               control={form.control}
-              name="image_url"
+              name="tickets_url"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Media URL</FormLabel>
+                  <FormLabel>Tickets Link</FormLabel>
                   <FormDescription className="text-pretty text-sm italic md:text-base">
-                    To add image/video, upload to Imgur, right click the media
-                    in Imgur and copy media address. For video, convert to video
-                    format to MP4 before uploading to Imgur.
+                    Optional Eventbrite or ticket purchase URL.
                   </FormDescription>
-
                   <FormControl>
-                    <Input placeholder=" Paste media URL here." {...field} />
+                    <Input
+                      type="url"
+                      placeholder="https://www.eventbrite.com/..."
+                      {...field}
+                    />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
@@ -194,7 +335,7 @@ const CreateEvent: React.FC = () => {
               )}
             />
             <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Submitting..." : "Submit"}
+              {isSubmitting ? "Uploading..." : "Submit"}
             </Button>
           </form>
         </Form>

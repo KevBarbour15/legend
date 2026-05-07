@@ -41,7 +41,15 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const { title, date, time, description, image_url, is_photo } = body;
+    const {
+      title,
+      date,
+      time,
+      description,
+      image_url,
+      tickets_url,
+      is_photo,
+    } = body;
 
     if (
       !title ||
@@ -63,6 +71,7 @@ export async function POST(req: NextRequest) {
       time,
       description,
       image_url,
+      tickets_url: tickets_url || undefined,
       is_photo,
       upcoming: true,
     });
@@ -87,17 +96,30 @@ export async function PUT(req: NextRequest) {
   await connectToMongoDB();
 
   try {
-    const { _id, title, date, time, description, image_url, notes, is_photo } =
-      await req.json();
-
-    await Event.findByIdAndUpdate(_id, {
+    const {
+      _id,
       title,
       date,
       time,
       description,
       image_url,
+      tickets_url,
       notes,
       is_photo,
+    } = await req.json();
+
+    await Event.findByIdAndUpdate(_id, {
+      $set: {
+        title,
+        date,
+        time,
+        description,
+        image_url,
+        notes,
+        is_photo,
+        ...(tickets_url ? { tickets_url } : {}),
+      },
+      ...(tickets_url ? {} : { $unset: { tickets_url: "" } }),
     });
 
     return NextResponse.json({ message: "Event updated." }, { status: 200 });

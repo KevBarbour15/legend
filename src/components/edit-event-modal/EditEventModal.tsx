@@ -120,6 +120,17 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
                 className="col-span-3"
               />
             </div>
+            <div className="grid grid-cols-4 items-center gap-6">
+              <Label htmlFor="tickets_url" className="text-right">
+                Tickets URL
+              </Label>
+              <Input
+                id="tickets_url"
+                value={editedEvent.tickets_url ?? ""}
+                onChange={handleEditChange("tickets_url")}
+                className="col-span-3"
+              />
+            </div>
 
             <div className="grid grid-cols-4 items-center gap-6">
               <Label htmlFor="description" className="text-right">

@@ -46,10 +46,10 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
 
       // Run the entrance animation
       let tl = gsap.timeline();
-      tl.set(menuLinks, { x: "-25%", opacity: 0 });
+      tl.set(menuLinks, { x: "-10%", opacity: 0 });
       tl.to(menuLinks, {
-        delay: 0.5,
-        duration: 0.65,
+        delay: 0.25,
+        duration: 0.5,
         ease: "back.out(2.7)",
         x: 0,
         opacity: 1,

@@ -27,6 +27,7 @@ function serializeEvent(doc: any): EventType {
     description: String(doc?.description ?? ""),
     notes: String(doc?.notes ?? ""),
     image_url: String(doc?.image_url ?? ""),
+    tickets_url: doc?.tickets_url ? String(doc.tickets_url) : undefined,
     is_photo: Boolean(doc?.is_photo),
     is_public: Boolean(doc?.is_public),
     upcoming: Boolean(doc?.upcoming),

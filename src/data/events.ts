@@ -6,6 +6,7 @@ export interface Event {
   description: string;
   notes: string;
   image_url: string;
+  tickets_url?: string;
   is_photo: boolean;
   is_public: boolean;
   upcoming: boolean;

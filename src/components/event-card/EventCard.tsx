@@ -323,6 +323,17 @@ const EventCard: React.FC<EventCardProps> = memo(function EventCard({
                 <p className="whitespace-pre-wrap font-hypatia text-base leading-snug md:text-lg md:leading-relaxed lg:text-xl">
                   {event.description}
                 </p>
+                {event.tickets_url && (
+                  <a
+                    href={event.tickets_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="mt-4 inline-flex w-full items-center justify-center rounded-sm border border-customNavy/30 bg-customNavy px-4 py-3 font-bigola text-base tracking-wide text-customWhite transition-colors hover:bg-customGold hover:text-customNavy md:text-lg"
+                  >
+                    GET TICKETS
+                  </a>
+                )}
               </div>
 
               <div
@@ -353,7 +364,7 @@ const EventCard: React.FC<EventCardProps> = memo(function EventCard({
                     />
                   )}
                 </div>
-                <div className="flex-shrink-0 border-t border-customNavy/20 bg-customWhite/95 p-3 backdrop-blur-sm">
+                <div className="flex flex-shrink-0 gap-2 border-t border-customNavy/20 bg-customWhite/95 p-3 backdrop-blur-sm">
                   <button
                     type="button"
                     aria-label="View event details"
@@ -361,10 +372,21 @@ const EventCard: React.FC<EventCardProps> = memo(function EventCard({
                       e.stopPropagation();
                       setShowDetails(true);
                     }}
-                    className="w-full cursor-pointer rounded-sm border border-customNavy/30 bg-customNavy/5 py-3 font-bigola text-base text-customNavy transition-colors hover:bg-customNavy/10 md:text-lg"
+                    className="min-w-0 flex-1 cursor-pointer rounded-sm border border-customNavy/30 bg-customNavy/5 py-3 font-bigola text-base text-customNavy transition-colors hover:bg-customNavy/10 md:text-lg"
                   >
                     View details
                   </button>
+                  {event.tickets_url && (
+                    <a
+                      href={event.tickets_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="min-w-0 flex-1 cursor-pointer rounded-sm border border-customNavy bg-customNavy px-3 py-3 text-center font-bigola text-base text-customWhite transition-colors hover:bg-customGold hover:text-customNavy md:text-lg"
+                    >
+                      GET TICKETS
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

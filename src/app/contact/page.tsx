@@ -42,21 +42,21 @@ export default function Contact() {
     tl.set("#tabs-container", { opacity: 0 })
       .set("#menu-heading", { opacity: 1 })
       .set("#menu-subheading", { opacity: 1 })
-      .set(heading.chars, { opacity: 0, y: -25 })
-      .set(subheading.words, { x: -25, opacity: 0 })
+      .set(heading.chars, { opacity: 0, y: -5 })
+      .set(subheading.words, { x: -5, opacity: 0 })
       .to(heading.chars, {
-        duration: 0.35,
+        duration: 0.15,
         ease: "back.out(1.7)",
         y: 0,
         opacity: 1,
-        stagger: 0.015,
+        stagger: 0.005,
       })
       .to(subheading.words, {
-        duration: 0.35,
+        duration: 0.15,
         ease: "back.out(1.7)",
         x: 0,
         opacity: 1,
-        stagger: 0.025,
+        stagger: 0.005,
       })
       .to("#tabs-container", { opacity: 1, duration: 0.015 }, "<");
   }, []);

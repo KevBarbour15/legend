@@ -7,6 +7,7 @@ export interface IEvent extends Document {
   description: string;
   notes: string;
   image_url: string;
+  tickets_url?: string;
   is_photo: boolean;
   upcoming: boolean;
 }
@@ -35,6 +36,10 @@ const EventSchema: Schema = new Schema({
   image_url: {
     type: String,
     required: true,
+  },
+  tickets_url: {
+    type: String,
+    required: false,
   },
   is_photo: {
     type: Boolean,

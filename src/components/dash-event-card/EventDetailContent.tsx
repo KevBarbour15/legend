@@ -46,6 +46,19 @@ export default function EventDetailContent({
             <DetailBody>{event.description}</DetailBody>
           </DetailSection>
 
+          {event.tickets_url && (
+            <DetailSection title="Tickets">
+              <a
+                href={event.tickets_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="break-all text-sm font-medium text-stone-700 underline hover:text-stone-950"
+              >
+                {event.tickets_url}
+              </a>
+            </DetailSection>
+          )}
+
           <DetailActions>
             <div className="flex gap-2">
               <Button
