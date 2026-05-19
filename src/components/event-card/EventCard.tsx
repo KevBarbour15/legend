@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect, useCallback, memo } from "react";
 
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { createPortal } from "react-dom";
 
 import { useOutsideClick } from "@/hooks/use-outside-click";
@@ -33,9 +32,29 @@ const EventCard: React.FC<EventCardProps> = memo(function EventCard({
   const mediaRef = useRef<HTMLDivElement>(null);
   const modalVideoRef = useRef<HTMLVideoElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const inlineMediaRef = useRef<HTMLDivElement>(null);
+  const hasRevealedInlineMediaRef = useRef(false);
 
   const formattedTime = formatTime(event.time);
   const formattedDate = parseEventDate(event.date).toLocaleDateString("en-US");
+
+  const revealInlineMedia = useCallback(() => {
+    const el = inlineMediaRef.current;
+    if (!el || hasRevealedInlineMediaRef.current) return;
+
+    hasRevealedInlineMediaRef.current = true;
+    gsap.fromTo(
+      el,
+      { opacity: 0, scale: 1.03 },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 0.5,
+        ease: "power2.out",
+        force3D: true,
+      },
+    );
+  }, []);
 
   const handleCloseCard = useCallback(() => {
     setShowDetails(false);
@@ -45,6 +64,27 @@ const EventCard: React.FC<EventCardProps> = memo(function EventCard({
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  useEffect(() => {
+    hasRevealedInlineMediaRef.current = false;
+    if (inlineMediaRef.current) {
+      gsap.set(inlineMediaRef.current, { opacity: 0, scale: 1.03 });
+    }
+  }, [event._id]);
+
+  useEffect(() => {
+    if (!preloadedMedia) return;
+
+    const mediaMatches =
+      (event.is_photo && preloadedMedia instanceof HTMLImageElement) ||
+      (!event.is_photo &&
+        preloadedMedia instanceof HTMLVideoElement &&
+        inlineVideoUnlocked);
+
+    if (mediaMatches) {
+      revealInlineMedia();
+    }
+  }, [event.is_photo, preloadedMedia, inlineVideoUnlocked, revealInlineMedia]);
 
   useEffect(() => {
     if (!deferInlineMedia || event.is_photo) {
@@ -296,44 +336,48 @@ const EventCard: React.FC<EventCardProps> = memo(function EventCard({
               onClick={(e) => e.stopPropagation()}
               className={`relative w-full max-w-[450px] overflow-hidden rounded-sm border border-customNavy/20 text-customNavy opacity-0 shadow-2xl ${isActive ? "border-customNavy" : "border-transparent"} bg-customWhite`}
             >
-              <div className="absolute inset-0 z-0 flex flex-col overflow-y-auto px-3 pb-4 pt-3">
-                {showDetails && (
-                  <div className="flex flex-shrink-0 border-b border-customNavy/20 pb-2">
-                    <button
-                      type="button"
-                      aria-label="Back to event image"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setShowDetails(false);
-                      }}
-                      className="inline-flex cursor-pointer items-center gap-2 py-1 pl-0 pr-3 font-bigola text-sm text-customNavy transition-colors hover:text-customGold md:text-base"
-                    >
-                      <ArrowLeft size={20} weight="regular" aria-hidden />
-                      Back
-                    </button>
+              <div className="absolute inset-0 z-0 flex flex-col overflow-hidden bg-customWhite">
+                <div className="flex-shrink-0 border-b border-customNavy/20 bg-customWhite px-3 pb-3 pt-3">
+                  {showDetails && (
+                    <div className="pb-2">
+                      <button
+                        type="button"
+                        aria-label="Back to event image"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setShowDetails(false);
+                        }}
+                        className="inline-flex cursor-pointer items-center gap-2 py-1 pl-0 pr-3 font-bigola text-sm text-customNavy transition-colors hover:text-customGold md:text-base"
+                      >
+                        <ArrowLeft size={20} weight="regular" aria-hidden />
+                        Back
+                      </button>
+                    </div>
+                  )}
+                  <div className="flex w-full flex-row justify-between py-3 font-bigola text-lg md:leading-[1.25]">
+                    <p>{formattedDate}</p>
+                    <p>{formattedTime}</p>
                   </div>
-                )}
-                <div className="flex w-full flex-shrink-0 flex-row justify-between py-3 font-bigola text-lg md:leading-[1.25]">
-                  <p>{formattedDate}</p>
-                  <p>{formattedTime}</p>
+                  <h1 className="text-balance font-bigola text-4xl capitalize leading-tight">
+                    {event.title}
+                  </h1>
                 </div>
-                <h1 className="text-balance pb-2 font-bigola text-4xl capitalize leading-tight">
-                  {event.title}
-                </h1>
-                <p className="whitespace-pre-wrap font-hypatia text-base leading-snug md:text-lg md:leading-relaxed lg:text-xl">
-                  {event.description}
-                </p>
-                {event.tickets_url && (
-                  <a
-                    href={event.tickets_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="mt-4 inline-flex w-full items-center justify-center rounded-sm border border-customNavy/30 bg-customNavy px-4 py-3 font-bigola text-base tracking-wide text-customWhite transition-colors hover:bg-customGold hover:text-customNavy md:text-lg"
-                  >
-                    GET TICKETS
-                  </a>
-                )}
+                <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-4 pt-3">
+                  <p className="whitespace-pre-wrap font-hypatia text-base leading-snug md:text-lg md:leading-relaxed lg:text-xl">
+                    {event.description}
+                  </p>
+                  {event.tickets_url && (
+                    <a
+                      href={event.tickets_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="mt-4 inline-flex w-full items-center justify-center rounded-sm border border-customNavy/30 bg-customNavy px-4 py-3 font-bigola text-base tracking-wide text-customWhite transition-colors hover:bg-customGold hover:text-customNavy md:text-lg"
+                    >
+                      GET TICKETS
+                    </a>
+                  )}
+                </div>
               </div>
 
               <div
@@ -407,30 +451,45 @@ const EventCard: React.FC<EventCardProps> = memo(function EventCard({
         className="h-full w-full transition-all will-change-transform"
       >
         {event.is_photo ? (
-          <div className="relative h-full w-full overflow-hidden">
-            <Image
-              src={event.image_url}
-              alt={event.title}
-              fill
-              sizes="100vw"
-              unoptimized
-              loading="lazy"
-              className="object-cover object-center"
-            />
+          <div className="relative h-full w-full overflow-hidden bg-customNavy/10">
+            <div ref={inlineMediaRef} className="h-full w-full opacity-0">
+              <Image
+                src={event.image_url}
+                alt={event.title}
+                fill
+                sizes="100vw"
+                unoptimized
+                loading="lazy"
+                onLoadingComplete={revealInlineMedia}
+                className="object-cover object-center"
+              />
+            </div>
           </div>
         ) : inlineVideoUnlocked ? (
-          <div className="relative h-full w-full overflow-hidden">
-            <video
-              src={event.image_url}
-              className="h-full w-full object-cover object-center"
-              loop
-              autoPlay
-              muted
-              playsInline
-              preload="metadata"
-              width={1000}
-              height={1000}
-            />
+          <div className="relative h-full w-full overflow-hidden bg-customNavy/10">
+            <div ref={inlineMediaRef} className="h-full w-full opacity-0">
+              <video
+                src={
+                  preloadedMedia instanceof HTMLVideoElement
+                    ? preloadedMedia.src
+                    : event.image_url
+                }
+                className="h-full w-full object-cover object-center"
+                loop
+                autoPlay
+                muted
+                playsInline
+                preload={
+                  preloadedMedia instanceof HTMLVideoElement
+                    ? "auto"
+                    : "metadata"
+                }
+                onLoadedData={revealInlineMedia}
+                onCanPlay={revealInlineMedia}
+                width={1000}
+                height={1000}
+              />
+            </div>
           </div>
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-customNavy/15">

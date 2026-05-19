@@ -14,15 +14,15 @@ const BackgroundOverlay: React.FC = () => {
     setVideoReady(true);
   }, []);
 
-  // Handle race condition: video may already be ready before React attaches handlers
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // readyState >= 2 (HAVE_CURRENT_DATA) means at least the current frame is available
     if (video.readyState >= 2) {
       markReady();
     }
+
+    void video.play().catch(() => {});
   }, [markReady]);
 
   useGSAP(() => {
@@ -39,11 +39,21 @@ const BackgroundOverlay: React.FC = () => {
     <div
       ref={containerRef}
       id="background-overlay"
-      className="fixed inset-0 z-[-1] h-screen w-screen overflow-hidden bg-black bg-cover bg-center"
+      className="fixed inset-0 z-[-1] h-screen w-screen overflow-hidden bg-black"
     >
+      <Image
+        src="/images/background.webp"
+        alt=""
+        aria-hidden
+        fill
+        priority
+        sizes="100vw"
+        className="absolute inset-0 object-cover object-center brightness-[0.65] lg:brightness-90"
+      />
       <video
         ref={videoRef}
         src="/images/Epik-2.mp4"
+        poster="/images/background.webp"
         className={`absolute inset-0 h-full w-full object-cover object-center brightness-[0.65] transition-opacity duration-700 ease-in-out lg:brightness-90 ${videoReady ? "opacity-100" : "opacity-0"}`}
         preload="auto"
         autoPlay
@@ -51,6 +61,7 @@ const BackgroundOverlay: React.FC = () => {
         muted
         playsInline
         onLoadedData={markReady}
+        onCanPlay={markReady}
         onPlaying={markReady}
       />
       <Image

@@ -68,10 +68,7 @@ export default function EventDetailContent({
               >
                 Edit
               </Button>
-              <Button
-                size="sm"
-                onClick={() => setDeletingEvent(event)}
-              >
+              <Button size="sm" onClick={() => setDeletingEvent(event)}>
                 Delete
               </Button>
             </div>

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useLayoutEffect, useState, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
 import Image from "next/image";
@@ -22,8 +22,12 @@ interface SideMenuProps {
   color?: string;
 }
 
+const menuLinkClass = (visible: boolean) =>
+  visible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-[10%]";
+
 const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
+  const [menuVisible, setMenuVisible] = useState<boolean>(false);
   const hasAnimatedRef = useRef<boolean>(false);
 
   const router = useRouter();
@@ -33,8 +37,14 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
     setIsMounted(true);
   }, []);
 
+  useLayoutEffect(() => {
+    if (sessionStorage.getItem("sideMenuAnimated")) {
+      setMenuVisible(true);
+    }
+  }, []);
+
   useGSAP(() => {
-    const menuLinks = document.querySelectorAll("#hover");
+    const menuLinks = document.querySelectorAll(".side-menu-link");
 
     // Check if animation has already run this session
     const hasAnimated = sessionStorage.getItem("sideMenuAnimated");
@@ -45,19 +55,25 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
       sessionStorage.setItem("sideMenuAnimated", "true");
 
       // Run the entrance animation
-      let tl = gsap.timeline();
-      tl.set(menuLinks, { x: "-10%", opacity: 0 });
-      tl.to(menuLinks, {
-        delay: 0.25,
-        duration: 0.5,
-        ease: "back.out(2.7)",
-        x: 0,
-        opacity: 1,
-        stagger: 0.1,
+      let tl = gsap.timeline({
+        onComplete: () => setMenuVisible(true),
       });
+      tl.fromTo(
+        menuLinks,
+        { x: "-10%", opacity: 0 },
+        {
+          delay: 0.25,
+          duration: 0.5,
+          ease: "back.out(2.7)",
+          x: 0,
+          opacity: 1,
+          stagger: 0.1,
+        },
+      );
     } else {
       // If already animated, ensure links are visible
       gsap.set(menuLinks, { x: 0, opacity: 1 });
+      setMenuVisible(true);
     }
 
     // Set up hover animations (these run every time)
@@ -116,8 +132,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
           {links.map((link, idx) => (
             <li
               key={idx}
-              id="hover"
-              className={`${link.path === "/" ? "about-link" : "menu-link"} leading-[.85] text-shadow-custom ${
+              className={`side-menu-link ${menuLinkClass(menuVisible)} ${link.path === "/" ? "about-link" : "menu-link"} leading-[.85] text-shadow-custom ${
                 pathname === link.path && pathname !== "/"
                   ? "text-customGold"
                   : color
@@ -144,7 +159,9 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
             </li>
           ))}
         </ul>
-        <div className="menu-link mt-20 pr-3 font-bigola" id="hover">
+        <div
+          className={`side-menu-link ${menuLinkClass(menuVisible)} menu-link mt-20 pr-3 font-bigola`}
+        >
           <Image
             className="mb-6 w-[150px] drop-shadow-text md:hidden"
             src="/images/alt-logo.png"

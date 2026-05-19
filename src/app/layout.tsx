@@ -127,6 +127,12 @@ export default function RootLayout({
           />
           <link
             rel="preload"
+            href="/images/background.webp"
+            as="image"
+            type="image/webp"
+          />
+          <link
+            rel="preload"
             href="/images/Epik-2.mp4"
             as="video"
             type="video/mp4"
