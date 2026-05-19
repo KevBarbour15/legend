@@ -48,7 +48,7 @@
     "googleapis": "^167.0.0",
     "graphql": "^16.10.0",
     "graphql-request": "^7.1.2",
-    "gsap": "npm:@gsap/shockingly@^3.12.5",
+    "gsap": "^3.12.5",
     "lucide-react": "^0.441.0",
     "mongoose": "^8.5.1",
     "next": "^14.2.4",
