@@ -25,7 +25,7 @@ const BackgroundOverlay: React.FC = () => {
       className="fixed inset-0 z-[-1] h-screen w-screen overflow-hidden bg-black"
     >
       <Image
-        src="/images/new-background.jpg"
+        src="/images/new-background.webp"
         alt=""
         aria-hidden
         fill

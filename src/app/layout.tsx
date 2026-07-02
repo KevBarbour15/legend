@@ -127,7 +127,7 @@ export default function RootLayout({
           />
           <link
             rel="preload"
-            href="/images/new-background.jpg"
+            href="/images/new-background.webp"
             as="image"
             type="image/jpeg"
           />
