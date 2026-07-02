@@ -20,12 +20,13 @@ const links = [
 
 interface SideMenuProps {
   color?: string;
+  homeShadow?: boolean;
 }
 
 const menuLinkClass = (visible: boolean) =>
   visible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-[10%]";
 
-const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
+const SideMenu: React.FC<SideMenuProps> = ({ color, homeShadow = false }) => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [menuVisible, setMenuVisible] = useState<boolean>(false);
   const hasAnimatedRef = useRef<boolean>(false);
@@ -132,7 +133,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ color }) => {
           {links.map((link, idx) => (
             <li
               key={idx}
-              className={`side-menu-link ${menuLinkClass(menuVisible)} ${link.path === "/" ? "about-link" : "menu-link"} leading-[.85] text-shadow-custom ${
+              className={`side-menu-link ${menuLinkClass(menuVisible)} ${homeShadow ? "home-menu-link-shadow" : ""} ${link.path === "/" ? "about-link" : "menu-link"} leading-[.85] text-shadow-custom ${
                 pathname === link.path && pathname !== "/"
                   ? "text-customGold"
                   : color

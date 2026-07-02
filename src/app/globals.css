@@ -438,6 +438,14 @@ body {
   background: var(--custom-cream);
 }
 
+.home-menu-link-shadow {
+  filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.28));
+}
+
+.home-logo-shadow {
+  filter: drop-shadow(0 1.5px 2px rgba(0, 0, 0, 0.32));
+}
+
 input,
 textarea,
 select {

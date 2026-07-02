@@ -127,7 +127,7 @@ export default function Home() {
 
   return (
     <>
-      <SideMenu color="text-customCream" />
+      <SideMenu color="text-customCream" homeShadow />
       <MobileMenu />
       <div ref={containerRef} className="block w-screen">
         <div

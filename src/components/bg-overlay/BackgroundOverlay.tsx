@@ -3,10 +3,12 @@
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { usePathname } from "next/navigation";
 import { useRef } from "react";
 
 const BackgroundOverlay: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -36,7 +38,9 @@ const BackgroundOverlay: React.FC = () => {
       <Image
         src="/images/alt-logo.png"
         id="alt-logo"
-        className="invisible absolute bottom-6 right-6 scale-50 opacity-0 md:visible"
+        className={`invisible absolute bottom-6 right-6 scale-50 opacity-0 md:visible ${
+          pathname === "/" ? "home-logo-shadow" : ""
+        }`}
         alt="Legend Has It logo"
         width={150}
         height={150}

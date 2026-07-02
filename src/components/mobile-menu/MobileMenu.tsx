@@ -65,7 +65,7 @@ const MobileMenu: React.FC = () => {
     >
       <div className="absolute flex flex-grow flex-col justify-start pl-3 pt-3">
         <Image
-          className="home-logo w-[150px] scale-50 opacity-0 drop-shadow-card md:hidden"
+          className="home-logo home-logo-shadow w-[150px] scale-50 opacity-0 md:hidden"
           src="/images/alt-logo.png"
           alt="Logo"
           height={150}
@@ -76,7 +76,7 @@ const MobileMenu: React.FC = () => {
           {links.map((link, idx) => (
             <li
               key={idx}
-              className="mobile-link m-0 p-0 leading-[0.85] opacity-0 text-shadow-custom"
+              className="mobile-link home-menu-link-shadow m-0 p-0 leading-[0.85] opacity-0 text-shadow-custom"
             >
               {link.label === "About" ? (
                 <a
