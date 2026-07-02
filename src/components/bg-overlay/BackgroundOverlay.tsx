@@ -3,27 +3,10 @@
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useRef, useState, useCallback, useEffect } from "react";
+import { useRef } from "react";
 
 const BackgroundOverlay: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoReady, setVideoReady] = useState(false);
-
-  const markReady = useCallback(() => {
-    setVideoReady(true);
-  }, []);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (video.readyState >= 2) {
-      markReady();
-    }
-
-    void video.play().catch(() => {});
-  }, [markReady]);
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -42,27 +25,13 @@ const BackgroundOverlay: React.FC = () => {
       className="fixed inset-0 z-[-1] h-screen w-screen overflow-hidden bg-black"
     >
       <Image
-        src="/images/background.webp"
+        src="/images/new-background.jpg"
         alt=""
         aria-hidden
         fill
         priority
         sizes="100vw"
         className="absolute inset-0 object-cover object-center brightness-[0.65] lg:brightness-90"
-      />
-      <video
-        ref={videoRef}
-        src="/images/Epik-2.mp4"
-        poster="/images/background.webp"
-        className={`absolute inset-0 h-full w-full object-cover object-center brightness-[0.65] transition-opacity duration-700 ease-in-out lg:brightness-90 ${videoReady ? "opacity-100" : "opacity-0"}`}
-        preload="auto"
-        autoPlay
-        loop
-        muted
-        playsInline
-        onLoadedData={markReady}
-        onCanPlay={markReady}
-        onPlaying={markReady}
       />
       <Image
         src="/images/alt-logo.png"
