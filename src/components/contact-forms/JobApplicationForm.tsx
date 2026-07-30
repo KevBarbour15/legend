@@ -90,28 +90,27 @@ const JobApplicationForm = forwardRef<
       >
         <div className="mb-6 space-y-3 text-pretty font-hypatia text-xl leading-[1.25] text-customNavy text-shadow-custom">
           <p>
-            We&apos;re looking for experienced bar staff who move with urgency,
-            take ownership, and genuinely enjoy working as part of a small,
-            close-knit team.
+            Thanks for your interest in working with us!
           </p>
           <p>
-            Great hospitality matters here. We care about creating a space where
-            guests feel welcomed, comfortable, and engaged, not rushed through a
-            transaction.
+            We&apos;re looking for experienced bar staff who are reliable, work
+            with a sense of urgency, take ownership, and enjoy being part of a
+            small, close-knit team.
           </p>
           <p>
-            Familiarity with craft beer and natural wine is a plus, but
-            curiosity and a willingness to learn are essential.
+            Hospitality is a big part of what we do. We want every guest who
+            walks through our doors to feel welcomed, comfortable, and taken care
+            of.
           </p>
+          <p>Bartending and cocktail experience is required.</p>
           <p>
-            Music is central to what we do.{" "}
-            <span className="font-bigola">Legend Has It</span> is a
-            vinyl-focused listening bar, and staff are responsible for curating
-            a thoughtful, vibe-forward atmosphere throughout their shift. We
-            value curiosity and range when it comes to music, and our
-            programming spans genres, eras, and moods. This role is best suited
-            for someone who enjoys engaging with music beyond a single genre or
-            trend.
+            Music is also a huge part of{" "}
+            <span className="font-bigola">Legend Has It</span>. We&apos;re a
+            vinyl-focused listening bar, and our staff help set the tone and
+            atmosphere throughout each shift. Our music spans genres, eras, and
+            moods, so we&apos;re looking for people who are genuinely into music,
+            curious about it, and comfortable going beyond one particular genre
+            or style.
           </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
