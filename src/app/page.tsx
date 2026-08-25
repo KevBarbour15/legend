@@ -98,6 +98,13 @@ export default function Home() {
           opacity: 1,
         },
         0,
+      )
+      .to(
+        "#about-hero-image",
+        {
+          opacity: 1,
+        },
+        0,
       );
 
     const sectionRefs = document.querySelectorAll(".about-section");
@@ -141,7 +148,10 @@ export default function Home() {
           id="about-content"
           className="relative mx-auto block h-auto md:pl-[240px] md:pr-6 md:pt-6 xl:max-w-[1280px] xxl:max-w-[1536px]"
         >
-          <div className="about-section aspect-video w-full px-3 opacity-0 md:px-0">
+          <div
+            id="about-hero-image"
+            className="aspect-video w-full px-3 opacity-0 md:px-0"
+          >
             <Image
               src="/images/about-image.jpg"
               className="h-full w-full border border-customNavy/20 object-cover object-center drop-shadow-card"
