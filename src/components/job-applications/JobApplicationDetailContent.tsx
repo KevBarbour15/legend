@@ -136,27 +136,37 @@ export default function JobApplicationDetailContent({
         <DetailBody>{application.whyApply}</DetailBody>
       </DetailSection>
 
-      <DetailSection title="Genres or eras of music you listen to or are curious about">
+      <DetailSection title="Genres, artists, or albums you'd be excited to play behind the bar">
         <DetailBody>{application.musicGenres}</DetailBody>
       </DetailSection>
 
-      <DetailSection title="3 albums you'd play behind the bar">
-        <DetailBody>{application.threeAlbums}</DetailBody>
-      </DetailSection>
+      {application.threeAlbums && (
+        <DetailSection title="3 albums you'd play behind the bar">
+          <DetailBody>{application.threeAlbums}</DetailBody>
+        </DetailSection>
+      )}
 
-      <DetailSection title="Bar or restaurant experience">
+      <DetailSection title="Bartending experience">
         <DetailBody>{application.barExperience}</DetailBody>
       </DetailSection>
 
-      <DetailSection title="Experience with craft beer and/or natural wine">
-        <DetailBody>{application.craftBeerWine}</DetailBody>
-      </DetailSection>
+      {application.cocktailExperience && (
+        <DetailSection title="Cocktail experience">
+          <DetailBody>{application.cocktailExperience}</DetailBody>
+        </DetailSection>
+      )}
 
-      <DetailSection title="Time you worked through a busy rush">
+      {application.craftBeerWine && (
+        <DetailSection title="Experience with craft beer and/or natural wine">
+          <DetailBody>{application.craftBeerWine}</DetailBody>
+        </DetailSection>
+      )}
+
+      <DetailSection title="A particularly busy bar shift">
         <DetailBody>{application.busyRush}</DetailBody>
       </DetailSection>
 
-      <DetailSection title="Time you received difficult feedback">
+      <DetailSection title="Time you received constructive feedback">
         <DetailBody>{application.difficultFeedback}</DetailBody>
       </DetailSection>
 

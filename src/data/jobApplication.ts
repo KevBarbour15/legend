@@ -7,12 +7,21 @@ export const jobApplicationSchema = z.object({
   phone: z.string().min(1, "Phone number is required"),
   hearAbout: z.string().min(1, "Please tell us how you heard about us"),
   whyApply: z.string().min(1, "Please tell us what made you want to apply"),
-  musicGenres: z.string().min(1, "Please share genres or eras of music you enjoy"),
-  threeAlbums: z.string().min(1, "Please pick 3 albums you'd play behind the bar"),
-  barExperience: z.string().min(1, "Please describe your bar or restaurant experience"),
-  craftBeerWine: z.string().min(1, "Please describe your experience with craft beer and/or natural wine"),
-  busyRush: z.string().min(1, "Please describe a time you worked through a busy rush"),
-  difficultFeedback: z.string().min(1, "Please describe a time you received difficult feedback"),
+  musicGenres: z
+    .string()
+    .min(1, "Please share a few genres, artists, or albums you'd be excited to play"),
+  barExperience: z
+    .string()
+    .min(1, "Please describe your bartending experience"),
+  cocktailExperience: z
+    .string()
+    .min(1, "Please describe your cocktail experience"),
+  busyRush: z
+    .string()
+    .min(1, "Please describe a particularly busy bar shift"),
+  difficultFeedback: z
+    .string()
+    .min(1, "Please describe a time you received constructive feedback"),
   availability: z.string().min(1, "Please describe your current availability"),
   howSoonStart: z.enum(
     ["asap", "within_2_weeks", "next_month", "just_exploring"],
@@ -46,9 +55,10 @@ export type JobApplicationListItem = {
   hearAbout: string;
   whyApply: string;
   musicGenres: string;
-  threeAlbums: string;
+  threeAlbums?: string;
   barExperience: string;
-  craftBeerWine: string;
+  cocktailExperience?: string;
+  craftBeerWine?: string;
   busyRush: string;
   difficultFeedback: string;
   availability: string;

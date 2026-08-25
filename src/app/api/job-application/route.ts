@@ -40,9 +40,8 @@ export async function POST(req: NextRequest) {
     const hearAbout = formData.get("hearAbout") as string;
     const whyApply = formData.get("whyApply") as string;
     const musicGenres = formData.get("musicGenres") as string;
-    const threeAlbums = formData.get("threeAlbums") as string;
     const barExperience = formData.get("barExperience") as string;
-    const craftBeerWine = formData.get("craftBeerWine") as string;
+    const cocktailExperience = formData.get("cocktailExperience") as string;
     const busyRush = formData.get("busyRush") as string;
     const difficultFeedback = formData.get("difficultFeedback") as string;
     const availability = formData.get("availability") as string;
@@ -74,9 +73,8 @@ export async function POST(req: NextRequest) {
       hearAbout,
       whyApply,
       musicGenres,
-      threeAlbums,
       barExperience,
-      craftBeerWine,
+      cocktailExperience,
       busyRush,
       difficultFeedback,
       availability,
@@ -120,9 +118,8 @@ export async function POST(req: NextRequest) {
         hearAbout,
         whyApply,
         musicGenres,
-        threeAlbums,
         barExperience,
-        craftBeerWine,
+        cocktailExperience,
         busyRush,
         difficultFeedback,
         availability,

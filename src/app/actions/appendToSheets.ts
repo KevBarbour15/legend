@@ -23,9 +23,8 @@ export type JobApplicationSheetPayload = {
   hearAbout: string;
   whyApply: string;
   musicGenres: string;
-  threeAlbums: string;
   barExperience: string;
-  craftBeerWine: string;
+  cocktailExperience: string;
   busyRush: string;
   difficultFeedback: string;
   availability: string;
@@ -96,12 +95,12 @@ const JOB_APPLICATION_HEADERS = [
   "Phone",
   "How heard",
   "Why apply",
-  "Music genres",
+  "Music",
   "3 albums",
   "Bar experience",
-  "Craft beer/wine",
-  "Busy rush",
-  "Difficult feedback",
+  "Cocktail experience",
+  "Busy bar shift",
+  "Constructive feedback",
   "Availability",
   "How soon start",
   "Anything else",
@@ -135,9 +134,9 @@ export async function appendJobApplicationToSheet(
     payload.hearAbout ?? "",
     payload.whyApply ?? "",
     payload.musicGenres ?? "",
-    payload.threeAlbums ?? "",
+    "",
     payload.barExperience ?? "",
-    payload.craftBeerWine ?? "",
+    payload.cocktailExperience ?? "",
     payload.busyRush ?? "",
     payload.difficultFeedback ?? "",
     payload.availability ?? "",
@@ -146,15 +145,13 @@ export async function appendJobApplicationToSheet(
   ];
 
   let sheetExists = false;
-  let hasHeader = false;
 
   try {
-    const { data } = await sheets.spreadsheets.values.get({
+    await sheets.spreadsheets.values.get({
       spreadsheetId,
       range: `${JOB_APPLICATION_SHEET}!A1`,
     });
     sheetExists = true;
-    hasHeader = !!(data.values && data.values.length > 0);
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     if (
@@ -192,7 +189,7 @@ export async function appendJobApplicationToSheet(
     }
   }
 
-  if (sheetExists && !hasHeader) {
+  if (sheetExists) {
     await sheets.spreadsheets.values.update({
       spreadsheetId,
       range: `${JOB_APPLICATION_SHEET}!A1:P1`,

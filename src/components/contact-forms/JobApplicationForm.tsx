@@ -48,9 +48,8 @@ const JobApplicationForm = forwardRef<
       hearAbout: "",
       whyApply: "",
       musicGenres: "",
-      threeAlbums: "",
       barExperience: "",
-      craftBeerWine: "",
+      cocktailExperience: "",
       busyRush: "",
       difficultFeedback: "",
       availability: "",
@@ -214,7 +213,8 @@ const JobApplicationForm = forwardRef<
           render={({ field }) => (
             <FormItem>
               <FormLabel className="font-hypatia text-customNavy">
-                How did you hear about Legend Has It?{" "}
+                How did you hear about{" "}
+                <span className="font-bigola">Legend Has It</span>?{" "}
                 <span aria-hidden className="text-customGold">
                   *
                 </span>
@@ -260,40 +260,18 @@ const JobApplicationForm = forwardRef<
           render={({ field }) => (
             <FormItem>
               <FormLabel className="font-hypatia text-customNavy">
-                What are a few different genres or eras of music you regularly
-                listen to or are curious about?{" "}
+                Music is a big part of the experience at{" "}
+                <span className="font-bigola">Legend Has It</span>. What are
+                a few genres, artists, or albums you&apos;d be excited to play
+                behind the bar?{" "}
                 <span aria-hidden className="text-customGold">
                   *
                 </span>
               </FormLabel>
               <FormControl className={textareaClassName}>
                 <Textarea
-                  placeholder="Genres or eras of music..."
-                  aria-label="Music genres or eras"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="threeAlbums"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="font-hypatia text-customNavy">
-                You&apos;re in charge of playing records behind the bar. What 3
-                albums are you picking?{" "}
-                <span aria-hidden className="text-customGold">
-                  *
-                </span>
-              </FormLabel>
-              <FormControl className={textareaClassName}>
-                <Textarea
-                  placeholder="Your 3 albums..."
-                  aria-label="3 albums you'd play behind the bar"
+                  placeholder="Genres, artists, or albums..."
+                  aria-label="Genres, artists, or albums you'd be excited to play behind the bar"
                   {...field}
                 />
               </FormControl>
@@ -308,17 +286,17 @@ const JobApplicationForm = forwardRef<
           render={({ field }) => (
             <FormItem>
               <FormLabel className="font-hypatia text-customNavy">
-                Tell us about your bar or restaurant experience. What kind of
-                places have you worked in, and what were you responsible for
-                during a typical shift?{" "}
+                Tell us about your bartending experience. What kinds of bars or
+                restaurants have you worked in, and what were you responsible
+                for during a typical shift?{" "}
                 <span aria-hidden className="text-customGold">
                   *
                 </span>
               </FormLabel>
               <FormControl className={textareaClassName}>
                 <Textarea
-                  placeholder="Bar or restaurant experience..."
-                  aria-label="Bar or restaurant experience"
+                  placeholder="Bartending experience..."
+                  aria-label="Bartending experience"
                   {...field}
                 />
               </FormControl>
@@ -329,19 +307,22 @@ const JobApplicationForm = forwardRef<
 
         <FormField
           control={form.control}
-          name="craftBeerWine"
+          name="cocktailExperience"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="font-hypatia text-customNavy">
-                What is your experience with craft beer and/or natural wine?{" "}
+                Tell us about your cocktail experience. What kinds of cocktail
+                programs have you worked in, and how comfortable are you
+                following standardized recipes, preparing classic cocktails,
+                and completing bar prep?{" "}
                 <span aria-hidden className="text-customGold">
                   *
                 </span>
               </FormLabel>
               <FormControl className={textareaClassName}>
                 <Textarea
-                  placeholder="Craft beer and/or natural wine experience..."
-                  aria-label="Experience with craft beer and natural wine"
+                  placeholder="Cocktail experience..."
+                  aria-label="Cocktail experience"
                   {...field}
                 />
               </FormControl>
@@ -356,17 +337,17 @@ const JobApplicationForm = forwardRef<
           render={({ field }) => (
             <FormItem>
               <FormLabel className="font-hypatia text-customNavy">
-                Tell us about a time you worked through a busy rush. What was
+                Tell us about a particularly busy bar shift. What was
                 happening, what was your role, and how did you stay organized
-                and calm?{" "}
+                while maintaining quality and hospitality?{" "}
                 <span aria-hidden className="text-customGold">
                   *
                 </span>
               </FormLabel>
               <FormControl className={textareaClassName}>
                 <Textarea
-                  placeholder="A busy rush experience..."
-                  aria-label="Time you worked through a busy rush"
+                  placeholder="A busy bar shift..."
+                  aria-label="A particularly busy bar shift"
                   {...field}
                 />
               </FormControl>
@@ -381,17 +362,16 @@ const JobApplicationForm = forwardRef<
           render={({ field }) => (
             <FormItem>
               <FormLabel className="font-hypatia text-customNavy">
-                Describe a time you received feedback that was difficult to
-                hear. How did you respond in the moment, and what changed
-                afterward?{" "}
+                Tell us about a time you received constructive feedback at
+                work. How did you respond, and what did you take from it?{" "}
                 <span aria-hidden className="text-customGold">
                   *
                 </span>
               </FormLabel>
               <FormControl className={textareaClassName}>
                 <Textarea
-                  placeholder="Difficult feedback experience..."
-                  aria-label="Time you received difficult feedback"
+                  placeholder="Constructive feedback experience..."
+                  aria-label="Time you received constructive feedback"
                   {...field}
                 />
               </FormControl>

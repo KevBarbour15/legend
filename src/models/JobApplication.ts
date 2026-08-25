@@ -8,9 +8,10 @@ export interface IJobApplication extends Document {
   hearAbout: string;
   whyApply: string;
   musicGenres: string;
-  threeAlbums: string;
+  threeAlbums?: string;
   barExperience: string;
-  craftBeerWine: string;
+  cocktailExperience?: string;
+  craftBeerWine?: string;
   busyRush: string;
   difficultFeedback: string;
   availability: string;
@@ -31,9 +32,10 @@ const JobApplicationSchema: Schema = new Schema({
   hearAbout: { type: String, required: true },
   whyApply: { type: String, required: true },
   musicGenres: { type: String, required: true },
-  threeAlbums: { type: String, required: true },
+  threeAlbums: { type: String, required: false },
   barExperience: { type: String, required: true },
-  craftBeerWine: { type: String, required: true },
+  cocktailExperience: { type: String, required: false },
+  craftBeerWine: { type: String, required: false },
   busyRush: { type: String, required: true },
   difficultFeedback: { type: String, required: true },
   availability: { type: String, required: true },

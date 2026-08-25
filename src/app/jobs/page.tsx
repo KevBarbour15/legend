@@ -29,9 +29,8 @@ const Jobs = () => {
         formData.set("hearAbout", values.hearAbout);
         formData.set("whyApply", values.whyApply);
         formData.set("musicGenres", values.musicGenres);
-        formData.set("threeAlbums", values.threeAlbums);
         formData.set("barExperience", values.barExperience);
-        formData.set("craftBeerWine", values.craftBeerWine);
+        formData.set("cocktailExperience", values.cocktailExperience);
         formData.set("busyRush", values.busyRush);
         formData.set("difficultFeedback", values.difficultFeedback);
         formData.set("availability", values.availability);
